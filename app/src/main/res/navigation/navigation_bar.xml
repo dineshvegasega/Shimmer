@@ -108,6 +108,13 @@
             app:destination="@id/productDetail"
             app:launchSingleTop="true"
             />
+
+        <action
+            android:id="@+id/action_products_to_filter"
+            app:destination="@id/filters"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -115,6 +122,13 @@
         android:label="ProductDetail"
         android:id="@+id/productDetail"
         tools:layout="@layout/product_detail">
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.filters.Filters"
+        android:label="Filters"
+        android:id="@+id/filters"
+        tools:layout="@layout/filters">
     </fragment>
 
 

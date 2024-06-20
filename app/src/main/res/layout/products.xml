@@ -29,6 +29,7 @@
         >
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutSort"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
@@ -75,6 +76,7 @@
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutFilter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/app_color"

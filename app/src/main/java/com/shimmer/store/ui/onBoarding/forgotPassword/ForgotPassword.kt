@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.onBoarding.signup
+package com.shimmer.store.ui.onBoarding.forgotPassword
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.shimmer.store.databinding.SignupBinding
+import com.shimmer.store.databinding.ForgotPasswordBinding
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class Signup : Fragment() {
-    private val viewModel: SignupVM by viewModels()
-    private var _binding: SignupBinding? = null
+class ForgotPassword : Fragment() {
+    private val viewModel: ForgotPasswordVM by viewModels()
+    private var _binding: ForgotPasswordBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -21,7 +23,7 @@ class Signup : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SignupBinding.inflate(inflater)
+        _binding = ForgotPasswordBinding.inflate(inflater)
         return binding.root
     }
 
@@ -29,6 +31,7 @@ class Signup : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        saveObject(LOGIN_DATA, "data")
 
 
     }

@@ -310,9 +310,9 @@ class MainActivity : AppCompatActivity() {
         } else if (hideValueOff == 2) {
             menu?.findItem(R.id.item_search)?.isVisible = false
             menu?.findItem(R.id.item_cart_badge)?.isVisible = true
-//        } else if (hideValueOff == 3) {
-//            menu?.findItem(R.id.item_search)?.isVisible = false
-//            menu?.findItem(R.id.item_cart_badge)?.isVisible = false
+        } else if (hideValueOff == 3) {
+            menu?.findItem(R.id.item_search)?.isVisible = false
+            menu?.findItem(R.id.item_cart_badge)?.isVisible = false
         } else {
             menu?.findItem(R.id.item_search)?.isVisible = false
             menu?.findItem(R.id.item_cart_badge)?.isVisible = false
