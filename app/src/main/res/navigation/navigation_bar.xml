@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_bar"
+    app:startDestination="@id/splash"
+    >
+
+    <fragment
+        android:name="com.shimmer.store.ui.splash.Splash"
+        android:label="Splash"
+        android:id="@+id/splash"
+        tools:layout="@layout/splash">
+
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_splash_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
+
+<!--        <action-->
+<!--            android:id="@+id/action_splash_to_OnboardLanguage"-->
+<!--            app:destination="@id/onboardLanguage"-->
+<!--            app:launchSingleTop="true"-->
+<!--            app:popUpTo="@id/splash"-->
+<!--            app:popUpToInclusive="true" />-->
+
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.onBoarding.login.Login"
+        android:label="Login"
+        android:id="@+id/login"
+        tools:layout="@layout/login">
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.home.Home"
+        android:label="Home"
+        android:id="@+id/home"
+        tools:layout="@layout/home">
+        <action
+            android:id="@+id/action_home_to_products"
+            app:destination="@id/products"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.category.Category"
+        android:label="Category"
+        android:id="@+id/category"
+        tools:layout="@layout/category">
+
+        <action
+            android:id="@+id/action_category_to_products"
+            app:destination="@id/products"
+            app:launchSingleTop="true"
+            />
+
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.faq.Faq"
+        android:label="Faq"
+        android:id="@+id/faq"
+        tools:layout="@layout/faq">
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.profile.Profile"
+        android:label="Profile"
+        android:id="@+id/profile"
+        tools:layout="@layout/profile">
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.search.Search"
+        android:label="Search"
+        android:id="@+id/search"
+        tools:layout="@layout/search">
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.cart.Cart"
+        android:label="Cart"
+        android:id="@+id/cart"
+        tools:layout="@layout/cart">
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.products.Products"
+        android:label="Products"
+        android:id="@+id/products"
+        tools:layout="@layout/products">
+        <action
+            android:id="@+id/action_products_to_productsDetail"
+            app:destination="@id/productDetail"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.productDetail.ProductDetail"
+        android:label="ProductDetail"
+        android:id="@+id/productDetail"
+        tools:layout="@layout/product_detail">
+    </fragment>
+
+
+</navigation>
