@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shimmer.store.databinding.FiltersBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -33,6 +34,15 @@ class Filters : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
         hideValueOff = 3
-        MainActivity.mainActivity.get()!!.callBack(2)
+        MainActivity.mainActivity.get()!!.callBack(0)
+
+
+        binding.apply {
+
+            ivIconCross.setOnClickListener {
+                findNavController().navigateUp()
+            }
+
+        }
     }
 }

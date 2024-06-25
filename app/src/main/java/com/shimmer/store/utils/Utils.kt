@@ -41,6 +41,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
@@ -54,6 +55,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import com.shimmer.store.R
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -65,6 +67,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.text.FieldPosition
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -628,7 +631,7 @@ fun Context.getSignature(): String {
             packageName,
             PackageManager.GET_SIGNING_CERTIFICATES
         )
-        val sigHistory: Array<Signature> = info.signingInfo.signingCertificateHistory
+        val sigHistory: Array<Signature> = info.signingInfo!!.signingCertificateHistory
         val signature: ByteArray = sigHistory[0].toByteArray()
         val md = MessageDigest.getInstance("SHA1")
         val digest = md.digest(signature)
@@ -834,4 +837,32 @@ fun dpToPx(dp: Int): Int {
 fun pxToDp(px: Int): Int {
     val displayMetrics: DisplayMetrics = MainActivity.context.get()?.getResources()!!.getDisplayMetrics()
     return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
+}
+
+
+
+fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
+    StfalconImageViewer.Builder<String>(MainActivity.mainActivity.get()!!, this) { view, image ->
+        Glide.with(MainActivity.mainActivity.get()!!)
+            .load(image)
+            .apply(if (type == 1) myOptionsGlide else if (type == 2) myOptionsGlideUser else myOptionsGlide)
+            .into(view)
+
+    }
+        .withTransitionFrom(ivImage)
+        .withBackgroundColor(
+            ContextCompat.getColor(
+                MainActivity.mainActivity.get()!!,
+                R.color._D9000000
+            )
+        ).withStartPosition(position)
+        .show()
+}
+
+
+
+fun ViewPager2.getRecyclerView(): RecyclerView {
+    val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
+    recyclerViewField.isAccessible = true
+    return recyclerViewField.get(this) as RecyclerView
 }

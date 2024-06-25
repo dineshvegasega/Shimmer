@@ -3,6 +3,7 @@ package com.shimmer.store.ui.mainActivity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -86,11 +87,10 @@ class MainActivity : AppCompatActivity() {
 
     private val connectivityManager by lazy { ConnectivityManager(this) }
 
-
-    @SuppressLint("RestrictedApi")
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         _binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -129,11 +129,13 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("RestrictedApi")
     private fun setBar() {
-        setSupportActionBar(binding.toolbar.toolbar);
-        getSupportActionBar()?.setHomeButtonEnabled(false);
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar()?.setDisplayShowTitleEnabled(false);
-        getSupportActionBar()?.setShowHideAnimationEnabled(true)
+        setSupportActionBar(binding.toolbar.toolbar)
+        supportActionBar?.let {
+            it.setHomeButtonEnabled(false)
+            it.setDisplayHomeAsUpEnabled(false)
+            it.setDisplayShowTitleEnabled(false)
+            it.setShowHideAnimationEnabled(false)
+        }
     }
 
 

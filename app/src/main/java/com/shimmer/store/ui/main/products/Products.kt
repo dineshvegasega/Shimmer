@@ -14,6 +14,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
+import com.shimmer.store.ui.main.home.Home
+import com.shimmer.store.ui.main.home.Home.Companion
+import com.shimmer.store.ui.main.home.Home.Companion.adapter2
+import com.shimmer.store.ui.main.home.ListAdapter1
+import com.shimmer.store.ui.main.home.ListAdapter2
+import com.shimmer.store.ui.main.home.ListAdapter3
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -26,6 +32,15 @@ class Products : Fragment() {
     private val binding get() = _binding!!
 
     var sortAlert : BottomSheetDialog?= null
+
+
+    companion object {
+
+        @JvmStatic
+        lateinit var adapter2: ProductsAdapter
+
+    }
+
 
 
     override fun onCreateView(
@@ -43,10 +58,13 @@ class Products : Fragment() {
         isBackStack = true
         hideValueOff = 1
         MainActivity.mainActivity.get()!!.callBack(2)
+
+        adapter2 = ProductsAdapter()
+
         binding.apply {
-            button.setOnClickListener {
-                findNavController().navigate(R.id.action_products_to_productsDetail)
-            }
+//            button.setOnClickListener {
+//                findNavController().navigate(R.id.action_products_to_productsDetail)
+//            }
 
             layoutSort.setOnClickListener {
                 if(sortAlert?.isShowing == true) {
@@ -70,6 +88,13 @@ class Products : Fragment() {
             layoutFilter.setOnClickListener {
                 findNavController().navigate(R.id.action_products_to_filter)
             }
+
+
+
+
+            adapter2.submitData(viewModel.item1)
+            adapter2.notifyDataSetChanged()
+            binding.rvList2.adapter = adapter2
         }
     }
 

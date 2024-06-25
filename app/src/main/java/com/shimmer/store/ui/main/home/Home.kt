@@ -2,17 +2,21 @@ package com.shimmer.store.ui.main.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OVER_SCROLL_NEVER
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.request.Tags
 import com.shimmer.store.R
 import com.shimmer.store.databinding.HomeBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +24,21 @@ class Home : Fragment() {
     private val viewModel: HomeVM by viewModels()
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
+
+
+    companion object {
+        @JvmStatic
+        lateinit var adapter1: ListAdapter1
+
+        @JvmStatic
+        lateinit var adapter2: ListAdapter2
+
+        @JvmStatic
+        lateinit var adapter3: ListAdapter3
+    }
+
+//    var item1 : ArrayList<String> = ArrayList()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,18 +55,42 @@ class Home : Fragment() {
         isBackStack = false
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(1)
+
+//        item1.add("1")
+//        item1.add("2")
+//        item1.add("3")
+
+        adapter1 = ListAdapter1()
+        adapter2 = ListAdapter2()
+        adapter3 = ListAdapter3()
+
+
         binding.apply {
-            button.setOnClickListener {
-                findNavController().navigate(R.id.action_home_to_products)
+//            button.setOnClickListener {
+//                findNavController().navigate(R.id.action_home_to_products)
+//            }
+
+
+            adapter1.submitData(viewModel.item1)
+            adapter1.notifyDataSetChanged()
+            binding.rvList1.offscreenPageLimit = 1
+            binding.rvList1.overScrollMode = OVER_SCROLL_NEVER
+            binding.rvList1.adapter = adapter1
+            binding.rvList1.setPageTransformer { page, position ->
+                binding.rvList1.updatePagerHeightForChild(page)
             }
 
 
+            adapter2.submitData(viewModel.item2)
+            adapter2.notifyDataSetChanged()
+            binding.rvList2.adapter = adapter2
 
+            adapter3.submitData(viewModel.item3)
+            adapter3.notifyDataSetChanged()
+            binding.rvList3.adapter = adapter3
         }
 
     }
-
-
 
 
 }

@@ -11,6 +11,7 @@
     <color name="_21BE6916">#21BE6916</color>
     <color name="_000000">#FF000000</color>
     <color name="_ffffff">#FFFFFFFF</color>
+    <color name="_00000000">#00000000</color>
 
     <color name="_e8ebee">#e8ebee</color>
     <color name="_c9cdd0">#c9cdd0</color>
@@ -38,7 +39,6 @@
 
 
     <color name="_ffffffff">#FFFFFFFF</color>
-    <color name="_00000000">#00ffffff</color>
 
 
     <color name="_363438">#363438</color>
@@ -74,4 +74,9 @@
 
     <color name="_D9000000">#D9000000</color>
     <color name="ic_launcher_background2">#ED2525</color>
+    <color name="_B8C2C8">#B8C2C8</color>
+
+    <color name="_f2f2f2">#f2f2f2</color>
+
+
 </resources>

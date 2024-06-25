@@ -15,22 +15,183 @@
         android:background="@drawable/bg_top_round_corner"
         android:orientation="vertical"
         android:backgroundTint="@color/white"
-        android:paddingVertical="@dimen/_12sdp"
-        android:paddingHorizontal="@dimen/_15sdp">
+        android:paddingVertical="@dimen/_15sdp"
+
+        >
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvList"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textSortBy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:text="Sort By"
+            android:textColor="@color/_000000"
+            android:textSize="@dimen/_12sdp"
+            app:fontFamily="@font/roboto_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
-            app:spanCount="4"
-            tools:itemCount="4"
+            android:paddingVertical="@dimen/_3sdp"
+            tools:ignore="HardcodedText" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIconCross"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintDimensionRatio="H,1:1.1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/baseline_close_24"
+            android:padding="@dimen/_2sdp"
 
             />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textDefaultSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Default Sort"
+            android:textColor="@color/_000000"
+            android:textSize="@dimen/_10sdp"
+            app:fontFamily="@font/roboto_light"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textSortBy"
+            android:paddingVertical="@dimen/_3sdp"
+            tools:ignore="HardcodedText" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textPriceLowToHighSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort By Price: Low to High"
+            android:textColor="@color/_000000"
+            android:textSize="@dimen/_10sdp"
+            app:fontFamily="@font/roboto_light"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textDefaultSort"
+            android:paddingVertical="@dimen/_3sdp"
+            tools:ignore="HardcodedText" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textHighToLowSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sort By Price: High to Low"
+            android:textColor="@color/_000000"
+            android:textSize="@dimen/_10sdp"
+            app:fontFamily="@font/roboto_light"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textPriceLowToHighSort"
+            android:paddingVertical="@dimen/_3sdp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:background="@color/_424041"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textHighToLowSort">
+        </View>
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/footerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutSort"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btAddToCart"
+                    style="@style/PrimaryButtonBlue"
+                    app:backgroundTint="@color/_363438"
+                    app:rippleColor="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/_20sdp"
+                    android:paddingVertical="@dimen/_7sdp"
+                    android:textColor="@color/white"
+                    android:text="Clear All"
+                    android:textSize="@dimen/_11sdp"
+                    app:cornerRadius="@dimen/_4sdp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutFilter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center">
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btByNow"
+                    style="@style/PrimaryButtonBlue"
+                    app:backgroundTint="@color/_0183b8"
+                    app:rippleColor="@color/white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/_20sdp"
+                    android:paddingVertical="@dimen/_7sdp"
+                    android:textColor="@color/white"
+                    android:text="APPLY SORT"
+                    android:textSize="@dimen/_11sdp"
+                    app:cornerRadius="@dimen/_4sdp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

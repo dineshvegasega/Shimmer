@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_4sdp"
+        android:layout_margin="@dimen/_4sdp"
+        app:cardUseCompatPadding="true"
+        android:background="@color/_79747E"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_5sdp"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/rectangle_40"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
+                />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Silver Color Gold Ring"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/roboto_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="2"
+                app:layout_constraintEnd_toStartOf="@id/ivAddCart"
+                app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+                tools:ignore="HardcodedText" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivAddCart"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                app:layout_constraintDimensionRatio="H,1:1.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+                app:srcCompat="@drawable/ic_shopping_cart_white_18dp"
+                app:tint="@color/app_color"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="₹ 23,000"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_12sdp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="2"
+                app:layout_constraintEnd_toStartOf="@id/textPriceDiscount"
+                app:layout_constraintTop_toBottomOf="@+id/textTitle"
+                tools:ignore="HardcodedText" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPriceDiscount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/strike__through_text"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_10sdp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLines="2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
+
+
+
