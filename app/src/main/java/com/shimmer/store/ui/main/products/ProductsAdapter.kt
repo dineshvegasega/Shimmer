@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -89,8 +90,18 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.executePendingBindings()
             val model = obj as String
 
-            itemRowBinding.root.setOnClickListener {
+            itemRowBinding.ivIcon.setOnClickListener {
                 it.findNavController().navigate(R.id.action_products_to_productsDetail)
+            }
+
+            itemRowBinding.ivAddCart.setOnClickListener {
+//                itemRowBinding.ivAddCart.backgroundTintList = (if(dataClass.status == "Active") ContextCompat.getColorStateList(root.context,R.color._138808) else ContextCompat.getColorStateList(root.context,R.color._F02A2A))
+                itemRowBinding.ivAddCart.imageTintList = ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color)
+            }
+
+
+            itemRowBinding.btAddCart.setOnClickListener {
+                it.findNavController().navigate(R.id.action_products_to_cart)
             }
         }
 

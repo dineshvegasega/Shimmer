@@ -2,6 +2,7 @@ package com.shimmer.store.ui.main.category
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.shimmer.store.databinding.CategoryBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +41,22 @@ class Category : Fragment() {
         binding.apply {
             button.setOnClickListener {
                 findNavController().navigate(R.id.action_category_to_products)
+            }
+
+
+            topBar.apply {
+                textViewTitle.visibility = View.GONE
+                cardSearch.visibility = View.VISIBLE
+                ivSearch.visibility = View.GONE
+
+
+                editSearch.singleClick {
+                    findNavController().navigate(R.id.action_category_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_category_to_cart)
+                }
             }
         }
 

@@ -18,6 +18,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.getRecyclerView
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 //import com.stfalcon.imageviewer.StfalconImageViewer
 
@@ -51,7 +52,7 @@ class ProductZoom  : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(0)
 
         binding.apply {
-            ivIconCross.setOnClickListener {
+            ivIconCross.singleClick {
                 findNavController().navigateUp()
             }
 

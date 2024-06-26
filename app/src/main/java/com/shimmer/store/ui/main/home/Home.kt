@@ -16,6 +16,7 @@ import com.shimmer.store.databinding.HomeBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.singleClick
 import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,6 +89,24 @@ class Home : Fragment() {
             adapter3.submitData(viewModel.item3)
             adapter3.notifyDataSetChanged()
             binding.rvList3.adapter = adapter3
+
+
+
+            topBar.apply {
+                textViewTitle.visibility = View.GONE
+                cardSearch.visibility = View.VISIBLE
+                ivSearch.visibility = View.GONE
+
+                editSearch.singleClick {
+                    findNavController().navigate(R.id.action_home_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_home_to_cart)
+                }
+            }
+
+
         }
 
     }

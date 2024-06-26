@@ -24,6 +24,7 @@ import com.shimmer.store.databinding.FragmentExoPlayerBinding
 import com.shimmer.store.databinding.ProductZoomPageBinding
 import com.shimmer.store.ui.main.productDetail.ProductDetail
 import com.shimmer.store.utils.glideImage
+import com.shimmer.store.utils.glidePhotoView
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.UnstableApi
@@ -61,7 +62,7 @@ class ProductZoomPageFragment(
 //        _binding = FragmentExoPlayerBinding.bind(view)
         Log.d(TAG, "onViewCreated: Fragment Position : $positionOfFragment")
 
-        videoPath.glideImage(binding.ivIcon.context, binding.ivIcon)
+        videoPath.glidePhotoView(binding.ivIcon.context, binding.ivIcon)
     }
 
     @SuppressLint("UseRequireInsteadOfGet")

@@ -3,10 +3,14 @@ package com.shimmer.store.ui.main.products
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,16 +18,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
-import com.shimmer.store.ui.main.home.Home
-import com.shimmer.store.ui.main.home.Home.Companion
-import com.shimmer.store.ui.main.home.Home.Companion.adapter2
-import com.shimmer.store.ui.main.home.ListAdapter1
-import com.shimmer.store.ui.main.home.ListAdapter2
-import com.shimmer.store.ui.main.home.ListAdapter3
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class Products : Fragment() {
@@ -31,7 +33,7 @@ class Products : Fragment() {
     private var _binding: ProductsBinding? = null
     private val binding get() = _binding!!
 
-    var sortAlert : BottomSheetDialog?= null
+    var sortAlert: BottomSheetDialog? = null
 
 
     companion object {
@@ -40,7 +42,6 @@ class Products : Fragment() {
         lateinit var adapter2: ProductsAdapter
 
     }
-
 
 
     override fun onCreateView(
@@ -66,12 +67,43 @@ class Products : Fragment() {
 //                findNavController().navigate(R.id.action_products_to_productsDetail)
 //            }
 
-            layoutSort.setOnClickListener {
-                if(sortAlert?.isShowing == true) {
-                    return@setOnClickListener
+
+            topBar.apply {
+                textViewTitle.visibility = View.GONE
+                cardSearch.visibility = View.GONE
+
+                appicon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        MainActivity.context.get()!!,
+                        R.drawable.baseline_west_24
+                    )
+                )
+
+                appicon.singleClick {
+                    findNavController().navigateUp()
                 }
-                val dialogBinding = DialogSortBinding.inflate(root.context.getSystemService(
-                    Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+                ivSearch.singleClick {
+                    findNavController().navigate(R.id.action_products_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_products_to_cart)
+                }
+            }
+
+//            val typefaceroboto_light = resources.getFont(R.font.roboto_light)
+//            val typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
+
+
+            layoutSort.singleClick {
+                if (sortAlert?.isShowing == true) {
+                    return@singleClick
+                }
+                val dialogBinding = DialogSortBinding.inflate(
+                    root.context.getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE
+                    ) as LayoutInflater
                 )
                 val dialog = BottomSheetDialog(root.context)
                 dialog.setContentView(dialogBinding.root)
@@ -83,9 +115,47 @@ class Products : Fragment() {
                 }
                 dialog.show()
 
+                dialogBinding.apply {
+                    ivIconCross.singleClick {
+                        dialog.dismiss()
+                    }
+
+                    textDefaultSort.singleClick {
+                        // textDefaultSort.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
+                        textDefaultSort.setTypeface(typefaceroboto_medium)
+                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
+                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                        }, 200)
+                    }
+
+                    textPriceLowToHighSort.singleClick {
+                        textDefaultSort.setTypeface(typefaceroboto_light)
+                        textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
+                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                        }, 200)
+                    }
+
+                    textPriceHighToLowSort.singleClick {
+                        textDefaultSort.setTypeface(typefaceroboto_light)
+                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
+                        textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
+
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            dialog.dismiss()
+                        }, 200)
+                    }
+
+                }
+
             }
 
-            layoutFilter.setOnClickListener {
+            layoutFilter.singleClick {
                 findNavController().navigate(R.id.action_products_to_filter)
             }
 

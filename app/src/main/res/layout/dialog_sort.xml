@@ -15,11 +15,21 @@
         android:background="@drawable/bg_top_round_corner"
         android:orientation="vertical"
         android:backgroundTint="@color/white"
-        android:paddingVertical="@dimen/_15sdp"
-
+        android:paddingBottom="@dimen/_17sdp"
         >
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_top_round_corner"
+        android:backgroundTint="@color/_D9D9D9"
+        android:paddingVertical="@dimen/_17sdp"
+        android:paddingHorizontal="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        >
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textSortBy"
             android:layout_width="wrap_content"
@@ -29,23 +39,25 @@
             android:textSize="@dimen/_12sdp"
             app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             android:paddingVertical="@dimen/_3sdp"
             tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivIconCross"
-            android:layout_width="@dimen/_22sdp"
-            android:layout_height="@dimen/_22sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             app:layout_constraintDimensionRatio="H,1:1.1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:srcCompat="@drawable/baseline_close_24"
             android:padding="@dimen/_2sdp"
-
             />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textDefaultSort"
@@ -57,8 +69,8 @@
             app:fontFamily="@font/roboto_light"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textSortBy"
+            android:layout_marginTop="@dimen/_17sdp"
+            app:layout_constraintTop_toBottomOf="@+id/layout11"
             android:paddingVertical="@dimen/_3sdp"
             tools:ignore="HardcodedText" />
 
@@ -73,14 +85,14 @@
             app:fontFamily="@font/roboto_light"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_17sdp"
             app:layout_constraintTop_toBottomOf="@+id/textDefaultSort"
             android:paddingVertical="@dimen/_3sdp"
             tools:ignore="HardcodedText" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textHighToLowSort"
+            android:id="@+id/textPriceHighToLowSort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort By Price: High to Low"
@@ -89,7 +101,7 @@
             app:fontFamily="@font/roboto_light"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_17sdp"
             app:layout_constraintTop_toBottomOf="@+id/textPriceLowToHighSort"
             android:paddingVertical="@dimen/_3sdp"
             tools:ignore="HardcodedText" />
@@ -101,6 +113,7 @@
             android:background="@color/_424041"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/textHighToLowSort">
         </View>
 
@@ -115,6 +128,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_15sdp"
+            android:visibility="gone"
             >
 
             <androidx.appcompat.widget.LinearLayoutCompat

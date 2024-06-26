@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OVER_SCROLL_NEVER
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.media3.datasource.DataSource
@@ -23,6 +24,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.getRecyclerView
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -88,6 +90,32 @@ class ProductDetail : Fragment() , CallBackListener {
             rvList2.adapter = viewModel.recentAdapter
             viewModel.recentAdapter.notifyDataSetChanged()
             viewModel.recentAdapter.submitList(viewModel.item1)
+
+
+
+
+            topBar.apply {
+                textViewTitle.visibility = View.VISIBLE
+                cardSearch.visibility = View.VISIBLE
+                ivSearch.visibility = View.GONE
+                ivCart.visibility = View.VISIBLE
+                textViewTitle.text = "Product Detail"
+
+                appicon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        MainActivity.context.get()!!,
+                        R.drawable.baseline_west_24
+                    )
+                )
+
+                appicon.singleClick {
+                    findNavController().navigateUp()
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_productDetail_to_cart)
+                }
+            }
         }
 
 

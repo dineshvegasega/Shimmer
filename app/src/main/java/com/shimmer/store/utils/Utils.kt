@@ -49,6 +49,7 @@ import coil.load
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
@@ -423,6 +424,13 @@ fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
         .into(ivMap)
 }
 
+
+fun String.glidePhotoView(context: Context, ivMap: PhotoView) {
+    Glide.with(context)
+        .load(this)
+        .apply(myOptionsGlide)
+        .into(ivMap)
+}
 
 val myOptionsGlidePortrait: RequestOptions = RequestOptions()
     .placeholder(R.drawable.main_logo_land)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_bar"
-    app:startDestination="@id/products"
+    app:startDestination="@id/splash"
     >
 
     <fragment
@@ -53,6 +53,19 @@
             app:destination="@id/products"
             app:launchSingleTop="true"
             />
+
+        <action
+            android:id="@+id/action_home_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_home_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -67,6 +80,18 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_category_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_category_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -74,6 +99,19 @@
         android:label="Faq"
         android:id="@+id/faq"
         tools:layout="@layout/faq">
+
+        <action
+            android:id="@+id/action_faq_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_faq_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -81,6 +119,19 @@
         android:label="Profile"
         android:id="@+id/profile"
         tools:layout="@layout/profile">
+
+        <action
+            android:id="@+id/action_profile_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_profile_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
 
@@ -115,6 +166,18 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_products_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_products_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -122,6 +185,14 @@
         android:label="ProductDetail"
         android:id="@+id/productDetail"
         tools:layout="@layout/product_detail">
+
+        <action
+            android:id="@+id/action_productDetail_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
+
     </fragment>
 
     <fragment

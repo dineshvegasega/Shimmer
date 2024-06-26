@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -27,6 +28,7 @@ import com.shimmer.store.ui.main.category.Category
 import com.shimmer.store.ui.main.home.Home
 import com.shimmer.store.ui.main.faq.Faq
 import com.shimmer.store.ui.main.profile.Profile
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
 
@@ -83,6 +85,12 @@ class MainActivity : AppCompatActivity() {
         var networkFailed: Boolean = false
 
         lateinit var fragmentInFrame: Fragment
+
+        @JvmStatic
+        var typefaceroboto_light: Typeface? = null
+
+        @JvmStatic
+        var typefaceroboto_medium: Typeface? = null
     }
 
     private val connectivityManager by lazy { ConnectivityManager(this) }
@@ -104,13 +112,15 @@ class MainActivity : AppCompatActivity() {
         observeConnectivityManager()
         setupBottomNav()
 
+        typefaceroboto_light = resources.getFont(R.font.roboto_light)
+        typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
 
         setBar()
 
 
 
         binding.apply {
-            toolbar.appicon.setOnClickListener {
+            toolbar.appicon.singleClick {
                 if (isBackStack) {
                     navHostFragment.findNavController().navigateUp()
                 }
@@ -278,21 +288,21 @@ class MainActivity : AppCompatActivity() {
 
 
     fun callBack(hideValue: Int) {
-        setBar()
+//        setBar()
         binding.apply {
             when (hideValue) {
                 0 -> {
-                    toolbar.root.visibility = View.GONE
+//                    toolbar.root.visibility = View.GONE
                     bottomNavMain.visibility = View.GONE
                 }
 
                 1 -> {
-                    toolbar.root.visibility = View.VISIBLE
+//                    toolbar.root.visibility = View.VISIBLE
                     bottomNavMain.visibility = View.VISIBLE
                 }
 
                 2 -> {
-                    toolbar.root.visibility = View.VISIBLE
+//                    toolbar.root.visibility = View.VISIBLE
                     bottomNavMain.visibility = View.GONE
                 }
             }
