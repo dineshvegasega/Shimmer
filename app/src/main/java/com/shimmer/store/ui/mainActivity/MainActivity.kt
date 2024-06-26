@@ -115,7 +115,7 @@ class MainActivity : AppCompatActivity() {
         typefaceroboto_light = resources.getFont(R.font.roboto_light)
         typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
 
-        setBar()
+//        setBar()
 
 
 

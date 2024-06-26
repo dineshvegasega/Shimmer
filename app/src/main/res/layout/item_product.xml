@@ -112,7 +112,7 @@
                 android:layout_height="@dimen/_22sdp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
-                android:text="Add To Cart"
+                android:text="@string/buy_now"
                 app:iconTint="@color/black"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/white"

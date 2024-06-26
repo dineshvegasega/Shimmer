@@ -32,11 +32,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:singleLine="true"
-        android:text="@string/app_name"
-        android:fontFamily="@font/roboto_bold"
+        android:text="bkdh DFB JFJ"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_14sdp"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,6 +46,42 @@
         />
 
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardSearch"
+        app:cardElevation="3dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivSearch"
+        app:layout_constraintStart_toEndOf="@id/appicon"
+        android:padding="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/_30sdp"
+        android:layout_marginVertical="@dimen/_9sdp"
+        android:visibility="gone"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        >
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto_regular"
+            android:background="@color/_D9D9D9"
+            android:hint="Search..."
+            android:textColor="@color/black"
+            android:textColorHint="@color/_424041"
+            android:drawablePadding="@dimen/_8sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textSize="@dimen/_10sdp"
+            android:drawableLeft="@drawable/baseline_search_24"
+            android:drawableTint="@color/_424041"
+            android:gravity="center_vertical"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
+
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -90,7 +126,7 @@
         android:layout_height="1dp"
         android:background="@color/_c9cdd0"
         android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
     </View>
 
 

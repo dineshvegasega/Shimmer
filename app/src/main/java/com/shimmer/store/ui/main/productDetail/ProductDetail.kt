@@ -96,7 +96,7 @@ class ProductDetail : Fragment() , CallBackListener {
 
             topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
-                cardSearch.visibility = View.VISIBLE
+//                cardSearch.visibility = View.VISIBLE
                 ivSearch.visibility = View.GONE
                 ivCart.visibility = View.VISIBLE
                 textViewTitle.text = "Product Detail"

@@ -93,11 +93,11 @@ class Home : Fragment() {
 
 
             topBar.apply {
-                textViewTitle.visibility = View.GONE
-                cardSearch.visibility = View.VISIBLE
-                ivSearch.visibility = View.GONE
+                textViewTitle.visibility = View.VISIBLE
+                ivSearch.visibility = View.VISIBLE
+                ivCart.visibility = View.VISIBLE
 
-                editSearch.singleClick {
+                ivSearch.singleClick {
                     findNavController().navigate(R.id.action_home_to_search)
                 }
 

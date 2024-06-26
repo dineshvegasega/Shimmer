@@ -41,11 +41,11 @@ class Faq : Fragment() {
 
         binding.apply {
             topBar.apply {
-                textViewTitle.visibility = View.GONE
-                cardSearch.visibility = View.VISIBLE
-                ivSearch.visibility = View.GONE
+                textViewTitle.visibility = View.VISIBLE
+                ivSearch.visibility = View.VISIBLE
+                ivCart.visibility = View.VISIBLE
 
-                editSearch.singleClick {
+                ivSearch.singleClick {
                     findNavController().navigate(R.id.action_faq_to_search)
                 }
 

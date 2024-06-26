@@ -70,7 +70,7 @@ class Products : Fragment() {
 
             topBar.apply {
                 textViewTitle.visibility = View.GONE
-                cardSearch.visibility = View.GONE
+//                cardSearch.visibility = View.GONE
 
                 appicon.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -128,7 +128,7 @@ class Products : Fragment() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
                             dialog.dismiss()
-                        }, 200)
+                        }, 700)
                     }
 
                     textPriceLowToHighSort.singleClick {
@@ -138,7 +138,7 @@ class Products : Fragment() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
                             dialog.dismiss()
-                        }, 200)
+                        }, 700)
                     }
 
                     textPriceHighToLowSort.singleClick {
@@ -148,7 +148,7 @@ class Products : Fragment() {
 
                         Handler(Looper.getMainLooper()).postDelayed({
                             dialog.dismiss()
-                        }, 200)
+                        }, 700)
                     }
 
                 }

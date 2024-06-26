@@ -44,7 +44,7 @@ class Cart : Fragment() {
 
             topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
-                cardSearch.visibility = View.GONE
+//                cardSearch.visibility = View.GONE
                 ivSearch.visibility = View.GONE
                 ivCart.visibility = View.GONE
                 textViewTitle.text = "Cart"
