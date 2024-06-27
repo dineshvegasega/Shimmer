@@ -57,6 +57,11 @@ class Filters : Fragment() {
             viewModel.recentAdapter.submitList(viewModel.item1)
 
 
+            viewModel.itemPriceCount.observe(viewLifecycleOwner) {
+                if(it != 0){
+                    textPrice.text = "Price ($it)"
+                }
+            }
 
             textPrice.singleClick {
                 textPrice.setTypeface(typefaceroboto_medium)

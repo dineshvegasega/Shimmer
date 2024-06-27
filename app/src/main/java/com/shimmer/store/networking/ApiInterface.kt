@@ -3,7 +3,7 @@ package com.shimmer.store.networking
 import com.google.gson.JsonElement
 import com.shimmer.store.models.BaseResponseDC
 import com.shimmer.store.models.ItemChat
-import com.shimmer.store.models.ItemAds
+import com.shimmer.store.models.Items
 import com.shimmer.store.models.ItemComplaintType
 import com.shimmer.store.models.ItemDistrict
 import com.shimmer.store.models.ItemMarketplace
@@ -241,7 +241,7 @@ interface ApiInterface {
 
 
     @GET(ADS_LIST)
-    suspend fun adsList(): Response<BaseResponseDC<List<ItemAds>>>
+    suspend fun adsList(): Response<BaseResponseDC<List<Items>>>
 
 
     @GET(Complaint_Type)

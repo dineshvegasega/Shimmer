@@ -14,12 +14,13 @@ import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR
 import com.shimmer.store.databinding.ItemHome2Binding
 import com.shimmer.store.databinding.ItemProductBinding
+import com.shimmer.store.models.Items
 
 class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var counter = 0
 
-    var itemModels: MutableList<String> = ArrayList()
+    var itemModels: MutableList<Items> = ArrayList()
 
 
     lateinit var itemRowBinding2: ItemProductBinding
@@ -88,15 +89,17 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(obj: Any?, position: Int) {
             itemRowBinding.setVariable(BR._all, obj)
             itemRowBinding.executePendingBindings()
-            val model = obj as String
+            val model = obj as Items
 
             itemRowBinding.ivIcon.setOnClickListener {
                 it.findNavController().navigate(R.id.action_products_to_productsDetail)
             }
 
+            itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,R.color._9A9A9A)
+
             itemRowBinding.ivAddCart.setOnClickListener {
-//                itemRowBinding.ivAddCart.backgroundTintList = (if(dataClass.status == "Active") ContextCompat.getColorStateList(root.context,R.color._138808) else ContextCompat.getColorStateList(root.context,R.color._F02A2A))
-                itemRowBinding.ivAddCart.imageTintList = ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color)
+                model.isSelected = !model.isSelected
+                notifyItemChanged(position)
             }
 
 
@@ -119,7 +122,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAllSearch(movies: MutableList<String>) {
+    fun addAllSearch(movies: MutableList<Items>) {
         itemModels.clear()
         itemModels.addAll(movies)
 //        for(movie in movies){
@@ -128,13 +131,13 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addAll(movies: MutableList<String>) {
+    fun addAll(movies: MutableList<Items>) {
         for(movie in movies){
             add(movie)
         }
     }
 
-    fun add(moive: String) {
+    fun add(moive: Items) {
         itemModels.add(moive)
         notifyItemInserted(itemModels.size - 1)
     }
@@ -157,7 +160,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    fun submitData(itemMainArray: ArrayList<String>) {
+    fun submitData(itemMainArray: ArrayList<Items>) {
         itemModels = itemMainArray
     }
 
