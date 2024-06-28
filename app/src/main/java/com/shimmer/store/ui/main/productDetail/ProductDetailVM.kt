@@ -6,28 +6,29 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.Items
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ProductDetailVM @Inject constructor() : ViewModel() {
 
-    var item1 : ArrayList<String> = ArrayList()
+    var item1 : ArrayList<Items> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<String> = ArrayList()
 
 
-
     init {
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
-        item1.add("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4")
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
-        item1.add("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
-        item1.add("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4")
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
-        item1.add("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg")
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"))
+        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+
+
 
         item2.add("1")
         item2.add("2")
@@ -41,7 +42,7 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
 
 
 
-    val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, String>() {
+    val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -50,7 +51,7 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
 
         override fun onBindHolder(
             binding: ItemProductDiamondsBinding,
-            dataClass: String,
+            dataClass: Items,
             position: Int
         ) {
             binding.apply {

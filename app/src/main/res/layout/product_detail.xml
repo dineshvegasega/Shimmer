@@ -42,7 +42,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:nestedScrollingEnabled="false"
                 />
 
@@ -86,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:text="₹ 23,000"
                 android:textColor="@color/_000000"
-                android:textSize="@dimen/_25sdp"
+                android:textSize="@dimen/_23sdp"
                 app:fontFamily="@font/roboto_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginHorizontal="@dimen/_10sdp"
@@ -114,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:text="CATEGORIES:RINGS"
                 android:textColor="@color/_000000"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/roboto_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginHorizontal="@dimen/_10sdp"
@@ -756,6 +755,56 @@
                     app:layout_constraintTop_toBottomOf="@+id/textTotal">
                 </View>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutRelated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textRelatedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Related Products"
+                android:textAllCaps="true"
+                android:background="@color/_f2f2f2"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/roboto_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRelatedProducts"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                app:spanCount="2"
+                tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_product"
+                android:paddingHorizontal="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textRelatedProducts"
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

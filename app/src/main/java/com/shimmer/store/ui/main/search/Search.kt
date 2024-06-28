@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +16,12 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SearchBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.isTablet
 import com.shimmer.store.utils.onRightDrawableClicked
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class Search : Fragment() {
@@ -49,7 +51,6 @@ class Search : Fragment() {
 //            }
 
             topBarSearch.apply {
-
                 appicon.setImageDrawable(
                     ContextCompat.getDrawable(
                         MainActivity.context.get()!!,
@@ -62,6 +63,14 @@ class Search : Fragment() {
                 }
             }
 
+            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
+                1 -> R.drawable.baseline_search_24
+                2 -> R.drawable.baseline_search_32
+                3 -> R.drawable.baseline_search_50
+                else -> R.drawable.baseline_search_24
+            }
+            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
+            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0);
         }
 
         searchHandler()
@@ -84,7 +93,13 @@ class Search : Fragment() {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 }
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, if(count >= 1) R.drawable.ic_cross_white else R.drawable.baseline_search_24, 0);
+                    val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
+                        1 -> R.drawable.baseline_search_24
+                        2 -> R.drawable.baseline_search_32
+                        3 -> R.drawable.baseline_search_50
+                        else -> R.drawable.baseline_search_24
+                    }
+                    topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, if(count >= 1) R.drawable.ic_cross_white else iconTypeSearch, 0);
                 }
             })
 

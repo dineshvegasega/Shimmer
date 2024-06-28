@@ -12,12 +12,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.common.api.Status
 import com.shimmer.store.databinding.ProductZoomBinding
-import com.shimmer.store.ui.main.productDetail.ViewPagerAdapter
+import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.getRecyclerView
+import com.shimmer.store.utils.parcelable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 //import com.stfalcon.imageviewer.StfalconImageViewer
@@ -56,26 +59,26 @@ class ProductZoom  : Fragment() {
                 findNavController().navigateUp()
             }
 
-            val arrayList = arguments?.getStringArrayList("arrayList")
-            val position = arguments?.getInt("position")
+            val itemParcelable = arguments?.parcelable<ItemParcelable>("arrayList")
+
 
             val item1 : ArrayList<String> = ArrayList()
 
-            arrayList?.forEach {
-                if (it.endsWith("jpg") || it.endsWith("jpeg") || it.endsWith("png")){
-                    item1.add(it)
+            itemParcelable?.item?.forEach {
+                if (it.name.endsWith("jpg") || it.name.endsWith("jpeg") || it.name.endsWith("png")){
+                    item1.add(it.name)
                 }
             }
 
             Log.e("TAG", "arrayList: $item1")
-            Log.e("TAG", "position: $position")
+            Log.e("TAG", "position: ${itemParcelable?.position}")
 
-            pagerAdapter = ProductZoomAdapter(requireActivity(), item1!!)
+            pagerAdapter = ProductZoomPagerAdapter(requireActivity(), item1)
             rvList1.offscreenPageLimit = 1
             rvList1.overScrollMode = OVER_SCROLL_NEVER
             rvList1.adapter = pagerAdapter
             rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            rvList1.setCurrentItem(position!!, false)
+            rvList1.setCurrentItem(itemParcelable!!.position, false)
 
             Log.e("TAG", "videoList "+item1.size)
             (rvList1.getRecyclerView()

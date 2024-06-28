@@ -21,6 +21,7 @@ import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
 import com.shimmer.store.databinding.FragmentExoPlayerBinding
+import com.shimmer.store.models.Items
 import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,7 @@ import dagger.hilt.android.UnstableApi
 @AndroidEntryPoint
 class ProductDetailPageFragment(
     private val activity: FragmentActivity,
-    private val videoPath: String,
+    private val videoPath: Items,
     position: Int
 ) : Fragment() {
 
@@ -65,7 +66,7 @@ class ProductDetailPageFragment(
     private fun initializePlayer() {
         simpleExoPlayer = ExoPlayer.Builder(activity)
             .build()
-        val mediaSource = getProgressiveMediaSource(videoPath)
+        val mediaSource = getProgressiveMediaSource(videoPath.name)
         simpleExoPlayer!!.setMediaSource(mediaSource)
         simpleExoPlayer!!.prepare()
 
@@ -128,10 +129,10 @@ class ProductDetailPageFragment(
 //                !binding!!.playerView.player!!.isPlaying
 //        }
 
-        if(videoPath.endsWith("jpg") || videoPath.endsWith("jpeg") || videoPath.endsWith("png")){
+        if(videoPath.name.endsWith("jpg") || videoPath.name.endsWith("jpeg") || videoPath.name.endsWith("png")){
             binding.ivIcon.visibility = View.VISIBLE
             binding.playerView.visibility = View.GONE
-            videoPath.glideImage(binding.ivIcon.context, binding.ivIcon)
+            videoPath.name.glideImage(binding.ivIcon.context, binding.ivIcon)
            // binding.ivIcon.loadImage(type = 1, url = { videoPath })
 
 //            binding.root.setOnClickListener {
@@ -143,7 +144,7 @@ class ProductDetailPageFragment(
 //                findNavController().navigate(R.id.productZoom)
                 ProductDetail.callBackListener!!.onCallBack(0)
             }
-        } else if(videoPath.endsWith("mp4")) {
+        } else if(videoPath.name.endsWith("mp4")) {
             binding.ivIcon.visibility = View.GONE
             binding.playerView.visibility = View.VISIBLE
             initializePlayer()
@@ -162,7 +163,7 @@ class ProductDetailPageFragment(
 //        }
 //        simpleExoPlayer.release()
 
-        if(videoPath.endsWith("mp4")) {
+        if(videoPath.name.endsWith("mp4")) {
             Handler(Looper.getMainLooper()).postDelayed({
                 binding!!.playerView.player!!.stop()
             }, 100)

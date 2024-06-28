@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.shimmer.store.databinding.AbcBinding
-import com.shimmer.store.ui.main.productDetail.ViewPagerAdapter
+import com.shimmer.store.ui.main.productDetail.ProductDetailPagerAdapter
 
 class ABC  : AppCompatActivity() {
 
@@ -35,7 +35,7 @@ class ABC  : AppCompatActivity() {
     private fun initViewPagerView() {
 
         initializeList()
-        pagerAdapter = ViewPagerAdapter(this, videoList)
+//        pagerAdapter = ProductDetailPagerAdapter(this, videoList)
         mainViewBinding.viewPager.offscreenPageLimit = 1
         mainViewBinding.viewPager.adapter = pagerAdapter
         mainViewBinding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL

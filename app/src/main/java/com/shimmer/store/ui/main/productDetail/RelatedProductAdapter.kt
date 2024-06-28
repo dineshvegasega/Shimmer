@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.products
+package com.shimmer.store.ui.main.productDetail
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -9,14 +9,13 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.shimmer.store.BR
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
-import com.shimmer.store.BR
-import com.shimmer.store.databinding.ItemHome2Binding
 import com.shimmer.store.databinding.ItemProductBinding
 import com.shimmer.store.models.Items
 
-class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class RelatedProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var counter = 0
 
@@ -92,10 +91,12 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val model = obj as Items
 
             itemRowBinding.ivIcon.setOnClickListener {
-                it.findNavController().navigate(R.id.action_products_to_productsDetail)
+                it.findNavController().navigate(R.id.action_productDetail_to_productsDetail)
             }
 
-            itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,R.color._9A9A9A)
+            itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,
+                R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,
+                R.color._9A9A9A)
 
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected

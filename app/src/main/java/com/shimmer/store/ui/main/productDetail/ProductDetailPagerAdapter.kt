@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.media3.common.util.UnstableApi
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.shimmer.store.models.Items
 
-class ViewPagerAdapter(
+class ProductDetailPagerAdapter(
     private val activity: FragmentActivity,
-    private val videoList: ArrayList<String>
+    private val videoList: ArrayList<Items>
 ) : FragmentStateAdapter(activity) {
 
     override fun getItemCount(): Int {

@@ -19,7 +19,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ProductDetailBinding
+import com.shimmer.store.models.ItemParcelable
+import com.shimmer.store.models.Items
 import com.shimmer.store.ui.interfaces.CallBackListener
+import com.shimmer.store.ui.main.products.Products
+import com.shimmer.store.ui.main.products.Products.Companion
+import com.shimmer.store.ui.main.products.ProductsAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -50,6 +55,10 @@ class ProductDetail : Fragment() , CallBackListener {
         var callBackListener: CallBackListener? = null
 
 
+        @JvmStatic
+        lateinit var adapter2: RelatedProductAdapter
+
+
     }
 
     override fun onCreateView(
@@ -71,7 +80,7 @@ class ProductDetail : Fragment() , CallBackListener {
 
         binding.apply {
 
-            pagerAdapter = ViewPagerAdapter(requireActivity(), viewModel.item1)
+            pagerAdapter = ProductDetailPagerAdapter(requireActivity(), viewModel.item1)
             rvList1.offscreenPageLimit = 1
             rvList1.overScrollMode = OVER_SCROLL_NEVER
             rvList1.adapter = pagerAdapter
@@ -116,6 +125,14 @@ class ProductDetail : Fragment() , CallBackListener {
                     findNavController().navigate(R.id.action_productDetail_to_cart)
                 }
             }
+
+
+
+            adapter2 = RelatedProductAdapter()
+            adapter2.submitData(viewModel.item1)
+            adapter2.notifyDataSetChanged()
+            binding.rvRelatedProducts.adapter = adapter2
+
         }
 
 
@@ -190,8 +207,7 @@ class ProductDetail : Fragment() , CallBackListener {
 
     override fun onCallBack(pos: Int) {
         findNavController().navigate(R.id.productZoom, Bundle().apply {
-            putStringArrayList("arrayList", viewModel.item1)
-            putInt("position", binding.rvList1.currentItem)
+            putParcelable("arrayList", ItemParcelable(viewModel.item1, binding.rvList1.currentItem))
         })
     }
 

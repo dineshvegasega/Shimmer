@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_vuesax_bold_bank"
+        android:icon="@drawable/notification_icon"
         android:title="Home" />
     <item
         android:id="@+id/category"

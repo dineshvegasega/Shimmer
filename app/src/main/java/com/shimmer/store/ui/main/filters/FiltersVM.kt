@@ -62,7 +62,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-
                 textItem.setTypeface(if(dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
                 ivIconCheck.imageTintList = if(dataClass.isSelected == true) ContextCompat.getColorStateList(binding.root.context,
                     R.color.app_color)

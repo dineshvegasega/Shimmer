@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Items(
-    val name: String = "Item Name",
-    var isSelected: Boolean = false
+data class ItemParcelable(
+    val item: ArrayList<Items> = ArrayList(),
+    var position: Int = -1
 ): Parcelable
