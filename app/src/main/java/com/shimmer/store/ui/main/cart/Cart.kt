@@ -46,7 +46,7 @@ class Cart : Fragment() {
                 textViewTitle.visibility = View.VISIBLE
 //                cardSearch.visibility = View.GONE
                 ivSearch.visibility = View.GONE
-                ivCart.visibility = View.GONE
+                ivCartLayout.visibility = View.GONE
                 textViewTitle.text = "Cart"
 
                 appicon.setImageDrawable(

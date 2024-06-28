@@ -55,35 +55,63 @@
         android:src="@drawable/baseline_search_24"
         app:tint="@color/white"
         android:scaleType="fitCenter"
-        android:paddingTop="@dimen/_2sdp"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivCart"
-        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:rippleColor="@color/black"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackgroundBorderless"
         />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivCart"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:src="@drawable/ic_shopping_cart_white_18dp"
-        android:scaleType="fitCenter"
-        android:paddingTop="@dimen/_2sdp"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/_15sdp"
-        app:rippleColor="@color/black"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ivCartLayout"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
+        android:gravity="center"
+        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCart"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/ic_shopping_cart_white_18dp"
+            android:scaleType="fitCenter"
+            android:visibility="visible"
+            app:rippleColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/menu_badge"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:text="20"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_all_round_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/_F02A2A"
+            android:visibility="gone"
+            android:textSize="@dimen/_8sdp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     <View

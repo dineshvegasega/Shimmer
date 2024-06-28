@@ -14,6 +14,7 @@ import com.shimmer.store.databinding.FaqBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,6 +52,12 @@ class Faq : Fragment() {
 
                 ivCart.singleClick {
                     findNavController().navigate(R.id.action_faq_to_cart)
+                }
+
+
+                badgeCount.observe(viewLifecycleOwner) {
+                    menuBadge.text = "$it"
+                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
                 }
             }
         }

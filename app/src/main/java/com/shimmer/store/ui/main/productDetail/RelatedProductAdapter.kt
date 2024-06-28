@@ -14,6 +14,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.databinding.ItemProductBinding
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 
 class RelatedProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -100,6 +101,10 @@ class RelatedProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected
+
+                val filteredNot = itemModels.filter { it.isSelected == true }
+                badgeCount.value = filteredNot.size
+
                 notifyItemChanged(position)
             }
 

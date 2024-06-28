@@ -15,6 +15,10 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 //        var isHide: Boolean = false
 //        var isHide = MutableLiveData<Boolean>()
 
+        var badgeCount = MutableLiveData<Int>(6)
+
+
+
     }
 
 

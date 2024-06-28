@@ -28,6 +28,7 @@ import com.shimmer.store.ui.main.products.ProductsAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -124,9 +125,21 @@ class ProductDetail : Fragment() , CallBackListener {
                 ivCart.singleClick {
                     findNavController().navigate(R.id.action_productDetail_to_cart)
                 }
+
+
+                badgeCount.observe(viewLifecycleOwner) {
+                    menuBadge.text = "$it"
+                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                }
             }
 
+            btAddToCart.singleClick {
+                badgeCount.value = 1
+            }
 
+            btByNow.singleClick {
+                findNavController().navigate(R.id.action_productDetail_to_cart)
+            }
 
             adapter2 = RelatedProductAdapter()
             adapter2.submitData(viewModel.item1)
