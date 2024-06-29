@@ -31,16 +31,13 @@ class Cart : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
         MainActivity.mainActivity.get()!!.callBack(2)
 //        Log.e("TAG", "onViewCreated: ${isHide.value}")
         binding.apply {
-//            appicon.setOnClickListener {
-//                findNavController().navigateUp()
-//            }
 
             topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
@@ -59,6 +56,18 @@ class Cart : Fragment() {
                 appicon.singleClick {
                     findNavController().navigateUp()
                 }
+            }
+
+
+            rvList.setHasFixedSize(true)
+            rvList.adapter = viewModel.recentAdapter
+            viewModel.recentAdapter.notifyDataSetChanged()
+            viewModel.recentAdapter.submitList(viewModel.item1)
+
+
+
+            layoutSort.singleClick {
+                findNavController().navigate(R.id.action_cart_to_payment)
             }
         }
     }

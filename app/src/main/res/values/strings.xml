@@ -32,6 +32,7 @@
     <string name="buy_now">Buy Now</string>
 
     <string name="strike__through_text">₹ <strike>13,000</strike></string>
+    <string name="cart">Cart</string>
 
 
 </resources>

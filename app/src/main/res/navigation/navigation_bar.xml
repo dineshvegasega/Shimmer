@@ -147,6 +147,24 @@
         android:label="Cart"
         android:id="@+id/cart"
         tools:layout="@layout/cart">
+        <action
+            android:id="@+id/action_cart_to_payment"
+            app:destination="@id/payment"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.payment.Payment"
+        android:label="Payment"
+        android:id="@+id/payment"
+        tools:layout="@layout/payment">
+        <action
+            android:id="@+id/action_payment_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
