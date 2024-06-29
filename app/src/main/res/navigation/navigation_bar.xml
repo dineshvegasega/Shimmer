@@ -40,6 +40,19 @@
         android:label="Login"
         android:id="@+id/login"
         tools:layout="@layout/login">
+        <action
+            android:id="@+id/action_login_to_forgotPassword"
+            app:destination="@id/forgotPassword"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.onBoarding.forgotPassword.ForgotPassword"
+        android:label="ForgotPassword"
+        android:id="@+id/forgotPassword"
+        tools:layout="@layout/forgot_password">
     </fragment>
 
 
@@ -132,6 +145,19 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_profile_to_trackOrder"
+            app:destination="@id/trackOrder"
+            app:launchSingleTop="true"
+            />
+
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.trackOrder.TrackOrder"
+        android:label="TrackOrder"
+        android:id="@+id/trackOrder"
+        tools:layout="@layout/track_order">
     </fragment>
 
 
@@ -215,6 +241,13 @@
             app:destination="@id/productDetail"
             app:launchSingleTop="false"
             />
+
+        <action
+            android:id="@+id/action_productDetail_to_productZoom"
+            app:destination="@id/productZoom"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment

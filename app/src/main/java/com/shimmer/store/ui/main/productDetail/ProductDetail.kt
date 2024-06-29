@@ -219,7 +219,7 @@ class ProductDetail : Fragment() , CallBackListener {
     }
 
     override fun onCallBack(pos: Int) {
-        findNavController().navigate(R.id.productZoom, Bundle().apply {
+        findNavController().navigate(R.id.action_productDetail_to_productZoom, Bundle().apply {
             putParcelable("arrayList", ItemParcelable(viewModel.item1, binding.rvList1.currentItem))
         })
     }
