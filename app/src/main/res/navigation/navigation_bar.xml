@@ -178,6 +178,13 @@
             app:destination="@id/payment"
             app:launchSingleTop="true"
             />
+
+        <action
+            android:id="@+id/action_cart_to_productDetail"
+            app:destination="@id/productDetail"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment

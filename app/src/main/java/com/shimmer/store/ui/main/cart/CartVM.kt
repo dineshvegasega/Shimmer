@@ -1,12 +1,18 @@
 package com.shimmer.store.ui.main.cart
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -49,20 +55,36 @@ class CartVM @Inject constructor() : ViewModel() {
             viewType: Int
         ) = ItemCartBinding.inflate(inflater, parent, false)
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemCartBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
-//                recyclerViewRecentItems.setHasFixedSize(true)
-//                val headlineAdapter = RecentChildAdapter(
-//                    binding.root.context,
-//                    dataClass.items,
-//                    position
-//                )
-//                recyclerViewRecentItems.adapter = headlineAdapter
-//                recyclerViewRecentItems.layoutManager = LinearLayoutManager(binding.root.context)
+
+                ivIcon.singleClick {
+                    binding.root.findNavController().navigate(R.id.action_cart_to_productDetail)
+                }
+
+                ivCount.text = dataClass.quantity.toString()
+
+                ivMinus.singleClick {
+                    if (dataClass.quantity > 0) {
+                        dataClass.quantity--
+                        notifyItemChanged(position)
+                    }
+                }
+
+                ivPlus.singleClick {
+                    dataClass.quantity++
+                    notifyItemChanged(position)
+                }
+
+                btDelete.singleClick {
+                    item1.removeAt(position)
+                    notifyDataSetChanged()
+                }
             }
         }
     }
