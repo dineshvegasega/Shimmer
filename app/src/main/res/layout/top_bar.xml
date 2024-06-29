@@ -12,7 +12,7 @@
         android:layout_height="@dimen/_25sdp"
         android:src="@mipmap/ic_launcher"
         android:scaleType="fitCenter"
-        android:text="Toolbar Title"
+        android:text="@string/toolbar_title"
         android:paddingTop="@dimen/_2sdp"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"

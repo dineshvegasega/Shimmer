@@ -172,6 +172,10 @@ dependencies {
 //    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
 
     implementation ("com.github.chrisbanes:PhotoView:2.2.0")
+
+//    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
+
+//    implementation ("io.github.afreakyelf:Pdf-Viewer:2.0.7")
 }
 
 

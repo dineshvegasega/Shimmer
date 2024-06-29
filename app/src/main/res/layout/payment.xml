@@ -62,7 +62,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="Make Payment"
+                android:text="@string/make_payment"
                 app:fontFamily="@font/roboto_medium"
                 />
 

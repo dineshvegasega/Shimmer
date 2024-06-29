@@ -62,7 +62,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="Proceed To Payment"
+                android:text="@string/proceed_to_payment"
                 app:fontFamily="@font/roboto_medium"
                 />
 

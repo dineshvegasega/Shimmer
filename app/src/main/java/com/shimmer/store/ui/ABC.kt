@@ -1,18 +1,27 @@
 package com.shimmer.store.ui
 
+import android.app.AlertDialog
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.shimmer.store.databinding.AbcBinding
 import com.shimmer.store.ui.main.productDetail.ProductDetailPagerAdapter
+import com.shimmer.store.utils.pdfviewer.PdfRendererView
+import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
+import com.shimmer.store.utils.pdfviewer.util.FileUtils.uriToFile
+import java.io.File
 
 class ABC  : AppCompatActivity() {
 
     private val TAG = "MainActivity"
 
-    lateinit var mainViewBinding: AbcBinding
+    lateinit var binding: AbcBinding
 
     private val RECORD_REQUEST_CODE: Int = 101
 
@@ -22,23 +31,106 @@ class ABC  : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewBinding = AbcBinding.inflate(layoutInflater)
-        setContentView(mainViewBinding.root)
+        binding = AbcBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //setupPermissions()
 
 //        mainViewBinding.btnReqPermission.setOnClickListener { makeRequest() }
 
-        initViewPagerView()
+//        initViewPagerView()
+
+
+        initPdfViewerWithPath("quote.pdf")
+
     }
 
-    private fun initViewPagerView() {
+    var isFromAssets = true
+    private fun initPdfViewerWithPath(filePath: String?) {
+        if (TextUtils.isEmpty(filePath)) {
+            onPdfError("")
+            return
+        }
+        try {
+            val file = if (filePath!!.startsWith("content://")) {
+                uriToFile(applicationContext, Uri.parse(filePath))
+            } else if (isFromAssets) {
+                fileFromAsset(this, filePath)
+            } else {
+                File(filePath)
+            }
+            binding.pdfView.initWithFile(file)
+        } catch (e: Exception) {
+            onPdfError(e.toString())
+        }
 
+
+        binding.pdfView.statusListener = object : PdfRendererView.StatusCallBack {
+            override fun onPdfLoadStart() {
+                runOnUiThread {
+                    true.showProgressBar()
+                }
+            }
+
+            override fun onPdfLoadProgress(
+                progress: Int,
+                downloadedBytes: Long,
+                totalBytes: Long?
+            ) {
+                //Download is in progress
+            }
+
+            override fun onPdfLoadSuccess(absolutePath: String) {
+                runOnUiThread {
+                    false.showProgressBar()
+                    //downloadedFilePath = absolutePath
+                }
+            }
+
+            override fun onError(error: Throwable) {
+                runOnUiThread {
+                    false.showProgressBar()
+                    onPdfError(error.toString())
+                }
+            }
+
+            override fun onPageChanged(currentPage: Int, totalPage: Int) {
+                //Page change. Not require
+            }
+        }
+    }
+
+
+
+    private fun onPdfError(e: String) {
+        Log.e("Pdf render error", e)
+        AlertDialog.Builder(this)
+            .setTitle("pdf_viewer_error")
+            .setMessage("error_pdf_corrupted")
+            .setPositiveButton("pdf_viewer_retry") { dialog, which ->
+                runOnUiThread {
+                    initPdfViewerWithPath("quote.pdf")
+                }
+            }
+            .setNegativeButton("pdf_viewer_cancel", null)
+            .show()
+    }
+
+    private fun Boolean.showProgressBar() {
+        binding.progressBar.visibility = if (this) VISIBLE else GONE
+    }
+
+
+
+
+
+
+    private fun initViewPagerView() {
         initializeList()
 //        pagerAdapter = ProductDetailPagerAdapter(this, videoList)
-        mainViewBinding.viewPager.offscreenPageLimit = 1
-        mainViewBinding.viewPager.adapter = pagerAdapter
-        mainViewBinding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewPager.offscreenPageLimit = 1
+        binding.viewPager.adapter = pagerAdapter
+        binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
         Log.e(TAG, "videoList "+videoList.size)
 
