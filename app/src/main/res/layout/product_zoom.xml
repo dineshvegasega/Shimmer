@@ -23,7 +23,10 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_close_24"
                 android:padding="@dimen/_4sdp"
-
+                app:rippleColor="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 />
 
 

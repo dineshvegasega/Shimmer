@@ -17,7 +17,8 @@
     <FrameLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <com.shimmer.store.utils.pdfviewer.PdfRendererView
             android:id="@+id/pdfView"
@@ -37,5 +38,230 @@
             android:visibility="gone" />
 
     </FrameLayout>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:text="OK"
+        android:visibility="visible"/>
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/_9A9A9A"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/bg_all_round_black">
+        </View>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/_9A9A9A"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/bg_all_round_black">
+        </View>
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/_9A9A9A"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/bg_all_round_black">
+        </View>
+
+        <View
+            android:id="@+id/view10"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view11"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view12"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+
+        <View
+            android:id="@+id/view13"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/_9A9A9A"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/bg_all_round_black">
+        </View>
+
+        <View
+            android:id="@+id/view14"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view15"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view16"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+
+        <View
+            android:id="@+id/view17"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/_9A9A9A"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/bg_all_round_black">
+        </View>
+
+        <View
+            android:id="@+id/view18"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view19"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+        <View
+            android:id="@+id/view20"
+            android:layout_width="@dimen/_7sdp"
+            android:layout_height="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:backgroundTint="@color/app_color"
+            android:layout_margin="@dimen/_3sdp"
+            android:background="@drawable/ic_triangle_right">
+        </View>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>

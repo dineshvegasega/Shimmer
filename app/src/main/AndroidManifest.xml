@@ -59,7 +59,7 @@
 
 
         <activity
-            android:name=".ui.ABC"
+            android:name=".ui.mainActivity.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

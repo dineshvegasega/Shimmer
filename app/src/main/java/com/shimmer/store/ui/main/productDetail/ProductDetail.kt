@@ -1,6 +1,7 @@
 package com.shimmer.store.ui.main.productDetail
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -91,17 +92,80 @@ class ProductDetail : Fragment() , CallBackListener {
                 .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
                 false
 
-            TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-            }.attach()
+//            TabLayoutMediator(tabLayout, rvList1) { tab, position ->
+//            }.attach()
 
+            viewModel.indicator(binding, viewModel.item1, 1)
 
+            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//                    if (pageChangeValue != position) {
+//                        Log.e("TAG", "positionA" + position)
+//                    }
+//                    pageChangeValue = position
+                }
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+//                    adapter1.updatePosition(position)
+                    viewModel.indicator(binding, viewModel.item1, position)
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    Log.e("TAG", "state" + state)
+//                    if (state == 0) {
+//                    adapter1.notifyItemChanged(adapter1.counter)
+//                        onClickItem(pageChangeValue)
+//                    }
+                }
+            })
+
+            viewModel.colors(binding, 1)
+
+            ivPink.singleClick {
+                viewModel.colors(binding, 1)
+            }
+            ivSilver.singleClick {
+                viewModel.colors(binding, 2)
+            }
+            ivGold.singleClick {
+                viewModel.colors(binding, 3)
+            }
 
             rvList2.setHasFixedSize(true)
             rvList2.adapter = viewModel.recentAdapter
             viewModel.recentAdapter.notifyDataSetChanged()
-            viewModel.recentAdapter.submitList(viewModel.item1)
+            viewModel.recentAdapter.submitList(viewModel.item3)
 
 
+            btGuide.singleClick {
+                viewModel.openDialogSize(1, "quote.pdf")
+            }
+
+
+            bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+            bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+            bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+            bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+
+            bt14.singleClick {
+                bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+                bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
+            bt18.singleClick {
+                bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+            }
 
 
             topBar.apply {

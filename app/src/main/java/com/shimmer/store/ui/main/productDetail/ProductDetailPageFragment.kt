@@ -124,34 +124,18 @@ class ProductDetailPageFragment(
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume: $positionOfFragment")
-//        if (binding != null) {
-//            binding!!.playerView.player!!.playWhenReady =
-//                !binding!!.playerView.player!!.isPlaying
-//        }
-
         if(videoPath.name.endsWith("jpg") || videoPath.name.endsWith("jpeg") || videoPath.name.endsWith("png")){
             binding.ivIcon.visibility = View.VISIBLE
             binding.playerView.visibility = View.GONE
             videoPath.name.glideImage(binding.ivIcon.context, binding.ivIcon)
-           // binding.ivIcon.loadImage(type = 1, url = { videoPath })
-
-//            binding.root.setOnClickListener {
-//                it.findNavController().navigate(R.id.productZoom)
-//            }
-
             binding.ivIcon.singleClick {
-               // images.imageZoom(itemRowBinding.ivIcon, 2, counter)
-//                findNavController().navigate(R.id.productZoom)
                 ProductDetail.callBackListener!!.onCallBack(0)
             }
-        } else if(videoPath.name.endsWith("mp4")) {
+        } else if(videoPath.name.endsWith(".mp4")) {
             binding.ivIcon.visibility = View.GONE
             binding.playerView.visibility = View.VISIBLE
             initializePlayer()
-
         }
-
-
     }
 
     override fun onPause() {
@@ -168,8 +152,5 @@ class ProductDetailPageFragment(
                 binding!!.playerView.player!!.stop()
             }, 100)
         }
-
-
-
     }
 }

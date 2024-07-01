@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import coil.request.Tags
 import com.shimmer.store.R
 import com.shimmer.store.databinding.HomeBinding
@@ -17,6 +18,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
 import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
@@ -81,7 +83,36 @@ class Home : Fragment() {
             binding.rvList1.setPageTransformer { page, position ->
                 binding.rvList1.updatePagerHeightForChild(page)
             }
+            viewModel.indicator(binding, viewModel.item1, 1)
 
+            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//                    if (pageChangeValue != position) {
+//                        Log.e("TAG", "positionA" + position)
+//                    }
+//                    pageChangeValue = position
+                }
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+//                    adapter1.updatePosition(position)
+                    viewModel.indicator(binding, viewModel.item1, position)
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    Log.e("TAG", "state" + state)
+//                    if (state == 0) {
+//                    adapter1.notifyItemChanged(adapter1.counter)
+//                        onClickItem(pageChangeValue)
+//                    }
+                }
+            })
 
             adapter2.submitData(viewModel.item2)
             adapter2.notifyDataSetChanged()

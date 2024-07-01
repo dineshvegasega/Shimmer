@@ -15,10 +15,6 @@
         app:cardCornerRadius="@dimen/_4sdp"
         android:layout_margin="@dimen/_4sdp"
         app:cardUseCompatPadding="true"
-        android:background="@color/_79747E"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:focusable="true"
-        android:clickable="true"
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -36,6 +32,9 @@
                 app:srcCompat="@drawable/rectangle_40"
                 android:background="@color/white"
                 android:scaleType="centerCrop"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:focusable="true"
+                android:clickable="true"
                 />
 
 

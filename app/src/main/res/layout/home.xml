@@ -73,6 +73,17 @@
                 />
 
 
+
+            <include
+                android:id="@+id/indicator_layout"
+                layout="@layout/indicator_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/rvList1"
+                android:layout_marginBottom="@dimen/_10sdp"
+                />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textTitle2"
                 android:layout_width="wrap_content"
