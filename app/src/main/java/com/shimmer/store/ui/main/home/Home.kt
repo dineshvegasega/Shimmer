@@ -118,6 +118,7 @@ class Home : Fragment() {
             adapter2.notifyDataSetChanged()
             binding.rvList2.adapter = adapter2
 
+
             adapter3.submitData(viewModel.item3)
             adapter3.notifyDataSetChanged()
             binding.rvList3.adapter = adapter3

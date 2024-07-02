@@ -17,6 +17,8 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR
 import com.shimmer.store.databinding.ItemHome2Binding
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 
 class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -94,6 +96,16 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val model = obj as String
 
             itemRowBinding.root.setOnClickListener {
+                arrayCategory.apply {
+                    add("ring")
+//                    add("necklace")
+//                    add("earring")
+                }
+                arrayMaterial.apply {
+                    add("gold")
+//                    add("silver")
+//                    add("diamond")
+                }
                 it.findNavController().navigate(R.id.action_home_to_products)
             }
         }

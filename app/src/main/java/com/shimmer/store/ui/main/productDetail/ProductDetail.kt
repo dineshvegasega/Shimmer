@@ -1,6 +1,8 @@
 package com.shimmer.store.ui.main.productDetail
 
 import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OVER_SCROLL_NEVER
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,8 +20,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
+import com.shimmer.store.databinding.DialogPdfBinding
+import com.shimmer.store.databinding.DialogSizesBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.Items
@@ -40,16 +46,7 @@ class ProductDetail : Fragment() , CallBackListener {
     private var _binding: ProductDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val mediaUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
-    private val mediaUrlHls = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8"
-
-//    private var player: ExoPlayer?= null
-    // Create a data source factory.
-    private val dataSourceFactory: DataSource.Factory = DefaultHttpDataSource.Factory()
-
     companion object {
-//        @JvmStatic
-//        lateinit var adapter1: ProductDetailAdapter
 
         @JvmStatic
         lateinit var pagerAdapter: FragmentStateAdapter
@@ -138,15 +135,21 @@ class ProductDetail : Fragment() , CallBackListener {
                 viewModel.colors(binding, 3)
             }
 
+            btRingSize.singleClick {
+                openDialogSize()
+            }
+
+            btGuide.singleClick {
+                viewModel.openDialogPdf(1, "quote.pdf")
+            }
+
             rvList2.setHasFixedSize(true)
             rvList2.adapter = viewModel.recentAdapter
             viewModel.recentAdapter.notifyDataSetChanged()
             viewModel.recentAdapter.submitList(viewModel.item3)
 
 
-            btGuide.singleClick {
-                viewModel.openDialogSize(1, "quote.pdf")
-            }
+
 
 
             bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
@@ -214,72 +217,6 @@ class ProductDetail : Fragment() , CallBackListener {
 
 
 
-//
-//        player = ExoPlayer.Builder(requireContext())
-//            .build()
-
-//        adapter1 = ProductDetailAdapter()
-//
-//        binding.apply {
-//            adapter1.submitData(viewModel.item1)
-//            adapter1.notifyDataSetChanged()
-//            (rvList1.getRecyclerView()
-//                .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
-//                false
-//
-//            binding.rvList1.offscreenPageLimit = 1
-//            binding.rvList1.overScrollMode = OVER_SCROLL_NEVER
-//            binding.rvList1.adapter = adapter1
-//            binding.rvList1.setPageTransformer { page, position ->
-//                binding.rvList1.updatePagerHeightForChild(page)
-//            }
-//            TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-//            }.attach()
-//
-//            var pageChangeValue = -0
-//            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//                override fun onPageScrolled(
-//                    position: Int,
-//                    positionOffset: Float,
-//                    positionOffsetPixels: Int
-//                ) {
-//                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                    if (pageChangeValue != position) {
-//                        Log.e("TAG", "positionA" + position)
-//                    }
-//                    pageChangeValue = position
-//                }
-//
-//                override fun onPageSelected(position: Int) {
-//                    super.onPageSelected(position)
-//                    adapter1.updatePosition(position)
-//                }
-//
-//                override fun onPageScrollStateChanged(state: Int) {
-//                    super.onPageScrollStateChanged(state)
-//                    Log.e("TAG", "state" + state)
-////                    if (state == 0) {
-//                    adapter1.notifyItemChanged(adapter1.counter)
-////                        onClickItem(pageChangeValue)
-////                    }
-//                }
-//            })
-//
-//
-//
-//
-//
-////            val player = ExoPlayer.Builder(requireContext()).build()
-////            binding.playerView.player = player
-////            val mediaItem = MediaItem.fromUri("yourURL")
-////            player.setMediaItem(mediaItem)
-////            player.prepare()
-////            player.play()
-////
-//
-////            initPlayer()
-//        }
-
     }
 
     override fun onCallBack(pos: Int) {
@@ -293,76 +230,33 @@ class ProductDetail : Fragment() , CallBackListener {
     }
 
 
-//
-//    @OptIn(UnstableApi::class)
-//    private fun initPlayer(){
-//        player = ExoPlayer.Builder(requireContext())
-//            .build()
-//            .apply {
-//
-//                val source = if (mediaUrl.contains("m3u8"))
-//                    getHlsMediaSource()
-//                else
-//                    getProgressiveMediaSource()
-//
-//                setMediaSource(source)
-//                prepare()
-//                addListener(playerListener)
-//
-//
-//            }
-//
-//
-//
-////        binding.playerView.player.setShowPreviousButton(false);
-//    }
-//
-//
-//    @OptIn(UnstableApi::class)
-//    private fun getHlsMediaSource(): MediaSource {
-//        // Create a HLS media source pointing to a playlist uri.
-//        return HlsMediaSource.Factory(dataSourceFactory).
-//        createMediaSource(MediaItem.fromUri(mediaUrl))
-//    }
-//
-//    @OptIn(UnstableApi::class)
-//    private fun getProgressiveMediaSource(): MediaSource{
-//        // Create a Regular media source pointing to a playlist uri.
-//        return ProgressiveMediaSource.Factory(dataSourceFactory)
-//            .createMediaSource(MediaItem.fromUri(Uri.parse(mediaUrl)))
-//    }
-//
-//    private fun releasePlayer(){
-//        player?.apply {
-//            playWhenReady = false
-//            release()
-//        }
-//        player = null
-//    }
-//
-//    private fun pause(){
-//        player?.playWhenReady = false
-//    }
-//
-//    private fun play(){
-//        player?.playWhenReady = true
-//    }
-//
-//    private fun restartPlayer(){
-//        player?.seekTo(0)
-//        player?.playWhenReady = true
-//    }
-//
-//    private val playerListener = object: Player.Listener {
-//        override fun onPlaybackStateChanged(playbackState: Int) {
-//            super.onPlaybackStateChanged(playbackState)
-//            when(playbackState){
-//                STATE_ENDED -> restartPlayer()
-//                STATE_READY -> {
-//                   // binding.playerView.player = player
-//                    play()
-//                }
-//            }
-//        }
-//    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun openDialogSize() {
+        val dialogBinding = DialogSizesBinding.inflate(MainActivity.activity.get()?.getSystemService(
+            Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        )
+        val dialog = BottomSheetDialog(MainActivity.context.get()!!)
+        dialog.setContentView(dialogBinding.root)
+        dialog.setOnShowListener { dia ->
+            val bottomSheetDialog = dia as BottomSheetDialog
+            val bottomSheetInternal: FrameLayout =
+                bottomSheetDialog.findViewById(com.google.android.material.R.id.design_bottom_sheet)!!
+            bottomSheetInternal.setBackgroundResource(R.drawable.bg_top_round_corner)
+        }
+        dialog.show()
+
+
+        dialogBinding.rvListSize.setHasFixedSize(true)
+        dialogBinding.rvListSize.adapter = viewModel.sizeAdapter
+        viewModel.sizeAdapter.notifyDataSetChanged()
+        viewModel.sizeAdapter.submitList(viewModel.arraySizes)
+
+
+        dialogBinding.ivIconCross.singleClick {
+            dialog.dismiss()
+        }
+
+    }
+
 }

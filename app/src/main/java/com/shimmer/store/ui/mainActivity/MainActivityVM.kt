@@ -17,7 +17,11 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 
         var badgeCount = MutableLiveData<Int>(6)
 
+//        val filters = hashMapOf<String, Any?>()
 
+        val arrayPrice : ArrayList<String> = ArrayList()
+        val arrayCategory : ArrayList<String> = ArrayList()
+        val arrayMaterial : ArrayList<String> = ArrayList()
 
     }
 

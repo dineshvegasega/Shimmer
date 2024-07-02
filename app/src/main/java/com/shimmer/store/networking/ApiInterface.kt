@@ -10,7 +10,7 @@ import com.shimmer.store.models.ItemMarketplace
 import com.shimmer.store.models.ItemOrganization
 import com.shimmer.store.models.ItemPanchayat
 import com.shimmer.store.models.ItemPincode
-import com.shimmer.store.models.ItemState
+import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.ItemVending
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -103,7 +103,7 @@ interface ApiInterface {
 
 
     @GET(STATE)
-    suspend fun state(): Response<BaseResponseDC<List<ItemState>>>
+    suspend fun state(): Response<BaseResponseDC<List<ItemSizes>>>
 
 
     @POST(DISTRICT)

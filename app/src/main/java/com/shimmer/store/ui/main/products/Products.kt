@@ -5,12 +5,12 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -24,6 +24,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.serializable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -68,6 +69,10 @@ class Products : Fragment() {
 //                findNavController().navigate(R.id.action_products_to_productsDetail)
 //            }
 
+
+//           val leftMaxima = requireArguments().serializable("filters") as HashMap<String, Any?>?
+//
+//            Log.e("TAG", "leftMaxima "+leftMaxima?.get("category"))
 
             topBar.apply {
                 textViewTitle.visibility = View.GONE

@@ -18,8 +18,10 @@ import androidx.lifecycle.ViewModel
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
+import com.shimmer.store.databinding.ItemSizeBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
@@ -36,6 +38,9 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
     var item1 : ArrayList<Items> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<Items> = ArrayList()
+
+    var arraySizes : ArrayList<ItemSizes> = ArrayList()
+
 
 
     init {
@@ -57,6 +62,29 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
         item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
         item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
         item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+
+
+        arraySizes.add(ItemSizes(5 , 11.1))
+        arraySizes.add(ItemSizes(6 , 12.1))
+        arraySizes.add(ItemSizes(7 , 13.1))
+        arraySizes.add(ItemSizes(8 , 14.1))
+        arraySizes.add(ItemSizes(9 , 15.1))
+        arraySizes.add(ItemSizes(10 , 16.1))
+        arraySizes.add(ItemSizes(11 , 17.1))
+        arraySizes.add(ItemSizes(12 , 18.1))
+        arraySizes.add(ItemSizes(13 , 19.1))
+        arraySizes.add(ItemSizes(14 , 20.1))
+        arraySizes.add(ItemSizes(15 , 21.1))
+        arraySizes.add(ItemSizes(16 , 22.1))
+        arraySizes.add(ItemSizes(17 , 23.1))
+        arraySizes.add(ItemSizes(18 , 24.1))
+        arraySizes.add(ItemSizes(19 , 25.1))
+        arraySizes.add(ItemSizes(20 , 26.1))
+        arraySizes.add(ItemSizes(21 , 27.1))
+        arraySizes.add(ItemSizes(22 , 28.1))
+        arraySizes.add(ItemSizes(23 , 29.1))
+        arraySizes.add(ItemSizes(24 , 30.1))
+        arraySizes.add(ItemSizes(25 , 31.1))
     }
 
 
@@ -88,6 +116,49 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
     }
 
 
+    var selectedPosition = -1
+    val sizeAdapter = object : GenericAdapter<ItemSizeBinding, ItemSizes>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemSizeBinding.inflate(inflater, parent, false)
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun onBindHolder(
+            binding: ItemSizeBinding,
+            dataClass: ItemSizes,
+            position: Int
+        ) {
+            binding.apply {
+                textSize.text = dataClass.inch.toString()
+                textMM.text = dataClass.mm.toString() +" mm"
+
+                ivIcon.singleClick {
+                    selectedPosition = position
+//                    val list = currentList
+//                    list.apply {
+//                        forEach {
+//                            it.isSelected = false
+//                        }
+//                        this[position].isSelected = true
+//                    }
+////                    dataClass.isSelected = !dataClass.isSelected
+//                    notifyItemChanged(position)
+                    notifyDataSetChanged()
+                }
+
+                if (selectedPosition == position) {
+                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.app_color))
+                } else {
+                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
+                }
+
+//                ivIcon.setBackgroundColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.app_color)
+//                else ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
+            }
+        }
+    }
 
 
 
@@ -168,7 +239,7 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
 
 
 
-    public fun openDialogSize(type: Int, pdf : String) {
+    public fun openDialogPdf(type: Int, pdf : String) {
         val dialogBinding = DialogPdfBinding.inflate(MainActivity.activity.get()?.getSystemService(
             Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         )

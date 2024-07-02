@@ -176,7 +176,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btAddToCart"
+                android:id="@+id/btClear"
                 style="@style/PrimaryButtonBlue"
                 app:backgroundTint="@color/_363438"
                 app:rippleColor="@color/white"
@@ -214,7 +214,7 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btByNow"
+                android:id="@+id/btApply"
                 style="@style/PrimaryButtonBlue"
                 app:backgroundTint="@color/_0183b8"
                 app:rippleColor="@color/white"
