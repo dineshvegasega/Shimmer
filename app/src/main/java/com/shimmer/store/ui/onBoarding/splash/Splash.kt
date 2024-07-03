@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.splash
 
+import android.animation.Animator
 import android.graphics.drawable.Animatable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -42,6 +43,29 @@ class Splash : Fragment() {
 //        MainActivity.mainActivity.get()?.callFragment(0)
 
 
+      //  handleSplashTime()
+
+//        binding.avFromCode.setAnimation("drink.json")
+        binding.avFromCode.playAnimation()
+//        binding.avFromCode.addAnimatorListener(object : Animator.AnimatorListener {
+//            override fun onAnimationStart(animation: Animator) {
+//                Log.e("TAG", "onAnimationStart")
+//            }
+//
+//            override fun onAnimationEnd(animation: Animator) {
+//                Log.e("TAG", "onAnimationEnd")
+//                handleSplashTime()
+//            }
+//
+//            override fun onAnimationCancel(animation: Animator) {
+//                Log.e("TAG", "onAnimationCancel")
+//            }
+//
+//            override fun onAnimationRepeat(animation: Animator) {
+//                Log.e("TAG", "onAnimationRepeat")
+//            }
+//        })
+
         handleSplashTime()
 
     }
@@ -53,7 +77,7 @@ class Splash : Fragment() {
 
     private fun handleSplashTime() {
         ioThread {
-            delay(1000)
+            delay(3000)
             readData(LOGIN_DATA) { loginUser ->
 //                val fragmentInFrame = navHostFragment!!.getChildFragmentManager().getFragments().get(0)
                 if(loginUser == null){
