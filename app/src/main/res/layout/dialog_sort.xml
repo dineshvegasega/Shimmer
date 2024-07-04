@@ -128,7 +128,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_15sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -143,7 +143,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btAddToCart"
+                    android:id="@+id/btClear"
                     style="@style/PrimaryButtonBlue"
                     app:backgroundTint="@color/_363438"
                     app:rippleColor="@color/white"
@@ -156,7 +156,7 @@
                     android:paddingHorizontal="@dimen/_20sdp"
                     android:paddingVertical="@dimen/_7sdp"
                     android:textColor="@color/white"
-                    android:text="@string/clear_all"
+                    android:text="@string/clear"
                     android:textSize="@dimen/_11sdp"
                     app:cornerRadius="@dimen/_4sdp"
                     android:insetTop="0dp"
@@ -181,7 +181,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btByNow"
+                    android:id="@+id/btApply"
                     style="@style/PrimaryButtonBlue"
                     app:backgroundTint="@color/_0183b8"
                     app:rippleColor="@color/white"
@@ -194,7 +194,7 @@
                     android:paddingHorizontal="@dimen/_20sdp"
                     android:paddingVertical="@dimen/_7sdp"
                     android:textColor="@color/white"
-                    android:text="@string/apply_sort"
+                    android:text="@string/apply"
                     android:textSize="@dimen/_11sdp"
                     app:cornerRadius="@dimen/_4sdp"
                     android:insetTop="0dp"

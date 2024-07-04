@@ -24,6 +24,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.serializable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -74,6 +75,12 @@ class Products : Fragment() {
 //
 //            Log.e("TAG", "leftMaxima "+leftMaxima?.get("category"))
 
+
+            mainCategory.forEach {
+                Log.e("TAG", "itmainCategory "+it.isSelected)
+            }
+
+
             topBar.apply {
                 textViewTitle.visibility = View.GONE
 //                cardSearch.visibility = View.GONE
@@ -108,6 +115,7 @@ class Products : Fragment() {
 //            val typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
 
 
+            var sortFilter = 0
             layoutSort.singleClick {
                 if (sortAlert?.isShowing == true) {
                     return@singleClick
@@ -132,35 +140,64 @@ class Products : Fragment() {
                         dialog.dismiss()
                     }
 
+                    when(sortFilter){
+                        1 -> {
+                            textDefaultSort.setTypeface(typefaceroboto_medium)
+                            textPriceLowToHighSort.setTypeface(typefaceroboto_light)
+                            textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        }
+                        2 -> {
+                            textDefaultSort.setTypeface(typefaceroboto_light)
+                            textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
+                            textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        }
+                        3 -> {
+                            textDefaultSort.setTypeface(typefaceroboto_light)
+                            textPriceLowToHighSort.setTypeface(typefaceroboto_light)
+                            textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
+                        }
+                    }
+
                     textDefaultSort.singleClick {
                         // textDefaultSort.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
                         textDefaultSort.setTypeface(typefaceroboto_medium)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_light)
-
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            dialog.dismiss()
-                        }, 700)
+                        sortFilter = 1
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            dialog.dismiss()
+//                        }, 700)
                     }
 
                     textPriceLowToHighSort.singleClick {
                         textDefaultSort.setTypeface(typefaceroboto_light)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_light)
-
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            dialog.dismiss()
-                        }, 700)
+                        sortFilter = 2
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            dialog.dismiss()
+//                        }, 700)
                     }
 
                     textPriceHighToLowSort.singleClick {
                         textDefaultSort.setTypeface(typefaceroboto_light)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
+                        sortFilter = 3
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            dialog.dismiss()
+//                        }, 700)
+                    }
 
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            dialog.dismiss()
-                        }, 700)
+                    btClear.singleClick {
+                        textDefaultSort.setTypeface(typefaceroboto_light)
+                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
+                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        sortFilter = 0
+                    }
+
+                    btApply.singleClick {
+                        dialog.dismiss()
                     }
 
                 }

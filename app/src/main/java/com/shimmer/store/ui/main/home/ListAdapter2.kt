@@ -17,6 +17,8 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR
 import com.shimmer.store.databinding.ItemHome2Binding
+import com.shimmer.store.databinding.ItemHomeCategoryBinding
+import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 
@@ -24,10 +26,9 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var counter = 0
 
-    var itemModels: MutableList<String> = ArrayList()
+    var itemModels: MutableList<Items> = ArrayList()
 
 
-    lateinit var itemRowBinding2: ItemHome2Binding
 
 
     private val item: Int = 0
@@ -41,8 +42,7 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return  if(viewType == item){
-            val binding: ItemHome2Binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_home_2, parent, false)
-            itemRowBinding2 = binding
+            val binding: ItemHomeCategoryBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_home_category, parent, false)
             TopMoviesVH(binding)
         }else{
             val binding: ItemLoadingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_loading, parent, false)
@@ -86,16 +86,18 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    inner class TopMoviesVH(binding: ItemHome2Binding) : RecyclerView.ViewHolder(binding.root) {
-        var itemRowBinding: ItemHome2Binding = binding
+    inner class TopMoviesVH(binding: ItemHomeCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        var itemRowBinding: ItemHomeCategoryBinding = binding
 
         @SuppressLint("NotifyDataSetChanged", "SetTextI18n", "ClickableViewAccessibility")
         fun bind(obj: Any?, position: Int) {
             itemRowBinding.setVariable(BR._all, obj)
             itemRowBinding.executePendingBindings()
-            val model = obj as String
+            val model = obj as Items
 
-            itemRowBinding.root.setOnClickListener {
+            itemRowBinding.textName.text = model.name
+
+            itemRowBinding.ivIcon.setOnClickListener {
                 arrayCategory.apply {
                     add("ring")
 //                    add("necklace")
@@ -124,7 +126,7 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAllSearch(movies: MutableList<String>) {
+    fun addAllSearch(movies: MutableList<Items>) {
         itemModels.clear()
         itemModels.addAll(movies)
 //        for(movie in movies){
@@ -133,13 +135,13 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addAll(movies: MutableList<String>) {
+    fun addAll(movies: MutableList<Items>) {
         for(movie in movies){
             add(movie)
         }
     }
 
-    fun add(moive: String) {
+    fun add(moive: Items) {
         itemModels.add(moive)
         notifyItemInserted(itemModels.size - 1)
     }
@@ -162,7 +164,7 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    fun submitData(itemMainArray: ArrayList<String>) {
+    fun submitData(itemMainArray: ArrayList<Items>) {
         itemModels = itemMainArray
     }
 

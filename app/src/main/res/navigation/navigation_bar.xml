@@ -79,6 +79,12 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_home_to_customDesign"
+            app:destination="@id/customDesign"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -102,6 +108,12 @@
         <action
             android:id="@+id/action_category_to_cart"
             app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_category_to_customDesign"
+            app:destination="@id/customDesign"
             app:launchSingleTop="true"
             />
 
@@ -269,6 +281,13 @@
         android:label="Filters"
         android:id="@+id/productZoom"
         tools:layout="@layout/product_zoom">
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.customDesign.CustomDesign"
+        android:label="CustomDesign"
+        android:id="@+id/customDesign"
+        tools:layout="@layout/custom_design">
     </fragment>
 
 </navigation>

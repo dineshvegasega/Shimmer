@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.cart
+package com.shimmer.store.ui.main.customDesign
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,16 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.CartBinding
+import com.shimmer.store.databinding.CustomDesignBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class Cart : Fragment() {
-    private val viewModel: CartVM by viewModels()
-    private var _binding: CartBinding? = null
+class CustomDesign : Fragment() {
+    private val viewModel: CustomDesignVM by viewModels()
+    private var _binding: CustomDesignBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class Cart : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = CartBinding.inflate(inflater)
+        _binding = CustomDesignBinding.inflate(inflater)
         return binding.root
     }
 
@@ -44,7 +44,7 @@ class Cart : Fragment() {
 //                cardSearch.visibility = View.GONE
                 ivSearch.visibility = View.GONE
                 ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "Cart"
+                textViewTitle.text = "Custom Design"
 
                 appicon.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -59,20 +59,8 @@ class Cart : Fragment() {
             }
 
 
-            rvList.setHasFixedSize(true)
-            rvList.adapter = viewModel.recentAdapter
-            viewModel.recentAdapter.notifyDataSetChanged()
-            viewModel.recentAdapter.submitList(viewModel.item1)
 
-
-
-            layoutSort.singleClick {
-                findNavController().navigate(R.id.action_cart_to_payment)
-            }
         }
     }
-
-
-
 
 }

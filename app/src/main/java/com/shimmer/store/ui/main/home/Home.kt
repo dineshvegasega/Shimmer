@@ -18,6 +18,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
 import com.shimmer.store.utils.updatePagerHeightForChild
@@ -34,8 +35,8 @@ class Home : Fragment() {
         @JvmStatic
         lateinit var adapter1: ListAdapter1
 
-        @JvmStatic
-        lateinit var adapter2: ListAdapter2
+//        @JvmStatic
+//        lateinit var adapter2: ListAdapter2
 
         @JvmStatic
         lateinit var adapter3: ListAdapter3
@@ -65,7 +66,7 @@ class Home : Fragment() {
 //        item1.add("3")
 
         adapter1 = ListAdapter1()
-        adapter2 = ListAdapter2()
+//        adapter2 = ListAdapter2()
         adapter3 = ListAdapter3()
 
 
@@ -74,49 +75,61 @@ class Home : Fragment() {
 //                findNavController().navigate(R.id.action_home_to_products)
 //            }
 
-
-            adapter1.submitData(viewModel.item1)
-            adapter1.notifyDataSetChanged()
-            binding.rvList1.offscreenPageLimit = 1
-            binding.rvList1.overScrollMode = OVER_SCROLL_NEVER
-            binding.rvList1.adapter = adapter1
-            binding.rvList1.setPageTransformer { page, position ->
-                binding.rvList1.updatePagerHeightForChild(page)
+            layoutCustomDesign.ivCustomDesign.setOnClickListener {
+                findNavController().navigate(R.id.action_home_to_customDesign)
             }
-            viewModel.indicator(binding, viewModel.item1, 1)
 
-            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                    if (pageChangeValue != position) {
-//                        Log.e("TAG", "positionA" + position)
-//                    }
-//                    pageChangeValue = position
-                }
+//            adapter1.submitData(viewModel.item1)
+//            adapter1.notifyDataSetChanged()
+//            binding.rvList1.offscreenPageLimit = 1
+//            binding.rvList1.overScrollMode = OVER_SCROLL_NEVER
+//            binding.rvList1.adapter = adapter1
+//            binding.rvList1.setPageTransformer { page, position ->
+//                binding.rvList1.updatePagerHeightForChild(page)
+//            }
+//            viewModel.indicator(binding, viewModel.item1, 1)
+//
+//            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//                override fun onPageScrolled(
+//                    position: Int,
+//                    positionOffset: Float,
+//                    positionOffsetPixels: Int
+//                ) {
+//                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+////                    if (pageChangeValue != position) {
+////                        Log.e("TAG", "positionA" + position)
+////                    }
+////                    pageChangeValue = position
+//                }
+//
+//                override fun onPageSelected(position: Int) {
+//                    super.onPageSelected(position)
+////                    adapter1.updatePosition(position)
+//                    viewModel.indicator(binding, viewModel.item1, position)
+//                }
+//
+//                override fun onPageScrollStateChanged(state: Int) {
+//                    super.onPageScrollStateChanged(state)
+//                    Log.e("TAG", "state" + state)
+////                    if (state == 0) {
+////                    adapter1.notifyItemChanged(adapter1.counter)
+////                        onClickItem(pageChangeValue)
+////                    }
+//                }
+//            })
 
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
-//                    adapter1.updatePosition(position)
-                    viewModel.indicator(binding, viewModel.item1, position)
-                }
+//            adapter2.submitData(mainCategory)
+//            adapter2.notifyDataSetChanged()
+//            binding.rvList2.adapter = adapter2
 
-                override fun onPageScrollStateChanged(state: Int) {
-                    super.onPageScrollStateChanged(state)
-                    Log.e("TAG", "state" + state)
-//                    if (state == 0) {
-//                    adapter1.notifyItemChanged(adapter1.counter)
-//                        onClickItem(pageChangeValue)
-//                    }
-                }
-            })
 
-            adapter2.submitData(viewModel.item2)
-            adapter2.notifyDataSetChanged()
-            binding.rvList2.adapter = adapter2
+
+            rvList2.setHasFixedSize(true)
+            rvList2.adapter = viewModel.categoryAdapter
+            viewModel.categoryAdapter.notifyDataSetChanged()
+            viewModel.categoryAdapter.submitList(mainCategory)
+
+
 
 
             adapter3.submitData(viewModel.item3)

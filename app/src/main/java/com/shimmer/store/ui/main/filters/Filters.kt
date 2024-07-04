@@ -21,6 +21,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_m
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayShopFor
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,6 +61,7 @@ class Filters : Fragment() {
                 arrayPrice.clear()
                 arrayCategory.clear()
                 arrayMaterial.clear()
+                arrayShopFor.clear()
 
                 viewModel.itemPrice.map { mapPrice ->
                     if (mapPriceMatch(mapPrice.name) == true){
@@ -85,9 +87,18 @@ class Filters : Fragment() {
                     }
                 }
 
+                viewModel.itemShopFor.map { mapMaterial ->
+                    if (mapShopForMatch(mapMaterial.name) == true){
+                        mapMaterial.isSelected = true
+                    } else {
+                        mapMaterial.isSelected = false
+                    }
+                }
+
                 viewModel.itemPriceCount.value = 0
                 viewModel.itemCategoryCount.value = 0
                 viewModel.itemMaterialCount.value = 0
+                viewModel.itemShopForCount.value = 0
 
                 when(defaultRun){
                     1 -> {
@@ -104,6 +115,11 @@ class Filters : Fragment() {
                         rvList2.adapter = viewModel.materialAdapter
                         viewModel.materialAdapter.notifyDataSetChanged()
                         viewModel.materialAdapter.submitList(viewModel.itemMaterial)
+                    }
+                    4 -> {
+                        rvList2.adapter = viewModel.shopForAdapter
+                        viewModel.shopForAdapter.notifyDataSetChanged()
+                        viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
                     }
                 }
             }
@@ -183,6 +199,22 @@ class Filters : Fragment() {
 //            viewModel.materialAdapter.submitList(viewModel.itemMaterial)
 
 
+            viewModel.itemShopFor.map { mapShopFor ->
+                if (mapShopForMatch(mapShopFor.name) == true){
+                    mapShopFor.isSelected = true
+                } else {
+                    mapShopFor.isSelected = false
+                }
+            }
+
+            val filteredShopFor = viewModel.itemShopFor.filter { it.isSelected == true }
+            viewModel.itemShopForCount.value = filteredShopFor.size
+
+//            rvList2.setHasFixedSize(true)
+//            rvList2.adapter = viewModel.shopForAdapter
+//            viewModel.shopForAdapter.notifyDataSetChanged()
+//            viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
+
 
             viewModel.itemPriceCount.observe(viewLifecycleOwner) {
                 textPrice.text = if(it == 0) "Price" else "Price ($it)"
@@ -196,11 +228,16 @@ class Filters : Fragment() {
                 textMaterial.text = if(it == 0) "Material" else "Material ($it)"
             }
 
+            viewModel.itemShopForCount.observe(viewLifecycleOwner) {
+                textShopFor.text = if(it == 0) "Shop For" else "Shop For ($it)"
+            }
+
             textPrice.singleClick {
                 defaultRun = 1
                 textPrice.setTypeface(typefaceroboto_medium)
                 textCategories.setTypeface(typefaceroboto_light)
                 textMaterial.setTypeface(typefaceroboto_light)
+                textShopFor.setTypeface(typefaceroboto_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 //                    arrayPrice.clear()
@@ -230,6 +267,7 @@ class Filters : Fragment() {
                 textPrice.setTypeface(typefaceroboto_light)
                 textCategories.setTypeface(typefaceroboto_medium)
                 textMaterial.setTypeface(typefaceroboto_light)
+                textShopFor.setTypeface(typefaceroboto_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 //                    arrayCategory.clear()
@@ -258,6 +296,7 @@ class Filters : Fragment() {
                 textPrice.setTypeface(typefaceroboto_light)
                 textCategories.setTypeface(typefaceroboto_light)
                 textMaterial.setTypeface(typefaceroboto_medium)
+                textShopFor.setTypeface(typefaceroboto_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 //                    arrayMaterial.clear()
@@ -281,6 +320,34 @@ class Filters : Fragment() {
                 }, 100)
             }
 
+            textShopFor.singleClick {
+                defaultRun = 3
+                textPrice.setTypeface(typefaceroboto_light)
+                textCategories.setTypeface(typefaceroboto_light)
+                textMaterial.setTypeface(typefaceroboto_light)
+                textShopFor.setTypeface(typefaceroboto_medium)
+
+                Handler(Looper.getMainLooper()).postDelayed({
+//                    arrayMaterial.clear()
+//                    arrayMaterial.apply {
+//                        add("gold")
+//                        add("silver")
+//                    }
+
+                    viewModel.itemMaterial.map { mapShopFor ->
+                        if (mapShopForMatch(mapShopFor.name) == true){
+                            mapShopFor.isSelected = true
+                        } else {
+                            mapShopFor.isSelected = false
+                        }
+                    }
+
+                    rvList2.setHasFixedSize(true)
+                    rvList2.adapter = viewModel.shopForAdapter
+                    viewModel.shopForAdapter.notifyDataSetChanged()
+                    viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
+                }, 100)
+            }
         }
     }
 
@@ -314,5 +381,13 @@ class Filters : Fragment() {
     }
 
 
+    private fun mapShopForMatch(name: String): Boolean {
+        arrayShopFor.forEach {
+            if(it.equals(name)){
+                return true
+            }
+        }
+        return false
+    }
 
 }

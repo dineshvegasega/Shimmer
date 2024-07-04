@@ -20,68 +20,86 @@
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layout_custom_design"
+        android:layout_marginBottom="@dimen/_10sdp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/rvList1"
+<!--            <androidx.viewpager2.widget.ViewPager2-->
+<!--                android:id="@+id/rvList1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:spanCount="2"-->
+<!--                tools:itemCount="2"-->
+<!--                tools:listitem="@layout/item_home_1"-->
+<!--                android:paddingHorizontal="@dimen/_10sdp"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                android:layout_marginTop="@dimen/_5sdp"-->
+<!--                android:nestedScrollingEnabled="false"-->
+<!--                />-->
+
+
+<!--            <include-->
+<!--                android:id="@+id/indicator_layout"-->
+<!--                layout="@layout/indicator_layout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="visible"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/rvList1"-->
+<!--                android:layout_marginBottom="@dimen/_10sdp"-->
+<!--                />-->
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ivIcon"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:spanCount="2"
-                tools:itemCount="2"
-                tools:listitem="@layout/item_home_1"
-                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_height="match_parent"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:nestedScrollingEnabled="false"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_fileName="ballon.json"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
                 />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Trending"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp"
-                app:fontFamily="@font/roboto_bold"
-                tools:ignore="HardcodedText"
-                android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/rvList1"
-                app:layout_constraintStart_toStartOf="parent"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvList2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:nestedScrollingEnabled="false"
                 app:spanCount="2"
-                tools:itemCount="2"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_home_2"
+                tools:itemCount="6"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_home_category"
                 android:paddingHorizontal="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@+id/textTitle"
+                android:layout_marginBottom="@dimen/_7sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-            <include
-                android:id="@+id/indicator_layout"
-                layout="@layout/indicator_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/rvList1"
-                android:layout_marginBottom="@dimen/_10sdp"
-                />
+
+
+
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textTitle2"
@@ -92,9 +110,10 @@
                 android:textSize="@dimen/_14sdp"
                 app:fontFamily="@font/roboto_bold"
                 tools:ignore="HardcodedText"
+                android:visibility="gone"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                app:layout_constraintTop_toBottomOf="@+id/rvList2"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTop"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -104,7 +123,7 @@
                 android:orientation="vertical"
                 android:nestedScrollingEnabled="false"
                 app:spanCount="2"
-                tools:itemCount="2"
+                tools:itemCount="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_home_3"
                 android:paddingHorizontal="@dimen/_10sdp"
@@ -112,9 +131,72 @@
                 />
 
 
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/_E1E2DB"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintTop_toBottomOf="@+id/rvList3"
+                >
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="About us"
+                        android:textColor="@color/_000000"
+                        android:textSize="@dimen/_14sdp"
+                        app:fontFamily="@font/roboto_medium"
+                        android:letterSpacing="0.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/cardLayout"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Decompiling our Android app’s APK file is essential to ensure our applications' integrity, security, and efficiency. This article explores why decompiling our APK is crucial and provides insights into some good practices for safeguarding our app. In Android Studio, inspecting the contents of an APK is a simple process. If we build our app on Android Studio, the APK file is typically located at /app/build/outputs/apk. Double-clicking on the APK file will display its contents. Alternatively, under the Build pull-down menu, selecting Analyze APK allows us to pick an APK file from any location."
+                        android:textColor="@color/_000000"
+                        android:textSize="@dimen/_10sdp"
+                        app:fontFamily="@font/roboto_light"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="@dimen/_2sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/cardLayout"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.cardview.widget.CardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+
+
+
+    <include
+        android:id="@+id/layout_custom_design"
+        layout="@layout/layout_custom_design"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

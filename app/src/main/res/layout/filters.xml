@@ -112,6 +112,21 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="@dimen/_10sdp"/>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textShopFor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/shop_for"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/roboto_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingVertical="@dimen/_5sdp"
+                tools:ignore="HardcodedText"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/_10sdp"/>
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat

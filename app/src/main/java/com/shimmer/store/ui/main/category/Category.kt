@@ -40,12 +40,17 @@ class Category : Fragment() {
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(1)
         binding.apply {
-            button.setOnClickListener {
-                findNavController().navigate(R.id.action_category_to_products)
+//            button.setOnClickListener {
+//                findNavController().navigate(R.id.action_category_to_products)
+//            }
+
+
+            layoutCustomDesign.ivCustomDesign.setOnClickListener {
+                findNavController().navigate(R.id.action_category_to_customDesign)
             }
 
 
-            topBar.apply {
+                topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
                 ivSearch.visibility = View.VISIBLE
                 ivCart.visibility = View.VISIBLE

@@ -18,6 +18,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_m
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayShopFor
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,11 +28,12 @@ class FiltersVM @Inject constructor() : ViewModel() {
     var itemPriceCount = MutableLiveData<Int>(0)
     var itemCategoryCount = MutableLiveData<Int>(0)
     var itemMaterialCount = MutableLiveData<Int>(0)
+    var itemShopForCount = MutableLiveData<Int>(0)
 
     var itemPrice: ArrayList<Items> = ArrayList()
     var itemCategory: ArrayList<Items> = ArrayList()
     var itemMaterial: ArrayList<Items> = ArrayList()
-
+    var itemShopFor: ArrayList<Items> = ArrayList()
 
     init {
         itemPrice.add(Items("₹1000 - ₹10000"))
@@ -41,19 +43,20 @@ class FiltersVM @Inject constructor() : ViewModel() {
         itemPrice.add(Items("₹30000 - ₹50000"))
         itemPrice.add(Items("₹50000 - ₹100000"))
         itemPrice.add(Items("₹100000 - ₹1000000"))
-        itemPrice.add(Items("₹1000000 - above"))
+        itemPrice.add(Items("₹1000000 - Above"))
 
         itemCategory.add(Items("ring"))
         itemCategory.add(Items("necklace"))
         itemCategory.add(Items("earring"))
         itemCategory.add(Items("bangle"))
 
-        itemMaterial.add(Items("gold"))
-        itemMaterial.add(Items("silver"))
-        itemMaterial.add(Items("diamond"))
-        itemMaterial.add(Items("steel"))
-        itemMaterial.add(Items("loha"))
-        itemMaterial.add(Items("plastic"))
+        itemMaterial.add(Items("Gold 14 K"))
+        itemMaterial.add(Items("Gold 18 K"))
+        itemMaterial.add(Items("Platinum"))
+
+        itemShopFor.add(Items("Men"))
+        itemShopFor.add(Items("Women"))
+        itemShopFor.add(Items("Kids"))
     }
 
 
@@ -73,9 +76,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-
                 textItem.text = dataClass.name
-
                 textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
@@ -104,7 +105,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
                     it.isSelected == true
                 }
                 itemPriceCount.value = filteredNot.size
-
             }
         }
     }
@@ -207,5 +207,53 @@ class FiltersVM @Inject constructor() : ViewModel() {
         }
     }
 
+
+
+    val shopForAdapter = object : GenericAdapter<ItemFilterBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemFilterBinding.inflate(inflater, parent, false)
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun onBindHolder(
+            binding: ItemFilterBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textItem.text = dataClass.name
+
+                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                ivIconCheck.imageTintList =
+                    if (dataClass.isSelected == true) ContextCompat.getColorStateList(
+                        binding.root.context,
+                        R.color.app_color
+                    )
+                    else ContextCompat.getColorStateList(
+                        binding.root.context,
+                        R.color._D9D9D9
+                    )
+
+                root.singleClick {
+                    selectedPosition = position
+                    dataClass.isSelected = !dataClass.isSelected
+                    if (dataClass.isSelected == true) {
+                        arrayShopFor.add(dataClass.name)
+                    } else {
+                        arrayShopFor.remove(dataClass.name)
+                    }
+                    arrayShopFor.distinct()
+                    notifyItemChanged(position)
+                }
+
+
+                val filteredNot = currentList.filter { it.isSelected == true }
+                itemShopForCount.value = filteredNot.size
+
+            }
+        }
+    }
 
 }
