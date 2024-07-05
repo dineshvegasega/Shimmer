@@ -20,17 +20,33 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 
 //        val filters = hashMapOf<String, Any?>()
 
-        val arrayPrice : ArrayList<String> = ArrayList()
-        val arrayCategory : ArrayList<String> = ArrayList()
-        val arrayMaterial : ArrayList<String> = ArrayList()
-        val arrayShopFor : ArrayList<String> = ArrayList()
+//        val arrayPrice : ArrayList<String> = ArrayList()
+//        val arrayCategory : ArrayList<String> = ArrayList()
+//        val arrayMaterial : ArrayList<String> = ArrayList()
+//        val arrayShopFor : ArrayList<String> = ArrayList()
 
+
+        var isFilterFromFrom: Boolean = false
+
+        var mainPrice: ArrayList<Items> = ArrayList()
         val mainCategory : ArrayList<Items> = ArrayList()
+        var mainMaterial: ArrayList<Items> = ArrayList()
+        var mainShopFor: ArrayList<Items> = ArrayList()
 
         init {
+            mainPrice.add(Items("₹1000 - ₹10000"))
+            mainPrice.add(Items("₹10000 - ₹15000"))
+            mainPrice.add(Items("₹15000 - ₹20000"))
+            mainPrice.add(Items("₹20000 - ₹30000"))
+            mainPrice.add(Items("₹30000 - ₹50000"))
+            mainPrice.add(Items("₹50000 - ₹100000"))
+            mainPrice.add(Items("₹100000 - ₹1000000"))
+            mainPrice.add(Items("₹1000000 - Above"))
+
+
+
             mainCategory.add(Items("RINGS",
                 subCategory = arrayListOf(Items("All Rings"),
-                    Items("Men's"),
                     Items("Band"),
                     Items("Casual"),
                     Items("Cocktail"),
@@ -39,14 +55,12 @@ class MainActivityVM @Inject constructor() : ViewModel() {
             ))
             mainCategory.add(Items("NECKLACE",
                 subCategory = arrayListOf(Items("All Necklace"),
-                    Items("Men's"),
                     Items("Long Necklace"),
-                    Items("Short Necklace"),
                     Items("Short Necklace"))
             ))
             mainCategory.add(Items("PENDANTS",
                 subCategory = arrayListOf(Items("All Pendants"),
-                    Items("Alphabates"),
+                    Items("Alphabets"),
                     Items("Zodiac"),
                     Items("Casual"),
                     Items("Everyday"))
@@ -71,6 +85,18 @@ class MainActivityVM @Inject constructor() : ViewModel() {
                     Items("Drops"),
                     Items("Hoops"))
             ))
+
+
+
+            mainMaterial.add(Items("Gold 14 K"))
+            mainMaterial.add(Items("Gold 18 K"))
+            mainMaterial.add(Items("Platinum"))
+
+
+
+            mainShopFor.add(Items("Men"))
+            mainShopFor.add(Items("Women"))
+            mainShopFor.add(Items("Kids"))
         }
     }
 

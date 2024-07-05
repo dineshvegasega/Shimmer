@@ -24,7 +24,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.serializable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,9 +76,9 @@ class Products : Fragment() {
 //            Log.e("TAG", "leftMaxima "+leftMaxima?.get("category"))
 
 
-            mainCategory.forEach {
-                Log.e("TAG", "itmainCategory "+it.isSelected)
-            }
+//            mainCategory.forEach {
+//                Log.e("TAG", "itmainCategory "+it.isSelected)
+//            }
 
 
             topBar.apply {

@@ -13,15 +13,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.FiltersBinding
+import com.shimmer.store.databinding.ItemFilterCategoryBinding
+import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayShopFor
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFromFrom
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayShopFor
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +38,10 @@ class Filters : Fragment() {
     private val viewModel: FiltersVM by viewModels()
     private var _binding: FiltersBinding? = null
     private val binding get() = _binding!!
+
+    companion object{
+//        var headerAdapter : GenericAdapter<ItemFilterCategoryBinding, Items>? = null
+    }
 
     var defaultRun = 1
 
@@ -58,41 +70,61 @@ class Filters : Fragment() {
 
 
             btClear.singleClick {
-                arrayPrice.clear()
-                arrayCategory.clear()
-                arrayMaterial.clear()
-                arrayShopFor.clear()
+//                isFilterFromFrom = false
+//                arrayPrice.clear()
+//                arrayCategory.clear()
+//                arrayMaterial.clear()
+//                arrayShopFor.clear()
 
-                viewModel.itemPrice.map { mapPrice ->
-                    if (mapPriceMatch(mapPrice.name) == true){
-                        mapPrice.isSelected = true
-                    } else {
-                        mapPrice.isSelected = false
-                    }
+//                headerAdapter = viewModel.categoryAdapter
+
+//                viewModel.itemPrice.map { mapPrice ->
+//                    if (mapPriceMatch(mapPrice.name) == true){
+//                        mapPrice.isSelected = true
+//                    } else {
+//                        mapPrice.isSelected = false
+//                    }
+//                }
+
+//                mainCategory.map { mapCategory ->
+//                    if (mapCategoryMatch(mapCategory.name) == true){
+//                        mapCategory.isSelected = true
+//                    } else {
+//                        mapCategory.isSelected = false
+//                    }
+//                }
+
+//                viewModel.itemMaterial.map { mapMaterial ->
+//                    if (mapMaterialMatch(mapMaterial.name) == true){
+//                        mapMaterial.isSelected = true
+//                    } else {
+//                        mapMaterial.isSelected = false
+//                    }
+//                }
+//
+//                viewModel.itemShopFor.map { mapMaterial ->
+//                    if (mapShopForMatch(mapMaterial.name) == true){
+//                        mapMaterial.isSelected = true
+//                    } else {
+//                        mapMaterial.isSelected = false
+//                    }
+//                }
+
+
+                mainPrice.forEach {
+                    it.isSelected = false
                 }
 
-                viewModel.itemCategory.map { mapCategory ->
-                    if (mapCategoryMatch(mapCategory.name) == true){
-                        mapCategory.isSelected = true
-                    } else {
-                        mapCategory.isSelected = false
-                    }
+                mainCategory.forEach {
+                    it.isSelected = false
                 }
 
-                viewModel.itemMaterial.map { mapMaterial ->
-                    if (mapMaterialMatch(mapMaterial.name) == true){
-                        mapMaterial.isSelected = true
-                    } else {
-                        mapMaterial.isSelected = false
-                    }
+                mainMaterial.forEach {
+                    it.isSelected = false
                 }
 
-                viewModel.itemShopFor.map { mapMaterial ->
-                    if (mapShopForMatch(mapMaterial.name) == true){
-                        mapMaterial.isSelected = true
-                    } else {
-                        mapMaterial.isSelected = false
-                    }
+                mainShopFor.forEach {
+                    it.isSelected = false
                 }
 
                 viewModel.itemPriceCount.value = 0
@@ -104,27 +136,28 @@ class Filters : Fragment() {
                     1 -> {
                         rvList2.adapter = viewModel.priceAdapter
                         viewModel.priceAdapter.notifyDataSetChanged()
-                        viewModel.priceAdapter.submitList(viewModel.itemPrice)
+                        viewModel.priceAdapter.submitList(mainPrice)
                     }
                     2 -> {
                         rvList2.adapter = viewModel.categoryAdapter
                         viewModel.categoryAdapter.notifyDataSetChanged()
-                        viewModel.categoryAdapter.submitList(viewModel.itemCategory)
+                        viewModel.categoryAdapter.submitList(mainCategory)
                     }
                     3 -> {
                         rvList2.adapter = viewModel.materialAdapter
                         viewModel.materialAdapter.notifyDataSetChanged()
-                        viewModel.materialAdapter.submitList(viewModel.itemMaterial)
+                        viewModel.materialAdapter.submitList(mainMaterial)
                     }
                     4 -> {
                         rvList2.adapter = viewModel.shopForAdapter
                         viewModel.shopForAdapter.notifyDataSetChanged()
-                        viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
+                        viewModel.shopForAdapter.submitList(mainShopFor)
                     }
                 }
             }
 
             btApply.singleClick {
+//                isFilterFromFrom = false
                 findNavController().navigateUp()
             }
 
@@ -135,21 +168,21 @@ class Filters : Fragment() {
 //                add("₹15000 - ₹20000")
 //            }
 
-            viewModel.itemPrice.map { mapPrice ->
-                if (mapPriceMatch(mapPrice.name) == true){
-                    mapPrice.isSelected = true
-                } else {
-                    mapPrice.isSelected = false
-                }
-            }
+//            viewModel.itemPrice.map { mapPrice ->
+//                if (mapPriceMatch(mapPrice.name) == true){
+//                    mapPrice.isSelected = true
+//                } else {
+//                    mapPrice.isSelected = false
+//                }
+//            }
 
-            val filteredPrice = viewModel.itemPrice.filter { it.isSelected == true }
+            val filteredPrice = mainPrice.filter { it.isSelected == true }
             viewModel.itemPriceCount.value = filteredPrice.size
 
             rvList2.setHasFixedSize(true)
             rvList2.adapter = viewModel.priceAdapter
             viewModel.priceAdapter.notifyDataSetChanged()
-            viewModel.priceAdapter.submitList(viewModel.itemPrice)
+            viewModel.priceAdapter.submitList(mainPrice)
 
 
 //            arrayCategory.apply {
@@ -158,15 +191,15 @@ class Filters : Fragment() {
 //                add("earring")
 //            }
 
-            viewModel.itemCategory.map { mapCategory ->
-                if (mapCategoryMatch(mapCategory.name) == true){
-                    mapCategory.isSelected = true
-                } else {
-                    mapCategory.isSelected = false
-                }
-            }
+//            mainCategory.map { mapCategory ->
+//                if (mapCategoryMatch(mapCategory.name) == true){
+//                    mapCategory.isSelected = true
+//                } else {
+//                    mapCategory.isSelected = false
+//                }
+//            }
 
-            val filteredCategory = viewModel.itemCategory.filter { it.isSelected == true }
+            val filteredCategory = mainCategory.filter { it.isSelected == true }
             viewModel.itemCategoryCount.value = filteredCategory.size
 
 //            rvList2.setHasFixedSize(true)
@@ -182,15 +215,15 @@ class Filters : Fragment() {
 //                add("diamond")
 //            }
 
-            viewModel.itemMaterial.map { mapMaterial ->
-                if (mapMaterialMatch(mapMaterial.name) == true){
-                    mapMaterial.isSelected = true
-                } else {
-                    mapMaterial.isSelected = false
-                }
-            }
+//            viewModel.itemMaterial.map { mapMaterial ->
+//                if (mapMaterialMatch(mapMaterial.name) == true){
+//                    mapMaterial.isSelected = true
+//                } else {
+//                    mapMaterial.isSelected = false
+//                }
+//            }
 
-            val filteredMaterial = viewModel.itemMaterial.filter { it.isSelected == true }
+            val filteredMaterial = mainMaterial.filter { it.isSelected == true }
             viewModel.itemMaterialCount.value = filteredMaterial.size
 
 //            rvList2.setHasFixedSize(true)
@@ -199,15 +232,15 @@ class Filters : Fragment() {
 //            viewModel.materialAdapter.submitList(viewModel.itemMaterial)
 
 
-            viewModel.itemShopFor.map { mapShopFor ->
-                if (mapShopForMatch(mapShopFor.name) == true){
-                    mapShopFor.isSelected = true
-                } else {
-                    mapShopFor.isSelected = false
-                }
-            }
+//            viewModel.itemShopFor.map { mapShopFor ->
+//                if (mapShopForMatch(mapShopFor.name) == true){
+//                    mapShopFor.isSelected = true
+//                } else {
+//                    mapShopFor.isSelected = false
+//                }
+//            }
 
-            val filteredShopFor = viewModel.itemShopFor.filter { it.isSelected == true }
+            val filteredShopFor = mainShopFor.filter { it.isSelected == true }
             viewModel.itemShopForCount.value = filteredShopFor.size
 
 //            rvList2.setHasFixedSize(true)
@@ -247,22 +280,23 @@ class Filters : Fragment() {
 ////                        add("₹15000 - ₹20000")
 //                    }
 
-                    viewModel.itemPrice.map { mapPrice ->
-                        if (mapPriceMatch(mapPrice.name) == true){
-                            mapPrice.isSelected = true
-                        } else {
-                            mapPrice.isSelected = false
-                        }
-                    }
+//                    viewModel.itemPrice.map { mapPrice ->
+//                        if (mapPriceMatch(mapPrice.name) == true){
+//                            mapPrice.isSelected = true
+//                        } else {
+//                            mapPrice.isSelected = false
+//                        }
+//                    }
 
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.priceAdapter
                     viewModel.priceAdapter.notifyDataSetChanged()
-                    viewModel.priceAdapter.submitList(viewModel.itemPrice)
+                    viewModel.priceAdapter.submitList(mainPrice)
                 }, 100)
             }
 
             textCategories.singleClick {
+//                isFilterFromFrom = false
                 defaultRun = 2
                 textPrice.setTypeface(typefaceroboto_light)
                 textCategories.setTypeface(typefaceroboto_medium)
@@ -276,18 +310,18 @@ class Filters : Fragment() {
 //                        add("necklace")
 //                    }
 
-                    viewModel.itemCategory.map { mapCategory ->
-                        if (mapCategoryMatch(mapCategory.name) == true){
-                            mapCategory.isSelected = true
-                        } else {
-                            mapCategory.isSelected = false
-                        }
-                    }
+//                    mainCategory.map { mapCategory ->
+//                        if (mapCategoryMatch(mapCategory.name) == true){
+//                            mapCategory.isSelected = true
+//                        } else {
+//                            mapCategory.isSelected = false
+//                        }
+//                    }
 
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.categoryAdapter
                     viewModel.categoryAdapter.notifyDataSetChanged()
-                    viewModel.categoryAdapter.submitList(viewModel.itemCategory)
+                    viewModel.categoryAdapter.submitList(mainCategory)
                 }, 100)
             }
 
@@ -305,18 +339,18 @@ class Filters : Fragment() {
 //                        add("silver")
 //                    }
 
-                    viewModel.itemMaterial.map { mapMaterial ->
-                        if (mapMaterialMatch(mapMaterial.name) == true){
-                            mapMaterial.isSelected = true
-                        } else {
-                            mapMaterial.isSelected = false
-                        }
-                    }
+//                    viewModel.itemMaterial.map { mapMaterial ->
+//                        if (mapMaterialMatch(mapMaterial.name) == true){
+//                            mapMaterial.isSelected = true
+//                        } else {
+//                            mapMaterial.isSelected = false
+//                        }
+//                    }
 
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.materialAdapter
                     viewModel.materialAdapter.notifyDataSetChanged()
-                    viewModel.materialAdapter.submitList(viewModel.itemMaterial)
+                    viewModel.materialAdapter.submitList(mainMaterial)
                 }, 100)
             }
 
@@ -334,60 +368,60 @@ class Filters : Fragment() {
 //                        add("silver")
 //                    }
 
-                    viewModel.itemMaterial.map { mapShopFor ->
-                        if (mapShopForMatch(mapShopFor.name) == true){
-                            mapShopFor.isSelected = true
-                        } else {
-                            mapShopFor.isSelected = false
-                        }
-                    }
+//                    viewModel.itemMaterial.map { mapShopFor ->
+//                        if (mapShopForMatch(mapShopFor.name) == true){
+//                            mapShopFor.isSelected = true
+//                        } else {
+//                            mapShopFor.isSelected = false
+//                        }
+//                    }
 
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.shopForAdapter
                     viewModel.shopForAdapter.notifyDataSetChanged()
-                    viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
+                    viewModel.shopForAdapter.submitList(mainShopFor)
                 }, 100)
             }
         }
     }
 
-    private fun mapPriceMatch(name: String): Boolean {
-        arrayPrice.forEach {
-            if(it.equals(name)){
-                return true
-            }
-        }
-        return false
-    }
+//    private fun mapPriceMatch(name: String): Boolean {
+//        arrayPrice.forEach {
+//            if(it.equals(name)){
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 
-    private fun mapCategoryMatch(name: String): Boolean {
-        arrayCategory.forEach {
-            if(it.equals(name)){
-                return true
-            }
-        }
-        return false
-    }
+//    private fun mapCategoryMatch(name: String): Boolean {
+//        arrayCategory.forEach {
+//            if(it.equals(name)){
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 
-    private fun mapMaterialMatch(name: String): Boolean {
-        arrayMaterial.forEach {
-            if(it.equals(name)){
-                return true
-            }
-        }
-        return false
-    }
-
-
-    private fun mapShopForMatch(name: String): Boolean {
-        arrayShopFor.forEach {
-            if(it.equals(name)){
-                return true
-            }
-        }
-        return false
-    }
+//    private fun mapMaterialMatch(name: String): Boolean {
+//        arrayMaterial.forEach {
+//            if(it.equals(name)){
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//
+//
+//    private fun mapShopForMatch(name: String): Boolean {
+//        arrayShopFor.forEach {
+//            if(it.equals(name)){
+//                return true
+//            }
+//        }
+//        return false
+//    }
 
 }
