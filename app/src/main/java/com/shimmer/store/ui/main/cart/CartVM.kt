@@ -48,7 +48,7 @@ class CartVM @Inject constructor() : ViewModel() {
 
 
 
-    val recentAdapter = object : GenericAdapter<ItemCartBinding, Items>() {
+    val cartAdapter = object : GenericAdapter<ItemCartBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,

@@ -335,9 +335,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
                                 )
                         }
                     }
-
-
-
                 }
 
                 rvListChild.setHasFixedSize(true)

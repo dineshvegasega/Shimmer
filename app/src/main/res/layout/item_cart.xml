@@ -13,9 +13,7 @@
         app:cardCornerRadius="@dimen/_4sdp"
         app:cardUseCompatPadding="true"
         android:background="@color/_79747E"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:focusable="true"
-        android:clickable="true"
+
         >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -91,7 +89,7 @@
                     android:text="Lorem ipsum dolor ssit amet consectetur Lorem ipsum dolor sit amet consectetur "
                     android:textColor="@color/_484848"
                     android:textSize="@dimen/_11sdp"
-                    android:maxLines="5"
+                    android:maxLines="2"
                     app:fontFamily="@font/roboto_regular"
                     tools:ignore="HardcodedText"
                     app:layout_constraintTop_toBottomOf="@+id/view"
@@ -99,24 +97,42 @@
                     android:layout_marginTop="@dimen/_5sdp"/>
 
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹42,550"
+                    android:textColor="@color/_2C2C2C"
+                    android:textSize="@dimen/_11sdp"
+                    android:maxLines="2"
+                    app:fontFamily="@font/roboto_medium"
+                    tools:ignore="HardcodedText"
+                    app:layout_constraintTop_toBottomOf="@+id/textDesc"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btDelete"
                     style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_60sdp"
                     android:layout_height="@dimen/_22sdp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:paddingHorizontal="0dp"
                     android:text="@string/delete"
                     app:iconTint="@color/black"
                     android:textColor="@color/black"
                     android:backgroundTint="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textDesc"
+                    app:layout_constraintTop_toBottomOf="@id/textPrice"
                     android:layout_marginTop="@dimen/_5sdp"
                     app:cornerRadius="@dimen/_4sdp"
                     android:textSize="@dimen/_10sdp"
                     android:visibility="visible"
                     app:strokeColor="@color/app_color"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:focusable="true"
+                    android:clickable="true"
                     />
 
 
@@ -127,29 +143,32 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintTop_toBottomOf="@id/textDesc"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:layout_constraintTop_toBottomOf="@id/textPrice"
                     android:background="@drawable/white_round_corner"
                     >
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/ivMinus"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
                         app:srcCompat="@drawable/baseline_remove_24"
                         android:background="@drawable/baseline_remove_24"
                         android:gravity="center"
                         android:text=""
                         tools:ignore="MissingConstraints"
-                        app:layout_constraintRight_toLeftOf="@+id/ivCount"/>
+                        app:layout_constraintRight_toLeftOf="@+id/ivCount"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:focusable="true"
+                        android:clickable="true"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/ivCount"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:text="0"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/_10sdp"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
+                        android:text="11"
+                        app:fontFamily="@font/roboto_regular"
+                        android:textSize="@dimen/_12sdp"
                         android:textColor="@color/black"
                         android:gravity="center"
                         tools:ignore="MissingConstraints"
@@ -158,14 +177,17 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/ivPlus"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_21sdp"
+                        android:layout_height="@dimen/_21sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:srcCompat="@drawable/baseline_add_24"
                         android:background="@drawable/baseline_add_24"
                         android:textColor="@color/white"
                         android:gravity="center"
-                        tools:ignore="MissingConstraints" />
+                        tools:ignore="MissingConstraints"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:focusable="true"
+                        android:clickable="true"/>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

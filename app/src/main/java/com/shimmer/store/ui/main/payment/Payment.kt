@@ -31,7 +31,7 @@ class Payment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
@@ -44,7 +44,7 @@ class Payment : Fragment() {
 //                cardSearch.visibility = View.GONE
                 ivSearch.visibility = View.GONE
                 ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "Payment"
+                textViewTitle.text = "YOUR ORDER"
 
                 appicon.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -59,6 +59,12 @@ class Payment : Fragment() {
             }
 
 
+
+
+            rvList.setHasFixedSize(true)
+            rvList.adapter = viewModel.ordersAdapter
+            viewModel.ordersAdapter.notifyDataSetChanged()
+            viewModel.ordersAdapter.submitList(viewModel.item1)
 
             layoutSort.singleClick {
                 findNavController().navigate(R.id.action_payment_to_home)

@@ -60,13 +60,13 @@ class Cart : Fragment() {
 
 
             rvList.setHasFixedSize(true)
-            rvList.adapter = viewModel.recentAdapter
-            viewModel.recentAdapter.notifyDataSetChanged()
-            viewModel.recentAdapter.submitList(viewModel.item1)
+            rvList.adapter = viewModel.cartAdapter
+            viewModel.cartAdapter.notifyDataSetChanged()
+            viewModel.cartAdapter.submitList(viewModel.item1)
 
 
 
-            layoutSort.singleClick {
+            layoutProceedToPayment.singleClick {
                 findNavController().navigate(R.id.action_cart_to_payment)
             }
         }
