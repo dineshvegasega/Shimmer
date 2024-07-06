@@ -26,7 +26,7 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 //        val arrayShopFor : ArrayList<String> = ArrayList()
 
 
-        var isFilterFromFrom: Boolean = false
+        var isFilterFrom: Boolean = false
 
         var mainPrice: ArrayList<Items> = ArrayList()
         val mainCategory : ArrayList<Items> = ArrayList()
@@ -46,7 +46,7 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 
 
             mainCategory.add(Items("RINGS",
-                subCategory = arrayListOf(Items("All Rings"),
+                subCategory = arrayListOf(
                     Items("Band"),
                     Items("Casual"),
                     Items("Cocktail"),
@@ -54,32 +54,32 @@ class MainActivityVM @Inject constructor() : ViewModel() {
                     Items("Solitaire"))
             ))
             mainCategory.add(Items("NECKLACE",
-                subCategory = arrayListOf(Items("All Necklace"),
+                subCategory = arrayListOf(
                     Items("Long Necklace"),
                     Items("Short Necklace"))
             ))
             mainCategory.add(Items("PENDANTS",
-                subCategory = arrayListOf(Items("All Pendants"),
+                subCategory = arrayListOf(
                     Items("Alphabets"),
                     Items("Zodiac"),
                     Items("Casual"),
                     Items("Everyday"))
             ))
             mainCategory.add(Items("BRACELETS",
-                subCategory = arrayListOf(Items("All Bracelets"),
+                subCategory = arrayListOf(
                     Items("Casual"),
                     Items("Bangles"),
                     Items("Occasion"),
                     Items("Everyday"))
             ))
             mainCategory.add(Items("MANGALSUTRA",
-                subCategory = arrayListOf(Items("All Mangalsutra"),
+                subCategory = arrayListOf(
                     Items("Casual"),
                     Items("Bangles"),
                     Items("Everyday"))
             ))
             mainCategory.add(Items("EARRINGS",
-                subCategory = arrayListOf(Items("All Earrings"),
+                subCategory = arrayListOf(
                     Items("Balis"),
                     Items("Studs"),
                     Items("Drops"),

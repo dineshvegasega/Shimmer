@@ -20,7 +20,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFromFrom
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
@@ -162,6 +162,11 @@ class FiltersVM @Inject constructor() : ViewModel() {
     }
 
 
+
+    var parentPress = false
+    var childPress = false
+
+
     val categoryAdapter = object : GenericAdapter<ItemFilterCategoryBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -176,37 +181,24 @@ class FiltersVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
+
+
                 if (dataClass.isSelected == true) {
                     dataClass.subCategory.forEach {
                         it.isSelected = true
+                        it.isChildSelect = true
                     }
                 } else {
                     dataClass.subCategory.forEach {
-//                       it.isSelected = false
-//                        if (it.isSelected == true){
-//                            it.isSelected = true
+                        it.isSelected = false
+                        it.isChildSelect = false
+//                        if (isFilterFrom == true) {
+//                            it.isChildSelect = true
 //                        } else {
-                            it.isSelected = false
+//                            it.isChildSelect = false
 //                        }
                     }
                 }
-
-                dataClass.subCategory.forEach {
-                    Log.e("TAG", "dataClass "+dataClass.isSelected+" it "+it.isSelected)
-                }
-
-
-
-//                if (isFilterFromFrom){
-//
-//                } else {
-//                    if (dataClass.isSelected == false) {
-//                        dataClass.subCategory.forEach {
-//                            it.isSelected = false
-//                        }
-//                    }
-//                }
-
 
                 textItem.text = dataClass.name
 
@@ -226,6 +218,8 @@ class FiltersVM @Inject constructor() : ViewModel() {
                     selectedPosition = position
                     dataClass.isSelected = !dataClass.isSelected
 
+//                    parentPress = true
+
 //                    currentList.forEach {
 //                        if (dataClass.isSelected == false){
 //                            it.isSelected = false
@@ -243,7 +237,8 @@ class FiltersVM @Inject constructor() : ViewModel() {
                 itemCategoryCount.value = currentList.filter { it.isSelected == true }.size
 //                itemCategoryCount.value = filteredNot.size
 
-                layoutChild.visibility = if(dataClass.isCollapse == true) View.VISIBLE else View.GONE
+                layoutChild.visibility =
+                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
                 ivHideShow.setImageDrawable(
                     ContextCompat.getDrawable(
                         root.context,
@@ -255,87 +250,94 @@ class FiltersVM @Inject constructor() : ViewModel() {
                     notifyItemChanged(position)
                 }
 
-                val categoryChildAdapter = object : GenericAdapter<ItemFilterChildBinding, Items>() {
-                    override fun onCreateView(
-                        inflater: LayoutInflater,
-                        parent: ViewGroup,
-                        viewType: Int
-                    ) = ItemFilterChildBinding.inflate(inflater, parent, false)
+                val categoryChildAdapter =
+                    object : GenericAdapter<ItemFilterChildBinding, Items>() {
+                        override fun onCreateView(
+                            inflater: LayoutInflater,
+                            parent: ViewGroup,
+                            viewType: Int
+                        ) = ItemFilterChildBinding.inflate(inflater, parent, false)
 
-                    @SuppressLint("NotifyDataSetChanged")
-                    override fun onBindHolder(
-                        bindingChild: ItemFilterChildBinding,
-                        dataClassChild: Items,
-                        positionChild: Int
-                    ) {
-                        bindingChild.apply {
-                            textItemChild.text = dataClassChild.name
+                        @SuppressLint("NotifyDataSetChanged")
+                        override fun onBindHolder(
+                            bindingChild: ItemFilterChildBinding,
+                            dataClassChild: Items,
+                            positionChild: Int
+                        ) {
+                            bindingChild.apply {
+                                textItemChild.text = dataClassChild.name
 
-                            root.singleClick {
-                                isFilterFromFrom = true
-                                selectedPosition = positionChild
-                                dataClassChild.isSelected = !dataClassChild.isSelected
-                                dataClassChild.isChildSelect = !dataClassChild.isSelected
+                                root.singleClick {
+                                    isFilterFrom = true
+                                    selectedPosition = positionChild
+                                    dataClassChild.isSelected = !dataClassChild.isSelected
+                                    dataClassChild.isChildSelect = !dataClassChild.isChildSelect
+
+                                    parentPress = true
+
+                                    notifyItemChanged(positionChild)
+                                }
+
+                                Log.e("TAG" , "filteredNotChild ${dataClassChild.isSelected}   currentList${dataClassChild.isChildSelect}")
 
 
 
-                                notifyItemChanged(positionChild)
-                            }
+                                val filteredNotChild = currentList.filter { it.isSelected == true }
+//                                Log.e("TAG" , "filteredNotChild ${filteredNotChild.size}")
 
-                            val filteredNotChild = currentList.filter { it.isSelected == true }
-                            //itemCategoryCount.value = filteredNot.size
+                                if (filteredNotChild.size == (currentList.size)) {
+                                    dataClass.isSelected = true
+                                } else {
+                                    dataClass.isSelected = false
+                                }
 
-                            Log.e("TAG" , "filteredNotChild ${filteredNotChild.size}   currentList${currentList.size}")
+                                itemCategoryCount.value =
+                                    filteredNot.filter { it.isSelected == true }.size
+                                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                                ivIconCheck.imageTintList =
+                                    if (dataClass.isSelected == true) ContextCompat.getColorStateList(
+                                        binding.root.context,
+                                        R.color.app_color
+                                    )
+                                    else ContextCompat.getColorStateList(
+                                        binding.root.context,
+                                        R.color._D9D9D9
+                                    )
 
-                            if(filteredNotChild.size == (currentList.size)){
-                                dataClass.isSelected = true
-                            } else {
-                                dataClass.isSelected = false
-                            }
-
-                            itemCategoryCount.value = filteredNot.filter { it.isSelected == true }.size
-                            textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
-                            ivIconCheck.imageTintList =
-                                if (dataClass.isSelected == true) ContextCompat.getColorStateList(
-                                    binding.root.context,
-                                    R.color.app_color
-                                )
-                                else ContextCompat.getColorStateList(
-                                    binding.root.context,
-                                    R.color._D9D9D9
-                                )
-
-                            if (dataClassChild.isSelected == true){
+                                if (dataClassChild.isSelected == true) {
 //                                if (dataClassChild.isChildSelect == true){
 //                                    textItemChild.setTypeface(typefaceroboto_light)
 //                                } else {
                                     textItemChild.setTypeface(typefaceroboto_medium)
 //                                }
-                            } else {
-//                                if (dataClassChild.isChildSelect == true){
-                                    textItemChild.setTypeface(typefaceroboto_light)
-//                                } else {
-//                                    textItemChild.setTypeface(typefaceroboto_medium)
-//                                }
-                            }
+                                } else {
+                                    if(parentPress == false){
+                                        if (dataClassChild.isChildSelect == true){
+                                            textItemChild.setTypeface(typefaceroboto_medium)
+                                        } else {
+                                            textItemChild.setTypeface(typefaceroboto_light)
+                                        }
+                                    } else {
+                                        textItemChild.setTypeface(typefaceroboto_light)
+                                    }
+                                }
 
 
 //                            textItemChild.setTypeface(if (dataClassChild.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
 
 
-
-                            ivIconCheckChild.imageTintList =
-                                if (dataClassChild.isSelected == true) ContextCompat.getColorStateList(
-                                    bindingChild.root.context,
-                                    R.color.app_color
-                                )
-                                else ContextCompat.getColorStateList(
-                                    bindingChild.root.context,
-                                    R.color._D9D9D9
-                                )
+                                ivIconCheckChild.imageTintList =
+                                    if (dataClassChild.isSelected == true) ContextCompat.getColorStateList(
+                                        bindingChild.root.context,
+                                        R.color.app_color
+                                    )
+                                    else ContextCompat.getColorStateList(
+                                        bindingChild.root.context,
+                                        R.color._D9D9D9
+                                    )
+                            }
                         }
                     }
-                }
 
                 rvListChild.setHasFixedSize(true)
                 rvListChild.adapter = categoryChildAdapter
@@ -394,7 +396,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
             }
         }
     }
-
 
 
     val shopForAdapter = object : GenericAdapter<ItemFilterBinding, Items>() {

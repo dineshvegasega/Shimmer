@@ -19,7 +19,7 @@ import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFromFrom
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -73,12 +73,13 @@ class HomeVM @Inject constructor() : ViewModel() {
                         it.isSelected = false
                         it.subCategory.forEach {
                             it.isSelected = false
+                            it.isChildSelect = false
                         }
                     }
                     dataClass.apply {
                         isSelected = true
                     }
-                    isFilterFromFrom = false
+                    isFilterFrom = false
 //                    arrayCategory.apply {
 //                        add("ring")
 ////                    add("necklace")
@@ -89,6 +90,7 @@ class HomeVM @Inject constructor() : ViewModel() {
 ////                    add("silver")
 ////                    add("diamond")
 //                    }
+
                     it.findNavController().navigate(R.id.action_home_to_products)
                 }
             }

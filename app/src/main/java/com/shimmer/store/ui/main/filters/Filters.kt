@@ -21,11 +21,6 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFromFrom
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayShopFor
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
