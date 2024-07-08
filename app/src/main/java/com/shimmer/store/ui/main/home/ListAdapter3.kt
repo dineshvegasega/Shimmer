@@ -113,6 +113,7 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.root.setOnClickListener {
                 mainCategory.forEach {
                     it.isSelected = false
+                    it.isCollapse = false
                     it.subCategory.forEach { sub ->
                         sub.isSelected = false
                         sub.isChildSelect = false

@@ -74,6 +74,7 @@ class HomeVM @Inject constructor() : ViewModel() {
                 ivIcon.setOnClickListener {
                     currentList.forEach {
                         it.isSelected = false
+                        it.isCollapse = false
                         it.subCategory.forEach {
                             it.isSelected = false
                             it.isChildSelect = false
