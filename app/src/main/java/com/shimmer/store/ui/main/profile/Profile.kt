@@ -61,6 +61,25 @@ class Profile : Fragment() {
                     menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
                 }
             }
+
+
+
+            btProfileDetails.singleClick {
+                findNavController().navigate(R.id.action_profile_to_profileDetails)
+            }
+
+            btOrders.singleClick {
+                findNavController().navigate(R.id.action_profile_to_trackOrder)
+            }
+
+            btComplaints.singleClick {
+                findNavController().navigate(R.id.action_profile_to_complaintFeedback)
+            }
+
+            btChangePassword.singleClick {
+                findNavController().navigate(R.id.action_profile_to_ChangePassword)
+            }
+
         }
     }
 }

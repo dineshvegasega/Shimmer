@@ -60,6 +60,12 @@ class Faq : Fragment() {
                     menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
                 }
             }
+
+
+            rvList2.setHasFixedSize(true)
+            rvList2.adapter = viewModel.recentAdapter
+            viewModel.recentAdapter.notifyDataSetChanged()
+            viewModel.recentAdapter.submitList(viewModel.item1)
         }
     }
 }

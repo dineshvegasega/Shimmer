@@ -24,6 +24,10 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.serializable
 import com.shimmer.store.utils.singleClick
@@ -110,10 +114,6 @@ class Products : Fragment() {
                     menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
                 }
             }
-
-//            val typefaceroboto_light = resources.getFont(R.font.roboto_light)
-//            val typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
-
 
             var sortFilter = 0
             layoutSort.singleClick {
@@ -209,11 +209,44 @@ class Products : Fragment() {
             }
 
 
+            var count = 0
+            mainCategory.forEach {
+                it.subCategory.forEach { sub ->
+                    if(sub.isSelected){
+                        Log.e("TAG" , "it.isSelected ${sub.isSelected}")
+                        count += 1
+                    }
+                }
+            }
+
+            mainPrice.forEach {
+                if(it.isSelected){
+                    count += 1
+                }
+            }
+
+            mainMaterial.forEach {
+                if(it.isSelected){
+                    count += 1
+                }
+            }
+
+            mainShopFor.forEach {
+                if(it.isSelected){
+                    count += 1
+                }
+            }
+            Log.e("TAG" , "count ${count}")
+            textFilter.text = if(count == 0) "Filter" else "Filter ($count)"
 
 
             adapter2.submitData(viewModel.item1)
             adapter2.notifyDataSetChanged()
             binding.rvList2.adapter = adapter2
+
+
+
+
         }
     }
 

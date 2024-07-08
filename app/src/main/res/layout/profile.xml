@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,15 +16,183 @@
         />
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btProfileDetails"
+        style="@style/PrimaryButtonBlue"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:textColor="@color/black"
-        android:gravity="center"
-        android:text="Profile"
+        android:text="Profile Details"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_4sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/app_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        android:layout_marginTop="@dimen/_100sdp"
+        android:fontFamily="@font/roboto_medium"
         />
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btOrders"
+        style="@style/PrimaryButtonBlue"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:text="My Orders"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_4sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/app_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/btProfileDetails"
+        android:fontFamily="@font/roboto_medium"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btComplaints"
+        style="@style/PrimaryButtonBlue"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:text="Complaints"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_4sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/app_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/btOrders"
+        android:fontFamily="@font/roboto_medium"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btChangePassword"
+        style="@style/PrimaryButtonBlue"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+       android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:text="Change Password"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_4sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/app_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/btComplaints"
+        android:fontFamily="@font/roboto_medium"
+        />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchNotifications"
+        style="@style/PrimaryEditTextPink"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Notifications"
+        android:textSize="@dimen/_11sdp"
+        android:textColor="@color/_1D1B20"
+        android:fontFamily="@font/roboto_medium"
+        android:focusable="false"
+        app:layout_constraintTop_toBottomOf="@+id/btChangePassword"
+        android:textScaleX="1.1"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchNotifications"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:background="@color/_FFF3E4"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAppNameTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAllCaps="true"
+            android:textColor="@color/_322F35"
+            android:textSize="@dimen/_20sdp"
+            app:fontFamily="@font/roboto_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAppVersionTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_version_1_0"
+            android:textColor="@color/_322F35"
+            android:textSize="@dimen/_12sdp"
+            app:fontFamily="@font/roboto_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textAppNameTxt"
+            tools:ignore="MissingConstraints" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

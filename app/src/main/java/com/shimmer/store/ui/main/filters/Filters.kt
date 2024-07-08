@@ -71,6 +71,10 @@ class Filters : Fragment() {
 //                arrayMaterial.clear()
 //                arrayShopFor.clear()
 
+//                mainPrice.forEach {
+//                    it.isSelected = false
+//                }
+
 //                headerAdapter = viewModel.categoryAdapter
 
 //                viewModel.itemPrice.map { mapPrice ->
@@ -112,6 +116,11 @@ class Filters : Fragment() {
 
                 mainCategory.forEach {
                     it.isSelected = false
+                    if(it.isSelected == false){
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = false
+                        }
+                    }
                 }
 
                 mainMaterial.forEach {
@@ -194,8 +203,8 @@ class Filters : Fragment() {
 //                }
 //            }
 
-            val filteredCategory = mainCategory.filter { it.isSelected == true }
-            viewModel.itemCategoryCount.value = filteredCategory.size
+//            val filteredCategory = mainCategory.filter { it.isSelected == true }
+//            viewModel.itemCategoryCount.value = filteredCategory.size
 
 //            rvList2.setHasFixedSize(true)
 //            rvList2.adapter = viewModel.categoryAdapter
@@ -249,7 +258,36 @@ class Filters : Fragment() {
             }
 
             viewModel.itemCategoryCount.observe(viewLifecycleOwner) {
-                textCategories.text = if(it == 0) "Categories" else "Categories ($it)"
+                var count = 0
+                mainCategory.forEach {
+                    it.subCategory.forEach { sub ->
+                        if(sub.isSelected){
+                            Log.e("TAG" , "it.isSelected ${sub.isSelected}")
+                            count += 1
+                        }
+                    }
+                }
+
+//                mainPrice.forEach {
+//                    if(it.isSelected){
+//                        count += 1
+//                    }
+//                }
+//
+//                mainMaterial.forEach {
+//                    if(it.isSelected){
+//                        count += 1
+//                    }
+//                }
+//
+//                mainShopFor.forEach {
+//                    if(it.isSelected){
+//                        count += 1
+//                    }
+//                }
+
+                Log.e("TAG" , "count ${count}")
+                textCategories.text = if(count == 0) "Categories" else "Categories ($count)"
             }
 
             viewModel.itemMaterialCount.observe(viewLifecycleOwner) {

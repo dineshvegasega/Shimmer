@@ -17,6 +17,31 @@
         android:visibility="visible"
         />
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/_a5a8ab"
+        app:tabIconTint="@color/black"
+        app:tabIndicatorColor="@color/white"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/top_bar"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"/>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/rvList1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:spanCount="2"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/item_home_1"
+                    app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_custom_design"
+                    android:nestedScrollingEnabled="false"
+                    />
 
     <include
         android:id="@+id/layout_custom_design"

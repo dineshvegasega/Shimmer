@@ -19,7 +19,10 @@ import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -78,18 +81,23 @@ class HomeVM @Inject constructor() : ViewModel() {
                     }
                     dataClass.apply {
                         isSelected = true
+                        subCategory.forEach {
+                            it.isSelected = true
+                            it.isChildSelect = true
+                        }
                     }
-                    isFilterFrom = false
-//                    arrayCategory.apply {
-//                        add("ring")
-////                    add("necklace")
-////                    add("earring")
-//                    }
-//                    arrayMaterial.apply {
-//                        add("gold")
-////                    add("silver")
-////                    add("diamond")
-//                    }
+                    mainPrice.forEach {
+                        it.isSelected = false
+                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+                        it.isChildSelect = false
+                    }
+                    mainShopFor.forEach {
+                        it.isSelected = false
+                        it.isChildSelect = false
+                    }
 
                     it.findNavController().navigate(R.id.action_home_to_products)
                 }

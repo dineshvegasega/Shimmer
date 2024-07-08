@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.trackOrder
+package com.shimmer.store.ui.main.changePassword
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,7 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.TrackOrderBinding
+import com.shimmer.store.databinding.ChangePasswordBinding
+import com.shimmer.store.ui.main.faq.FaqVM
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -19,9 +20,9 @@ import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TrackOrder : Fragment() {
-    private val viewModel: TrackOrderVM by viewModels()
-    private var _binding: TrackOrderBinding? = null
+class ChangePassword : Fragment() {
+    private val viewModel: FaqVM by viewModels()
+    private var _binding: ChangePasswordBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -29,7 +30,7 @@ class TrackOrder : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = TrackOrderBinding.inflate(inflater)
+        _binding = ChangePasswordBinding.inflate(inflater)
         return binding.root
     }
 
@@ -45,7 +46,7 @@ class TrackOrder : Fragment() {
                 textViewTitle.visibility = View.VISIBLE
                 ivSearch.visibility = View.VISIBLE
                 ivCart.visibility = View.VISIBLE
-                textViewTitle.text = "My Orders"
+                textViewTitle.text = "Change Password"
 
                 appicon.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -60,11 +61,11 @@ class TrackOrder : Fragment() {
 
 
                 ivSearch.singleClick {
-                    findNavController().navigate(R.id.action_trackOrder_to_search)
+                    findNavController().navigate(R.id.action_changePassword_to_search)
                 }
 
                 ivCart.singleClick {
-                    findNavController().navigate(R.id.action_trackOrder_to_cart)
+                    findNavController().navigate(R.id.action_changePassword_to_cart)
                 }
 
 

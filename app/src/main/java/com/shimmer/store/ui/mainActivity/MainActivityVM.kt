@@ -26,6 +26,8 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 //        val arrayShopFor : ArrayList<String> = ArrayList()
 
 
+
+
         var isFilterFrom: Boolean = false
 
         var mainPrice: ArrayList<Items> = ArrayList()

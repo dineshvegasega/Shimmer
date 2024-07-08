@@ -158,11 +158,48 @@
             />
 
         <action
+            android:id="@+id/action_profile_to_profileDetails"
+            app:destination="@id/profileDetail"
+            app:launchSingleTop="true"
+            />
+
+        <action
             android:id="@+id/action_profile_to_trackOrder"
             app:destination="@id/trackOrder"
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_profile_to_complaintFeedback"
+            app:destination="@id/complaintFeedback"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_profile_to_ChangePassword"
+            app:destination="@id/changePassword"
+            app:launchSingleTop="true"
+            />
+
+
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.profileDetail.ProfileDetail"
+        android:label="ProfileDetail"
+        android:id="@+id/profileDetail"
+        tools:layout="@layout/product_detail">
+        <action
+            android:id="@+id/action_profileDetail_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_profileDetail_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
     </fragment>
 
     <fragment
@@ -170,8 +207,54 @@
         android:label="TrackOrder"
         android:id="@+id/trackOrder"
         tools:layout="@layout/track_order">
+        <action
+            android:id="@+id/action_trackOrder_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_trackOrder_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
     </fragment>
 
+    <fragment
+        android:name="com.shimmer.store.ui.main.complaintFeedback.ComplaintFeedback"
+        android:label="ComplaintFeedback"
+        android:id="@+id/complaintFeedback"
+        tools:layout="@layout/complaint_feedback">
+        <action
+            android:id="@+id/action_complaintFeedback_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_complaintFeedback_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.changePassword.ChangePassword"
+        android:label="ChangePassword"
+        android:id="@+id/changePassword"
+        tools:layout="@layout/change_password">
+        <action
+            android:id="@+id/action_changePassword_to_search"
+            app:destination="@id/search"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_changePassword_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+    </fragment>
 
     <fragment
         android:name="com.shimmer.store.ui.main.search.Search"

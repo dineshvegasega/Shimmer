@@ -5,17 +5,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OVER_SCROLL_NEVER
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryBinding
+import com.shimmer.store.ui.main.productDetail.ProductDetail.Companion.pagerAdapter
+import com.shimmer.store.ui.main.productDetail.ProductDetailPagerAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.singleClick
+import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,6 +74,18 @@ class Category : Fragment() {
                     menuBadge.text = "$it"
                     menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
                 }
+
+                    val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
+                    pagerAdapter.notifyDataSetChanged()
+                    rvList1.offscreenPageLimit = 1
+                    rvList1.overScrollMode = OVER_SCROLL_NEVER
+                    rvList1.adapter = pagerAdapter
+                    rvList1.setPageTransformer { page, position ->
+                        rvList1.updatePagerHeightForChild(page)
+                    }
+                    TabLayoutMediator(tabLayout, rvList1) { tab, position ->
+                        tab.text = mainShopFor[position].name
+                    }.attach()
             }
         }
 

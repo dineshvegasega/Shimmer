@@ -5,10 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.shimmer.store.R
 import com.shimmer.store.databinding.ComplaintFeedbackBinding
+import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +36,43 @@ class ComplaintFeedback : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        isBackStack = true
+        isBackStack = false
+        hideValueOff = 2
+        MainActivity.mainActivity.get()!!.callBack(2)
+
+        binding.apply {
+            topBar.apply {
+                textViewTitle.visibility = View.VISIBLE
+                ivSearch.visibility = View.VISIBLE
+                ivCart.visibility = View.VISIBLE
+                textViewTitle.text = "Complaint/Feedback"
+
+                appicon.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        MainActivity.context.get()!!,
+                        R.drawable.baseline_west_24
+                    )
+                )
+
+                appicon.singleClick {
+                    findNavController().navigateUp()
+                }
+
+
+                ivSearch.singleClick {
+                    findNavController().navigate(R.id.action_complaintFeedback_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_complaintFeedback_to_cart)
+                }
+
+
+                badgeCount.observe(viewLifecycleOwner) {
+                    menuBadge.text = "$it"
+                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                }
+            }
+        }
     }
 }

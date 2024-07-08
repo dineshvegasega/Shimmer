@@ -1,10 +1,6 @@
-package com.shimmer.store.ui.main.home
+package com.shimmer.store.ui.main.category
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,26 +9,21 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.shimmer.store.BR
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
-import com.shimmer.store.BR
-import com.shimmer.store.databinding.ItemHome3Binding
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.databinding.ItemProductBinding
+import com.shimmer.store.models.Items
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
-
-class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoryChildTabAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var counter = 0
 
-    var itemModels: MutableList<String> = ArrayList()
+    var itemModels: MutableList<Items> = ArrayList()
 
 
-    lateinit var itemRowBinding2: ItemHome3Binding
+    lateinit var itemRowBinding2: ItemProductBinding
 
 
     private val item: Int = 0
@@ -45,22 +36,12 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == item) {
-            val binding: ItemHome3Binding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_home_3,
-                parent,
-                false
-            )
+        return  if(viewType == item){
+            val binding: ItemProductBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_product, parent, false)
             itemRowBinding2 = binding
             TopMoviesVH(binding)
-        } else {
-            val binding: ItemLoadingBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_loading,
-                parent,
-                false
-            )
+        }else{
+            val binding: ItemLoadingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_loading, parent, false)
             LoadingVH(binding)
         }
 
@@ -69,12 +50,12 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = itemModels[position]
-        if (getItemViewType(position) == item) {
+        if(getItemViewType(position) == item){
 
             val myOrderVH: TopMoviesVH = holder as TopMoviesVH
 //            myOrderVH.itemRowBinding.movieProgress.visibility = View.VISIBLE
             myOrderVH.bind(model, position)
-        } else {
+        }else{
             val loadingVH: LoadingVH = holder as LoadingVH
             if (retryPageLoad) {
                 loadingVH.itemRowBinding.loadmoreProgress.visibility = View.GONE
@@ -89,9 +70,9 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == 0) {
+        return if(position == 0){
             item
-        } else {
+        }else {
             if (position == itemModels.size - 1 && isLoadingAdded) {
                 loading
             } else {
@@ -101,41 +82,41 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    inner class TopMoviesVH(binding: ItemHome3Binding) : RecyclerView.ViewHolder(binding.root) {
-        var itemRowBinding: ItemHome3Binding = binding
+    inner class TopMoviesVH(binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+        var itemRowBinding: ItemProductBinding = binding
 
         @SuppressLint("NotifyDataSetChanged", "SetTextI18n", "ClickableViewAccessibility")
         fun bind(obj: Any?, position: Int) {
             itemRowBinding.setVariable(BR._all, obj)
             itemRowBinding.executePendingBindings()
-            val model = obj as String
+            val model = obj as Items
 
-            itemRowBinding.root.setOnClickListener {
-                mainCategory.forEach {
-                    it.isSelected = false
-                    it.subCategory.forEach { sub ->
-                        sub.isSelected = false
-                        sub.isChildSelect = false
-                    }
-                }
-                mainPrice.forEach {
-                    it.isSelected = false
-                    it.isChildSelect = false
-                }
-                mainMaterial.forEach {
-                    it.isSelected = false
-                    it.isChildSelect = false
-                }
-                mainShopFor.forEach {
-                    it.isSelected = false
-                    it.isChildSelect = false
-                }
-                it.findNavController().navigate(R.id.action_home_to_products)
+            itemRowBinding.ivIcon.setOnClickListener {
+                it.findNavController().navigate(R.id.action_category_to_products)
             }
 
+            itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,
+                R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,
+                R.color._9A9A9A)
+
+            itemRowBinding.ivAddCart.setOnClickListener {
+                model.isSelected = !model.isSelected
+
+                val filteredNot = itemModels.filter { it.isSelected == true }
+                badgeCount.value = filteredNot.size
+
+                notifyItemChanged(position)
+            }
+
+
+
+
+
+
+            itemRowBinding.btAddCart.setOnClickListener {
+                it.findNavController().navigate(R.id.action_products_to_cart)
+            }
         }
-
-
     }
 
     inner class LoadingVH(binding: ItemLoadingBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -149,7 +130,7 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAllSearch(movies: MutableList<String>) {
+    fun addAllSearch(movies: MutableList<Items>) {
         itemModels.clear()
         itemModels.addAll(movies)
 //        for(movie in movies){
@@ -158,13 +139,13 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addAll(movies: MutableList<String>) {
-        for (movie in movies) {
+    fun addAll(movies: MutableList<Items>) {
+        for(movie in movies){
             add(movie)
         }
     }
 
-    fun add(moive: String) {
+    fun add(moive: Items) {
         itemModels.add(moive)
         notifyItemInserted(itemModels.size - 1)
     }
@@ -187,7 +168,7 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    fun submitData(itemMainArray: ArrayList<String>) {
+    fun submitData(itemMainArray: ArrayList<Items>) {
         itemModels = itemMainArray
     }
 
@@ -208,6 +189,7 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        notifyItemChanged(position)
 
     }
+
 
 
 }

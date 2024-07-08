@@ -20,7 +20,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayPrice
@@ -32,6 +32,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FiltersVM @Inject constructor() : ViewModel() {
+
     var itemPriceCount = MutableLiveData<Int>(0)
     var itemCategoryCount = MutableLiveData<Int>(0)
     var itemMaterialCount = MutableLiveData<Int>(0)
@@ -163,10 +164,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
 
 
 
-    var parentPress = false
-    var childPress = false
-
-
     val categoryAdapter = object : GenericAdapter<ItemFilterCategoryBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -182,24 +179,6 @@ class FiltersVM @Inject constructor() : ViewModel() {
         ) {
             binding.apply {
 
-
-                if (dataClass.isSelected == true) {
-                    dataClass.subCategory.forEach {
-                        it.isSelected = true
-                        it.isChildSelect = true
-                    }
-                } else {
-                    dataClass.subCategory.forEach {
-                        it.isSelected = false
-                        it.isChildSelect = false
-//                        if (isFilterFrom == true) {
-//                            it.isChildSelect = true
-//                        } else {
-//                            it.isChildSelect = false
-//                        }
-                    }
-                }
-
                 textItem.text = dataClass.name
 
                 textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
@@ -214,39 +193,59 @@ class FiltersVM @Inject constructor() : ViewModel() {
                     )
 
                 textItem.singleClick {
-//                    isFilterFromFrom = false
                     selectedPosition = position
                     dataClass.isSelected = !dataClass.isSelected
 
-//                    parentPress = true
-
-//                    currentList.forEach {
-//                        if (dataClass.isSelected == false){
-//                            it.isSelected = false
-//                            it.isChildSelect = false
-//                        } else {
-//                            it.isSelected = true
-//                            it.isChildSelect = true
-//                        }
-//                    }
+                    if (dataClass.isSelected == true) {
+                        dataClass.subCategory.forEach {
+                            it.isSelected = true
+                            it.isChildSelect = true
+                        }
+                    } else {
+                        dataClass.subCategory.forEach {
+                            it.isSelected = false
+                            it.isChildSelect = false
+                        }
+                    }
 
                     notifyItemChanged(position)
                 }
 
                 val filteredNot = currentList
-                itemCategoryCount.value = currentList.filter { it.isSelected == true }.size
-//                itemCategoryCount.value = filteredNot.size
+//                itemCategoryCount.value = currentList.filter { it.isSelected == true }.size
+////                itemCategoryCount.value = filteredNot.size
+
+//                var cout = 0
+//                filteredNot.forEach {
+////                        it.subCategory.forEach { sub ->
+////                            sub.isSelected = true
+////                            sub.isChildSelect = true
+////                        }
+//                    cout = it.subCategory.filter { it.isSelected == true }.size
+//                }
+                itemCategoryCount.value = 0
 
                 layoutChild.visibility =
                     if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
                 ivHideShow.setImageDrawable(
                     ContextCompat.getDrawable(
                         root.context,
-                        if (dataClass.isCollapse == true) R.drawable.baseline_add_24 else R.drawable.baseline_remove_24
+                        if (dataClass.isCollapse == true) R.drawable.baseline_remove_24 else R.drawable.baseline_add_24
                     )
                 )
                 ivHideShow.singleClick {
                     dataClass.isCollapse = !dataClass.isCollapse
+                    if (dataClass.isSelected == true) {
+                        dataClass.subCategory.forEach {
+                            it.isSelected = true
+                            it.isChildSelect = true
+                        }
+                    } else {
+                        dataClass.subCategory.forEach {
+                            it.isSelected = false
+                            it.isChildSelect = false
+                        }
+                    }
                     notifyItemChanged(position)
                 }
 
@@ -268,12 +267,10 @@ class FiltersVM @Inject constructor() : ViewModel() {
                                 textItemChild.text = dataClassChild.name
 
                                 root.singleClick {
-                                    isFilterFrom = true
+//                                    isFilterFrom = true
                                     selectedPosition = positionChild
                                     dataClassChild.isSelected = !dataClassChild.isSelected
                                     dataClassChild.isChildSelect = !dataClassChild.isChildSelect
-
-                                    parentPress = true
 
                                     notifyItemChanged(positionChild)
                                 }
@@ -291,8 +288,18 @@ class FiltersVM @Inject constructor() : ViewModel() {
                                     dataClass.isSelected = false
                                 }
 
-                                itemCategoryCount.value =
-                                    filteredNot.filter { it.isSelected == true }.size
+//                                itemCategoryCount.value =
+//                                    filteredNot.filter { it.isSelected == true }.size
+//                                var cout = 0
+//                                currentList.forEach {
+//                                    //cout += it.subCategory.filter { it.isSelected == true }.size
+//                                    Log.e("TAG", " itemCategoryCount ${it.isSelected}")
+//
+//                                }
+                                itemCategoryCount.value = 0
+
+
+
                                 textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
                                 ivIconCheck.imageTintList =
                                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
@@ -304,26 +311,26 @@ class FiltersVM @Inject constructor() : ViewModel() {
                                         R.color._D9D9D9
                                     )
 
-                                if (dataClassChild.isSelected == true) {
-//                                if (dataClassChild.isChildSelect == true){
-//                                    textItemChild.setTypeface(typefaceroboto_light)
+//                                if (dataClassChild.isSelected == true) {
+////                                if (dataClassChild.isChildSelect == true){
+////                                    textItemChild.setTypeface(typefaceroboto_light)
+////                                } else {
+//                                    textItemChild.setTypeface(typefaceroboto_medium)
+////                                }
 //                                } else {
-                                    textItemChild.setTypeface(typefaceroboto_medium)
+//                                    if(parentPress == false){
+//                                        if (dataClassChild.isChildSelect == true){
+//                                            textItemChild.setTypeface(typefaceroboto_medium)
+//                                        } else {
+//                                            textItemChild.setTypeface(typefaceroboto_light)
+//                                        }
+//                                    } else {
+//                                        textItemChild.setTypeface(typefaceroboto_light)
+//                                    }
 //                                }
-                                } else {
-                                    if(parentPress == false){
-                                        if (dataClassChild.isChildSelect == true){
-                                            textItemChild.setTypeface(typefaceroboto_medium)
-                                        } else {
-                                            textItemChild.setTypeface(typefaceroboto_light)
-                                        }
-                                    } else {
-                                        textItemChild.setTypeface(typefaceroboto_light)
-                                    }
-                                }
 
 
-//                            textItemChild.setTypeface(if (dataClassChild.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                            textItemChild.setTypeface(if (dataClassChild.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
 
 
                                 ivIconCheckChild.imageTintList =
