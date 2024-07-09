@@ -6,20 +6,144 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList2"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
-        app:spanCount="2"
-        tools:itemCount="20"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/item_product"
-        android:paddingHorizontal="@dimen/_6sdp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="@dimen/_5sdp"
-        />
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutCategory1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <include
+                    android:id="@+id/item_home_category1"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+                <include
+                    android:id="@+id/item_home_category2"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+                <include
+                    android:id="@+id/item_home_category3"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListCategory1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                app:spanCount="3"
+                tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_category_round"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCategory1"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:visibility="gone"
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutCategory2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rvListCategory1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+
+                <include
+                    android:id="@+id/item_home_category4"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+                <include
+                    android:id="@+id/item_home_category5"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+                <include
+                    android:id="@+id/item_home_category6"
+                    layout="@layout/item_home_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListCategory2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                app:spanCount="3"
+                tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_category_round"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCategory2"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:visibility="gone"
+
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                app:spanCount="2"
+                tools:itemCount="4"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_product"
+                android:paddingHorizontal="@dimen/_6sdp"
+                app:layout_constraintTop_toBottomOf="@+id/rvListCategory2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/_5sdp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryBinding
@@ -86,6 +87,37 @@ class Category : Fragment() {
                     TabLayoutMediator(tabLayout, rvList1) { tab, position ->
                         tab.text = mainShopFor[position].name
                     }.attach()
+
+
+                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageScrolled(
+                            position: Int,
+                            positionOffset: Float,
+                            positionOffsetPixels: Int
+                        ) {
+                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//                    if (pageChangeValue != position) {
+//                        Log.e("TAG", "positionA" + position)
+//                    }
+//                    pageChangeValue = position
+                        }
+
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+//                    adapter1.updatePosition(position)
+//                            viewModel.indicator(binding, viewModel.item1, position)
+//                            pagerAdapter.notifyDataSetChanged()
+                        }
+
+                        override fun onPageScrollStateChanged(state: Int) {
+                            super.onPageScrollStateChanged(state)
+                            Log.e("TAG", "state" + state)
+//                    if (state == 0) {
+//                    adapter1.notifyItemChanged(adapter1.counter)
+//                        onClickItem(pageChangeValue)
+//                    }
+                        }
+                    })
             }
         }
 
