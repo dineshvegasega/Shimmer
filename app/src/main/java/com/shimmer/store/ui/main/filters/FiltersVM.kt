@@ -199,12 +199,12 @@ class FiltersVM @Inject constructor() : ViewModel() {
                     if (dataClass.isSelected == true) {
                         dataClass.subCategory.forEach {
                             it.isSelected = true
-                            it.isChildSelect = true
+//                            it.isChildSelect = true
                         }
                     } else {
                         dataClass.subCategory.forEach {
                             it.isSelected = false
-                            it.isChildSelect = false
+//                            it.isChildSelect = false
                         }
                     }
 
@@ -235,17 +235,17 @@ class FiltersVM @Inject constructor() : ViewModel() {
                 )
                 ivHideShow.singleClick {
                     dataClass.isCollapse = !dataClass.isCollapse
-                    if (dataClass.isSelected == true) {
-                        dataClass.subCategory.forEach {
-                            it.isSelected = true
-                            it.isChildSelect = true
-                        }
-                    } else {
-                        dataClass.subCategory.forEach {
-                            it.isSelected = false
-                            it.isChildSelect = false
-                        }
-                    }
+//                    if (dataClass.isSelected == true) {
+//                        dataClass.subCategory.forEach {
+//                            it.isSelected = true
+//                            it.isChildSelect = true
+//                        }
+//                    } else {
+//                        dataClass.subCategory.forEach {
+//                            it.isSelected = false
+//                            it.isChildSelect = false
+//                        }
+//                    }
                     notifyItemChanged(position)
                 }
 
@@ -270,12 +270,12 @@ class FiltersVM @Inject constructor() : ViewModel() {
 //                                    isFilterFrom = true
                                     selectedPosition = positionChild
                                     dataClassChild.isSelected = !dataClassChild.isSelected
-                                    dataClassChild.isChildSelect = !dataClassChild.isChildSelect
+//                                    dataClassChild.isChildSelect = !dataClassChild.isChildSelect
 
                                     notifyItemChanged(positionChild)
                                 }
 
-                                Log.e("TAG" , "filteredNotChild ${dataClassChild.isSelected}   currentList${dataClassChild.isChildSelect}")
+//                                Log.e("TAG" , "filteredNotChild ${dataClassChild.isSelected}   currentList${dataClassChild.isChildSelect}")
 
 
 
@@ -349,9 +349,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
                 rvListChild.setHasFixedSize(true)
                 rvListChild.adapter = categoryChildAdapter
                 categoryChildAdapter.notifyDataSetChanged()
-                categoryChildAdapter.submitList(dataClass.subCategory)
-
-
+                categoryChildAdapter.submitList(dataClass.subCategory.filter { !it.isAll})
             }
         }
     }

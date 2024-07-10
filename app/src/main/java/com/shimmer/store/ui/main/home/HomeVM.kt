@@ -77,27 +77,27 @@ class HomeVM @Inject constructor() : ViewModel() {
                         it.isCollapse = false
                         it.subCategory.forEach {
                             it.isSelected = false
-                            it.isChildSelect = false
+//                            it.isChildSelect = false
                         }
                     }
                     dataClass.apply {
                         isSelected = true
                         subCategory.forEach {
                             it.isSelected = true
-                            it.isChildSelect = true
+//                            it.isChildSelect = true
                         }
                     }
                     mainPrice.forEach {
                         it.isSelected = false
-                        it.isChildSelect = false
+//                        it.isChildSelect = false
                     }
                     mainMaterial.forEach {
                         it.isSelected = false
-                        it.isChildSelect = false
+//                        it.isChildSelect = false
                     }
                     mainShopFor.forEach {
                         it.isSelected = false
-                        it.isChildSelect = false
+//                        it.isChildSelect = false
                     }
 
                     it.findNavController().navigate(R.id.action_home_to_products)

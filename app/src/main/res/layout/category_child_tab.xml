@@ -27,31 +27,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:paddingHorizontal="@dimen/_5sdp"
                 >
 
                 <include
-                    android:id="@+id/item_home_category1"
-                    layout="@layout/item_home_category"
+                    android:id="@+id/item_category1"
+                    layout="@layout/item_category"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
+                    android:layout_weight="1"
                     />
 
                 <include
-                    android:id="@+id/item_home_category2"
-                    layout="@layout/item_home_category"
+                    android:id="@+id/item_category2"
+                    layout="@layout/item_category"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
+                    android:layout_weight="1"
                     />
 
-                <include
-                    android:id="@+id/item_home_category3"
-                    layout="@layout/item_home_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -71,6 +67,7 @@
                 android:visibility="gone"
                 />
 
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/layoutCategory2"
                 android:layout_width="match_parent"
@@ -80,31 +77,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:paddingHorizontal="@dimen/_5sdp"
                 >
-
                 <include
-                    android:id="@+id/item_home_category4"
-                    layout="@layout/item_home_category"
+                    android:id="@+id/item_category3"
+                    layout="@layout/item_category"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
+                    android:layout_weight="1"
                     />
 
                 <include
-                    android:id="@+id/item_home_category5"
-                    layout="@layout/item_home_category"
+                    android:id="@+id/item_category4"
+                    layout="@layout/item_category"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
+                    android:layout_weight="1"
                     />
 
-                <include
-                    android:id="@+id/item_home_category6"
-                    layout="@layout/item_home_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -125,21 +118,57 @@
 
                 />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvList2"
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutCategory3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rvListCategory2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/_5sdp"
+                >
+
+
+                <include
+                    android:id="@+id/item_category5"
+                    layout="@layout/item_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_weight="1"
+                    />
+
+                <include
+                    android:id="@+id/item_category6"
+                    layout="@layout/item_category"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_weight="1"
+                    />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListCategory3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:orientation="vertical"
                 android:nestedScrollingEnabled="false"
-                app:spanCount="2"
+                app:spanCount="3"
                 tools:itemCount="4"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_product"
-                android:paddingHorizontal="@dimen/_6sdp"
-                app:layout_constraintTop_toBottomOf="@+id/rvListCategory2"
-                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_category_round"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCategory3"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:visibility="gone"
+
                 />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

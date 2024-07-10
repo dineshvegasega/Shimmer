@@ -212,7 +212,7 @@ class Products : Fragment() {
             var count = 0
             mainCategory.forEach {
                 it.subCategory.forEach { sub ->
-                    if(sub.isSelected){
+                    if(sub.isSelected && sub.isAll == false){
                         Log.e("TAG" , "it.isSelected ${sub.isSelected}")
                         count += 1
                     }

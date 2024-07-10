@@ -49,6 +49,7 @@ class MainActivityVM @Inject constructor() : ViewModel() {
 
             mainCategory.add(Items("RINGS",
                 subCategory = arrayListOf(
+                    Items("All Rings", isAll = true),
                     Items("Band"),
                     Items("Casual"),
                     Items("Cocktail"),
@@ -57,11 +58,13 @@ class MainActivityVM @Inject constructor() : ViewModel() {
             ))
             mainCategory.add(Items("NECKLACE",
                 subCategory = arrayListOf(
+                    Items("All Necklaces", isAll = true),
                     Items("Long Necklace"),
                     Items("Short Necklace"))
             ))
             mainCategory.add(Items("PENDANTS",
                 subCategory = arrayListOf(
+                    Items("All Pendants", isAll = true),
                     Items("Alphabets"),
                     Items("Zodiac"),
                     Items("Casual"),
@@ -69,6 +72,7 @@ class MainActivityVM @Inject constructor() : ViewModel() {
             ))
             mainCategory.add(Items("BRACELETS",
                 subCategory = arrayListOf(
+                    Items("All Bracelets", isAll = true),
                     Items("Casual"),
                     Items("Bangles"),
                     Items("Occasion"),
@@ -76,12 +80,14 @@ class MainActivityVM @Inject constructor() : ViewModel() {
             ))
             mainCategory.add(Items("MANGALSUTRA",
                 subCategory = arrayListOf(
+                    Items("All Mangalsutras", isAll = true),
                     Items("Casual"),
                     Items("Bangles"),
                     Items("Everyday"))
             ))
             mainCategory.add(Items("EARRINGS",
                 subCategory = arrayListOf(
+                    Items("All Earrings", isAll = true),
                     Items("Balis"),
                     Items("Studs"),
                     Items("Drops"),

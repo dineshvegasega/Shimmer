@@ -116,20 +116,20 @@ class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     it.isCollapse = false
                     it.subCategory.forEach { sub ->
                         sub.isSelected = false
-                        sub.isChildSelect = false
+//                        sub.isChildSelect = false
                     }
                 }
                 mainPrice.forEach {
                     it.isSelected = false
-                    it.isChildSelect = false
+//                    it.isChildSelect = false
                 }
                 mainMaterial.forEach {
                     it.isSelected = false
-                    it.isChildSelect = false
+//                    it.isChildSelect = false
                 }
                 mainShopFor.forEach {
                     it.isSelected = false
-                    it.isChildSelect = false
+//                    it.isChildSelect = false
                 }
                 it.findNavController().navigate(R.id.action_home_to_products)
             }

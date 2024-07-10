@@ -36,7 +36,8 @@ class CategoryChildTab (
 
     companion object {
         @JvmStatic
-        lateinit var adapter2: CategoryChildTabAdapter
+        var mainSelect = 0
+//        lateinit var adapter2: CategoryChildTabAdapter
     }
 
 
@@ -54,81 +55,94 @@ class CategoryChildTab (
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter2 = CategoryChildTabAdapter()
-//        setData()
+//        adapter2 = CategoryChildTabAdapter()
 
         binding.apply {
-            adapter2.submitData(viewModel.item1)
-            adapter2.notifyDataSetChanged()
-            binding.rvList2.adapter = adapter2
+//            adapter2.submitData(viewModel.item1)
+//            adapter2.notifyDataSetChanged()
+//            binding.rvList2.adapter = adapter2
 
+//
+            itemCategory1.textName.text = mainCategory[0].name
+            itemCategory2.textName.text = mainCategory[1].name
+            itemCategory3.textName.text = mainCategory[2].name
+            itemCategory4.textName.text = mainCategory[3].name
+            itemCategory5.textName.text = mainCategory[4].name
+            itemCategory6.textName.text = mainCategory[5].name
 
-            itemHomeCategory1.textName.text = mainCategory[0].name
-            itemHomeCategory2.textName.text = mainCategory[1].name
-            itemHomeCategory3.textName.text = mainCategory[2].name
-            itemHomeCategory4.textName.text = mainCategory[3].name
-            itemHomeCategory5.textName.text = mainCategory[4].name
-            itemHomeCategory6.textName.text = mainCategory[5].name
 
 
             rvListCategory1.adapter = viewModel.subCategoryAdapter1
-
-            itemHomeCategory1.ivIcon.singleClick {
+            itemCategory1.linearLayout.singleClick {
                 rvListCategory1.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
+//                mainCategory[0].apply {
+//                    subCategory.set(0,Items("All Rings"))
+//                }
                 viewModel.subCategoryAdapter1.submitList(mainCategory[0].subCategory)
-                if (rvListCategory1.isVisible){
-                    rvListCategory1.visibility = View.GONE
-                } else {
-                    rvListCategory1.visibility = View.VISIBLE
-                }
+                rvListCategory1.visibility = View.VISIBLE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                mainSelect = 1
             }
 
-            itemHomeCategory2.ivIcon.singleClick {
+            itemCategory2.linearLayout.singleClick {
                 rvListCategory1.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
+//                mainCategory[1].apply {
+//                    subCategory.add(Items("All Necklace"))
+//                }
                 viewModel.subCategoryAdapter1.submitList(mainCategory[1].subCategory)
-                if (rvListCategory1.isVisible){
-                    rvListCategory1.visibility = View.GONE
-                } else {
-                    rvListCategory1.visibility = View.VISIBLE
-                }
+                rvListCategory1.visibility = View.VISIBLE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                mainSelect = 2
             }
 
-            itemHomeCategory3.ivIcon.singleClick {
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter1.notifyDataSetChanged()
-                viewModel.subCategoryAdapter1.submitList(mainCategory[2].subCategory)
-                if (rvListCategory1.isVisible){
-                    rvListCategory1.visibility = View.GONE
-                } else {
-                    rvListCategory1.visibility = View.VISIBLE
-                }
-            }
+
 
             rvListCategory2.adapter = viewModel.subCategoryAdapter2
-            itemHomeCategory4.ivIcon.singleClick {
+            itemCategory3.linearLayout.singleClick {
+                rvListCategory1.adapter = viewModel.subCategoryAdapter1
+                viewModel.subCategoryAdapter2.notifyDataSetChanged()
+                viewModel.subCategoryAdapter2.submitList(mainCategory[2].subCategory)
+                rvListCategory1.visibility = View.GONE
+                rvListCategory2.visibility = View.VISIBLE
+                rvListCategory3.visibility = View.GONE
+                mainSelect = 3
+            }
+
+            itemCategory4.linearLayout.singleClick {
                 rvListCategory2.adapter = viewModel.subCategoryAdapter2
                 viewModel.subCategoryAdapter2.notifyDataSetChanged()
                 viewModel.subCategoryAdapter2.submitList(mainCategory[3].subCategory)
                 rvListCategory1.visibility = View.GONE
                 rvListCategory2.visibility = View.VISIBLE
+                rvListCategory3.visibility = View.GONE
+                mainSelect = 4
             }
 
-            itemHomeCategory5.ivIcon.singleClick {
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[4].subCategory)
+
+
+            rvListCategory3.adapter = viewModel.subCategoryAdapter3
+            itemCategory5.linearLayout.singleClick {
+                rvListCategory3.adapter = viewModel.subCategoryAdapter3
+                viewModel.subCategoryAdapter3.notifyDataSetChanged()
+                viewModel.subCategoryAdapter3.submitList(mainCategory[4].subCategory)
                 rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.VISIBLE
+                mainSelect = 5
             }
 
-            itemHomeCategory6.ivIcon.singleClick {
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[5].subCategory)
+            itemCategory6.linearLayout.singleClick {
+                rvListCategory3.adapter = viewModel.subCategoryAdapter3
+                viewModel.subCategoryAdapter3.notifyDataSetChanged()
+                viewModel.subCategoryAdapter3.submitList(mainCategory[5].subCategory)
                 rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.VISIBLE
+                mainSelect = 6
             }
         }
 
@@ -148,80 +162,10 @@ class CategoryChildTab (
                 Log.e("TAG", "onViewCreated: Fragment PositionELSE : ${it.name}")
             }
         }
-        adapter2 = CategoryChildTabAdapter()
+//        adapter2 = CategoryChildTabAdapter()
 
         viewModel.subCategoryAdapter1.notifyDataSetChanged()
         viewModel.subCategoryAdapter2.notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun setData() {
-        binding.apply {
-
-
-            itemHomeCategory1.textName.text = mainCategory[0].name
-            itemHomeCategory2.textName.text = mainCategory[1].name
-            itemHomeCategory3.textName.text = mainCategory[2].name
-            itemHomeCategory4.textName.text = mainCategory[3].name
-            itemHomeCategory5.textName.text = mainCategory[4].name
-            itemHomeCategory6.textName.text = mainCategory[5].name
-
-
-
-            itemHomeCategory1.ivIcon.singleClick {
-//                rvListCategory1.setHasFixedSize(true)
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter1.notifyDataSetChanged()
-                viewModel.subCategoryAdapter1.submitList(mainCategory[0].subCategory)
-                rvListCategory1.visibility = View.VISIBLE
-                rvListCategory2.visibility = View.GONE
-            }
-
-            itemHomeCategory2.ivIcon.singleClick {
-//                rvListCategory1.setHasFixedSize(true)
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter1.notifyDataSetChanged()
-                viewModel.subCategoryAdapter1.submitList(mainCategory[1].subCategory)
-                rvListCategory1.visibility = View.VISIBLE
-                rvListCategory2.visibility = View.GONE
-            }
-
-            itemHomeCategory3.ivIcon.singleClick {
-//                rvListCategory1.setHasFixedSize(true)
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter1.notifyDataSetChanged()
-                viewModel.subCategoryAdapter1.submitList(mainCategory[2].subCategory)
-                rvListCategory1.visibility = View.VISIBLE
-                rvListCategory2.visibility = View.GONE
-            }
-
-
-            itemHomeCategory4.ivIcon.singleClick {
-//                rvListCategory2.setHasFixedSize(true)
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[3].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
-            }
-
-            itemHomeCategory5.ivIcon.singleClick {
-//                rvListCategory2.setHasFixedSize(true)
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[4].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
-            }
-
-            itemHomeCategory6.ivIcon.singleClick {
-//                rvListCategory2.setHasFixedSize(true)
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[5].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
-            }
-        }
+        viewModel.subCategoryAdapter3.notifyDataSetChanged()
     }
 }

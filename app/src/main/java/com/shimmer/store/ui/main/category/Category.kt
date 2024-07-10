@@ -78,7 +78,7 @@ class Category : Fragment() {
 
                     val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
                     pagerAdapter.notifyDataSetChanged()
-                    rvList1.offscreenPageLimit = 1
+                    rvList1.offscreenPageLimit = 3
                     rvList1.overScrollMode = OVER_SCROLL_NEVER
                     rvList1.adapter = pagerAdapter
                     rvList1.setPageTransformer { page, position ->
