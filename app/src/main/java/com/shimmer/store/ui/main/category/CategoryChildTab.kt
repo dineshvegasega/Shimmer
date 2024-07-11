@@ -62,7 +62,6 @@ class CategoryChildTab (
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
-//
             itemCategory1.textName.text = mainCategory[0].name
             itemCategory2.textName.text = mainCategory[1].name
             itemCategory3.textName.text = mainCategory[2].name
@@ -76,9 +75,6 @@ class CategoryChildTab (
             itemCategory1.linearLayout.singleClick {
                 rvListCategory1.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
-//                mainCategory[0].apply {
-//                    subCategory.set(0,Items("All Rings"))
-//                }
                 viewModel.subCategoryAdapter1.submitList(mainCategory[0].subCategory)
                 rvListCategory1.visibility = View.VISIBLE
                 rvListCategory2.visibility = View.GONE
@@ -89,9 +85,6 @@ class CategoryChildTab (
             itemCategory2.linearLayout.singleClick {
                 rvListCategory1.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
-//                mainCategory[1].apply {
-//                    subCategory.add(Items("All Necklace"))
-//                }
                 viewModel.subCategoryAdapter1.submitList(mainCategory[1].subCategory)
                 rvListCategory1.visibility = View.VISIBLE
                 rvListCategory2.visibility = View.GONE
