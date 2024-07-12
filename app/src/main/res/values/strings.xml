@@ -74,6 +74,8 @@
     <string name="first_nameStar">First Name*</string>
     <string name="last_nameStar">Last Name*</string>
     <string name="app_version_1_0">App Version %s</string>
+    <string name="search_by_product">Search By Product</string>
+    <string name="search_by_sku">Search By SKU</string>
 
 
 </resources>

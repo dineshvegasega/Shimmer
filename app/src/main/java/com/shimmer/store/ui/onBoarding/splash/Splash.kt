@@ -1,32 +1,32 @@
 package com.shimmer.store.ui.splash
 
-import android.animation.Animator
-import android.graphics.drawable.Animatable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
+import androidx.fragment.app.viewModels
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SplashBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
-import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.navHostFragment
+import com.shimmer.store.ui.onBoarding.splash.SplashVM
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isHide
 import com.shimmer.store.utils.ioThread
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import org.json.JSONObject
 
 
 @AndroidEntryPoint
 class Splash : Fragment() {
     private var _binding: SplashBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: SplashVM by viewModels()
 
 
     override fun onCreateView(
@@ -66,7 +66,20 @@ class Splash : Fragment() {
 //            }
 //        })
 
-        handleSplashTime()
+//        val obj: JSONObject = JSONObject().apply {
+//            put("username", "admin")
+//            put("password", "admin123")
+//        }
+//
+//        viewModel.adminToken(obj){
+//            val token = this.replace("\"", "")
+//            Log.e("TAG", "itAAA "+token)
+            handleSplashTime()
+//        }
+//
+
+
+
 
     }
 

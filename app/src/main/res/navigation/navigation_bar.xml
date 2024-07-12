@@ -261,6 +261,13 @@
         android:label="Search"
         android:id="@+id/search"
         tools:layout="@layout/search">
+
+        <action
+            android:id="@+id/action_search_to_productDetail"
+            app:destination="@id/productDetail"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment

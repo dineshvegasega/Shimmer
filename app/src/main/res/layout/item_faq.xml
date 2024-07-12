@@ -23,12 +23,12 @@
             android:text="What is Faq?"
             android:textColor="@color/_000000"
             android:textSize="@dimen/_11sdp"
-            app:fontFamily="@font/roboto_regular"
+            app:fontFamily="@font/roboto_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivHideShow"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingVertical="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_4sdp"
             tools:ignore="HardcodedText"
             android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/_10sdp"/>
@@ -62,7 +62,7 @@
             android:id="@+id/textDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode!"
+            android:text="Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode! Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode! Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode!"
             android:textColor="@color/_000000"
             android:textSize="@dimen/_11sdp"
             app:fontFamily="@font/roboto_light"
@@ -70,9 +70,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:paddingVertical="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
             tools:ignore="HardcodedText"
             android:gravity="center_vertical"
+            android:lineSpacingExtra="@dimen/_2sdp"
             android:paddingHorizontal="@dimen/_10sdp"/>
 
 

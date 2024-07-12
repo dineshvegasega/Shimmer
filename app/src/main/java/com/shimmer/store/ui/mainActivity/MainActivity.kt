@@ -19,10 +19,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
 import com.shimmer.store.R
 import com.shimmer.store.databinding.MainActivityBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.db.AppDatabase
 import com.shimmer.store.networking.ConnectivityManager
 import com.shimmer.store.ui.main.category.Category
 import com.shimmer.store.ui.main.home.Home
@@ -91,6 +93,9 @@ class MainActivity : AppCompatActivity() {
 
         @JvmStatic
         var typefaceroboto_medium: Typeface? = null
+
+        @JvmStatic
+        var db : AppDatabase?= null
     }
 
     private val connectivityManager by lazy { ConnectivityManager(this) }
@@ -111,6 +116,11 @@ class MainActivity : AppCompatActivity() {
         mainActivity = WeakReference(this)
         observeConnectivityManager()
         setupBottomNav()
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "shimmer.db"
+        ).build()
 
         typefaceroboto_light = resources.getFont(R.font.roboto_light)
         typefaceroboto_medium = resources.getFont(R.font.roboto_medium)

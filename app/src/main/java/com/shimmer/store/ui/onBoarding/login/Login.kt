@@ -2,6 +2,7 @@ package com.shimmer.store.ui.onBoarding.login
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.shimmer.store.databinding.LoginBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class Login : Fragment() {
@@ -32,6 +34,18 @@ class Login : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         saveObject(LOGIN_DATA, "data")
+//
+//        var token = arguments?.getString("token")
+//        val obj: JSONObject = JSONObject().apply {
+//            put("username", "admin")
+//            put("password", "admin123")
+//        }
+
+//        viewModel.adminToken(obj){
+//            val token = this.replace("\"", "")
+//            Log.e("TAG", "itAAA "+token)
+//            handleSplashTime(token)
+//        }
 
 
     }
