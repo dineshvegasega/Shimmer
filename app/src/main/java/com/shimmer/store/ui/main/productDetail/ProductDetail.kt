@@ -26,6 +26,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.DialogSizesBinding
 import com.shimmer.store.databinding.ProductDetailBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.interfaces.CallBackListener
@@ -33,10 +34,12 @@ import com.shimmer.store.ui.main.products.Products
 import com.shimmer.store.ui.main.products.Products.Companion
 import com.shimmer.store.ui.main.products.ProductsAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.getRecyclerView
+import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,7 +72,7 @@ class ProductDetail : Fragment() , CallBackListener {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility", "SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         callBackListener = this
@@ -202,6 +205,25 @@ class ProductDetail : Fragment() , CallBackListener {
 
             btAddToCart.singleClick {
                 badgeCount.value = 1
+                ioThread {
+                    Log.e("TAG", "onViewCreated: ReaDY")
+
+                    val newUser = CartModel(product_id = 1, name = "test")
+//                    Log.e("TAG", "onViewCreated: ReaDY2")
+
+//                    if(model.isSelected == true){
+//                        db?.cartDao()?.insertAll(newUser)
+//                    } else {
+                        db?.cartDao()?.delete(CartModel())
+//                    }
+//                    Log.e("TAG", "onViewCreated: ReaDY3")
+
+                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                    userList?.forEach {
+                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
+                    }
+                }
+
             }
 
             btByNow.singleClick {

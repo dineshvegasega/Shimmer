@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.utils.singleClick
@@ -48,7 +49,7 @@ class CartVM @Inject constructor() : ViewModel() {
 
 
 
-    val cartAdapter = object : GenericAdapter<ItemCartBinding, Items>() {
+    val cartAdapter = object : GenericAdapter<ItemCartBinding, CartModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -58,7 +59,7 @@ class CartVM @Inject constructor() : ViewModel() {
         @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemCartBinding,
-            dataClass: Items,
+            dataClass: CartModel,
             position: Int
         ) {
             binding.apply {

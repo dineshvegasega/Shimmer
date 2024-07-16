@@ -2,6 +2,7 @@ package com.shimmer.store.ui.main.cart
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CartBinding
+import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -59,12 +64,23 @@ class Cart : Fragment() {
             }
 
 
-            rvList.setHasFixedSize(true)
-            rvList.adapter = viewModel.cartAdapter
-            viewModel.cartAdapter.notifyDataSetChanged()
-            viewModel.cartAdapter.submitList(viewModel.item1)
 
 
+            mainThread {
+                val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                binding.apply {
+                    rvList.setHasFixedSize(true)
+                    rvList.adapter = viewModel.cartAdapter
+                    viewModel.cartAdapter.notifyDataSetChanged()
+                    viewModel.cartAdapter.submitList(userList)
+                }
+
+
+
+            userList?.forEach {
+                Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
+            }
+            }
 
             layoutProceedToPayment.singleClick {
                 findNavController().navigate(R.id.action_cart_to_payment)

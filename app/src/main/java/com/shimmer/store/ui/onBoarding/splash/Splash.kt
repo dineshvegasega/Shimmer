@@ -66,19 +66,19 @@ class Splash : Fragment() {
 //            }
 //        })
 
-//        val obj: JSONObject = JSONObject().apply {
-//            put("username", "admin")
-//            put("password", "admin123")
-//        }
-//
-//        viewModel.adminToken(obj){
+        val obj: JSONObject = JSONObject().apply {
+            put("admin", "mageplaza")
+            put("pass", "WeLoveMagento123")
+        }
+
+        viewModel.adminToken(obj){
 //            val token = this.replace("\"", "")
 //            Log.e("TAG", "itAAA "+token)
-            handleSplashTime()
-//        }
-//
+//            handleSplashTime()
+        }
 
 
+        handleSplashTime()
 
 
     }

@@ -2,9 +2,10 @@ package com.shimmer.store.datastore.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-//@Entity(tableName = "pets")
+@Entity(tableName = "search", indices = [Index(value = ["search_name"], unique = true)])
 data class SearchModel (
     @PrimaryKey(autoGenerate = true) val _id: Int = 0,
     @ColumnInfo(name = "search_name") val search_name: String?,

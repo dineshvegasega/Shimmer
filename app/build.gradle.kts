@@ -86,10 +86,10 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.5.0")
-    implementation ("androidx.databinding:databinding-runtime:8.5.0")
+    implementation ("androidx.databinding:databinding-ktx:8.5.1")
+    implementation ("androidx.databinding:databinding-runtime:8.5.1")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
@@ -103,6 +103,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
 
     implementation ("com.google.code.gson:gson:2.10.1")
 
@@ -120,7 +121,7 @@ dependencies {
     implementation ("androidx.datastore:datastore-preferences-core:1.1.1")
 
     implementation ("id.zelory:compressor:3.0.1")
-    implementation ("com.airbnb.android:lottie:6.3.0")
+    implementation ("com.airbnb.android:lottie:6.4.0")
 
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
 
@@ -128,7 +129,7 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation (platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation ("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-database-ktx")

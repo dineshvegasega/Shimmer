@@ -9,16 +9,16 @@ import androidx.room.Query
 @Dao
 interface SearchDao {
 
-    @Query("SELECT * FROM searchmodel")
+    @Query("SELECT DISTINCT _id, search_name, `current_time` FROM search ORDER BY `current_time` DESC")
     suspend fun getAll(): List<SearchModel>
 
-    @Query("SELECT * FROM searchmodel WHERE _id IN (:ids)")
+    @Query("SELECT * FROM search WHERE _id IN (:ids)")
     suspend fun loadAllByIds(ids: IntArray): List<SearchModel>
 
-    @Query("SELECT * FROM searchmodel WHERE search_name LIKE :search_name")
+    @Query("SELECT * FROM search WHERE search_name LIKE :search_name")
     suspend fun findBySearchName(search_name: String): SearchModel
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(users: SearchModel)
 
     @Delete

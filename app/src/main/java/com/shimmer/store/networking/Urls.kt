@@ -5,7 +5,7 @@ const val BASE_URL = "https://shop.vegasega.com/rest/"
 const val URL = BASE_URL+"V1/"
 
 
-const val ADMIN_TOKEN = "integration/admin/token"
+const val ADMIN_TOKEN = "vegasega-apis/admin?"
 const val CUSTOMER_LOGIN_TOKEN = "integration/customer/token"
 const val CUSTOMER_DETAIL = "customers/me"
 

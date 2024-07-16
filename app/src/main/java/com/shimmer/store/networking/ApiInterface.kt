@@ -19,9 +19,10 @@ import retrofit2.http.*
 
 interface ApiInterface {
 
-    @POST(ADMIN_TOKEN)
+    @GET(ADMIN_TOKEN)
     suspend fun adminToken(
-        @Body requestBody: RequestBody
+        @Query("admin") admin: String,
+        @Query("pass") pass: String
     ): Response<JsonElement>
 
 

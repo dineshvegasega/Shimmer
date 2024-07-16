@@ -14,8 +14,13 @@ import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR
 import com.shimmer.store.databinding.ItemHome2Binding
 import com.shimmer.store.databinding.ItemProductBinding
+import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.ioThread
+import com.shimmer.store.utils.mainThread
 
 class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -98,11 +103,30 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,R.color._9A9A9A)
 
+
+
+
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected
 
                 val filteredNot = itemModels.filter { it.isSelected == true }
                 badgeCount.value = filteredNot.size
+
+                ioThread {
+//                    val newUser = CartModel(product_id = 3, name = "test3")
+                    if(model.isSelected == true){
+                        db?.cartDao()?.insertAll(CartModel())
+                      // Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
+                    } else {
+                        db?.cartDao()?.delete(CartModel())
+                    }
+
+                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                    userList?.forEach {
+                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
+                    }
+                }
+
 
                 notifyItemChanged(position)
             }
@@ -113,7 +137,11 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
             itemRowBinding.btAddCart.setOnClickListener {
-                it.findNavController().navigate(R.id.action_products_to_cart)
+                mainThread {
+                    val newUser = CartModel(product_id = 1, name = "test", currentTime = System.currentTimeMillis())
+                    db?.cartDao()?.insertAll(newUser)
+                    it.findNavController().navigate(R.id.action_products_to_cart)
+                }
             }
         }
     }

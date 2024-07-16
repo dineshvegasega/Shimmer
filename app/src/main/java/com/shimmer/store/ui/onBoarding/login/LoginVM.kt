@@ -43,32 +43,32 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
             }
         )
     }
-
-
-    fun customerDetail(jsonObject: JSONObject) = viewModelScope.launch {
-        repository.callApi(
-            callHandler = object : CallHandler<Response<JsonElement>> {
-                override suspend fun sendRequest(apiInterface: ApiInterface) =
-                    apiInterface.adminToken(requestBody = jsonObject.getJsonRequestBody())
-                override fun success(response: Response<JsonElement>) {
-                    if (response.isSuccessful){
-                        //itemLiveNoticeResultSecond.value =  response.body() as BaseResponseDC<Any>
-                    }
-
-                    Log.e("TAG", "success: ${response.body()}")
-                }
-
-                override fun error(message: String) {
-                    super.error(message)
-//                    showSnackBar(message)
-
-                    Log.e("TAG", "success: ${message}")
-                }
-
-                override fun loading() {
-                    super.loading()
-                }
-            }
-        )
-    }
+//
+//
+//    fun customerDetail(jsonObject: JSONObject) = viewModelScope.launch {
+//        repository.callApi(
+//            callHandler = object : CallHandler<Response<JsonElement>> {
+//                override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                    apiInterface.adminToken(requestBody = jsonObject.getJsonRequestBody())
+//                override fun success(response: Response<JsonElement>) {
+//                    if (response.isSuccessful){
+//                        //itemLiveNoticeResultSecond.value =  response.body() as BaseResponseDC<Any>
+//                    }
+//
+//                    Log.e("TAG", "success: ${response.body()}")
+//                }
+//
+//                override fun error(message: String) {
+//                    super.error(message)
+////                    showSnackBar(message)
+//
+//                    Log.e("TAG", "success: ${message}")
+//                }
+//
+//                override fun loading() {
+//                    super.loading()
+//                }
+//            }
+//        )
+//    }
 }

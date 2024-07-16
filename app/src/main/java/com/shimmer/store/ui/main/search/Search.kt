@@ -25,7 +25,10 @@ import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.defaultThread
 import com.shimmer.store.utils.ioThread
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.onRightDrawableClicked
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,20 +78,22 @@ class Search : Fragment() {
                 }
 
 
+                viewModel.searchValue.observe(viewLifecycleOwner) {
+                    binding.topBarSearch.editTextSearch.setText(it)
+                }
+
+                viewModel.searchDelete.observe(viewLifecycleOwner) {
+                    if (it) {
+                        openSearchHistory()
+                    }
+                }
                 editTextSearch.singleClick {
-                    rvListSearchHistory.setHasFixedSize(true)
-                    rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
-                    viewModel.searchHistoryAdapter.notifyDataSetChanged()
-                    viewModel.searchHistoryAdapter.submitList(viewModel.item1)
+                    openSearchHistory()
                 }
 
                 editTextSearch.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
                     if (hasFocus) {
-                        Log.e("TAG", "Focused Now!")
-                        rvListSearchHistory.setHasFixedSize(true)
-                        rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
-                        viewModel.searchHistoryAdapter.notifyDataSetChanged()
-                        viewModel.searchHistoryAdapter.submitList(viewModel.item1)
+                        openSearchHistory()
                     }
                 })
             }
@@ -115,12 +120,10 @@ class Search : Fragment() {
             }
 
             ivSearch.singleClick {
-                val newUser = SearchModel(search_name = "abc", currentTime = System.currentTimeMillis())
-                ioThread {
-                    db?.searchDao()?.insertAll(newUser)
-                    val userList: List<SearchModel> ?= db?.searchDao()?.getAll()
-                    userList?.forEach {
-                        Log.e("TAG", "onViewCreated: "+it.search_name + " it.currentTime "+it.currentTime)
+                if(topBarSearch.editTextSearch.text.toString().isNotEmpty()){
+                    val newUser = SearchModel(search_name = topBarSearch.editTextSearch.text.toString(), currentTime = System.currentTimeMillis())
+                    ioThread {
+                        db?.searchDao()?.insertAll(newUser)
                     }
                 }
             }
@@ -141,6 +144,27 @@ class Search : Fragment() {
 
 
         searchHandler()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun openSearchHistory() {
+        mainThread {
+            val userList: List<SearchModel> ?= db?.searchDao()?.getAll()
+            binding.apply {
+                rvListSearchHistory.setHasFixedSize(true)
+                rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
+                viewModel.searchHistoryAdapter.notifyDataSetChanged()
+                viewModel.searchHistoryAdapter.submitList(userList)
+                rvListSearchHistory.visibility = View.VISIBLE
+                rvList2.visibility = View.GONE
+            }
+
+
+
+//            userList?.forEach {
+//                Log.e("TAG", "onViewCreated: "+it.search_name + " it.currentTime "+it.currentTime)
+//            }
+        }
     }
 
     private fun setSearchButtons() {
@@ -225,10 +249,10 @@ class Search : Fragment() {
         )
 
 
-        dialogBinding.rvListSearchHistory.setHasFixedSize(true)
-        dialogBinding.rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
-        viewModel.searchHistoryAdapter.notifyDataSetChanged()
-        viewModel.searchHistoryAdapter.submitList(viewModel.item1)
+//        dialogBinding.rvListSearchHistory.setHasFixedSize(true)
+//        dialogBinding.rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
+//        viewModel.searchHistoryAdapter.notifyDataSetChanged()
+//        viewModel.searchHistoryAdapter.submitList(viewModel.item1)
 
     }
 

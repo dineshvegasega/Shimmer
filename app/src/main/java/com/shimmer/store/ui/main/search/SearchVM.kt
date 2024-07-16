@@ -1,17 +1,23 @@
 package com.shimmer.store.ui.main.search
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemFaqBinding
 import com.shimmer.store.databinding.ItemSearchBinding
 import com.shimmer.store.databinding.ItemSearchHistoryBinding
+import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.utils.ioThread
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -71,8 +77,10 @@ class SearchVM @Inject constructor() : ViewModel() {
 
 
 
+    var searchDelete = MutableLiveData<Boolean>(false)
+    var searchValue = MutableLiveData<String?>("")
 
-    val searchHistoryAdapter = object : GenericAdapter<ItemSearchHistoryBinding, Items>() {
+    val searchHistoryAdapter = object : GenericAdapter<ItemSearchHistoryBinding, SearchModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -81,10 +89,11 @@ class SearchVM @Inject constructor() : ViewModel() {
 
         override fun onBindHolder(
             binding: ItemSearchHistoryBinding,
-            dataClass: Items,
+            dataClass: SearchModel,
             position: Int
         ) {
             binding.apply {
+                textItem.text = dataClass.search_name
 //                textDesc.visibility =
 //                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
 //                ivHideShow.setImageDrawable(
@@ -93,9 +102,22 @@ class SearchVM @Inject constructor() : ViewModel() {
 //                        if (dataClass.isCollapse == true) R.drawable.baseline_remove_24 else R.drawable.baseline_add_24
 //                    )
 //                )
-//                root.singleClick {
-//                    root.findNavController().navigate(R.id.action_search_to_productDetail)
-//                }
+
+                textItem.singleClick {
+                    searchValue.value = dataClass.search_name
+                }
+
+
+
+                ivCross.singleClick {
+                    mainThread {
+                        db?.searchDao()?.delete(dataClass)
+                        searchDelete.value = true
+                    }
+                }
+
+
+
             }
         }
     }

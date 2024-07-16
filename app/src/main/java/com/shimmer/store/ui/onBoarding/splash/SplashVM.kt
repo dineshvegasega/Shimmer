@@ -50,19 +50,19 @@ class SplashVM @Inject constructor(private val repository: Repository) : ViewMod
         repository.callApi(
             callHandler = object : CallHandler<Response<JsonElement>> {
                 override suspend fun sendRequest(apiInterface: ApiInterface) =
-                    apiInterface.adminToken(requestBody = jsonObject.getJsonRequestBody())
+                    apiInterface.adminToken("mageplaza", "WeLoveMagento123")
                 override fun success(response: Response<JsonElement>) {
                     if (response.isSuccessful){
                         callBack(response.body().toString())
                     }
-                    Log.e("TAG", "success: ${response.body()}")
+                    Log.e("TAG", "successA: ${response.body()}")
                 }
 
                 override fun error(message: String) {
                     super.error(message)
 //                    showSnackBar(message)
                     callBack(message.toString())
-                    Log.e("TAG", "success: ${message}")
+                    Log.e("TAG", "successB: ${message}")
                 }
 
                 override fun loading() {
