@@ -13,28 +13,38 @@ import com.shimmer.store.models.ItemPanchayat
 import com.shimmer.store.models.ItemPincode
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.ItemVending
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiInterface {
 
-    @GET(ADMIN_TOKEN)
+    @POST(ADMIN_TOKEN)
     suspend fun adminToken(
-        @Query("admin") admin: String,
-        @Query("pass") pass: String
+        @Body requestBody: RequestBody
     ): Response<JsonElement>
 
 
-    @POST(CUSTOMER_LOGIN_TOKEN)
+    @GET(WEBSITE_URL)
+    suspend fun websiteUrl(
+        @Query("email") email: String
+    ): Response<JsonElement>
+
+
+    @POST("{id}"+CUSTOMER_LOGIN_TOKEN)
     suspend fun customerLoginToken(
+        @Header("Authorization") adminToken : String,
+        @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Response<JsonElement>
 
 
-    @POST(CUSTOMER_DETAIL)
+    @GET("{id}"+CUSTOMER_DETAIL)
     suspend fun customerDetail(
-        @Body requestBody: RequestBody
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
     ): Response<JsonElement>
+
 
 }

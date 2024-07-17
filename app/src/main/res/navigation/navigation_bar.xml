@@ -40,11 +40,20 @@
         android:label="Login"
         android:id="@+id/login"
         tools:layout="@layout/login">
+
         <action
             android:id="@+id/action_login_to_forgotPassword"
             app:destination="@id/forgotPassword"
             app:launchSingleTop="true"
             />
+
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -181,6 +190,12 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_profile_to_login"
+            app:destination="@id/login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
 
     </fragment>
 

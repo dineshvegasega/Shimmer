@@ -151,6 +151,38 @@
         android:textScaleX="1.1"
         />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btLogout"
+        style="@style/PrimaryButtonBlue"
+        app:backgroundTint="@color/white"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:text="Logout"
+        android:textSize="@dimen/_11sdp"
+        app:cornerRadius="@dimen/_4sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:strokeColor="@color/app_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/switchNotifications"
+        android:fontFamily="@font/roboto_medium"
+        />
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout6"
         android:layout_width="match_parent"

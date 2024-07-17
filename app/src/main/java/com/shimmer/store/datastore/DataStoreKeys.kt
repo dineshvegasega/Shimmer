@@ -7,7 +7,9 @@ import androidx.datastore.preferences.preferencesDataStore
 object DataStoreKeys {
     const val DATA_STORE_NAME = "ApplicationTemplate"
     val LOGIN_DATA by lazy { stringPreferencesKey("LOGIN_DATA") }
-    val TOKEN by lazy { stringPreferencesKey("TOKEN") }
+    val ADMIN_TOKEN by lazy { stringPreferencesKey("ADMIN_TOKEN") }
+    val STORE_TOKEN by lazy { stringPreferencesKey("STORE_TOKEN") }
+    val WEBSITE_ID by lazy { stringPreferencesKey("WEBSITE_ID") }
     val AUTH by lazy { stringPreferencesKey("AUTH") }
     val LIVE_SCHEME_DATA by lazy { stringPreferencesKey("LIVE_SCHEME_DATA") }
     val LIVE_NOTICE_DATA by lazy { stringPreferencesKey("LIVE_NOTICE_DATA") }

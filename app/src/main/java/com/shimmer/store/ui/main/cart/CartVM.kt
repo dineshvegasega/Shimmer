@@ -68,7 +68,9 @@ class CartVM @Inject constructor() : ViewModel() {
                     binding.root.findNavController().navigate(R.id.action_cart_to_productDetail)
                 }
 
+                textTitle.text = dataClass.name
                 ivCount.text = dataClass.quantity.toString()
+                textPrice.text = "₹"+dataClass.price.toString()
 
                 ivMinus.singleClick {
                     if (dataClass.quantity > 0) {

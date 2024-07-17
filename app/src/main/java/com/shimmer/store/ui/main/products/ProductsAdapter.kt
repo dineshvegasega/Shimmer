@@ -113,17 +113,17 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 badgeCount.value = filteredNot.size
 
                 ioThread {
-//                    val newUser = CartModel(product_id = 3, name = "test3")
+                    val newUser = CartModel(product_id = 4, name = "test4", price = 20.0, quantity = 1)
                     if(model.isSelected == true){
-                        db?.cartDao()?.insertAll(CartModel())
+                        db?.cartDao()?.insertAll(newUser)
                       // Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
                     } else {
-                        db?.cartDao()?.delete(CartModel())
+                        db?.cartDao()?.deleteById(newUser.product_id!!)
                     }
 
                     val userList: List<CartModel> ?= db?.cartDao()?.getAll()
                     userList?.forEach {
-                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
+                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.price)
                     }
                 }
 

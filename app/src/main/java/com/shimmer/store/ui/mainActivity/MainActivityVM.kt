@@ -10,6 +10,10 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityVM @Inject constructor() : ViewModel() {
     companion object {
+
+        @JvmStatic
+        var storeWebUrl: String = ""
+
         @JvmStatic
         var locale: Locale = Locale.getDefault()
 

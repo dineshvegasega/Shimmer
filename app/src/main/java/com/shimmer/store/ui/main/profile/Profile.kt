@@ -2,6 +2,8 @@ package com.shimmer.store.ui.main.profile
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +11,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ProfileBinding
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MultipartBody
 
 @AndroidEntryPoint
 class Profile : Fragment() {
@@ -78,6 +88,29 @@ class Profile : Fragment() {
 
             btChangePassword.singleClick {
                 findNavController().navigate(R.id.action_profile_to_ChangePassword)
+            }
+
+            switchNotifications.setOnCheckedChangeListener { _, isChecked ->
+                Log.e("TAG", "onViewCreated: $isChecked")
+            }
+
+            btLogout.singleClick {
+               MaterialAlertDialogBuilder(requireContext(), R.style.LogoutDialogTheme)
+                    .setTitle(resources.getString(R.string.app_name))
+                    .setMessage(resources.getString(R.string.are_your_sure_want_to_logout))
+                    .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+                        dialog.dismiss()
+                        removeKey(LOGIN_DATA) {}
+                        removeKey(STORE_TOKEN) {}
+                        clearDataStore { }
+                        findNavController().navigate(R.id.action_profile_to_login)
+                    }
+                    .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+                    .show()
+
             }
 
         }

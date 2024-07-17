@@ -30,6 +30,7 @@ import com.shimmer.store.ui.main.category.Category
 import com.shimmer.store.ui.main.home.Home
 import com.shimmer.store.ui.main.faq.Faq
 import com.shimmer.store.ui.main.profile.Profile
+import com.shimmer.store.utils.getDensityName
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
@@ -278,9 +279,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-//        barHideShow()
-//        callBack()
+        val fontScale = resources.configuration.fontScale
+        scale10 = when (fontScale) {
+            0.8f -> 13
+            0.9f -> 12
+            1.0f -> 11
+            1.1f -> 10
+            1.2f -> 9
+            1.3f -> 8
+            1.5f -> 7
+            1.7f -> 6
+            2.0f -> 5
+            else -> 4
+        }
 
+        val densityDpi = getDensityName()
+//        Log.e("TAG", "densityDpiAA " + densityDpi)
+        fontSize = when (densityDpi) {
+            "xxxhdpi" -> 9f
+            "xxhdpi" -> 9.5f
+            "xhdpi" -> 10.5f
+            "hdpi" -> 10.5f
+            "mdpi" -> 11f
+            "ldpi" -> 11.5f
+            else -> 12f
+        }
     }
 
 

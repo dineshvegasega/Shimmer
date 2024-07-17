@@ -14,6 +14,7 @@ data class CartModel(
     @PrimaryKey(autoGenerate = true) val _id: Int = 0,
     @ColumnInfo(name = "product_id") val product_id: Int? = 0,
     @ColumnInfo(name = "name") val name: String? = "",
+    @ColumnInfo(name = "price") val price: Double? = 0.0,
     @ColumnInfo(name = "isSelected") val isSelected: Boolean? = false,
     @ColumnInfo(name = "isCollapse") val isCollapse: Boolean? = false,
     @ColumnInfo(name = "isAll") val isAll: Boolean? = false,

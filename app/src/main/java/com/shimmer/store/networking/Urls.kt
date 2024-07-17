@@ -1,14 +1,16 @@
 package com.shimmer.store.networking
 
-
-const val BASE_URL = "https://shop.vegasega.com/rest/"
-const val URL = BASE_URL+"V1/"
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 
 
-const val ADMIN_TOKEN = "vegasega-apis/admin?"
-const val CUSTOMER_LOGIN_TOKEN = "integration/customer/token"
-const val CUSTOMER_DETAIL = "customers/me"
+const val BASE_URL = "https://shop.vegasega.com/"
+const val URL = BASE_URL+"rest/"
 
+
+const val ADMIN_TOKEN = "V1/integration/admin/token"
+const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"
+const val CUSTOMER_DETAIL = "/V1/customers/me"
+const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
 
 

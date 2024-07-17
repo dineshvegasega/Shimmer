@@ -9,8 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.shimmer.store.databinding.LoginBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 
@@ -33,20 +38,25 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        saveObject(LOGIN_DATA, "data")
+        val obj: JSONObject = JSONObject().apply {
+            put("username", "vegasega@gmail.com")
+            put("password", "ZvdZIC0R")
+        }
+
+
+        binding.apply {
+            textHeaderadfdsfTxt4.singleClick {
+                readData(ADMIN_TOKEN) {
+                    viewModel.websiteUrl(it.toString(), obj, view){
+                        Log.e("TAG", "itAAA "+this)
+                    }
 //
-//        var token = arguments?.getString("token")
-//        val obj: JSONObject = JSONObject().apply {
-//            put("username", "admin")
-//            put("password", "admin123")
-//        }
-
-//        viewModel.adminToken(obj){
-//            val token = this.replace("\"", "")
-//            Log.e("TAG", "itAAA "+token)
-//            handleSplashTime(token)
-//        }
-
+//                    viewModel.customerLoginToken(it.toString(), obj, view){
+//                        Log.e("TAG", "itAAA "+this)
+//                    }
+                }
+            }
+        }
 
     }
 }

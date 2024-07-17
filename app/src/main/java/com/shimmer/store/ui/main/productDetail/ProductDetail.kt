@@ -208,13 +208,13 @@ class ProductDetail : Fragment() , CallBackListener {
                 ioThread {
                     Log.e("TAG", "onViewCreated: ReaDY")
 
-                    val newUser = CartModel(product_id = 1, name = "test")
+                    val newUser = CartModel(product_id = 1, name = "test", price = 20.0, quantity = 1)
 //                    Log.e("TAG", "onViewCreated: ReaDY2")
 
 //                    if(model.isSelected == true){
-//                        db?.cartDao()?.insertAll(newUser)
+                        db?.cartDao()?.insertAll(newUser)
 //                    } else {
-                        db?.cartDao()?.delete(CartModel())
+//                        db?.cartDao()?.deleteById(1)
 //                    }
 //                    Log.e("TAG", "onViewCreated: ReaDY3")
 
