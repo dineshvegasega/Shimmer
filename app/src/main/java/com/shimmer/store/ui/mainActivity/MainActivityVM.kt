@@ -40,75 +40,107 @@ class MainActivityVM @Inject constructor() : ViewModel() {
         var mainShopFor: ArrayList<Items> = ArrayList()
 
         init {
-            mainPrice.add(Items("₹1000 - ₹10000"))
-            mainPrice.add(Items("₹10000 - ₹15000"))
-            mainPrice.add(Items("₹15000 - ₹20000"))
-            mainPrice.add(Items("₹20000 - ₹30000"))
-            mainPrice.add(Items("₹30000 - ₹50000"))
-            mainPrice.add(Items("₹50000 - ₹100000"))
-            mainPrice.add(Items("₹100000 - ₹1000000"))
-            mainPrice.add(Items("₹1000000 - Above"))
+            mainPrice.add(Items(name = "₹1000 - ₹10000"))
+            mainPrice.add(Items(name = "₹10000 - ₹15000"))
+            mainPrice.add(Items(name = "₹15000 - ₹20000"))
+            mainPrice.add(Items(name = "₹20000 - ₹30000"))
+            mainPrice.add(Items(name = "₹30000 - ₹50000"))
+            mainPrice.add(Items(name = "₹50000 - ₹100000"))
+            mainPrice.add(Items(name = "₹100000 - ₹1000000"))
+            mainPrice.add(Items(name = "₹1000000 - Above"))
 
 
 
-            mainCategory.add(Items("RINGS",
+            mainCategory.add(Items(id = 19, parent_id = 18, name = "RINGS",
                 subCategory = arrayListOf(
-                    Items("All Rings", isAll = true),
-                    Items("Band"),
-                    Items("Casual"),
-                    Items("Cocktail"),
-                    Items("Engagement"),
-                    Items("Solitaire"))
+                    Items(id = -1, parent_id = 19, name = "All Rings", isAll = true),
+                    Items(id = 13, parent_id = 19, name = "Solitaire Rings"),
+                    Items(id = 14, parent_id = 19, name = "Everyday Wear"),
+                    Items(id = 15, parent_id = 19, name = "Cocktail Rings"),
+                    Items(id = 16, parent_id = 19, name = "Engagement Rings"),
+                    Items(id = 17, parent_id = 19, name = "Bands"))
             ))
-            mainCategory.add(Items("NECKLACE",
+            mainCategory.add(Items(id = 4, parent_id = 18, name = "EARRINGS",
                 subCategory = arrayListOf(
-                    Items("All Necklaces", isAll = true),
-                    Items("Long Necklace"),
-                    Items("Short Necklace"))
+                    Items(name = "All Earrings", isAll = true),
+                    Items(name = "Long Necklace"),
+                    Items(name = "Short Necklace"))
             ))
-            mainCategory.add(Items("PENDANTS",
+            mainCategory.add(Items(id = 5, parent_id = 18, name = "PENDANTS",
                 subCategory = arrayListOf(
-                    Items("All Pendants", isAll = true),
-                    Items("Alphabets"),
-                    Items("Zodiac"),
-                    Items("Casual"),
-                    Items("Everyday"))
+                    Items(name = "All Pendants", isAll = true),
+                    Items(name = "Alphabets"),
+                    Items(name = "Zodiac"),
+                    Items(name = "Casual"),
+                    Items(name = "Everyday"))
             ))
-            mainCategory.add(Items("BRACELETS",
+            mainCategory.add(Items(id = 6, parent_id = 18, name = "BRACELETS",
                 subCategory = arrayListOf(
-                    Items("All Bracelets", isAll = true),
-                    Items("Casual"),
-                    Items("Bangles"),
-                    Items("Occasion"),
-                    Items("Everyday"))
+                    Items(name = "All Bracelets", isAll = true),
+                    Items(name = "Casual"),
+                    Items(name = "Bangles"),
+                    Items(name = "Occasion"),
+                    Items(name = "Everyday"))
             ))
-            mainCategory.add(Items("MANGALSUTRA",
+            mainCategory.add(Items(id = 7, parent_id = 18, name = "MANGALSUTRA",
                 subCategory = arrayListOf(
-                    Items("All Mangalsutras", isAll = true),
-                    Items("Casual"),
-                    Items("Bangles"),
-                    Items("Everyday"))
+                    Items(name = "All Mangalsutras", isAll = true),
+                    Items(name = "Casual"),
+                    Items(name = "Bangles"),
+                    Items(name = "Everyday"))
             ))
-            mainCategory.add(Items("EARRINGS",
+            mainCategory.add(Items(id = 8, parent_id = 18, name = "NOSEPINS",
                 subCategory = arrayListOf(
-                    Items("All Earrings", isAll = true),
-                    Items("Balis"),
-                    Items("Studs"),
-                    Items("Drops"),
-                    Items("Hoops"))
+                    Items(name = "All Nosepins", isAll = true),
+                    Items(name = "Balis"),
+                    Items(name = "Studs"),
+                    Items(name = "Drops"),
+                    Items(name = "Hoops"))
+            ))
+            mainCategory.add(Items(id = 9, parent_id = 18, name = "SOLITAIRE",
+                subCategory = arrayListOf(
+                    Items(name = "All Solitaire", isAll = true),
+                    Items(name = "Balis"),
+                    Items(name = "Studs"),
+                    Items(name = "Drops"),
+                    Items(name = "Hoops"))
+            ))
+            mainCategory.add(Items(id = 10, parent_id = 18, name = "ACCESSORIES",
+                subCategory = arrayListOf(
+                    Items(name = "All Accessories", isAll = true),
+                    Items(name = "Balis"),
+                    Items(name = "Studs"),
+                    Items(name = "Drops"),
+                    Items(name = "Hoops"))
+            ))
+            mainCategory.add(Items(id = 11, parent_id = 18, name = "BANGLES",
+                subCategory = arrayListOf(
+                    Items(name = "All Bangles", isAll = true),
+                    Items(name = "Balis"),
+                    Items(name = "Studs"),
+                    Items(name = "Drops"),
+                    Items(name = "Hoops"))
+            ))
+            mainCategory.add(Items(id = 12, parent_id = 18, name = "WATCHES",
+                subCategory = arrayListOf(
+                    Items(name = "All Watches", isAll = true),
+                    Items(name = "Balis"),
+                    Items(name = "Studs"),
+                    Items(name = "Drops"),
+                    Items(name = "Hoops"))
             ))
 
 
 
-            mainMaterial.add(Items("Gold 14 K"))
-            mainMaterial.add(Items("Gold 18 K"))
-            mainMaterial.add(Items("Platinum"))
+            mainMaterial.add(Items(name = "Gold 14 K"))
+            mainMaterial.add(Items(name = "Gold 18 K"))
+            mainMaterial.add(Items(name = "Platinum"))
 
 
 
-            mainShopFor.add(Items("Men"))
-            mainShopFor.add(Items("Women"))
-            mainShopFor.add(Items("Kids"))
+            mainShopFor.add(Items(name = "Men"))
+            mainShopFor.add(Items(name = "Women"))
+            mainShopFor.add(Items(name = "Kids"))
         }
     }
 

@@ -155,17 +155,21 @@ class Home : Fragment() {
                 }
 
                 badgeCount.observe(viewLifecycleOwner) {
-                    mainThread {
-                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                   viewModel.getCartCount(){
+                       Log.e("TAG", "count: $this")
+                       menuBadge.text = "${this}"
+                       menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                   }
 
-                        var countBadge = 0
-                        userList?.forEach {
-                            countBadge += it.quantity
-                        }
-
-                        menuBadge.text = "${countBadge}"
-                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
-                    }
+//                    mainThread {
+//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                        var countBadge = 0
+//                        userList?.forEach {
+//                            countBadge += it.quantity
+//                        }
+//                        menuBadge.text = "${countBadge}"
+//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//                    }
                 }
 
             }

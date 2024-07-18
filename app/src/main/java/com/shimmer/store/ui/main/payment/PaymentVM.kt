@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.databinding.ItemPaymentProductsBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,15 +26,24 @@ class PaymentVM @Inject constructor() : ViewModel() {
 
 
     init {
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
     }
 
 
+    fun getCartCount(callBack: Int.() -> Unit){
+        viewModelScope.launch {
+            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            var countBadge = 0
+            userList?.forEach {
+                countBadge += it.quantity
+            }
+            callBack(countBadge)
+        }
+    }
 
 
-
-    val ordersAdapter = object : GenericAdapter<ItemPaymentProductsBinding, Items>() {
+    val ordersAdapter = object : GenericAdapter<ItemPaymentProductsBinding, CartModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -40,10 +53,13 @@ class PaymentVM @Inject constructor() : ViewModel() {
         @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemPaymentProductsBinding,
-            dataClass: Items,
+            dataClass: CartModel,
             position: Int
         ) {
             binding.apply {
+
+                textTitle.text = dataClass.name
+                textPrice.text = "Price: ₹"+dataClass.price + " x "+dataClass.quantity + " = ₹"+(dataClass.price?.times(dataClass.quantity.toDouble()))
 
                 ivIcon.singleClick {
                     binding.root.findNavController().navigate(R.id.action_payment_to_productDetail)

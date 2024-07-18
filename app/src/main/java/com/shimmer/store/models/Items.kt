@@ -5,6 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Items(
+    val id : Int = 0,
+    val parent_id : Int = 18,
     val name: String = "Item Name",
     var isSelected: Boolean = false,
     var isCollapse: Boolean = false,

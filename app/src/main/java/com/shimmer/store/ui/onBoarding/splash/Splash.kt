@@ -48,7 +48,7 @@ class Splash : Fragment() {
 //        MainActivity.mainActivity.get()?.callFragment(0)
 
 
-      //  handleSplashTime()
+        //  handleSplashTime()
 
 //        binding.avFromCode.setAnimation("drink.json")
         binding.avFromCode.playAnimation()
@@ -81,7 +81,11 @@ class Splash : Fragment() {
             put("username", "admin")
             put("password", "admin123")
         }
-
+//        viewModel.adminToken(obj) {
+//            Log.e("TAG", "ADMIN_TOKENAAAA: " + this)
+//            saveData(ADMIN_TOKEN, this)
+//            handleSplashTime()
+//        }
         readData(ADMIN_TOKEN) { savedToken ->
             if(savedToken == null){
                 viewModel.adminToken(obj){
@@ -94,6 +98,9 @@ class Splash : Fragment() {
                 handleSplashTime()
             }
         }
+
+
+
     }
 
 
@@ -106,20 +113,20 @@ class Splash : Fragment() {
             delay(1000)
             readData(LOGIN_DATA) { loginUser ->
 //                val fragmentInFrame = navHostFragment!!.getChildFragmentManager().getFragments().get(0)
-                if(loginUser == null){
+                if (loginUser == null) {
 //                    if (fragmentInFrame !is Start){
 //                    navHostFragment?.navController?.navigate(R.id.action_splash_to_login)
                     navHostFragment?.navController?.navigate(R.id.action_splash_to_login)
-                        //isHide.value = false
-                        MainActivity.mainActivity.get()!!.callBack(0)
+                    //isHide.value = false
+                    MainActivity.mainActivity.get()!!.callBack(0)
 //                    }
-                }else{
+                } else {
 //                    if (fragmentInFrame !is Dashboard){
 //                        if(!MainActivity.isBackStack){
                     navHostFragment?.navController?.navigate(R.id.action_splash_to_home)
 //                        }
-                        //isHide.value = true
-                        MainActivity.mainActivity.get()!!.callBack(1)
+                    //isHide.value = true
+                    MainActivity.mainActivity.get()!!.callBack(1)
 //                   }
                 }
             }
@@ -131,9 +138,6 @@ class Splash : Fragment() {
         _binding = null
         super.onDestroyView()
     }
-
-
-
 
 
 //    <com.google.android.material.appbar.MaterialToolbar

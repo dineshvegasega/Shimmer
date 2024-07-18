@@ -3,8 +3,6 @@ package com.shimmer.store.ui.main.products
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +16,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -29,7 +29,6 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
-import com.shimmer.store.utils.serializable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -108,11 +107,26 @@ class Products : Fragment() {
                     findNavController().navigate(R.id.action_products_to_cart)
                 }
 
-
                 badgeCount.observe(viewLifecycleOwner) {
-                    menuBadge.text = "$it"
-                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                    viewModel.getCartCount(){
+                        Log.e("TAG", "count: $this")
+                        menuBadge.text = "${this}"
+                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                    }
+//                    mainThread {
+//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                        var countBadge = 0
+//                        userList?.forEach {
+//                            countBadge += it.quantity
+//                        }
+//                        menuBadge.text = "${countBadge}"
+//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//                    }
                 }
+
+
+
+
             }
 
             var sortFilter = 0
@@ -209,13 +223,30 @@ class Products : Fragment() {
             }
 
 
+            var arrayField : ArrayList<String> = ArrayList()
+            var arrayValue : ArrayList<String> = ArrayList()
             var count = 0
             mainCategory.forEach {
                 it.subCategory.forEach { sub ->
                     if(sub.isSelected && sub.isAll == false){
-                        Log.e("TAG" , "it.isSelected ${sub.isSelected}")
+                        Log.e("TAG" , "it.isSelected ${sub.isSelected} ids:${sub.id}")
+//                        arrayField.add("searchCriteria[filter_groups][0][filters]["+count+"][field]")
+//                        arrayValue.add("searchCriteria[filter_groups][0][filters]["+count+"][value]")
                         count += 1
                     }
+                }
+            }
+
+
+            arrayField.add("searchCriteria[filter_groups][0][filters][0][field]")
+            arrayField.add("searchCriteria[filter_groups][0][filters][1][field]")
+
+            arrayValue.add("searchCriteria[filter_groups][0][filters][0][value]")
+            arrayValue.add("searchCriteria[filter_groups][0][filters][1][value]")
+
+            readData(ADMIN_TOKEN) {
+                viewModel.getProducts(it.toString(), view, arrayField, arrayValue){
+                    Log.e("TAG", "itAAA "+this)
                 }
             }
 

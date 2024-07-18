@@ -15,20 +15,24 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.databinding.ItemSizeBinding
 import com.shimmer.store.databinding.ProductDetailBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.uriToFile
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
@@ -44,24 +48,24 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
 
 
     init {
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"))
-        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item1.add(Items(name = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"))
+        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
 
 
 
         item2.add("1")
         item2.add("2")
 
-        item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item3.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
+        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
 
 
         arraySizes.add(ItemSizes(5 , 11.1))
@@ -88,6 +92,16 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
     }
 
 
+    fun getCartCount(callBack: Int.() -> Unit){
+        viewModelScope.launch {
+            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            var countBadge = 0
+            userList?.forEach {
+                countBadge += it.quantity
+            }
+            callBack(countBadge)
+        }
+    }
 
 
     val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, Items>() {

@@ -10,15 +10,18 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.AbcBinding
 import com.shimmer.store.databinding.HomeBinding
 import com.shimmer.store.databinding.ItemHomeCategoryBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
@@ -26,10 +29,12 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeVM @Inject constructor() : ViewModel() {
+
 
     var item1 : ArrayList<String> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
@@ -55,6 +60,16 @@ class HomeVM @Inject constructor() : ViewModel() {
     }
 
 
+    fun getCartCount(callBack: Int.() -> Unit){
+        viewModelScope.launch {
+            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            var countBadge = 0
+            userList?.forEach {
+                countBadge += it.quantity
+            }
+            callBack(countBadge)
+        }
+    }
 
 
     val categoryAdapter = object : GenericAdapter<ItemHomeCategoryBinding, Items>() {

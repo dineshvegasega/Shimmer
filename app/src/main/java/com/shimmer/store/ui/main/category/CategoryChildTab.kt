@@ -68,7 +68,10 @@ class CategoryChildTab (
             itemCategory4.textName.text = mainCategory[3].name
             itemCategory5.textName.text = mainCategory[4].name
             itemCategory6.textName.text = mainCategory[5].name
-
+            itemCategory7.textName.text = mainCategory[6].name
+            itemCategory8.textName.text = mainCategory[7].name
+            itemCategory9.textName.text = mainCategory[8].name
+            itemCategory10.textName.text = mainCategory[9].name
 
 
             rvListCategory1.adapter = viewModel.subCategoryAdapter1
@@ -79,6 +82,8 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.VISIBLE
                 rvListCategory2.visibility = View.GONE
                 rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 1
             }
 
@@ -89,6 +94,8 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.VISIBLE
                 rvListCategory2.visibility = View.GONE
                 rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 2
             }
 
@@ -102,6 +109,8 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.GONE
                 rvListCategory2.visibility = View.VISIBLE
                 rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 3
             }
 
@@ -112,6 +121,8 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.GONE
                 rvListCategory2.visibility = View.VISIBLE
                 rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 4
             }
 
@@ -125,6 +136,8 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.GONE
                 rvListCategory2.visibility = View.GONE
                 rvListCategory3.visibility = View.VISIBLE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 5
             }
 
@@ -135,8 +148,67 @@ class CategoryChildTab (
                 rvListCategory1.visibility = View.GONE
                 rvListCategory2.visibility = View.GONE
                 rvListCategory3.visibility = View.VISIBLE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.GONE
                 mainSelect = 6
             }
+
+
+
+            rvListCategory4.adapter = viewModel.subCategoryAdapter4
+            itemCategory7.linearLayout.singleClick {
+                rvListCategory4.adapter = viewModel.subCategoryAdapter4
+                viewModel.subCategoryAdapter4.notifyDataSetChanged()
+                viewModel.subCategoryAdapter4.submitList(mainCategory[6].subCategory)
+                rvListCategory1.visibility = View.GONE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.VISIBLE
+                rvListCategory5.visibility = View.GONE
+                mainSelect = 7
+            }
+
+            itemCategory8.linearLayout.singleClick {
+                rvListCategory4.adapter = viewModel.subCategoryAdapter4
+                viewModel.subCategoryAdapter4.notifyDataSetChanged()
+                viewModel.subCategoryAdapter4.submitList(mainCategory[7].subCategory)
+                rvListCategory1.visibility = View.GONE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.VISIBLE
+                rvListCategory5.visibility = View.GONE
+                mainSelect = 8
+            }
+
+
+
+
+            rvListCategory5.adapter = viewModel.subCategoryAdapter5
+            itemCategory9.linearLayout.singleClick {
+                rvListCategory5.adapter = viewModel.subCategoryAdapter5
+                viewModel.subCategoryAdapter5.notifyDataSetChanged()
+                viewModel.subCategoryAdapter5.submitList(mainCategory[8].subCategory)
+                rvListCategory1.visibility = View.GONE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.VISIBLE
+                mainSelect = 9
+            }
+
+            itemCategory10.linearLayout.singleClick {
+                rvListCategory5.adapter = viewModel.subCategoryAdapter5
+                viewModel.subCategoryAdapter5.notifyDataSetChanged()
+                viewModel.subCategoryAdapter5.submitList(mainCategory[9].subCategory)
+                rvListCategory1.visibility = View.GONE
+                rvListCategory2.visibility = View.GONE
+                rvListCategory3.visibility = View.GONE
+                rvListCategory4.visibility = View.GONE
+                rvListCategory5.visibility = View.VISIBLE
+                mainSelect = 10
+            }
+
+
         }
 
     }
@@ -160,5 +232,7 @@ class CategoryChildTab (
         viewModel.subCategoryAdapter1.notifyDataSetChanged()
         viewModel.subCategoryAdapter2.notifyDataSetChanged()
         viewModel.subCategoryAdapter3.notifyDataSetChanged()
+        viewModel.subCategoryAdapter4.notifyDataSetChanged()
+        viewModel.subCategoryAdapter5.notifyDataSetChanged()
     }
 }

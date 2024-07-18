@@ -11,10 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.FaqBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,9 +59,23 @@ class Faq : Fragment() {
 
 
                 badgeCount.observe(viewLifecycleOwner) {
-                    menuBadge.text = "$it"
-                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                    viewModel.getCartCount(){
+                        Log.e("TAG", "count: $this")
+                        menuBadge.text = "${this}"
+                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                    }
+//                    mainThread {
+//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                        var countBadge = 0
+//                        userList?.forEach {
+//                            countBadge += it.quantity
+//                        }
+//                        menuBadge.text = "${countBadge}"
+//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//                    }
                 }
+
+
             }
 
 

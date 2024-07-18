@@ -127,7 +127,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
                 }
 
-
+                badgeCount.value = 0
                 notifyItemChanged(position)
             }
 
@@ -140,6 +140,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 mainThread {
                     val newUser = CartModel(product_id = 1, name = "test", currentTime = System.currentTimeMillis())
                     db?.cartDao()?.insertAll(newUser)
+                    badgeCount.value = 0
                     it.findNavController().navigate(R.id.action_products_to_cart)
                 }
             }

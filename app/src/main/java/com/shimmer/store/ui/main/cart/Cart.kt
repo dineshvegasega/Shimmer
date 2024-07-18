@@ -64,31 +64,40 @@ class Cart : Fragment() {
             }
 
 
+            viewModel.cartMutableList.observe(viewLifecycleOwner) {
+                mainThread {
+                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+                    binding.apply {
+                        rvList.setHasFixedSize(true)
+                        rvList.adapter = viewModel.cartAdapter
+                        viewModel.cartAdapter.notifyDataSetChanged()
+                        viewModel.cartAdapter.submitList(userList)
+                    }
 
+                    if (!userList.isNullOrEmpty()){
+                        upperLayout.visibility = View.VISIBLE
+                        filterLayout.visibility = View.VISIBLE
+                    } else {
+                        upperLayout.visibility = View.GONE
+                        filterLayout.visibility = View.GONE
+                    }
 
-            mainThread {
-                val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-                binding.apply {
-                    rvList.setHasFixedSize(true)
-                    rvList.adapter = viewModel.cartAdapter
-                    viewModel.cartAdapter.notifyDataSetChanged()
-                    viewModel.cartAdapter.submitList(userList)
+                    userList?.forEach {
+                        Log.e(
+                            "TAG",
+                            "onViewCreated: " + it.name + " it.currentTime " + it.currentTime
+                        )
+                    }
                 }
-
-
-
-            userList?.forEach {
-                Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
             }
-            }
+
+
 
             layoutProceedToPayment.singleClick {
                 findNavController().navigate(R.id.action_cart_to_payment)
             }
         }
     }
-
-
 
 
 }

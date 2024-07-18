@@ -14,13 +14,16 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.main.productDetail.ProductDetail.Companion.pagerAdapter
 import com.shimmer.store.ui.main.productDetail.ProductDetailPagerAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
@@ -72,8 +75,20 @@ class Category : Fragment() {
 
 
                 badgeCount.observe(viewLifecycleOwner) {
-                    menuBadge.text = "$it"
-                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                    viewModel.getCartCount(){
+                        Log.e("TAG", "count: $this")
+                        menuBadge.text = "${this}"
+                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                    }
+//                    mainThread {
+//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                        var countBadge = 0
+//                        userList?.forEach {
+//                            countBadge += it.quantity
+//                        }
+//                        menuBadge.text = "${countBadge}"
+//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//                    }
                 }
 
                     val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)

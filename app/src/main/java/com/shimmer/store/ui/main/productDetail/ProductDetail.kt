@@ -40,6 +40,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.ioThread
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -198,8 +199,20 @@ class ProductDetail : Fragment() , CallBackListener {
 
 
                 badgeCount.observe(viewLifecycleOwner) {
-                    menuBadge.text = "$it"
-                    menuBadge.visibility = if (it != 0) View.VISIBLE else View.GONE
+                    viewModel.getCartCount(){
+                        Log.e("TAG", "count: $this")
+                        menuBadge.text = "${this}"
+                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                    }
+//                    mainThread {
+//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                        var countBadge = 0
+//                        userList?.forEach {
+//                            countBadge += it.quantity
+//                        }
+//                        menuBadge.text = "${countBadge}"
+//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//                    }
                 }
             }
 
@@ -223,10 +236,11 @@ class ProductDetail : Fragment() , CallBackListener {
                         Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
                     }
                 }
-
+                badgeCount.value = 0
             }
 
             btByNow.singleClick {
+                badgeCount.value = 0
                 findNavController().navigate(R.id.action_productDetail_to_cart)
             }
 

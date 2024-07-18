@@ -61,7 +61,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/roboto_medium"
-                android:text="@string/first_nameStar"
+                android:text="@string/first_name"
                 android:visibility="visible"
                 android:layout_marginTop="@dimen/_5sdp"
                 />
@@ -76,6 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textFNTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
 
@@ -91,7 +92,7 @@
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/last_nameStar"
+                android:text="@string/last_name"
                 android:visibility="visible"
                 />
 
@@ -106,6 +107,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textLNTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
 
@@ -136,6 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
 
@@ -166,6 +169,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -195,6 +199,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
 
@@ -226,6 +231,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textStateTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
 
@@ -256,6 +262,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textPinCodeTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
+                android:visibility="gone"
                 />
 
             <View
