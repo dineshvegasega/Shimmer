@@ -16,14 +16,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import com.shimmer.store.R
 import com.shimmer.store.databinding.MainActivityBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.db.AppDatabase
 import com.shimmer.store.networking.ConnectivityManager
 import com.shimmer.store.ui.main.category.Category
@@ -33,6 +36,7 @@ import com.shimmer.store.ui.main.profile.Profile
 import com.shimmer.store.utils.getDensityName
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 import java.lang.ref.WeakReference
 
 
@@ -381,5 +385,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+
+
+
+
+    fun adminToken() {
+        val obj: JSONObject = JSONObject().apply {
+            put("username", "admin")
+            put("password", "admin123")
+        }
+        viewModel.adminToken(obj){
+            Log.e("TAG", "ADMIN_TOKENAAAA: "+this)
+            saveData(ADMIN_TOKEN, this)
+
+            val navOptions: NavOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.navigation_bar, true)
+                .build()
+            runOnUiThread {
+                navHostFragment?.navController?.navigate(R.id.login, null, navOptions)
+            }
+        }
+    }
 }
 

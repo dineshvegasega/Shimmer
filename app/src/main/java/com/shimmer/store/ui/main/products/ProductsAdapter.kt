@@ -1,6 +1,7 @@
 package com.shimmer.store.ui.main.products
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.shimmer.store.databinding.ItemProductBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.ioThread
@@ -26,7 +28,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var counter = 0
 
-    var itemModels: MutableList<Items> = ArrayList()
+    var itemModels: MutableList<ItemProduct> = ArrayList()
 
 
     lateinit var itemRowBinding2: ItemProductBinding
@@ -95,40 +97,46 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(obj: Any?, position: Int) {
             itemRowBinding.setVariable(BR._all, obj)
             itemRowBinding.executePendingBindings()
-            val model = obj as Items
+            val model = obj as ItemProduct
+
+            itemRowBinding.textTitle.text = model.name
+            itemRowBinding.textPrice.text = "₹"+model.price
+
 
             itemRowBinding.ivIcon.setOnClickListener {
-                it.findNavController().navigate(R.id.action_products_to_productsDetail)
+                it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
+                    putString("sku", model.sku)
+                })
             }
 
             itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,R.color.app_color) else ContextCompat.getColorStateList(itemRowBinding.root.context,R.color._9A9A9A)
 
 
-
-
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected
 
-                val filteredNot = itemModels.filter { it.isSelected == true }
-                badgeCount.value = filteredNot.size
+//                val filteredNot = itemModels.filter { it.isSelected == true }
+//                badgeCount.value = filteredNot.size
 
-                ioThread {
-                    val newUser = CartModel(product_id = 4, name = "test4", price = 20.0, quantity = 1)
+                mainThread {
+                    val newUser = CartModel(product_id = model.id, name = model.name, price = model.price, quantity = 1, currentTime = System.currentTimeMillis())
                     if(model.isSelected == true){
                         db?.cartDao()?.insertAll(newUser)
-                      // Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
                     } else {
                         db?.cartDao()?.deleteById(newUser.product_id!!)
                     }
 
-                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-                    userList?.forEach {
-                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.price)
-                    }
+//                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                    userList?.forEach {
+//                        Log.e("TAG", "onViewCreatedBB: "+it.name + " it.currentTime "+it.price)
+//                    }
+
+
+                    badgeCount.value = true
+                    notifyItemChanged(position)
                 }
 
-                badgeCount.value = 0
-                notifyItemChanged(position)
+
             }
 
 
@@ -138,9 +146,9 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             itemRowBinding.btAddCart.setOnClickListener {
                 mainThread {
-                    val newUser = CartModel(product_id = 1, name = "test", currentTime = System.currentTimeMillis())
+                    val newUser = CartModel(product_id = model.id, name = model.name, price = model.price, quantity = 1, currentTime = System.currentTimeMillis())
                     db?.cartDao()?.insertAll(newUser)
-                    badgeCount.value = 0
+                    badgeCount.value = true
                     it.findNavController().navigate(R.id.action_products_to_cart)
                 }
             }
@@ -158,7 +166,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addAllSearch(movies: MutableList<Items>) {
+    fun addAllSearch(movies: MutableList<ItemProduct>) {
         itemModels.clear()
         itemModels.addAll(movies)
 //        for(movie in movies){
@@ -167,13 +175,13 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun addAll(movies: MutableList<Items>) {
+    fun addAll(movies: MutableList<ItemProduct>) {
         for(movie in movies){
             add(movie)
         }
     }
 
-    fun add(moive: Items) {
+    fun add(moive: ItemProduct) {
         itemModels.add(moive)
         notifyItemInserted(itemModels.size - 1)
     }
@@ -196,7 +204,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
 
-    fun submitData(itemMainArray: ArrayList<Items>) {
+    fun submitData(itemMainArray: ArrayList<ItemProduct>) {
         itemModels = itemMainArray
     }
 

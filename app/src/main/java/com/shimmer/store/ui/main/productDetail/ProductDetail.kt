@@ -26,6 +26,8 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.DialogSizesBinding
 import com.shimmer.store.databinding.ProductDetailBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.Items
@@ -83,49 +85,75 @@ class ProductDetail : Fragment() , CallBackListener {
 
         binding.apply {
 
-            pagerAdapter = ProductDetailPagerAdapter(requireActivity(), viewModel.item1)
-            rvList1.offscreenPageLimit = 1
-            rvList1.overScrollMode = OVER_SCROLL_NEVER
-            rvList1.adapter = pagerAdapter
-            rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            Log.e("TAG", "videoList "+viewModel.item1.size)
-            (rvList1.getRecyclerView()
-                .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
-                false
 
-//            TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-//            }.attach()
+            readData(ADMIN_TOKEN) { token ->
+                viewModel.getProductDetail(token.toString(), view, "SRI0001G14YG11") {
+                    Log.e("TAG", "getProductDetailAA " + this.id)
 
-            viewModel.indicator(binding, viewModel.item1, 1)
+                    var images =  this.media_gallery_entries
 
-            rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageScrolled(
-                    position: Int,
-                    positionOffset: Float,
-                    positionOffsetPixels: Int
-                ) {
-                    super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
+                    rvList1.offscreenPageLimit = 1
+                    rvList1.overScrollMode = OVER_SCROLL_NEVER
+                    rvList1.adapter = pagerAdapter
+                    rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                    Log.e("TAG", "videoList "+viewModel.item1.size)
+                    (rvList1.getRecyclerView()
+                        .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
+                        false
+
+                    viewModel.indicator(binding, this.media_gallery_entries, 1)
+
+                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageScrolled(
+                            position: Int,
+                            positionOffset: Float,
+                            positionOffsetPixels: Int
+                        ) {
+                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
 //                    if (pageChangeValue != position) {
 //                        Log.e("TAG", "positionA" + position)
 //                    }
 //                    pageChangeValue = position
-                }
+                        }
 
-                override fun onPageSelected(position: Int) {
-                    super.onPageSelected(position)
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
 //                    adapter1.updatePosition(position)
-                    viewModel.indicator(binding, viewModel.item1, position)
-                }
+                            viewModel.indicator(binding, images, position)
+                        }
 
-                override fun onPageScrollStateChanged(state: Int) {
-                    super.onPageScrollStateChanged(state)
-                    Log.e("TAG", "state" + state)
+                        override fun onPageScrollStateChanged(state: Int) {
+                            super.onPageScrollStateChanged(state)
+                            Log.e("TAG", "state" + state)
 //                    if (state == 0) {
 //                    adapter1.notifyItemChanged(adapter1.counter)
 //                        onClickItem(pageChangeValue)
 //                    }
+                        }
+                    })
+
+
+
+
+                    val newUser = CartModel(product_id = this.id, name = this.name, price = this.price, quantity = 1, currentTime = System.currentTimeMillis())
+                    btAddToCart.singleClick {
+                        ioThread {
+                            db?.cartDao()?.insertAll(newUser)
+                            badgeCount.value = true
+                        }
+                    }
+
+                    btAddToCart.singleClick {
+                        ioThread {
+                            db?.cartDao()?.insertAll(newUser)
+                            badgeCount.value = true
+                            findNavController().navigate(R.id.action_productDetail_to_cart)
+                        }
+                    }
                 }
-            })
+            }
+
 
             viewModel.colors(binding, 1)
 
@@ -138,7 +166,6 @@ class ProductDetail : Fragment() , CallBackListener {
             ivGold.singleClick {
                 viewModel.colors(binding, 3)
             }
-
             btRingSize.singleClick {
                 openDialogSize()
             }
@@ -204,45 +231,9 @@ class ProductDetail : Fragment() , CallBackListener {
                         menuBadge.text = "${this}"
                         menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
                     }
-//                    mainThread {
-//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                        var countBadge = 0
-//                        userList?.forEach {
-//                            countBadge += it.quantity
-//                        }
-//                        menuBadge.text = "${countBadge}"
-//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
-//                    }
                 }
             }
 
-            btAddToCart.singleClick {
-                badgeCount.value = 1
-                ioThread {
-                    Log.e("TAG", "onViewCreated: ReaDY")
-
-                    val newUser = CartModel(product_id = 1, name = "test", price = 20.0, quantity = 1)
-//                    Log.e("TAG", "onViewCreated: ReaDY2")
-
-//                    if(model.isSelected == true){
-                        db?.cartDao()?.insertAll(newUser)
-//                    } else {
-//                        db?.cartDao()?.deleteById(1)
-//                    }
-//                    Log.e("TAG", "onViewCreated: ReaDY3")
-
-                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-                    userList?.forEach {
-                        Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.currentTime)
-                    }
-                }
-                badgeCount.value = 0
-            }
-
-            btByNow.singleClick {
-                badgeCount.value = 0
-                findNavController().navigate(R.id.action_productDetail_to_cart)
-            }
 
             adapter2 = RelatedProductAdapter()
             adapter2.submitData(viewModel.item1)

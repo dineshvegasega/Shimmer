@@ -23,10 +23,12 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import com.shimmer.store.utils.updatePagerHeightForChild
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class Category : Fragment() {
@@ -60,7 +62,7 @@ class Category : Fragment() {
             }
 
 
-                topBar.apply {
+            topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
                 ivSearch.visibility = View.VISIBLE
                 ivCart.visibility = View.VISIBLE
@@ -75,64 +77,62 @@ class Category : Fragment() {
 
 
                 badgeCount.observe(viewLifecycleOwner) {
-                    viewModel.getCartCount(){
+                    viewModel.getCartCount() {
                         Log.e("TAG", "count: $this")
                         menuBadge.text = "${this}"
                         menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
                     }
-//                    mainThread {
-//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                        var countBadge = 0
-//                        userList?.forEach {
-//                            countBadge += it.quantity
-//                        }
-//                        menuBadge.text = "${countBadge}"
-//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
-//                    }
                 }
 
+                viewModel.show()
+                mainThread {
                     val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
-                    pagerAdapter.notifyDataSetChanged()
+//                    pagerAdapter.notifyDataSetChanged()
                     rvList1.offscreenPageLimit = 3
                     rvList1.overScrollMode = OVER_SCROLL_NEVER
+
                     rvList1.adapter = pagerAdapter
+                    delay(200)
+
                     rvList1.setPageTransformer { page, position ->
                         rvList1.updatePagerHeightForChild(page)
                     }
                     TabLayoutMediator(tabLayout, rvList1) { tab, position ->
                         tab.text = mainShopFor[position].name
                     }.attach()
+                    viewModel.hide()
+                }
 
 
-                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                        override fun onPageScrolled(
-                            position: Int,
-                            positionOffset: Float,
-                            positionOffsetPixels: Int
-                        ) {
-                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                    if (pageChangeValue != position) {
-//                        Log.e("TAG", "positionA" + position)
-//                    }
-//                    pageChangeValue = position
-                        }
-
-                        override fun onPageSelected(position: Int) {
-                            super.onPageSelected(position)
-//                    adapter1.updatePosition(position)
-//                            viewModel.indicator(binding, viewModel.item1, position)
-//                            pagerAdapter.notifyDataSetChanged()
-                        }
-
-                        override fun onPageScrollStateChanged(state: Int) {
-                            super.onPageScrollStateChanged(state)
-                            Log.e("TAG", "state" + state)
-//                    if (state == 0) {
-//                    adapter1.notifyItemChanged(adapter1.counter)
-//                        onClickItem(pageChangeValue)
-//                    }
-                        }
-                    })
+//                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+//                        override fun onPageScrolled(
+//                            position: Int,
+//                            positionOffset: Float,
+//                            positionOffsetPixels: Int
+//                        ) {
+//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+////                    if (pageChangeValue != position) {
+////                        Log.e("TAG", "positionA" + position)
+////                    }
+////                    pageChangeValue = position
+//                        }
+//
+//                        override fun onPageSelected(position: Int) {
+//                            super.onPageSelected(position)
+////                    adapter1.updatePosition(position)
+////                            viewModel.indicator(binding, viewModel.item1, position)
+////                            pagerAdapter.notifyDataSetChanged()
+//                        }
+//
+//                        override fun onPageScrollStateChanged(state: Int) {
+//                            super.onPageScrollStateChanged(state)
+//                            Log.e("TAG", "state" + state)
+////                    if (state == 0) {
+////                    adapter1.notifyItemChanged(adapter1.counter)
+////                        onClickItem(pageChangeValue)
+////                    }
+//                        }
+//                    })
             }
         }
 

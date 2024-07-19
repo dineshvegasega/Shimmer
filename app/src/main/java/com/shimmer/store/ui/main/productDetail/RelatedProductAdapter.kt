@@ -102,8 +102,8 @@ class RelatedProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected
 
-                val filteredNot = itemModels.filter { it.isSelected == true }
-                badgeCount.value = filteredNot.size
+//                val filteredNot = itemModels.filter { it.isSelected == true }
+                badgeCount.value = true
 
                 notifyItemChanged(position)
             }

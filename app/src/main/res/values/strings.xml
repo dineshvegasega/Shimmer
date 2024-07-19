@@ -77,7 +77,7 @@
     <string name="search_by_product">Search By Product</string>
     <string name="search_by_sku">Search By SKU</string>
     <string name="are_your_sure_want_to_logout">Are you sure, You want to Logout?</string>
-
+    <string name="sessionExpired">Session Expired</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
 

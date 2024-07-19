@@ -16,6 +16,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
@@ -25,26 +27,35 @@ import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.products.ItemProduct
+import com.shimmer.store.models.products.ItemProductRoot
+import com.shimmer.store.models.products.MediaGalleryEntry
+import com.shimmer.store.networking.ApiInterface
+import com.shimmer.store.networking.CallHandler
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.uriToFile
+import com.shimmer.store.utils.sessionExpired
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class ProductDetailVM @Inject constructor() : ViewModel() {
+class ProductDetailVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
     var item1 : ArrayList<Items> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<Items> = ArrayList()
 
     var arraySizes : ArrayList<ItemSizes> = ArrayList()
-
 
 
     init {
@@ -102,6 +113,77 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
             callBack(countBadge)
         }
     }
+
+
+
+
+
+    fun getProductDetail(adminToken: String, view: View, skuId: String, callBack: ItemProduct.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.prodcutsDetail("Bearer " +adminToken, storeWebUrl, skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+
+                                viewModelScope.launch {
+//                                    mMineUserEntity.forEach {items ->
+                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
+                                        userList?.forEach { user ->
+                                            if (mMineUserEntity.id == user.product_id) {
+                                                mMineUserEntity.apply {
+                                                    isSelected = true
+                                                }
+//                                                Log.e( "TAG", "YYYYYYYYY: " )
+                                            } else {
+                                                mMineUserEntity.apply {
+                                                    isSelected = false
+                                                }
+//                                                Log.e( "TAG", "NNNNNNNNNN: " )
+                                            }
+                                        }
+//                                    }
+
+
+                                        callBack(mMineUserEntity)
+
+                                }
+
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else if(message.contains("The product that was requested doesn't exist")){
+                            showSnackBar(message)
+                        } else {
+                            sessionExpired()
+                        }
+
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
 
 
     val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, Items>() {
@@ -177,7 +259,7 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    public fun indicator(binding: ProductDetailBinding, arrayList: ArrayList<Items>, current: Int) {
+    public fun indicator(binding: ProductDetailBinding, arrayList: ArrayList<MediaGalleryEntry>, current: Int) {
         val views : ArrayList<View> = ArrayList()
         views.add(binding.indicatorLayout.view1)
         views.add(binding.indicatorLayout.view2)
@@ -205,7 +287,7 @@ class ProductDetailVM @Inject constructor() : ViewModel() {
             Log.e("TAG", " index "+index+" size "+arrayList.size+" current "+current)
             if (index <= (arrayList.size -1)){
                 it.visibility = VISIBLE
-                if (arrayList[index].name.endsWith(".mp4")){
+                if (arrayList[index].file.endsWith(".mp4")){
                     it.setBackgroundResource(R.drawable.ic_triangle_right)
                 } else {
                     it.setBackgroundResource(R.drawable.bg_all_round_black)

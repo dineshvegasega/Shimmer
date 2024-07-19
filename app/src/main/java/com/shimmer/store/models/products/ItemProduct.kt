@@ -1,7 +1,25 @@
 package com.shimmer.store.models.products
 
 data class ItemProduct(
-    val items: List<Item>,
-    val search_criteria: SearchCriteria,
-    val total_count: Int
+    val attribute_set_id: Int,
+    val created_at: String,
+    val custom_attributes: ArrayList<CustomAttribute>,
+    val extension_attributes: ExtensionAttributes,
+    val id: Int,
+    val media_gallery_entries: ArrayList<MediaGalleryEntry>,
+    val name: String,
+    val options: List<Any>,
+    val price: Double,
+    val product_links: List<Any>,
+    val sku: String,
+    val status: Int,
+    val tier_prices: List<Any>,
+    val type_id: String,
+    val updated_at: String,
+    val visibility: Int,
+    val weight: Double,
+    var isSelected: Boolean = false,
+    var isCollapse: Boolean = false,
+    var isAll: Boolean = false,
+    var quantity: Int = 0,
 )

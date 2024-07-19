@@ -1,5 +1,8 @@
 package com.shimmer.store.ui.main.category
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +15,12 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCategoryRoundBinding
 import com.shimmer.store.databinding.ItemFaqBinding
 import com.shimmer.store.databinding.ItemHomeCategoryBinding
+import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.main.category.CategoryChildTab.Companion.mainSelect
+import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
@@ -33,7 +38,36 @@ class CategoryVM @Inject constructor() : ViewModel() {
     var item3: ArrayList<String> = ArrayList()
 
 
+    var alertDialog: AlertDialog? = null
+
+
+    fun show() {
+        viewModelScope.launch {
+            if (alertDialog != null) {
+                alertDialog?.dismiss()
+                alertDialog?.show()
+            }
+        }
+    }
+
+    fun hide() {
+        viewModelScope.launch {
+            if (alertDialog != null) {
+                alertDialog?.dismiss()
+            }
+        }
+    }
+
+
     init {
+        val alert = AlertDialog.Builder(MainActivity.activity.get())
+        val binding =
+            LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
+        alert.setView(binding.root)
+        alert.setCancelable(false)
+        alertDialog = alert.create()
+        alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
 //        item1.add(Items())
 //        item1.add(Items())
 //        item1.add(Items())

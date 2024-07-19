@@ -125,7 +125,6 @@ class Profile : Fragment() {
                     }
                     .setCancelable(false)
                     .show()
-
             }
 
         }

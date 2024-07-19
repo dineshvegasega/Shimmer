@@ -9,6 +9,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface ApiInterface {
 
@@ -38,23 +39,19 @@ interface ApiInterface {
         @Path("id") id: String,
     ): Response<JsonElement>
 
+
     @GET("{id}"+PRODUCTS)
     suspend fun prodcuts(
-        @Header("Authorization") authHeader : String,
+        @Header("Authorization") authHeader: String,
         @Path("id") id: String,
-        @Query("") field: ArrayList<String>,
-//        @FieldMap parms : Map<String, String>,
-//        @Query("searchCriteria[filter_groups][0][filters]") field: ArrayList<String>,
-//        @Query("searchCriteria[filter_groups][0][filters]") value: ArrayList<String>,
-
-//        @Query("searchCriteria[filter_groups][0][filters][0][field]") field: ArrayList<String>,
-//        @Query("searchCriteria[filter_groups][0][filters][0][value]") value: ArrayList<String>
+        @QueryMap parms: Map<String, String>,
     ): Response<JsonElement>
 
-    @GET("{id}"+PRODUCTS)
-    suspend fun list(
+
+    @GET("{id}"+PRODUCTS_DETAIL+"{ids}")
+    suspend fun prodcutsDetail(
         @Header("Authorization") authHeader : String,
-                      @Path("id") id: String,
-                      @Query("searchCriteria[filter_groups][0][filters]") vararg categories: String?):
-            Response<JsonElement>
+        @Path("id") id: String,
+        @Path("ids") ids: String,
+    ): Response<JsonElement>
 }

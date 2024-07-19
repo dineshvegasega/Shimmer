@@ -2,10 +2,10 @@ package com.shimmer.store.networking
 
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 
-
+//https://shop.vegasega.com/media/catalog/product/u/r/ur01473-yg0000_4_lar.jpg
 const val BASE_URL = "https://shop.vegasega.com/"
 const val URL = BASE_URL+"rest/"
-
+const val IMAGE_URL = BASE_URL+"media/catalog/product"
 
 const val ADMIN_TOKEN = "V1/integration/admin/token"
 const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"
@@ -13,6 +13,7 @@ const val CUSTOMER_DETAIL = "/V1/customers/me"
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
 const val PRODUCTS = "/V1/products/?"
+const val PRODUCTS_DETAIL = "/V1/products/"
 
 const val mobile_no = "mobile_no"
 const val slug = "slug"

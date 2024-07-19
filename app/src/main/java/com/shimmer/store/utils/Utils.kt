@@ -41,6 +41,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager.widget.ViewPager
@@ -55,6 +56,10 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import com.shimmer.store.R
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
+import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
@@ -885,4 +890,26 @@ inline fun <reified T : java.io.Serializable> Bundle.serializable(key: String): 
 inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
     Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(key, T::class.java)
     else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
+}
+
+
+
+
+fun sessionExpired(){
+    MaterialAlertDialogBuilder(MainActivity.mainActivity.get()!!, R.style.LogoutDialogTheme)
+        .setTitle(MainActivity.mainActivity.get()!!.resources.getString(R.string.app_name))
+        .setMessage(MainActivity.mainActivity.get()!!.resources.getString(R.string.sessionExpired))
+        .setPositiveButton(MainActivity.mainActivity.get()!!.resources.getString(R.string.yes)) { dialog, _ ->
+            dialog.dismiss()
+            removeKey(LOGIN_DATA) {}
+            removeKey(STORE_TOKEN) {}
+            clearDataStore { }
+//            findNavController().navigate(R.id.action_profile_to_login)
+            MainActivity.mainActivity.get()!!.adminToken()
+        }
+        .setNegativeButton(MainActivity.mainActivity.get()!!.resources.getString(R.string.cancel)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        .setCancelable(false)
+        .show()
 }

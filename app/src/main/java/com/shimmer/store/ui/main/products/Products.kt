@@ -18,7 +18,10 @@ import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
@@ -28,6 +31,7 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.utils.mainThread
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -107,24 +111,13 @@ class Products : Fragment() {
                     findNavController().navigate(R.id.action_products_to_cart)
                 }
 
-                badgeCount.observe(viewLifecycleOwner) {
-                    viewModel.getCartCount(){
-                        Log.e("TAG", "count: $this")
+                badgeCount.observe(viewLifecycleOwner) { badgeCount ->
+                    viewModel.getCartCount() {
+                        Log.e("TAG", "countAA: $this")
                         menuBadge.text = "${this}"
                         menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
                     }
-//                    mainThread {
-//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                        var countBadge = 0
-//                        userList?.forEach {
-//                            countBadge += it.quantity
-//                        }
-//                        menuBadge.text = "${countBadge}"
-//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
-//                    }
                 }
-
-
 
 
             }
@@ -154,17 +147,19 @@ class Products : Fragment() {
                         dialog.dismiss()
                     }
 
-                    when(sortFilter){
+                    when (sortFilter) {
                         1 -> {
                             textDefaultSort.setTypeface(typefaceroboto_medium)
                             textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                             textPriceHighToLowSort.setTypeface(typefaceroboto_light)
                         }
+
                         2 -> {
                             textDefaultSort.setTypeface(typefaceroboto_light)
                             textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
                             textPriceHighToLowSort.setTypeface(typefaceroboto_light)
                         }
+
                         3 -> {
                             textDefaultSort.setTypeface(typefaceroboto_light)
                             textPriceLowToHighSort.setTypeface(typefaceroboto_light)
@@ -223,59 +218,104 @@ class Products : Fragment() {
             }
 
 
-            var arrayField : ArrayList<String> = ArrayList()
-            var arrayValue : ArrayList<String> = ArrayList()
+//            val hobbies = mapOf("searchCriteria[filter_groups][0][filters][0][field]" to "category_id",
+//                "searchCriteria[filter_groups][0][filters][0][value]" to "13",
+//            )
+
+            val emptyMap = mutableMapOf<String, String>()
             var count = 0
             mainCategory.forEach {
                 it.subCategory.forEach { sub ->
-                    if(sub.isSelected && sub.isAll == false){
-                        Log.e("TAG" , "it.isSelected ${sub.isSelected} ids:${sub.id}")
-//                        arrayField.add("searchCriteria[filter_groups][0][filters]["+count+"][field]")
-//                        arrayValue.add("searchCriteria[filter_groups][0][filters]["+count+"][value]")
+                    if (sub.isSelected && sub.isAll == false) {
+                        Log.e("TAG", "it.isSelected ${sub.isSelected} ids:${sub.id}")
+                        emptyMap["searchCriteria[filter_groups][0][filters][" + count + "][field]"] =
+                            "category_id"
+                        emptyMap["searchCriteria[filter_groups][0][filters][" + count + "][value]"] =
+                            "${sub.id}"
                         count += 1
                     }
                 }
             }
 
 
-            arrayField.add("searchCriteria[filter_groups][0][filters][0][field]")
-            arrayField.add("searchCriteria[filter_groups][0][filters][1][field]")
+            //            adapter2.submitData(viewModel.item1)
+            adapter2.notifyDataSetChanged()
+            binding.rvList2.adapter = adapter2
 
-            arrayValue.add("searchCriteria[filter_groups][0][filters][0][value]")
-            arrayValue.add("searchCriteria[filter_groups][0][filters][1][value]")
+            readData(ADMIN_TOKEN) { token ->
+                viewModel.getProducts(token.toString(), view, emptyMap) {
+                    Log.e("TAG", "itAAA " + this)
 
-            readData(ADMIN_TOKEN) {
-                viewModel.getProducts(it.toString(), view, arrayField, arrayValue){
-                    Log.e("TAG", "itAAA "+this)
+//                    val filteredNot = this.items.filter {
+//                        mainThread {
+//                            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+//                            userList?.forEach { user ->
+//                                Log.e("TAG", "onViewCreated: "+user.name + " it.currentTime "+user.price)
+//                            }
+//                        }
+//                        it.isSelected == true
+//                    }
+
+//                    this.items.forEach {items ->
+//                        mainThread {
+//                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                            userList?.forEach { user ->
+//                                if (items.id == user.product_id) {
+//                                    items.apply {
+//                                        isSelected = true
+//                                    }
+//
+//                                    Log.e( "TAG", "YYYYYYYYY: " )
+//                                } else {
+//                                    items.apply {
+//                                        isSelected = false
+//                                    }
+//                                    Log.e( "TAG", "NNNNNNNNNN: " )
+//                                }
+////                                Log.e( "TAG", "AAAAAAA: " + items.name + " BBBBBBB " + items.id + " CCCCCCC " + user.product_id )
+//                            }
+//                        }
+//                    }
+
+
+//                    this.items.forEach {
+//                        Log.e( "TAG", "CCCCCCCCCCC: " + it.isSelected )
+//                    }
+//                    mainThread {
+//                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                        userList?.forEach { user ->
+//                            Log.e(
+//                                "TAG",
+//                                "onViewCreated: " + user.name + " it.currentTime " + user.price
+//                            )
+//                        }
+//
+                        adapter2.submitData(this.items)
+                        adapter2.notifyDataSetChanged()
+//                    }
+
                 }
             }
 
             mainPrice.forEach {
-                if(it.isSelected){
+                if (it.isSelected) {
                     count += 1
                 }
             }
 
             mainMaterial.forEach {
-                if(it.isSelected){
+                if (it.isSelected) {
                     count += 1
                 }
             }
 
             mainShopFor.forEach {
-                if(it.isSelected){
+                if (it.isSelected) {
                     count += 1
                 }
             }
-            Log.e("TAG" , "count ${count}")
-            textFilter.text = if(count == 0) "Filter" else "Filter ($count)"
-
-
-            adapter2.submitData(viewModel.item1)
-            adapter2.notifyDataSetChanged()
-            binding.rvList2.adapter = adapter2
-
-
+            Log.e("TAG", "count ${count}")
+            textFilter.text = if (count == 0) "Filter" else "Filter ($count)"
 
 
         }
