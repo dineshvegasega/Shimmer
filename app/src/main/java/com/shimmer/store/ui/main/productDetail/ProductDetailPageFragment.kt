@@ -80,34 +80,7 @@ class ProductDetailPageFragment(
         binding!!.playerView.player!!.playWhenReady =
             !binding!!.playerView.player!!.isPlaying
 
-
-
-
     }
-
-//    private fun buildMediaSource(
-//        uri: String
-//    ): MediaSource {
-////
-////        //adding caching
-////        val cacheDataSourceFactory = CacheDataSourceFactory(
-////            simpleCache, mediaDataSourceFactory, CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR
-////        )
-//
-//
-////        // This is the MediaSource representing the media to be played.
-////        val extension: String = uri.toString().substring(uri.toString().lastIndexOf("."))
-////        if (extension.contains("mp4")) {
-////            return ProgressiveMediaSource.Factory(cacheDataSourceFactory)
-////                .createMediaSource(uri)
-////        } else {
-////            return HlsMediaSource.Factory(cacheDataSourceFactory)
-////                .createMediaSource(uri)
-////        }
-//
-////        return ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(uri)
-//        return getProgressiveMediaSource(uri)
-//    }
 
 
 

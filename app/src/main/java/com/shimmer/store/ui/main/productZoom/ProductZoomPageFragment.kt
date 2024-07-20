@@ -22,6 +22,7 @@ import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
 import com.shimmer.store.databinding.FragmentExoPlayerBinding
 import com.shimmer.store.databinding.ProductZoomPageBinding
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.main.productDetail.ProductDetail
 import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glidePhotoView
@@ -62,7 +63,7 @@ class ProductZoomPageFragment(
 //        _binding = FragmentExoPlayerBinding.bind(view)
         Log.d(TAG, "onViewCreated: Fragment Position : $positionOfFragment")
 
-        videoPath.glidePhotoView(binding.ivIcon.context, binding.ivIcon)
+        (IMAGE_URL +videoPath).glidePhotoView(binding.ivIcon.context, binding.ivIcon)
     }
 
     @SuppressLint("UseRequireInsteadOfGet")

@@ -11,10 +11,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.shimmer.store.R
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.shimmer.store.databinding.FiltersBinding
-import com.shimmer.store.databinding.ItemFilterCategoryBinding
-import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.datastore.DataStoreKeys.FILTER_PRICE
+import com.shimmer.store.datastore.DataStoreKeys.FILTER_CATEGORY
+import com.shimmer.store.datastore.DataStoreKeys.FILTER_MATERIAL
+import com.shimmer.store.datastore.DataStoreKeys.FILTER_GENDER
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -33,6 +38,7 @@ class Filters : Fragment() {
     private val viewModel: FiltersVM by viewModels()
     private var _binding: FiltersBinding? = null
     private val binding get() = _binding!!
+
 
     companion object{
 //        var headerAdapter : GenericAdapter<ItemFilterCategoryBinding, Items>? = null
@@ -59,56 +65,46 @@ class Filters : Fragment() {
 
         binding.apply {
 
+            saveObject(FILTER_PRICE, mainPrice)
+            saveObject(FILTER_CATEGORY, mainCategory)
+            saveObject(FILTER_MATERIAL, mainMaterial)
+            saveObject(FILTER_GENDER, mainShopFor)
+
             ivIconCross.singleClick {
+                readData(FILTER_PRICE) { filter ->
+                    val typeToken = object : TypeToken<ArrayList<Items>>() {}.type
+                    val changeValue = Gson().fromJson<ArrayList<Items>>(filter, typeToken)
+                    mainPrice.clear()
+                    mainPrice.addAll(changeValue)
+                }
+
+                readData(FILTER_CATEGORY) { filter ->
+                    val typeToken = object : TypeToken<ArrayList<Items>>() {}.type
+                    val changeValue = Gson().fromJson<ArrayList<Items>>(filter, typeToken)
+                    mainCategory.clear()
+                    mainCategory.addAll(changeValue)
+                }
+
+                readData(FILTER_MATERIAL) { filter ->
+                    val typeToken = object : TypeToken<ArrayList<Items>>() {}.type
+                    val changeValue = Gson().fromJson<ArrayList<Items>>(filter, typeToken)
+                    mainMaterial.clear()
+                    mainMaterial.addAll(changeValue)
+                }
+
+                readData(FILTER_GENDER) { filter ->
+                    val typeToken = object : TypeToken<ArrayList<Items>>() {}.type
+                    val changeValue = Gson().fromJson<ArrayList<Items>>(filter, typeToken)
+                    mainShopFor.clear()
+                    mainShopFor.addAll(changeValue)
+                }
+
+
                 findNavController().navigateUp()
             }
 
 
             btClear.singleClick {
-//                isFilterFromFrom = false
-//                arrayPrice.clear()
-//                arrayCategory.clear()
-//                arrayMaterial.clear()
-//                arrayShopFor.clear()
-
-//                mainPrice.forEach {
-//                    it.isSelected = false
-//                }
-
-//                headerAdapter = viewModel.categoryAdapter
-
-//                viewModel.itemPrice.map { mapPrice ->
-//                    if (mapPriceMatch(mapPrice.name) == true){
-//                        mapPrice.isSelected = true
-//                    } else {
-//                        mapPrice.isSelected = false
-//                    }
-//                }
-
-//                mainCategory.map { mapCategory ->
-//                    if (mapCategoryMatch(mapCategory.name) == true){
-//                        mapCategory.isSelected = true
-//                    } else {
-//                        mapCategory.isSelected = false
-//                    }
-//                }
-
-//                viewModel.itemMaterial.map { mapMaterial ->
-//                    if (mapMaterialMatch(mapMaterial.name) == true){
-//                        mapMaterial.isSelected = true
-//                    } else {
-//                        mapMaterial.isSelected = false
-//                    }
-//                }
-//
-//                viewModel.itemShopFor.map { mapMaterial ->
-//                    if (mapShopForMatch(mapMaterial.name) == true){
-//                        mapMaterial.isSelected = true
-//                    } else {
-//                        mapMaterial.isSelected = false
-//                    }
-//                }
-
 
                 mainPrice.forEach {
                     it.isSelected = false
@@ -166,19 +162,6 @@ class Filters : Fragment() {
             }
 
 
-//            arrayPrice.apply {
-//                add("₹1000 - ₹10000")
-//                add("₹10000 - ₹15000")
-//                add("₹15000 - ₹20000")
-//            }
-
-//            viewModel.itemPrice.map { mapPrice ->
-//                if (mapPriceMatch(mapPrice.name) == true){
-//                    mapPrice.isSelected = true
-//                } else {
-//                    mapPrice.isSelected = false
-//                }
-//            }
 
             val filteredPrice = mainPrice.filter { it.isSelected == true }
             viewModel.itemPriceCount.value = filteredPrice.size
@@ -189,68 +172,14 @@ class Filters : Fragment() {
             viewModel.priceAdapter.submitList(mainPrice)
 
 
-//            arrayCategory.apply {
-//                add("ring")
-//                add("necklace")
-//                add("earring")
-//            }
-
-//            mainCategory.map { mapCategory ->
-//                if (mapCategoryMatch(mapCategory.name) == true){
-//                    mapCategory.isSelected = true
-//                } else {
-//                    mapCategory.isSelected = false
-//                }
-//            }
-
-//            val filteredCategory = mainCategory.filter { it.isSelected == true }
-//            viewModel.itemCategoryCount.value = filteredCategory.size
-
-//            rvList2.setHasFixedSize(true)
-//            rvList2.adapter = viewModel.categoryAdapter
-//            viewModel.categoryAdapter.notifyDataSetChanged()
-//            viewModel.categoryAdapter.submitList(viewModel.itemCategory)
-
-
-
-//            arrayMaterial.apply {
-//                add("gold")
-//                add("silver")
-//                add("diamond")
-//            }
-
-//            viewModel.itemMaterial.map { mapMaterial ->
-//                if (mapMaterialMatch(mapMaterial.name) == true){
-//                    mapMaterial.isSelected = true
-//                } else {
-//                    mapMaterial.isSelected = false
-//                }
-//            }
-
             val filteredMaterial = mainMaterial.filter { it.isSelected == true }
             viewModel.itemMaterialCount.value = filteredMaterial.size
 
-//            rvList2.setHasFixedSize(true)
-//            rvList2.adapter = viewModel.materialAdapter
-//            viewModel.materialAdapter.notifyDataSetChanged()
-//            viewModel.materialAdapter.submitList(viewModel.itemMaterial)
 
-
-//            viewModel.itemShopFor.map { mapShopFor ->
-//                if (mapShopForMatch(mapShopFor.name) == true){
-//                    mapShopFor.isSelected = true
-//                } else {
-//                    mapShopFor.isSelected = false
-//                }
-//            }
 
             val filteredShopFor = mainShopFor.filter { it.isSelected == true }
             viewModel.itemShopForCount.value = filteredShopFor.size
 
-//            rvList2.setHasFixedSize(true)
-//            rvList2.adapter = viewModel.shopForAdapter
-//            viewModel.shopForAdapter.notifyDataSetChanged()
-//            viewModel.shopForAdapter.submitList(viewModel.itemShopFor)
 
 
             viewModel.itemPriceCount.observe(viewLifecycleOwner) {
@@ -268,23 +197,6 @@ class Filters : Fragment() {
                     }
                 }
 
-//                mainPrice.forEach {
-//                    if(it.isSelected){
-//                        count += 1
-//                    }
-//                }
-//
-//                mainMaterial.forEach {
-//                    if(it.isSelected){
-//                        count += 1
-//                    }
-//                }
-//
-//                mainShopFor.forEach {
-//                    if(it.isSelected){
-//                        count += 1
-//                    }
-//                }
 
                 Log.e("TAG" , "count ${count}")
                 textCategories.text = if(count == 0) "Categories" else "Categories ($count)"
@@ -306,21 +218,6 @@ class Filters : Fragment() {
                 textShopFor.setTypeface(typefaceroboto_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
-//                    arrayPrice.clear()
-//                    arrayPrice.apply {
-//                        add("₹1000 - ₹10000")
-//                        add("₹10000 - ₹15000")
-////                        add("₹15000 - ₹20000")
-//                    }
-
-//                    viewModel.itemPrice.map { mapPrice ->
-//                        if (mapPriceMatch(mapPrice.name) == true){
-//                            mapPrice.isSelected = true
-//                        } else {
-//                            mapPrice.isSelected = false
-//                        }
-//                    }
-
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.priceAdapter
                     viewModel.priceAdapter.notifyDataSetChanged()
@@ -337,19 +234,6 @@ class Filters : Fragment() {
                 textShopFor.setTypeface(typefaceroboto_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
-//                    arrayCategory.clear()
-//                    arrayCategory.apply {
-//                        add("ring")
-//                        add("necklace")
-//                    }
-
-//                    mainCategory.map { mapCategory ->
-//                        if (mapCategoryMatch(mapCategory.name) == true){
-//                            mapCategory.isSelected = true
-//                        } else {
-//                            mapCategory.isSelected = false
-//                        }
-//                    }
 
                     rvList2.setHasFixedSize(true)
                     rvList2.adapter = viewModel.categoryAdapter
@@ -418,43 +302,5 @@ class Filters : Fragment() {
         }
     }
 
-//    private fun mapPriceMatch(name: String): Boolean {
-//        arrayPrice.forEach {
-//            if(it.equals(name)){
-//                return true
-//            }
-//        }
-//        return false
-//    }
-
-
-//    private fun mapCategoryMatch(name: String): Boolean {
-//        arrayCategory.forEach {
-//            if(it.equals(name)){
-//                return true
-//            }
-//        }
-//        return false
-//    }
-
-
-//    private fun mapMaterialMatch(name: String): Boolean {
-//        arrayMaterial.forEach {
-//            if(it.equals(name)){
-//                return true
-//            }
-//        }
-//        return false
-//    }
-//
-//
-//    private fun mapShopForMatch(name: String): Boolean {
-//        arrayShopFor.forEach {
-//            if(it.equals(name)){
-//                return true
-//            }
-//        }
-//        return false
-//    }
 
 }

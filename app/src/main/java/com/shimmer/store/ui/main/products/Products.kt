@@ -71,6 +71,7 @@ class Products : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(2)
 
         adapter2 = ProductsAdapter()
+        binding.rvList2.adapter = adapter2
 
         binding.apply {
 //            button.setOnClickListener {
@@ -223,99 +224,97 @@ class Products : Fragment() {
 //            )
 
             val emptyMap = mutableMapOf<String, String>()
+            var ids : String = ""
             var count = 0
+
+            var countFrom = 0
+            var mainCategoryBoolean = false
             mainCategory.forEach {
+                if (it.isSelected) {
+                    ids += ""+it.id+","
+                    mainCategoryBoolean = true
+                }
+
                 it.subCategory.forEach { sub ->
                     if (sub.isSelected && sub.isAll == false) {
                         Log.e("TAG", "it.isSelected ${sub.isSelected} ids:${sub.id}")
-                        emptyMap["searchCriteria[filter_groups][0][filters][" + count + "][field]"] =
-                            "category_id"
-                        emptyMap["searchCriteria[filter_groups][0][filters][" + count + "][value]"] =
-                            "${sub.id}"
                         count += 1
+                        ids += ""+sub.id+","
                     }
                 }
             }
-
-
-            //            adapter2.submitData(viewModel.item1)
-            adapter2.notifyDataSetChanged()
-            binding.rvList2.adapter = adapter2
-
-            readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), view, emptyMap) {
-                    Log.e("TAG", "itAAA " + this)
-
-//                    val filteredNot = this.items.filter {
-//                        mainThread {
-//                            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                            userList?.forEach { user ->
-//                                Log.e("TAG", "onViewCreated: "+user.name + " it.currentTime "+user.price)
-//                            }
-//                        }
-//                        it.isSelected == true
-//                    }
-
-//                    this.items.forEach {items ->
-//                        mainThread {
-//                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
-//                            userList?.forEach { user ->
-//                                if (items.id == user.product_id) {
-//                                    items.apply {
-//                                        isSelected = true
-//                                    }
-//
-//                                    Log.e( "TAG", "YYYYYYYYY: " )
-//                                } else {
-//                                    items.apply {
-//                                        isSelected = false
-//                                    }
-//                                    Log.e( "TAG", "NNNNNNNNNN: " )
-//                                }
-////                                Log.e( "TAG", "AAAAAAA: " + items.name + " BBBBBBB " + items.id + " CCCCCCC " + user.product_id )
-//                            }
-//                        }
-//                    }
-
-
-//                    this.items.forEach {
-//                        Log.e( "TAG", "CCCCCCCCCCC: " + it.isSelected )
-//                    }
-//                    mainThread {
-//                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
-//                        userList?.forEach { user ->
-//                            Log.e(
-//                                "TAG",
-//                                "onViewCreated: " + user.name + " it.currentTime " + user.price
-//                            )
-//                        }
-//
-                        adapter2.submitData(this.items)
-                        adapter2.notifyDataSetChanged()
-//                    }
-
-                }
+            if (mainCategoryBoolean){
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = ids
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
             }
 
+
+
+            var mainPriceBoolean = false
             mainPrice.forEach {
                 if (it.isSelected) {
                     count += 1
+                    countFrom += 1
+                    mainPriceBoolean = true
                 }
             }
+            if (mainPriceBoolean){
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom2"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+            }
 
+
+
+            var mainMaterialBoolean = false
             mainMaterial.forEach {
                 if (it.isSelected) {
                     count += 1
+                    countFrom += 1
+                    mainMaterialBoolean = true
                 }
             }
+            if (mainMaterialBoolean){
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom3"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+            }
 
+
+
+            var mainShopForBoolean = false
             mainShopFor.forEach {
                 if (it.isSelected) {
                     count += 1
+                    countFrom += 1
+                    mainShopForBoolean = true
                 }
             }
+            if (mainShopForBoolean){
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "gender"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom4"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+            }
+
+
+
             Log.e("TAG", "count ${count}")
             textFilter.text = if (count == 0) "Filter" else "Filter ($count)"
+
+
+
+
+            binding.rvList2.adapter = adapter2
+            readData(ADMIN_TOKEN) { token ->
+                viewModel.getProducts(token.toString(), view, emptyMap) {
+                    Log.e("TAG", "itAAA " + this)
+                        adapter2.submitData(this.items)
+                        adapter2.notifyDataSetChanged()
+                }
+            }
+
+
 
 
         }

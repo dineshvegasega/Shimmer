@@ -65,8 +65,8 @@ class ProductZoom  : Fragment() {
             val item1 : ArrayList<String> = ArrayList()
 
             itemParcelable?.item?.forEach {
-                if (it.name.endsWith("jpg") || it.name.endsWith("jpeg") || it.name.endsWith("png")){
-                    item1.add(it.name)
+                if (it.media_type.endsWith("image")){
+                    item1.add(it.file)
                 }
             }
 

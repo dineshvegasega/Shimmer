@@ -31,6 +31,7 @@ import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.ui.interfaces.CallBackListener
 import com.shimmer.store.ui.main.products.Products
 import com.shimmer.store.ui.main.products.Products.Companion
@@ -41,6 +42,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.getRecyclerView
+//import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
@@ -63,7 +65,7 @@ class ProductDetail : Fragment() , CallBackListener {
         @JvmStatic
         lateinit var adapter2: RelatedProductAdapter
 
-
+        var images : ArrayList<MediaGalleryEntry> = ArrayList()
     }
 
     override fun onCreateView(
@@ -85,12 +87,13 @@ class ProductDetail : Fragment() , CallBackListener {
 
         binding.apply {
 
+            var skuId = arguments?.getString("sku")
 
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProductDetail(token.toString(), view, "SRI0001G14YG11") {
+                viewModel.getProductDetail(token.toString(), view, skuId!!) {
                     Log.e("TAG", "getProductDetailAA " + this.id)
 
-                    var images =  this.media_gallery_entries
+                    images =  this.media_gallery_entries
 
                     pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
                     rvList1.offscreenPageLimit = 1
@@ -111,28 +114,53 @@ class ProductDetail : Fragment() , CallBackListener {
                             positionOffsetPixels: Int
                         ) {
                             super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-//                    if (pageChangeValue != position) {
-//                        Log.e("TAG", "positionA" + position)
-//                    }
-//                    pageChangeValue = position
+
                         }
 
                         override fun onPageSelected(position: Int) {
                             super.onPageSelected(position)
-//                    adapter1.updatePosition(position)
                             viewModel.indicator(binding, images, position)
                         }
 
                         override fun onPageScrollStateChanged(state: Int) {
                             super.onPageScrollStateChanged(state)
                             Log.e("TAG", "state" + state)
-//                    if (state == 0) {
-//                    adapter1.notifyItemChanged(adapter1.counter)
-//                        onClickItem(pageChangeValue)
-//                    }
                         }
                     })
 
+
+                    textTitle.text = this.name
+                    textPrice.text = "₹ "+this.price
+                    textSKU.text = "SKU: "+this.sku
+
+
+                    this.custom_attributes.forEach {
+                        if (it.attribute_code == "size"){
+                            btRingSize.text = ""+it.value
+                        }
+
+                        if (it.attribute_code == "metal_type"){
+                            if (it.value == "12"){
+                                this.custom_attributes.forEach { againAttributes ->
+                                    if (againAttributes.attribute_code == "metal_purity"){
+                                        if (againAttributes.value == "14"){
+                                            bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                                            bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+                                            bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                                            bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                        }
+
+                                        if (againAttributes.value == "18"){
+                                            bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                                            bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                            bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                                            bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
 
 
 
@@ -183,10 +211,7 @@ class ProductDetail : Fragment() , CallBackListener {
 
 
 
-            bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
-            bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
-            bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
-            bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+
 
             bt14.singleClick {
                 bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
@@ -247,8 +272,9 @@ class ProductDetail : Fragment() , CallBackListener {
     }
 
     override fun onCallBack(pos: Int) {
+        Log.e("TAG", "onCallBack: ${images.toString()}")
         findNavController().navigate(R.id.action_productDetail_to_productZoom, Bundle().apply {
-            putParcelable("arrayList", ItemParcelable(viewModel.item1, binding.rvList1.currentItem))
+            putParcelable("arrayList", ItemParcelable(images, binding.rvList1.currentItem))
         })
     }
 

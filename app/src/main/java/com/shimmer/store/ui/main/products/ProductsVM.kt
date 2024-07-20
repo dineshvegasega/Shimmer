@@ -99,23 +99,34 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
                                   Log.e("TAG", "successAA: ${response.body().toString()}")
                                 val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
 
-                                viewModelScope.launch {
+
+                                mainThread {
+                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                    userList?.forEach { itemsDB ->
+////                                        Log.e( "TAG", "VVVVVVVVV: " +itemsDB.product_id+"  "+itemsDB.isSelected+"  "+itemsDB.price)
+//                                    }
+
                                     mMineUserEntity.items.forEach {items ->
-                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
                                         userList?.forEach { user ->
                                             if (items.id == user.product_id) {
                                                 items.apply {
                                                     isSelected = true
                                                 }
-//                                                Log.e( "TAG", "YYYYYYYYY: " )
-                                            } else {
-                                                items.apply {
-                                                    isSelected = false
-                                                }
-//                                                Log.e( "TAG", "NNNNNNNNNN: " )
+//                                                Log.e( "TAG", "YYYYYYYYY: " +items.price)
                                             }
+//                                            else {
+//                                                items.apply {
+//                                                    isSelected = false
+//                                                }
+//                                                Log.e( "TAG", "NNNNNNNNNN: " )
+//                                            }
                                         }
                                     }
+
+
+//                                    mMineUserEntity.items.forEach { items ->
+//                                        Log.e( "TAG", "YYYYYYYYY: " +items.isSelected+"  "+items.price)
+//                                    }
 
                                     if(mMineUserEntity.items.isNotEmpty()){
                                         callBack(mMineUserEntity)
@@ -123,6 +134,41 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
                                         showSnackBar("No Products Available!")
                                     }
                                 }
+
+//                                viewModelScope.launch {
+//
+//                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                    userList?.forEach { itemsDB ->
+//                                        Log.e( "TAG", "VVVVVVVVV: " +itemsDB.product_id+"  "+itemsDB.isSelected+"  "+itemsDB.price)
+//                                    }
+//
+//                                    mMineUserEntity.items.forEach {items ->
+//                                        userList?.forEach { user ->
+//                                            if (items.id == user.product_id) {
+//                                                items.apply {
+//                                                    isSelected = true
+//                                                }
+////                                                Log.e( "TAG", "YYYYYYYYY: " +items.price)
+//                                            } else {
+//                                                items.apply {
+//                                                    isSelected = false
+//                                                }
+////                                                Log.e( "TAG", "NNNNNNNNNN: " )
+//                                            }
+//                                        }
+//                                    }
+//
+//
+//                                    mMineUserEntity.items.forEach { items ->
+//                                        Log.e( "TAG", "YYYYYYYYY: " +items.isSelected+"  "+items.price)
+//                                    }
+//
+//                                    if(mMineUserEntity.items.isNotEmpty()){
+//                                        callBack(mMineUserEntity)
+//                                    } else {
+//                                        showSnackBar("No Products Available!")
+//                                    }
+//                                }
 
 
                             } catch (e: Exception) {
