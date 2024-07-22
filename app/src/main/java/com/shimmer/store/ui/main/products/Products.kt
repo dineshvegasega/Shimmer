@@ -224,14 +224,14 @@ class Products : Fragment() {
 //            )
 
             val emptyMap = mutableMapOf<String, String>()
-            var ids : String = ""
             var count = 0
 
+            var categoryIds : String = ""
             var countFrom = 0
             var mainCategoryBoolean = false
             mainCategory.forEach {
                 if (it.isSelected) {
-                    ids += ""+it.id+","
+                    categoryIds += ""+it.id+","
                     mainCategoryBoolean = true
                 }
 
@@ -239,53 +239,64 @@ class Products : Fragment() {
                     if (sub.isSelected && sub.isAll == false) {
                         Log.e("TAG", "it.isSelected ${sub.isSelected} ids:${sub.id}")
                         count += 1
-                        ids += ""+sub.id+","
+                        categoryIds += ""+sub.id+","
                     }
                 }
             }
             if (mainCategoryBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = ids
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = categoryIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
             }
 
 
-
             var mainPriceBoolean = false
+            var priceFrom : Double = 0.0
+            var priceTo : Double = 0.0
+            var countFrom2 = 0
             mainPrice.forEach {
                 if (it.isSelected) {
                     count += 1
                     countFrom += 1
+                    countFrom2 = countFrom
                     mainPriceBoolean = true
+                    priceFrom = it.name.replace("₹","").split("-")[0].toDouble()
+                    priceTo = it.name.replace("₹","").split("-")[1].toDouble()
                 }
             }
             if (mainPriceBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom2"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] =
+                    priceFrom.toString()
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "from"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][value]"] = priceTo.toString()
+                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][condition_type]"] = "to"
             }
 
 
-
+            var materialIds : String = ""
             var mainMaterialBoolean = false
             mainMaterial.forEach {
                 if (it.isSelected) {
+                    materialIds += ""+it.id+","
                     count += 1
                     countFrom += 1
                     mainMaterialBoolean = true
                 }
             }
             if (mainMaterialBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom3"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "metal_type"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = materialIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
             }
 
 
-
+            var genderIds : String = ""
             var mainShopForBoolean = false
             mainShopFor.forEach {
                 if (it.isSelected) {
+                    genderIds += ""+it.id+","
                     count += 1
                     countFrom += 1
                     mainShopForBoolean = true
@@ -293,7 +304,7 @@ class Products : Fragment() {
             }
             if (mainShopForBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "gender"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = "categoryFrom4"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = genderIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
             }
 

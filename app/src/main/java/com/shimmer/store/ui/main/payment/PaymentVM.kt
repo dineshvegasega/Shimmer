@@ -3,16 +3,16 @@ package com.shimmer.store.ui.main.payment
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.databinding.ItemPaymentProductsBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,15 +21,12 @@ import javax.inject.Inject
 @HiltViewModel
 class PaymentVM @Inject constructor() : ViewModel() {
 
-
-    var item1 : ArrayList<Items> = ArrayList()
-
-
-    init {
-        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-    }
-
+    var subTotalPrice : Double = 0.0
+    var discountPrice : Double = 10.0
+    var shippingPrice : Double = 100.0
+    var cgstPrice : Double = 9.0
+    var sgstPrice : Double = 9.0
+    var totalPrice : Double = 0.0
 
     fun getCartCount(callBack: Int.() -> Unit){
         viewModelScope.launch {
@@ -59,7 +56,7 @@ class PaymentVM @Inject constructor() : ViewModel() {
             binding.apply {
 
                 textTitle.text = dataClass.name
-                textPrice.text = "Price: ₹"+dataClass.price + " x "+dataClass.quantity + " = ₹"+(dataClass.price?.times(dataClass.quantity.toDouble()))
+                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!) + " x "+dataClass.quantity + " = ₹"+getPatternFormat("1", (dataClass.price?.times(dataClass.quantity.toDouble())))
 
                 ivIcon.singleClick {
                     binding.root.findNavController().navigate(R.id.action_payment_to_productDetail)

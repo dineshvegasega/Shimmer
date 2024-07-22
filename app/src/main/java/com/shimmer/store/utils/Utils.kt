@@ -41,7 +41,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager.widget.ViewPager
@@ -69,12 +68,11 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.io.Serializable
 import java.math.RoundingMode
-import java.security.AccessController.getContext
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.text.FieldPosition
+import java.text.NumberFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -913,3 +911,81 @@ fun sessionExpired(){
         .setCancelable(false)
         .show()
 }
+
+
+fun Double.getPatternFormat(type: String): Double {
+//    var defaultPattern : Double = 0.0
+    if (type.equals("0", ignoreCase = true)) {
+        val nf: NumberFormat = NumberFormat.getInstance(Locale("en", "US"))
+        nf.setMinimumFractionDigits(2)
+        nf.setMaximumFractionDigits(2)
+        return nf.format(this).toDouble()
+        //            defaultPattern = "###,###,###,##0.00";
+    } else if (type.equals("1", ignoreCase = true)) {
+        val nf: NumberFormat = NumberFormat.getInstance(Locale("en", "IN"))
+        nf.setMinimumFractionDigits(2)
+        nf.setMaximumFractionDigits(2)
+        return nf.format(this).toDouble()
+        //            defaultPattern = "##,##,##,##0.00";
+    } else if (type.equals("2", ignoreCase = true)) {
+        val nf: NumberFormat = NumberFormat.getInstance(Locale("da", "DK"))
+        nf.setMinimumFractionDigits(2)
+        nf.setMaximumFractionDigits(2)
+        return nf.format(this).toDouble()
+        //            defaultPattern = "###.###.###.##0,00";
+    } else if (type.equals("3", ignoreCase = true)) {
+        val nf: NumberFormat = NumberFormat.getInstance(Locale("sk", "SK"))
+        nf.setMinimumFractionDigits(2)
+        nf.setMaximumFractionDigits(2)
+        return nf.format(this).toDouble()
+        //            defaultPattern = "### ### ### ###,00";
+    }
+    return 1.0
+}
+
+
+fun getPatternFormat(s: String, value: Double?): String {
+    var defaultPattern = "0.0"
+    if (s.equals("0", ignoreCase = true)) {
+        val nf = NumberFormat.getInstance(Locale("en", "US"))
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        defaultPattern = nf.format(value)
+        //            defaultPattern = "###,###,###,##0.00";
+    } else if (s.equals("1", ignoreCase = true)) {
+        val nf = NumberFormat.getInstance(Locale("en", "IN"))
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        defaultPattern = nf.format(value)
+        //            defaultPattern = "##,##,##,##0.00";
+    } else if (s.equals("2", ignoreCase = true)) {
+        val nf = NumberFormat.getInstance(Locale("da", "DK"))
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        defaultPattern = nf.format(value)
+        //            defaultPattern = "###.###.###.##0,00";
+    } else if (s.equals("3", ignoreCase = true)) {
+        val nf = NumberFormat.getInstance(Locale("sk", "SK"))
+        nf.minimumFractionDigits = 2
+        nf.maximumFractionDigits = 2
+        defaultPattern = nf.format(value)
+        //            defaultPattern = "### ### ### ###,00";
+    }
+    return defaultPattern
+}
+// filters -
+// gender - male, female, kids ,
+// category
+// material - 14, 18, Platinum
+// price - 1000 - 10000
+
+//sort
+//default
+//price - low to high
+//price - high to low
+
+
+//seach api - search by sku and name, color, purity, ring size
+
+
+

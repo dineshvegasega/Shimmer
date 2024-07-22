@@ -171,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="₹42,550"
+                    android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_light"
@@ -194,7 +194,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutShipping"
+                android:id="@+id/layoutDiscount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
@@ -204,6 +204,56 @@
                 android:focusable="true"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutSubtotal"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="Discount"
+                    android:textColor="@color/_424041"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/roboto_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDiscountPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="₹0"
+                    android:textColor="@color/_424041"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/roboto_light"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:background="@color/_424041"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/textDiscount" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutShipping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/layoutDiscount"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -224,7 +274,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="₹42,550"
+                    android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_light"
@@ -274,11 +324,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="₹42,550"
+                    android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_light"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -324,7 +373,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="₹42,550"
+                    android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_light"
@@ -373,7 +422,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="₹42,550"
+                    android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_medium"

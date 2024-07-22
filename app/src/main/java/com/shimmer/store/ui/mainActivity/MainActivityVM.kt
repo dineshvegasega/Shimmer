@@ -60,7 +60,6 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
             mainPrice.add(Items(name = "₹1000000 - Above"))
 
 
-
             mainCategory.add(Items(id = 19, parent_id = 18, name = "RINGS",
                 subCategory = arrayListOf(
                     Items(id = -1, parent_id = 19, name = "All Rings", isAll = true),
@@ -142,15 +141,14 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 
 
 
-            mainMaterial.add(Items(name = "Gold 14 K"))
-            mainMaterial.add(Items(name = "Gold 18 K"))
-            mainMaterial.add(Items(name = "Platinum"))
+            mainMaterial.add(Items(id = 12, name = "Gold"))
+            mainMaterial.add(Items(id = 13,name = "Platinum"))
 
 
 
-            mainShopFor.add(Items(name = "Men"))
-            mainShopFor.add(Items(name = "Women"))
-            mainShopFor.add(Items(name = "Kids"))
+            mainShopFor.add(Items(id = 10, name = "Men"))
+            mainShopFor.add(Items(id = 11, name = "Women"))
+            mainShopFor.add(Items(id = 9, name = "Kids"))
         }
     }
 

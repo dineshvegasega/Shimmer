@@ -6,16 +6,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCartBinding
-import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,33 +21,13 @@ import javax.inject.Inject
 @HiltViewModel
 class CartVM @Inject constructor() : ViewModel() {
 
-//    var item1 : ArrayList<Items> = ArrayList()
-//    var item2 : ArrayList<String> = ArrayList()
-//    var item3 : ArrayList<String> = ArrayList()
-
-
-    init {
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"))
-//        item1.add(Items("https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//
-//
-//
-//        item2.add("1")
-//        item2.add("2")
-//
-//        item3.add("1")
-//        item3.add("2")
-//        item3.add("3")
-//        item3.add("4")
-    }
-
-
+//    var refreshPrice = MutableLiveData<Boolean>(false)
+    var subTotalPrice : Double = 0.0
+    var discountPrice : Double = 10.0
+    var shippingPrice : Double = 100.0
+    var cgstPrice : Double = 9.0
+    var sgstPrice : Double = 9.0
+    var totalPrice : Double = 0.0
 
     var cartMutableList = MutableLiveData<Boolean>(false)
     val cartAdapter = object : GenericAdapter<ItemCartBinding, CartModel>() {
@@ -74,7 +51,7 @@ class CartVM @Inject constructor() : ViewModel() {
 
                 textTitle.text = dataClass.name
                 ivCount.text = dataClass.quantity.toString()
-                textPrice.text = "Price: ₹"+dataClass.price.toString()
+                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
 
                 ivMinus.singleClick {
                     if (dataClass.quantity > 1) {
@@ -88,6 +65,7 @@ class CartVM @Inject constructor() : ViewModel() {
                         }
                         notifyItemChanged(position)
                     }
+                    cartMutableList.value = true
                 }
 
                 ivPlus.singleClick {
@@ -100,6 +78,7 @@ class CartVM @Inject constructor() : ViewModel() {
                         }
                     }
                     notifyItemChanged(position)
+                    cartMutableList.value = true
                 }
 
                 btDelete.singleClick {
