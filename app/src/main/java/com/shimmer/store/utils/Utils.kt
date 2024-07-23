@@ -988,4 +988,7 @@ fun getPatternFormat(s: String, value: Double?): String {
 //seach api - search by sku and name, color, purity, ring size
 
 
+//https://shop.vegasega.com/rest/default/V1/products/?searchCriteria[sortOrders][0][field]=price&searchCriteria[sortOrders][0][direction]=ASC
 
+//not visibility 1
+//visibility 2,3,4

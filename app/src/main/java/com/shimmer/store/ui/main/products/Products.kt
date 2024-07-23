@@ -119,11 +119,15 @@ class Products : Fragment() {
                         menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
                     }
                 }
-
-
             }
 
-            var sortFilter = 0
+
+
+            filters()
+
+
+
+
             layoutSort.singleClick {
                 if (sortAlert?.isShowing == true) {
                     return@singleClick
@@ -148,7 +152,7 @@ class Products : Fragment() {
                         dialog.dismiss()
                     }
 
-                    when (sortFilter) {
+                    when (viewModel.sortFilter) {
                         1 -> {
                             textDefaultSort.setTypeface(typefaceroboto_medium)
                             textPriceLowToHighSort.setTypeface(typefaceroboto_light)
@@ -173,7 +177,7 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefaceroboto_medium)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_light)
-                        sortFilter = 1
+                        viewModel.sortFilter = 1
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
 //                        }, 700)
@@ -183,7 +187,7 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefaceroboto_light)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_light)
-                        sortFilter = 2
+                        viewModel.sortFilter = 2
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
 //                        }, 700)
@@ -193,7 +197,7 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefaceroboto_light)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
-                        sortFilter = 3
+                        viewModel.sortFilter = 3
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
 //                        }, 700)
@@ -203,10 +207,12 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefaceroboto_light)
                         textPriceLowToHighSort.setTypeface(typefaceroboto_light)
                         textPriceHighToLowSort.setTypeface(typefaceroboto_light)
-                        sortFilter = 0
+                        viewModel.sortFilter = 0
+                        filters()
                     }
 
                     btApply.singleClick {
+                        filters()
                         dialog.dismiss()
                     }
 
@@ -223,11 +229,20 @@ class Products : Fragment() {
 //                "searchCriteria[filter_groups][0][filters][0][value]" to "13",
 //            )
 
+        }
+    }
+
+
+
+
+    fun filters(){
+        binding.apply {
             val emptyMap = mutableMapOf<String, String>()
             var count = 0
 
             var categoryIds : String = ""
-            var countFrom = 0
+            var countFrom1 = 0
+            var countFrom2 = 0
             var mainCategoryBoolean = false
             mainCategory.forEach {
                 if (it.isSelected) {
@@ -243,57 +258,37 @@ class Products : Fragment() {
                     }
                 }
             }
+            Log.e("TAG", "countFromAAA "+countFrom1)
             if (mainCategoryBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = categoryIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "category_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = categoryIds
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
 
 
             var mainPriceBoolean = false
             var priceFrom : Double = 0.0
             var priceTo : Double = 0.0
-//            var countFrom2 = 0
             mainPrice.forEach {
                 if (it.isSelected) {
                     count += 1
-                    countFrom += 1
-//                    countFrom2 = countFrom
+                    countFrom1 += 1
                     mainPriceBoolean = true
                     priceFrom = it.name.replace("₹","").split("-")[0].trim().toDouble()
                     priceTo = if(it.name.replace("₹","").split("-")[1].trim() == "Above") 10000000.00 else it.name.replace("₹","").split("-")[1].trim().toDouble()
-//                    priceTo = 10000000.00
-
-
-                 //   Log.e("TAG", "AAAAAAAAAAA"+it.name.replace("₹","").split("-")[1].trim())
-
-//                    if(it.name.replace("₹","").split("-")[1].equals("Above")) {
-//                        Log.e("TAG", "AAAAAAAAAAA ")
-//                    } else {
-//                        Log.e("TAG", "BBBBBBBBBB ")
-////                        it.name.replace("₹","").split("-")[1].toDouble()
-//                    }
-
                 }
             }
+            Log.e("TAG", "countFrom2BBB "+countFrom1)
             if (mainPriceBoolean){
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][field]"] = "price"
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][value]"] =
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][value]"] =
                     priceFrom.toString()
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][condition_type]"] = "from"
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][condition_type]"] = "from"
 
-                countFrom += 1
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][field]"] = "price"
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][value]"] = priceTo.toString()
-                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][condition_type]"] = "to"
-
-//                emptyMap["searchCriteria[filter_groups][1][filters]["+ countFrom +"][field]=price&" +
-//                        "searchCriteria[filter_groups][1][filters]["+ countFrom +"][value]=40&" +
-//                        "searchCriteria[filter_groups][1][filters]["+ countFrom +"][condition_type]=from&" +
-//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][field]=price&" +
-//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][value]=49.99&" +
-//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][condition_type]="] = "to"
-
+                countFrom2 += 1
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][value]"] = priceTo.toString()
+                emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][condition_type]"] = "to"
             }
 
 
@@ -303,14 +298,15 @@ class Products : Fragment() {
                 if (it.isSelected) {
                     materialIds += ""+it.id+","
                     count += 1
-                    countFrom += 1
+                    countFrom1 += 1
                     mainMaterialBoolean = true
                 }
             }
+            Log.e("TAG", "countFromCCC "+countFrom1)
             if (mainMaterialBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "metal_type"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = materialIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "metal_type"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = materialIds
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
 
 
@@ -320,16 +316,37 @@ class Products : Fragment() {
                 if (it.isSelected) {
                     genderIds += ""+it.id+","
                     count += 1
-                    countFrom += 1
+                    countFrom1 += 1
                     mainShopForBoolean = true
                 }
             }
+            Log.e("TAG", "countFromDDD "+countFrom1)
             if (mainShopForBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "gender"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] = genderIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "in"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "gender"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = genderIds
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
 
+
+            when(viewModel.sortFilter){
+                  0 -> {
+
+                  }
+                  1 -> {
+
+                  }
+                  2 -> {
+                      countFrom2 += 1
+                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
+                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "ASC"
+                  }
+                  3 -> {
+                      countFrom2 += 1
+                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
+                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "DESC"
+                  }
+            }
+            Log.e("TAG", "countFrom2EEE "+countFrom2)
 
 
             Log.e("TAG", "count ${count}")
@@ -340,18 +357,16 @@ class Products : Fragment() {
 
             binding.rvList2.adapter = adapter2
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), view, emptyMap) {
+                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
                     Log.e("TAG", "itAAA " + this)
-                        adapter2.submitData(this.items)
-                        adapter2.notifyDataSetChanged()
+                    adapter2.submitData(this.items)
+                    adapter2.notifyDataSetChanged()
                 }
             }
 
-
-
-
         }
     }
+
 
 
     override fun onDestroyView() {

@@ -27,6 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductsVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
+    var sortFilter : Int = 0
+
     var item1 : ArrayList<Items> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<String> = ArrayList()
