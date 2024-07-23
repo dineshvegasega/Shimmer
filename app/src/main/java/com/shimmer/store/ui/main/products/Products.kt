@@ -253,25 +253,47 @@ class Products : Fragment() {
             var mainPriceBoolean = false
             var priceFrom : Double = 0.0
             var priceTo : Double = 0.0
-            var countFrom2 = 0
+//            var countFrom2 = 0
             mainPrice.forEach {
                 if (it.isSelected) {
                     count += 1
                     countFrom += 1
-                    countFrom2 = countFrom
+//                    countFrom2 = countFrom
                     mainPriceBoolean = true
-                    priceFrom = it.name.replace("₹","").split("-")[0].toDouble()
-                    priceTo = it.name.replace("₹","").split("-")[1].toDouble()
+                    priceFrom = it.name.replace("₹","").split("-")[0].trim().toDouble()
+                    priceTo = if(it.name.replace("₹","").split("-")[1].trim() == "Above") 10000000.00 else it.name.replace("₹","").split("-")[1].trim().toDouble()
+//                    priceTo = 10000000.00
+
+
+                 //   Log.e("TAG", "AAAAAAAAAAA"+it.name.replace("₹","").split("-")[1].trim())
+
+//                    if(it.name.replace("₹","").split("-")[1].equals("Above")) {
+//                        Log.e("TAG", "AAAAAAAAAAA ")
+//                    } else {
+//                        Log.e("TAG", "BBBBBBBBBB ")
+////                        it.name.replace("₹","").split("-")[1].toDouble()
+//                    }
+
                 }
             }
             if (mainPriceBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][field]"] = "price"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][value]"] =
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][value]"] =
                     priceFrom.toString()
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom + "][condition_type]"] = "from"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][field]"] = "price"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][value]"] = priceTo.toString()
-                emptyMap["searchCriteria[filter_groups][0][filters][" + (countFrom2+1) + "][condition_type]"] = "to"
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][condition_type]"] = "from"
+
+                countFrom += 1
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][field]"] = "price"
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][value]"] = priceTo.toString()
+                emptyMap["searchCriteria[filter_groups][" + countFrom + "][filters][0][condition_type]"] = "to"
+
+//                emptyMap["searchCriteria[filter_groups][1][filters]["+ countFrom +"][field]=price&" +
+//                        "searchCriteria[filter_groups][1][filters]["+ countFrom +"][value]=40&" +
+//                        "searchCriteria[filter_groups][1][filters]["+ countFrom +"][condition_type]=from&" +
+//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][field]=price&" +
+//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][value]=49.99&" +
+//                        "searchCriteria[filter_groups][2][filters]["+ countFrom +"][condition_type]="] = "to"
+
             }
 
 

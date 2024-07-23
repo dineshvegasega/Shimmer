@@ -21,6 +21,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 
@@ -100,7 +101,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val model = obj as ItemProduct
 
             itemRowBinding.textTitle.text = model.name
-            itemRowBinding.textPrice.text = "₹"+model.price
+            itemRowBinding.textPrice.text = "₹"+ getPatternFormat("1", model.price)
 
 
             itemRowBinding.ivIcon.setOnClickListener {
