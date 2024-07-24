@@ -1,6 +1,7 @@
 package com.shimmer.store.ui.main.products
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -115,24 +116,54 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             itemRowBinding.ivAddCart.setOnClickListener {
                 model.isSelected = !model.isSelected
-
-//                val filteredNot = itemModels.filter { it.isSelected == true }
-//                badgeCount.value = filteredNot.size
-
                 mainThread {
-                    val newUser = CartModel(product_id = model.id, name = model.name, price = model.price, quantity = 1, currentTime = System.currentTimeMillis())
+                    val newUser = CartModel(product_id = model.id, name = model.name, price = model.price, quantity = 1, sku = model.sku, currentTime = System.currentTimeMillis())
+                    model.custom_attributes.forEach {
+                        if (it.attribute_code == "size"){
+                            newUser.apply {
+                                this.size = ""+it.value
+                            }
+                        }
+
+
+                        if (it.attribute_code == "metal_color"){
+                            newUser.apply {
+                                this.color = ""+it.value
+                            }
+                        }
+
+                        if (it.attribute_code == "metal_type"){
+                            Log.e("TAG", "metal_typeAAA " + it.value)
+                            if (it.value == "12"){
+                                newUser.apply {
+                                    this.material_type = ""+it.value
+                                }
+                                model.custom_attributes.forEach { againAttributes ->
+                                    if (againAttributes.attribute_code == "metal_purity"){
+                                        Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+                                        newUser.apply {
+                                            this.purity = ""+againAttributes.value
+                                        }
+                                    }
+//                                    Log.e("TAG", "metal_typeBBB " + againAttributes.toString())
+                                }
+                            }
+                        } else {
+//                            Log.e("TAG", "metal_typeBBB " + it.value)
+//                            model.custom_attributes.forEach { againAttributes ->
+//                                if (againAttributes.attribute_code == "metal_purity"){
+//                                    newUser.apply {
+//                                        this.purity = ""+it.value
+//                                    }
+//                                }
+//                            }
+                        }
+                    }
                     if(model.isSelected == true){
                         db?.cartDao()?.insertAll(newUser)
                     } else {
                         db?.cartDao()?.deleteById(newUser.product_id!!)
                     }
-
-//                    val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                    userList?.forEach {
-//                        Log.e("TAG", "onViewCreatedBB: "+it.name + " it.currentTime "+it.price)
-//                    }
-
-
                     badgeCount.value = true
                     notifyItemChanged(position)
                 }

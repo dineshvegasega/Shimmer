@@ -243,22 +243,20 @@ class Search : Fragment() {
 
 
         if(searchType == 1){
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "name"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "%"+topBarSearch.editTextSearch.text.toString()+"%"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "like"
+
+        } else  if(searchType == 2){
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
-        } else  if(searchType == 2){
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "name"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
-//            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
         }
-
-
-//        emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
-
 
 
             readData(ADMIN_TOKEN) { token ->
                 viewModel.getProducts(token.toString(), requireView(), emptyMap) {
                     Log.e("TAG", "itAAA " + this)
+
                     viewModel.searchAdapter.submitList(this.items)
                     viewModel.searchAdapter.notifyDataSetChanged()
 

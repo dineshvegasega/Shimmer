@@ -159,12 +159,69 @@ class ProductDetail : Fragment() , CallBackListener {
                                     }
                                 }
                             }
+                        } else {
+                            this.custom_attributes.forEach { againAttributes ->
+                                if (againAttributes.attribute_code == "metal_purity"){
+                                    if (againAttributes.value == "14"){
+                                        bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                                        bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+                                        bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                                        bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                    }
+
+                                    if (againAttributes.value == "18"){
+                                        bt14.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._a5a8ab))
+                                        bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                        bt18.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._000000))
+                                        bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
+                                    }
+                                }
+                            }
                         }
                     }
 
 
+                    val newUser = CartModel(product_id = this.id, name = this.name, price = this.price, quantity = 1, sku = this.sku, currentTime = System.currentTimeMillis())
+                    this.custom_attributes.forEach {
+                        if (it.attribute_code == "size"){
+                            newUser.apply {
+                                this.size = ""+it.value
+                            }
+                        }
 
-                    val newUser = CartModel(product_id = this.id, name = this.name, price = this.price, quantity = 1, currentTime = System.currentTimeMillis())
+
+                        if (it.attribute_code == "metal_color"){
+                            newUser.apply {
+                                this.color = ""+it.value
+                            }
+                        }
+
+                        if (it.attribute_code == "metal_type"){
+                            if (it.value == "12"){
+                                newUser.apply {
+                                    this.material_type = ""+it.value
+                                }
+                                this.custom_attributes.forEach { againAttributes ->
+                                    if (againAttributes.attribute_code == "metal_purity"){
+                                        newUser.apply {
+                                            this.purity = ""+it.value
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            this.custom_attributes.forEach { againAttributes ->
+                                if (againAttributes.attribute_code == "metal_purity"){
+                                    newUser.apply {
+                                        this.purity = ""+it.value
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+//                    val newUser = CartModel(product_id = this.id, name = this.name, price = this.price, quantity = 1, currentTime = System.currentTimeMillis())
                     btAddToCart.singleClick {
                         ioThread {
                             db?.cartDao()?.insertAll(newUser)

@@ -19,5 +19,10 @@ data class CartModel(
     @ColumnInfo(name = "isCollapse") val isCollapse: Boolean? = false,
     @ColumnInfo(name = "isAll") val isAll: Boolean? = false,
     @ColumnInfo(name = "quantity") var quantity: Int = 0,
+    @ColumnInfo(name = "sku") var sku: String = "",
+    @ColumnInfo(name = "color") var color: String = "",
+    @ColumnInfo(name = "material_type") var material_type: String = "",
+    @ColumnInfo(name = "purity") var purity: String = "",
+    @ColumnInfo(name = "size") var size: String = "",
     @ColumnInfo(name = "current_time") val currentTime: Long? = 0,
 ) : Parcelable

@@ -1,6 +1,7 @@
 package com.shimmer.store.ui.main.cart
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -46,10 +47,14 @@ class CartVM @Inject constructor() : ViewModel() {
             binding.apply {
 
                 ivIcon.singleClick {
-                    binding.root.findNavController().navigate(R.id.action_cart_to_productDetail)
+                    binding.root.findNavController().navigate(R.id.action_cart_to_productDetail, Bundle().apply {
+                        putString("sku", dataClass.sku)
+                    })
                 }
 
                 textTitle.text = dataClass.name
+                textDesc.text =  "SKU: "+dataClass.sku
+
                 ivCount.text = dataClass.quantity.toString()
                 textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
 

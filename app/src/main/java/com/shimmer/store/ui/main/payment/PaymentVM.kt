@@ -1,8 +1,10 @@
 package com.shimmer.store.ui.main.payment
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -56,6 +58,13 @@ class PaymentVM @Inject constructor() : ViewModel() {
             binding.apply {
 
                 textTitle.text = dataClass.name
+                textColor.text = "Color: "+dataClass.color
+//                if (dataClass.material_type == "12"){
+                    textPurity.text = "Purity: "+dataClass.purity
+//                } else if (dataClass.material_type == ""){
+//                    textPurity.text = "Purity: "+dataClass.purity
+//                }
+                textRingsize.text = "Ring size: "+dataClass.size
                 textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!) + " x "+dataClass.quantity + " = ₹"+getPatternFormat("1", (dataClass.price?.times(dataClass.quantity.toDouble())))
 
                 ivIcon.singleClick {
