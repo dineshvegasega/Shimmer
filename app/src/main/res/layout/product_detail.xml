@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
-                android:text="SKU:WRI534958374867"
+                android:text="SKU: WRI534958374867"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/roboto_medium"
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="CATEGORIES:RINGS"
+                android:text="CATEGORIES: RINGS"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/roboto_medium"
@@ -494,16 +494,6 @@
                         tools:ignore="HardcodedText" />
 
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textPurity2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_4sdp"
-                        android:text="22 kt Yellow Gold"
-                        android:textColor="@color/_000000"
-                        android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
-                        tools:ignore="HardcodedText" />
 
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
