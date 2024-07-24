@@ -21,6 +21,8 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSearchHistoryBinding
 import com.shimmer.store.databinding.SearchBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
@@ -121,6 +123,7 @@ class Search : Fragment() {
 
             ivSearch.singleClick {
                 if(topBarSearch.editTextSearch.text.toString().isNotEmpty()){
+                    searchFilter()
                     val newUser = SearchModel(search_name = topBarSearch.editTextSearch.text.toString(), currentTime = System.currentTimeMillis())
                     ioThread {
                         db?.searchDao()?.insertAll(newUser)
@@ -129,16 +132,15 @@ class Search : Fragment() {
             }
 
 
+
             rvList2.setHasFixedSize(true)
             rvList2.adapter = viewModel.searchAdapter
-            viewModel.searchAdapter.notifyDataSetChanged()
-            viewModel.searchAdapter.submitList(viewModel.item1)
 
 
-
-
-
-
+            if (viewModel.isListVisible){
+                rvList2.visibility = View.VISIBLE
+                rvListSearchHistory.visibility = View.GONE
+            }
 
         }
 
@@ -156,7 +158,7 @@ class Search : Fragment() {
                 viewModel.searchHistoryAdapter.notifyDataSetChanged()
                 viewModel.searchHistoryAdapter.submitList(userList)
                 rvListSearchHistory.visibility = View.VISIBLE
-                rvList2.visibility = View.GONE
+//                rvList2.visibility = View.GONE
             }
 
 
@@ -223,6 +225,52 @@ class Search : Fragment() {
 //                loadFirstPage()
             }
         }
+    }
+
+
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun searchFilter(){
+        binding.apply {
+        val emptyMap = mutableMapOf<String, String>()
+        var count = 0
+
+        var categoryIds : String = ""
+        var countFrom1 = 0
+        var countFrom2 = 0
+        var mainCategoryBoolean = false
+
+
+        if(searchType == 1){
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
+        } else  if(searchType == 2){
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "name"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
+//            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
+        }
+
+
+//        emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
+
+
+
+            readData(ADMIN_TOKEN) { token ->
+                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
+                    Log.e("TAG", "itAAA " + this)
+                    viewModel.searchAdapter.submitList(this.items)
+                    viewModel.searchAdapter.notifyDataSetChanged()
+
+                    rvListSearchHistory.visibility = View.GONE
+                    rvList2.visibility = View.VISIBLE
+
+                    viewModel.isListVisible = true
+                }
+            }
+        }
+
+
     }
 
 
