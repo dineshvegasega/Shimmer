@@ -14,6 +14,9 @@ const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
 const val PRODUCTS = "/V1/products/?"
 const val PRODUCTS_DETAIL = "/V1/products/"
+const val ALL_PRODUCTS = "all/V1/configurable-products/"
+//https://shop.vegasega.com/rest/all/V1/configurable-products/SRI0002G/children
+
 
 const val mobile_no = "mobile_no"
 const val slug = "slug"

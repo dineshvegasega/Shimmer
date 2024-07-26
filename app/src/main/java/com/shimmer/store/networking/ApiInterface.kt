@@ -41,7 +41,7 @@ interface ApiInterface {
 
 
     @GET("{id}"+PRODUCTS)
-    suspend fun prodcuts(
+    suspend fun products(
         @Header("Authorization") authHeader: String,
         @Path("id") id: String,
         @QueryMap parms: Map<String, String>,
@@ -49,9 +49,24 @@ interface ApiInterface {
 
 
     @GET("{id}"+PRODUCTS_DETAIL+"{ids}")
-    suspend fun prodcutsDetail(
+    suspend fun productsDetail(
         @Header("Authorization") authHeader : String,
         @Path("id") id: String,
         @Path("ids") ids: String,
     ): Response<JsonElement>
+
+
+
+    @GET(ALL_PRODUCTS+"{id}/children")
+    suspend fun allProducts(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+    ): Response<JsonElement>
+
+
 }
+
+
+
+
+//https://shop.vegasega.com/rest/all/V1/configurable-products/SRI0002G/children

@@ -114,13 +114,11 @@ fun hideKeyboard() = try {
 }
 
 
-
-
 /**
  * Show Snack Bar
  * */
 @SuppressLint("CutPasteId")
-fun showSnackBar(string: String, type : Int = 1, navController: NavController ?=null) = try {
+fun showSnackBar(string: String, type: Int = 1, navController: NavController? = null) = try {
     hideKeyboard()
     MainActivity.context.get()?.let { context ->
         val message = if (string.contains("Unable to resolve host")) {
@@ -145,7 +143,7 @@ fun showSnackBar(string: String, type : Int = 1, navController: NavController ?=
             view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).textSize =
                 (MainActivity.scale10 + 1).toFloat()
             view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5
-            if(type == 2){
+            if (type == 2) {
 //                setAction(context.getString(R.string.subscribe_now), View.OnClickListener {
 //                    navController?.navigate(R.id.subscription)
 //                    this.dismiss()
@@ -237,8 +235,6 @@ fun Context.getMediaFilePathFor(uri: Uri): String {
 }
 
 
-
-
 @SuppressLint("CheckResult")
 fun ImageView.loadImage(
     type: Int,
@@ -258,7 +254,6 @@ fun ImageView.loadImage(
 } catch (e: Exception) {
     e.printStackTrace()
 }
-
 
 
 fun isValidPassword(password: String): Boolean {
@@ -388,11 +383,9 @@ fun String.firstCharIfItIsLowercase() = replaceFirstChar {
 }
 
 
-
 fun Context.isTablet(): Boolean {
     return this.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
 }
-
 
 
 fun ViewPager2.updatePagerHeightForChild(view: View) {
@@ -406,12 +399,11 @@ fun ViewPager2.updatePagerHeightForChild(view: View) {
 }
 
 
-
 val myOptionsGlide: RequestOptions = RequestOptions()
     .placeholder(R.drawable.main_logo_land)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .dontAnimate()
-      .apply( RequestOptions().placeholder(R.drawable.no_image))
+    .apply(RequestOptions().placeholder(R.drawable.no_image))
     .skipMemoryCache(true)
 
 val myOptionsGlideUser: RequestOptions = RequestOptions()
@@ -573,10 +565,6 @@ fun Context.isNetworkAvailable() =
     }
 
 
-
-
-
-
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelable(key, T::class.java)
@@ -611,8 +599,6 @@ fun Context.determineScreenDensityCode(): String {
         else -> "Unknown code ${resources.displayMetrics.densityDpi}"
     }
 }
-
-
 
 
 fun Context.getDensityName(): String {
@@ -666,7 +652,7 @@ fun Double.decimal2Digits(): String {
 fun Double.roundOffDecimal(): String { //here, 1.45678 = 1.46
     val df = DecimalFormat("####0.00", DecimalFormatSymbols(Locale.ENGLISH))
     df.roundingMode = RoundingMode.HALF_UP
-    return ""+df.format(this)
+    return "" + df.format(this)
 }
 
 //fun roundOffDecimal(number: Double): Double? { //here, 1.45678 = 1.45
@@ -762,17 +748,21 @@ fun Activity.callPermissionDialog(callBack: Intent.() -> Unit) {
 }
 
 
-
-
-
-
-
 fun String.orderId(): String {
-    return if (this.length > 3) this.substring(4, this.length) +"-"+SimpleDateFormat("yyMMdd-HHmmss", Locale.ENGLISH).format(Calendar.getInstance().time) else ""
+    return if (this.length > 3) this.substring(
+        4,
+        this.length
+    ) + "-" + SimpleDateFormat(
+        "yyMMdd-HHmmss",
+        Locale.ENGLISH
+    ).format(Calendar.getInstance().time) else ""
 }
 
 fun dateTime(): String {
-    return SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.ENGLISH).format(Calendar.getInstance().time)
+    return SimpleDateFormat(
+        "dd-MM-yyyy HH:mm:ss",
+        Locale.ENGLISH
+    ).format(Calendar.getInstance().time)
 }
 
 
@@ -780,7 +770,6 @@ fun gen(): Int {
     val r = Random(System.currentTimeMillis())
     return 1000000000 + r.nextInt(2000000000)
 }
-
 
 
 fun getBitmapFromVectorDrawable(context: Context?, drawableId: Int): Bitmap {
@@ -799,8 +788,7 @@ fun getBitmapFromVectorDrawable(context: Context?, drawableId: Int): Bitmap {
 }
 
 
-
-fun saveImageInQ(context: Context?, bitmap: Bitmap):Uri {
+fun saveImageInQ(context: Context?, bitmap: Bitmap): Uri {
     val filename = getImageName()
     var fos: OutputStream? = null
     var imageUri: Uri? = null
@@ -824,33 +812,34 @@ fun saveImageInQ(context: Context?, bitmap: Bitmap):Uri {
 }
 
 
-
-
 @RequiresApi(Build.VERSION_CODES.O)
-fun getDateToLongTime(amount: String): Long{
-    val current1 = LocalDate.parse(amount, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH))
+fun getDateToLongTime(amount: String): Long {
+    val current1 =
+        LocalDate.parse(amount, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH))
     val millis1: Long = SimpleDateFormat("yyyy-MM-dd").parse(current1.toString())?.time ?: 0
     return millis1
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun getDateToLongTimeNow(): Long{
-    val current1 = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH))
+fun getDateToLongTimeNow(): Long {
+    val current1 =
+        LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH))
     val millis1: Long = SimpleDateFormat("yyyy-MM-dd").parse(current1.toString())?.time ?: 0
     return millis1
 }
 
 fun dpToPx(dp: Int): Int {
-    val displayMetrics: DisplayMetrics = MainActivity.context.get()?.getResources()!!.getDisplayMetrics()
+    val displayMetrics: DisplayMetrics =
+        MainActivity.context.get()?.getResources()!!.getDisplayMetrics()
     return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
 
 
 fun pxToDp(px: Int): Int {
-    val displayMetrics: DisplayMetrics = MainActivity.context.get()?.getResources()!!.getDisplayMetrics()
+    val displayMetrics: DisplayMetrics =
+        MainActivity.context.get()?.getResources()!!.getDisplayMetrics()
     return Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 }
-
 
 
 fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
@@ -872,7 +861,6 @@ fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
 }
 
 
-
 fun ViewPager2.getRecyclerView(): RecyclerView {
     val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
     recyclerViewField.isAccessible = true
@@ -886,14 +874,16 @@ inline fun <reified T : java.io.Serializable> Bundle.serializable(key: String): 
 }
 
 inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
-    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(key, T::class.java)
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(
+        key,
+        T::class.java
+    )
+
     else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
 }
 
 
-
-
-fun sessionExpired(){
+fun sessionExpired() {
     MaterialAlertDialogBuilder(MainActivity.mainActivity.get()!!, R.style.LogoutDialogTheme)
         .setTitle(MainActivity.mainActivity.get()!!.resources.getString(R.string.app_name))
         .setMessage(MainActivity.mainActivity.get()!!.resources.getString(R.string.sessionExpired))
@@ -992,3 +982,15 @@ fun getPatternFormat(s: String, value: Double?): String {
 
 //not visibility 1
 //visibility 2,3,4
+
+//gold 12
+//platinum 13
+
+//yg 19
+//gw 20
+
+//14 14
+//15 18
+//16 22
+//17 24
+//18 95

@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
@@ -123,7 +124,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.prodcutsDetail("Bearer " +adminToken, storeWebUrl, skuId)
+                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
@@ -151,10 +152,58 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
 
                                         callBack(mMineUserEntity)
-
                                 }
 
 
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else if(message.contains("The product that was requested doesn't exist")){
+                            showSnackBar(message)
+                        } else {
+                            sessionExpired()
+                        }
+
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+    fun allProducts(adminToken: String, view: View, skuId: String, callBack: ArrayList<ItemProduct>.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.allProducts("Bearer " +adminToken, skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAABBCC: ${response.body().toString()}")
+                                val typeToken = object : TypeToken<ArrayList<ItemProduct>>() {}.type
+                                val changeValue = Gson().fromJson<ArrayList<ItemProduct>>(response.body(), typeToken)
+//                                changeValue.forEach {
+//                                    Log.e("TAG", "allProductsAA: "+it.sku)
+//                                }
+                                if(changeValue.isNotEmpty()){
+                                    callBack(changeValue)
+                                }
                             } catch (e: Exception) {
                             }
                         }

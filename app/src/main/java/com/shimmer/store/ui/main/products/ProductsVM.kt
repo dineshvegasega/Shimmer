@@ -93,7 +93,7 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.prodcuts("Bearer " +adminToken, storeWebUrl, emptyMap)
+                        apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
