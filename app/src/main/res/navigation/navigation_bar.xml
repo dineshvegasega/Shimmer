@@ -26,14 +26,39 @@
             app:popUpTo="@id/splash"
             app:popUpToInclusive="true" />
 
-<!--        <action-->
-<!--            android:id="@+id/action_splash_to_OnboardLanguage"-->
-<!--            app:destination="@id/onboardLanguage"-->
-<!--            app:launchSingleTop="true"-->
-<!--            app:popUpTo="@id/splash"-->
-<!--            app:popUpToInclusive="true" />-->
+        <action
+            android:id="@+id/action_splash_to_loginOptions"
+            app:destination="@id/loginOptions"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splash"
+            app:popUpToInclusive="true" />
 
     </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.onBoarding.loginOptions.LoginOptions"
+        android:label="LoginOptions"
+        android:id="@+id/loginOptions"
+        tools:layout="@layout/login_options">
+
+
+        <action
+            android:id="@+id/action_loginOptions_to_login"
+            app:destination="@id/login"
+            app:launchSingleTop="true"
+        />
+
+        <action
+            android:id="@+id/action_loginOptions_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loginOptions"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+
 
     <fragment
         android:name="com.shimmer.store.ui.onBoarding.login.Login"
@@ -55,6 +80,9 @@
             app:popUpToInclusive="true" />
 
     </fragment>
+
+
+
 
 
     <fragment

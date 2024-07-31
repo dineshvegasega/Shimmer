@@ -235,6 +235,7 @@ class Products : Fragment() {
 
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun filters(){
         binding.apply {
             val emptyMap = mutableMapOf<String, String>()
@@ -326,6 +327,13 @@ class Products : Fragment() {
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = genderIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
+
+
+            countFrom1 += 1
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "visibility"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "4"
+            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "eq"
+
 
 
             when(viewModel.sortFilter){

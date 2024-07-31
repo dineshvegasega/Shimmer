@@ -20,6 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityVM @Inject constructor(private val repository: Repository) : ViewModel() {
     companion object {
+        @JvmStatic
+        var loginType: String = ""
 
         @JvmStatic
         var storeWebUrl: String = ""

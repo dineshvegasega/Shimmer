@@ -20,6 +20,7 @@ import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -138,6 +139,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                         ItemStore::class.java
                                     )
                                 )
+                                loginType = "vendor"
                                 view.findNavController().navigate(R.id.action_login_to_home)
                             } catch (e: Exception) {
                             }
