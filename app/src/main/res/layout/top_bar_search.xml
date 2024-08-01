@@ -51,7 +51,9 @@
         android:layout_marginTop="0dp"
         app:layout_constraintStart_toEndOf="@+id/appicon"
         app:layout_constraintEnd_toEndOf="parent"
-
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         />
 
     <View

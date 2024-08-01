@@ -28,11 +28,243 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/upperLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
 
-            >
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textBillingDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/_f2f2f2"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="@string/billing_details"
+                android:textAllCaps="true"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/roboto_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textFNTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textBillingDetails"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/roboto_medium"
+                android:text="@string/first_name"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCompanyNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textFNTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Company Name"
+                android:visibility="visible"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textAdrressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Adrress"
+                android:visibility="visible"
+                />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCityTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="City"
+                android:visibility="visible"
+                />
+
+
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editState"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="State"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="gone"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPinCodeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/editState"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="PinCode"
+                android:visibility="visible"
+                />
+
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textPinCodeTxt"
+                >
+
+            </View>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCustomerDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/_f2f2f2"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="Customer Details"
+                android:textAllCaps="true"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1"
+                tools:ignore="HardcodedText"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextN"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="@string/first_name"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/textCustomerDetails"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="Email"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/editTextN"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="Mobile No"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/editEmail"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/editMobileNo"
+                >
+
+            </View>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/_f2f2f2"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="Products"
+                android:textAllCaps="true"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view11"
+                tools:ignore="HardcodedText"
+                />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -44,14 +276,14 @@
                 app:spanCount="2"
                 tools:itemCount="2"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_cart"
+                tools:listitem="@layout/item_payment_products"
                 android:paddingHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textProducts"
                 />
 
 
             <View
-                android:id="@+id/view1"
+                android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/_424041"
@@ -63,61 +295,7 @@
             </View>
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCoupon"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/view1"
-                android:gravity="center">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextCoupon"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    style="@style/PrimaryEditText"
-                    android:hint="@string/coupon_code"
-                    android:digits="0123456789"
-                    android:text=""
-                    android:drawableTint="@color/_868686"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:imeOptions="actionSearch"
-                    android:inputType="number"
-                    android:maxLines="1"
-                    android:lines="1"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="0.8"
-                    />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btDelete"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_35sdp"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="@string/apply_coupon"
-                    app:iconTint="@color/black"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/black"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    app:cornerRadius="@dimen/_4sdp"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:strokeColor="@color/black"
-                    android:layout_weight="1.3"
-                    app:rippleColor="@color/white"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -133,9 +311,9 @@
                 android:textAllCaps="true"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/roboto_regular"
+                app:fontFamily="@font/roboto_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCoupon"
+                app:layout_constraintTop_toBottomOf="@+id/view2"
                 tools:ignore="HardcodedText"
                 />
 
@@ -161,7 +339,7 @@
                     android:text="Subtotal"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -174,7 +352,7 @@
                     android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -214,7 +392,7 @@
                     android:text="Discount"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -227,7 +405,7 @@
                     android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -264,7 +442,7 @@
                     android:text="Shipping"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -277,7 +455,7 @@
                     android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -314,7 +492,7 @@
                     android:text="CGST"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -327,7 +505,7 @@
                     android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -363,7 +541,7 @@
                     android:text="SGST"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -376,7 +554,7 @@
                     android:text="₹0"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -410,7 +588,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="Total"
-                    android:textColor="@color/_424041"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_medium"
                     app:layout_constraintStart_toStartOf="parent"
@@ -423,7 +601,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:text="₹0"
-                    android:textColor="@color/_424041"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_medium"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -440,10 +618,25 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="textBillingDetails, textFNTxt, textCompanyNameTxt, textAdrressTxt, textAdrressTxt, textCityTxt, textPinCodeTxt, view1" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="textCustomerDetails, editTextN, editEmail, editMobileNo, view11" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -453,16 +646,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:orientation="vertical"
+        android:background="@color/app_color"
+        android:orientation="horizontal"
         >
 
-
-
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/layoutProceedToPayment"
+            android:id="@+id/layoutSort"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
@@ -471,13 +664,13 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textCartOrder"
+                android:id="@+id/textPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="@string/place_order"
+                android:text="@string/proceed_to_payment"
                 app:fontFamily="@font/roboto_medium"
                 />
 
@@ -486,7 +679,9 @@
 
 
 
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

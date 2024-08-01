@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "839047795865",
+    "project_id": "shimmer-c982d",
+    "storage_bucket": "shimmer-c982d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839047795865:android:612677cd9859e8ddbf1408",
+        "android_client_info": {
+          "package_name": "com.shimmer.admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCENjVM2ONRbk-jYtJvp4UFRvN1oGPZPEo"
+        },
+        {
+          "current_key": "AIzaSyB1vpo_mCaAEZghU4MhZwbuUwLxJh-aH2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839047795865:android:c6e3ec4fd3399555bf1408",
+        "android_client_info": {
+          "package_name": "com.shimmer.store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCENjVM2ONRbk-jYtJvp4UFRvN1oGPZPEo"
+        },
+        {
+          "current_key": "AIzaSyB1vpo_mCaAEZghU4MhZwbuUwLxJh-aH2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

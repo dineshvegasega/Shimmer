@@ -66,49 +66,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editTextFN"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="@string/first_nameStar"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textFNTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
-                />
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textLNTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/_2C2C2C"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editTextFN"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                app:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="@string/last_name"
-                android:visibility="visible"
-                />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editTextLN"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="@string/last_nameStar"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textLNTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
-                />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -118,27 +77,13 @@
                 android:textColor="@color/_2C2C2C"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editTextLN"
+                app:layout_constraintTop_toBottomOf="@+id/textFNTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/roboto_medium"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text="Company Name"
                 android:visibility="visible"
-                />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editCompanyName"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="Company Name"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
                 />
 
 
@@ -149,7 +94,7 @@
                 android:textColor="@color/_2C2C2C"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editCompanyName"
+                app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/roboto_medium"
@@ -158,19 +103,7 @@
                 android:visibility="visible"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editAdrress"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="Adrress"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
-                />
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textCityTxt"
@@ -179,7 +112,7 @@
                 android:textColor="@color/_2C2C2C"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editAdrress"
+                app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/roboto_medium"
@@ -188,37 +121,8 @@
                 android:visibility="visible"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editCity"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="City"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
-                />
 
 
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textStateTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/_2C2C2C"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editCity"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                app:fontFamily="@font/roboto_medium"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:text="State"
-                android:visibility="visible"
-                />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/editState"
@@ -228,7 +132,7 @@
                 android:hint="State"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textStateTxt"
+                app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:maxLength="25"
                 android:visibility="gone"
@@ -251,19 +155,6 @@
                 android:visibility="visible"
                 />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editCountry"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                style="@style/PrimaryEditText"
-                android:hint="PinCode"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text=""
-                app:layout_constraintTop_toBottomOf="@+id/textPinCodeTxt"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:maxLength="25"
-                android:visibility="gone"
-                />
 
             <View
                 android:id="@+id/view1"
@@ -272,7 +163,85 @@
                 android:background="@color/_424041"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/editCountry"
+                app:layout_constraintTop_toBottomOf="@+id/textPinCodeTxt"
+                >
+
+            </View>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCustomerDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@color/_f2f2f2"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:text="Customer Details"
+                android:textAllCaps="true"
+                android:textColor="@color/_000000"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1"
+                tools:ignore="HardcodedText"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextN"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="@string/first_name"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/textCustomerDetails"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editEmail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="Email"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/editTextN"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                style="@style/PrimaryEditText"
+                android:hint="Mobile No"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:text=""
+                app:layout_constraintTop_toBottomOf="@+id/editEmail"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:maxLength="25"
+                android:visibility="visible"
+                />
+
+
+
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/editMobileNo"
                 >
 
             </View>
@@ -293,7 +262,7 @@
                 android:textSize="@dimen/_13sdp"
                 app:fontFamily="@font/roboto_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view1"
+                app:layout_constraintTop_toBottomOf="@+id/view11"
                 tools:ignore="HardcodedText"
                 />
 
@@ -649,6 +618,21 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="textBillingDetails, textFNTxt, textCompanyNameTxt, textAdrressTxt, textAdrressTxt, textCityTxt, textPinCodeTxt, view1" />
+
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="textCustomerDetails, editTextN, editEmail, editMobileNo, view11" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -680,12 +664,13 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="@string/place_order"
+                android:text="@string/proceed_to_payment"
                 app:fontFamily="@font/roboto_medium"
                 />
 
@@ -694,7 +679,11 @@
 
 
 
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

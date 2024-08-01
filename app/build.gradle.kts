@@ -8,6 +8,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id ("com.apollographql.apollo3") version ("3.7.0")
+    id ("com.google.gms.google-services")
 }
 
 android {
@@ -89,7 +90,7 @@ dependencies {
     implementation ("androidx.databinding:databinding-ktx:8.5.1")
     implementation ("androidx.databinding:databinding-runtime:8.5.1")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
@@ -135,15 +136,18 @@ dependencies {
     implementation ("com.google.firebase:firebase-database-ktx")
     implementation ("com.google.firebase:firebase-messaging-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
-    implementation ("com.google.firebase:firebase-crashlytics-ktx")
+//    implementation ("com.google.firebase:firebase-crashlytics-ktx")
     implementation ("com.google.firebase:firebase-config-ktx")
     implementation ("com.google.firebase:firebase-dynamic-links-ktx")
 
     implementation ("com.github.stfalcon-studio:StfalconImageViewer:v1.0.1")
-    implementation ("com.google.android.gms:play-services-auth-api-phone:18.1.0")
 
-    implementation ("androidx.paging:paging-common-ktx:3.3.0")
-    implementation ("androidx.paging:paging-runtime-ktx:3.3.0")
+    implementation ("com.google.android.gms:play-services-auth:21.2.0")
+    implementation ("com.google.android.gms:play-services-location:21.3.0")
+    implementation ("com.google.android.gms:play-services-maps:19.0.0")
+
+    implementation ("androidx.paging:paging-common-ktx:3.3.1")
+    implementation ("androidx.paging:paging-runtime-ktx:3.3.1")
 //    implementation ("com.google.android.play:review-ktx:2.0.1")
     implementation ("org.jsoup:jsoup:1.17.2")
     implementation ("com.github.vipulasri:timelineview:1.1.5")

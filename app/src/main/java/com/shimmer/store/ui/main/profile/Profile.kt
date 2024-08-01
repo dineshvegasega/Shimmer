@@ -26,10 +26,17 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MultipartBody
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+
 
 @AndroidEntryPoint
 class Profile : Fragment() {
@@ -88,6 +95,23 @@ class Profile : Fragment() {
             }
 
 
+            when(loginType){
+                "vendor" ->  {
+                    groupVendor.visibility = View.VISIBLE
+                    groupGuest.visibility = View.GONE
+                }
+                "guest" ->  {
+                    groupVendor.visibility = View.GONE
+                    groupGuest.visibility = View.VISIBLE
+                }
+            }
+
+
+            topBarSearch.apply {
+                appicon.visibility = View.GONE
+                editTextSearch.hint = "Search For Nearest Franchise"
+                editTextSearch.isFocusable = false
+            }
 
             btProfileDetails.singleClick {
                 findNavController().navigate(R.id.action_profile_to_profileDetails)
@@ -118,7 +142,7 @@ class Profile : Fragment() {
                         removeKey(LOGIN_DATA) {}
                         removeKey(STORE_TOKEN) {}
                         clearDataStore { }
-                        findNavController().navigate(R.id.action_profile_to_login)
+                        findNavController().navigate(R.id.action_profile_to_loginOptions)
                     }
                     .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
                         dialog.dismiss()

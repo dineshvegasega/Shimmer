@@ -16,6 +16,7 @@ import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
@@ -63,6 +64,15 @@ class Cart : Fragment() {
                 }
             }
 
+
+            when(loginType){
+                "vendor" ->  {
+                    textCartOrder.text = resources.getString(R.string.place_order)
+                }
+                "guest" ->  {
+                    textCartOrder.text = resources.getString(R.string.proceed)
+                }
+            }
 
             viewModel.cartMutableList.observe(viewLifecycleOwner) {
                 mainThread {
@@ -121,7 +131,7 @@ class Cart : Fragment() {
 
 
             layoutProceedToPayment.singleClick {
-                findNavController().navigate(R.id.action_cart_to_payment)
+                findNavController().navigate(R.id.action_cart_to_orderSummary)
             }
         }
     }

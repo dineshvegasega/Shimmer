@@ -1,11 +1,8 @@
-package com.shimmer.store.ui.main.payment
+package com.shimmer.store.ui.main.orderSummary
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -21,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PaymentVM @Inject constructor() : ViewModel() {
+class OrderSummaryVM @Inject constructor() : ViewModel() {
 
     var subTotalPrice : Double = 0.0
     var discountPrice : Double = 10.0
@@ -56,7 +53,6 @@ class PaymentVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-
                 textTitle.text = dataClass.name
                 textColor.text = "Color: "+dataClass.color
 //                if (dataClass.material_type == "12"){
@@ -68,7 +64,7 @@ class PaymentVM @Inject constructor() : ViewModel() {
                 textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!) + " x "+dataClass.quantity + " = ₹"+getPatternFormat("1", (dataClass.price?.times(dataClass.quantity.toDouble())))
 
                 ivIcon.singleClick {
-                    binding.root.findNavController().navigate(R.id.action_payment_to_productDetail)
+                    binding.root.findNavController().navigate(R.id.action_orderSummary_to_productDetail)
                 }
 
 //                ivCount.text = dataClass.quantity.toString()

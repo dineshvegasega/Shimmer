@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.payment
+package com.shimmer.store.ui.main.orderSummary
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -11,20 +11,22 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
+import com.shimmer.store.databinding.OrderSummaryBinding
 import com.shimmer.store.databinding.PaymentBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class Payment : Fragment() {
-    private val viewModel: PaymentVM by viewModels()
-    private var _binding: PaymentBinding? = null
+class OrderSummary : Fragment() {
+    private val viewModel: OrderSummaryVM by viewModels()
+    private var _binding: OrderSummaryBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -32,7 +34,7 @@ class Payment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PaymentBinding.inflate(inflater)
+        _binding = OrderSummaryBinding.inflate(inflater)
         return binding.root
     }
 
@@ -40,7 +42,6 @@ class Payment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
-
 
 
         binding.apply {
@@ -60,6 +61,20 @@ class Payment : Fragment() {
 
                 appicon.singleClick {
                     findNavController().navigateUp()
+                }
+            }
+
+
+            when(loginType){
+                "vendor" ->  {
+                    groupVendor.visibility = View.VISIBLE
+                    groupGuest.visibility = View.VISIBLE
+                    textPayment.text = resources.getString(R.string.proceed_to_payment)
+                }
+                "guest" ->  {
+                    groupVendor.visibility = View.GONE
+                    groupGuest.visibility = View.VISIBLE
+                    textPayment.text = resources.getString(R.string.select_franchise)
                 }
             }
 
@@ -113,7 +128,14 @@ class Payment : Fragment() {
 //            viewModel.ordersAdapter.submitList(viewModel.item1)
 
             layoutSort.singleClick {
-                findNavController().navigate(R.id.action_payment_to_home)
+                when(loginType){
+                    "vendor" ->  {
+                        findNavController().navigate(R.id.action_orderSummary_to_home)
+                    }
+                    "guest" ->  {
+                        findNavController().navigate(R.id.action_orderSummary_to_franchiseList)
+                    }
+                }
             }
         }
     }

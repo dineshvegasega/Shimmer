@@ -16,6 +16,25 @@
         />
 
 
+    <include
+        android:id="@+id/top_bar_search"
+        layout="@layout/top_bar_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_search"
+        app:layout_constraintBottom_toTopOf="@+id/layout6"
+     />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btProfileDetails"
         style="@style/PrimaryButtonBlue"
@@ -41,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_search"
         android:fontFamily="@font/roboto_medium"
         />
 
@@ -62,7 +81,7 @@
         android:paddingVertical="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:text="My Orders"
+        android:text="@string/orders"
         android:textSize="@dimen/_11sdp"
         app:cornerRadius="@dimen/_4sdp"
         android:insetTop="0dp"
@@ -92,7 +111,7 @@
         android:paddingVertical="@dimen/_7sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:textColor="@color/black"
-        android:text="Complaints"
+        android:text="@string/complaints_feedback"
         android:textSize="@dimen/_11sdp"
         app:cornerRadius="@dimen/_4sdp"
         android:insetTop="0dp"
@@ -226,5 +245,18 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_vendor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="btProfileDetails,btOrders, btComplaints, btChangePassword, switchNotifications, btLogout" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_guest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="top_bar_search,map" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -202,7 +202,7 @@
 
         <action
             android:id="@+id/action_profile_to_trackOrder"
-            app:destination="@id/trackOrder"
+            app:destination="@id/orders"
             app:launchSingleTop="true"
             />
 
@@ -221,6 +221,13 @@
         <action
             android:id="@+id/action_profile_to_login"
             app:destination="@id/login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
+        \
+        <action
+            android:id="@+id/action_profile_to_loginOptions"
+            app:destination="@id/loginOptions"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true" />
@@ -246,18 +253,18 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.trackOrder.TrackOrder"
-        android:label="TrackOrder"
-        android:id="@+id/trackOrder"
-        tools:layout="@layout/track_order">
+        android:name="com.shimmer.store.ui.main.orders.Orders"
+        android:label="Orders"
+        android:id="@+id/orders"
+        tools:layout="@layout/orders">
         <action
-            android:id="@+id/action_trackOrder_to_search"
+            android:id="@+id/action_orders_to_search"
             app:destination="@id/search"
             app:launchSingleTop="true"
             />
 
         <action
-            android:id="@+id/action_trackOrder_to_cart"
+            android:id="@+id/action_orders_to_cart"
             app:destination="@id/cart"
             app:launchSingleTop="true"
             />
@@ -319,8 +326,8 @@
         android:id="@+id/cart"
         tools:layout="@layout/cart">
         <action
-            android:id="@+id/action_cart_to_payment"
-            app:destination="@id/payment"
+            android:id="@+id/action_cart_to_orderSummary"
+            app:destination="@id/orderSummary"
             app:launchSingleTop="true"
             />
 
@@ -333,20 +340,26 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.payment.Payment"
-        android:label="Payment"
-        android:id="@+id/payment"
-        tools:layout="@layout/payment">
+        android:name="com.shimmer.store.ui.main.orderSummary.OrderSummary"
+        android:label="OrderSummary"
+        android:id="@+id/orderSummary"
+        tools:layout="@layout/order_summary">
         <action
-            android:id="@+id/action_payment_to_home"
+            android:id="@+id/action_orderSummary_to_home"
             app:destination="@id/home"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true" />
 
         <action
-            android:id="@+id/action_payment_to_productDetail"
+            android:id="@+id/action_orderSummary_to_productDetail"
             app:destination="@id/productDetail"
+            app:launchSingleTop="true"
+            />
+
+        <action
+            android:id="@+id/action_orderSummary_to_franchiseList"
+            app:destination="@id/franchiseList"
             app:launchSingleTop="true"
             />
 
@@ -429,5 +442,20 @@
         android:id="@+id/customDesign"
         tools:layout="@layout/custom_design">
     </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.franchiseList.FranchiseList"
+        android:label="FranchiseList"
+        android:id="@+id/franchiseList"
+        tools:layout="@layout/franchise_list">
+        <action
+            android:id="@+id/action_franchiseList_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 
 </navigation>

@@ -20,9 +20,12 @@ import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.getPatternFormat
+import com.shimmer.store.utils.glideImage
+import com.shimmer.store.utils.glidePhotoView
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 
@@ -104,10 +107,10 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.textTitle.text = model.name
             itemRowBinding.textPrice.text = "₹"+ getPatternFormat("1", model.price)
 
-
+            (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
             itemRowBinding.ivIcon.setOnClickListener {
                 it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
-                    putString("sku", model.sku)
+                    putParcelable("model", model)
                 })
             }
 
