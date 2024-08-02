@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.text.TextUtils
+import android.util.ArraySet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
@@ -56,7 +58,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<Items> = ArrayList()
 
-    var arraySizes : ArrayList<ItemSizes> = ArrayList()
+    var arraySizes : ArraySet<ItemSizes> = ArraySet()
 
 
     init {
@@ -80,27 +82,27 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
 
 
-        arraySizes.add(ItemSizes(5 , 11.1))
-        arraySizes.add(ItemSizes(6 , 12.1))
-        arraySizes.add(ItemSizes(7 , 13.1))
-        arraySizes.add(ItemSizes(8 , 14.1))
-        arraySizes.add(ItemSizes(9 , 15.1))
-        arraySizes.add(ItemSizes(10 , 16.1))
-        arraySizes.add(ItemSizes(11 , 17.1))
-        arraySizes.add(ItemSizes(12 , 18.1))
-        arraySizes.add(ItemSizes(13 , 19.1))
-        arraySizes.add(ItemSizes(14 , 20.1))
-        arraySizes.add(ItemSizes(15 , 21.1))
-        arraySizes.add(ItemSizes(16 , 22.1))
-        arraySizes.add(ItemSizes(17 , 23.1))
-        arraySizes.add(ItemSizes(18 , 24.1))
-        arraySizes.add(ItemSizes(19 , 25.1))
-        arraySizes.add(ItemSizes(20 , 26.1))
-        arraySizes.add(ItemSizes(21 , 27.1))
-        arraySizes.add(ItemSizes(22 , 28.1))
-        arraySizes.add(ItemSizes(23 , 29.1))
-        arraySizes.add(ItemSizes(24 , 30.1))
-        arraySizes.add(ItemSizes(25 , 31.1))
+//        arraySizes.add(ItemSizes(5 , 11.1))
+//        arraySizes.add(ItemSizes(6 , 12.1))
+//        arraySizes.add(ItemSizes(7 , 13.1))
+//        arraySizes.add(ItemSizes(8 , 14.1))
+//        arraySizes.add(ItemSizes(9 , 15.1))
+//        arraySizes.add(ItemSizes(10 , 16.1))
+//        arraySizes.add(ItemSizes(11 , 17.1))
+//        arraySizes.add(ItemSizes(12 , 18.1))
+//        arraySizes.add(ItemSizes(13 , 19.1))
+//        arraySizes.add(ItemSizes(14 , 20.1))
+//        arraySizes.add(ItemSizes(15 , 21.1))
+//        arraySizes.add(ItemSizes(16 , 22.1))
+//        arraySizes.add(ItemSizes(17 , 23.1))
+//        arraySizes.add(ItemSizes(18 , 24.1))
+//        arraySizes.add(ItemSizes(19 , 25.1))
+//        arraySizes.add(ItemSizes(20 , 26.1))
+//        arraySizes.add(ItemSizes(21 , 27.1))
+//        arraySizes.add(ItemSizes(22 , 28.1))
+//        arraySizes.add(ItemSizes(23 , 29.1))
+//        arraySizes.add(ItemSizes(24 , 30.1))
+//        arraySizes.add(ItemSizes(25 , 31.1))
     }
 
 
@@ -261,6 +263,10 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
+
+    var sizeMutableListClose = MutableLiveData<Boolean>(false)
+    var sizeMutableList = MutableLiveData<Int>(0)
+//    var sizeValue : Int = 0
     var selectedPosition = -1
     val sizeAdapter = object : GenericAdapter<ItemSizeBinding, ItemSizes>() {
         override fun onCreateView(
@@ -277,30 +283,35 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         ) {
             binding.apply {
                 textSize.text = dataClass.inch.toString()
-                textMM.text = dataClass.mm.toString() +" mm"
+//                textMM.text = dataClass.mm.toString() +" mm"
 
                 ivIcon.singleClick {
                     selectedPosition = position
-//                    val list = currentList
-//                    list.apply {
-//                        forEach {
-//                            it.isSelected = false
-//                        }
-//                        this[position].isSelected = true
-//                    }
+                    val list = currentList
+                    list.apply {
+                        forEach {
+                            it.isSelected = false
+                        }
+                        this[position].isSelected = true
+                    }
 ////                    dataClass.isSelected = !dataClass.isSelected
 //                    notifyItemChanged(position)
+
+
+
+                    sizeMutableList.value = dataClass.inch.toInt()
+                    sizeMutableListClose.value = true
                     notifyDataSetChanged()
                 }
 
-                if (selectedPosition == position) {
-                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.app_color))
-                } else {
-                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
-                }
+//                if (selectedPosition == position) {
+//                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color.app_color))
+//                } else {
+//                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
+//                }
 
-//                ivIcon.setBackgroundColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.app_color)
-//                else ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
+                ivIcon.setBackgroundColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.app_color)
+                else ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
             }
         }
     }

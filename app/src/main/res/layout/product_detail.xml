@@ -192,7 +192,7 @@
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutPuritySelect"
+                android:id="@+id/layoutMetalType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -201,6 +201,71 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutColor">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textMetalType"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:text="Metal Type"
+                    android:textColor="@color/_000000"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/roboto_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bt12"
+                    style="@style/PrimaryButtonBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:backgroundTint="@color/black"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Gold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="visible"
+                    app:cornerRadius="@dimen/_4sdp"
+                    app:iconTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bt13"
+                    style="@style/PrimaryButtonBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:backgroundTint="@color/_a5a8ab"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="Platinum"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="visible"
+                    app:cornerRadius="@dimen/_4sdp"
+                    app:iconTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutPuritySelect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutMetalType">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textPuritySelect"
@@ -219,7 +284,7 @@
                     style="@style/PrimaryButtonBlue"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:backgroundTint="@color/black"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
@@ -238,7 +303,7 @@
                     style="@style/PrimaryButtonBlue"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:backgroundTint="@color/_a5a8ab"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
@@ -252,6 +317,24 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                     />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/bt95"
+                    style="@style/PrimaryButtonBlue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:backgroundTint="@color/_a5a8ab"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:text="95"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    android:visibility="visible"
+                    app:cornerRadius="@dimen/_4sdp"
+                    app:iconTint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                    />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -272,7 +355,7 @@
                     android:layout_width="@dimen/_60sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="Ring Size"
+                    android:text="Size"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/roboto_medium"

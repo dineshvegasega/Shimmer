@@ -31,6 +31,7 @@ import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.ItemParcelable
+import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.ui.interfaces.CallBackListener
@@ -40,6 +41,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+import com.shimmer.store.utils.getIntValue
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.ioThread
@@ -76,6 +78,10 @@ class ProductDetail : Fragment(), CallBackListener {
 
     var arrayColors = ArrayList<ItemColor>()
     var arrayPurity = ArrayList<ItemColor>()
+
+
+    var arrayAllProduct: ArrayList<ItemProduct> = ArrayList()
+    lateinit var currentProduct: ItemProduct
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -141,24 +147,141 @@ class ProductDetail : Fragment(), CallBackListener {
                 viewModel.colors(binding, 1)
             }
             ivSilver.singleClick {
-                arrayColors.forEach {
-                    Log.e("TAG", "it.skuAA " + it.sku + " :: " + it.color)
-                    if (it.color == "20") {
-                        callApiDetails(it.sku)
+                arrayAllProduct.forEach { itemProdcut ->
+                    itemProdcut.custom_attributes.forEach { productAttributesColor ->
+                        if (productAttributesColor.attribute_code == "metal_color") {
+                            itemProdcut.custom_attributes.forEach { productAttributesPurity ->
+                                if (productAttributesPurity.attribute_code == "metal_purity") {
+                                    itemProdcut.custom_attributes.forEach { productAttributesSize ->
+                                        if (productAttributesSize.attribute_code == "size") {
+                                            currentProduct.custom_attributes.forEach { customeAttrColor ->
+                                                if (customeAttrColor.attribute_code == "metal_color") {
+                                                    currentProduct.custom_attributes.forEach { customeAttrPurity ->
+                                                        if (customeAttrPurity.attribute_code == "metal_purity") {
+                                                            currentProduct.custom_attributes.forEach { customeAttrSize ->
+                                                                if (customeAttrSize.attribute_code == "size") {
+                                                                    if (productAttributesColor.value == "20" && productAttributesPurity.value == customeAttrPurity.value && productAttributesSize.value == customeAttrSize.value) {
+                                                                        Log.e(
+                                                                            "TAG",
+                                                                            "it.skuAA " + itemProdcut.sku + " :: "
+                                                                        )
+                                                                        setOneDetail(itemProdcut)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+
+
             ivGold.singleClick {
-                arrayColors.forEach {
-                    Log.e("TAG", "it.skuBB " + it.sku + " :: " + it.color)
-                    if (it.color == "19") {
-                        callApiDetails(it.sku)
+                arrayAllProduct.forEach { itemProdcut ->
+                    itemProdcut.custom_attributes.forEach { productAttributesColor ->
+                        if (productAttributesColor.attribute_code == "metal_color") {
+                            itemProdcut.custom_attributes.forEach { productAttributesPurity ->
+                                if (productAttributesPurity.attribute_code == "metal_purity") {
+                                    itemProdcut.custom_attributes.forEach { productAttributesSize ->
+                                        if (productAttributesSize.attribute_code == "size") {
+                                            currentProduct.custom_attributes.forEach { customeAttrColor ->
+                                                if (customeAttrColor.attribute_code == "metal_color") {
+                                                    currentProduct.custom_attributes.forEach { customeAttrPurity ->
+                                                        if (customeAttrPurity.attribute_code == "metal_purity") {
+                                                            currentProduct.custom_attributes.forEach { customeAttrSize ->
+                                                                if (customeAttrSize.attribute_code == "size") {
+                                                                    if (productAttributesColor.value == "19" && productAttributesPurity.value == customeAttrPurity.value && productAttributesSize.value == customeAttrSize.value) {
+                                                                        Log.e(
+                                                                            "TAG",
+                                                                            "it.skuAA " + itemProdcut.sku + " :: "
+                                                                        )
+                                                                        setOneDetail(itemProdcut)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
+
+
             btRingSize.singleClick {
                 openDialogSize()
             }
+
+
+//            viewModel.sizeMutableList.value = 0
+            viewModel.sizeMutableList.observe(viewLifecycleOwner) {
+                if (it != 0) {
+                    btRingSize.text = "" + it
+
+                    viewModel.arraySizes.forEach { itemSize ->
+//                        Log.e("TAG", "itemSize.inchAA "+itemSize.inch)
+                        itemSize.apply {
+                            isSelected = false
+                        }
+                        if (itemSize.inch == "" + it) {
+                            Log.e("TAG", "itemSize.inchBB " + itemSize.inch)
+                            itemSize.apply {
+                                isSelected = true
+                            }
+                        }
+
+//                        viewModel.sizeAdapter.notifyDataSetChanged()
+
+
+                        arrayAllProduct.forEach { itemProdcut ->
+                            itemProdcut.custom_attributes.forEach { productAttributesColor ->
+                                if (productAttributesColor.attribute_code == "metal_color") {
+                                    itemProdcut.custom_attributes.forEach { productAttributesPurity ->
+                                        if (productAttributesPurity.attribute_code == "metal_purity") {
+                                            itemProdcut.custom_attributes.forEach { productAttributesSize ->
+                                                if (productAttributesSize.attribute_code == "size") {
+                                                    currentProduct.custom_attributes.forEach { customeAttrColor ->
+                                                        if (customeAttrColor.attribute_code == "metal_color") {
+                                                            currentProduct.custom_attributes.forEach { customeAttrPurity ->
+                                                                if (customeAttrPurity.attribute_code == "metal_purity") {
+                                                                    currentProduct.custom_attributes.forEach { customeAttrSize ->
+                                                                        if (customeAttrSize.attribute_code == "size") {
+                                                                            if (productAttributesColor.value == customeAttrColor.value && productAttributesPurity.value == customeAttrPurity.value && productAttributesSize.value ==  itemSize.inch) {
+                                                                                Log.e(
+                                                                                    "TAG",
+                                                                                    "it.skuAA " + itemProdcut.sku + " :: "
+                                                                                )
+                                                                                setOneDetail(itemProdcut)
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
 
             btGuide.singleClick {
                 viewModel.openDialogPdf(1, "quote.pdf")
@@ -176,48 +299,72 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
             bt14.singleClick {
-//                bt14.backgroundTintList = ColorStateList.valueOf(
-//                    ContextCompat.getColor(
-//                        requireContext(),
-//                        R.color._000000
-//                    )
-//                )
-//                bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
-//                bt18.backgroundTintList = ColorStateList.valueOf(
-//                    ContextCompat.getColor(
-//                        requireContext(),
-//                        R.color._a5a8ab
-//                    )
-//                )
-//                bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-
-                arrayPurity.forEach {
-                    Log.e("TAG", "it.skuAA " + it.sku + " :: " + it.color)
-                    if (it.purity == "14") {
-                        callApiDetails(it.sku)
+                arrayAllProduct.forEach { itemProdcut ->
+                    itemProdcut.custom_attributes.forEach { productAttributesColor ->
+                        if (productAttributesColor.attribute_code == "metal_color") {
+                            itemProdcut.custom_attributes.forEach { productAttributesPurity ->
+                                if (productAttributesPurity.attribute_code == "metal_purity") {
+                                    itemProdcut.custom_attributes.forEach { productAttributesSize ->
+                                        if (productAttributesSize.attribute_code == "size") {
+                                            currentProduct.custom_attributes.forEach { customeAttrColor ->
+                                                if (customeAttrColor.attribute_code == "metal_color") {
+                                                    currentProduct.custom_attributes.forEach { customeAttrPurity ->
+                                                        if (customeAttrPurity.attribute_code == "metal_purity") {
+                                                            currentProduct.custom_attributes.forEach { customeAttrSize ->
+                                                                if (customeAttrSize.attribute_code == "size") {
+                                                                    if (productAttributesColor.value == customeAttrColor.value && productAttributesPurity.value == "14" && productAttributesSize.value == customeAttrSize.value) {
+                                                                        Log.e(
+                                                                            "TAG",
+                                                                            "it.skuAA " + itemProdcut.sku + " :: "
+                                                                        )
+                                                                        setOneDetail(itemProdcut)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
             bt18.singleClick {
-//                bt14.backgroundTintList = ColorStateList.valueOf(
-//                    ContextCompat.getColor(
-//                        requireContext(),
-//                        R.color._a5a8ab
-//                    )
-//                )
-//                bt14.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-//                bt18.backgroundTintList = ColorStateList.valueOf(
-//                    ContextCompat.getColor(
-//                        requireContext(),
-//                        R.color._000000
-//                    )
-//                )
-//                bt18.setTextColor(ContextCompat.getColor(requireContext(), R.color._ffffff))
-
-                arrayPurity.forEach {
-                    Log.e("TAG", "it.skuAA " + it.sku + " :: " + it.color)
-                    if (it.purity == "15") {
-                        callApiDetails(it.sku)
+                arrayAllProduct.forEach { itemProdcut ->
+                    itemProdcut.custom_attributes.forEach { productAttributesColor ->
+                        if (productAttributesColor.attribute_code == "metal_color") {
+                            itemProdcut.custom_attributes.forEach { productAttributesPurity ->
+                                if (productAttributesPurity.attribute_code == "metal_purity") {
+                                    itemProdcut.custom_attributes.forEach { productAttributesSize ->
+                                        if (productAttributesSize.attribute_code == "size") {
+                                            currentProduct.custom_attributes.forEach { customeAttrColor ->
+                                                if (customeAttrColor.attribute_code == "metal_color") {
+                                                    currentProduct.custom_attributes.forEach { customeAttrPurity ->
+                                                        if (customeAttrPurity.attribute_code == "metal_purity") {
+                                                            currentProduct.custom_attributes.forEach { customeAttrSize ->
+                                                                if (customeAttrSize.attribute_code == "size") {
+                                                                    if (productAttributesColor.value == customeAttrColor.value && productAttributesPurity.value == "15" && productAttributesSize.value == customeAttrSize.value) {
+                                                                        Log.e(
+                                                                            "TAG",
+                                                                            "it.skuAA " + itemProdcut.sku + " :: "
+                                                                        )
+                                                                        setOneDetail(itemProdcut)
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -298,13 +445,23 @@ class ProductDetail : Fragment(), CallBackListener {
         dialogBinding.rvListSize.setHasFixedSize(true)
         dialogBinding.rvListSize.adapter = viewModel.sizeAdapter
         viewModel.sizeAdapter.notifyDataSetChanged()
-        viewModel.sizeAdapter.submitList(viewModel.arraySizes)
+        viewModel.sizeAdapter.submitList(ArrayList(viewModel.arraySizes))
+
 
 
         dialogBinding.ivIconCross.singleClick {
             dialog.dismiss()
         }
 
+
+        viewModel.sizeMutableListClose.value = false
+        viewModel.sizeMutableListClose.observe(viewLifecycleOwner) {
+            if (it) {
+                mainThread {
+                    dialog.dismiss()
+                }
+            }
+        }
     }
 
 
@@ -319,16 +476,89 @@ class ProductDetail : Fragment(), CallBackListener {
                         requireView(),
                         skuId
                     ) {
-                        val _allProductArray = this
+                        arrayAllProduct = this
 //                        _allProductArray.forEach {
 //                            val _allProduct = it
 //                            Log.e("TAG", "arrayColorsSize: " + _allProduct.name)
 //                        }
 
-                        if (_allProductArray.size > 0) {
-                            Log.e("TAG", "_allProductArray.size "+_allProductArray.size)
-                            setOneDetail(_allProductArray[0])
+
+                        bt12.visibility = View.GONE
+                        bt13.visibility = View.GONE
+                        bt14.visibility = View.GONE
+                        bt18.visibility = View.GONE
+                        bt95.visibility = View.GONE
+
+                        ivGold.visibility = View.GONE
+                        ivSilver.visibility = View.GONE
+                        ivPink.visibility = View.GONE
+
+
+                        if (arrayAllProduct.size > 0) {
+                            Log.e("TAG", "_allProductArray.size " + arrayAllProduct.size)
+                            currentProduct = arrayAllProduct[0]
+                            setOneDetail(arrayAllProduct[0])
                         }
+
+
+
+                        arrayAllProduct.forEach { itemProduct ->
+                            itemProduct.custom_attributes.forEach { customAttr ->
+                                if (customAttr.attribute_code == "metal_color") {
+                                    if (customAttr.value == "19") {
+                                        ivGold.visibility = View.VISIBLE
+                                    }
+
+                                    if (customAttr.value == "20") {
+                                        ivSilver.visibility = View.VISIBLE
+                                    }
+
+                                    if (customAttr.value == "21") {
+                                        ivPink.visibility = View.VISIBLE
+                                    }
+                                }
+
+
+
+
+                                if (customAttr.attribute_code == "metal_purity") {
+                                    if (customAttr.value == "14") {
+                                        bt12.visibility = View.VISIBLE
+                                        bt14.visibility = View.VISIBLE
+                                    }
+
+                                    if (customAttr.value == "15") {
+                                        bt12.visibility = View.VISIBLE
+                                        bt18.visibility = View.VISIBLE
+                                    }
+
+                                    if (customAttr.value == "16") {
+                                        bt13.visibility = View.VISIBLE
+                                        bt95.visibility = View.VISIBLE
+                                    }
+                                }
+
+
+
+                                if (customAttr.attribute_code == "size") {
+                                    Log.e("TAG", "sizeAAA: ${customAttr.value}")
+                                    viewModel.arraySizes.add(ItemSizes(inch = "" + customAttr.value))
+                                }
+
+
+                            }
+
+
+//                            viewModel.arraySizes.forEach { itemSize->
+//                                if (itemSize.inch == it.value) {
+//                                    itemSize.apply {
+//                                        isSelected = true
+//                                    }
+//                                }
+//                            }
+
+                        }
+
 
 //                        Log.e("TAG", "arrayColorsSize: " + arrayColors.size)
 //                        Log.e("TAG", "arrayPuritySize: " + arrayPurity.size)
@@ -1077,48 +1307,208 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
     private fun setOneDetail(itemProduct: ItemProduct) {
-        Log.e("TAG", "itemProduct.name "+itemProduct.name)
+        Log.e("TAG", "itemProduct.name " + itemProduct.name)
 //        images = itemProduct.media_gallery_entries
 //        pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
 
         binding.apply {
-//            mainThread {
-                Log.e("TAG", "itemProduct.name "+itemProduct.name)
-            textTitle.text = itemProduct.name
-            textPrice.text = "₹ "+ getPatternFormat("1", itemProduct.price)
-            textSKU.text = "SKU: " + itemProduct.sku
+            mainThread {
+                Log.e("TAG", "itemProduct.name " + itemProduct.name)
+                textTitle.text = itemProduct.name
+                textPrice.text = "₹ " + getPatternFormat("1", itemProduct.price)
+                textSKU.text = "SKU: " + itemProduct.sku
 
-            itemProduct.custom_attributes.forEach {
-                if(it.attribute_code == "category_ids"){
-                    Log.e("TAG", "itemProduct.attribute_code "+it.value)
-//                    mainCategory
-//                    var ss = arrayOf(it.value)
 
-//                    val items = it.value.toString().replace("\\[".toRegex(), "").replace("\\]".toRegex(), "").replace("\\s".toRegex(), "").split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-////                    val results = IntArray(items.size)
-//                    Log.e("TAG", "itemProduct.ss "+items.toString())
-//                    var dd = it.value.toString().chars().toArray()
-//                    Log.e("TAG", "itemProduct.ss "+dd.toString())
-                    //val result = strings.map { it.toInt() }
-
-                    var idvalues = ""
-                    val ids = it.value.toString().replace("[", "").replace("]", "").replace(" ", "").split(",")
-                    ids.forEach { idsInner ->
+                itemProduct.custom_attributes.forEach {
+                    if (it.attribute_code == "category_ids") {
+//                    Log.e("TAG", "itemProduct.attribute_code "+it.value)
+                        var idvalues = ""
+                        val ids =
+                            it.value.toString().replace("[", "").replace("]", "").replace(" ", "")
+                                .split(",")
+                        ids.forEach { idsInner ->
 //                        Log.e("TAG", "itemProduct.ss "+idsInner.toString())
-                        val filteredNot = mainCategory.filter { idsInner.toInt() == it.id }
-                        filteredNot.forEach { filteredNotInner ->
-                            idvalues += filteredNotInner.name+", "
+                            val filteredNot = mainCategory.filter { idsInner.toInt() == it.id }
+                            filteredNot.forEach { filteredNotInner ->
+                                idvalues += filteredNotInner.name + ", "
 //                            Log.e("TAG", "itemProduct.ss "+filteredNot.toString())
+                            }
+                        }
+                        textCategories.text = "CATEGORIES: " + idvalues
+                    }
+
+
+
+                    if (it.attribute_code == "metal_purity") {
+                        if (it.value == "14") {
+                            Log.e("TAG", "itemProduct.ss 14")
+                            bt12.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt12.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt12.visibility = View.VISIBLE
+
+
+                            bt14.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt14.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+
+                            bt18.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt18.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+
+                            bt14.visibility = View.VISIBLE
+
                         }
 
+                        if (it.value == "15") {
+                            Log.e("TAG", "itemProduct.ss 15")
+                            bt12.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt12.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt12.visibility = View.VISIBLE
+
+
+                            bt14.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt14.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+
+                            bt18.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt18.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt18.visibility = View.VISIBLE
+                        }
+
+                        if (it.value == "16") {
+                            Log.e("TAG", "itemProduct.ss 16")
+                            bt13.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt13.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt13.visibility = View.VISIBLE
+
+
+                            bt95.backgroundTintList = ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._000000
+                                )
+                            )
+                            bt95.setTextColor(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._ffffff
+                                )
+                            )
+                            bt95.visibility = View.VISIBLE
+                        }
                     }
-                    textCategories.text = "CATEGORIES: "+idvalues
+
+
+
+
+                    if (it.attribute_code == "metal_color") {
+                        if (it.value == "19") {
+                            ivGold.visibility = View.VISIBLE
+                            viewModel.colors(binding, 3)
+                        }
+
+                        if (it.value == "20") {
+                            ivSilver.visibility = View.VISIBLE
+                            viewModel.colors(binding, 2)
+                        }
+
+                        if (it.value == "21") {
+                            ivPink.visibility = View.VISIBLE
+                            viewModel.colors(binding, 1)
+                        }
+                    }
+
+
+
+
+                    if (it.attribute_code == "size") {
+                        btRingSize.text = "" + it.value
+//                        viewModel.sizeValue = it.value.toString().toInt()
+
+                        viewModel.arraySizes.forEach { itemSize ->
+//                            Log.e("TAG", "itemSize.inchAA " + itemSize.inch)
+                            itemSize.apply {
+                                isSelected = false
+                            }
+                            if (itemSize.inch == ""+it.value) {
+//                                Log.e("TAG", "itemSize.inchBB " + itemSize.inch)
+                                itemSize.apply {
+                                    isSelected = true
+                                }
+                            }
+                        }
+                    }
 
                 }
+
             }
-
-
-//            }
         }
 
     }

@@ -57,8 +57,6 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val binding: ItemLoadingBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_loading, parent, false)
             LoadingVH(binding)
         }
-
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

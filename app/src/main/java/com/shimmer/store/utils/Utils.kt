@@ -963,6 +963,17 @@ fun getPatternFormat(s: String, value: Double?): String {
     }
     return defaultPattern
 }
+
+
+
+fun getIntValue(vararg any: Any) : Int {
+    return when(val tmp = any.first()) {
+        is Number -> tmp.toInt()
+        else -> throw Exception("not a number") // or do something else reasonable for your case
+    }
+}
+
+
 // filters -
 // gender - male, female, kids ,
 // category
