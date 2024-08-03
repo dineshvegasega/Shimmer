@@ -186,6 +186,49 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
+    fun getProductOptions(_id: String, callBack: JsonElement.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.productsOptions(_id)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAACCC: ${response.body().toString()}")
+                           //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+                                callBack(response.body()!!)
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else if(message.contains("The product that was requested doesn't exist")){
+                            showSnackBar(message)
+                        } else {
+                            sessionExpired()
+                        }
+
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
 
     fun allProducts(adminToken: String, view: View, skuId: String, callBack: ArrayList<ItemProduct>.() -> Unit) =
         viewModelScope.launch {
@@ -237,7 +280,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
 
 
-    val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, Items>() {
+    val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, ItemProduct>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -246,18 +289,60 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
         override fun onBindHolder(
             binding: ItemProductDiamondsBinding,
-            dataClass: Items,
+            dataClass: ItemProduct,
             position: Int
         ) {
             binding.apply {
-//                recyclerViewRecentItems.setHasFixedSize(true)
-//                val headlineAdapter = RecentChildAdapter(
-//                    binding.root.context,
-//                    dataClass.items,
-//                    position
-//                )
-//                recyclerViewRecentItems.adapter = headlineAdapter
-//                recyclerViewRecentItems.layoutManager = LinearLayoutManager(binding.root.context)
+                dataClass.custom_attributes.forEach{ itemProductAttr ->
+
+//                    if (itemProductAttr.attribute_code == "metal_color") {
+//                        textDiamondColorText.text = "" + itemProductAttr.value
+//                    }
+                    if (itemProductAttr.attribute_code == "size") {
+                        textDiamondSizeText.text = "" + itemProductAttr.value
+                    }
+
+                    if (itemProductAttr.attribute_code == "metal_purity") {
+                        if (itemProductAttr.value == "14") {
+                            dataClass.custom_attributes.forEach { itemProductChildAttr ->
+                                if (itemProductChildAttr.attribute_code == "metal_color") {
+                                    if (itemProductChildAttr.value == "19") {
+                                        textDiamondColorText.text = "14 kt Yellow Gold"
+                                    } else if (itemProductChildAttr.value == "20") {
+                                        textDiamondColorText.text = "14 kt White Gold"
+                                    } else if (itemProductChildAttr.value == "18") {
+                                        textDiamondColorText.text = "14 kt Rose Gold"
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemProductAttr.value == "15") {
+                            dataClass.custom_attributes.forEach { itemProductChildAttr ->
+                                if (itemProductChildAttr.attribute_code == "metal_color") {
+                                    if (itemProductChildAttr.value == "19") {
+                                        textDiamondColorText.text = "18 kt Yellow Gold"
+                                    } else if (itemProductChildAttr.value == "20") {
+                                        textDiamondColorText.text = "18 kt White Gold"
+                                    } else if (itemProductChildAttr.value == "18") {
+                                        textDiamondColorText.text = "18 kt Rose Gold"
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemProductAttr.value == "16") {
+                            textDiamondColorText.text = "Platinum 95"
+                        }
+                    }
+
+                }
+
+                textDiamondClarityText.text = ""
+                textDiamondShapeText.text = ""
+                textDiamondNoText.text = ""
+                textDiamondTotalWeightText.text = ""+dataClass.weight
+
             }
         }
     }

@@ -56,6 +56,11 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
+    @GET(PRODUCT_OPTIONS)
+    suspend fun productsOptions(
+        @Query("con_id") con_id: String
+    ): Response<JsonElement>
+
 
     @GET(ALL_PRODUCTS+"{id}/children")
     suspend fun allProducts(

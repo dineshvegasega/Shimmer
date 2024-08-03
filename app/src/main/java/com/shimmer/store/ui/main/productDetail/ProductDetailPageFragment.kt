@@ -25,6 +25,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.utils.glideImage
+import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.UnstableApi
@@ -102,7 +103,7 @@ class ProductDetailPageFragment(
         if(videoPath.media_type.endsWith("image")){
             binding.ivIcon.visibility = View.VISIBLE
             binding.playerView.visibility = View.GONE
-            (IMAGE_URL+videoPath.file).glideImage(binding.ivIcon.context, binding.ivIcon)
+            (IMAGE_URL+videoPath.file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
             binding.ivIcon.singleClick {
                 ProductDetail.callBackListener!!.onCallBack(0)
             }

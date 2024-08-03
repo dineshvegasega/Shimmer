@@ -525,7 +525,8 @@
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/roboto_light"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText"
+                        android:visibility="gone"/>
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -537,7 +538,8 @@
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/roboto_light"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText"
+                        android:visibility="gone"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -631,7 +633,7 @@
                         android:id="@+id/textWeightCt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Weight 2.4 Ct"
+                        android:text="Weight"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_10sdp"
                         app:fontFamily="@font/roboto_medium"
@@ -643,7 +645,7 @@
                         android:id="@+id/textDiamonds"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Diamonds 45"
+                        android:text="Diamonds"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_10sdp"
                         app:fontFamily="@font/roboto_medium"

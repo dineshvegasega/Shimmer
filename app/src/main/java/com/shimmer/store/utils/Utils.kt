@@ -421,6 +421,20 @@ fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
 }
 
 
+val myOptionsGlideUserChache: RequestOptions = RequestOptions()
+    .diskCacheStrategy(DiskCacheStrategy.ALL)
+    .dontAnimate()
+    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
+    .skipMemoryCache(true)
+
+fun String.glideImageChache(context: Context, ivMap: ShapeableImageView) {
+    Glide.with(context)
+        .load(this)
+        .apply(myOptionsGlideUserChache)
+        .into(ivMap)
+}
+
+
 fun String.glidePhotoView(context: Context, ivMap: PhotoView) {
     Glide.with(context)
         .load(this)

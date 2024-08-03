@@ -107,8 +107,11 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
             itemRowBinding.ivIcon.setOnClickListener {
+//                it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
+//                    putParcelable("model", model)
+//                })
                 it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
-                    putParcelable("model", model)
+                    putString("model", model.sku)
                 })
             }
 
