@@ -28,11 +28,13 @@ import com.shimmer.store.databinding.ItemSizeBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.ItemProductOptions
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.models.products.MediaGalleryEntry
+import com.shimmer.store.models.products.Value
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -54,11 +56,18 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
+//    var isApiCall : Boolean = false
+
+    var arrayItemProductOptionsColor: MutableList<Value> = ArrayList()
+    var arrayItemProductOptionsPurity: MutableList<Value> = ArrayList()
+    var arrayItemProductOptionsSize: MutableList<Value> = ArrayList()
+
+
     var item1 : ArrayList<Items> = ArrayList()
     var item2 : ArrayList<String> = ArrayList()
     var item3 : ArrayList<Items> = ArrayList()
 
-    var arraySizes : ArraySet<ItemSizes> = ArraySet()
+//    var arraySizes : ArraySet<ItemSizes> = ArraySet()
 
 
     init {
@@ -353,7 +362,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     var sizeMutableList = MutableLiveData<Int>(0)
 //    var sizeValue : Int = 0
     var selectedPosition = -1
-    val sizeAdapter = object : GenericAdapter<ItemSizeBinding, ItemSizes>() {
+    val sizeAdapter = object : GenericAdapter<ItemSizeBinding, Value>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -363,11 +372,11 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemSizeBinding,
-            dataClass: ItemSizes,
+            dataClass: Value,
             position: Int
         ) {
             binding.apply {
-                textSize.text = dataClass.inch.toString()
+                textSize.text = dataClass.value_index.toString()
 //                textMM.text = dataClass.mm.toString() +" mm"
 
                 ivIcon.singleClick {
@@ -384,7 +393,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
 
 
-                    sizeMutableList.value = dataClass.inch.toInt()
+                    sizeMutableList.value = dataClass.value_index.toInt()
                     sizeMutableListClose.value = true
                     notifyDataSetChanged()
                 }

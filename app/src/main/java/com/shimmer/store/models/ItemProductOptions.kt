@@ -8,5 +8,7 @@ data class ItemProductOptions(
     val price: String,
     val size: String,
     val sku: String,
-    val weight: String
+    val weight: String,
+    var isSelected : Boolean = false
+
 )

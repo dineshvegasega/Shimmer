@@ -6,5 +6,5 @@ data class ConfigurableProductOption(
     val label: String,
     val position: Int,
     val product_id: Int,
-    val values: List<Value>
+    val values: ArrayList<Value> = ArrayList()
 )

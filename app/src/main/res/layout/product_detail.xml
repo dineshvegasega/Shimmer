@@ -618,6 +618,15 @@
                     app:fontFamily="@font/roboto_regular"
                     tools:ignore="HardcodedText" />
 
+                <WebView
+                    android:id="@+id/webView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    tools:ignore="WebViewLayout">
+                </WebView>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutWD"
@@ -627,7 +636,8 @@
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textWeightCt"
@@ -658,7 +668,8 @@
 
                 <HorizontalScrollView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layoutList"

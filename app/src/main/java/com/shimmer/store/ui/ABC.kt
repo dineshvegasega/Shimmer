@@ -53,11 +53,16 @@ class ABC  : AppCompatActivity() {
 
       //  initPdfViewerWithPath("quote.pdf")
 
-        binding.button.setOnClickListener {
-            openDialog(1, "quote.pdf")
-        }
+//        binding.button.setOnClickListener {
+//            openDialog(1, "quote.pdf")
+//        }
+//
+//        indicator(binding, 20, 10, 1)
 
-        indicator(binding, 20, 10, 1)
+
+        val content = "<table style=width:100%>\n<tr>\n<th>Shape</th>\n<th>Pieces</th>\n<th>Weight</th>\n<th>Price</th>\n</tr>\n<tr>\n<td>Round</td>\n<td>12</td>\n<td>0.03</td>\n<td>30000</td>\n</tr>\n<tr>\n<td>Oval</td>\n<td>1</td>\n<td>0.21</td>\n<td>30000</td>\n</tr>\n<tr>\n<td>Princess</td>\n<td>2</td>\n<td>0.25</td>\n<td>35000</td>\n</tr>\n</table>"
+        binding.webView.loadDataWithBaseURL(null, content, "text/html", "utf-8", null);
+
 
     }
 

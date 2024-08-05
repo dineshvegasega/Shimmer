@@ -87,5 +87,6 @@
     <string name="complaints_feedback">Complaints/Feedback</string>
     <string name="orders">Orders</string>
     <string name="place_order_with_franchise">Place order with Franchise</string>
+    <string name="text"><![CDATA[<table><tr><th bgcolor= #FF0000>some text</th></tr> <tr><td bgcolor= #FF0000> some text</td></tr>]]></string>
 
 </resources>

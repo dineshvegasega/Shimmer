@@ -21,6 +21,9 @@ import javax.inject.Inject
 class MainActivityVM @Inject constructor(private val repository: Repository) : ViewModel() {
     companion object {
         @JvmStatic
+        var isApiCall : Boolean = false
+
+        @JvmStatic
         var loginType: String = ""
 
         @JvmStatic
