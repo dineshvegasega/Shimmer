@@ -128,14 +128,16 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
 //            val model = arguments?.parcelable<ItemProduct>("model")
-//            val model = arguments?.getString("model")
+            val model = arguments?.getString("model")
+
+            callApiDetails(model)
 
 //            if (isApiCall == false){
 //                isApiCall = true
 
 //            SAS0005
 //            SRI0006
-            callApiDetails("SRI0006")
+//            callApiDetails("SRI0006")
 //            }
 
             Log.e("TAG", "isApiCall " + isApiCall)
@@ -677,12 +679,16 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                                     if (itemProductAttr.attribute_code == "short_description") {
-                                        textProductDetails.setText(
-                                            Html.fromHtml(
+                                        if (itemProductAttr.attribute_code == "short_description") {
+                                            binding.webView.loadDataWithBaseURL(
+                                                null,
                                                 "" + itemProductAttr.value,
-                                                Html.FROM_HTML_MODE_COMPACT
+                                                "text/html",
+                                                "utf-8",
+                                                null
                                             )
-                                        )
+                                            layoutDiamondAndGemstones.visibility = View.VISIBLE
+                                        }
                                     }
 
 
@@ -808,15 +814,18 @@ class ProductDetail : Fragment(), CallBackListener {
                                         itemProductAttr.value.toString().replace("[", "")
                                             .replace("]", "").replace(" ", "")
                                             .split(",")
-                                    ids.forEach { idsInner ->
-                                        val filteredNot =
-                                            mainCategory.filter { idsInner.toInt() == it.id }
-                                        filteredNot.forEach { filteredNotInner ->
-                                            idvalues += filteredNotInner.name + ", "
+                                    Log.e("TAG", "idsids "+ids)
+                                    if(ids.toString() != "[]"){
+                                        ids.forEach { idsInner ->
+                                            val filteredNot =
+                                                mainCategory.filter { idsInner.toInt() == it.id }
+                                            filteredNot.forEach { filteredNotInner ->
+                                                idvalues += filteredNotInner.name + ", "
+                                            }
                                         }
+                                        textCategories.text = "CATEGORIES: " + idvalues
+                                        textCategories.visibility = View.VISIBLE
                                     }
-                                    textCategories.text = "CATEGORIES: " + idvalues
-                                    textCategories.visibility = View.VISIBLE
                                 }
 
                                 if (itemProductAttr.attribute_code == "metal_color") {

@@ -103,7 +103,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                 root.singleClick {
                     root.findNavController()
                         .navigate(R.id.action_search_to_productDetail, Bundle().apply {
-                            putString("sku", dataClass.sku)
+                            putString("model", dataClass.sku)
                         })
                 }
             }
