@@ -116,7 +116,7 @@ dependencies {
 
 
     implementation ("androidx.preference:preference-ktx:1.2.1")
-    implementation ("io.coil-kt:coil:2.4.0")
+    implementation ("io.coil-kt:coil:2.6.0")
 
     implementation ("androidx.datastore:datastore-preferences:1.1.1")
     implementation ("androidx.datastore:datastore-preferences-core:1.1.1")

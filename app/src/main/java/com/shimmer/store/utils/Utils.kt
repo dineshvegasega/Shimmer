@@ -1011,6 +1011,7 @@ fun getIntValue(vararg any: Any) : Int {
 //gold 12
 //platinum 13
 
+//rg 25
 //yg 19
 //gw 20
 
@@ -1019,3 +1020,4 @@ fun getIntValue(vararg any: Any) : Int {
 //16 22
 //17 24
 //18 95
+//26 9
