@@ -988,6 +988,25 @@ fun getIntValue(vararg any: Any) : Int {
 }
 
 
+
+fun getSize(size: Int) : Int {
+    return when(size){
+        4 -> 6
+        5 -> 7
+        6 -> 8
+        7 -> 9
+        24 -> 10
+        else -> 0
+    }
+
+//    return when(val tmp = any.first()) {
+//        is Number -> tmp.toInt()
+//        else -> throw Exception("not a number") // or do something else reasonable for your case
+//    }
+}
+
+
+
 // filters -
 // gender - male, female, kids ,
 // category

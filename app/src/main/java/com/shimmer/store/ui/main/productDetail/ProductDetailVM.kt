@@ -41,6 +41,7 @@ import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.uriToFile
@@ -376,7 +377,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             position: Int
         ) {
             binding.apply {
-                textSize.text = dataClass.value_index.toString()
+                textSize.text = ""+getSize(dataClass.value_index)
 //                textMM.text = dataClass.mm.toString() +" mm"
 
                 ivIcon.singleClick {

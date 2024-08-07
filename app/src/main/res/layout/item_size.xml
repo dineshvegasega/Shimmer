@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="5"
                 android:textColor="@color/_000000"
-                android:textSize="@dimen/_9sdp"
+                android:textSize="@dimen/_10sdp"
                 app:fontFamily="@font/roboto_medium"
                 tools:ignore="HardcodedText" />
 
@@ -65,6 +65,7 @@
                 android:text="11.2"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_7sdp"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/_1sdp"
                 app:fontFamily="@font/roboto_regular"
                 tools:ignore="HardcodedText" />

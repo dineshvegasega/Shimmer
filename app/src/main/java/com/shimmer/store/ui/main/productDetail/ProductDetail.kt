@@ -40,6 +40,7 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isApiCall
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getRecyclerView
+import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.mainThread
 //import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
@@ -70,6 +71,7 @@ class ProductDetail : Fragment(), CallBackListener {
     val arrayItemProduct = mutableListOf<ItemProductOptions>()
 //    var arrayAllProduct: ArrayList<ItemProduct> = ArrayList()
 
+    lateinit var itemProduct: ItemProduct
     lateinit var itemProductThis: ItemProduct
 
     var currentSku: String = ""
@@ -162,6 +164,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                                     "TAG",
                                                     "jsonObjectSizeAA: ${itemProductOptions.toString()}"
                                                 )
+                                                callApiDetails2(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
                                             }
                                         }
                                     }
@@ -184,6 +190,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "TAG",
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
                                         )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
                                     }
                                 }
                             }
@@ -203,6 +213,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "TAG",
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
                                         )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
                                     }
                                 }
                             }
@@ -221,6 +235,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
+                                        )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
                                         )
                                     }
                                 }
@@ -242,6 +260,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "TAG",
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
                                         )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
                                     }
                                 }
                             }
@@ -262,6 +284,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "TAG",
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
                                         )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
                                     }
                                 }
                             }
@@ -280,6 +306,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
+                                        )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
                                         )
                                     }
                                 }
@@ -300,6 +330,10 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "TAG",
                                             "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
                                         )
+                                        callApiDetails2(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
                                     }
                                 }
                             }
@@ -307,11 +341,7 @@ class ProductDetail : Fragment(), CallBackListener {
                     }
                 }
             }
-
-
         }
-
-
     }
 
     override fun onCallBack(pos: Int) {
@@ -391,7 +421,7 @@ class ProductDetail : Fragment(), CallBackListener {
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
                     viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
-                        val itemProduct = this
+                        itemProduct = this
 
                         if (itemProduct.type_id == "simple" || itemProduct.type_id == "virtual") {
 //                            arrayAllProduct.add(itemProduct)
@@ -399,42 +429,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
                             images = itemProduct.media_gallery_entries
 
-                            pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
-                            rvList1.offscreenPageLimit = 1
-                            rvList1.overScrollMode = OVER_SCROLL_NEVER
-                            rvList1.adapter = pagerAdapter
-                            rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                            Log.e("TAG", "videoList " + viewModel.item1.size)
-                            (rvList1.getRecyclerView()
-                                .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
-                                false
-
-                            viewModel.indicator(binding, itemProduct.media_gallery_entries, 1)
-
-                            rvList1.registerOnPageChangeCallback(object :
-                                ViewPager2.OnPageChangeCallback() {
-                                override fun onPageScrolled(
-                                    position: Int,
-                                    positionOffset: Float,
-                                    positionOffsetPixels: Int
-                                ) {
-                                    super.onPageScrolled(
-                                        position,
-                                        positionOffset,
-                                        positionOffsetPixels
-                                    )
-                                }
-
-                                override fun onPageSelected(position: Int) {
-                                    super.onPageSelected(position)
-                                    viewModel.indicator(binding, images, position)
-                                }
-
-                                override fun onPageScrollStateChanged(state: Int) {
-                                    super.onPageScrollStateChanged(state)
-                                    Log.e("TAG", "state" + state)
-                                }
-                            })
+                            setAllImages()
 
 
                             textTitle.text = itemProduct.name
@@ -671,7 +666,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                                     if (itemProductAttr.attribute_code == "size") {
-                                        btRingSize.text = "" + itemProductAttr.value
+                                        btRingSize.text = ""+getSize(itemProductAttr.value.toString().toInt())
                                         layoutRingSize.visibility = View.VISIBLE
                                         layoutGuide.visibility = View.VISIBLE
                                     }
@@ -726,11 +721,8 @@ class ProductDetail : Fragment(), CallBackListener {
                                     callApiDetails(
                                         currentSku,
 //                                        "SRI0006-G-9-YG-7",
-                                        arrayItemProduct,
                                         itemProduct
                                     )
-
-
                                 }
                             }
                         }
@@ -742,16 +734,16 @@ class ProductDetail : Fragment(), CallBackListener {
     }
 
 
+
+
     @SuppressLint("NotifyDataSetChanged")
     fun callApiDetails(
         skuId: String?,
-        arrayItemProductOptions: MutableList<ItemProductOptions>,
         itemProduct: ItemProduct
     ) {
 
-//        arrayAllProduct.clear()
-
         binding.apply {
+            viewModel.arrayItemProductOptionsSize.clear()
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
                     viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
@@ -760,51 +752,21 @@ class ProductDetail : Fragment(), CallBackListener {
                         if (itemProductThis.type_id == "simple" || itemProduct.type_id == "virtual") {
 //                            arrayAllProduct.add(itemProductThis)
                             Log.e("TAG", "getProductDetailAA " + itemProductThis.id)
-
-                            images = itemProductThis.media_gallery_entries
-
-                            pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
-                            rvList1.offscreenPageLimit = 1
-                            rvList1.overScrollMode = OVER_SCROLL_NEVER
-                            rvList1.adapter = pagerAdapter
-                            rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                            Log.e("TAG", "videoList " + images.size)
-                            (rvList1.getRecyclerView()
-                                .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
-                                false
-
-                            viewModel.indicator(binding, itemProductThis.media_gallery_entries, 1)
-
-                            rvList1.registerOnPageChangeCallback(object :
-                                ViewPager2.OnPageChangeCallback() {
-                                override fun onPageScrolled(
-                                    position: Int,
-                                    positionOffset: Float,
-                                    positionOffsetPixels: Int
-                                ) {
-                                    super.onPageScrolled(
-                                        position,
-                                        positionOffset,
-                                        positionOffsetPixels
-                                    )
-                                }
-
-                                override fun onPageSelected(position: Int) {
-                                    super.onPageSelected(position)
-                                    viewModel.indicator(binding, images, position)
-                                }
-
-                                override fun onPageScrollStateChanged(state: Int) {
-                                    super.onPageScrollStateChanged(state)
-                                    Log.e("TAG", "state" + state)
-                                }
-                            })
-
+                            images = itemProduct.media_gallery_entries
+                            setAllImages()
 
                             textTitle.text = itemProductThis.name
                             textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
                             textSKU.text = "SKU: " + itemProductThis.sku
-                            textWeight2.text = "" + itemProductThis.weight + " gram"
+//                            textWeight2.text = "" + itemProductThis.weight + " gram"
+
+                            Log.e("TAG", "itemProductThis.weightAA" + itemProductThis.weight)
+
+                            if(itemProductThis.weight == 0.0){
+                                textWeight2.text = "- gram"
+                            } else {
+                                textWeight2.text = "" + itemProductThis.weight + " gram"
+                            }
 
 
                             itemProductThis.custom_attributes.forEach { itemProductAttr ->
@@ -814,8 +776,8 @@ class ProductDetail : Fragment(), CallBackListener {
                                         itemProductAttr.value.toString().replace("[", "")
                                             .replace("]", "").replace(" ", "")
                                             .split(",")
-                                    Log.e("TAG", "idsids "+ids)
-                                    if(ids.toString() != "[]"){
+                                    Log.e("TAG", "idsids " + ids)
+                                    if (ids.toString() != "[]") {
                                         ids.forEach { idsInner ->
                                             val filteredNot =
                                                 mainCategory.filter { idsInner.toInt() == it.id }
@@ -966,6 +928,9 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
                                 }
 
+
+                                //-------------------------------------------------------------------
+
                                 if (itemProductAttr.attribute_code == "metal_purity") {
                                     if (itemProductAttr.value == "26") {
                                         itemProduct.custom_attributes.forEach { itemProductChildAttr ->
@@ -1015,133 +980,16 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
 
                                 if (itemProductAttr.attribute_code == "size") {
-                                    btRingSize.text = "" + itemProductAttr.value
+                                    btRingSize.text = ""+getSize(itemProductAttr.value.toString().toInt())
                                     layoutRingSize.visibility = View.VISIBLE
                                     layoutGuide.visibility = View.VISIBLE
                                 }
 
                             }
-
-
-
-
-
-
-//                        arrayItemProductOptions.forEach { itemProductOptions ->
-//                            itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
-//                                if(itemCustomSizeAttr.attribute_code == "size"){
-//                                    itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
-//                                        if(itemCustomPurityAttr.attribute_code == "metal_purity"){
-//                                            if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_purity == itemCustomPurityAttr.value){
-//                                                Log.e("TAG", "jsonObjectColorAA: ${itemProductOptions.toString()}")
-//                                            }
-//
-//                                         //   Log.e("TAG", "jsonObjectColorAA: ${itemProductOptions.size} :: ${itemCustomSizeAttr.value}")
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-
-
-//                        arrayItemProductOptions.forEach { itemProductOptions ->
-//                            itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
-//                                if(itemCustomSizeAttr.attribute_code == "size"){
-//                                    itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-//                                        if(itemCustomColorAttr.attribute_code == "metal_color"){
-//                                            if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value){
-//                                                Log.e("TAG", "jsonObjectPurityAA: ${itemProductOptions.toString()}")
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        }
-
-
-//                            arrayItemProductOptions.forEach { itemProductOptions ->
-//                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-//                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
-//                                        itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
-//                                            if (itemCustomPurityAttr.attribute_code == "metal_purity") {
-//                                                if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == itemCustomPurityAttr.value) {
-//                                                    Log.e(
-//                                                        "TAG",
-//                                                        "jsonObjectSizeAA: ${itemProductOptions.toString()}"
-//                                                    )
-////                                                viewModel.arrayItemProductOptionsSize.add(itemProductOptions)
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                            }
-
-
-//                        if (arrayItemProduct.size > 0){
-//                            callApiDetails3(arrayItemProduct[0].sku, arrayItemProduct, itemProduct)
-//                                arrayItemProduct.forEach {itemProductColor->
-////                                    Log.e("TAG", "jsonObject: ${itemProductColor.toString()}")
-////                                    if(itemProductColor.metal_color == "19"){
-//                                        arrayItemProduct.forEach { itemProductPurity ->
-//                                            arrayItemProduct.forEach { itemProductSize ->
-//                                                if(itemProductColor.metal_color == "19"){
-//
-//                                                }
-//                                            }
-//                                        }
-////                                    }
-//                                }
-//                        }
-
-
-//                        rvList2.setHasFixedSize(true)
-//                        rvList2.adapter = viewModel.recentAdapter
-//                        viewModel.recentAdapter.notifyDataSetChanged()
-//                        viewModel.recentAdapter.submitList(arrayAllProduct)
-
                         }
 
 
-                        images = itemProduct.media_gallery_entries
-
-                        pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
-                        rvList1.offscreenPageLimit = 1
-                        rvList1.overScrollMode = OVER_SCROLL_NEVER
-                        rvList1.adapter = pagerAdapter
-                        rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-                        Log.e("TAG", "videoList " + viewModel.item1.size)
-                        (rvList1.getRecyclerView()
-                            .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
-                            false
-
-                        viewModel.indicator(binding, itemProduct.media_gallery_entries, 1)
-
-                        rvList1.registerOnPageChangeCallback(object :
-                            ViewPager2.OnPageChangeCallback() {
-                            override fun onPageScrolled(
-                                position: Int,
-                                positionOffset: Float,
-                                positionOffsetPixels: Int
-                            ) {
-                                super.onPageScrolled(
-                                    position,
-                                    positionOffset,
-                                    positionOffsetPixels
-                                )
-                            }
-
-                            override fun onPageSelected(position: Int) {
-                                super.onPageSelected(position)
-                                viewModel.indicator(binding, images, position)
-                            }
-
-                            override fun onPageScrollStateChanged(state: Int) {
-                                super.onPageScrollStateChanged(state)
-                                Log.e("TAG", "state" + state)
-                            }
-                        })
-
+                        setAllImages()
 
 
                         itemProduct.custom_attributes.forEach { itemProductAttr ->
@@ -1157,6 +1005,21 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
                         }
 
+
+                        var metal_weight : String = "- gram"
+                        itemProductThis.custom_attributes.forEach {itemProductAttr->
+                            if (itemProductAttr.attribute_code == "size") {
+                                btRingSize.text = ""+getSize(itemProductAttr.value.toString().toInt())
+                                layoutRingSize.visibility = View.VISIBLE
+                                layoutGuide.visibility = View.VISIBLE
+                            }
+
+                            if (itemProductAttr.attribute_code == "metal_weight") {
+                                metal_weight = "" + itemProductAttr.value +" gram"
+                            }
+                        }
+                        textWeight4.text = "" + metal_weight
+
                         itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
                             if (itemConfigurableProductAttr.label == "Size") {
                                 Log.e(
@@ -1164,6 +1027,608 @@ class ProductDetail : Fragment(), CallBackListener {
                                     "itemConfigurableProductSizeAttr " + itemConfigurableProductAttr.values
                                 )
 
+
+                                itemConfigurableProductAttr.values.forEach { itemConfigurableProductSizeAttr ->
+                                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                                        if (itemCustomSizeAttr.attribute_code == "size") {
+
+                                            if (itemConfigurableProductSizeAttr.value_index == itemCustomSizeAttr.value.toString()
+                                                    .toInt()
+                                            ) {
+                                                viewModel.arrayItemProductOptionsSize.add(
+                                                    Value(
+                                                        itemConfigurableProductSizeAttr.value_index,
+                                                        true
+                                                    )
+                                                )
+                                            } else {
+                                                viewModel.arrayItemProductOptionsSize.add(
+                                                    Value(
+                                                        itemConfigurableProductSizeAttr.value_index,
+                                                        false
+                                                    )
+                                                )
+                                            }
+                                        }
+                                    }
+
+                                }
+
+
+                            }
+
+                            if (itemConfigurableProductAttr.label == "Metal Type") {
+                                itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalTypeAttr ->
+                                    if (itemConfigurableProductMetalTypeAttr.value_index == 12) {
+                                        bt12.visibility = View.VISIBLE
+                                        itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
+                                            if (itemConfigurableProductAttr.label == "Metal Purity") {
+                                                itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalPurityAttr ->
+                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 26) {
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "26") {
+                                                                    bt9.visibility = View.VISIBLE
+                                                                    bt9.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt9.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "26") {
+                                                                    bt9.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt9.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt9.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 14) {
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "14") {
+                                                                    bt14.visibility = View.VISIBLE
+                                                                    bt14.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt14.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "14") {
+                                                                    bt14.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt14.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt14.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 15) {
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "15") {
+                                                                    bt18.visibility = View.VISIBLE
+                                                                    bt18.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt18.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "15") {
+                                                                    bt18.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt18.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt18.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+
+                                                        if (itemConfigurableProductMetalPurityAttr.value_index == 18) {
+                                                            itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                                if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                    if (itemProductAttr.value == "18") {
+                                                                        bt95.visibility =
+                                                                            View.VISIBLE
+                                                                        bt95.backgroundTintList =
+                                                                            ColorStateList.valueOf(
+                                                                                ContextCompat.getColor(
+                                                                                    requireContext(),
+                                                                                    R.color._000000
+                                                                                )
+                                                                            )
+                                                                        bt95.setTextColor(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    if (itemProductAttr.value != "18") {
+                                                                        bt95.backgroundTintList =
+                                                                            ColorStateList.valueOf(
+                                                                                ContextCompat.getColor(
+                                                                                    requireContext(),
+                                                                                    R.color._ffffff
+                                                                                )
+                                                                            )
+                                                                        bt95.setTextColor(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                        bt95.visibility =
+                                                                            View.VISIBLE
+                                                                    }
+                                                                }
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+
+
+                            if (itemConfigurableProductAttr.label == "Metal Color") {
+                                Log.e(
+                                    "TAG",
+                                    "itemConfigurableProductMetalColorAttr " + itemConfigurableProductAttr.values
+                                )
+                                itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalColorAttr ->
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 19) {
+                                        ivGold.visibility = View.VISIBLE
+                                    }
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 20) {
+                                        ivSilver.visibility = View.VISIBLE
+                                    }
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 25) {
+                                        ivPink.visibility = View.VISIBLE
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+
+//            data class ItemColor(
+//                var color: String = "",
+//                var purity: String = "",
+//                var sku: String = ""
+//            )
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun callApiDetails2(
+        skuId: String?,
+        itemProduct: ItemProduct
+    ) {
+        binding.apply {
+            viewModel.arrayItemProductOptionsSize.clear()
+            textCategories.visibility = View.GONE
+            ivPink.visibility = View.GONE
+            ivSilver.visibility = View.GONE
+            ivGold.visibility = View.GONE
+
+            bt12.visibility = View.GONE
+            bt13.visibility = View.GONE
+
+            bt9.visibility = View.GONE
+            bt14.visibility = View.GONE
+            bt18.visibility = View.GONE
+            bt95.visibility = View.GONE
+
+            layoutRingSize.visibility = View.GONE
+            layoutGuide.visibility = View.GONE
+
+            mainThread {
+                readData(ADMIN_TOKEN) { token ->
+                    viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
+                        itemProductThis = this
+
+//
+//                        if (itemProductThis.type_id == "simple" || itemProduct.type_id == "virtual") {
+//                            images = itemProduct.media_gallery_entries
+//                            setAllImages()
+//
+//
+//                            textTitle.text = itemProductThis.name
+//                            textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
+//                            textSKU.text = "SKU: " + itemProductThis.sku
+//
+//                            Log.e("TAG", "itemProductThis.weightBB "+itemProductThis.weight)
+////                            if(itemProductThis.weight == 0.0){
+////                                textWeight2.text = "- gram"
+////                            } else {
+//                                textWeight2.text = "" + itemProductThis.weight + " gram"
+////                            }
+//
+//
+//                            itemProductThis.custom_attributes.forEach { itemProductAttr ->
+//                                if (itemProductAttr.attribute_code == "category_ids") {
+//                                    var idvalues = ""
+//                                    val ids =
+//                                        itemProductAttr.value.toString().replace("[", "")
+//                                            .replace("]", "").replace(" ", "")
+//                                            .split(",")
+//                                    Log.e("TAG", "idsids " + ids)
+//                                    if (ids.toString() != "[]") {
+//                                        ids.forEach { idsInner ->
+//                                            val filteredNot =
+//                                                mainCategory.filter { idsInner.toInt() == it.id }
+//                                            filteredNot.forEach { filteredNotInner ->
+//                                                idvalues += filteredNotInner.name + ", "
+//                                            }
+//                                        }
+//                                        textCategories.text = "CATEGORIES: " + idvalues
+//                                        textCategories.visibility = View.VISIBLE
+//                                    }
+//                                }
+//
+//                                if (itemProductAttr.attribute_code == "metal_color") {
+//                                    if ("" + itemProductAttr.value == "25") {
+//                                        ivPink.visibility = View.VISIBLE
+//                                        viewModel.colors(binding, 1)
+//                                    }
+//                                    if ("" + itemProductAttr.value == "19") {
+//                                        ivGold.visibility = View.VISIBLE
+//                                        viewModel.colors(binding, 3)
+//                                    }
+//                                    if ("" + itemProductAttr.value == "20") {
+//                                        ivSilver.visibility = View.VISIBLE
+//                                        viewModel.colors(binding, 2)
+//                                    }
+//                                }
+//
+//                                if (itemProductAttr.attribute_code == "metal_purity") {
+//                                    if (itemProductAttr.value == "26") {
+//                                        bt12.visibility = View.VISIBLE
+//                                        bt9.visibility = View.VISIBLE
+//                                        bt12.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt12.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//
+//                                        bt9.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt9.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//                                    }
+//                                    if (itemProductAttr.value == "14") {
+//                                        bt12.visibility = View.VISIBLE
+//                                        bt14.visibility = View.VISIBLE
+//                                        bt12.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt12.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//
+//                                        bt14.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt14.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//                                    }
+//
+//                                    if (itemProductAttr.value == "15") {
+//                                        bt12.visibility = View.VISIBLE
+//                                        bt18.visibility = View.VISIBLE
+//
+//                                        bt12.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt12.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//
+//                                        bt18.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt18.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//                                    }
+//
+//                                    if (itemProductAttr.value == "18") {
+//                                        bt13.visibility = View.VISIBLE
+//                                        bt95.visibility = View.VISIBLE
+//
+//                                        bt13.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt13.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//
+//                                        bt95.backgroundTintList = ColorStateList.valueOf(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._000000
+//                                            )
+//                                        )
+//                                        bt95.setTextColor(
+//                                            ContextCompat.getColor(
+//                                                requireContext(),
+//                                                R.color._ffffff
+//                                            )
+//                                        )
+//                                    }
+//                                }
+//
+//                                if (itemProductAttr.attribute_code == "metal_purity") {
+//                                    if (itemProductAttr.value == "26") {
+//                                        itemProduct.custom_attributes.forEach { itemProductChildAttr ->
+//                                            if (itemProductChildAttr.attribute_code == "metal_color") {
+//                                                if (itemProductChildAttr.value == "19") {
+//                                                    textPurity1.text = "9 kt Yellow Gold"
+//                                                } else if (itemProductChildAttr.value == "20") {
+//                                                    textPurity1.text = "9 kt White Gold"
+//                                                } else if (itemProductChildAttr.value == "25") {
+//                                                    textPurity1.text = "9 kt Rose Gold"
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    if (itemProductAttr.value == "14") {
+//                                        itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+//                                            if (itemProductChildAttr.attribute_code == "metal_color") {
+//                                                if (itemProductChildAttr.value == "19") {
+//                                                    textPurity1.text = "14 kt Yellow Gold"
+//                                                } else if (itemProductChildAttr.value == "20") {
+//                                                    textPurity1.text = "14 kt White Gold"
+//                                                } else if (itemProductChildAttr.value == "25") {
+//                                                    textPurity1.text = "14 kt Rose Gold"
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    if (itemProductAttr.value == "15") {
+//                                        itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+//                                            if (itemProductChildAttr.attribute_code == "metal_color") {
+//                                                if (itemProductChildAttr.value == "19") {
+//                                                    textPurity1.text = "18 kt Yellow Gold"
+//                                                } else if (itemProductChildAttr.value == "20") {
+//                                                    textPurity1.text = "18 kt White Gold"
+//                                                } else if (itemProductChildAttr.value == "25") {
+//                                                    textPurity1.text = "18 kt Rose Gold"
+//                                                }
+//                                            }
+//                                        }
+//                                    }
+//
+//                                    if (itemProductAttr.value == "18") {
+//                                        textPurity1.text = "Platinum 95"
+//                                    }
+//                                }
+//
+//                                if (itemProductAttr.attribute_code == "size") {
+//                                    btRingSize.text = "" + itemProductAttr.value
+//                                    layoutRingSize.visibility = View.VISIBLE
+//                                    layoutGuide.visibility = View.VISIBLE
+//                                }
+//
+//                            }
+//                        }
+
+
+                        Log.e("TAG", "getProductDetailBB " + itemProductThis.toString())
+
+                        images = itemProduct.media_gallery_entries
+
+                        setAllImages()
+
+                        textTitle.text = itemProductThis.name
+                        textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
+                        textSKU.text = "SKU: " + itemProductThis.sku
+
+                        textWeight2.text = "" + itemProductThis.weight + " gram"
+
+
+                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+                            if (itemProductAttr.attribute_code == "short_description") {
+                                binding.webView.loadDataWithBaseURL(
+                                    null,
+                                    "" + itemProductAttr.value,
+                                    "text/html",
+                                    "utf-8",
+                                    null
+                                )
+                                layoutDiamondAndGemstones.visibility = View.VISIBLE
+                            }
+                        }
+
+
+                        itemProductThis.custom_attributes.forEach {itemProductAttr->
+                            if (itemProductAttr.attribute_code == "size") {
+                                btRingSize.text = ""+getSize(itemProductAttr.value.toString().toInt())
+                                layoutRingSize.visibility = View.VISIBLE
+                                layoutGuide.visibility = View.VISIBLE
+                            }
+
+                            var metal_weight : String = "- gram"
+                            if (itemProductAttr.attribute_code == "metal_weight") {
+                                metal_weight = "" + itemProductAttr.value +" gram"
+                            }
+                            textWeight4.text = "" + metal_weight
+
+
+
+                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                if (itemProductAttr.value == "26") {
+                                    itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+                                        if (itemProductChildAttr.attribute_code == "metal_color") {
+                                            if (itemProductChildAttr.value == "19") {
+                                                textPurity1.text = "9 kt Yellow Gold"
+                                            } else if (itemProductChildAttr.value == "20") {
+                                                textPurity1.text = "9 kt White Gold"
+                                            } else if (itemProductChildAttr.value == "25") {
+                                                textPurity1.text = "9 kt Rose Gold"
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (itemProductAttr.value == "14") {
+                                    itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+                                        if (itemProductChildAttr.attribute_code == "metal_color") {
+                                            if (itemProductChildAttr.value == "19") {
+                                                textPurity1.text = "14 kt Yellow Gold"
+                                            } else if (itemProductChildAttr.value == "20") {
+                                                textPurity1.text = "14 kt White Gold"
+                                            } else if (itemProductChildAttr.value == "25") {
+                                                textPurity1.text = "14 kt Rose Gold"
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (itemProductAttr.value == "15") {
+                                    itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+                                        if (itemProductChildAttr.attribute_code == "metal_color") {
+                                            if (itemProductChildAttr.value == "19") {
+                                                textPurity1.text = "18 kt Yellow Gold"
+                                            } else if (itemProductChildAttr.value == "20") {
+                                                textPurity1.text = "18 kt White Gold"
+                                            } else if (itemProductChildAttr.value == "25") {
+                                                textPurity1.text = "18 kt Rose Gold"
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (itemProductAttr.value == "18") {
+                                    textPurity1.text = "Platinum 95"
+                                }
+                            }
+
+
+                        }
+
+
+
+
+                        itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
+                            if (itemConfigurableProductAttr.label == "Size") {
+                                Log.e(
+                                    "TAG",
+                                    "itemConfigurableProductSizeAttr " + itemConfigurableProductAttr.values
+                                )
 
                                 itemConfigurableProductAttr.values.forEach { itemConfigurableProductSizeAttr ->
                                     itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
@@ -1192,8 +1657,6 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
 
                                 }
-
-
                             }
 
                             if (itemConfigurableProductAttr.label == "Metal Type") {
@@ -1204,16 +1667,162 @@ class ProductDetail : Fragment(), CallBackListener {
                                             if (itemConfigurableProductAttr.label == "Metal Purity") {
                                                 itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalPurityAttr ->
                                                     if (itemConfigurableProductMetalPurityAttr.value_index == 26) {
-                                                        bt9.visibility = View.VISIBLE
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "26") {
+                                                                    bt9.visibility = View.VISIBLE
+                                                                    bt9.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt9.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "26") {
+                                                                    bt9.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt9.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt9.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
                                                     }
+
                                                     if (itemConfigurableProductMetalPurityAttr.value_index == 14) {
-                                                        bt14.visibility = View.VISIBLE
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "14") {
+                                                                    bt14.visibility = View.VISIBLE
+                                                                    bt14.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt14.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "14") {
+                                                                    bt14.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt14.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt14.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
                                                     }
+
                                                     if (itemConfigurableProductMetalPurityAttr.value_index == 15) {
-                                                        bt18.visibility = View.VISIBLE
-                                                    }
-                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 18) {
-                                                        bt95.visibility = View.GONE
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "15") {
+                                                                    bt18.visibility = View.VISIBLE
+                                                                    bt18.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                    bt18.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "15") {
+                                                                    bt18.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt18.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._000000
+                                                                        )
+                                                                    )
+                                                                    bt18.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+
+                                                        if (itemConfigurableProductMetalPurityAttr.value_index == 18) {
+                                                            itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                                if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                    if (itemProductAttr.value == "18") {
+                                                                        bt95.visibility =
+                                                                            View.VISIBLE
+                                                                        bt95.backgroundTintList =
+                                                                            ColorStateList.valueOf(
+                                                                                ContextCompat.getColor(
+                                                                                    requireContext(),
+                                                                                    R.color._000000
+                                                                                )
+                                                                            )
+                                                                        bt95.setTextColor(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    }
+                                                                    if (itemProductAttr.value != "18") {
+                                                                        bt95.backgroundTintList =
+                                                                            ColorStateList.valueOf(
+                                                                                ContextCompat.getColor(
+                                                                                    requireContext(),
+                                                                                    R.color._ffffff
+                                                                                )
+                                                                            )
+                                                                        bt95.setTextColor(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._000000
+                                                                            )
+                                                                        )
+                                                                        bt95.visibility =
+                                                                            View.VISIBLE
+                                                                    }
+                                                                }
+                                                            }
+
+                                                        }
                                                     }
                                                 }
                                             }
@@ -1222,38 +1831,93 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
 
-                                if (itemConfigurableProductAttr.label == "Metal Color") {
-                                    Log.e(
-                                        "TAG",
-                                        "itemConfigurableProductMetalColorAttr " + itemConfigurableProductAttr.values
-                                    )
-                                    itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalColorAttr ->
-                                        if (itemConfigurableProductMetalColorAttr.value_index == 19) {
-                                            ivGold.visibility = View.VISIBLE
-                                        }
-                                        if (itemConfigurableProductMetalColorAttr.value_index == 20) {
-                                            ivSilver.visibility = View.VISIBLE
-                                        }
-                                        if (itemConfigurableProductMetalColorAttr.value_index == 25) {
-                                            ivPink.visibility = View.VISIBLE
-                                        }
+
+                            if (itemConfigurableProductAttr.label == "Metal Color") {
+                                Log.e(
+                                    "TAG",
+                                    "itemConfigurableProductMetalColorAttr " + itemConfigurableProductAttr.values
+                                )
+                                itemConfigurableProductAttr.values.forEach { itemConfigurableProductMetalColorAttr ->
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 19) {
+                                        ivGold.visibility = View.VISIBLE
+                                    }
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 20) {
+                                        ivSilver.visibility = View.VISIBLE
+                                    }
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 25) {
+                                        ivPink.visibility = View.VISIBLE
                                     }
                                 }
                             }
-                        }
 
+
+                            itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                if (itemProductAttr.attribute_code == "metal_color") {
+                                    if ("" + itemProductAttr.value == "25") {
+                                        ivPink.visibility = View.VISIBLE
+                                        viewModel.colors(binding, 1)
+                                    }
+                                    if ("" + itemProductAttr.value == "19") {
+                                        ivGold.visibility = View.VISIBLE
+                                        viewModel.colors(binding, 3)
+                                    }
+                                    if ("" + itemProductAttr.value == "20") {
+                                        ivSilver.visibility = View.VISIBLE
+                                        viewModel.colors(binding, 2)
+                                    }
+                                }
+                            }
+
+                        }
                     }
+
                 }
             }
-
-
-//            data class ItemColor(
-//                var color: String = "",
-//                var purity: String = "",
-//                var sku: String = ""
-//            )
         }
 
+    }
 
+
+
+    private fun setAllImages() {
+        binding.apply {
+            pagerAdapter = ProductDetailPagerAdapter(requireActivity(), images)
+            rvList1.offscreenPageLimit = 1
+            rvList1.overScrollMode = OVER_SCROLL_NEVER
+            rvList1.adapter = pagerAdapter
+            rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            Log.e("TAG", "videoList " + viewModel.item1.size)
+            (rvList1.getRecyclerView()
+                .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
+                false
+
+            viewModel.indicator(binding, itemProduct.media_gallery_entries, 1)
+
+            rvList1.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageScrolled(
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
+                ) {
+                    super.onPageScrolled(
+                        position,
+                        positionOffset,
+                        positionOffsetPixels
+                    )
+                }
+
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    viewModel.indicator(binding, images, position)
+                }
+
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    Log.e("TAG", "state" + state)
+                }
+            })
+        }
+    }
 
 }
