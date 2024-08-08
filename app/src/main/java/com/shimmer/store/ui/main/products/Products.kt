@@ -258,14 +258,15 @@ class Products : Fragment() {
                         categoryIds += ""+sub.id+","
                     }
                 }
+                categoryIds = categoryIds.substring(0, categoryIds.length-1)
             }
-            Log.e("TAG", "countFromAAA "+countFrom1)
+
             if (mainCategoryBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "category_id"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = categoryIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
-
+            Log.e("TAG", "countFromAAA "+emptyMap.toString())
 
             var mainPriceBoolean = false
             var priceFrom : Double = 0.0
@@ -279,7 +280,7 @@ class Products : Fragment() {
                     priceTo = if(it.name.replace("₹","").split("-")[1].trim() == "Above") 10000000.00 else it.name.replace("₹","").split("-")[1].trim().toDouble()
                 }
             }
-            Log.e("TAG", "countFrom2BBB "+countFrom1)
+//            Log.e("TAG", "countFrom2BBB "+countFrom1)
             if (mainPriceBoolean){
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][field]"] = "price"
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][value]"] =
@@ -291,7 +292,7 @@ class Products : Fragment() {
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][value]"] = priceTo.toString()
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][condition_type]"] = "to"
             }
-
+            Log.e("TAG", "countFrom2BBB "+emptyMap.toString())
 
             var materialIds : String = ""
             var mainMaterialBoolean = false
@@ -303,13 +304,13 @@ class Products : Fragment() {
                     mainMaterialBoolean = true
                 }
             }
-            Log.e("TAG", "countFromCCC "+countFrom1)
+//            Log.e("TAG", "countFromCCC "+countFrom1)
             if (mainMaterialBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "metal_type"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = materialIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
-
+            Log.e("TAG", "countFromCCC "+emptyMap.toString())
 
             var genderIds : String = ""
             var mainShopForBoolean = false
@@ -321,19 +322,19 @@ class Products : Fragment() {
                     mainShopForBoolean = true
                 }
             }
-            Log.e("TAG", "countFromDDD "+countFrom1)
+//            Log.e("TAG", "countFromDDD "+countFrom1)
             if (mainShopForBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "gender"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = genderIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
             }
-
+            Log.e("TAG", "countFromDDD "+emptyMap.toString())
 
             countFrom1 += 1
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "visibility"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "4"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "eq"
-
+            Log.e("TAG", "countFromDDD "+emptyMap.toString())
 
 
             when(viewModel.sortFilter){
@@ -366,7 +367,7 @@ class Products : Fragment() {
             binding.rvList2.adapter = adapter2
             readData(ADMIN_TOKEN) { token ->
                 viewModel.getProducts(token.toString(), requireView(), emptyMap) {
-                    Log.e("TAG", "itAAA " + this)
+//                    Log.e("TAG", "itAAA " + this)
                     adapter2.submitData(this.items)
                     adapter2.notifyDataSetChanged()
                 }

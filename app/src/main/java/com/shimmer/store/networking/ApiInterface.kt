@@ -47,11 +47,24 @@ interface ApiInterface {
         @QueryMap parms: Map<String, String>,
     ): Response<JsonElement>
 
+    @GET(PRODUCTS_ID)
+    suspend fun productsID(
+        @Header("Authorization") authHeader: String,
+        @QueryMap parms: Map<String, String>,
+    ): Response<JsonElement>
+
 
     @GET("{id}"+PRODUCTS_DETAIL+"{ids}")
     suspend fun productsDetail(
         @Header("Authorization") authHeader : String,
         @Path("id") id: String,
+        @Path("ids") ids: String,
+    ): Response<JsonElement>
+
+
+    @GET(PRODUCTS_DETAIL_ID+"{ids}")
+    suspend fun productsDetailID(
+        @Header("Authorization") authHeader : String,
         @Path("ids") ids: String,
     ): Response<JsonElement>
 

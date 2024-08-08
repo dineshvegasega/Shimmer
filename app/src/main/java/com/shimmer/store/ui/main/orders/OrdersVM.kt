@@ -94,70 +94,8 @@ class OrdersVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
-
-                constraintLayout.singleClick {
-                    mainCategory.forEach {
-                        it.isSelected = false
-                        it.subCategory.forEach {
-                            it.isSelected = false
-                        }
-                    }
-
-                    currentList.forEach {
-                        it.isSelected = false
-                    }
-                    dataClass.isSelected = true
-
-                    currentList.forEach {
-                        if (it.isSelected && it.isAll) {
-//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
-                            when (mainSelect) {
-                                1 -> mainCategory[0].isSelected = true
-                                2 -> mainCategory[1].isSelected = true
-                                3 -> mainCategory[2].isSelected = true
-                                4 -> mainCategory[3].isSelected = true
-                                5 -> mainCategory[4].isSelected = true
-                                6 -> mainCategory[5].isSelected = true
-                                7 -> mainCategory[6].isSelected = true
-                                8 -> mainCategory[7].isSelected = true
-                                9 -> mainCategory[8].isSelected = true
-                                10 -> mainCategory[9].isSelected = true
-                            }
-                        } else {
-//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
-                        }
-                    }
-
-
-
-                    mainCategory.forEach {
-//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
-                        if (it.isSelected) {
-                            it.subCategory.forEach { sub ->
-                                sub.isSelected = true
-                            }
-                        }
-                    }
-
-
-//                    currentList.forEach {
-//                        Log.e("TAG", "currentList: " + it.isSelected)
-//                    }
-
-                    mainPrice.forEach {
-                        it.isSelected = false
-//                        it.isChildSelect = false
-                    }
-                    mainMaterial.forEach {
-                        it.isSelected = false
-//                        it.isChildSelect = false
-                    }
-
-
-                    root.findNavController().navigate(R.id.action_category_to_products)
-
-
+                root.singleClick {
+                    root.findNavController().navigate(R.id.action_orders_to_orderDetail)
                 }
             }
         }
@@ -177,69 +115,8 @@ class OrdersVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
-                constraintLayout.singleClick {
-                    mainCategory.forEach {
-                        it.isSelected = false
-                        it.subCategory.forEach {
-                            it.isSelected = false
-                        }
-                    }
-
-                    currentList.forEach {
-                        it.isSelected = false
-                    }
-                    dataClass.isSelected = true
-
-                    currentList.forEach {
-                        if (it.isSelected && it.isAll) {
-//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
-                            when (mainSelect) {
-                                1 -> mainCategory[0].isSelected = true
-                                2 -> mainCategory[1].isSelected = true
-                                3 -> mainCategory[2].isSelected = true
-                                4 -> mainCategory[3].isSelected = true
-                                5 -> mainCategory[4].isSelected = true
-                                6 -> mainCategory[5].isSelected = true
-                                7 -> mainCategory[6].isSelected = true
-                                8 -> mainCategory[7].isSelected = true
-                                9 -> mainCategory[8].isSelected = true
-                                10 -> mainCategory[9].isSelected = true
-                            }
-                        } else {
-//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
-                        }
-                    }
-
-
-
-                    mainCategory.forEach {
-//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
-                        if (it.isSelected) {
-                            it.subCategory.forEach { sub ->
-                                sub.isSelected = true
-                            }
-                        }
-                    }
-
-
-//                    currentList.forEach {
-//                        Log.e("TAG", "currentList: " + it.isSelected)
-//                    }
-
-                    mainPrice.forEach {
-                        it.isSelected = false
-//                        it.isChildSelect = false
-                    }
-                    mainMaterial.forEach {
-                        it.isSelected = false
-//                        it.isChildSelect = false
-                    }
-
-
-                    root.findNavController().navigate(R.id.action_category_to_products)
-
-
+                root.singleClick {
+                    root.findNavController().navigate(R.id.action_orders_to_orderDetail)
                 }
             }
         }

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.shimmer.store.databinding.ForgotPasswordBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
+import com.shimmer.store.ui.mainActivity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +31,7 @@ class ForgotPassword : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        MainActivity.mainActivity.get()!!.callBack(0)
         saveObject(LOGIN_DATA, "data")
 
 

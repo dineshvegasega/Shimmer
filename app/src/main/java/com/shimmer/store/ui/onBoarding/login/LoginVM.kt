@@ -11,7 +11,7 @@ import com.shimmer.store.ItemSS
 import com.shimmer.store.R
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
@@ -131,7 +131,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                 Log.e("TAG", "customerDetail: ${response.body().toString()}")
                                 //callBack(response.body().toString())
 
-                                saveData(STORE_TOKEN, token)
+                                saveData(STORE_DETAIL, token)
                                 saveObject(
                                     LOGIN_DATA,
                                     Gson().fromJson(

@@ -27,6 +27,7 @@ import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.ioThread
@@ -164,7 +165,13 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
+                    if (loginType == "vendor") {
                         apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+                    } else if (loginType == "guest") {
+                        apiInterface.productsID("Bearer " +adminToken, emptyMap)
+                    } else {
+                        apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+                    }
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {

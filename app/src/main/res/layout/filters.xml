@@ -110,7 +110,8 @@
                 android:paddingVertical="@dimen/_5sdp"
                 tools:ignore="HardcodedText"
                 android:gravity="center_vertical"
-                android:paddingHorizontal="@dimen/_10sdp"/>
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:visibility="gone"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textShopFor"

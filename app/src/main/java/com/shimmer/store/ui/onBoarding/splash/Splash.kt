@@ -82,23 +82,23 @@ class Splash : Fragment() {
             put("username", "admin")
             put("password", "admin123")
         }
-//        viewModel.adminToken(obj) {
-//            Log.e("TAG", "ADMIN_TOKENAAAA: " + this)
-//            saveData(ADMIN_TOKEN, this)
-//            handleSplashTime()
-//        }
-        readData(ADMIN_TOKEN) { savedToken ->
-            if(savedToken == null){
-                viewModel.adminToken(obj){
-                    Log.e("TAG", "ADMIN_TOKENAAAA: "+this)
-                    saveData(ADMIN_TOKEN, this)
-                    handleSplashTime()
-                }
-            } else {
-                Log.e("TAG", "ADMIN_TOKENBBBB: "+savedToken)
-                handleSplashTime()
-            }
+        viewModel.adminToken(obj) {
+            Log.e("TAG", "ADMIN_TOKENAAAA: " + this)
+            saveData(ADMIN_TOKEN, this)
+            handleSplashTime()
         }
+//        readData(ADMIN_TOKEN) { savedToken ->
+//            if(savedToken == null){
+//                viewModel.adminToken(obj){
+//                    Log.e("TAG", "ADMIN_TOKENAAAA: "+this)
+//                    saveData(ADMIN_TOKEN, this)
+//                    handleSplashTime()
+//                }
+//            } else {
+//                Log.e("TAG", "ADMIN_TOKENBBBB: "+savedToken)
+//                handleSplashTime()
+//            }
+//        }
     }
 
 

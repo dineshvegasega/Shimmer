@@ -268,6 +268,12 @@
             app:destination="@id/cart"
             app:launchSingleTop="true"
             />
+
+        <action
+            android:id="@+id/action_orders_to_orderDetail"
+            app:destination="@id/orderDetail"
+            app:launchSingleTop="true"
+            />
     </fragment>
 
     <fragment
@@ -458,4 +464,10 @@
     </fragment>
 
 
+    <fragment
+        android:name="com.shimmer.store.ui.main.orderDetail.OrderDetail"
+        android:label="OrderDetail"
+        android:id="@+id/orderDetail"
+        tools:layout="@layout/order_detail">
+    </fragment>
 </navigation>

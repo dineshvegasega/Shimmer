@@ -16,7 +16,7 @@ import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ProfileBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
@@ -36,6 +36,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 
 
 @AndroidEntryPoint
@@ -140,7 +142,8 @@ class Profile : Fragment() {
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
                         dialog.dismiss()
                         removeKey(LOGIN_DATA) {}
-                        removeKey(STORE_TOKEN) {}
+                        removeKey(STORE_DETAIL) {}
+                        removeKey(WEBSITE_ID) {}
                         clearDataStore { }
                         findNavController().navigate(R.id.action_profile_to_loginOptions)
                     }

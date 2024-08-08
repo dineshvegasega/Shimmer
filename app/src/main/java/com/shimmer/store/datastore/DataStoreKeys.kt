@@ -8,7 +8,7 @@ object DataStoreKeys {
     const val DATA_STORE_NAME = "ApplicationTemplate"
     val LOGIN_DATA by lazy { stringPreferencesKey("LOGIN_DATA") }
     val ADMIN_TOKEN by lazy { stringPreferencesKey("ADMIN_TOKEN") }
-    val STORE_TOKEN by lazy { stringPreferencesKey("STORE_TOKEN") }
+    val STORE_DETAIL by lazy { stringPreferencesKey("STORE_DETAIL") }
     val WEBSITE_ID by lazy { stringPreferencesKey("WEBSITE_ID") }
     val FILTER_PRICE by lazy { stringPreferencesKey("FILTER_PRICE") }
     val FILTER_CATEGORY by lazy { stringPreferencesKey("FILTER_CATEGORY") }

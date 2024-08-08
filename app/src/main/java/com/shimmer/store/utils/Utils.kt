@@ -56,7 +56,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import com.shimmer.store.R
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.ui.mainActivity.MainActivity
@@ -904,7 +904,7 @@ fun sessionExpired() {
         .setPositiveButton(MainActivity.mainActivity.get()!!.resources.getString(R.string.yes)) { dialog, _ ->
             dialog.dismiss()
             removeKey(LOGIN_DATA) {}
-            removeKey(STORE_TOKEN) {}
+            removeKey(STORE_DETAIL) {}
             clearDataStore { }
 //            findNavController().navigate(R.id.action_profile_to_login)
             MainActivity.mainActivity.get()!!.adminToken()
