@@ -63,7 +63,7 @@ class Products : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
@@ -124,8 +124,14 @@ class Products : Fragment() {
 
 
             filters()
-
-
+//
+//            searchCriteria[filter_groups][0][filters][0][field]
+//            searchCriteria[filter_groups][0][filters][1][field]
+//            searchCriteria[filter_groups][0][filters][2][field]
+//
+//
+//            searchCriteria[filter_groups][0][filters][0][field]
+//            searchCriteria[filter_groups][1][filters][0][field]
 
 
             layoutSort.singleClick {
@@ -282,6 +288,7 @@ class Products : Fragment() {
             }
 //            Log.e("TAG", "countFrom2BBB "+countFrom1)
             if (mainPriceBoolean){
+                countFrom2 += 1
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][field]"] = "price"
                 emptyMap["searchCriteria[filter_groups][" + countFrom2 + "][filters][0][value]"] =
                     priceFrom.toString()

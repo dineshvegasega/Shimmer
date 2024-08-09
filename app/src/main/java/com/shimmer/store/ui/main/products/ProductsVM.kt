@@ -94,13 +94,13 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        if (loginType == "vendor") {
-                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-                        } else if (loginType == "guest") {
+//                        if (loginType == "vendor") {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        } else if (loginType == "guest") {
                             apiInterface.productsID("Bearer " +adminToken, emptyMap)
-                        } else {
-                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-                        }
+//                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {

@@ -137,13 +137,13 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                    if (loginType == "vendor") {
-                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
-                    } else if (loginType == "guest") {
+//                    if (loginType == "vendor") {
+//                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
+//                    } else if (loginType == "guest") {
                         apiInterface.productsDetailID("Bearer " +adminToken, skuId)
-                    } else {
-                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
-                    }
+//                    } else {
+//                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
+//                    }
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {

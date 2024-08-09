@@ -10,11 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.shimmer.store.databinding.LoginBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
-import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.readData
-import com.shimmer.store.datastore.DataStoreUtil.saveData
-import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint

@@ -12,7 +12,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CartBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.ui.main.products.Products.Companion.adapter2
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -21,6 +26,7 @@ import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class Cart : Fragment() {
@@ -65,26 +71,96 @@ class Cart : Fragment() {
             }
 
 
-            when(loginType){
-                "vendor" ->  {
+            when (loginType) {
+                "vendor" -> {
                     textCartOrder.text = resources.getString(R.string.place_order)
                 }
-                "guest" ->  {
+
+                "guest" -> {
                     textCartOrder.text = resources.getString(R.string.proceed)
                 }
             }
 
-            viewModel.cartMutableList.observe(viewLifecycleOwner) {
-                mainThread {
-                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
-                    binding.apply {
-                        rvList.setHasFixedSize(true)
-                        rvList.adapter = viewModel.cartAdapter
-                        viewModel.cartAdapter.notifyDataSetChanged()
-                        viewModel.cartAdapter.submitList(userList)
-                    }
+//            viewModel.cartMutableList.observe(viewLifecycleOwner) {
+//                mainThread {
+//                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//
+//                    rvList.setHasFixedSize(true)
+//                    rvList.adapter = viewModel.cartAdapter
+//                    viewModel.cartAdapter.notifyDataSetChanged()
+//                    viewModel.cartAdapter.submitList(userList)
+//
+//
+//                    if (!userList.isNullOrEmpty()) {
+//                        upperLayout.visibility = View.VISIBLE
+//                        filterLayout.visibility = View.VISIBLE
+//                    } else {
+//                        upperLayout.visibility = View.GONE
+//                        filterLayout.visibility = View.GONE
+//                    }
+//
+//
+//                    var price: Double = 0.0
+//                    userList?.forEach {
+//                        price += (it.price!! * it.quantity)
+//                        Log.e(
+//                            "TAG",
+//                            "onViewCreated: " + it.name + " it.currentTime " + it.currentTime
+//                        )
+//                    }
+//
+//                    viewModel.subTotalPrice = price
+//                    textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
+//
+//                    val discountPriceAfter =
+//                        (viewModel.subTotalPrice * viewModel.discountPrice) / 100
+//                    textDiscountPrice.text = "₹${getPatternFormat("1", discountPriceAfter)}"
+//
+//                    val priceANDdiscountPrice = price + discountPriceAfter
+//
+//                    val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice) / 100
+//                    textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
+//
+//                    val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
+//                    textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
+//
+//                    val priceANDGSTPrice =
+//                        priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
+//                    textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
+//
+//                    textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
+//
+//
+//                    textDiscount.text = "Discount (${viewModel.discountPrice}%)"
+//                    textCGST.text = "CGST (${viewModel.cgstPrice}%)"
+//                    textSGST.text = "SGST (${viewModel.sgstPrice}%)"
+//                }
+//            }
 
-                    if (!userList.isNullOrEmpty()){
+
+
+            layoutProceedToPayment.singleClick {
+                findNavController().navigate(R.id.action_cart_to_orderSummary)
+            }
+
+
+            readData(CUSTOMER_TOKEN) { token ->
+                Log.e("TAG", "itAAAtoken " + token)
+                viewModel.getQuoteId(token!!, JSONObject()) {
+                    Log.e("TAG", "getQuoteId " + this)
+                    viewModel.quoteId = this
+                }
+
+                viewModel.getCart(token!!) {
+                    var itemCart = this
+                    Log.e("TAG", "getCart " + this.toString())
+                    rvList.setHasFixedSize(true)
+                    rvList.adapter = viewModel.cartAdapter
+                    viewModel.cartAdapter.notifyDataSetChanged()
+                    viewModel.cartAdapter.submitList(itemCart.items)
+
+
+                    if (!itemCart.items.isNullOrEmpty()) {
                         upperLayout.visibility = View.VISIBLE
                         filterLayout.visibility = View.VISIBLE
                     } else {
@@ -93,46 +169,11 @@ class Cart : Fragment() {
                     }
 
 
-                    var price : Double = 0.0
-                    userList?.forEach {
-                        price += (it.price!! * it.quantity)
-                        Log.e(
-                            "TAG",
-                            "onViewCreated: " + it.name + " it.currentTime " + it.currentTime
-                        )
-                    }
-
-                    viewModel.subTotalPrice = price
-                    textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
-
-                    val discountPriceAfter = (viewModel.subTotalPrice * viewModel.discountPrice) / 100
-                    textDiscountPrice.text = "₹${getPatternFormat("1", discountPriceAfter)}"
-
-                    val priceANDdiscountPrice = price + discountPriceAfter
-
-                    val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice ) / 100
-                    textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
-
-                    val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
-                    textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
-
-                    val priceANDGSTPrice = priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
-                    textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
-
-                    textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
-
-
-                    textDiscount.text = "Discount (${viewModel.discountPrice}%)"
-                    textCGST.text = "CGST (${viewModel.cgstPrice}%)"
-                    textSGST.text = "SGST (${viewModel.sgstPrice}%)"
                 }
+
+//                }
             }
 
-
-
-            layoutProceedToPayment.singleClick {
-                findNavController().navigate(R.id.action_cart_to_orderSummary)
-            }
         }
     }
 

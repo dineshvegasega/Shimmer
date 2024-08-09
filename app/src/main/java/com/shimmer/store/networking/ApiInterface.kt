@@ -1,6 +1,8 @@
 package com.shimmer.store.networking
 
 import com.google.gson.JsonElement
+import com.shimmer.store.models.cart.ItemCart
+import com.shimmer.store.models.cart.ItemCartModel
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -81,6 +83,31 @@ interface ApiInterface {
         @Path("id") id: String,
     ): Response<JsonElement>
 
+
+    @POST("{id}"+QUOTE_ID)
+    suspend fun getQuoteId(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
+
+
+    @GET("{id}"+QUOTE_ID)
+    suspend fun getCart(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+    ): Response<ItemCart>
+
+
+
+    @POST("{id}"+ADD_CART)
+    suspend fun addCart(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<ItemCartModel>
 
 }
 

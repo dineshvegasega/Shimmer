@@ -16,7 +16,7 @@ import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ProfileBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
@@ -142,7 +142,7 @@ class Profile : Fragment() {
                     .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
                         dialog.dismiss()
                         removeKey(LOGIN_DATA) {}
-                        removeKey(STORE_DETAIL) {}
+                        removeKey(CUSTOMER_TOKEN) {}
                         removeKey(WEBSITE_ID) {}
                         clearDataStore { }
                         findNavController().navigate(R.id.action_profile_to_loginOptions)

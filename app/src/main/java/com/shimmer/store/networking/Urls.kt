@@ -20,6 +20,10 @@ const val PRODUCTS_DETAIL_ID = "V1/products/"
 const val ALL_PRODUCTS = "all/V1/configurable-products/"
 const val PRODUCT_OPTIONS = "V1/vegasega-apis/productdetails?"
 
+const val QUOTE_ID = "/V1/carts/mine"
+
+const val ADD_CART = "/V1/carts/mine/items"
+
 //https://shop.vegasega.com/rest/all/V1/configurable-products/SRI0002G/children
 
 

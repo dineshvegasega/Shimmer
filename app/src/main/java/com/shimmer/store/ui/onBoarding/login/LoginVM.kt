@@ -7,9 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import com.shimmer.store.ItemSS
 import com.shimmer.store.R
-import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
@@ -131,7 +130,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                 Log.e("TAG", "customerDetail: ${response.body().toString()}")
                                 //callBack(response.body().toString())
 
-                                saveData(STORE_DETAIL, token)
+                                saveData(CUSTOMER_TOKEN, token)
                                 saveObject(
                                     LOGIN_DATA,
                                     Gson().fromJson(
