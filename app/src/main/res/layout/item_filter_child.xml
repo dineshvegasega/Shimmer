@@ -26,7 +26,7 @@
         android:text="₹10000 - ₹15000"
         android:textColor="@color/_000000"
         android:textSize="@dimen/_10sdp"
-        app:fontFamily="@font/roboto_light"
+        app:fontFamily="@font/nunitosans_light"
         app:layout_constraintStart_toEndOf="@+id/ivIconCheckChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

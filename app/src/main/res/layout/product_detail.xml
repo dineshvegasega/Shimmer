@@ -63,7 +63,7 @@
                 android:text=""
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_14sdp"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                 tools:ignore="HardcodedText" />
@@ -78,7 +78,7 @@
                 android:text="₹ 0.0"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_20sdp"
-                app:fontFamily="@font/roboto_bold"
+                app:fontFamily="@font/nunitosans_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTitle"
                 tools:ignore="HardcodedText" />
@@ -93,7 +93,7 @@
                 android:text="SKU: "
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_11sdp"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPrice"
                 tools:ignore="HardcodedText" />
@@ -107,7 +107,7 @@
                 android:text="CATEGORIES: "
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_11sdp"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textSKU"
                 tools:ignore="HardcodedText" />
@@ -132,7 +132,7 @@
                     android:text="COLOR"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="HardcodedText" />
 
@@ -210,7 +210,7 @@
                     android:text="Metal Type"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="HardcodedText" />
 
@@ -275,7 +275,7 @@
                     android:text="PURITY"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="HardcodedText" />
 
@@ -381,7 +381,7 @@
                     android:text="Size"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:textAllCaps="true"
                     tools:ignore="HardcodedText" />
@@ -431,7 +431,7 @@
                     android:text="Ring Size"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:textAllCaps="true"
                     android:visibility="invisible"
@@ -473,7 +473,7 @@
                 android:text="@string/product_details"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/roboto_regular"
+                app:fontFamily="@font/nunitosans_regular"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutGuide"
                 tools:ignore="HardcodedText" />
@@ -512,7 +512,7 @@
                         android:text="Weight"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_regular"
+                        app:fontFamily="@font/nunitosans_regular"
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -523,7 +523,7 @@
                         android:text="Gross (Product)"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
+                        app:fontFamily="@font/nunitosans_light"
                         tools:ignore="HardcodedText" />
 
 
@@ -535,7 +535,7 @@
                         android:text="- gram"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
+                        app:fontFamily="@font/nunitosans_light"
                         tools:ignore="HardcodedText" />
 
 
@@ -547,7 +547,7 @@
                         android:text="Net (Gold)"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
+                        app:fontFamily="@font/nunitosans_light"
                         tools:ignore="HardcodedText"
                         android:visibility="visible"/>
 
@@ -560,7 +560,7 @@
                         android:text="- gram"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
+                        app:fontFamily="@font/nunitosans_light"
                         tools:ignore="HardcodedText"
                         android:visibility="visible"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -589,7 +589,7 @@
                         android:text="Purity"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_regular"
+                        app:fontFamily="@font/nunitosans_regular"
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -600,7 +600,7 @@
                         android:text="-"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_9sdp"
-                        app:fontFamily="@font/roboto_light"
+                        app:fontFamily="@font/nunitosans_light"
                         tools:ignore="HardcodedText" />
 
 
@@ -639,7 +639,7 @@
                     android:text="Diamond &amp; Gemstones"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_9sdp"
-                    app:fontFamily="@font/roboto_regular"
+                    app:fontFamily="@font/nunitosans_regular"
                     tools:ignore="HardcodedText" />
 
                 <WebView
@@ -670,7 +670,7 @@
                         android:text="Weight"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_10sdp"
-                        app:fontFamily="@font/roboto_medium"
+                        app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
@@ -682,7 +682,7 @@
                         android:text="Diamonds"
                         android:textColor="@color/_000000"
                         android:textSize="@dimen/_10sdp"
-                        app:fontFamily="@font/roboto_medium"
+                        app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="HardcodedText" />
@@ -719,7 +719,7 @@
                                 android:text="Size"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -731,7 +731,7 @@
                                 android:text="Color"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -743,7 +743,7 @@
                                 android:text="Clarity"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -755,7 +755,7 @@
                                 android:text="Shape"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -767,7 +767,7 @@
                                 android:text="No Of Diamonds"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -779,7 +779,7 @@
                                 android:text="Total Weight"
                                 android:textColor="@color/_000000"
                                 android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/roboto_regular"
+                                app:fontFamily="@font/nunitosans_regular"
                                 tools:ignore="HardcodedText" />
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -818,7 +818,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/roboto_regular"
+                app:fontFamily="@font/nunitosans_regular"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiamondAndGemstones"
                 tools:ignore="HardcodedText"
@@ -845,7 +845,7 @@
                     android:text="Gold"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -858,7 +858,7 @@
                     android:text="233245"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -895,7 +895,7 @@
                     android:text="Diamond"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -908,7 +908,7 @@
                     android:text="233245"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -944,7 +944,7 @@
                     android:text="Making Charge"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -957,7 +957,7 @@
                     android:text="233245"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -992,7 +992,7 @@
                     android:text="GST"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -1005,7 +1005,7 @@
                     android:text="233245"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -1040,7 +1040,7 @@
                     android:text="Total"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -1053,7 +1053,7 @@
                     android:text="233245"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -1093,7 +1093,7 @@
                     android:textAllCaps="true"
                     android:textColor="@color/_000000"
                     android:textSize="@dimen/_13sdp"
-                    app:fontFamily="@font/roboto_regular"
+                    app:fontFamily="@font/nunitosans_regular"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />

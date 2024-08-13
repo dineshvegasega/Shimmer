@@ -40,7 +40,7 @@
             android:text="What is Faq?"
             android:textColor="@color/_424041"
             android:textSize="@dimen/_11sdp"
-            app:fontFamily="@font/roboto_medium"
+            app:fontFamily="@font/nunitosans_semibold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivCross"
             app:layout_constraintStart_toEndOf="@+id/ivTime"

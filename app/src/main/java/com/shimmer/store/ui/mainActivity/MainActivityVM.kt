@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.mainActivity
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,8 @@ import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
+import com.shimmer.store.utils.sessionExpired
+import com.shimmer.store.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -20,6 +23,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityVM @Inject constructor(private val repository: Repository) : ViewModel() {
     companion object {
+//        @JvmStatic
+//        var quoteId : String = ""
+
         @JvmStatic
         var isApiCall : Boolean = false
 
@@ -65,7 +71,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
             mainPrice.add(Items(name = "₹1000000 - Above"))
 
 
-            mainCategory.add(Items(id = 19, parent_id = 18, name = "RINGS",
+            mainCategory.add(Items(id = 19, parent_id = 18, name = "Rings",
                 subCategory = arrayListOf(
                     Items(id = -1, parent_id = 19, name = "All Rings", isAll = true),
                     Items(id = 13, parent_id = 19, name = "Solitaire Rings"),
@@ -74,13 +80,13 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(id = 16, parent_id = 19, name = "Engagement Rings"),
                     Items(id = 17, parent_id = 19, name = "Bands"))
             ))
-            mainCategory.add(Items(id = 4, parent_id = 18, name = "EARRINGS",
+            mainCategory.add(Items(id = 4, parent_id = 18, name = "Earrings",
                 subCategory = arrayListOf(
                     Items(name = "All Earrings", isAll = true),
                     Items(name = "Long Necklace"),
                     Items(name = "Short Necklace"))
             ))
-            mainCategory.add(Items(id = 5, parent_id = 18, name = "PENDANTS",
+            mainCategory.add(Items(id = 5, parent_id = 18, name = "Pendants",
                 subCategory = arrayListOf(
                     Items(name = "All Pendants", isAll = true),
                     Items(name = "Alphabets"),
@@ -88,7 +94,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Casual"),
                     Items(name = "Everyday"))
             ))
-            mainCategory.add(Items(id = 6, parent_id = 18, name = "BRACELETS",
+            mainCategory.add(Items(id = 6, parent_id = 18, name = "Bracelets",
                 subCategory = arrayListOf(
                     Items(name = "All Bracelets", isAll = true),
                     Items(name = "Casual"),
@@ -96,14 +102,14 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Occasion"),
                     Items(name = "Everyday"))
             ))
-            mainCategory.add(Items(id = 7, parent_id = 18, name = "MANGALSUTRA",
+            mainCategory.add(Items(id = 7, parent_id = 18, name = "Mangalsutras",
                 subCategory = arrayListOf(
                     Items(name = "All Mangalsutras", isAll = true),
                     Items(name = "Casual"),
                     Items(name = "Bangles"),
                     Items(name = "Everyday"))
             ))
-            mainCategory.add(Items(id = 8, parent_id = 18, name = "NOSEPINS",
+            mainCategory.add(Items(id = 8, parent_id = 18, name = "Nosepins",
                 subCategory = arrayListOf(
                     Items(name = "All Nosepins", isAll = true),
                     Items(name = "Balis"),
@@ -111,7 +117,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Drops"),
                     Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 9, parent_id = 18, name = "SOLITAIRE",
+            mainCategory.add(Items(id = 9, parent_id = 18, name = "Solitaire",
                 subCategory = arrayListOf(
                     Items(name = "All Solitaire", isAll = true),
                     Items(name = "Balis"),
@@ -119,7 +125,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Drops"),
                     Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 10, parent_id = 18, name = "ACCESSORIES",
+            mainCategory.add(Items(id = 10, parent_id = 18, name = "Accessories",
                 subCategory = arrayListOf(
                     Items(name = "All Accessories", isAll = true),
                     Items(name = "Balis"),
@@ -127,7 +133,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Drops"),
                     Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 11, parent_id = 18, name = "BANGLES",
+            mainCategory.add(Items(id = 11, parent_id = 18, name = "Bangles",
                 subCategory = arrayListOf(
                     Items(name = "All Bangles", isAll = true),
                     Items(name = "Balis"),
@@ -135,7 +141,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Drops"),
                     Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 12, parent_id = 18, name = "WATCHES",
+            mainCategory.add(Items(id = 12, parent_id = 18, name = "Watches",
                 subCategory = arrayListOf(
                     Items(name = "All Watches", isAll = true),
                     Items(name = "Balis"),
@@ -193,5 +199,45 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
     }
 
 
+
+
+
+    fun getQuoteId(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.getQuoteId("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body().toString())
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else {
+                            sessionExpired()
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 }

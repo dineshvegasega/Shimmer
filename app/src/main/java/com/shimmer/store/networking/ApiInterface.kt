@@ -6,9 +6,11 @@ import com.shimmer.store.models.cart.ItemCartModel
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -92,14 +94,11 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
-
-
     @GET("{id}"+QUOTE_ID)
     suspend fun getCart(
         @Header("Authorization") authHeader : String,
         @Path("id") id: String,
     ): Response<ItemCart>
-
 
 
     @POST("{id}"+ADD_CART)
@@ -108,6 +107,23 @@ interface ApiInterface {
         @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Response<ItemCartModel>
+
+
+    @PUT("{id}"+ADD_CART+"/{ids}")
+    suspend fun updateCart(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Path("ids") ids: Int,
+        @Body requestBody: RequestBody
+    ): Response<ItemCartModel>
+
+
+    @DELETE("{id}"+ADD_CART+"/{ids}")
+    suspend fun deleteCart(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Path("ids") ids: Int,
+    ): Response<Boolean>
 
 }
 

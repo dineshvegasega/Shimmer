@@ -31,6 +31,7 @@ import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemProductOptions
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.models.products.MediaGalleryEntry
@@ -38,6 +39,7 @@ import com.shimmer.store.models.products.Value
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
+import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -51,6 +53,7 @@ import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
@@ -65,58 +68,6 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     var arrayItemProductOptionsSize: MutableList<Value> = ArrayList()
 
 
-//    var item1 : ArrayList<Items> = ArrayList()
-//    var item2 : ArrayList<String> = ArrayList()
-//    var item3 : ArrayList<Items> = ArrayList()
-
-//    var arraySizes : ArraySet<ItemSizes> = ArraySet()
-
-//
-//    init {
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items(name = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"))
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item1.add(Items(name = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"))
-//        item1.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//
-//
-//
-//        item2.add("1")
-//        item2.add("2")
-//
-//        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//        item3.add(Items(name = "https://v2.streetsaarthi.in//uploads//1704703414Vishwakarma%20Scheme.jpeg"))
-//
-//
-////        arraySizes.add(ItemSizes(5 , 11.1))
-////        arraySizes.add(ItemSizes(6 , 12.1))
-////        arraySizes.add(ItemSizes(7 , 13.1))
-////        arraySizes.add(ItemSizes(8 , 14.1))
-////        arraySizes.add(ItemSizes(9 , 15.1))
-////        arraySizes.add(ItemSizes(10 , 16.1))
-////        arraySizes.add(ItemSizes(11 , 17.1))
-////        arraySizes.add(ItemSizes(12 , 18.1))
-////        arraySizes.add(ItemSizes(13 , 19.1))
-////        arraySizes.add(ItemSizes(14 , 20.1))
-////        arraySizes.add(ItemSizes(15 , 21.1))
-////        arraySizes.add(ItemSizes(16 , 22.1))
-////        arraySizes.add(ItemSizes(17 , 23.1))
-////        arraySizes.add(ItemSizes(18 , 24.1))
-////        arraySizes.add(ItemSizes(19 , 25.1))
-////        arraySizes.add(ItemSizes(20 , 26.1))
-////        arraySizes.add(ItemSizes(21 , 27.1))
-////        arraySizes.add(ItemSizes(22 , 28.1))
-////        arraySizes.add(ItemSizes(23 , 29.1))
-////        arraySizes.add(ItemSizes(24 , 30.1))
-////        arraySizes.add(ItemSizes(25 , 31.1))
-//    }
-
-
     fun getCartCount(callBack: Int.() -> Unit){
         viewModelScope.launch {
             val userList: List<CartModel> ?= db?.cartDao()?.getAll()
@@ -129,7 +80,44 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
+    fun addCart(adminToken: String, jsonObject: JSONObject, callBack: ItemCartModel.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemCartModel>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.addCart("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemCartModel>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
 
+                    override fun error(message: String) {
+                        showSnackBar(message)
+//                        if(message.contains("fieldName")){
+//                            showSnackBar("Something went wrong!")
+//                        } else {
+//                            sessionExpired()
+//                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 
     fun getProductDetail(adminToken: String, view: View, skuId: String, callBack: ItemProduct.() -> Unit) =
@@ -244,7 +232,6 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 }
             )
         }
-
 
 
     fun allProducts(adminToken: String, view: View, skuId: String, callBack: ArrayList<ItemProduct>.() -> Unit) =

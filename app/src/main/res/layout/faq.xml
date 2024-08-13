@@ -7,11 +7,27 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar"
+        android:id="@+id/top_bar_others"
+        layout="@layout/top_bar_others"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/faqs"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_others"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
         />
 
 
@@ -25,8 +41,9 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_faq"
         android:paddingHorizontal="@dimen/_6sdp"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/_5sdp"
         />
 
 

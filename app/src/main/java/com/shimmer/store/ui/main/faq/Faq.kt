@@ -44,39 +44,39 @@ class Faq : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(1)
 
         binding.apply {
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-                ivSearch.visibility = View.VISIBLE
-                ivCart.visibility = View.VISIBLE
-
-                ivSearch.singleClick {
-                    findNavController().navigate(R.id.action_faq_to_search)
-                }
-
-                ivCart.singleClick {
-                    findNavController().navigate(R.id.action_faq_to_cart)
-                }
-
-
-                badgeCount.observe(viewLifecycleOwner) {
-                    viewModel.getCartCount(){
-                        Log.e("TAG", "count: $this")
-                        menuBadge.text = "${this}"
-                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-                    }
-//                    mainThread {
-//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                        var countBadge = 0
-//                        userList?.forEach {
-//                            countBadge += it.quantity
-//                        }
-//                        menuBadge.text = "${countBadge}"
-//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+//                ivSearch.visibility = View.VISIBLE
+//                ivCart.visibility = View.VISIBLE
+//
+//                ivSearch.singleClick {
+//                    findNavController().navigate(R.id.action_faq_to_search)
+//                }
+//
+//                ivCart.singleClick {
+//                    findNavController().navigate(R.id.action_faq_to_cart)
+//                }
+//
+//
+//                badgeCount.observe(viewLifecycleOwner) {
+//                    viewModel.getCartCount(){
+//                        Log.e("TAG", "count: $this")
+//                        menuBadge.text = "${this}"
+//                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
 //                    }
-                }
-
-
-            }
+////                    mainThread {
+////                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+////                        var countBadge = 0
+////                        userList?.forEach {
+////                            countBadge += it.quantity
+////                        }
+////                        menuBadge.text = "${countBadge}"
+////                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
+////                    }
+//                }
+//
+//
+//            }
 
 
             rvList2.setHasFixedSize(true)

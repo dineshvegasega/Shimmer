@@ -24,6 +24,7 @@ import androidx.room.Room
 import com.shimmer.store.R
 import com.shimmer.store.databinding.MainActivityBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
@@ -94,10 +95,10 @@ class MainActivity : AppCompatActivity() {
         lateinit var fragmentInFrame: Fragment
 
         @JvmStatic
-        var typefaceroboto_light: Typeface? = null
+        var typefacenunitosans_light: Typeface? = null
 
         @JvmStatic
-        var typefaceroboto_medium: Typeface? = null
+        var typefacenunitosans_semibold: Typeface? = null
 
         @JvmStatic
         var db : AppDatabase?= null
@@ -127,8 +128,8 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "shimmer.db"
         ).build()
 
-        typefaceroboto_light = resources.getFont(R.font.roboto_light)
-        typefaceroboto_medium = resources.getFont(R.font.roboto_medium)
+        typefacenunitosans_light = resources.getFont(R.font.nunitosans_light)
+        typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
 
 //        setBar()
 
@@ -148,6 +149,17 @@ class MainActivity : AppCompatActivity() {
                 navHostFragment.findNavController().navigate(R.id.search)
             }
         }
+
+
+//        readData(CUSTOMER_TOKEN) { token ->
+//            Log.e("TAG", "itAAAtoken " + token)
+//            token?.let {
+//                viewModel.getQuoteId(token, JSONObject()) {
+//                    Log.e("TAG", "getQuoteId " + this)
+//                    quoteId = this
+//                }
+//            }
+//        }
 
 
     }
@@ -330,17 +342,17 @@ class MainActivity : AppCompatActivity() {
             when (hideValue) {
                 0 -> {
 //                    toolbar.root.visibility = View.GONE
-                    bottomNavMain.visibility = View.GONE
+                    bottomNavLayout?.visibility = View.GONE
                 }
 
                 1 -> {
 //                    toolbar.root.visibility = View.VISIBLE
-                    bottomNavMain.visibility = View.VISIBLE
+                    bottomNavLayout?.visibility = View.VISIBLE
                 }
 
                 2 -> {
 //                    toolbar.root.visibility = View.VISIBLE
-                    bottomNavMain.visibility = View.GONE
+                    bottomNavLayout?.visibility = View.GONE
                 }
             }
         }

@@ -55,7 +55,7 @@
                 android:text="5"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_10sdp"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 tools:ignore="HardcodedText" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -67,7 +67,7 @@
                 android:textSize="@dimen/_7sdp"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/_1sdp"
-                app:fontFamily="@font/roboto_regular"
+                app:fontFamily="@font/nunitosans_regular"
                 tools:ignore="HardcodedText" />
 
 

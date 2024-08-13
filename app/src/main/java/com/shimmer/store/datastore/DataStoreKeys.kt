@@ -11,6 +11,8 @@ object DataStoreKeys {
     val CUSTOMER_TOKEN by lazy { stringPreferencesKey("CUSTOMER_TOKEN") }
     val STORE_DETAIL by lazy { stringPreferencesKey("STORE_DETAIL") }
     val WEBSITE_ID by lazy { stringPreferencesKey("WEBSITE_ID") }
+    val QUOTE_ID by lazy { stringPreferencesKey("QUOTE_ID") }
+
     val FILTER_PRICE by lazy { stringPreferencesKey("FILTER_PRICE") }
     val FILTER_CATEGORY by lazy { stringPreferencesKey("FILTER_CATEGORY") }
     val FILTER_MATERIAL by lazy { stringPreferencesKey("FILTER_MATERIAL") }

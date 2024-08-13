@@ -60,7 +60,7 @@
                     android:id="@+id/editSearch"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/nunitosans_semibold"
                     android:background="@color/_D9D9D9"
                     android:hint="Search..."
                     android:textColor="@color/black"

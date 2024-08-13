@@ -95,7 +95,7 @@ class ListAdapter2() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.executePendingBindings()
             val model = obj as Items
 
-            itemRowBinding.textName.text = model.name
+            itemRowBinding.textTitle.text = model.name
 
             itemRowBinding.ivIcon.setOnClickListener {
 //                arrayCategory.apply {

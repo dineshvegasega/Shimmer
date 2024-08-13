@@ -24,8 +24,8 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_light
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_semibold
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
@@ -212,10 +212,10 @@ class Filters : Fragment() {
 
             textPrice.singleClick {
                 defaultRun = 1
-                textPrice.setTypeface(typefaceroboto_medium)
-                textCategories.setTypeface(typefaceroboto_light)
-                textMaterial.setTypeface(typefaceroboto_light)
-                textShopFor.setTypeface(typefaceroboto_light)
+                textPrice.setTypeface(typefacenunitosans_semibold)
+                textCategories.setTypeface(typefacenunitosans_light)
+                textMaterial.setTypeface(typefacenunitosans_light)
+                textShopFor.setTypeface(typefacenunitosans_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     rvList2.setHasFixedSize(true)
@@ -228,10 +228,10 @@ class Filters : Fragment() {
             textCategories.singleClick {
 //                isFilterFromFrom = false
                 defaultRun = 2
-                textPrice.setTypeface(typefaceroboto_light)
-                textCategories.setTypeface(typefaceroboto_medium)
-                textMaterial.setTypeface(typefaceroboto_light)
-                textShopFor.setTypeface(typefaceroboto_light)
+                textPrice.setTypeface(typefacenunitosans_light)
+                textCategories.setTypeface(typefacenunitosans_semibold)
+                textMaterial.setTypeface(typefacenunitosans_light)
+                textShopFor.setTypeface(typefacenunitosans_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 
@@ -244,10 +244,10 @@ class Filters : Fragment() {
 
             textMaterial.singleClick {
                 defaultRun = 3
-                textPrice.setTypeface(typefaceroboto_light)
-                textCategories.setTypeface(typefaceroboto_light)
-                textMaterial.setTypeface(typefaceroboto_medium)
-                textShopFor.setTypeface(typefaceroboto_light)
+                textPrice.setTypeface(typefacenunitosans_light)
+                textCategories.setTypeface(typefacenunitosans_light)
+                textMaterial.setTypeface(typefacenunitosans_semibold)
+                textShopFor.setTypeface(typefacenunitosans_light)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 //                    arrayMaterial.clear()
@@ -273,10 +273,10 @@ class Filters : Fragment() {
 
             textShopFor.singleClick {
                 defaultRun = 3
-                textPrice.setTypeface(typefaceroboto_light)
-                textCategories.setTypeface(typefaceroboto_light)
-                textMaterial.setTypeface(typefaceroboto_light)
-                textShopFor.setTypeface(typefaceroboto_medium)
+                textPrice.setTypeface(typefacenunitosans_light)
+                textCategories.setTypeface(typefacenunitosans_light)
+                textMaterial.setTypeface(typefacenunitosans_light)
+                textShopFor.setTypeface(typefacenunitosans_semibold)
 
                 Handler(Looper.getMainLooper()).postDelayed({
 //                    arrayMaterial.clear()

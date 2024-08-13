@@ -124,7 +124,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/roboto_regular"
+                app:fontFamily="@font/nunitosans_regular"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutCoupon"
                 tools:ignore="HardcodedText"
@@ -152,7 +152,7 @@
                     android:text="Subtotal"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -165,7 +165,7 @@
                     android:text="₹42,550"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -205,7 +205,7 @@
                     android:text="Shipping"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -218,7 +218,7 @@
                     android:text="₹42,550"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -255,7 +255,7 @@
                     android:text="CGST"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -268,7 +268,7 @@
                     android:text="₹42,550"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -305,7 +305,7 @@
                     android:text="SGST"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -318,7 +318,7 @@
                     android:text="₹42,550"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_light"
+                    app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -354,7 +354,7 @@
                     android:text="Total"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -367,7 +367,7 @@
                     android:text="₹42,550"
                     android:textColor="@color/_424041"
                     android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/roboto_medium"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -423,7 +423,7 @@
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
                 android:text="@string/proceed_to_payment"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 />
 
 

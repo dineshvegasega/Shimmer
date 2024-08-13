@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.shimmer.store.R
 import com.shimmer.store.databinding.ForgotPasswordBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,8 +35,12 @@ class ForgotPassword : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.mainActivity.get()!!.callBack(0)
-        saveObject(LOGIN_DATA, "data")
 
+        binding.apply {
+            btResetPassword.singleClick {
+                findNavController().navigate(R.id.action_forgotPassword_to_resetPassword)
+            }
+        }
 
     }
 }

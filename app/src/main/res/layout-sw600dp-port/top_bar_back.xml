@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:singleLine="true"
         android:text="@string/app_name"
-        android:fontFamily="@font/roboto_bold"
+        android:fontFamily="@font/nunitosans_bold"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="@dimen/_14sdp"

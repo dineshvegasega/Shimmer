@@ -42,11 +42,11 @@ class LoginOptions : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(0)
         binding.apply {
 
-            textLogin.singleClick {
+            layoutFranchise.singleClick {
                 findNavController().navigate(R.id.action_loginOptions_to_login)
             }
 
-            textGuest.singleClick {
+            layoutUser.singleClick {
                 val obj: JSONObject = JSONObject().apply {
                     put("username", "admin")
                     put("password", "admin123")

@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.onBoarding.login
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModel
@@ -21,6 +22,7 @@ import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -35,7 +37,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
         var storeToken = ""
     }
 
-    fun websiteUrl(adminToken: String, jsonObject: JSONObject, view: View, callBack: String.() -> Unit) =
+    fun websiteUrl(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
@@ -48,29 +50,21 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
 //                                    .substring(1, response.body().toString().length - 1)
                                   Log.e("TAG", "successAA: ${response.body().toString()}")
                                 //val token = response.body().toString().substring(1, response.body().toString().length - 1)
-//                                //callBack(token)
+
 //                                storeToken = token
 
                                 val json = JSONObject(response.body().toString())
                                 val website_id = json.getString("website_id")
                                 saveData(WEBSITE_ID, website_id)
                                 storeWebUrl = website_id
-
-                                customerLoginToken(adminToken, jsonObject, view){
-                                    Log.e("TAG", "itAAA "+this)
-                                }
-
-//                                customerDetail(adminToken, view, callBack)
+                                callBack(response.body().toString())
                             } catch (e: Exception) {
                             }
                         }
                     }
 
                     override fun error(message: String) {
-//                        Log.e("TAG", "successAA: ${message}")
-//                        super.error(message)
                         showSnackBar(message)
-//                        callBack(message.toString())
                     }
 
                     override fun loading() {
@@ -81,7 +75,38 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
         }
 
 
-    fun customerLoginToken(adminToken: String, jsonObject: JSONObject, view: View, callBack: String.() -> Unit) =
+    fun adminToken(jsonObject: JSONObject, callBack: String.() -> Unit) = viewModelScope.launch {
+        repository.callApi(
+            callHandler = object : CallHandler<Response<JsonElement>> {
+                override suspend fun sendRequest(apiInterface: ApiInterface) =
+                    apiInterface.adminToken(requestBody = jsonObject.getJsonRequestBody())
+                override fun success(response: Response<JsonElement>) {
+                    if (response.isSuccessful){
+//                        Log.e("TAG", "successAA: ${response.body().toString()}")
+                        try {
+                            val token = response.body().toString().substring(1, response.body().toString().length - 1)
+                            callBack(token)
+                        }catch (e : Exception){
+                        }
+                    }
+                }
+
+                override fun error(message: String) {
+                    super.error(message)
+//                    showSnackBar(message)
+                    Log.e("TAG", "successBB: ${message.toString()}")
+                    callBack(message.toString())
+                }
+
+                override fun loading() {
+                    super.loading()
+                }
+            }
+        )
+    }
+
+
+    fun customerLoginToken(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
@@ -93,9 +118,8 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                 val token = response.body().toString()
                                     .substring(1, response.body().toString().length - 1)
                                 //  Log.e("TAG", "successAA: ${token}")
-                                //callBack(token)
                                 storeToken = token
-                                customerDetail(token, view, callBack)
+                                callBack(token)
                             } catch (e: Exception) {
                             }
                         }
@@ -116,7 +140,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
         }
 
 
-    fun customerDetail(token: String, view: View, callBack: String.() -> Unit) =
+    fun customerDetail(token: String, callBack: String.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
@@ -128,18 +152,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                             try {
 //                            val token = response.body().toString().substring(1, response.body().toString().length - 1)
                                 Log.e("TAG", "customerDetail: ${response.body().toString()}")
-                                //callBack(response.body().toString())
-
-                                saveData(CUSTOMER_TOKEN, token)
-                                saveObject(
-                                    LOGIN_DATA,
-                                    Gson().fromJson(
-                                        response.body()!!.toString(),
-                                        ItemStore::class.java
-                                    )
-                                )
-                                loginType = "vendor"
-                                view.findNavController().navigate(R.id.action_login_to_home)
+                                callBack(response.body().toString())
                             } catch (e: Exception) {
                             }
                         }
@@ -157,6 +170,47 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                 }
             )
         }
+
+
+    fun getQuoteId(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.getQuoteId("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body().toString())
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        if(message.contains("fieldName")){
+//                            showSnackBar("Something went wrong!")
+//                        } else {
+//                            sessionExpired()
+//                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
 
 
 //

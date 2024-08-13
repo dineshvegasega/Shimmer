@@ -85,7 +85,7 @@ class HomeVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                textTitle.text = dataClass.name
                 ivIcon.setOnClickListener {
                     currentList.forEach {
                         it.isSelected = false

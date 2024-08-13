@@ -25,6 +25,8 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSizesBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.ItemProductOptions
@@ -42,6 +44,7 @@ import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.mainThread
+import com.shimmer.store.utils.showSnackBar
 //import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -277,7 +280,6 @@ class ProductDetail : Fragment(), CallBackListener {
                 }
             }
 
-
             bt14.singleClick {
                 arrayItemProduct.forEach { itemProductOptions ->
                     itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
@@ -345,6 +347,49 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
                                 }
                             }
+                        }
+                    }
+                }
+            }
+
+
+
+            btAddToCart.singleClick {
+                readData(QUOTE_ID) {
+                    val json : JSONObject = JSONObject().apply {
+                        put("sku", currentSku)
+                        put("qty", 1)
+                        put("quote_id", it.toString())
+                    }
+                    val jsonCartItem : JSONObject = JSONObject().apply {
+                        put("cartItem", json)
+                    }
+                    readData(CUSTOMER_TOKEN) { token ->
+                        viewModel.addCart(token!!, jsonCartItem){
+                            //cartMutableList.value = true
+                            Log.e("TAG", "onCallBack: ${this.toString()}")
+                            showSnackBar("Item added to cart")
+                        }
+                    }
+                }
+            }
+
+            btByNow.singleClick {
+                readData(QUOTE_ID) {
+                    val json : JSONObject = JSONObject().apply {
+                        put("sku", currentSku)
+                        put("qty", 1)
+                        put("quote_id", it.toString())
+                    }
+                    val jsonCartItem : JSONObject = JSONObject().apply {
+                        put("cartItem", json)
+                    }
+                    readData(CUSTOMER_TOKEN) { token ->
+                        viewModel.addCart(token!!, jsonCartItem){
+                            //cartMutableList.value = true
+                            Log.e("TAG", "onCallBack: ${this.toString()}")
+                            showSnackBar("Item added to cart")
+                            findNavController().navigate(R.id.action_productDetail_to_cart)
                         }
                     }
                 }

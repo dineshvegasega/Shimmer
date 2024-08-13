@@ -4,24 +4,147 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_login">
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/textHeaderTxt4"
+    <include
+        android:id="@+id/back_button"
+        layout="@layout/include_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/_12sdp"
-        android:paddingVertical="@dimen/_5sdp"
-        android:text="Login"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitleLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_here"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_24sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_120sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitleMobileNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mobile_number"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextMobileNumber"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        style="@style/PrimaryEditText"
+        android:hint="@string/mobile_number"
+        android:text="vegasega@gmail.com"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleMobileNumber"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:maxLength="25"
+        android:visibility="visible"
+        android:backgroundTint="@color/_002630"
+        />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitlePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        app:layout_constraintTop_toBottomOf="@+id/editTextMobileNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        style="@style/PrimaryEditText"
+        android:hint="@string/password"
+        android:text="ZvdZIC0R"
+        app:layout_constraintTop_toBottomOf="@+id/textTitlePassword"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:maxLength="25"
+        android:visibility="visible"
+        android:backgroundTint="@color/_002630"
+        />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btLogin"
+        style="@style/PrimaryButtonBlue"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingHorizontal="0dp"
+        android:text="@string/login"
+        app:iconTint="@color/black"
         android:textColor="@color/black"
-        android:textSize="@dimen/_13sdp"
+        android:backgroundTint="@color/_07FFFC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextPassword"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:cornerRadius="@dimen/_7sdp"
+        android:visibility="visible"
+        app:strokeColor="@color/app_color"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true"
+        />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitleForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_password"
+        android:textColor="@color/_0098BD"
+        android:textSize="@dimen/_12sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-/>
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:padding="@dimen/_5sdp"
+        />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,8 +18,8 @@ import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 //import com.shimmer.store.ui.main.filters.Filters.Companion.headerAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_light
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_semibold
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
@@ -130,7 +130,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
         ) {
             binding.apply {
                 textItem.text = dataClass.name
-                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
                         binding.root.context,
@@ -181,7 +181,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
 
                 textItem.text = dataClass.name
 
-                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
                         binding.root.context,
@@ -300,7 +300,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
 
 
 
-                                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                                textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                                 ivIconCheck.imageTintList =
                                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
                                         binding.root.context,
@@ -313,24 +313,24 @@ class FiltersVM @Inject constructor() : ViewModel() {
 
 //                                if (dataClassChild.isSelected == true) {
 ////                                if (dataClassChild.isChildSelect == true){
-////                                    textItemChild.setTypeface(typefaceroboto_light)
+////                                    textItemChild.setTypeface(typefacenunitosans_light)
 ////                                } else {
-//                                    textItemChild.setTypeface(typefaceroboto_medium)
+//                                    textItemChild.setTypeface(typefacenunitosans_semibold)
 ////                                }
 //                                } else {
 //                                    if(parentPress == false){
 //                                        if (dataClassChild.isChildSelect == true){
-//                                            textItemChild.setTypeface(typefaceroboto_medium)
+//                                            textItemChild.setTypeface(typefacenunitosans_semibold)
 //                                        } else {
-//                                            textItemChild.setTypeface(typefaceroboto_light)
+//                                            textItemChild.setTypeface(typefacenunitosans_light)
 //                                        }
 //                                    } else {
-//                                        textItemChild.setTypeface(typefaceroboto_light)
+//                                        textItemChild.setTypeface(typefacenunitosans_light)
 //                                    }
 //                                }
 
 
-                            textItemChild.setTypeface(if (dataClassChild.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                            textItemChild.setTypeface(if (dataClassChild.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
 
 
                                 ivIconCheckChild.imageTintList =
@@ -371,7 +371,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
             binding.apply {
                 textItem.text = dataClass.name
 
-                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
                         binding.root.context,
@@ -419,7 +419,7 @@ class FiltersVM @Inject constructor() : ViewModel() {
             binding.apply {
                 textItem.text = dataClass.name
 
-                textItem.setTypeface(if (dataClass.isSelected == true) typefaceroboto_medium else typefaceroboto_light)
+                textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(
                         binding.root.context,

@@ -73,7 +73,7 @@ class FaqVM @Inject constructor() : ViewModel() {
                 ivHideShow.setImageDrawable(
                     ContextCompat.getDrawable(
                         root.context,
-                        if (dataClass.isCollapse == true) R.drawable.baseline_remove_24 else R.drawable.baseline_add_24
+                        if (dataClass.isCollapse == true) R.drawable.arrow_down else R.drawable.arrow_right
                     )
                 )
                 ivHideShow.singleClick {

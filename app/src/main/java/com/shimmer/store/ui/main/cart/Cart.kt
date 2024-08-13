@@ -53,7 +53,6 @@ class Cart : Fragment() {
 
             topBar.apply {
                 textViewTitle.visibility = View.VISIBLE
-//                cardSearch.visibility = View.GONE
                 ivSearch.visibility = View.GONE
                 ivCartLayout.visibility = View.GONE
                 textViewTitle.text = "Cart"
@@ -78,6 +77,38 @@ class Cart : Fragment() {
 
                 "guest" -> {
                     textCartOrder.text = resources.getString(R.string.proceed)
+                }
+            }
+//            {
+//                "cartItem": {
+//                "sku": "SAS0005-G-18-YG-11",
+//                "qty": 1,
+//                "quote_id": "7"
+//            }
+//            }
+
+            rvList.adapter = viewModel.cartAdapter
+            upperLayout.visibility = View.GONE
+            filterLayout.visibility = View.GONE
+//            viewModel.cartMutableList.value = false
+            viewModel.cartMutableList.observe(viewLifecycleOwner) {
+                readData(CUSTOMER_TOKEN) { token ->
+                    viewModel.getCart(token!!) {
+                        val itemCart = this
+                        Log.e("TAG", "getCart " + this.toString())
+                        rvList.setHasFixedSize(true)
+                        viewModel.cartAdapter.notifyDataSetChanged()
+                        viewModel.cartAdapter.submitList(itemCart.items)
+
+
+                        if (!itemCart.items.isNullOrEmpty()) {
+                            upperLayout.visibility = View.VISIBLE
+                            filterLayout.visibility = View.VISIBLE
+                        } else {
+                            upperLayout.visibility = View.GONE
+                            filterLayout.visibility = View.GONE
+                        }
+                    }
                 }
             }
 
@@ -144,35 +175,27 @@ class Cart : Fragment() {
             }
 
 
-            readData(CUSTOMER_TOKEN) { token ->
-                Log.e("TAG", "itAAAtoken " + token)
-                viewModel.getQuoteId(token!!, JSONObject()) {
-                    Log.e("TAG", "getQuoteId " + this)
-                    viewModel.quoteId = this
-                }
-
-                viewModel.getCart(token!!) {
-                    var itemCart = this
-                    Log.e("TAG", "getCart " + this.toString())
-                    rvList.setHasFixedSize(true)
-                    rvList.adapter = viewModel.cartAdapter
-                    viewModel.cartAdapter.notifyDataSetChanged()
-                    viewModel.cartAdapter.submitList(itemCart.items)
-
-
-                    if (!itemCart.items.isNullOrEmpty()) {
-                        upperLayout.visibility = View.VISIBLE
-                        filterLayout.visibility = View.VISIBLE
-                    } else {
-                        upperLayout.visibility = View.GONE
-                        filterLayout.visibility = View.GONE
-                    }
-
-
-                }
-
+//            readData(CUSTOMER_TOKEN) { token ->
+//                viewModel.getCart(token!!) {
+//                    val itemCart = this
+//                    Log.e("TAG", "getCart " + this.toString())
+//                    rvList.setHasFixedSize(true)
+//                    rvList.adapter = viewModel.cartAdapter
+//                    viewModel.cartAdapter.notifyDataSetChanged()
+//                    viewModel.cartAdapter.submitList(itemCart.items)
+//
+//
+//                    if (!itemCart.items.isNullOrEmpty()) {
+//                        upperLayout.visibility = View.VISIBLE
+//                        filterLayout.visibility = View.VISIBLE
+//                    } else {
+//                        upperLayout.visibility = View.GONE
+//                        filterLayout.visibility = View.GONE
+//                    }
+//
+//
 //                }
-            }
+//            }
 
         }
     }

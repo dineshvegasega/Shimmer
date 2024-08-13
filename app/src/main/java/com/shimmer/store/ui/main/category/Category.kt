@@ -62,77 +62,81 @@ class Category : Fragment() {
             }
 
 
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-                ivSearch.visibility = View.VISIBLE
-                ivCart.visibility = View.VISIBLE
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+//                ivSearch.visibility = View.VISIBLE
+//                ivCart.visibility = View.VISIBLE
+//
+//                ivSearch.singleClick {
+//                    findNavController().navigate(R.id.action_category_to_search)
+//                }
+//
+//                ivCart.singleClick {
+//                    findNavController().navigate(R.id.action_category_to_cart)
+//                }
+//
+//
+//                badgeCount.observe(viewLifecycleOwner) {
+//                    viewModel.getCartCount() {
+//                        Log.e("TAG", "count: $this")
+//                        menuBadge.text = "${this}"
+//                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+//                    }
+//                }
+//
+//
+//
+//
+////                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+////                        override fun onPageScrolled(
+////                            position: Int,
+////                            positionOffset: Float,
+////                            positionOffsetPixels: Int
+////                        ) {
+////                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+//////                    if (pageChangeValue != position) {
+//////                        Log.e("TAG", "positionA" + position)
+//////                    }
+//////                    pageChangeValue = position
+////                        }
+////
+////                        override fun onPageSelected(position: Int) {
+////                            super.onPageSelected(position)
+//////                    adapter1.updatePosition(position)
+//////                            viewModel.indicator(binding, viewModel.item1, position)
+//////                            pagerAdapter.notifyDataSetChanged()
+////                        }
+////
+////                        override fun onPageScrollStateChanged(state: Int) {
+////                            super.onPageScrollStateChanged(state)
+////                            Log.e("TAG", "state" + state)
+//////                    if (state == 0) {
+//////                    adapter1.notifyItemChanged(adapter1.counter)
+//////                        onClickItem(pageChangeValue)
+//////                    }
+////                        }
+////                    })
+//            }
 
-                ivSearch.singleClick {
-                    findNavController().navigate(R.id.action_category_to_search)
-                }
-
-                ivCart.singleClick {
-                    findNavController().navigate(R.id.action_category_to_cart)
-                }
 
 
-                badgeCount.observe(viewLifecycleOwner) {
-                    viewModel.getCartCount() {
-                        Log.e("TAG", "count: $this")
-                        menuBadge.text = "${this}"
-                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-                    }
-                }
-
-                viewModel.show()
-                mainThread {
-                    val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
+            viewModel.show()
+            mainThread {
+                val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
 //                    pagerAdapter.notifyDataSetChanged()
-                    rvList1.offscreenPageLimit = 3
-                    rvList1.overScrollMode = OVER_SCROLL_NEVER
+                rvList1.offscreenPageLimit = 3
+                rvList1.overScrollMode = OVER_SCROLL_NEVER
 
-                    rvList1.adapter = pagerAdapter
-                    delay(200)
+                rvList1.adapter = pagerAdapter
+                delay(200)
 
-                    rvList1.setPageTransformer { page, position ->
-                        rvList1.updatePagerHeightForChild(page)
-                    }
-                    TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-                        tab.text = mainShopFor[position].name
-                    }.attach()
-                    viewModel.hide()
+                rvList1.setPageTransformer { page, position ->
+                    rvList1.updatePagerHeightForChild(page)
                 }
-
-
-//                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//                        override fun onPageScrolled(
-//                            position: Int,
-//                            positionOffset: Float,
-//                            positionOffsetPixels: Int
-//                        ) {
-//                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-////                    if (pageChangeValue != position) {
-////                        Log.e("TAG", "positionA" + position)
-////                    }
-////                    pageChangeValue = position
-//                        }
-//
-//                        override fun onPageSelected(position: Int) {
-//                            super.onPageSelected(position)
-////                    adapter1.updatePosition(position)
-////                            viewModel.indicator(binding, viewModel.item1, position)
-////                            pagerAdapter.notifyDataSetChanged()
-//                        }
-//
-//                        override fun onPageScrollStateChanged(state: Int) {
-//                            super.onPageScrollStateChanged(state)
-//                            Log.e("TAG", "state" + state)
-////                    if (state == 0) {
-////                    adapter1.notifyItemChanged(adapter1.counter)
-////                        onClickItem(pageChangeValue)
-////                    }
-//                        }
-//                    })
+                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
+                    tab.text = mainShopFor[position].name
+                }.attach()
+                viewModel.hide()
             }
         }
 

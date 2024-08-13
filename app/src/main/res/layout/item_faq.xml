@@ -5,25 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/_3sdp">
+    android:background="@drawable/all_round_options"
+    android:backgroundTint="@color/_B9F2FF"
+    android:layout_marginVertical="@dimen/_6sdp"
+   >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/all_round_options"
+        android:backgroundTint="@color/_003E4D"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="What is Faq?"
-            android:textColor="@color/_000000"
-            android:textSize="@dimen/_11sdp"
-            app:fontFamily="@font/roboto_medium"
+            android:minHeight="@dimen/_45sdp"
+            android:text="Lorem ipsum dolor sit amet consectetur. Gravida purus mi est faucibus volutpat."
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            app:fontFamily="@font/nunitosans_semibold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivHideShow"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,15 +42,16 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivHideShow"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
             app:layout_constraintDimensionRatio="H,1:1.1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/baseline_remove_24"
+            app:srcCompat="@drawable/arrow_right"
             android:layout_marginStart="@dimen/_5sdp"
-            app:tint="@color/app_color"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:padding="@dimen/_3sdp"
             />
 
 
@@ -64,8 +72,9 @@
             android:layout_height="wrap_content"
             android:text="Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode! Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode! Be part of the community and earn reputation by helping others. Save your favorite posts and try dark mode!"
             android:textColor="@color/_000000"
-            android:textSize="@dimen/_11sdp"
-            app:fontFamily="@font/roboto_light"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:fontFamily="@font/nunitosans_light"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -1,88 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_38sdp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/app_color">
+    android:background="@drawable/home_top_bg"
+    android:paddingVertical="@dimen/_15sdp">
 
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appicon"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:src="@mipmap/ic_launcher"
-        android:scaleType="fitCenter"
-        android:text="@string/toolbar_title"
-        android:paddingTop="@dimen/_2sdp"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/_15sdp"
-        app:rippleColor="@color/black"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        />
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView_title"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/logoLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:singleLine="true"
-        android:text="@string/app_name"
-        android:fontFamily="@font/roboto_bold"
-        android:textAllCaps="true"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_14sdp"
-        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivSearch"
-        app:layout_constraintStart_toEndOf="@id/appicon"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        />
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/_20sdp"
+        android:paddingTop="@dimen/_5sdp"
+        >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/appicon"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:src="@drawable/logo_transparent"
+            android:scaleType="fitCenter"
+            android:text="@string/toolbar_title"
+            android:paddingTop="@dimen/_2sdp"
+            android:visibility="visible"
+            android:layout_marginStart="@dimen/_15sdp"
+            app:rippleColor="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/app_name"
+            app:textAllCaps="false"
+            android:fontFamily="@font/nunitosans_regular"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_12sdp"
+            android:visibility="visible"
+            android:lineSpacingExtra="@dimen/_minus2sdp"
+            />
 
 
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.appcompat.widget.AppCompatImageView
+
+
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/ivSearch"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:src="@drawable/baseline_search_24"
-        app:tint="@color/white"
-        android:scaleType="fitCenter"
-        android:visibility="visible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
-        android:layout_marginEnd="@dimen/_10sdp"
-        app:rippleColor="@color/black"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35sdp"
+        style="@style/PrimaryEditText_Transparent"
+        android:hint="@string/type_here_to_search"
+        android:text="@string/type_here_to_search"
+        android:drawableEnd="@drawable/search"
+        android:drawableTint="@color/white"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:imeOptions="actionSearch"
+        android:inputType="text|textNoSuggestions"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@+id/logoLayout"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/white"
         android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:focusable="false"
+        android:foreground="?android:attr/selectableItemBackground"
         />
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ivCartLayout"
-        android:layout_width="@dimen/_35sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
         android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCart"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/ic_shopping_cart_white_18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart"
             android:scaleType="fitCenter"
             android:visibility="visible"
             app:rippleColor="@color/black"
@@ -93,31 +112,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_2sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/menu_badge"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="20"
             android:gravity="center"
-            android:textColor="@android:color/white"
-            android:background="@drawable/bg_all_round_black"
+            android:textColor="@color/_07FFFC"
+            android:fontFamily="@font/nunitosans_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTint="@color/_F02A2A"
-            android:visibility="gone"
+            android:visibility="visible"
             android:textSize="@dimen/_8sdp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/_c9cdd0"
-        android:orientation="horizontal"
-      app:layout_constraintBottom_toBottomOf="parent">
-    </View>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,8 +24,8 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_light
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefaceroboto_medium
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_light
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_semibold
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
@@ -160,29 +160,29 @@ class Products : Fragment() {
 
                     when (viewModel.sortFilter) {
                         1 -> {
-                            textDefaultSort.setTypeface(typefaceroboto_medium)
-                            textPriceLowToHighSort.setTypeface(typefaceroboto_light)
-                            textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                            textDefaultSort.setTypeface(typefacenunitosans_semibold)
+                            textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
+                            textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
                         }
 
                         2 -> {
-                            textDefaultSort.setTypeface(typefaceroboto_light)
-                            textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
-                            textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                            textDefaultSort.setTypeface(typefacenunitosans_light)
+                            textPriceLowToHighSort.setTypeface(typefacenunitosans_semibold)
+                            textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
                         }
 
                         3 -> {
-                            textDefaultSort.setTypeface(typefaceroboto_light)
-                            textPriceLowToHighSort.setTypeface(typefaceroboto_light)
-                            textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
+                            textDefaultSort.setTypeface(typefacenunitosans_light)
+                            textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
+                            textPriceHighToLowSort.setTypeface(typefacenunitosans_semibold)
                         }
                     }
 
                     textDefaultSort.singleClick {
                         // textDefaultSort.setTextColor(ContextCompat.getColor(binding.root.context, R.color.white))
-                        textDefaultSort.setTypeface(typefaceroboto_medium)
-                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
-                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        textDefaultSort.setTypeface(typefacenunitosans_semibold)
+                        textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
+                        textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
                         viewModel.sortFilter = 1
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
@@ -190,9 +190,9 @@ class Products : Fragment() {
                     }
 
                     textPriceLowToHighSort.singleClick {
-                        textDefaultSort.setTypeface(typefaceroboto_light)
-                        textPriceLowToHighSort.setTypeface(typefaceroboto_medium)
-                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        textDefaultSort.setTypeface(typefacenunitosans_light)
+                        textPriceLowToHighSort.setTypeface(typefacenunitosans_semibold)
+                        textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
                         viewModel.sortFilter = 2
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
@@ -200,9 +200,9 @@ class Products : Fragment() {
                     }
 
                     textPriceHighToLowSort.singleClick {
-                        textDefaultSort.setTypeface(typefaceroboto_light)
-                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
-                        textPriceHighToLowSort.setTypeface(typefaceroboto_medium)
+                        textDefaultSort.setTypeface(typefacenunitosans_light)
+                        textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
+                        textPriceHighToLowSort.setTypeface(typefacenunitosans_semibold)
                         viewModel.sortFilter = 3
 //                        Handler(Looper.getMainLooper()).postDelayed({
 //                            dialog.dismiss()
@@ -210,9 +210,9 @@ class Products : Fragment() {
                     }
 
                     btClear.singleClick {
-                        textDefaultSort.setTypeface(typefaceroboto_light)
-                        textPriceLowToHighSort.setTypeface(typefaceroboto_light)
-                        textPriceHighToLowSort.setTypeface(typefaceroboto_light)
+                        textDefaultSort.setTypeface(typefacenunitosans_light)
+                        textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
+                        textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
                         viewModel.sortFilter = 0
                         filters()
                     }
@@ -264,7 +264,7 @@ class Products : Fragment() {
                         categoryIds += ""+sub.id+","
                     }
                 }
-                categoryIds = categoryIds.substring(0, categoryIds.length-1)
+                categoryIds = if(categoryIds.length > 0) categoryIds.substring(0, categoryIds.length-1) else ""
             }
 
             if (mainCategoryBoolean){

@@ -90,6 +90,20 @@
         android:label="ForgotPassword"
         android:id="@+id/forgotPassword"
         tools:layout="@layout/forgot_password">
+        <action
+            android:id="@+id/action_forgotPassword_to_resetPassword"
+            app:destination="@id/resetPassword"
+            app:launchSingleTop="true"
+            />
+
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.onBoarding.resetPassword.ResetPassword"
+        android:label="ResetPassword"
+        android:id="@+id/resetPassword"
+        tools:layout="@layout/reset_password">
     </fragment>
 
 

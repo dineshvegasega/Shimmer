@@ -68,7 +68,7 @@
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
                 android:text="@string/place_order_with_franchise"
-                app:fontFamily="@font/roboto_medium"
+                app:fontFamily="@font/nunitosans_semibold"
                 />
 
 

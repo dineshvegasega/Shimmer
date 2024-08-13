@@ -8,12 +8,28 @@
 
 
     <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar"
+        android:id="@+id/top_bar_others"
+        layout="@layout/top_bar_others"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_others"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_12sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
 
 
     <include
@@ -22,7 +38,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
         />
 
     <androidx.fragment.app.FragmentContainerView
@@ -61,7 +77,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/top_bar_search"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         />
 
 
@@ -92,7 +108,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/btProfileDetails"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         />
 
 
@@ -122,7 +138,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/btOrders"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         />
 
     <com.google.android.material.button.MaterialButton
@@ -151,7 +167,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/btComplaints"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         />
 
     <androidx.appcompat.widget.SwitchCompat
@@ -164,7 +180,7 @@
         android:text="Notifications"
         android:textSize="@dimen/_11sdp"
         android:textColor="@color/_1D1B20"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         android:focusable="false"
         app:layout_constraintTop_toBottomOf="@+id/btChangePassword"
         android:textScaleX="1.1"
@@ -197,7 +213,7 @@
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@+id/switchNotifications"
-        android:fontFamily="@font/roboto_medium"
+        android:fontFamily="@font/nunitosans_semibold"
         />
 
 
@@ -224,7 +240,7 @@
             android:textAllCaps="true"
             android:textColor="@color/_322F35"
             android:textSize="@dimen/_20sdp"
-            app:fontFamily="@font/roboto_bold"
+            app:fontFamily="@font/nunitosans_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
@@ -236,7 +252,7 @@
             android:text="@string/app_version_1_0"
             android:textColor="@color/_322F35"
             android:textSize="@dimen/_12sdp"
-            app:fontFamily="@font/roboto_medium"
+            app:fontFamily="@font/nunitosans_semibold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textAppNameTxt"

@@ -127,8 +127,8 @@ class Home : Fragment() {
 
 
 
-            rvList2.setHasFixedSize(true)
-            rvList2.adapter = viewModel.categoryAdapter
+            rvList1.setHasFixedSize(true)
+            rvList1.adapter = viewModel.categoryAdapter
             viewModel.categoryAdapter.notifyDataSetChanged()
             viewModel.categoryAdapter.submitList(mainCategory)
 
