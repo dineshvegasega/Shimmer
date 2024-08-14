@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemCategoryRoundBinding
+import com.shimmer.store.databinding.ItemCategoryBinding
 import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
@@ -81,15 +81,15 @@ class OrdersVM @Inject constructor() : ViewModel() {
 
 
 
-    val orderHistory = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val orderHistory = object : GenericAdapter<ItemCategoryBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemCategoryBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemCategoryBinding,
             dataClass: Items,
             position: Int
         ) {
@@ -102,15 +102,15 @@ class OrdersVM @Inject constructor() : ViewModel() {
     }
 
 
-    val customerOrders = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val customerOrders = object : GenericAdapter<ItemCategoryBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemCategoryBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemCategoryBinding,
             dataClass: Items,
             position: Int
         ) {

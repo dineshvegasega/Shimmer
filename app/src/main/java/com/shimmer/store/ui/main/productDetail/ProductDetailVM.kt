@@ -120,7 +120,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
-    fun getProductDetail(adminToken: String, view: View, skuId: String, callBack: ItemProduct.() -> Unit) =
+    fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {

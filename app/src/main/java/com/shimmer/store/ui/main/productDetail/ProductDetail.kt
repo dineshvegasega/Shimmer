@@ -811,7 +811,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
-                    viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
+                    viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProduct = this
 
                         if (itemProduct.type_id == "simple" || itemProduct.type_id == "virtual") {
@@ -883,7 +883,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
-                    viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
+                    viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProductThis = this
 
                         viewModel.arrayItemProductOptionsSize.clear()
@@ -1383,7 +1383,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
-                    viewModel.getProductDetail(token.toString(), requireView(), skuId!!) {
+                    viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProductThis = this
 
                         viewModel.arrayItemProductOptionsSize.clear()

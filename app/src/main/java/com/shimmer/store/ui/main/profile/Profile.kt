@@ -109,11 +109,18 @@ class Profile : Fragment() {
             }
 
 
-            topBarSearch.apply {
-                appicon.visibility = View.GONE
-                editTextSearch.hint = "Search For Nearest Franchise"
-                editTextSearch.isFocusable = false
+//            topBarSearch.apply {
+//                appicon.visibility = View.GONE
+//                editTextSearch.hint = "Search For Nearest Franchise"
+//                editTextSearch.isFocusable = false
+//            }
+
+            topBarOthers.apply {
+                ivSearch.singleClick {
+                    findNavController().navigate(R.id.action_profile_to_search)
+                }
             }
+
 
             btProfileDetails.singleClick {
                 findNavController().navigate(R.id.action_profile_to_profileDetails)

@@ -15,17 +15,19 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.main.products.Products
 import com.shimmer.store.ui.main.products.Products.Companion
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.utils.endDrawable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoryChildTab (
+class CategoryChildTab(
     private val activity: FragmentActivity,
     private val videoPath: Items,
     position: Int
@@ -52,6 +54,7 @@ class CategoryChildTab (
         _binding = CategoryChildTabBinding.inflate(inflater)
         return binding.root
     }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,139 +77,395 @@ class CategoryChildTab (
             itemCategory10.textName.text = mainCategory[9].name
 
 
-            rvListCategory1.adapter = viewModel.subCategoryAdapter1
+            itemCategory1.rvListCategory.adapter = viewModel.subCategoryAdapter1
             itemCategory1.linearLayout.singleClick {
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
+                itemCategory1.rvListCategory.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
                 viewModel.subCategoryAdapter1.submitList(mainCategory[0].subCategory)
-                rvListCategory1.visibility = View.VISIBLE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory1.rvListCategory.visibility = View.VISIBLE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 1
             }
 
+
+
             itemCategory2.linearLayout.singleClick {
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter1.notifyDataSetChanged()
-                viewModel.subCategoryAdapter1.submitList(mainCategory[1].subCategory)
-                rvListCategory1.visibility = View.VISIBLE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory2.rvListCategory.adapter = viewModel.subCategoryAdapter2
+                viewModel.subCategoryAdapter2.notifyDataSetChanged()
+                viewModel.subCategoryAdapter2.submitList(mainCategory[1].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.VISIBLE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 2
             }
 
 
-
-            rvListCategory2.adapter = viewModel.subCategoryAdapter2
             itemCategory3.linearLayout.singleClick {
-                rvListCategory1.adapter = viewModel.subCategoryAdapter1
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[2].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory3.rvListCategory.adapter = viewModel.subCategoryAdapter3
+                viewModel.subCategoryAdapter3.notifyDataSetChanged()
+                viewModel.subCategoryAdapter3.submitList(mainCategory[2].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.VISIBLE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 3
             }
 
+
             itemCategory4.linearLayout.singleClick {
-                rvListCategory2.adapter = viewModel.subCategoryAdapter2
-                viewModel.subCategoryAdapter2.notifyDataSetChanged()
-                viewModel.subCategoryAdapter2.submitList(mainCategory[3].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.VISIBLE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory4.rvListCategory.adapter = viewModel.subCategoryAdapter4
+                viewModel.subCategoryAdapter4.notifyDataSetChanged()
+                viewModel.subCategoryAdapter4.submitList(mainCategory[3].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.VISIBLE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 4
             }
 
 
-
-            rvListCategory3.adapter = viewModel.subCategoryAdapter3
             itemCategory5.linearLayout.singleClick {
-                rvListCategory3.adapter = viewModel.subCategoryAdapter3
-                viewModel.subCategoryAdapter3.notifyDataSetChanged()
-                viewModel.subCategoryAdapter3.submitList(mainCategory[4].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.VISIBLE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory5.rvListCategory.adapter = viewModel.subCategoryAdapter5
+                viewModel.subCategoryAdapter5.notifyDataSetChanged()
+                viewModel.subCategoryAdapter5.submitList(mainCategory[4].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.VISIBLE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 5
             }
 
+
             itemCategory6.linearLayout.singleClick {
-                rvListCategory3.adapter = viewModel.subCategoryAdapter3
-                viewModel.subCategoryAdapter3.notifyDataSetChanged()
-                viewModel.subCategoryAdapter3.submitList(mainCategory[5].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.VISIBLE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.GONE
+                itemCategory6.rvListCategory.adapter = viewModel.subCategoryAdapter6
+                viewModel.subCategoryAdapter6.notifyDataSetChanged()
+                viewModel.subCategoryAdapter6.submitList(mainCategory[5].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.VISIBLE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 6
             }
 
 
-
-            rvListCategory4.adapter = viewModel.subCategoryAdapter4
             itemCategory7.linearLayout.singleClick {
-                rvListCategory4.adapter = viewModel.subCategoryAdapter4
-                viewModel.subCategoryAdapter4.notifyDataSetChanged()
-                viewModel.subCategoryAdapter4.submitList(mainCategory[6].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.VISIBLE
-                rvListCategory5.visibility = View.GONE
+                itemCategory7.rvListCategory.adapter = viewModel.subCategoryAdapter7
+                viewModel.subCategoryAdapter7.notifyDataSetChanged()
+                viewModel.subCategoryAdapter7.submitList(mainCategory[6].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.VISIBLE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 7
             }
 
+
             itemCategory8.linearLayout.singleClick {
-                rvListCategory4.adapter = viewModel.subCategoryAdapter4
-                viewModel.subCategoryAdapter4.notifyDataSetChanged()
-                viewModel.subCategoryAdapter4.submitList(mainCategory[7].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.VISIBLE
-                rvListCategory5.visibility = View.GONE
+                itemCategory8.rvListCategory.adapter = viewModel.subCategoryAdapter8
+                viewModel.subCategoryAdapter8.notifyDataSetChanged()
+                viewModel.subCategoryAdapter8.submitList(mainCategory[7].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.VISIBLE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 8
             }
 
 
-
-
-            rvListCategory5.adapter = viewModel.subCategoryAdapter5
             itemCategory9.linearLayout.singleClick {
-                rvListCategory5.adapter = viewModel.subCategoryAdapter5
-                viewModel.subCategoryAdapter5.notifyDataSetChanged()
-                viewModel.subCategoryAdapter5.submitList(mainCategory[8].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.VISIBLE
+                itemCategory9.rvListCategory.adapter = viewModel.subCategoryAdapter9
+                viewModel.subCategoryAdapter9.notifyDataSetChanged()
+                viewModel.subCategoryAdapter9.submitList(mainCategory[8].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.VISIBLE
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_down)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 9
             }
 
+
             itemCategory10.linearLayout.singleClick {
-                rvListCategory5.adapter = viewModel.subCategoryAdapter5
-                viewModel.subCategoryAdapter5.notifyDataSetChanged()
-                viewModel.subCategoryAdapter5.submitList(mainCategory[9].subCategory)
-                rvListCategory1.visibility = View.GONE
-                rvListCategory2.visibility = View.GONE
-                rvListCategory3.visibility = View.GONE
-                rvListCategory4.visibility = View.GONE
-                rvListCategory5.visibility = View.VISIBLE
+                itemCategory10.rvListCategory.adapter = viewModel.subCategoryAdapter10
+                viewModel.subCategoryAdapter10.notifyDataSetChanged()
+                viewModel.subCategoryAdapter10.submitList(mainCategory[9].subCategory)
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory10.rvListCategory.visibility = View.VISIBLE
+                itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+                itemCategory10.textName.endDrawable(R.drawable.arrow_down)
                 mainSelect = 10
             }
+
+
+//
+//            rvListCategory2.adapter = viewModel.subCategoryAdapter2
+//            itemCategory3.linearLayout.singleClick {
+//                rvListCategory1.adapter = viewModel.subCategoryAdapter1
+//                viewModel.subCategoryAdapter2.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter2.submitList(mainCategory[2].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.VISIBLE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 3
+//            }
+//
+//            itemCategory4.linearLayout.singleClick {
+//                rvListCategory2.adapter = viewModel.subCategoryAdapter2
+//                viewModel.subCategoryAdapter2.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter2.submitList(mainCategory[3].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.VISIBLE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 4
+//            }
+//
+//
+//
+//            rvListCategory3.adapter = viewModel.subCategoryAdapter3
+//            itemCategory5.linearLayout.singleClick {
+//                rvListCategory3.adapter = viewModel.subCategoryAdapter3
+//                viewModel.subCategoryAdapter3.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter3.submitList(mainCategory[4].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.VISIBLE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 5
+//            }
+//
+//            itemCategory6.linearLayout.singleClick {
+//                rvListCategory3.adapter = viewModel.subCategoryAdapter3
+//                viewModel.subCategoryAdapter3.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter3.submitList(mainCategory[5].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.VISIBLE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 6
+//            }
+//
+//
+//
+//            rvListCategory4.adapter = viewModel.subCategoryAdapter4
+//            itemCategory7.linearLayout.singleClick {
+//                rvListCategory4.adapter = viewModel.subCategoryAdapter4
+//                viewModel.subCategoryAdapter4.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter4.submitList(mainCategory[6].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.VISIBLE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 7
+//            }
+//
+//            itemCategory8.linearLayout.singleClick {
+//                rvListCategory4.adapter = viewModel.subCategoryAdapter4
+//                viewModel.subCategoryAdapter4.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter4.submitList(mainCategory[7].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.VISIBLE
+//                rvListCategory5.visibility = View.GONE
+//                mainSelect = 8
+//            }
+//
+//
+//
+//
+//            rvListCategory5.adapter = viewModel.subCategoryAdapter5
+//            itemCategory9.linearLayout.singleClick {
+//                rvListCategory5.adapter = viewModel.subCategoryAdapter5
+//                viewModel.subCategoryAdapter5.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter5.submitList(mainCategory[8].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.VISIBLE
+//                mainSelect = 9
+//            }
+//
+//            itemCategory10.linearLayout.singleClick {
+//                rvListCategory5.adapter = viewModel.subCategoryAdapter5
+//                viewModel.subCategoryAdapter5.notifyDataSetChanged()
+//                viewModel.subCategoryAdapter5.submitList(mainCategory[9].subCategory)
+//                rvListCategory1.visibility = View.GONE
+//                rvListCategory2.visibility = View.GONE
+//                rvListCategory3.visibility = View.GONE
+//                rvListCategory4.visibility = View.GONE
+//                rvListCategory5.visibility = View.VISIBLE
+//                mainSelect = 10
+//            }
 
 
         }
@@ -219,7 +478,7 @@ class CategoryChildTab (
         super.onResume()
 //        Log.e("TAG", "onViewCreated: Fragment Position : ${videoPath.name}")
         mainShopFor.forEach {
-            if (videoPath.name == it.name){
+            if (videoPath.name == it.name) {
                 it.isSelected = true
                 Log.e("TAG", "onViewCreated: Fragment PositionIF : ${it.name}")
             } else {
@@ -234,5 +493,10 @@ class CategoryChildTab (
         viewModel.subCategoryAdapter3.notifyDataSetChanged()
         viewModel.subCategoryAdapter4.notifyDataSetChanged()
         viewModel.subCategoryAdapter5.notifyDataSetChanged()
+        viewModel.subCategoryAdapter6.notifyDataSetChanged()
+        viewModel.subCategoryAdapter7.notifyDataSetChanged()
+        viewModel.subCategoryAdapter8.notifyDataSetChanged()
+        viewModel.subCategoryAdapter9.notifyDataSetChanged()
+        viewModel.subCategoryAdapter10.notifyDataSetChanged()
     }
 }

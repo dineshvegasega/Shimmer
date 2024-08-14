@@ -56,7 +56,8 @@
         tools:listitem="@layout/item_home_1"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         app:layout_constraintBottom_toTopOf="@+id/layout_custom_design"
-        android:nestedScrollingEnabled="false" />
+        android:nestedScrollingEnabled="false"
+        android:layout_marginTop="@dimen/_7sdp"/>
 
     <include
         android:id="@+id/layout_custom_design"

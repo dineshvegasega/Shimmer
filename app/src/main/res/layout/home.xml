@@ -128,7 +128,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/cardLayout"
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -142,7 +141,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/cardLayout"
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -157,7 +155,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toTopOf="@id/cardLayout"
                         android:layout_marginTop="@dimen/_3sdp"
                         tools:ignore="HardcodedText" />
                 </androidx.appcompat.widget.LinearLayoutCompat>

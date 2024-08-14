@@ -12,7 +12,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemCategoryRoundBinding
+import com.shimmer.store.databinding.ItemChildBinding
+//import com.shimmer.store.databinding.ItemCategoryRoundBinding
 import com.shimmer.store.databinding.ItemFaqBinding
 import com.shimmer.store.databinding.ItemHomeCategoryBinding
 import com.shimmer.store.databinding.LoaderBinding
@@ -106,22 +107,22 @@ class CategoryVM @Inject constructor() : ViewModel() {
         }
     }
 
-    val subCategoryAdapter1 = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val subCategoryAdapter1 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemChildBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemChildBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
                 textName.text = dataClass.name
 
-                constraintLayout.singleClick {
+                layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
                         it.subCategory.forEach {
@@ -189,21 +190,21 @@ class CategoryVM @Inject constructor() : ViewModel() {
     }
 
 
-    val subCategoryAdapter2 = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val subCategoryAdapter2 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemChildBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemChildBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
                 textName.text = dataClass.name
-                constraintLayout.singleClick {
+                layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
                         it.subCategory.forEach {
@@ -271,21 +272,21 @@ class CategoryVM @Inject constructor() : ViewModel() {
     }
 
 
-    val subCategoryAdapter3 = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val subCategoryAdapter3 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemChildBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemChildBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
                 textName.text = dataClass.name
-                constraintLayout.singleClick {
+                layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
                         it.subCategory.forEach {
@@ -353,21 +354,21 @@ class CategoryVM @Inject constructor() : ViewModel() {
     }
 
 
-    val subCategoryAdapter4 = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val subCategoryAdapter4 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemChildBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemChildBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
                 textName.text = dataClass.name
-                constraintLayout.singleClick {
+                layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
                         it.subCategory.forEach {
@@ -435,21 +436,432 @@ class CategoryVM @Inject constructor() : ViewModel() {
     }
 
 
-    val subCategoryAdapter5 = object : GenericAdapter<ItemCategoryRoundBinding, Items>() {
+    val subCategoryAdapter5 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryRoundBinding.inflate(inflater, parent, false)
+        ) = ItemChildBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryRoundBinding,
+            binding: ItemChildBinding,
             dataClass: Items,
             position: Int
         ) {
             binding.apply {
                 textName.text = dataClass.name
-                constraintLayout.singleClick {
+                layoutChild.singleClick {
+                    mainCategory.forEach {
+                        it.isSelected = false
+                        it.subCategory.forEach {
+                            it.isSelected = false
+                        }
+                    }
+
+                    currentList.forEach {
+                        it.isSelected = false
+                    }
+                    dataClass.isSelected = true
+
+                    currentList.forEach {
+                        if (it.isSelected && it.isAll) {
+//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
+                            when (mainSelect) {
+                                1 -> mainCategory[0].isSelected = true
+                                2 -> mainCategory[1].isSelected = true
+                                3 -> mainCategory[2].isSelected = true
+                                4 -> mainCategory[3].isSelected = true
+                                5 -> mainCategory[4].isSelected = true
+                                6 -> mainCategory[5].isSelected = true
+                                7 -> mainCategory[6].isSelected = true
+                                8 -> mainCategory[7].isSelected = true
+                                9 -> mainCategory[8].isSelected = true
+                                10 -> mainCategory[9].isSelected = true
+                            }
+                        } else {
+//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
+                        }
+                    }
+
+
+
+                    mainCategory.forEach {
+//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
+                        if (it.isSelected) {
+                            it.subCategory.forEach { sub ->
+                                sub.isSelected = true
+                            }
+                        }
+                    }
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentList: " + it.isSelected)
+//                    }
+
+                    mainPrice.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+
+
+                    root.findNavController().navigate(R.id.action_category_to_products)
+
+
+                }
+            }
+        }
+    }
+
+
+    val subCategoryAdapter6 = object : GenericAdapter<ItemChildBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemChildBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemChildBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textName.text = dataClass.name
+
+                layoutChild.singleClick {
+                    mainCategory.forEach {
+                        it.isSelected = false
+                        it.subCategory.forEach {
+                            it.isSelected = false
+                        }
+                    }
+
+                    currentList.forEach {
+                        it.isSelected = false
+                    }
+                    dataClass.isSelected = true
+
+                    currentList.forEach {
+                        if (it.isSelected && it.isAll) {
+//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
+                            when (mainSelect) {
+                                1 -> mainCategory[0].isSelected = true
+                                2 -> mainCategory[1].isSelected = true
+                                3 -> mainCategory[2].isSelected = true
+                                4 -> mainCategory[3].isSelected = true
+                                5 -> mainCategory[4].isSelected = true
+                                6 -> mainCategory[5].isSelected = true
+                                7 -> mainCategory[6].isSelected = true
+                                8 -> mainCategory[7].isSelected = true
+                                9 -> mainCategory[8].isSelected = true
+                                10 -> mainCategory[9].isSelected = true
+                            }
+                        } else {
+//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
+                        }
+                    }
+
+
+
+                    mainCategory.forEach {
+//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
+                        if (it.isSelected) {
+                            it.subCategory.forEach { sub ->
+                                sub.isSelected = true
+                            }
+                        }
+                    }
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentList: " + it.isSelected)
+//                    }
+
+                    mainPrice.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+
+
+                    root.findNavController().navigate(R.id.action_category_to_products)
+
+
+                }
+            }
+        }
+    }
+
+
+    val subCategoryAdapter7 = object : GenericAdapter<ItemChildBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemChildBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemChildBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textName.text = dataClass.name
+                layoutChild.singleClick {
+                    mainCategory.forEach {
+                        it.isSelected = false
+                        it.subCategory.forEach {
+                            it.isSelected = false
+                        }
+                    }
+
+                    currentList.forEach {
+                        it.isSelected = false
+                    }
+                    dataClass.isSelected = true
+
+                    currentList.forEach {
+                        if (it.isSelected && it.isAll) {
+//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
+                            when (mainSelect) {
+                                1 -> mainCategory[0].isSelected = true
+                                2 -> mainCategory[1].isSelected = true
+                                3 -> mainCategory[2].isSelected = true
+                                4 -> mainCategory[3].isSelected = true
+                                5 -> mainCategory[4].isSelected = true
+                                6 -> mainCategory[5].isSelected = true
+                                7 -> mainCategory[6].isSelected = true
+                                8 -> mainCategory[7].isSelected = true
+                                9 -> mainCategory[8].isSelected = true
+                                10 -> mainCategory[9].isSelected = true
+                            }
+                        } else {
+//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
+                        }
+                    }
+
+
+
+                    mainCategory.forEach {
+//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
+                        if (it.isSelected) {
+                            it.subCategory.forEach { sub ->
+                                sub.isSelected = true
+                            }
+                        }
+                    }
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentList: " + it.isSelected)
+//                    }
+
+                    mainPrice.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+
+
+                    root.findNavController().navigate(R.id.action_category_to_products)
+
+
+                }
+            }
+        }
+    }
+
+
+    val subCategoryAdapter8 = object : GenericAdapter<ItemChildBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemChildBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemChildBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textName.text = dataClass.name
+                layoutChild.singleClick {
+                    mainCategory.forEach {
+                        it.isSelected = false
+                        it.subCategory.forEach {
+                            it.isSelected = false
+                        }
+                    }
+
+                    currentList.forEach {
+                        it.isSelected = false
+                    }
+                    dataClass.isSelected = true
+
+                    currentList.forEach {
+                        if (it.isSelected && it.isAll) {
+//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
+                            when (mainSelect) {
+                                1 -> mainCategory[0].isSelected = true
+                                2 -> mainCategory[1].isSelected = true
+                                3 -> mainCategory[2].isSelected = true
+                                4 -> mainCategory[3].isSelected = true
+                                5 -> mainCategory[4].isSelected = true
+                                6 -> mainCategory[5].isSelected = true
+                                7 -> mainCategory[6].isSelected = true
+                                8 -> mainCategory[7].isSelected = true
+                                9 -> mainCategory[8].isSelected = true
+                                10 -> mainCategory[9].isSelected = true
+                            }
+                        } else {
+//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
+                        }
+                    }
+
+
+
+                    mainCategory.forEach {
+//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
+                        if (it.isSelected) {
+                            it.subCategory.forEach { sub ->
+                                sub.isSelected = true
+                            }
+                        }
+                    }
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentList: " + it.isSelected)
+//                    }
+
+                    mainPrice.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+
+
+                    root.findNavController().navigate(R.id.action_category_to_products)
+
+
+                }
+            }
+        }
+    }
+
+
+    val subCategoryAdapter9 = object : GenericAdapter<ItemChildBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemChildBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemChildBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textName.text = dataClass.name
+                layoutChild.singleClick {
+                    mainCategory.forEach {
+                        it.isSelected = false
+                        it.subCategory.forEach {
+                            it.isSelected = false
+                        }
+                    }
+
+                    currentList.forEach {
+                        it.isSelected = false
+                    }
+                    dataClass.isSelected = true
+
+                    currentList.forEach {
+                        if (it.isSelected && it.isAll) {
+//                            Log.e("TAG", "IFisSelected: " + it.isSelected + " :: "+it.isAll + " :: "+mainSelect)
+                            when (mainSelect) {
+                                1 -> mainCategory[0].isSelected = true
+                                2 -> mainCategory[1].isSelected = true
+                                3 -> mainCategory[2].isSelected = true
+                                4 -> mainCategory[3].isSelected = true
+                                5 -> mainCategory[4].isSelected = true
+                                6 -> mainCategory[5].isSelected = true
+                                7 -> mainCategory[6].isSelected = true
+                                8 -> mainCategory[7].isSelected = true
+                                9 -> mainCategory[8].isSelected = true
+                                10 -> mainCategory[9].isSelected = true
+                            }
+                        } else {
+//                            Log.e("TAG", "ELSEisSelected: " + it.isSelected + " :: "+it.isAll)
+                        }
+                    }
+
+
+
+                    mainCategory.forEach {
+//                        Log.e("TAG", "onBindHolder: " + it.isSelected)
+                        if (it.isSelected) {
+                            it.subCategory.forEach { sub ->
+                                sub.isSelected = true
+                            }
+                        }
+                    }
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentList: " + it.isSelected)
+//                    }
+
+                    mainPrice.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+                    mainMaterial.forEach {
+                        it.isSelected = false
+//                        it.isChildSelect = false
+                    }
+
+
+                    root.findNavController().navigate(R.id.action_category_to_products)
+
+
+                }
+            }
+        }
+    }
+
+
+    val subCategoryAdapter10 = object : GenericAdapter<ItemChildBinding, Items>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemChildBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemChildBinding,
+            dataClass: Items,
+            position: Int
+        ) {
+            binding.apply {
+                textName.text = dataClass.name
+                layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
                         it.subCategory.forEach {

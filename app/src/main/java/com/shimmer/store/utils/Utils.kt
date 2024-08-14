@@ -34,9 +34,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.DimenRes
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.DrawableCompat
@@ -1004,6 +1006,13 @@ fun getSize(size: Int) : Int {
 //        else -> throw Exception("not a number") // or do something else reasonable for your case
 //    }
 }
+
+
+
+fun AppCompatTextView.endDrawable(@DrawableRes id: Int = 0) {
+    this.setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
+}
+
 
 
 

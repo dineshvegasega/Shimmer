@@ -18,257 +18,118 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCategory1"
+            <include
+                android:id="@+id/item_category1"
+                layout="@layout/item_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingHorizontal="@dimen/_5sdp"
-                >
-
-                <include
-                    android:id="@+id/item_category1"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-                <include
-                    android:id="@+id/item_category2"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListCategory1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                app:spanCount="3"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category_round"
-                android:paddingHorizontal="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCategory1"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:visibility="gone"
+                android:visibility="visible"
                 />
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCategory2"
+            <include
+                android:id="@+id/item_category2"
+                layout="@layout/item_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rvListCategory1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingHorizontal="@dimen/_5sdp"
-                >
-                <include
-                    android:id="@+id/item_category3"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-                <include
-                    android:id="@+id/item_category4"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListCategory2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                app:spanCount="3"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category_round"
-                android:paddingHorizontal="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCategory2"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:visibility="gone"
-
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category1"
                 />
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCategory3"
+
+            <include
+                android:id="@+id/item_category3"
+                layout="@layout/item_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rvListCategory2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingHorizontal="@dimen/_5sdp"
-                >
-
-
-                <include
-                    android:id="@+id/item_category5"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-                <include
-                    android:id="@+id/item_category6"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListCategory3"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                app:spanCount="3"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category_round"
-                android:paddingHorizontal="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCategory3"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:visibility="gone"
-
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category2"
                 />
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCategory4"
+
+
+
+            <include
+                android:id="@+id/item_category4"
+                layout="@layout/item_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rvListCategory3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingHorizontal="@dimen/_5sdp"
-                >
-
-
-                <include
-                    android:id="@+id/item_category7"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-                <include
-                    android:id="@+id/item_category8"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListCategory4"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                app:spanCount="3"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category_round"
-                android:paddingHorizontal="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCategory4"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:visibility="gone"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category3"
                 />
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutCategory5"
+
+
+
+            <include
+                android:id="@+id/item_category5"
+                layout="@layout/item_category"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rvListCategory4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:paddingHorizontal="@dimen/_5sdp"
-                >
-
-
-                <include
-                    android:id="@+id/item_category9"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-                <include
-                    android:id="@+id/item_category10"
-                    layout="@layout/item_category"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvListCategory5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                android:nestedScrollingEnabled="false"
-                app:spanCount="3"
-                tools:itemCount="4"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/item_category_round"
-                android:paddingHorizontal="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/layoutCategory5"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:visibility="gone"
-
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category4"
                 />
+
+
+
+
+            <include
+                android:id="@+id/item_category6"
+                layout="@layout/item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category5"
+                />
+
+
+
+            <include
+                android:id="@+id/item_category7"
+                layout="@layout/item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category6"
+                />
+
+
+
+            <include
+                android:id="@+id/item_category8"
+                layout="@layout/item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category7"
+                />
+
+
+
+            <include
+                android:id="@+id/item_category9"
+                layout="@layout/item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category8"
+                />
+
+
+
+
+            <include
+                android:id="@+id/item_category10"
+                layout="@layout/item_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/item_category9"
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
