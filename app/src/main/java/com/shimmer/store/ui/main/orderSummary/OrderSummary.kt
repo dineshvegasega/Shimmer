@@ -45,24 +45,24 @@ class OrderSummary : Fragment() {
 
 
         binding.apply {
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-//                cardSearch.visibility = View.GONE
-                ivSearch.visibility = View.GONE
-                ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "YOUR ORDER"
-
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
-                    findNavController().navigateUp()
-                }
-            }
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+////                cardSearch.visibility = View.GONE
+//                ivSearch.visibility = View.GONE
+//                ivCartLayout.visibility = View.GONE
+//                textViewTitle.text = "YOUR ORDER"
+//
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//            }
 
 
             when(loginType){
@@ -98,7 +98,7 @@ class OrderSummary : Fragment() {
                 }
 
                 viewModel.subTotalPrice = price
-                textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
+//                textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
 
                 val discountPriceAfter = (viewModel.subTotalPrice * viewModel.discountPrice) / 100
                 textDiscountPrice.text = "₹${getPatternFormat("1", discountPriceAfter)}"
@@ -106,10 +106,10 @@ class OrderSummary : Fragment() {
                 val priceANDdiscountPrice = price + discountPriceAfter
 
                 val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice ) / 100
-                textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
+//                textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
 
                 val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
-                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
+//                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
 
                 val priceANDGSTPrice = priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
                 textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
@@ -118,8 +118,8 @@ class OrderSummary : Fragment() {
 
 
                 textDiscount.text = "Discount (${viewModel.discountPrice}%)"
-                textCGST.text = "CGST (${viewModel.cgstPrice}%)"
-                textSGST.text = "SGST (${viewModel.sgstPrice}%)"
+//                textCGST.text = "CGST (${viewModel.cgstPrice}%)"
+//                textSGST.text = "SGST (${viewModel.sgstPrice}%)"
             }
 
 //            rvList.setHasFixedSize(true)

@@ -89,37 +89,37 @@ class Products : Fragment() {
 //            }
 
 
-            topBar.apply {
-                textViewTitle.visibility = View.GONE
-//                cardSearch.visibility = View.GONE
-
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
-                    findNavController().navigateUp()
-                }
-
-                ivSearch.singleClick {
-                    findNavController().navigate(R.id.action_products_to_search)
-                }
-
-                ivCart.singleClick {
-                    findNavController().navigate(R.id.action_products_to_cart)
-                }
-
-                badgeCount.observe(viewLifecycleOwner) { badgeCount ->
-                    viewModel.getCartCount() {
-                        Log.e("TAG", "countAA: $this")
-                        menuBadge.text = "${this}"
-                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-                    }
-                }
-            }
+//            topBar.apply {
+//                textViewTitle.visibility = View.GONE
+////                cardSearch.visibility = View.GONE
+//
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//
+//                ivSearch.singleClick {
+//                    findNavController().navigate(R.id.action_products_to_search)
+//                }
+//
+//                ivCart.singleClick {
+//                    findNavController().navigate(R.id.action_products_to_cart)
+//                }
+//
+//                badgeCount.observe(viewLifecycleOwner) { badgeCount ->
+//                    viewModel.getCartCount() {
+//                        Log.e("TAG", "countAA: $this")
+//                        menuBadge.text = "${this}"
+//                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+//                    }
+//                }
+//            }
 
 
 

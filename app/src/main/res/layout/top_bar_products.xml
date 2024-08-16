@@ -7,6 +7,7 @@
     android:paddingVertical="@dimen/_15sdp">
 
 
+
     <include
         android:id="@+id/back_button"
         layout="@layout/include_back_button"
@@ -18,6 +19,32 @@
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/ivSearch"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35sdp"
+        style="@style/PrimaryEditText"
+        android:hint="@string/type_here_to_search"
+        android:drawableEnd="@drawable/search"
+        android:drawableTint="@color/app_color"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:imeOptions="actionSearch"
+        android:inputType="text|textNoSuggestions"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_button"
+        app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
+        app:rippleColor="@color/white"
+        android:layout_marginTop="0dp"
+        android:focusable="false"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        />
 
 
 

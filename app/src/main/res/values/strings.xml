@@ -67,7 +67,7 @@
     <string name="clear">Clear</string>
     <string name="shop_for">Shop For</string>
     <string name="coupon_code">Coupon Code</string>
-    <string name="order_summary">ORDER SUMMARY</string>
+    <string name="order_summary">Order Summary</string>
     <string name="price_breakup">Price Breakup</string>
     <string name="product_details">PRODUCT DETAILS</string>
     <string name="apply_coupon">Apply Coupon</string>
@@ -108,5 +108,12 @@
     <string name="faqs">FAQs</string>
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
+    <string name="remove">Remove</string>
+    <string name="cart_details">Cart Details</string>
+    <string name="checkout">Checkout</string>
+    <string name="all_products">All Products</string>
+    <string name="enter_franchise_code">Enter Franchise Code</string>
+    <string name="home">Home</string>
+    <string name="thank_you">Thank You!</string>
 
 </resources>

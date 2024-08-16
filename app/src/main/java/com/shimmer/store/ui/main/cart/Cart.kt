@@ -51,23 +51,23 @@ class Cart : Fragment() {
 //        Log.e("TAG", "onViewCreated: ${isHide.value}")
         binding.apply {
 
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-                ivSearch.visibility = View.GONE
-                ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "Cart"
-
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
-                    findNavController().navigateUp()
-                }
-            }
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+//                ivSearch.visibility = View.GONE
+//                ivCartLayout.visibility = View.GONE
+//                textViewTitle.text = "Cart"
+//
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//            }
 
 
             when (loginType) {

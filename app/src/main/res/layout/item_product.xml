@@ -46,7 +46,7 @@
                 android:text="Silver Color Gold Ring"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_11sdp"
-                app:fontFamily="@font/nunitosans_regular"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginHorizontal="@dimen/_7sdp"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -103,6 +103,7 @@
                 android:background="@color/white"
                 android:scaleType="centerCrop"
                 android:layout_marginHorizontal="@dimen/_7sdp"
+                android:visibility="gone"
                 />
 
             <com.google.android.material.button.MaterialButton
@@ -121,9 +122,9 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 app:cornerRadius="@dimen/_4sdp"
                 android:textSize="@dimen/_10sdp"
-                android:visibility="visible"
                 app:strokeColor="@color/app_color"
                 android:layout_marginHorizontal="@dimen/_7sdp"
+                android:visibility="gone"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

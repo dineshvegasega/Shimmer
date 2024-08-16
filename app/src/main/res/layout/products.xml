@@ -7,12 +7,29 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar"
+        android:id="@+id/top_bar_products"
+        layout="@layout/top_bar_products"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/all_products"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_products"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,21 +43,23 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         tools:listitem="@layout/item_product"
         android:paddingHorizontal="@dimen/_6sdp"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintBottom_toTopOf="@+id/filterLayout"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
         />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/filterLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/app_color"
+        android:background="@drawable/menu_top_round"
+android:layout_marginHorizontal="@dimen/_45sdp"
         android:orientation="horizontal"
+
         >
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -52,14 +71,13 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:background="@color/app_color"
             android:gravity="center">
 
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/baseline_west_24"
+                android:src="@drawable/sort"
                 android:scaleType="fitCenter"
                 android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -83,9 +101,9 @@
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/_07FFFC"
             android:orientation="horizontal"
-            android:layout_marginVertical="@dimen/_8sdp"
+            android:layout_marginVertical="@dimen/_3sdp"
             >
         </View>
 
@@ -94,7 +112,6 @@
             android:id="@+id/layoutFilter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/app_color"
             android:orientation="horizontal"
             android:layout_weight="1"
             android:clickable="true"
@@ -105,7 +122,7 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/baseline_west_24"
+                android:src="@drawable/filter"
                 android:scaleType="fitCenter"
                 android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintTop_toTopOf="parent"

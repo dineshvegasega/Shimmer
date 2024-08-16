@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/_7sdp"
-        android:paddingVertical="@dimen/_8sdp"
-        android:background="@color/_FFFCF6"
+        android:paddingVertical="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
+        android:background="@drawable/bg_all_round_franchise"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +53,7 @@
                 android:id="@+id/textTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notice Name"
+                android:text="Rama Jewellers"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_bold"
@@ -67,12 +68,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Color: Red"
+                android:text="Jaipur, Rajasthan"
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTitle"
+                android:layout_marginTop="@dimen/_3sdp"
                 tools:ignore="HardcodedText" />
 
 
@@ -81,12 +83,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Purity: 12"
+                android:text="Pincode - 21566324"
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textColor"
+                android:layout_marginTop="@dimen/_3sdp"
                 tools:ignore="HardcodedText" />
 
 
@@ -96,26 +99,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Ring Size: 6"
+                android:text="Contact - 84652345620 "
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPurity"
-                tools:ignore="HardcodedText" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:text="₹42,550"
-                android:textColor="@color/_2C2C2C"
-                android:textSize="@dimen/_11sdp"
-                app:fontFamily="@font/nunitosans_semibold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textRingSize"
+                android:layout_marginTop="@dimen/_3sdp"
                 tools:ignore="HardcodedText" />
 
 
