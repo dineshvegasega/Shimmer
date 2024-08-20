@@ -346,8 +346,8 @@
         android:id="@+id/cart"
         tools:layout="@layout/cart">
         <action
-            android:id="@+id/action_cart_to_orderSummary"
-            app:destination="@id/orderSummary"
+            android:id="@+id/action_cart_to_checkout"
+            app:destination="@id/checkout"
             app:launchSingleTop="true"
             />
 
@@ -360,25 +360,25 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.orderSummary.OrderSummary"
-        android:label="OrderSummary"
-        android:id="@+id/orderSummary"
-        tools:layout="@layout/order_summary">
+        android:name="com.shimmer.store.ui.main.checkout.Checkout"
+        android:label="Checkout"
+        android:id="@+id/checkout"
+        tools:layout="@layout/checkout">
         <action
-            android:id="@+id/action_orderSummary_to_home"
+            android:id="@+id/action_checkout_to_home"
             app:destination="@id/home"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true" />
 
         <action
-            android:id="@+id/action_orderSummary_to_productDetail"
+            android:id="@+id/action_checkout_to_productDetail"
             app:destination="@id/productDetail"
             app:launchSingleTop="true"
             />
 
         <action
-            android:id="@+id/action_orderSummary_to_franchiseList"
+            android:id="@+id/action_checkout_to_franchiseList"
             app:destination="@id/franchiseList"
             app:launchSingleTop="true"
             />
@@ -483,5 +483,13 @@
         android:label="OrderDetail"
         android:id="@+id/orderDetail"
         tools:layout="@layout/order_detail">
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.thankyou.ThankYou"
+        android:label="ThankYou"
+        android:id="@+id/thankyou"
+        tools:layout="@layout/thankyou">
     </fragment>
 </navigation>

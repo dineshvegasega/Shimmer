@@ -276,7 +276,7 @@
                 app:spanCount="2"
                 tools:itemCount="2"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_payment_products"
+                tools:listitem="@layout/item_checkout"
                 android:paddingHorizontal="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@+id/textProducts"
                 />

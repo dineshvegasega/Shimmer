@@ -39,47 +39,47 @@ class FranchiseList : Fragment() {
 
 
         binding.apply {
-            topBarSearch.apply {
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
-                    findNavController().navigateUp()
-                }
-
-
-//                viewModel.searchValue.observe(viewLifecycleOwner) {
-//                    binding.topBarSearch.editTextSearch.setText(it)
+//            topBarSearch.apply {
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
 //                }
 //
-//                viewModel.searchDelete.observe(viewLifecycleOwner) {
-//                    if (it) {
-//                        openSearchHistory()
-//                    }
-//                }
-//                editTextSearch.singleClick {
-//                    openSearchHistory()
-//                }
+//
+////                viewModel.searchValue.observe(viewLifecycleOwner) {
+////                    binding.topBarSearch.editTextSearch.setText(it)
+////                }
+////
+////                viewModel.searchDelete.observe(viewLifecycleOwner) {
+////                    if (it) {
+////                        openSearchHistory()
+////                    }
+////                }
+////                editTextSearch.singleClick {
+////                    openSearchHistory()
+////                }
+//
+////                editTextSearch.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
+////                    if (hasFocus) {
+////                        openSearchHistory()
+////                    }
+////                })
+//            }
 
-//                editTextSearch.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus ->
-//                    if (hasFocus) {
-//                        openSearchHistory()
-//                    }
-//                })
-            }
-
-            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
-                1 -> R.drawable.baseline_search_24
-                2 -> R.drawable.baseline_search_32
-                3 -> R.drawable.baseline_search_50
-                else -> R.drawable.baseline_search_24
-            }
-            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
-            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
+//            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
+//                1 -> R.drawable.baseline_search_24
+//                2 -> R.drawable.baseline_search_32
+//                3 -> R.drawable.baseline_search_50
+//                else -> R.drawable.baseline_search_24
+//            }
+//            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
+//            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
 val userList = listOf(
     SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
@@ -90,11 +90,11 @@ val userList = listOf(
     SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
     )
 
-            rvListSearchHistory.setHasFixedSize(true)
-            rvListSearchHistory.adapter = viewModel.franchiseListAdapter
+            rvList.setHasFixedSize(true)
+            rvList.adapter = viewModel.franchiseListAdapter
             viewModel.franchiseListAdapter.notifyDataSetChanged()
             viewModel.franchiseListAdapter.submitList(userList)
-            rvListSearchHistory.visibility = View.VISIBLE
+            rvList.visibility = View.VISIBLE
 
 
 

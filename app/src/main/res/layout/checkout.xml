@@ -70,7 +70,7 @@
                 app:spanCount="2"
                 tools:itemCount="2"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_payment_products"
+                tools:listitem="@layout/item_checkout"
                 android:paddingHorizontal="@dimen/_10sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 />
@@ -290,28 +290,28 @@
 
 
 
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textOrderSummary"
+                android:id="@+id/textPriceBreakup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_1sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_5sdp"
-                android:text="@string/order_summary"
+                android:text="Price Breakup"
                 android:textAllCaps="false"
-                android:textColor="@color/_000000"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/nunitosans_semibold"
+                app:fontFamily="@font/nunitosans_regular"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view11"
                 tools:ignore="HardcodedText"
                 />
 
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutSubtotal"
+                android:id="@+id/layoutGold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
@@ -320,7 +320,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/textOrderSummary"
+                app:layout_constraintTop_toBottomOf="@+id/textPriceBreakup"
                 android:paddingVertical="@dimen/_3sdp"
                 >
 
@@ -354,7 +354,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutDiamond"
                 android:layout_width="match_parent"
@@ -365,7 +364,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutSubtotal"
+                app:layout_constraintTop_toBottomOf="@+id/layoutGold"
                 android:paddingVertical="@dimen/_3sdp"
                 >
 
@@ -398,7 +397,6 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -447,7 +445,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutShipping"
+                android:id="@+id/layoutMakingCharges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
@@ -461,11 +459,11 @@
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textShipping"
+                    android:id="@+id/textMakingCharges"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="Shipping"
+                    android:text="Making Charges"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
@@ -474,7 +472,7 @@
                     tools:ignore="HardcodedText" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textShippingPrice"
+                    android:id="@+id/textMakingChargesPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
@@ -500,7 +498,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutShipping"
+                app:layout_constraintTop_toBottomOf="@+id/layoutMakingCharges"
                 android:paddingVertical="@dimen/_3sdp"
                 >
 
@@ -575,6 +573,7 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
             <View

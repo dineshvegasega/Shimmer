@@ -15,8 +15,25 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
       >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            app:layout_constraintDimensionRatio="H,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/ic_launcher"
+            android:background="@color/app_color"
+            android:scaleType="centerCrop"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:focusable="true"
+            android:clickable="true"
+            android:theme="@style/RoundCorner50"
+            />
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textTitle1"
@@ -27,9 +44,10 @@
             android:textSize="@dimen/_26sdp"
             app:fontFamily="@font/nunitosans_bold"
             tools:ignore="HardcodedText"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivIcon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_15sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -171,7 +171,7 @@ class Cart : Fragment() {
 
 
             layoutProceedToPayment.singleClick {
-                findNavController().navigate(R.id.action_cart_to_orderSummary)
+                findNavController().navigate(R.id.action_cart_to_checkout)
             }
 
 

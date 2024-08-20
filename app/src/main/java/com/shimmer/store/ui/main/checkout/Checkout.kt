@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.orderSummary
+package com.shimmer.store.ui.main.checkout
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,15 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.OrderSummaryBinding
-import com.shimmer.store.databinding.PaymentBinding
+import com.shimmer.store.databinding.CheckoutBinding
 import com.shimmer.store.datastore.db.CartModel
-import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -24,9 +21,9 @@ import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class OrderSummary : Fragment() {
-    private val viewModel: OrderSummaryVM by viewModels()
-    private var _binding: OrderSummaryBinding? = null
+class Checkout : Fragment() {
+    private val viewModel: CheckoutVM by viewModels()
+    private var _binding: CheckoutBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -34,7 +31,7 @@ class OrderSummary : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = OrderSummaryBinding.inflate(inflater)
+        _binding = CheckoutBinding.inflate(inflater)
         return binding.root
     }
 
@@ -130,10 +127,10 @@ class OrderSummary : Fragment() {
             layoutSort.singleClick {
                 when(loginType){
                     "vendor" ->  {
-                        findNavController().navigate(R.id.action_orderSummary_to_home)
+                        findNavController().navigate(R.id.action_checkout_to_home)
                     }
                     "guest" ->  {
-                        findNavController().navigate(R.id.action_orderSummary_to_franchiseList)
+                        findNavController().navigate(R.id.action_checkout_to_franchiseList)
                     }
                 }
             }

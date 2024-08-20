@@ -142,7 +142,7 @@ class Profile : Fragment() {
                 Log.e("TAG", "onViewCreated: $isChecked")
             }
 
-            btLogout.singleClick {
+            textLogout.singleClick {
                MaterialAlertDialogBuilder(requireContext(), R.style.LogoutDialogTheme)
                     .setTitle(resources.getString(R.string.app_name))
                     .setMessage(resources.getString(R.string.are_your_sure_want_to_logout))

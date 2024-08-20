@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.orderSummary
+package com.shimmer.store.ui.main.checkout
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemPaymentProductsBinding
+import com.shimmer.store.databinding.ItemCheckoutBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrderSummaryVM @Inject constructor() : ViewModel() {
+class CheckoutVM @Inject constructor() : ViewModel() {
 
     var subTotalPrice : Double = 0.0
     var discountPrice : Double = 10.0
@@ -39,16 +39,16 @@ class OrderSummaryVM @Inject constructor() : ViewModel() {
     }
 
 
-    val ordersAdapter = object : GenericAdapter<ItemPaymentProductsBinding, CartModel>() {
+    val ordersAdapter = object : GenericAdapter<ItemCheckoutBinding, CartModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemPaymentProductsBinding.inflate(inflater, parent, false)
+        ) = ItemCheckoutBinding.inflate(inflater, parent, false)
 
         @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
-            binding: ItemPaymentProductsBinding,
+            binding: ItemCheckoutBinding,
             dataClass: CartModel,
             position: Int
         ) {
@@ -60,11 +60,11 @@ class OrderSummaryVM @Inject constructor() : ViewModel() {
 //                } else if (dataClass.material_type == ""){
 //                    textPurity.text = "Purity: "+dataClass.purity
 //                }
-                textRingsize.text = "Ring size: "+dataClass.size
+                textRingSize.text = "Ring size: "+dataClass.size
                 textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!) + " x "+dataClass.quantity + " = ₹"+getPatternFormat("1", (dataClass.price?.times(dataClass.quantity.toDouble())))
 
                 ivIcon.singleClick {
-                    binding.root.findNavController().navigate(R.id.action_orderSummary_to_productDetail)
+                    binding.root.findNavController().navigate(R.id.action_checkout_to_productDetail)
                 }
 
 //                ivCount.text = dataClass.quantity.toString()

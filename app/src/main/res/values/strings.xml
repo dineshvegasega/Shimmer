@@ -115,5 +115,9 @@
     <string name="enter_franchise_code">Enter Franchise Code</string>
     <string name="home">Home</string>
     <string name="thank_you">Thank You!</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">Change Password</string>
+    <string name="search_for_your_nearest_franchise">Search for your nearest franchise</string>
+    <string name="search_your_order">Search your order</string>
 
 </resources>

@@ -153,7 +153,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                 }
 
                 textTitle.text = dataClass.name
-                textDesc.text =  "SKU: "+dataClass.sku
+                textSKU.text =  "SKU: "+dataClass.sku
 
                 ivCount.text = dataClass.qty.toString()
                 textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
