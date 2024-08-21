@@ -15,6 +15,7 @@ import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.navHostFragment
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -121,7 +122,7 @@ class Splash : Fragment() {
                 } else {
 //                    if (fragmentInFrame !is Dashboard){
 //                        if(!MainActivity.isBackStack){
-                    loginType = "vendor"
+                    loginType = LoginType.VENDOR
                     navHostFragment?.navController?.navigate(R.id.action_splash_to_home)
 //                        }
                     //isHide.value = true

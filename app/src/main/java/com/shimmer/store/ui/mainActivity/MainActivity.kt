@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -218,10 +219,19 @@ class MainActivity : AppCompatActivity() {
                     Log.e("TAG", "addOnDestinationChangedListener " + destination.id)
 
 //                    bottomNavMain.getMenu().getItem(2).setChecked(true);
-
+//                    bottomNavMain.itemIconTintList = null
                     when (destination.id) {
                         R.id.home -> {
                             bottomNavMain.getMenu().findItem(R.id.home).setChecked(true)
+//                            bottomNavMain.getMenu().findItem(R.id.home).iconTintList = ColorStateList.valueOf(
+//                                        ContextCompat.getColor(context.get()!!,R.color._28E0DE)
+//                                    )
+//                            bottomNavMain.itemIconTintList = null
+//                            bottomNavMain.itemIconTintList =
+//                                ColorStateList.valueOf(
+//                                    ContextCompat.getColor(context.get()!!,R.color._28E0DE)
+//                                )
+
                         }
 
                         R.id.category -> {
@@ -255,7 +265,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+//            bottomNavMain.itemIconTintList = null
 
 
             bottomNavMain.setOnItemSelectedListener { item ->

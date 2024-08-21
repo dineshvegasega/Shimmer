@@ -20,11 +20,13 @@ import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.utils.glideImageChache
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
@@ -85,6 +87,8 @@ class HomeVM @Inject constructor() : ViewModel() {
             position: Int
         ) {
             binding.apply {
+                dataClass.image.glideImageChache(binding.ivIcon.context, binding.ivIcon)
+
                 textTitle.text = dataClass.name
                 ivIcon.setOnClickListener {
                     currentList.forEach {

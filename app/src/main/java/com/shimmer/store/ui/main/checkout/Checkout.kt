@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CheckoutBinding
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -42,6 +43,11 @@ class Checkout : Fragment() {
 
 
         binding.apply {
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
 ////                cardSearch.visibility = View.GONE
@@ -63,12 +69,12 @@ class Checkout : Fragment() {
 
 
             when(loginType){
-                "vendor" ->  {
+                LoginType.VENDOR ->  {
                     groupVendor.visibility = View.VISIBLE
                     groupGuest.visibility = View.VISIBLE
                     textPayment.text = resources.getString(R.string.proceed_to_payment)
                 }
-                "guest" ->  {
+                LoginType.CUSTOMER ->  {
                     groupVendor.visibility = View.GONE
                     groupGuest.visibility = View.VISIBLE
                     textPayment.text = resources.getString(R.string.select_franchise)
@@ -111,7 +117,7 @@ class Checkout : Fragment() {
                 val priceANDGSTPrice = priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
                 textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
 
-                textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
+//                textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
 
 
                 textDiscount.text = "Discount (${viewModel.discountPrice}%)"
@@ -126,10 +132,10 @@ class Checkout : Fragment() {
 
             layoutSort.singleClick {
                 when(loginType){
-                    "vendor" ->  {
+                    LoginType.VENDOR ->  {
                         findNavController().navigate(R.id.action_checkout_to_home)
                     }
-                    "guest" ->  {
+                    LoginType.CUSTOMER ->  {
                         findNavController().navigate(R.id.action_checkout_to_franchiseList)
                     }
                 }

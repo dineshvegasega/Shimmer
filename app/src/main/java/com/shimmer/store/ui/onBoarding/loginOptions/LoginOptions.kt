@@ -15,6 +15,7 @@ import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
@@ -54,7 +55,7 @@ class LoginOptions : Fragment() {
                 viewModel.adminToken(obj) {
                     Log.e("TAG", "ADMIN_TOKENBBBB " + this)
                     saveData(ADMIN_TOKEN, this)
-                    loginType = "guest"
+                    loginType = LoginType.CUSTOMER
                     readData(WEBSITE_ID) {
                         storeWebUrl = if (it != null) it.toString() else ""
                         findNavController().navigate(R.id.action_loginOptions_to_home)

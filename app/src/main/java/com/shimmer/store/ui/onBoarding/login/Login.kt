@@ -21,6 +21,7 @@ import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.models.ItemStore
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
@@ -52,6 +53,14 @@ class Login : Fragment() {
 
 
         binding.apply {
+
+            includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
+
             val customerJSON: JSONObject = JSONObject().apply {
                 put("username", editTextMobileNumber.text.toString())
                 put("password", editTextPassword.text.toString())
@@ -102,7 +111,7 @@ class Login : Fragment() {
                                     viewModel.getQuoteId(storeToken, JSONObject()) {
                                         val quoteId = this
                                         saveData(QUOTE_ID, quoteId)
-                                        loginType = "vendor"
+                                        loginType = LoginType.VENDOR
                                         findNavController().navigate(R.id.action_login_to_home)
                                     }
                                 }

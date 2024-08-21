@@ -40,24 +40,30 @@ class OrderDetail : Fragment() {
 //            rvListCategory1.adapter = viewModel.customerOrders
 
 
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-//                cardSearch.visibility = View.GONE
-                ivSearch.visibility = View.GONE
-                ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "Order Detail"
-
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
             }
+
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+////                cardSearch.visibility = View.GONE
+//                ivSearch.visibility = View.GONE
+//                ivCartLayout.visibility = View.GONE
+//                textViewTitle.text = "Order Detail"
+//
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//            }
         }
 
     }

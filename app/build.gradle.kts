@@ -87,8 +87,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.5.1")
-    implementation ("androidx.databinding:databinding-runtime:8.5.1")
+    implementation ("androidx.databinding:databinding-ktx:8.5.2")
+    implementation ("androidx.databinding:databinding-runtime:8.5.2")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
@@ -103,7 +103,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.5")
+    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
     implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
 
     implementation ("com.google.code.gson:gson:2.10.1")
@@ -146,8 +146,8 @@ dependencies {
     implementation ("com.google.android.gms:play-services-location:21.3.0")
     implementation ("com.google.android.gms:play-services-maps:19.0.0")
 
-    implementation ("androidx.paging:paging-common-ktx:3.3.1")
-    implementation ("androidx.paging:paging-runtime-ktx:3.3.1")
+    implementation ("androidx.paging:paging-common-ktx:3.3.2")
+    implementation ("androidx.paging:paging-runtime-ktx:3.3.2")
 //    implementation ("com.google.android.play:review-ktx:2.0.1")
     implementation ("org.jsoup:jsoup:1.17.2")
     implementation ("com.github.vipulasri:timelineview:1.1.5")
@@ -164,7 +164,7 @@ dependencies {
     ksp ("androidx.room:room-ktx:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
 //    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.work:work-runtime-ktx:2.9.0")
+    implementation ("androidx.work:work-runtime-ktx:2.9.1")
     implementation ("com.hbb20:ccp:2.7.0")
     implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
     implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")

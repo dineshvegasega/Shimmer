@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.FranchiseListBinding
 import com.shimmer.store.datastore.db.SearchModel
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.singleClick
@@ -39,6 +40,11 @@ class FranchiseList : Fragment() {
 
 
         binding.apply {
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
 //            topBarSearch.apply {
 //                appicon.setImageDrawable(
 //                    ContextCompat.getDrawable(
@@ -101,10 +107,10 @@ val userList = listOf(
 
             layoutSort.singleClick {
                 when(loginType){
-                    "vendor" ->  {
+                    LoginType.VENDOR ->  {
 //                        findNavController().navigate(R.id.action_orderSummary_to_home)
                     }
-                    "guest" ->  {
+                    LoginType.CUSTOMER ->  {
                         findNavController().navigate(R.id.action_franchiseList_to_home)
                     }
                 }

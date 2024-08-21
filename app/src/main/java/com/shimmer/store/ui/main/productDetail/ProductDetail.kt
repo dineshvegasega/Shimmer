@@ -99,37 +99,50 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
         binding.apply {
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-//                cardSearch.visibility = View.VISIBLE
-                ivSearch.visibility = View.GONE
-                ivCart.visibility = View.VISIBLE
-                textViewTitle.text = "Product Detail"
 
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
-
-                ivCart.singleClick {
-                    findNavController().navigate(R.id.action_productDetail_to_cart)
-                }
-
-
-                badgeCount.observe(viewLifecycleOwner) {
-                    viewModel.getCartCount() {
-                        Log.e("TAG", "count: $this")
-                        menuBadge.text = "${this}"
-                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-                    }
-                }
             }
+
+
+//            topBar.apply {
+//                textViewTitle.visibility = View.VISIBLE
+////                cardSearch.visibility = View.VISIBLE
+//                ivSearch.visibility = View.GONE
+//                ivCart.visibility = View.VISIBLE
+//                textViewTitle.text = "Product Detail"
+//
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
+//
+//                appicon.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//
+//                ivCart.singleClick {
+//                    findNavController().navigate(R.id.action_productDetail_to_cart)
+//                }
+//
+//
+//                badgeCount.observe(viewLifecycleOwner) {
+//                    viewModel.getCartCount() {
+//                        Log.e("TAG", "count: $this")
+//                        menuBadge.text = "${this}"
+//                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+//                    }
+//                }
+//            }
+
+
+
+
+
 
 
 //            val model = arguments?.parcelable<ItemProduct>("model")

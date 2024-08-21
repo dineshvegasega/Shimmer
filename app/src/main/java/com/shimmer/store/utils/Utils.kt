@@ -38,6 +38,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -430,6 +431,14 @@ val myOptionsGlideUserChache: RequestOptions = RequestOptions()
     .skipMemoryCache(true)
 
 fun String.glideImageChache(context: Context, ivMap: ShapeableImageView) {
+    Glide.with(context)
+        .load(this)
+        .apply(myOptionsGlideUserChache)
+        .into(ivMap)
+}
+
+
+fun Int.glideImageChache(context: Context, ivMap: AppCompatImageView) {
     Glide.with(context)
         .load(this)
         .apply(myOptionsGlideUserChache)

@@ -7,12 +7,11 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/top_bar"
-        layout="@layout/top_bar"
+        android:id="@+id/top_bar_back"
+        layout="@layout/top_bar_back"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:visibility="visible"
-        />
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -24,8 +23,8 @@
         app:tabSelectedTextColor="@color/white"
         app:tabTextColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/top_bar"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/rvList1"

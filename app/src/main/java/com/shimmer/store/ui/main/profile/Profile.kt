@@ -37,6 +37,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 
 
@@ -98,11 +99,11 @@ class Profile : Fragment() {
 
 
             when(loginType){
-                "vendor" ->  {
+                LoginType.VENDOR ->  {
                     groupVendor.visibility = View.VISIBLE
                     groupGuest.visibility = View.GONE
                 }
-                "guest" ->  {
+                LoginType.CUSTOMER ->  {
                     groupVendor.visibility = View.GONE
                     groupGuest.visibility = View.VISIBLE
                 }

@@ -37,6 +37,12 @@ class ForgotPassword : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(0)
 
         binding.apply {
+            includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
             btResetPassword.singleClick {
                 findNavController().navigate(R.id.action_forgotPassword_to_resetPassword)
             }

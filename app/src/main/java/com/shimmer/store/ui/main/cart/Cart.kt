@@ -17,6 +17,8 @@ import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.networking.login
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.main.products.Products.Companion.adapter2
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
@@ -51,6 +53,12 @@ class Cart : Fragment() {
 //        Log.e("TAG", "onViewCreated: ${isHide.value}")
         binding.apply {
 
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
 //                ivSearch.visibility = View.GONE
@@ -71,11 +79,11 @@ class Cart : Fragment() {
 
 
             when (loginType) {
-                "vendor" -> {
+                LoginType.VENDOR -> {
                     textCartOrder.text = resources.getString(R.string.place_order)
                 }
 
-                "guest" -> {
+                LoginType.CUSTOMER -> {
                     textCartOrder.text = resources.getString(R.string.proceed)
                 }
             }
@@ -92,16 +100,15 @@ class Cart : Fragment() {
             filterLayout.visibility = View.GONE
 //            viewModel.cartMutableList.value = false
             viewModel.cartMutableList.observe(viewLifecycleOwner) {
-                readData(CUSTOMER_TOKEN) { token ->
-                    viewModel.getCart(token!!) {
-                        val itemCart = this
-                        Log.e("TAG", "getCart " + this.toString())
+                if (LoginType.CUSTOMER == loginType) {
+                    val itemCart = this
+                    Log.e("TAG", "getCart " + this.toString())
+                    mainThread {
+                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
                         rvList.setHasFixedSize(true)
                         viewModel.cartAdapter.notifyDataSetChanged()
-                        viewModel.cartAdapter.submitList(itemCart.items)
-
-
-                        if (!itemCart.items.isNullOrEmpty()) {
+//                        viewModel.cartAdapter.submitList(userList)
+                        if (!userList.isNullOrEmpty()) {
                             upperLayout.visibility = View.VISIBLE
                             filterLayout.visibility = View.VISIBLE
                         } else {
@@ -109,7 +116,26 @@ class Cart : Fragment() {
                             filterLayout.visibility = View.GONE
                         }
                     }
+
+                } else if (LoginType.VENDOR == loginType) {
+                    readData(CUSTOMER_TOKEN) { token ->
+                        viewModel.getCart(token!!) {
+                            val itemCart = this
+                            Log.e("TAG", "getCart " + this.toString())
+                            rvList.setHasFixedSize(true)
+                            viewModel.cartAdapter.notifyDataSetChanged()
+                            viewModel.cartAdapter.submitList(itemCart.items)
+                            if (!itemCart.items.isNullOrEmpty()) {
+                                upperLayout.visibility = View.VISIBLE
+                                filterLayout.visibility = View.VISIBLE
+                            } else {
+                                upperLayout.visibility = View.GONE
+                                filterLayout.visibility = View.GONE
+                            }
+                        }
+                    }
                 }
+
             }
 
 //            viewModel.cartMutableList.observe(viewLifecycleOwner) {
@@ -167,7 +193,6 @@ class Cart : Fragment() {
 //                    textSGST.text = "SGST (${viewModel.sgstPrice}%)"
 //                }
 //            }
-
 
 
             layoutProceedToPayment.singleClick {

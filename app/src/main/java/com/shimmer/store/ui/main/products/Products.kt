@@ -74,6 +74,11 @@ class Products : Fragment() {
         binding.rvList2.adapter = adapter2
 
         binding.apply {
+            topBarProducts.includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
 //            button.setOnClickListener {
 //                findNavController().navigate(R.id.action_products_to_productsDetail)
 //            }

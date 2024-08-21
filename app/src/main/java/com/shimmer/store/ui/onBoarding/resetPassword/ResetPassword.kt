@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.shimmer.store.databinding.ResetPasswordBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,5 +32,13 @@ class ResetPassword : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.mainActivity.get()!!.callBack(0)
+
+        binding.apply {
+            includeBackButton.apply {
+                layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+        }
     }
 }
