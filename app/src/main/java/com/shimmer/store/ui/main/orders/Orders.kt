@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.OrdersBinding
@@ -117,10 +118,66 @@ class Orders : Fragment() {
                 rvList1.setPageTransformer { page, position ->
                     rvList1.updatePagerHeightForChild(page)
                 }
-                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-                    tab.text = viewModel.ordersTypesArray[position].name
-                }.attach()
+//                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
+//                    tab.text = viewModel.ordersTypesArray[position].name
+//                }.attach()
                 viewModel.hide()
+
+                positionSelectFun()
+
+
+                layoutCustomerOrders.singleClick {
+                    rvList1.currentItem = 0
+                }
+
+                layoutOrderHistory.singleClick {
+                    rvList1.currentItem = 1
+                }
+
+                rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                        super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    }
+
+
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        Log.e("TAG", "onPageSelectedAA: $position")
+                        viewModel.positionSelect = position
+                        positionSelectFun()
+                    }
+
+
+                    override fun onPageScrollStateChanged(state: Int) {
+                        super.onPageScrollStateChanged(state)
+                        Log.e("TAG", "onPageScrollStateChangedAA: $state")
+                    }
+
+                })
+            }
+        }
+    }
+
+
+
+    private fun positionSelectFun() {
+        binding.apply {
+            if(viewModel.positionSelect == 0){
+                layoutCustomerOrders.background =  ContextCompat.getDrawable(binding.root.context, R.drawable.tab_round_light_blue)
+                layoutOrderHistory.background =  ContextCompat.getDrawable(binding.root.context, R.drawable.tab_round_light_white)
+
+                textCustomerOrders.setTextColor(ContextCompat.getColorStateList(binding.root.context,R.color.white))
+                textOrderHistory.setTextColor(ContextCompat.getColorStateList(binding.root.context,R.color.black))
+            } else if(viewModel.positionSelect == 1){
+                layoutCustomerOrders.background =  ContextCompat.getDrawable(binding.root.context, R.drawable.tab_round_light_white)
+                layoutOrderHistory.background =  ContextCompat.getDrawable(binding.root.context, R.drawable.tab_round_light_blue)
+
+                textCustomerOrders.setTextColor(ContextCompat.getColorStateList(binding.root.context,R.color.black))
+                textOrderHistory.setTextColor(ContextCompat.getColorStateList(binding.root.context,R.color.white))
             }
         }
     }

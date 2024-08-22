@@ -119,5 +119,9 @@
     <string name="change_password">Change Password</string>
     <string name="search_for_your_nearest_franchise">Search for your nearest franchise</string>
     <string name="search_your_order">Search your order</string>
+    <string name="order_history">Order History</string>
+    <string name="customer_orders">Customer Orders</string>
+    <string name="search_mobile_no_name">Search Mobile NO/Name</string>
+    <string name="order_details">Order Details</string>
 
 </resources>

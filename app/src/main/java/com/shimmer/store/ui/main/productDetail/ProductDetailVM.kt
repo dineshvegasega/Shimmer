@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.text.TextUtils
 import android.util.ArraySet
@@ -139,28 +140,25 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
                                 val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
 
-                                viewModelScope.launch {
-//                                    mMineUserEntity.forEach {items ->
-                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
-                                        userList?.forEach { user ->
-                                            if (mMineUserEntity.id == user.product_id) {
-                                                mMineUserEntity.apply {
-                                                    isSelected = true
-                                                }
-//                                                Log.e( "TAG", "YYYYYYYYY: " )
-                                            } else {
-                                                mMineUserEntity.apply {
-                                                    isSelected = false
-                                                }
-//                                                Log.e( "TAG", "NNNNNNNNNN: " )
-                                            }
-                                        }
-//                                    }
-
-
-                                        callBack(mMineUserEntity)
-                                }
-
+//                                viewModelScope.launch {
+////                                    mMineUserEntity.forEach {items ->
+//                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                        userList?.forEach { user ->
+//                                            if (mMineUserEntity.id == user.product_id) {
+//                                                mMineUserEntity.apply {
+//                                                    isSelected = true
+//                                                }
+////                                                Log.e( "TAG", "YYYYYYYYY: " )
+//                                            } else {
+//                                                mMineUserEntity.apply {
+//                                                    isSelected = false
+//                                                }
+////                                                Log.e( "TAG", "NNNNNNNNNN: " )
+//                                            }
+//                                        }
+////                                    }
+//                                }
+                                callBack(mMineUserEntity)
 
                             } catch (e: Exception) {
                             }
@@ -465,19 +463,19 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     public fun colors(binding: ProductDetailBinding, type: Int) {
         when (type) {
             1 -> {
-                binding.ivPink.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._26571_check_circle_icon))
-                binding.ivSilver.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
-                binding.ivGold.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
+                binding.linearRoseGold.setBackgroundResource(R.drawable.rounds_black_5)
+                binding.linearWhiteGold.setBackgroundColor(Color.WHITE)
+                binding.linearYellowGold.setBackgroundColor(Color.WHITE)
             }
             2 -> {
-                binding.ivPink.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
-                binding.ivSilver.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._26571_check_circle_icon))
-                binding.ivGold.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
+                binding.linearRoseGold.setBackgroundColor(Color.WHITE)
+                binding.linearWhiteGold.setBackgroundResource(R.drawable.rounds_black_5)
+                binding.linearYellowGold.setBackgroundColor(Color.WHITE)
             }
             3 -> {
-                binding.ivPink.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
-                binding.ivSilver.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._665384_circle_round_icon))
-                binding.ivGold.setImageDrawable(ContextCompat.getDrawable(binding.root.context,R.drawable._26571_check_circle_icon))
+                binding.linearRoseGold.setBackgroundColor(Color.WHITE)
+                binding.linearWhiteGold.setBackgroundColor(Color.WHITE)
+                binding.linearYellowGold.setBackgroundResource(R.drawable.rounds_black_5)
             }
         }
     }

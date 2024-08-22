@@ -19,8 +19,8 @@ class OrdersPagerAdapter (
     @OptIn(UnstableApi::class)
     override fun createFragment(position: Int): Fragment {
         when(position){
-            0 -> return OrderHistory(activity, videoList[position], position)
-            1 -> return CustomerOrders(activity, videoList[position], position)
+            0 -> return CustomerOrders(activity, videoList[position], position)
+            1 -> return OrderHistory(activity, videoList[position], position)
         }
         return OrderHistory(activity, videoList[position], position)
     }

@@ -13,18 +13,116 @@
         android:layout_height="wrap_content"
         android:visibility="visible" />
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/_a5a8ab"
-        app:tabIconTint="@color/black"
-        app:tabIndicatorColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/black"
+        android:text="@string/orders"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/tabLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"/>
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutCustomerOrders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/tab_round_light_blue"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:gravity="center">
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCustomerOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"
+                android:text="@string/customer_orders"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutOrderHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:background="@drawable/tab_round_light_white"
+            android:layout_marginStart="@dimen/_7sdp"
+            android:gravity="center">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textOrderHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"
+                android:text="@string/order_history"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextSearch"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_35sdp"
+        style="@style/PrimaryEditText"
+        android:hint="@string/search_mobile_no_name"
+        android:text=""
+        android:drawableEnd="@drawable/search"
+        android:drawableTint="@color/_868686"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:imeOptions="actionSearch"
+        android:inputType="text|textNoSuggestions"
+        android:maxLines="1"
+        android:lines="1"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@+id/tabLinearLayout"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/white"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        />
+
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/rvList1"
@@ -34,9 +132,10 @@
         app:spanCount="2"
         tools:itemCount="2"
         tools:listitem="@layout/item_home_1"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSearch"
         app:layout_constraintBottom_toBottomOf="parent"
         android:nestedScrollingEnabled="false"
+        android:layout_marginTop="@dimen/_5sdp"
         />
 
 

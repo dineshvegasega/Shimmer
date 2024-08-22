@@ -79,6 +79,15 @@ class Products : Fragment() {
                     findNavController().navigateUp()
                 }
             }
+
+            topBarProducts.ivSearch.singleClick {
+                findNavController().navigate(R.id.action_products_to_search)
+            }
+
+            topBarProducts.ivCart.singleClick {
+                findNavController().navigate(R.id.action_products_to_cart)
+            }
+
 //            button.setOnClickListener {
 //                findNavController().navigate(R.id.action_products_to_productsDetail)
 //            }

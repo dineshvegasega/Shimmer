@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/footerLayoutConstraint"
+        app:layout_constraintBottom_toTopOf="@+id/filterLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar_back">
 
@@ -60,10 +60,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text=""
+                android:text="Adafsdg"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_14sdp"
-                app:fontFamily="@font/nunitosans_semibold"
+                app:fontFamily="@font/nunitosans_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                 tools:ignore="HardcodedText" />
@@ -77,8 +77,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="₹ 0.0"
                 android:textColor="@color/_000000"
-                android:textSize="@dimen/_20sdp"
-                app:fontFamily="@font/nunitosans_bold"
+                android:textSize="@dimen/_14sdp"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textTitle"
                 tools:ignore="HardcodedText" />
@@ -89,12 +89,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:text="SKU: "
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/_11sdp"
+                android:textColor="@color/_383838"
+                android:textSize="@dimen/_10sdp"
                 app:fontFamily="@font/nunitosans_semibold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPrice"
                 tools:ignore="HardcodedText" />
 
@@ -104,91 +104,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text="CATEGORIES: "
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/_11sdp"
+                android:text="Category: Rings"
+                android:textColor="@color/_383838"
+                android:textSize="@dimen/_10sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textSKU"
+                app:layout_constraintTop_toBottomOf="@+id/textPrice"
                 tools:ignore="HardcodedText" />
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutColor"
+
+            <View
+                android:id="@+id/view1212"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:gravity="center_vertical"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textSKU"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textCustomizationDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="Customization Details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textCategories">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textColor"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="COLOR"
-                    android:textColor="@color/_000000"
-                    android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/nunitosans_semibold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="HardcodedText" />
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivPink"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/_665384_circle_round_icon"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:rippleColor="@color/black"
-                    app:tint="@color/_F7879A" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivSilver"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/_665384_circle_round_icon"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:rippleColor="@color/black"
-                    app:tint="@color/_F5F5FF" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivGold"
-                    android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/_665384_circle_round_icon"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ivCartLayout"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:rippleColor="@color/black"
-                    app:tint="@color/_FFDF00" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                app:layout_constraintTop_toBottomOf="@+id/view1212"
+                tools:ignore="HardcodedText" />
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -197,63 +145,82 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutColor">
+                app:layout_constraintTop_toBottomOf="@+id/textCustomizationDetails">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textMetalType"
-                    android:layout_width="@dimen/_60sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="Metal Type"
-                    android:textColor="@color/_000000"
+                    android:text="Metal"
+                    android:textColor="@color/_383838"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt12"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="Gold"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textMetalType">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt13"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="Platinum"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt12"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Gold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt13"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="Platinum"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -262,128 +229,329 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutMetalType">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textPuritySelect"
-                    android:layout_width="@dimen/_60sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="PURITY"
-                    android:textColor="@color/_000000"
+                    android:text="Purity"
+                    android:textColor="@color/_383838"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt9"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:minWidth="@dimen/_50sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="9Kt"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt14"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:minWidth="@dimen/_50sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="14Kt"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                   />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textPuritySelect">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt9"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="9Kt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt18"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:minWidth="@dimen/_50sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="18Kt"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt14"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="14Kt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bt95"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="wrap_content"
-                    android:minWidth="@dimen/_50sdp"
-                    android:layout_height="@dimen/_24sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:backgroundTint="@color/_a5a8ab"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:text="95"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:visibility="visible"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt18"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="18Kt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt95"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="95(Platinium)"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="visible"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutRingSize"
+                android:id="@+id/layoutColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutPuritySelect">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textRingSize"
-                    android:layout_width="@dimen/_60sdp"
+                    android:id="@+id/textColor"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="Size"
-                    android:textColor="@color/_000000"
+                    android:text="Color"
+                    android:textColor="@color/_383838"
                     android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:textAllCaps="true"
+                    tools:ignore="HardcodedText" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutPuritySelect">
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/linearRoseGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@drawable/rounds_black_5"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivPink"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/_665384_circle_round_icon"
+                            android:visibility="visible"
+                            app:rippleColor="@color/black"
+                            app:tint="@color/_FFDEFC" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textRoseGold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rose Gold"
+                            android:textColor="@color/_383838"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/nunitosans_semibold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/linearWhiteGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:background="@drawable/rounds_black_5"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivWhiteGold"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/_665384_circle_round_icon"
+                            android:visibility="visible"
+                            app:rippleColor="@color/black"
+                            app:tint="@color/_E3FAFF" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textWhiteGold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="White Gold"
+                            android:textColor="@color/_383838"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/nunitosans_semibold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/linearYellowGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@drawable/rounds_black_5"
+                        >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivYellowGold"
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/_665384_circle_round_icon"
+                            android:visibility="visible"
+                            app:rippleColor="@color/black"
+                            app:tint="@color/_EAC360" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textYellowGold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yellow Gold"
+                            android:textColor="@color/_383838"
+                            android:textSize="@dimen/_11sdp"
+                            app:fontFamily="@font/nunitosans_semibold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            tools:ignore="HardcodedText" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+            <View
+                android:id="@+id/view1213"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutColor"/>
+
+
+
+
+
+
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutRingSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1213">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textRingSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:text="Size"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_383838"
+                    android:textSize="@dimen/_9sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:textAllCaps="false"
                     tools:ignore="HardcodedText" />
 
                 <com.google.android.material.button.MaterialButton
@@ -397,8 +565,9 @@
                     android:drawablePadding="0dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
+                    android:ems="5"
                     android:text="10"
-                    android:textColor="@color/black"
+                    android:textColor="@color/_1E1E1E"
                     android:textSize="@dimen/_10sdp"
                     android:visibility="visible"
                     app:cornerRadius="@dimen/_4sdp"
@@ -413,29 +582,16 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/layoutGuide"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutRingSize">
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/view1213">
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textGuide"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:text="Ring Size"
-                    android:textColor="@color/_000000"
-                    android:textSize="@dimen/_11sdp"
-                    app:fontFamily="@font/nunitosans_semibold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:textAllCaps="true"
-                    android:visibility="invisible"
-                    tools:ignore="HardcodedText" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btGuide"
@@ -443,51 +599,99 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_24sdp"
                     android:backgroundTint="@color/white"
-                    android:drawableLeft="@drawable/scale"
+                    app:icon="@drawable/info_outline"
+                    app:iconGravity="start"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:text="@string/ring_size_guide"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/_393939"
+                    android:textSize="@dimen/_9sdp"
                     android:visibility="visible"
                     app:cornerRadius="@dimen/_4sdp"
                     app:iconTint="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutRingSize"
-                    app:strokeColor="@color/black"
+                    app:strokeColor="@color/white"
 
                     />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textProductDetails"
+
+
+            <View
+                android:id="@+id/view1214"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/_424041"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutRingSize"/>
+
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@color/_f2f2f2"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_3sdp"
-                android:text="@string/product_details"
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/nunitosans_regular"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutGuide"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/view1214"
+                android:background="@drawable/all_round_5"
+                android:backgroundTint="@color/_0098BD"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_35sdp"
+                    android:text="Description"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingVertical="@dimen/_4sdp"
+                    tools:ignore="HardcodedText"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_10sdp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivHideShow"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintDimensionRatio="H,1:1.1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/arrow_down"
+                    android:tint="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:padding="@dimen/_3sdp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/layoutProductDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textProductDetails">
+                app:layout_constraintTop_toBottomOf="@+id/layoutDescription">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/layoutWeight"
@@ -496,7 +700,6 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_all_round_black"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="start"
@@ -507,7 +710,6 @@
                         android:id="@+id/textWeight"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/google"
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="Weight"
                         android:textColor="@color/_000000"
@@ -573,7 +775,6 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_all_round_black"
                     android:clickable="true"
                     android:focusable="true"
                     android:gravity="start"
@@ -584,7 +785,6 @@
                         android:id="@+id/textPurity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/google"
                         android:drawablePadding="@dimen/_5sdp"
                         android:text="Purity"
                         android:textColor="@color/_000000"
@@ -612,230 +812,176 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutDiamondAndGemstones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_all_round_black"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="start"
-                android:orientation="vertical"
-                android:padding="@dimen/_12sdp"
-                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutProductDetails"
-
-                >
+                android:background="@drawable/all_round_5"
+                android:backgroundTint="@color/_0098BD"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textDiamondAndGemstones"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/google"
-                    android:drawablePadding="@dimen/_5sdp"
+                    android:minHeight="@dimen/_35sdp"
                     android:text="Diamond &amp; Gemstones"
-                    android:textColor="@color/_000000"
-                    android:textSize="@dimen/_9sdp"
-                    app:fontFamily="@font/nunitosans_regular"
-                    tools:ignore="HardcodedText" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingVertical="@dimen/_4sdp"
+                    tools:ignore="HardcodedText"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_10sdp"/>
 
-                <WebView
-                    android:id="@+id/webView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    tools:ignore="WebViewLayout">
-                </WebView>
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutWD"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textWeightCt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight"
-                        android:textColor="@color/_000000"
-                        android:textSize="@dimen/_10sdp"
-                        app:fontFamily="@font/nunitosans_semibold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textDiamonds"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Diamonds"
-                        android:textColor="@color/_000000"
-                        android:textSize="@dimen/_10sdp"
-                        app:fontFamily="@font/nunitosans_semibold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivHideShow3"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintDimensionRatio="H,1:1.1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/arrow_down"
+                    android:tint="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:padding="@dimen/_3sdp"
+                    />
 
 
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/layoutList"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:id="@+id/linearHeader"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:orientation="horizontal"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondSizeText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="Size"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondColorText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="Color"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondClarityText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="Clarity"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondShapeText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="Shape"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondNoText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="No Of Diamonds"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/textDiamondTotalWeightText"
-                                android:layout_width="@dimen/_60sdp"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:padding="@dimen/_4sdp"
-                                android:text="Total Weight"
-                                android:textColor="@color/_000000"
-                                android:textSize="@dimen/_10sdp"
-                                app:fontFamily="@font/nunitosans_regular"
-                                tools:ignore="HardcodedText" />
-
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvList2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/linearHeader"
-                            tools:itemCount="4"
-                            tools:listitem="@layout/item_product_diamonds" />
 
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                </HorizontalScrollView>
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textPriceBreakup"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutWD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@color/_f2f2f2"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:paddingVertical="@dimen/_3sdp"
-                android:text="@string/price_breakup"
-                android:textAllCaps="true"
-                android:textColor="@color/_000000"
-                android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/nunitosans_regular"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/_20sdp"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiamondAndGemstones"
-                tools:ignore="HardcodedText"
-      />
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textWeightCt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight"
+                    android:textColor="@color/_000000"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDiamonds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Diamonds"
+                    android:textColor="@color/_000000"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutWD"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                tools:ignore="WebViewLayout">
+            </WebView>
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutPriceBreakup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/webView"
+                android:background="@drawable/all_round_5"
+                android:backgroundTint="@color/_0098BD"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textPriceBreakup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_35sdp"
+                    android:text="Price Breakup"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingVertical="@dimen/_4sdp"
+                    tools:ignore="HardcodedText"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/_10sdp"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivHideShow2"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    app:layout_constraintDimensionRatio="H,1:1.1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:srcCompat="@drawable/arrow_down"
+                    android:tint="@color/white"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:padding="@dimen/_3sdp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutGold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/textPriceBreakup">
+                app:layout_constraintTop_toBottomOf="@+id/layoutPriceBreakup"
+                android:paddingVertical="@dimen/_3sdp"
+                >
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textGold"
@@ -843,8 +989,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="Gold"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -855,22 +1001,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="233245"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/_424041"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/textGold"></View>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -879,13 +1017,15 @@
                 android:id="@+id/layoutDiamond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutGold">
+                app:layout_constraintTop_toBottomOf="@+id/layoutGold"
+                android:paddingVertical="@dimen/_3sdp"
+                >
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textDiamond"
@@ -893,8 +1033,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="Diamond"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -905,70 +1045,105 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="233245"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/_424041"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/textDiamond"></View>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutMakingCharge"
+                android:id="@+id/layoutDiscount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutDiamond">
+                app:layout_constraintTop_toBottomOf="@+id/layoutDiamond"
+                android:paddingVertical="@dimen/_3sdp"
+                >
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textMakingCharge"
+                    android:id="@+id/textDiscount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:text="Making Charge"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:text="Discount"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textMakingChargePrice"
+                    android:id="@+id/textDiscountPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="233245"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/_424041"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/textMakingCharge"></View>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutMakingCharges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/layoutDiscount"
+                android:paddingVertical="@dimen/_3sdp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textMakingCharges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="Making Charges"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textMakingChargesPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -976,13 +1151,15 @@
                 android:id="@+id/layoutGST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutMakingCharge">
+                app:layout_constraintTop_toBottomOf="@+id/layoutMakingCharges"
+                android:paddingVertical="@dimen/_3sdp"
+                >
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textGST"
@@ -990,8 +1167,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="GST"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -1002,21 +1179,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="233245"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/_424041"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/textGST"></View>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -1024,13 +1194,15 @@
                 android:id="@+id/layoutTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_7sdp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutGST">
+                app:layout_constraintTop_toBottomOf="@+id/layoutGST"
+                android:paddingVertical="@dimen/_3sdp"
+                >
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textTotal"
@@ -1038,9 +1210,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:text="Total"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/nunitosans_light"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
@@ -1050,23 +1222,118 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:text="233245"
-                    android:textColor="@color/_424041"
-                    android:textSize="@dimen/_10sdp"
-                    app:fontFamily="@font/nunitosans_light"
+                    android:text="₹0"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_11sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:background="@color/_424041"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/textTotal" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutCertificates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layoutShielde"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
+                    android:background="@drawable/rounds_black_5"
+                    android:backgroundTint="@color/_D9F8FF"
+                    android:padding="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        app:srcCompat="@drawable/shield"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitCenter"
+                        android:visibility="visible"
+                        app:rippleColor="@color/black"
+                        app:tint="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Certified Jewellery"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/layoutCertificate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
+                    android:background="@drawable/rounds_black_5"
+                    android:backgroundTint="@color/_D9F8FF"
+                    android:padding="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_weight="1"
+                    android:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        app:srcCompat="@drawable/certificate"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:scaleType="fitCenter"
+                        android:visibility="visible"
+                        app:rippleColor="@color/black"
+                        app:tint="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hallmarked Gold"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -1078,7 +1345,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCertificates"
                 android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -1120,114 +1387,82 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/footerLayoutConstraint"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <View
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/filterLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        >
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutAddtoCart"
             android:layout_width="match_parent"
-            android:layout_height="0.6dp"
-            android:background="@color/_e8ebee"></View>
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginEnd="1dp"
+            android:background="@drawable/menu_top_round"
+            android:backgroundTint="@color/_0098BD"
+            android:gravity="center">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"
+                android:text="Add To Cart"
+                />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/footerLayout"
+            android:id="@+id/layoutBuyNow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:paddingVertical="@dimen/_10sdp">
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginStart="1dp"
+            android:background="@drawable/menu_top_round"
+            android:backgroundTint="@color/_003E4D"
+            android:gravity="center">
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutSort"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btAddToCart"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_5sdp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:paddingHorizontal="@dimen/_20sdp"
-                    android:paddingVertical="@dimen/_7sdp"
-                    android:text="@string/add_to_cart"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    app:backgroundTint="@color/_363438"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:icon="@drawable/google"
-                    app:iconGravity="textStart"
-                    app:iconPadding="@dimen/_10sdp"
-                    app:iconTintMode="multiply"
-                    app:rippleColor="@color/white" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layoutFilter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btByNow"
-                    style="@style/PrimaryButtonBlue"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_weight="1"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:insetTop="0dp"
-                    android:insetBottom="0dp"
-                    android:paddingHorizontal="@dimen/_20sdp"
-                    android:paddingVertical="@dimen/_7sdp"
-                    android:text="@string/buy_now"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_11sdp"
-                    app:backgroundTint="@color/_0183b8"
-                    app:cornerRadius="@dimen/_4sdp"
-                    app:icon="@drawable/google"
-                    app:iconGravity="textStart"
-                    app:iconPadding="@dimen/_10sdp"
-                    app:iconTintMode="multiply"
-                    app:rippleColor="@color/white" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                android:text="Buy Now"
+                />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

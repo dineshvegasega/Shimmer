@@ -14,13 +14,27 @@
         android:layout_height="wrap_content"
         android:visibility="visible" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order_details"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
 
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         >
@@ -32,7 +46,345 @@
 
             >
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_all_round_orders"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitleCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Details"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_13sdp"
+                        app:fontFamily="@font/nunitosans_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textTitleCustomer"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Ram Kumar Sharma"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textTitle1"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textPurity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Contact"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textColor"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textRingSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="+91-1234567892"
+                        android:textColor="@color/_484848"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textPurity"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textPurity12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Email"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textRingSize"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textRingSize324"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="mymail@gmail.com"
+                        android:textColor="@color/_484848"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textPurity12"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle3241"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Date &amp; Time"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textTitleCustomer"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textColorr3rwt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="01-Aug-2023"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textTitle3241"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textColorrt65346"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="02:00 PM"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textColorr3rwt"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textOrders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                android:textColor="@color/_141414"
+                android:textSize="@dimen/_13sdp"
+                app:fontFamily="@font/nunitosans_bold"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutCustomer"
+                tools:ignore="HardcodedText" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListCategory1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_skus"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textOrders"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:visibility="visible"
+                android:layout_marginTop="@dimen/_5sdp"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutPayment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                android:background="@drawable/bg_all_round_orders"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvListCategory1"
+                >
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="RtlSymmetry">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textPaymentMethod"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Payment Method"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_13sdp"
+                        app:fontFamily="@font/nunitosans_bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="HardcodedText" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle14235"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="By"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textPaymentMethod"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textColorr42wr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Credit Card"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textTitle14235"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textPurity4235435"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Name"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textColorr42wr"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textRingSizerwett"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Ram Kumar Sharma"
+                        android:textColor="@color/_484848"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textPurity4235435"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textPurity12rwetet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Card Number"
+                        android:textColor="@color/_141414"
+                        android:textSize="@dimen/_9sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textRingSizerwett"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textRingSize324ertr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="XXX XXXX XXX"
+                        android:textColor="@color/_484848"
+                        android:textSize="@dimen/_11sdp"
+                        app:fontFamily="@font/nunitosans_semibold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textPurity12rwetet"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        tools:ignore="HardcodedText" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -10,6 +10,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCategoryBinding
+import com.shimmer.store.databinding.ItemCustomerOrderBinding
+import com.shimmer.store.databinding.ItemOrderHistoryBinding
 import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
@@ -32,6 +34,7 @@ class OrdersVM @Inject constructor() : ViewModel() {
     var ordersTypesArray: ArrayList<Items> = ArrayList()
 
     var alertDialog: AlertDialog? = null
+    var positionSelect = 0
 
 
     fun show() {
@@ -81,15 +84,15 @@ class OrdersVM @Inject constructor() : ViewModel() {
 
 
 
-    val orderHistory = object : GenericAdapter<ItemCategoryBinding, Items>() {
+    val orderHistory = object : GenericAdapter<ItemOrderHistoryBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryBinding.inflate(inflater, parent, false)
+        ) = ItemOrderHistoryBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryBinding,
+            binding: ItemOrderHistoryBinding,
             dataClass: Items,
             position: Int
         ) {
@@ -102,15 +105,15 @@ class OrdersVM @Inject constructor() : ViewModel() {
     }
 
 
-    val customerOrders = object : GenericAdapter<ItemCategoryBinding, Items>() {
+    val customerOrders = object : GenericAdapter<ItemCustomerOrderBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemCategoryBinding.inflate(inflater, parent, false)
+        ) = ItemCustomerOrderBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemCategoryBinding,
+            binding: ItemCustomerOrderBinding,
             dataClass: Items,
             position: Int
         ) {
