@@ -120,6 +120,10 @@ class Profile : Fragment() {
                 ivSearch.singleClick {
                     findNavController().navigate(R.id.action_profile_to_search)
                 }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_profile_to_cart)
+                }
             }
 
 
@@ -142,6 +146,12 @@ class Profile : Fragment() {
             switchNotifications.setOnCheckedChangeListener { _, isChecked ->
                 Log.e("TAG", "onViewCreated: $isChecked")
             }
+
+            btSearchNearFranchise.singleClick {
+                findNavController().navigate(R.id.action_profile_to_nearetFranchise)
+            }
+
+
 
             textLogout.singleClick {
                MaterialAlertDialogBuilder(requireContext(), R.style.LogoutDialogTheme)

@@ -44,6 +44,16 @@ class Faq : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(1)
 
         binding.apply {
+            topBarOthers.apply {
+                ivSearch.singleClick {
+                    findNavController().navigate(R.id.action_faq_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_faq_to_cart)
+                }
+            }
+
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
 //                ivSearch.visibility = View.VISIBLE

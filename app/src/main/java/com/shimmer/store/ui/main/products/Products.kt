@@ -214,7 +214,7 @@ class Products : Fragment() {
 //                        }, 700)
                     }
 
-                    btClear.singleClick {
+                    layoutClear.singleClick {
                         textDefaultSort.setTypeface(typefacenunitosans_light)
                         textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
                         textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
@@ -222,7 +222,7 @@ class Products : Fragment() {
                         filters()
                     }
 
-                    btApply.singleClick {
+                    layoutApply.singleClick {
                         filters()
                         dialog.dismiss()
                     }

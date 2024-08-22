@@ -232,7 +232,7 @@
         app:iconTint="@color/_07FFFC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:layout_constraintTop_toBottomOf="@+id/switchNotifications"
         app:rippleColor="@color/white"
         app:strokeColor="@color/_D8D8D8"
         />
@@ -271,6 +271,22 @@
 
 
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textAppVersionTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.8.2004"
+        android:textColor="@color/_003E4D"
+        android:textSize="@dimen/_12sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:layout_constraintTop_toBottomOf="@+id/btSearchOrder"
+        tools:ignore="MissingConstraints" />
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout6"
         android:layout_width="match_parent"
@@ -282,6 +298,7 @@
         android:paddingVertical="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -298,7 +315,7 @@
             tools:ignore="MissingConstraints" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textAppVersionTxt"
+            android:id="@+id/textAppVersionTxt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Version 1.8.2004"

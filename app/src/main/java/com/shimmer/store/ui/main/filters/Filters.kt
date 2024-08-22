@@ -104,8 +104,7 @@ class Filters : Fragment() {
             }
 
 
-            btClear.singleClick {
-
+            layoutClear.singleClick {
                 mainPrice.forEach {
                     it.isSelected = false
                 }
@@ -156,7 +155,7 @@ class Filters : Fragment() {
                 }
             }
 
-            btApply.singleClick {
+            layoutApply.singleClick {
 //                isFilterFromFrom = false
                 findNavController().navigateUp()
             }

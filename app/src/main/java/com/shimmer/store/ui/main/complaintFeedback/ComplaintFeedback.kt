@@ -49,6 +49,10 @@ class ComplaintFeedback : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCart.singleClick {
+                    findNavController().navigate(R.id.action_complaintFeedback_to_cart)
+                }
             }
 
 //            topBar.apply {

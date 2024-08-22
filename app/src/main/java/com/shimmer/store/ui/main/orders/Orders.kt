@@ -54,6 +54,10 @@ class Orders : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCart.singleClick {
+                    findNavController().navigate(R.id.action_orders_to_cart)
+                }
             }
 
 //            topBar.apply {

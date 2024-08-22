@@ -50,6 +50,10 @@ class ChangePassword : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCart.singleClick {
+                    findNavController().navigate(R.id.action_changePassword_to_cart)
+                }
             }
 
 //            topBar.apply {

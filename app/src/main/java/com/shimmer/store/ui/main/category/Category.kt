@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OVER_SCROLL_NEVER
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -36,6 +37,7 @@ class Category : Fragment() {
     private var _binding: CategoryBinding? = null
     private val binding get() = _binding!!
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,6 +58,16 @@ class Category : Fragment() {
 //                findNavController().navigate(R.id.action_category_to_products)
 //            }
 
+
+            topBarOthers.apply {
+                ivSearch.singleClick {
+                    findNavController().navigate(R.id.action_category_to_search)
+                }
+
+                ivCart.singleClick {
+                    findNavController().navigate(R.id.action_category_to_cart)
+                }
+            }
 
             layoutCustomDesign.ivCustomDesign.setOnClickListener {
                 findNavController().navigate(R.id.action_category_to_customDesign)
@@ -133,12 +145,82 @@ class Category : Fragment() {
                 rvList1.setPageTransformer { page, position ->
                     rvList1.updatePagerHeightForChild(page)
                 }
-                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
-                    tab.text = mainShopFor[position].name
-                }.attach()
+//                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
+//                    tab.text = mainShopFor[position].name
+//                }.attach()
                 viewModel.hide()
+
+
+
+                positionSelectFun()
+
+                linearMen.singleClick {
+                    rvList1.currentItem = 0
+                }
+
+                linearWomen.singleClick {
+                    rvList1.currentItem = 1
+                }
+
+                linearKids.singleClick {
+                    rvList1.currentItem = 2
+                }
+
+                rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageScrolled(
+                        position: Int,
+                        positionOffset: Float,
+                        positionOffsetPixels: Int
+                    ) {
+                        super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    }
+
+
+                    override fun onPageSelected(position: Int) {
+                        super.onPageSelected(position)
+                        Log.e("TAG", "onPageSelectedAA: $position")
+                        viewModel.positionSelect = position
+                        positionSelectFun()
+                    }
+
+
+                    override fun onPageScrollStateChanged(state: Int) {
+                        super.onPageScrollStateChanged(state)
+                        Log.e("TAG", "onPageScrollStateChangedAA: $state")
+                    }
+
+                })
             }
         }
+    }
 
+    private fun positionSelectFun() {
+        binding.apply {
+            if(viewModel.positionSelect == 0){
+                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+
+                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+            } else if(viewModel.positionSelect == 1){
+                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+
+                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+            } else if(viewModel.positionSelect == 2){
+                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+
+                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
+                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+            }
+        }
     }
 }

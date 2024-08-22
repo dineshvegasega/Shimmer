@@ -50,6 +50,10 @@ class ProfileDetail : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCart.singleClick {
+                    findNavController().navigate(R.id.action_profileDetail_to_cart)
+                }
             }
 
 //            topBar.apply {

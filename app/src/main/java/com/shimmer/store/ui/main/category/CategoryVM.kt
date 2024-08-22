@@ -38,6 +38,7 @@ class CategoryVM @Inject constructor() : ViewModel() {
     var item2: ArrayList<String> = ArrayList()
     var item3: ArrayList<String> = ArrayList()
 
+    var positionSelect = 0
 
     var alertDialog: AlertDialog? = null
 

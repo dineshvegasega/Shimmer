@@ -238,13 +238,19 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true" />
-        \
+
         <action
             android:id="@+id/action_profile_to_loginOptions"
             app:destination="@id/loginOptions"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_profile_to_nearetFranchise"
+            app:destination="@id/nearetFranchise"
+            app:launchSingleTop="true"
+            />
 
     </fragment>
 
@@ -492,4 +498,17 @@
         android:id="@+id/thankyou"
         tools:layout="@layout/thankyou">
     </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.nearetFranchise.NearetFranchise"
+        android:label="NearetFranchise"
+        android:id="@+id/nearetFranchise"
+        tools:layout="@layout/nearet_franchise">
+        <action
+            android:id="@+id/action_nearetFranchise_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true" />
+    </fragment>
+
 </navigation>
