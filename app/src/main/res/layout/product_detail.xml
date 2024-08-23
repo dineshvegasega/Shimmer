@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Adafsdg"
+                android:text=""
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_14sdp"
                 app:fontFamily="@font/nunitosans_bold"
@@ -400,8 +400,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:clickable="false"
                             android:scaleType="fitCenter"
                             android:src="@drawable/_665384_circle_round_icon"
                             android:visibility="visible"
@@ -440,8 +439,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:clickable="false"
                             android:scaleType="fitCenter"
                             android:src="@drawable/_665384_circle_round_icon"
                             android:visibility="visible"
@@ -479,8 +477,7 @@
                             android:layout_height="@dimen/_25sdp"
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:background="?attr/selectableItemBackgroundBorderless"
-                            android:clickable="true"
-                            android:focusable="true"
+                            android:clickable="false"
                             android:scaleType="fitCenter"
                             android:src="@drawable/_665384_circle_round_icon"
                             android:visibility="visible"
@@ -671,7 +668,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:srcCompat="@drawable/arrow_down"
+                    app:srcCompat="@drawable/arrow_right"
                     android:tint="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -691,7 +688,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutDescription">
+                app:layout_constraintTop_toBottomOf="@+id/layoutDescription"
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/layoutWeight"
@@ -836,7 +834,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow3"
+                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:paddingVertical="@dimen/_4sdp"
@@ -845,14 +843,14 @@
                     android:paddingHorizontal="@dimen/_10sdp"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivHideShow3"
+                    android:id="@+id/ivHideShow2"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     app:layout_constraintDimensionRatio="H,1:1.1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:srcCompat="@drawable/arrow_down"
+                    app:srcCompat="@drawable/arrow_right"
                     android:tint="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -876,7 +874,7 @@
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiamondAndGemstones"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textWeightCt"
@@ -914,7 +912,8 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@+id/layoutWD"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                tools:ignore="WebViewLayout">
+                tools:ignore="WebViewLayout"
+                android:visibility="gone">
             </WebView>
 
 
@@ -942,7 +941,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow2"
+                    app:layout_constraintEnd_toStartOf="@+id/ivHideShow3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:paddingVertical="@dimen/_4sdp"
@@ -951,14 +950,14 @@
                     android:paddingHorizontal="@dimen/_10sdp"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivHideShow2"
+                    android:id="@+id/ivHideShow3"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     app:layout_constraintDimensionRatio="H,1:1.1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:srcCompat="@drawable/arrow_down"
+                    app:srcCompat="@drawable/arrow_right"
                     android:tint="@color/white"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
@@ -1070,6 +1069,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiamond"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -1159,6 +1159,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutMakingCharges"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -1232,6 +1233,13 @@
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/group_price_breakup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="layoutGold,layoutDiamond, layoutMakingCharges, layoutTotal" />
 
 
 

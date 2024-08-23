@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -29,17 +30,21 @@ import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.models.ItemProductOptions
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.models.products.Value
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.interfaces.CallBackListener
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isApiCall
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getRecyclerView
@@ -145,9 +150,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
 //            val model = arguments?.parcelable<ItemProduct>("model")
-            val model = arguments?.getString("model")
 
-            callSKUDetails(model)
+            val baseSku = arguments?.getString("baseSku")
+            callSKUDetails(baseSku)
 
 //            if (isApiCall == false){
 //                isApiCall = true
@@ -370,23 +375,76 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
             layoutAddtoCart.singleClick {
-                readData(QUOTE_ID) {
-                    val json: JSONObject = JSONObject().apply {
-                        put("sku", currentSku)
-                        put("qty", 1)
-                        put("quote_id", it.toString())
+                if (LoginType.CUSTOMER == loginType) {
+                    mainThread {
+                        val newUser = CartModel(product_id = itemProductThis.id, name = itemProductThis.name, price = itemProductThis.price, quantity = 1, sku = itemProductThis.sku, currentTime = System.currentTimeMillis())
+                        itemProductThis.custom_attributes.forEach {
+                            if (it.attribute_code == "size"){
+                                newUser.apply {
+                                    this.size = ""+it.value
+                                }
+                            }
+
+
+                            if (it.attribute_code == "metal_color"){
+                                newUser.apply {
+                                    this.color = ""+it.value
+                                }
+                            }
+
+                            if (it.attribute_code == "metal_type"){
+                                Log.e("TAG", "metal_typeAAA " + it.value)
+                                if (it.value == "12"){
+                                    newUser.apply {
+                                        this.material_type = ""+it.value
+                                    }
+                                    itemProductThis.custom_attributes.forEach { againAttributes ->
+                                        if (againAttributes.attribute_code == "metal_purity"){
+                                            Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+                                            newUser.apply {
+                                                this.purity = ""+againAttributes.value
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (it.value == "13"){
+                                    newUser.apply {
+                                        this.material_type = ""+it.value
+                                    }
+                                    itemProductThis.custom_attributes.forEach { againAttributes ->
+                                        if (againAttributes.attribute_code == "metal_purity"){
+                                            Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+                                            newUser.apply {
+                                                this.purity = ""+againAttributes.value
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        db?.cartDao()?.insertAll(newUser)
                     }
-                    val jsonCartItem: JSONObject = JSONObject().apply {
-                        put("cartItem", json)
-                    }
-                    readData(CUSTOMER_TOKEN) { token ->
-                        viewModel.addCart(token!!, jsonCartItem) {
-                            //cartMutableList.value = true
-                            Log.e("TAG", "onCallBack: ${this.toString()}")
-                            showSnackBar("Item added to cart")
+                } else if (LoginType.VENDOR == loginType) {
+                    readData(QUOTE_ID) {
+                        val json: JSONObject = JSONObject().apply {
+                            put("sku", currentSku)
+                            put("qty", 1)
+                            put("quote_id", it.toString())
+                        }
+                        val jsonCartItem: JSONObject = JSONObject().apply {
+                            put("cartItem", json)
+                        }
+                        readData(CUSTOMER_TOKEN) { token ->
+                            viewModel.addCart(token!!, jsonCartItem) {
+                                //cartMutableList.value = true
+                                Log.e("TAG", "onCallBack: ${this.toString()}")
+                                showSnackBar("Item added to cart")
+                            }
                         }
                     }
                 }
+
             }
 
             layoutBuyNow.singleClick {
@@ -407,6 +465,42 @@ class ProductDetail : Fragment(), CallBackListener {
                             findNavController().navigate(R.id.action_productDetail_to_cart)
                         }
                     }
+                }
+            }
+
+
+
+
+            layoutDescription.singleClick {
+                if (layoutProductDetails.isVisible == true){
+                    layoutProductDetails.visibility = View.GONE
+                    ivHideShow.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                } else {
+                    layoutProductDetails.visibility = View.VISIBLE
+                    ivHideShow.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
+                }
+            }
+
+            layoutDiamondAndGemstones.singleClick {
+                if (layoutWD.isVisible == true){
+                    layoutWD.visibility = View.GONE
+                    webView.visibility = View.GONE
+                    ivHideShow2.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                } else {
+                    layoutWD.visibility = View.VISIBLE
+                    webView.visibility = View.VISIBLE
+                    ivHideShow2.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
+                }
+            }
+
+
+            layoutPriceBreakup.singleClick {
+                if (groupPriceBreakup.isVisible == true){
+                    groupPriceBreakup.visibility = View.GONE
+                    ivHideShow3.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                } else {
+                    groupPriceBreakup.visibility = View.VISIBLE
+                    ivHideShow3.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
                 }
             }
         }
@@ -520,6 +614,11 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
                                     Log.e("TAG", "arrayItemProductcurrentSku " + currentSku)
 
+                                    val sku = arguments?.getString("sku")
+                                    if(sku!!.isNotEmpty()){
+                                        currentSku = sku
+                                    }
+
                                     callApiDetailsConfigurable(
                                         currentSku,
                                         itemProduct
@@ -572,6 +671,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         textTitle.text = itemProductThis.name
                         textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
+
+                        textTotalPrice.text =  "₹ " +itemProductThis.price
+
                         textSKU.text = "SKU: " + itemProductThis.sku
 
                         textWeight2.text = "" + itemProductThis.weight + " gram"
@@ -607,6 +709,26 @@ class ProductDetail : Fragment(), CallBackListener {
                                 )
                                 layoutDiamondAndGemstones.visibility = View.VISIBLE
                             }
+
+
+                            if (itemProductAttr.attribute_code == "diamond_weight") {
+                                textWeightCt.text = "Weight "+itemProductAttr.value
+                            }
+
+                            if (itemProductAttr.attribute_code == "diamond_number") {
+                                textDiamonds.text = "Diamonds "+itemProductAttr.value
+                            }
+
+
+                            if (itemProductAttr.attribute_code == "totel_gold_rate") {
+                                textGoldPrice.text = "₹"+itemProductAttr.value
+                            }
+
+
+                            if (itemProductAttr.attribute_code == "making_charges") {
+                                textMakingChargesPrice.text = "₹"+itemProductAttr.value
+                            }
+
                         }
 
 
@@ -623,7 +745,9 @@ class ProductDetail : Fragment(), CallBackListener {
                                 metal_weight = "" + itemProductAttr.value + " gram"
                             }
 
-
+                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+                                textDiamondPrice.text = "₹"+itemProductAttr.value
+                            }
 
                             if (itemProductAttr.attribute_code == "metal_purity") {
                                 if (itemProductAttr.value == "26") {

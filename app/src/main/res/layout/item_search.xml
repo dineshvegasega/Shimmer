@@ -33,15 +33,16 @@
                 >
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivIcon"
-                    android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_85sdp"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:theme="@style/RoundCorner5"
                     app:layout_constraintDimensionRatio="H,1:1.1"
+                    app:srcCompat="@drawable/no_image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/rectangle_40"
-                    android:background="@color/white"
-                    android:theme="@style/RoundCorner5"
-                    android:scaleType="centerCrop"
+
                     />
 
 
@@ -77,13 +78,13 @@
                     android:layout_height="wrap_content"
                     android:text="Color:"
                     android:textColor="@color/_484848"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:maxLines="2"
                     app:fontFamily="@font/nunitosans_bold"
                     tools:ignore="HardcodedText"
                     app:layout_constraintTop_toBottomOf="@+id/textTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_2sdp"/>
+                    android:layout_marginTop="@dimen/_1sdp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textPurity"
@@ -91,13 +92,13 @@
                     android:layout_height="wrap_content"
                     android:text="Purity:"
                     android:textColor="@color/_484848"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:maxLines="2"
                     app:fontFamily="@font/nunitosans_bold"
                     tools:ignore="HardcodedText"
                     app:layout_constraintTop_toBottomOf="@+id/textColor"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_2sdp"/>
+                    android:layout_marginTop="@dimen/_1sdp"/>
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -106,13 +107,13 @@
                     android:layout_height="wrap_content"
                     android:text="Ring size:"
                     android:textColor="@color/_484848"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:maxLines="2"
                     app:fontFamily="@font/nunitosans_bold"
                     tools:ignore="HardcodedText"
                     app:layout_constraintTop_toBottomOf="@+id/textPurity"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_2sdp"/>
+                    android:layout_marginTop="@dimen/_1sdp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textPrice"
@@ -120,13 +121,13 @@
                     android:layout_height="wrap_content"
                     android:text="Price:₹12000 x 3 = ₹36,000"
                     android:textColor="@color/_484848"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:maxLines="2"
                     app:fontFamily="@font/nunitosans_bold"
                     tools:ignore="HardcodedText"
                     app:layout_constraintTop_toBottomOf="@+id/textRingsize"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_2sdp"/>
+                    android:layout_marginTop="@dimen/_1sdp"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

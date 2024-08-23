@@ -39,27 +39,15 @@ class CustomDesign : Fragment() {
 //        Log.e("TAG", "onViewCreated: ${isHide.value}")
         binding.apply {
 
-            topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
-//                cardSearch.visibility = View.GONE
-                ivSearch.visibility = View.GONE
-                ivCartLayout.visibility = View.GONE
-                textViewTitle.text = "Custom Design"
-
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
-
-                appicon.singleClick {
+            topBarBack.includeBackButton.apply {
+                layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCart.singleClick {
+                    findNavController().navigate(R.id.action_customDesign_to_cart)
+                }
             }
-
-
-
         }
     }
 

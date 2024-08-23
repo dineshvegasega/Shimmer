@@ -109,6 +109,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@+id/view27"
+                android:visibility="gone"
                 android:gravity="center">
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -167,6 +168,7 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/_494949"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/layoutCoupon" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -200,6 +202,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/textPriceBreakup"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -244,6 +247,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutGold"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -289,6 +293,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiamond"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -334,6 +339,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/layoutDiscount"
                 android:paddingVertical="@dimen/_3sdp"
+                android:visibility="gone"
                 >
 
                 <androidx.appcompat.widget.AppCompatTextView

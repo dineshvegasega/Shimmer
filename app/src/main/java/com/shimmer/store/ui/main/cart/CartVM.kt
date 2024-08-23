@@ -148,7 +148,8 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
             binding.apply {
                 ivIcon.singleClick {
                     binding.root.findNavController().navigate(R.id.action_cart_to_productDetail, Bundle().apply {
-                        putString("model", dataClass.sku)
+                        putString("baseSku", dataClass.sku.split("-")[0])
+                        putString("sku", dataClass.sku)
                     })
                 }
 
@@ -256,6 +257,85 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
         }
     }
 
+
+    val cartAdapterCustomer = object : GenericAdapter<ItemCartBinding, CartModel>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemCartBinding.inflate(inflater, parent, false)
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun onBindHolder(
+            binding: ItemCartBinding,
+            dataClass: CartModel,
+            position: Int
+        ) {
+            binding.apply {
+                ivIcon.singleClick {
+                    binding.root.findNavController().navigate(R.id.action_cart_to_productDetail, Bundle().apply {
+                        putString("baseSku", dataClass.sku.split("-")[0])
+                        putString("sku", dataClass.sku)
+                    })
+                }
+
+                textTitle.text = dataClass.name
+                textSKU.text =  "SKU: "+dataClass.sku
+
+                ivCount.text = dataClass.quantity.toString()
+                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
+
+
+                mainThread {
+                    readData(ADMIN_TOKEN) { token ->
+                        Log.e("TAG", "tokenOO: "+token)
+                        getProductDetail(token.toString(), dataClass.sku) {
+                            Log.e("TAG", "getProductDetailOO: "+this.name)
+                            if (this.media_gallery_entries.size > 0){
+                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+                            }
+                        }
+                    }
+                }
+
+                ivMinus.singleClick {
+                    if (dataClass.quantity > 1) {
+                        dataClass.quantity--
+                        mainThread {
+                            db?.cartDao()?.updateById(dataClass.product_id!!, dataClass.quantity)
+                            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                            userList?.forEach {
+                                Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.quantity)
+                            }
+                            notifyItemChanged(position)
+                            cartMutableList.value = true
+                        }
+                    }
+                }
+
+                ivPlus.singleClick {
+                    dataClass.quantity++
+                    mainThread {
+                        db?.cartDao()?.updateById(dataClass.product_id!!, dataClass.quantity)
+                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+                        userList?.forEach {
+                            Log.e("TAG", "onViewCreated: "+it.name + " it.currentTime "+it.quantity)
+                        }
+                        notifyItemChanged(position)
+                        cartMutableList.value = true
+                    }
+                }
+
+                btDelete.singleClick {
+                    mainThread {
+                        db?.cartDao()?.deleteById(dataClass.product_id!!)
+                        notifyItemChanged(position)
+                        cartMutableList.value = true
+                    }
+                }
+            }
+        }
+    }
 
 
     fun getQuoteId(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =

@@ -25,11 +25,13 @@ import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
+import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.sessionExpired
@@ -80,6 +82,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                         textColor.text = "Color: "+it.value
                     }
 
+
                     if (it.attribute_code == "metal_type"){
                         Log.e("TAG", "metal_typeAAA " + it.value)
                         if (it.value == "12"){
@@ -101,10 +104,15 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                 }
 
 
+                if (dataClass.media_gallery_entries.size > 0){
+                    (IMAGE_URL +dataClass.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+                }
+
                 root.singleClick {
                     root.findNavController()
                         .navigate(R.id.action_search_to_productDetail, Bundle().apply {
-                            putString("model", dataClass.sku)
+                            putString("baseSku", dataClass.sku.split("-")[0])
+                            putString("sku", dataClass.sku)
                         })
                 }
             }

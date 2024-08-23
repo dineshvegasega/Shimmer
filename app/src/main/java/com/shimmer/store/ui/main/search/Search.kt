@@ -68,14 +68,14 @@ class Search : Fragment() {
 //            }
 
             topBarSearch.apply {
-                appicon.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        MainActivity.context.get()!!,
-                        R.drawable.baseline_west_24
-                    )
-                )
+//                appicon.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        MainActivity.context.get()!!,
+//                        R.drawable.baseline_west_24
+//                    )
+//                )
 
-                appicon.singleClick {
+                includeBackButton.layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
 
@@ -100,14 +100,14 @@ class Search : Fragment() {
                 })
             }
 
-            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
-                1 -> R.drawable.baseline_search_24
-                2 -> R.drawable.baseline_search_32
-                3 -> R.drawable.baseline_search_50
-                else -> R.drawable.baseline_search_24
-            }
-            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
-            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
+//            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
+//                1 -> R.drawable.baseline_search_24
+//                2 -> R.drawable.baseline_search_32
+//                3 -> R.drawable.baseline_search_50
+//                else -> R.drawable.baseline_search_24
+//            }
+//            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
+//            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
             setSearchButtons()
 

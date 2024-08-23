@@ -59,6 +59,8 @@ class Cart : Fragment() {
                 }
             }
 
+            topBarBack.ivCartLayout.visibility = View.GONE
+
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
 //                ivSearch.visibility = View.GONE
@@ -95,19 +97,26 @@ class Cart : Fragment() {
 //            }
 //            }
 
-            rvList.adapter = viewModel.cartAdapter
+
             upperLayout.visibility = View.GONE
             filterLayout.visibility = View.GONE
 //            viewModel.cartMutableList.value = false
             viewModel.cartMutableList.observe(viewLifecycleOwner) {
+                Log.e("TAG", "loginType " + loginType)
                 if (LoginType.CUSTOMER == loginType) {
-                    val itemCart = this
-                    Log.e("TAG", "getCart " + this.toString())
+                    rvList.adapter = viewModel.cartAdapterCustomer
                     mainThread {
                         val userList: List<CartModel>? = db?.cartDao()?.getAll()
                         rvList.setHasFixedSize(true)
-                        viewModel.cartAdapter.notifyDataSetChanged()
-//                        viewModel.cartAdapter.submitList(userList)
+                        viewModel.cartAdapterCustomer.notifyDataSetChanged()
+                        viewModel.cartAdapterCustomer.submitList(userList)
+
+                        var totalPrice: Double = 0.0
+                        userList?.forEach {
+                            totalPrice += (it.price!! * it.quantity)
+                        }
+                        textTotalPrice.text = "₹"+totalPrice
+
                         if (!userList.isNullOrEmpty()) {
                             upperLayout.visibility = View.VISIBLE
                             filterLayout.visibility = View.VISIBLE
@@ -118,6 +127,7 @@ class Cart : Fragment() {
                     }
 
                 } else if (LoginType.VENDOR == loginType) {
+                    rvList.adapter = viewModel.cartAdapter
                     readData(CUSTOMER_TOKEN) { token ->
                         viewModel.getCart(token!!) {
                             val itemCart = this
@@ -125,6 +135,13 @@ class Cart : Fragment() {
                             rvList.setHasFixedSize(true)
                             viewModel.cartAdapter.notifyDataSetChanged()
                             viewModel.cartAdapter.submitList(itemCart.items)
+                            textItems.text = "${itemCart.items.size} Item"
+
+                            var totalPrice: Double = 0.0
+                            itemCart.items.forEach {
+                                totalPrice += (it.price * it.qty)
+                            }
+                            textTotalPrice.text = "₹"+totalPrice
                             if (!itemCart.items.isNullOrEmpty()) {
                                 upperLayout.visibility = View.VISIBLE
                                 filterLayout.visibility = View.VISIBLE

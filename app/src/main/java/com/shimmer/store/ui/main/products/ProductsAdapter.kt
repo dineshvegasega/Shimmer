@@ -111,7 +111,8 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //                    putParcelable("model", model)
 //                })
                 it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
-                    putString("model", model.sku)
+                    putString("baseSku", model.sku)
+                    putString("sku", "")
                 })
             }
 
