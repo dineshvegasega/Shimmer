@@ -65,7 +65,7 @@
         android:nestedScrollingEnabled="false"
         tools:itemCount="5"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_franchise_list"
+        tools:listitem="@layout/item_select_franchise"
         android:paddingHorizontal="@dimen/_6sdp"
         app:layout_constraintTop_toBottomOf="@+id/ivEditSearch"
         app:layout_constraintBottom_toTopOf="@+id/filterLayout"

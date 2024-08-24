@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemFranchiseListBinding
 import com.shimmer.store.databinding.ItemSearchOrderBinding
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter

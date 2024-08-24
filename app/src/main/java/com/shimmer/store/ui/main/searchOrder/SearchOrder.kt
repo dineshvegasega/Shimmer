@@ -9,13 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.FranchiseListBinding
 import com.shimmer.store.databinding.SearchOrderBinding
 import com.shimmer.store.datastore.db.SearchModel
-import com.shimmer.store.ui.enums.LoginType
-import com.shimmer.store.ui.main.franchiseList.FranchiseListVM
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 

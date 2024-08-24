@@ -391,7 +391,7 @@
 
         <action
             android:id="@+id/action_checkout_to_franchiseList"
-            app:destination="@id/franchiseList"
+            app:destination="@id/selectFranchise"
             app:launchSingleTop="true"
             />
 
@@ -482,12 +482,12 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.franchiseList.FranchiseList"
-        android:label="FranchiseList"
-        android:id="@+id/franchiseList"
-        tools:layout="@layout/franchise_list">
+        android:name="com.shimmer.store.ui.main.selectFranchise.SelectFranchise"
+        android:label="SelectFranchise"
+        android:id="@+id/selectFranchise"
+        tools:layout="@layout/select_franchise">
         <action
-            android:id="@+id/action_franchiseList_to_home"
+            android:id="@+id/action_selectFranchise_to_home"
             app:destination="@id/home"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"

@@ -1,30 +1,26 @@
-package com.shimmer.store.ui.main.franchiseList
+package com.shimmer.store.ui.main.selectFranchise
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
-import com.shimmer.store.databinding.ItemFranchiseListBinding
-import com.shimmer.store.databinding.ItemSearchHistoryBinding
+import com.shimmer.store.databinding.ItemSelectFranchiseBinding
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.utils.mainThread
-import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FranchiseListVM @Inject constructor() : ViewModel() {
+class SelectFranchiseVM @Inject constructor() : ViewModel() {
 
-    val franchiseListAdapter = object : GenericAdapter<ItemFranchiseListBinding, SearchModel>() {
+    val franchiseListAdapter = object : GenericAdapter<ItemSelectFranchiseBinding, SearchModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemFranchiseListBinding.inflate(inflater, parent, false)
+        ) = ItemSelectFranchiseBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemFranchiseListBinding,
+            binding: ItemSelectFranchiseBinding,
             dataClass: SearchModel,
             position: Int
         ) {
