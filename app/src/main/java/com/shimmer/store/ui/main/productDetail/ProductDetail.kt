@@ -625,7 +625,6 @@ class ProductDetail : Fragment(), CallBackListener {
                                     )
                                 }
                             }
-
                         }
                     }
                 }

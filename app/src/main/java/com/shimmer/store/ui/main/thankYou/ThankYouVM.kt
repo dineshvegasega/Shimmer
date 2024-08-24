@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.thankyou
+package com.shimmer.store.ui.main.thankYou
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

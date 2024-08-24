@@ -15,11 +15,14 @@ import coil.request.Tags
 import com.shimmer.store.R
 import com.shimmer.store.databinding.HomeBinding
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.mainThread
@@ -126,7 +129,6 @@ class Home : Fragment() {
 //            binding.rvList2.adapter = adapter2
 
 
-
             rvList1.setHasFixedSize(true)
             rvList1.adapter = viewModel.categoryAdapter
             viewModel.categoryAdapter.notifyDataSetChanged()
@@ -154,27 +156,29 @@ class Home : Fragment() {
                     findNavController().navigate(R.id.action_home_to_cart)
                 }
 
+
+
+                badgeCount.value = false
                 badgeCount.observe(viewLifecycleOwner) {
-                   viewModel.getCartCount(){
-                       Log.e("TAG", "count: $this")
-                       menuBadge.text = "${this}"
-                       menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-                   }
-
-//                    mainThread {
-//                        val userList: List<CartModel> ?= db?.cartDao()?.getAll()
-//                        var countBadge = 0
-//                        userList?.forEach {
-//                            countBadge += it.quantity
+                    if (LoginType.CUSTOMER == loginType) {
+                        mainThread {
+                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
+                            userList?.forEach {
+                                cartItemCount += it.quantity
+                            }
+                            menuBadge.text = "${cartItemCount}"
+                            menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+                        }
+                    }
+                    if (LoginType.VENDOR == loginType) {
+//                        viewModel.getCartCount() {
+//                            Log.e("TAG", "count: $this")
+//                            menuBadge.text = "${this}"
+//                            menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
 //                        }
-//                        menuBadge.text = "${countBadge}"
-//                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
-//                    }
+                    }
                 }
-
             }
-
-
         }
 
     }

@@ -45,6 +45,7 @@ class OrderDetail : Fragment() {
                     findNavController().navigateUp()
                 }
             }
+            topBarBack.ivCartLayout.visibility = View.GONE
 
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
@@ -64,6 +65,14 @@ class OrderDetail : Fragment() {
 //                    findNavController().navigateUp()
 //                }
 //            }
+
+
+
+            rvListCategory1.setHasFixedSize(true)
+            viewModel.orderSKU.notifyDataSetChanged()
+            viewModel.orderSKU.submitList(arrayListOf("","",""))
+            rvListCategory1.adapter = viewModel.orderSKU
+
         }
 
     }

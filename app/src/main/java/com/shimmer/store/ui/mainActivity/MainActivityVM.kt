@@ -29,6 +29,9 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //        var quoteId : String = ""
 
         @JvmStatic
+        var cartItemCount : Int = 0
+
+        @JvmStatic
         var isApiCall : Boolean = false
 
         @JvmStatic

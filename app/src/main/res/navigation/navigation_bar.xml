@@ -252,6 +252,12 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_profile_to_searchOrder"
+            app:destination="@id/searchOrder"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -498,10 +504,18 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.thankyou.ThankYou"
+        android:name="com.shimmer.store.ui.main.thankYou.ThankYou"
         android:label="ThankYou"
         android:id="@+id/thankyou"
         tools:layout="@layout/thankyou">
+
+        <action
+            android:id="@+id/action_thankyou_to_home"
+            app:destination="@id/home"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
 
@@ -517,6 +531,15 @@
     </fragment>
 
 
-
+    <fragment
+        android:name="com.shimmer.store.ui.main.searchOrder.SearchOrder"
+        android:label="SearchOrder"
+        android:id="@+id/searchOrder"
+        tools:layout="@layout/search_order">
+        <action
+            android:id="@+id/action_searchOrder_to_orderDetail"
+            app:destination="@id/orderDetail"
+            app:launchSingleTop="true" />
+    </fragment>
 
 </navigation>

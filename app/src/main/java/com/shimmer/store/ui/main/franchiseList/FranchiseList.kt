@@ -38,13 +38,15 @@ class FranchiseList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.apply {
             topBarBack.includeBackButton.apply {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
             }
+
+            topBarBack.ivCartLayout.visibility = View.GONE
+            
 //            topBarSearch.apply {
 //                appicon.setImageDrawable(
 //                    ContextCompat.getDrawable(

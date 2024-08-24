@@ -124,6 +124,12 @@ class Cart : Fragment() {
                             upperLayout.visibility = View.GONE
                             filterLayout.visibility = View.GONE
                         }
+
+                        if(userList!!.size == 0){
+                            binding.idDataNotFound.root.visibility = View.VISIBLE
+                        }else{
+                            binding.idDataNotFound.root.visibility = View.GONE
+                        }
                     }
 
                 } else if (LoginType.VENDOR == loginType) {
@@ -148,6 +154,13 @@ class Cart : Fragment() {
                             } else {
                                 upperLayout.visibility = View.GONE
                                 filterLayout.visibility = View.GONE
+                            }
+
+
+                            if(itemCart.items.size == 0){
+                                binding.idDataNotFound.root.visibility = View.VISIBLE
+                            }else{
+                                binding.idDataNotFound.root.visibility = View.GONE
                             }
                         }
                     }

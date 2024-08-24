@@ -47,6 +47,8 @@ class Checkout : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
+
+                topBarBack.ivCartLayout.visibility = View.GONE
             }
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE

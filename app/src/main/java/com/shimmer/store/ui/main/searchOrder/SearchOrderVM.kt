@@ -1,30 +1,30 @@
-package com.shimmer.store.ui.main.franchiseList
+package com.shimmer.store.ui.main.searchOrder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemFranchiseListBinding
-import com.shimmer.store.databinding.ItemSearchHistoryBinding
+import com.shimmer.store.databinding.ItemSearchOrderBinding
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FranchiseListVM @Inject constructor() : ViewModel() {
+class SearchOrderVM @Inject constructor() : ViewModel() {
 
-    val franchiseListAdapter = object : GenericAdapter<ItemFranchiseListBinding, SearchModel>() {
+    val searchOrderAdapter = object : GenericAdapter<ItemSearchOrderBinding, SearchModel>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemFranchiseListBinding.inflate(inflater, parent, false)
+        ) = ItemSearchOrderBinding.inflate(inflater, parent, false)
 
         override fun onBindHolder(
-            binding: ItemFranchiseListBinding,
+            binding: ItemSearchOrderBinding,
             dataClass: SearchModel,
             position: Int
         ) {
@@ -39,9 +39,9 @@ class FranchiseListVM @Inject constructor() : ViewModel() {
 //                    )
 //                )
 
-//                textItem.singleClick {
-//                    searchValue.value = dataClass.search_name
-//                }
+                root.singleClick {
+                    root.findNavController().navigate(R.id.action_searchOrder_to_orderDetail)
+                }
 
 
 //
@@ -54,7 +54,5 @@ class FranchiseListVM @Inject constructor() : ViewModel() {
             }
         }
     }
-
-
 
 }

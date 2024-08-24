@@ -264,6 +264,13 @@ class Search : Fragment() {
                     rvList2.visibility = View.VISIBLE
 
                     viewModel.isListVisible = true
+
+
+                    if(this.items.size == 0){
+                        binding.idDataNotFound.root.visibility = View.VISIBLE
+                    }else{
+                        binding.idDataNotFound.root.visibility = View.GONE
+                    }
                 }
             }
         }

@@ -219,7 +219,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                                         callBack(mMineUserEntity)
                                     } else {
                                         callBack(mMineUserEntity)
-                                        showSnackBar("No Products Available!")
+//                                        showSnackBar("No Products Available!")
                                     }
                                 }
 

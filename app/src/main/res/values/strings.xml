@@ -123,5 +123,16 @@
     <string name="customer_orders">Customer Orders</string>
     <string name="search_mobile_no_name">Search Mobile NO/Name</string>
     <string name="order_details">Order Details</string>
+    <string name="old_password">Old Password</string>
+    <string name="no_item_available">No Item Available</string>
+
+    <string name="default_lat">00.000000</string>
+    <string name="default_lng">00.000000</string>
+    <string name="enable_gps">Enable GPS</string>
+    <string name="required_for_this_app">Required for this app</string>
+    <string name="enable_now">Enable Now</string>
+    <string name="location_permission_not_granted">Location Permission not granted</string>
+    <string name="search_order">Search Order</string>
+    <string name="enterOrderNumber">Enter Order Number</string>
 
 </resources>

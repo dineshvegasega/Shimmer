@@ -391,6 +391,12 @@ class Products : Fragment() {
 //                    Log.e("TAG", "itAAA " + this)
                     adapter2.submitData(this.items)
                     adapter2.notifyDataSetChanged()
+
+                    if(this.items.size == 0){
+                        binding.idDataNotFound.root.visibility = View.VISIBLE
+                    }else{
+                        binding.idDataNotFound.root.visibility = View.GONE
+                    }
                 }
             }
 

@@ -151,6 +151,9 @@ class Profile : Fragment() {
                 findNavController().navigate(R.id.action_profile_to_nearetFranchise)
             }
 
+            btSearchOrder.singleClick {
+                findNavController().navigate(R.id.action_profile_to_searchOrder)
+            }
 
 
             textLogout.singleClick {

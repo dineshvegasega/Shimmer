@@ -137,11 +137,13 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 //                                        Log.e( "TAG", "YYYYYYYYY: " +items.isSelected+"  "+items.price)
 //                                    }
 
-                                    if(mMineUserEntity.items.isNotEmpty()){
-                                        callBack(mMineUserEntity)
-                                    } else {
-                                        showSnackBar("No Products Available!")
-                                    }
+//                                    if(mMineUserEntity.items.isNotEmpty()){
+//                                        callBack(mMineUserEntity)
+//                                    } else {
+                                        //showSnackBar("No Products Available!")
+//                                    }
+
+                                    callBack(mMineUserEntity)
                                 }
 
 //                                viewModelScope.launch {
