@@ -26,7 +26,8 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_light
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_semibold
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
@@ -69,6 +70,7 @@ class Products : Fragment() {
         isBackStack = true
         hideValueOff = 1
         MainActivity.mainActivity.get()!!.callBack(2)
+        MainActivity.mainActivity.get()!!.callCartApi()
 
         adapter2 = ProductsAdapter()
         binding.rvList2.adapter = adapter2
@@ -87,6 +89,14 @@ class Products : Fragment() {
             topBarProducts.ivCart.singleClick {
                 findNavController().navigate(R.id.action_products_to_cart)
             }
+
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarProducts.menuBadge.text = "$cartItemCount"
+                topBarProducts.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
+
 
 //            button.setOnClickListener {
 //                findNavController().navigate(R.id.action_products_to_productsDetail)

@@ -42,7 +42,8 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isApiCall
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
@@ -102,7 +103,7 @@ class ProductDetail : Fragment(), CallBackListener {
         isBackStack = true
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(0)
-
+        MainActivity.mainActivity.get()!!.callCartApi()
 
         binding.apply {
             topBarBack.includeBackButton.apply {
@@ -113,6 +114,14 @@ class ProductDetail : Fragment(), CallBackListener {
                 topBarBack.ivCart.singleClick {
                     findNavController().navigate(R.id.action_productDetail_to_cart)
                 }
+            }
+
+
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
 
 
@@ -424,6 +433,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
                         }
                         db?.cartDao()?.insertAll(newUser)
+                        showSnackBar("Item added to cart")
                     }
                 } else if (LoginType.VENDOR == loginType) {
                     readData(QUOTE_ID) {

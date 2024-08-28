@@ -22,7 +22,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glidePhotoView
@@ -169,7 +169,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     } else {
                         db?.cartDao()?.deleteById(newUser.product_id!!)
                     }
-                    badgeCount.value = true
+                    cartItemLiveData.value = true
                     notifyItemChanged(position)
                 }
             }
@@ -183,7 +183,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 mainThread {
                     val newUser = CartModel(product_id = model.id, name = model.name, price = model.price, quantity = 1, currentTime = System.currentTimeMillis())
                     db?.cartDao()?.insertAll(newUser)
-                    badgeCount.value = true
+                    cartItemLiveData.value = true
                     it.findNavController().navigate(R.id.action_products_to_cart)
                 }
             }

@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ThankyouBinding
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,6 +40,17 @@ class ThankYou : Fragment() {
 
 
         binding.apply {
+
+            when(loginType){
+                LoginType.VENDOR ->  {
+                    textTitle2.text = "Your order has been successfully placed."
+                }
+                LoginType.CUSTOMER ->  {
+                    textTitle2.text = "Your order has been successfully placed.\n" +
+                            "Franchise will contact you within 24hrs"
+                }
+            }
+
             btHome.singleClick {
                 findNavController().navigate(R.id.action_thankyou_to_home)
             }

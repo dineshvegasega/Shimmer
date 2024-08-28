@@ -111,11 +111,15 @@ class Cart : Fragment() {
                         viewModel.cartAdapterCustomer.notifyDataSetChanged()
                         viewModel.cartAdapterCustomer.submitList(userList)
 
+                        var qunty = 0
                         var totalPrice: Double = 0.0
                         userList?.forEach {
                             totalPrice += (it.price!! * it.quantity)
+                            qunty += it.quantity
                         }
+                        textSubtotalPrice.text = "₹"+totalPrice
                         textTotalPrice.text = "₹"+totalPrice
+                        textItems.text = "${qunty} Item"
 
                         if (!userList.isNullOrEmpty()) {
                             upperLayout.visibility = View.VISIBLE
@@ -141,13 +145,16 @@ class Cart : Fragment() {
                             rvList.setHasFixedSize(true)
                             viewModel.cartAdapter.notifyDataSetChanged()
                             viewModel.cartAdapter.submitList(itemCart.items)
-                            textItems.text = "${itemCart.items.size} Item"
 
+                            var qunty = 0
                             var totalPrice: Double = 0.0
                             itemCart.items.forEach {
                                 totalPrice += (it.price * it.qty)
+                                qunty += it.qty
                             }
                             textTotalPrice.text = "₹"+totalPrice
+                            textItems.text = "${qunty} Item"
+
                             if (!itemCart.items.isNullOrEmpty()) {
                                 upperLayout.visibility = View.VISIBLE
                                 filterLayout.visibility = View.VISIBLE

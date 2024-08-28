@@ -18,7 +18,17 @@
         android:backgroundTint="@color/_0098BD"
         >
 
-
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:background="@color/white"
+            android:scaleType="centerCrop"
+            android:theme="@style/RoundCorner5"
+            app:layout_constraintDimensionRatio="H,1:1.1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/no_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textTitle"
@@ -28,7 +38,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
             app:fontFamily="@font/nunitosans_semibold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivIcon"
+            android:layout_marginStart="@dimen/_5sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="HardcodedText" />

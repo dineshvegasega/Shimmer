@@ -15,14 +15,19 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryBinding
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.main.productDetail.ProductDetail.Companion.pagerAdapter
 import com.shimmer.store.ui.main.productDetail.ProductDetailPagerAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
@@ -53,6 +58,7 @@ class Category : Fragment() {
         isBackStack = false
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(1)
+        MainActivity.mainActivity.get()!!.callCartApi()
         binding.apply {
 //            button.setOnClickListener {
 //                findNavController().navigate(R.id.action_category_to_products)
@@ -71,6 +77,15 @@ class Category : Fragment() {
 
             layoutCustomDesign.ivCustomDesign.setOnClickListener {
                 findNavController().navigate(R.id.action_category_to_customDesign)
+            }
+
+
+
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarOthers.menuBadge.text = "$cartItemCount"
+                topBarOthers.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
 
 
@@ -129,7 +144,6 @@ class Category : Fragment() {
 ////                        }
 ////                    })
 //            }
-
 
 
             viewModel.show()
@@ -196,30 +210,48 @@ class Category : Fragment() {
 
     private fun positionSelectFun() {
         binding.apply {
-            if(viewModel.positionSelect == 0){
-                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
-                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
-                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+            if (viewModel.positionSelect == 0) {
+                linear1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                linear2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                linear3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
 
-                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
-                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-            } else if(viewModel.positionSelect == 1){
-                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
-                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
-                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
+                view1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                view2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+                view3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+            } else if (viewModel.positionSelect == 1) {
+                linear1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                linear2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                linear3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
 
-                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
-                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-            } else if(viewModel.positionSelect == 2){
-                linear1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
-                linear2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._B9F2FF)
-                linear3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                view1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+                view2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                view3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+            } else if (viewModel.positionSelect == 2) {
+                linear1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                linear2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                linear3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
 
-                view1.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-                view2.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color.white)
-                view3.backgroundTintList =  ContextCompat.getColorStateList(binding.root.context,R.color._003E4D)
+                view1.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+                view2.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color.white)
+                view3.backgroundTintList =
+                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
             }
         }
     }

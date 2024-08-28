@@ -403,7 +403,7 @@ fun ViewPager2.updatePagerHeightForChild(view: View) {
 
 
 val myOptionsGlide: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.main_logo_land)
+    .placeholder(R.drawable.no_image)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .dontAnimate()
     .apply(RequestOptions().placeholder(R.drawable.no_image))
@@ -454,7 +454,7 @@ fun String.glidePhotoView(context: Context, ivMap: PhotoView) {
 }
 
 val myOptionsGlidePortrait: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.main_logo_land)
+    .placeholder(R.drawable.no_image_modified)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .dontAnimate()
     //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
@@ -464,6 +464,21 @@ fun String.glideImagePortrait(context: Context, ivMap: ShapeableImageView) {
     Glide.with(context)
         .load(this)
         .apply(myOptionsGlidePortrait)
+        .into(ivMap)
+}
+
+
+
+val myOptionsGlideLand: RequestOptions = RequestOptions()
+    .placeholder(R.drawable.no_image_long)
+    .diskCacheStrategy(DiskCacheStrategy.ALL)
+    .dontAnimate()
+    .skipMemoryCache(true)
+
+fun glideImageBanner(context: Context, ivMap: ShapeableImageView, s: String) {
+    Glide.with(context)
+        .load(s)
+        .apply(myOptionsGlideLand)
         .into(ivMap)
 }
 

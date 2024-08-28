@@ -14,14 +14,16 @@ import androidx.viewpager2.widget.ViewPager2
 import coil.request.Tags
 import com.shimmer.store.R
 import com.shimmer.store.databinding.HomeBinding
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.utils.getRecyclerView
@@ -44,8 +46,8 @@ class Home : Fragment() {
 //        @JvmStatic
 //        lateinit var adapter2: ListAdapter2
 
-        @JvmStatic
-        lateinit var adapter3: ListAdapter3
+//        @JvmStatic
+//        lateinit var adapter3: ListAdapter3
     }
 
 //    var item1 : ArrayList<String> = ArrayList()
@@ -66,6 +68,8 @@ class Home : Fragment() {
         isBackStack = false
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(1)
+        MainActivity.mainActivity.get()!!.callCartApi()
+
 
 //        item1.add("1")
 //        item1.add("2")
@@ -73,7 +77,7 @@ class Home : Fragment() {
 
         adapter1 = ListAdapter1()
 //        adapter2 = ListAdapter2()
-        adapter3 = ListAdapter3()
+//        adapter3 = ListAdapter3()
 
 
         binding.apply {
@@ -136,10 +140,17 @@ class Home : Fragment() {
 
 
 
+            viewModel.banner {
+                Log.e("TAG", "bannerthis: $this")
+                rvList3.setHasFixedSize(true)
+                rvList3.adapter = viewModel.bannerAdapter
+                viewModel.bannerAdapter.notifyDataSetChanged()
+                viewModel.bannerAdapter.submitList(this)
+            }
 
-            adapter3.submitData(viewModel.item3)
-            adapter3.notifyDataSetChanged()
-            binding.rvList3.adapter = adapter3
+//            adapter3.submitData(viewModel.item3)
+//            adapter3.notifyDataSetChanged()
+//            binding.rvList3.adapter = adapter3
 
 
 
@@ -158,25 +169,42 @@ class Home : Fragment() {
 
 
 
-                badgeCount.value = false
-                badgeCount.observe(viewLifecycleOwner) {
-                    if (LoginType.CUSTOMER == loginType) {
-                        mainThread {
-                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
-                            userList?.forEach {
-                                cartItemCount += it.quantity
-                            }
-                            menuBadge.text = "${cartItemCount}"
-                            menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
-                        }
-                    }
-                    if (LoginType.VENDOR == loginType) {
-//                        viewModel.getCartCount() {
-//                            Log.e("TAG", "count: $this")
-//                            menuBadge.text = "${this}"
-//                            menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
+                cartItemLiveData.value = false
+                cartItemLiveData.observe(viewLifecycleOwner) {
+                    menuBadge.text = "$cartItemCount"
+                    menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+//                    if (LoginType.CUSTOMER == loginType) {
+//                        mainThread {
+//                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                            cartItemCount = 0
+//                            userList?.forEach {
+//                                cartItemCount += it.quantity
+//                            }
+//                            menuBadge.text = "${cartItemCount}"
+//                            menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
 //                        }
-                    }
+//
+//                        menuBadge.text = "${cartItemCount}"
+//                        menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+//                    }
+//                    if (LoginType.VENDOR == loginType) {
+//                        readData(CUSTOMER_TOKEN) { token ->
+//                            viewModel.getCart(token!!) {
+//                                val itemCart = this
+//                                Log.e("TAG", "getCart " + this.toString())
+//                                cartItemCount = 0
+//                                itemCart.items.forEach {
+//                                    cartItemCount += it.qty
+//                                }
+//
+//                                menuBadge.text = "${cartItemCount}"
+//                                menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+//                            }
+//                        }
+//
+//                        menuBadge.text = "$cartItemCount"
+//                        menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+//                    }
                 }
             }
         }

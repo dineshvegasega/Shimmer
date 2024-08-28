@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
 import com.shimmer.store.datastore.db.SearchModel
+import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.singleClick
@@ -86,14 +87,13 @@ class SelectFranchise : Fragment() {
 //            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
 //            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
-val userList = listOf(
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
-    )
+        val userList = listOf(
+            ItemFranchise(banner_id = "1", isSelected = false),
+            ItemFranchise(banner_id = "1", isSelected = false),
+            ItemFranchise(banner_id = "1", isSelected = false),
+            ItemFranchise(banner_id = "1", isSelected = false),
+            ItemFranchise(banner_id = "1", isSelected = false),
+            )
 
             rvList.setHasFixedSize(true)
             rvList.adapter = viewModel.franchiseListAdapter
@@ -110,7 +110,9 @@ val userList = listOf(
 //                        findNavController().navigate(R.id.action_orderSummary_to_home)
                     }
                     LoginType.CUSTOMER ->  {
-                        findNavController().navigate(R.id.action_selectFranchise_to_home)
+                        if(viewModel.selectedPosition != -1){
+                            findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
+                        }
                     }
                 }
             }

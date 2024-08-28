@@ -27,7 +27,6 @@ import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.badgeCount
 import com.shimmer.store.utils.defaultThread
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread

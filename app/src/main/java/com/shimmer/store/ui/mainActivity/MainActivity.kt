@@ -30,12 +30,18 @@ import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.db.AppDatabase
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.networking.ConnectivityManager
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.main.category.Category
 import com.shimmer.store.ui.main.home.Home
 import com.shimmer.store.ui.main.faq.Faq
 import com.shimmer.store.ui.main.profile.Profile
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.getDensityName
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -428,5 +434,38 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+
+
+
+    fun callCartApi(){
+        if (LoginType.CUSTOMER == loginType) {
+            mainThread {
+                val userList: List<CartModel>? = db?.cartDao()?.getAll()
+                cartItemCount = 0
+                userList?.forEach {
+                    cartItemCount += it.quantity
+                }
+                cartItemLiveData.value = true
+            }
+        }
+
+        if (LoginType.VENDOR == loginType) {
+            readData(CUSTOMER_TOKEN) { token ->
+                viewModel.getCart(token!!) {
+                    val itemCart = this
+                    Log.e("TAG", "getCart " + this.toString())
+                    cartItemCount = 0
+                    itemCart.items.forEach {
+                        cartItemCount += it.qty
+                    }
+                    cartItemLiveData.value = true
+                }
+            }
+        }
+
+    }
+
 }
 

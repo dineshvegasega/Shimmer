@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.shimmer.store.R
@@ -34,6 +35,8 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.mainThread
+import com.shimmer.store.utils.myOptionsGlide
+import com.shimmer.store.utils.myOptionsGlideUserChache
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
@@ -293,6 +296,11 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
                                 (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+//                                Glide.with(binding.ivIcon.context)
+//                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
+//                                    .apply(myOptionsGlide)
+//                                    .into(binding.ivIcon)
+
                             }
                         }
                     }
@@ -546,7 +554,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
     fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiWithoutLoader(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
 //                    if (loginType == "vendor") {

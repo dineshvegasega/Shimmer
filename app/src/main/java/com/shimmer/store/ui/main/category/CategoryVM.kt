@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.main.category
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -20,6 +21,10 @@ import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.cart.ItemCart
+import com.shimmer.store.networking.ApiInterface
+import com.shimmer.store.networking.CallHandler
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.main.category.CategoryChildTab.Companion.mainSelect
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
@@ -27,13 +32,17 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.sessionExpired
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryVM @Inject constructor() : ViewModel() {
+class CategoryVM @Inject constructor(private val repository: Repository) : ViewModel() {
 //    var item1: ArrayList<Items> = ArrayList()
     var item2: ArrayList<String> = ArrayList()
     var item3: ArrayList<String> = ArrayList()
@@ -107,6 +116,46 @@ class CategoryVM @Inject constructor() : ViewModel() {
             callBack(countBadge)
         }
     }
+
+
+
+    fun getCart(customerToken: String, callBack: ItemCart.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemCart>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.getCart("Bearer " +customerToken, storeWebUrl)
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemCart>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else {
+                            sessionExpired()
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
     val subCategoryAdapter1 = object : GenericAdapter<ItemChildBinding, Items>() {
         override fun onCreateView(

@@ -395,6 +395,12 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_checkout_to_payment"
+            app:destination="@id/payment"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
     <fragment
@@ -487,11 +493,12 @@
         android:id="@+id/selectFranchise"
         tools:layout="@layout/select_franchise">
         <action
-            android:id="@+id/action_selectFranchise_to_home"
-            app:destination="@id/home"
+            android:id="@+id/action_selectFranchise_to_thankyou"
+            app:destination="@id/thankyou"
             app:launchSingleTop="true"
             app:popUpTo="@id/navigation_bar"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+        />
     </fragment>
 
 
@@ -540,6 +547,20 @@
             android:id="@+id/action_searchOrder_to_orderDetail"
             app:destination="@id/orderDetail"
             app:launchSingleTop="true" />
+    </fragment>
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.payment.Payment"
+        android:label="Payment"
+        android:id="@+id/payment"
+        tools:layout="@layout/payment">
+        <action
+            android:id="@+id/action_payment_to_thankyou"
+            app:destination="@id/thankyou"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

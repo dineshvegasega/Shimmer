@@ -24,6 +24,8 @@ const val QUOTE_ID = "/V1/carts/mine"
 
 const val ADD_CART = "/V1/carts/mine/items"
 
+const val BANNER = "V1/vegasega-apis/banner?homebanner=1"
+
 //https://shop.vegasega.com/rest/all/V1/configurable-products/SRI0002G/children
 
 

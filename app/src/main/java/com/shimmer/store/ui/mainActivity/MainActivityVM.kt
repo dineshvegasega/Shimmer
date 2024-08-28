@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonElement
 import com.shimmer.store.R
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -27,7 +28,8 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
     companion object {
 //        @JvmStatic
 //        var quoteId : String = ""
-
+//        var badgeCount = MutableLiveData<Boolean>(false)
+        var cartItemLiveData = MutableLiveData<Boolean>(false)
         @JvmStatic
         var cartItemCount : Int = 0
 
@@ -46,7 +48,6 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //        var isHide: Boolean = false
 //        var isHide = MutableLiveData<Boolean>()
 
-        var badgeCount = MutableLiveData<Boolean>(false)
 
 //        val filters = hashMapOf<String, Any?>()
 
@@ -236,6 +237,50 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                         } else {
                             sessionExpired()
                         }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+
+
+
+
+    fun getCart(customerToken: String, callBack: ItemCart.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<ItemCart>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.getCart("Bearer " +customerToken, storeWebUrl)
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemCart>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        if(message.contains("fieldName")){
+//                            showSnackBar("Something went wrong!")
+//                        } else {
+//                            sessionExpired()
+//                        }
                     }
 
                     override fun loading() {

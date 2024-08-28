@@ -51,9 +51,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/white"
         app:strokeColor="@color/app_color"
-        android:foreground="?android:attr/selectableItemBackground"
         />
 
 
@@ -69,7 +67,7 @@
         android:paddingHorizontal="@dimen/_6sdp"
         app:layout_constraintTop_toBottomOf="@+id/ivEditSearch"
         app:layout_constraintBottom_toTopOf="@+id/filterLayout"
-        android:layout_marginVertical="@dimen/_8sdp"
+        android:paddingVertical="@dimen/_5sdp"
         android:layout_marginHorizontal="@dimen/_10sdp"
         />
 
@@ -105,7 +103,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="@string/place_order_with_franchise"
+                android:text="@string/place_order"
                 app:fontFamily="@font/nunitosans_semibold"
                 />
 

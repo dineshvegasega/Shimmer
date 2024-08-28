@@ -1,46 +1,49 @@
 package com.shimmer.store.ui.main.home
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
-import com.shimmer.store.databinding.AbcBinding
-import com.shimmer.store.databinding.HomeBinding
+import com.shimmer.store.databinding.ItemHome3Binding
 import com.shimmer.store.databinding.ItemHomeCategoryBinding
-import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.ItemBanner
+import com.shimmer.store.models.ItemBannerItem
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.cart.ItemCart
+import com.shimmer.store.networking.ApiInterface
+import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.IMAGE_URL
-import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.glideImageBanner
 import com.shimmer.store.utils.glideImageChache
+import com.shimmer.store.utils.sessionExpired
+import com.shimmer.store.utils.showSnackBar
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeVM @Inject constructor() : ViewModel() {
+class HomeVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
 
-    var item1 : ArrayList<String> = ArrayList()
-    var item2 : ArrayList<String> = ArrayList()
-    var item3 : ArrayList<String> = ArrayList()
+    var item1: ArrayList<String> = ArrayList()
+    var item2: ArrayList<String> = ArrayList()
+    var item3: ArrayList<String> = ArrayList()
 
 
     init {
@@ -62,9 +65,9 @@ class HomeVM @Inject constructor() : ViewModel() {
     }
 
 
-    fun getCartCount(callBack: Int.() -> Unit){
+    fun getCartCount(callBack: Int.() -> Unit) {
         viewModelScope.launch {
-            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            val userList: List<CartModel>? = db?.cartDao()?.getAll()
             var countBadge = 0
             userList?.forEach {
                 countBadge += it.quantity
@@ -126,6 +129,136 @@ class HomeVM @Inject constructor() : ViewModel() {
     }
 
 
+
+    val bannerAdapter = object : GenericAdapter<ItemHome3Binding, ItemBannerItem>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemHome3Binding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemHome3Binding,
+            dataClass: ItemBannerItem,
+            position: Int
+        ) {
+            binding.apply {
+                glideImageBanner(binding.ivIcon.context, binding.ivIcon, IMAGE_URL+dataClass.image)
+//                Glide.with(binding.ivIcon.context)
+//                    .load(IMAGE_URL+dataClass.image)
+//                    .apply(myOptionsGlidePortrait)
+//                    .into(binding.ivIcon)
+//                Log.e("TAG", "onBindHolder: "+IMAGE_URL+dataClass.image)
+
+//                ivIcon.setOnClickListener {
+//                    currentList.forEach {
+//                        it.isSelected = false
+//                        it.isCollapse = false
+//                        it.subCategory.forEach {
+//                            it.isSelected = false
+////                            it.isChildSelect = false
+//                        }
+//                    }
+//                    dataClass.apply {
+//                        isSelected = true
+//                        subCategory.forEach {
+//                            it.isSelected = true
+////                            it.isChildSelect = true
+//                        }
+//                    }
+//                    mainPrice.forEach {
+//                        it.isSelected = false
+////                        it.isChildSelect = false
+//                    }
+//                    mainMaterial.forEach {
+//                        it.isSelected = false
+////                        it.isChildSelect = false
+//                    }
+//                    mainShopFor.forEach {
+//                        it.isSelected = false
+////                        it.isChildSelect = false
+//                    }
+
+//                    it.findNavController().navigate(R.id.action_home_to_products)
+//                }
+            }
+        }
+    }
+
+
+
+    fun banner(callBack: ItemBanner.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemBanner>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        } else if (loginType == "guest") {
+                        apiInterface.banner()
+
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemBanner>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        showSnackBar(message.toString())
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+//    fun getCart(customerToken: String, callBack: ItemCart.() -> Unit) =
+//        viewModelScope.launch {
+//            repository.callApi(
+//                callHandler = object : CallHandler<Response<ItemCart>> {
+//                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+////                        if (loginType == "vendor") {
+//                        apiInterface.getCart("Bearer " +customerToken, storeWebUrl)
+//                    //                        } else if (loginType == "guest") {
+////                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+//                    //                        } else {
+////                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+////                        }
+//                    @SuppressLint("SuspiciousIndentation")
+//                    override fun success(response: Response<ItemCart>) {
+//                        if (response.isSuccessful) {
+//                            try {
+//                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+//                                callBack(response.body()!!)
+//                            } catch (_: Exception) {
+//                            }
+//                        }
+//                    }
+//
+//                    override fun error(message: String) {
+////                        if(message.contains("fieldName")){
+////                            showSnackBar("Something went wrong!")
+////                        } else {
+////                            sessionExpired()
+////                        }
+//                    }
+//
+//                    override fun loading() {
+//                        super.loading()
+//                    }
+//                }
+//            )
+//        }
 
 //
 //    @SuppressLint("UseCompatLoadingForDrawables")

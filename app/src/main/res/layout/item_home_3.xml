@@ -11,7 +11,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@color/_28E0DE"
         app:cardCornerRadius="@dimen/_4sdp"
         app:cardUseCompatPadding="true"
         android:background="@color/_79747E"
@@ -31,7 +31,6 @@
                 app:layout_constraintDimensionRatio="H,1:0.4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/rectangle_40"
                 android:background="@color/white"
                 android:scaleType="centerCrop"
                 />

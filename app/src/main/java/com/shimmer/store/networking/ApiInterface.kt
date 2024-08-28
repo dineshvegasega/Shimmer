@@ -1,6 +1,7 @@
 package com.shimmer.store.networking
 
 import com.google.gson.JsonElement
+import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
 import okhttp3.RequestBody
@@ -124,6 +125,12 @@ interface ApiInterface {
         @Path("id") id: String,
         @Path("ids") ids: Int,
     ): Response<Boolean>
+
+
+    @GET(BANNER)
+    suspend fun banner(): Response<ItemBanner>
+
+
 
 }
 

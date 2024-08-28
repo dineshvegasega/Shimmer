@@ -117,6 +117,7 @@ class Checkout : Fragment() {
 //                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
 
                 val priceANDGSTPrice = priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
+                textSubtotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
                 textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
 
 //                textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
@@ -135,7 +136,7 @@ class Checkout : Fragment() {
             layoutSort.singleClick {
                 when(loginType){
                     LoginType.VENDOR ->  {
-                        findNavController().navigate(R.id.action_checkout_to_home)
+                        findNavController().navigate(R.id.action_checkout_to_payment)
                     }
                     LoginType.CUSTOMER ->  {
                         findNavController().navigate(R.id.action_checkout_to_franchiseList)
