@@ -135,4 +135,10 @@
     <string name="search_order">Search Order</string>
     <string name="enterOrderNumber">Enter Order Number</string>
 
+    <string name="EnterOldPassword">Enter Old Password</string>
+    <string name="InvalidPassword">*Minimum 8 characters containing 1 Uppercase, 1 Lowercase, 1 Number &amp; 1 Special Character</string>
+    <string name="EnterNewPassword">Enter New Password</string>
+    <string name="EnterConfirmNewPassword">Enter Confirm New Password</string>
+    <string name="CreatePasswordReEnterPasswordisnotsame">*Password Not Match</string>
+
 </resources>

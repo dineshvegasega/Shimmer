@@ -51,7 +51,6 @@ class Login : Fragment() {
 
 
 
-
         binding.apply {
 
             includeBackButton.apply {

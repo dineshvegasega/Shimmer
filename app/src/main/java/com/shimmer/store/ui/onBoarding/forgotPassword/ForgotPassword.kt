@@ -1,10 +1,15 @@
 package com.shimmer.store.ui.onBoarding.forgotPassword
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -46,6 +51,68 @@ class ForgotPassword : Fragment() {
             btResetPassword.singleClick {
                 findNavController().navigate(R.id.action_forgotPassword_to_resetPassword)
             }
+
+
+
+
+            editTextMobileNumber.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                @SuppressLint("SuspiciousIndentation")
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (editTextMobileNumber.text.toString().length == 10){
+                        textTitleRequestOTP.isEnabled = true
+                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._0098BD))
+                    } else {
+                        textTitleRequestOTP.isEnabled = false
+                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._007a99))
+                    }
+                }
+            })
+
+
+            textTitleRequestOTP.singleClick {
+                Log.e("TAG", "count: $this")
+            }
+
+
+
+
+            editTextPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                @SuppressLint("SuspiciousIndentation")
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (editTextPassword.text.toString().length == 6){
+                        btResetPassword.isEnabled = true
+                        btResetPassword.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._07FFFC
+                                )
+                            )
+                    } else {
+                        btResetPassword.isEnabled = false
+                        btResetPassword.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._00b3b0
+                                )
+                            )
+                    }
+                }
+            })
+
         }
 
     }
