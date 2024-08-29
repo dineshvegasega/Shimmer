@@ -99,9 +99,9 @@ class Faq : Fragment() {
 
 
             rvList2.setHasFixedSize(true)
-            rvList2.adapter = viewModel.recentAdapter
-            viewModel.recentAdapter.notifyDataSetChanged()
-            viewModel.recentAdapter.submitList(viewModel.item1)
+            rvList2.adapter = viewModel.faqAdapter
+            viewModel.faqAdapter.notifyDataSetChanged()
+            viewModel.faqAdapter.submitList(viewModel.item1)
         }
     }
 }

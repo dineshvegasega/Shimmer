@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.main.selectFranchise
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ class SelectFranchiseVM @Inject constructor() : ViewModel() {
             viewType: Int
         ) = ItemSelectFranchiseBinding.inflate(inflater, parent, false)
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemSelectFranchiseBinding,
             dataClass: ItemFranchise,

@@ -60,14 +60,12 @@ class Login : Fragment() {
             }
 
 
-            val customerJSON: JSONObject = JSONObject().apply {
-                put("username", editTextMobileNumber.text.toString())
-                put("password", editTextPassword.text.toString())
-            }
+
+
             btLogin.singleClick {
-                val adminJSON: JSONObject = JSONObject().apply {
-                    put("username", "admin")
-                    put("password", "admin123")
+                val customerJSON: JSONObject = JSONObject().apply {
+                    put("username", editTextMobileNumber.text.toString())
+                    put("password", editTextPassword.text.toString())
                 }
 //                viewModel.adminToken(obj) {
 //                    val adminToken = this
@@ -84,6 +82,10 @@ class Login : Fragment() {
 //                    }
 //                }
 
+                val adminJSON: JSONObject = JSONObject().apply {
+                    put("username", "admin")
+                    put("password", "admin123")
+                }
                 viewModel.adminToken(adminJSON) {
                     val adminToken = this
                     saveData(ADMIN_TOKEN, adminToken)

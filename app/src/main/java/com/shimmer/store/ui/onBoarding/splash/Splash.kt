@@ -79,15 +79,15 @@ class Splash : Fragment() {
         }
 
 
-        val obj: JSONObject = JSONObject().apply {
-            put("username", "admin")
-            put("password", "admin123")
-        }
-        viewModel.adminToken(obj) {
-            Log.e("TAG", "ADMIN_TOKENAAAA: " + this)
-            saveData(ADMIN_TOKEN, this)
+//        val obj: JSONObject = JSONObject().apply {
+//            put("username", "admin")
+//            put("password", "admin123")
+//        }
+//        viewModel.adminToken(obj) {
+//            Log.e("TAG", "ADMIN_TOKENAAAA: " + this)
+//            saveData(ADMIN_TOKEN, this)
             handleSplashTime()
-        }
+//        }
 //        readData(ADMIN_TOKEN) { savedToken ->
 //            if(savedToken == null){
 //                viewModel.adminToken(obj){

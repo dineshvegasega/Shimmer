@@ -397,6 +397,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
 //                }
 
+                textSize.setTextColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.white)
+                else ContextCompat.getColor(binding.root.context, R.color._000000))
+
                 ivIcon.setBackgroundColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.app_color)
                 else ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
             }

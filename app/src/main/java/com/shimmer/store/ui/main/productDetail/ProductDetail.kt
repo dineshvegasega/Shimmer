@@ -454,7 +454,6 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
-
             }
 
             layoutBuyNow.singleClick {
@@ -720,29 +719,13 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
 
-                            if (itemProductAttr.attribute_code == "diamond_weight") {
-                                textWeightCt.text = "Weight "+itemProductAttr.value
-                            }
-
-                            if (itemProductAttr.attribute_code == "diamond_number") {
-                                textDiamonds.text = "Diamonds "+itemProductAttr.value
-                            }
-
-
-                            if (itemProductAttr.attribute_code == "totel_gold_rate") {
-                                textGoldPrice.text = "₹"+itemProductAttr.value
-                            }
-
-
-                            if (itemProductAttr.attribute_code == "making_charges") {
-                                textMakingChargesPrice.text = "₹"+itemProductAttr.value
-                            }
 
                         }
 
 
                         var metal_weight: String = "0.0 gram"
                         itemProductThis.custom_attributes.forEach { itemProductAttr ->
+
                             if (itemProductAttr.attribute_code == "size") {
                                 btRingSize.text =
                                     "" + getSize(itemProductAttr.value.toString().toInt())
@@ -804,6 +787,31 @@ class ProductDetail : Fragment(), CallBackListener {
                                 if (itemProductAttr.value == "18") {
                                     textPurity1.text = "Platinum 95"
                                 }
+                            }
+
+
+
+
+
+                            if (itemProductAttr.attribute_code == "diamond_weight") {
+                                textWeightCt.text = "Weight "+itemProductAttr.value
+                            }
+
+                            if (itemProductAttr.attribute_code == "diamond_number") {
+                                textDiamonds.text = "Diamonds "+itemProductAttr.value
+                            }
+
+                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+                                textDiamondPrice.text = "₹"+itemProductAttr.value
+                            }
+
+                            if (itemProductAttr.attribute_code == "totel_gold_rate") {
+                                textGoldPrice.text = "₹"+itemProductAttr.value
+                            }
+
+
+                            if (itemProductAttr.attribute_code == "totel_making_charge") {
+                                textMakingChargesPrice.text = "₹"+itemProductAttr.value
                             }
                         }
 

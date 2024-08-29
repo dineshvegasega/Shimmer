@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.main.faq
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,14 +54,15 @@ class FaqVM @Inject constructor() : ViewModel() {
     }
 
 
-
-    val recentAdapter = object : GenericAdapter<ItemFaqBinding, Items>() {
+    var selectedPosition = -1
+    val faqAdapter = object : GenericAdapter<ItemFaqBinding, Items>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
         ) = ItemFaqBinding.inflate(inflater, parent, false)
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemFaqBinding,
             dataClass: Items,
@@ -68,17 +70,29 @@ class FaqVM @Inject constructor() : ViewModel() {
         ) {
             binding.apply {
 
+//                textDesc.visibility =
+//                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
+//                ivHideShow.setImageDrawable(
+//                    ContextCompat.getDrawable(
+//                        root.context,
+//                        if (dataClass.isCollapse == true) R.drawable.arrow_down else R.drawable.arrow_right
+//                    )
+//                )
+
                 textDesc.visibility =
-                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
+                    if (selectedPosition == position) View.VISIBLE else View.GONE
                 ivHideShow.setImageDrawable(
                     ContextCompat.getDrawable(
                         root.context,
-                        if (dataClass.isCollapse == true) R.drawable.arrow_down else R.drawable.arrow_right
+                        if (selectedPosition == position) R.drawable.arrow_down else R.drawable.arrow_right
                     )
                 )
+
                 ivHideShow.singleClick {
-                    dataClass.isCollapse = !dataClass.isCollapse
-                    notifyItemChanged(position)
+//                    dataClass.isCollapse = !dataClass.isCollapse
+                    selectedPosition = position
+                    notifyDataSetChanged()
+//                    notifyItemChanged(position)
                 }
 
             }
