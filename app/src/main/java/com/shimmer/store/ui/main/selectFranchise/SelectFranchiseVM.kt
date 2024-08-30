@@ -2,23 +2,33 @@ package com.shimmer.store.ui.main.selectFranchise
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemSelectFranchiseBinding
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchise
+import com.shimmer.store.models.ItemFranchiseArray
+import com.shimmer.store.networking.ApiInterface
+import com.shimmer.store.networking.CallHandler
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.utils.mainThread
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class SelectFranchiseVM @Inject constructor() : ViewModel() {
+class SelectFranchiseVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
     var selectedPosition = -1
     val franchiseListAdapter = object : GenericAdapter<ItemSelectFranchiseBinding, ItemFranchise>() {
@@ -69,7 +79,12 @@ class SelectFranchiseVM @Inject constructor() : ViewModel() {
                     binding.layoutTop.backgroundTintList = null
                 }
 
-                //textItem.text = dataClass.search_name
+                textTitle.text = dataClass.name
+                textAddr.text = dataClass.register_address
+                textPincode.text = "Pincode - "+dataClass.d_pincode
+                textContact.text = "Contact - "+dataClass.mobile_number
+
+
 //                textDesc.visibility =
 //                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
 //                ivHideShow.setImageDrawable(
@@ -96,5 +111,42 @@ class SelectFranchiseVM @Inject constructor() : ViewModel() {
     }
 
 
+
+
+
+    fun franchiseList(callBack: ItemFranchiseArray.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemFranchiseArray>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        } else if (loginType == "guest") {
+                        apiInterface.franchiseList()
+
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemFranchiseArray>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        showSnackBar(message.toString())
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 }

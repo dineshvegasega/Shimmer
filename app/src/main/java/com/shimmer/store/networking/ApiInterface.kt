@@ -2,6 +2,7 @@ package com.shimmer.store.networking
 
 import com.google.gson.JsonElement
 import com.shimmer.store.models.ItemBanner
+import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
 import okhttp3.RequestBody
@@ -129,6 +130,9 @@ interface ApiInterface {
 
     @GET(BANNER)
     suspend fun banner(): Response<ItemBanner>
+
+    @GET(FRANCHISE_LIST)
+    suspend fun franchiseList(): Response<ItemFranchiseArray>
 
 
 

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,10 +25,15 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.gson.Gson
 import com.shimmer.store.R
+import com.shimmer.store.databinding.MapInfoWindowBinding
 import com.shimmer.store.databinding.NearetFranchiseBinding
+import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.PermissionUtils
+import com.shimmer.store.utils.getLocationFromAddress
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -94,6 +100,9 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
     }
 
 
+
+    var array = ArrayList<ItemFranchise>()
+
     private fun setUpMapIfNeeded() {
 //        if (map == null) {
         val mapFragment = childFragmentManager
@@ -106,14 +115,35 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
 
 //            map = mapFragment!!.getMapAsync(this)
         //map = mapFragment?.view?.findViewById(R.id.map) as GoogleMap
-        mapFragment?.getMapAsync(this)
+
 
 //            if (map != null) {
 //                //setUpMap();
 //                MarkerTask().execute()
 //            }
 //        }
+
+        val callB = this
+        mapFragment?.getMapAsync(this)
+
+        viewModel.franchiseList(){
+            val fList = this
+//            array = fList
+            fList.forEach {
+                val addr = (it.d_address+","+it.d_city+","+it.d_state+","+it.d_pincode).getLocationFromAddress()
+                it.apply {
+                    this.latLng = addr
+                }
+                array.add(it)
+            }
+
+            mainThread {
+                mapFragment?.getMapAsync(callB)
+            }
+        }
     }
+
+
 
     override fun onMapReady(p0: GoogleMap) {
         map = p0
@@ -138,21 +168,21 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
         map?.mapType = GoogleMap.MAP_TYPE_NORMAL
         map?.uiSettings?.isZoomControlsEnabled = true
 
-        val array = ArrayList<LatLng>()
-        array.add(LatLng(28.635324, 77.224944))
-        array.add(LatLng(28.641529,  77.120918))
-        array.add(LatLng(28.546536,  77.7647568))
-        array.add(LatLng(28.99876529,  77.340918))
+//        array.add(LatLng(28.635324, 77.224944))
+//        array.add(LatLng(28.641529,  77.120918))
+//        array.add(LatLng(28.546536,  77.7647568))
+//        array.add(LatLng(28.99876529,  77.340918))
 
         array.forEach {
-            val markerOptions = MarkerOptions().position(it)
-                .title("First Pit Stop")
+            val markerOptions = MarkerOptions().position(it.latLng)
+                .title(it.name)
+                .snippet(Gson().toJson(it))
                 .icon(
                     BitmapDescriptorFactory
                         .fromResource(R.drawable.marker)
                 )
             map?.addMarker(markerOptions)
-            map?.setInfoWindowAdapter(InfoWindowAdapter(requireContext(), it));
+            map?.setInfoWindowAdapter(InfoWindowAdapter(requireContext()));
         }
 
 
@@ -181,18 +211,38 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
     }
 
 
-    class InfoWindowAdapter(private val myContext: Context, huduma_gpo: LatLng) :
+    class InfoWindowAdapter(private val myContext: Context) :
         GoogleMap.InfoWindowAdapter {
-        private val view: View
+//                private val view: View
 
-        init {
-            val inflater =
-                myContext.applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            view = inflater.inflate(
-                R.layout.map_info_window,
-                null
+
+        var viewBinding = MapInfoWindowBinding.inflate(
+                myContext.getSystemService(
+                    Context.LAYOUT_INFLATER_SERVICE
+                ) as LayoutInflater
             )
-        }
+
+//        init {
+//            val inflater =
+//                myContext.applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+//            view = inflater.inflate(
+//                R.layout.map_info_window,
+//                null
+//            )
+//
+////            Log.e("TAG", "dataClassAA "+dataClass.name)
+//
+////            viewBinding = MapInfoWindowBinding.inflate(
+////                myContext.getSystemService(
+////                    Context.LAYOUT_INFLATER_SERVICE
+////                ) as LayoutInflater
+////            )
+////
+////            viewBinding.apply {
+////                textTitle.text = dataClass.name
+////            }
+//
+//        }
 
         override fun getInfoContents(marker: Marker): View {
             if (marker != null
@@ -201,35 +251,34 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
                 marker.hideInfoWindow()
                 marker.showInfoWindow()
             }
-            return view
+            return viewBinding.root
         }
 
         override fun getInfoWindow(marker: Marker): View {
 //            val title: String = ""+marker.getTitle()
-//            val titleUi = (view.findViewById<View>(R.id.title) as TextView)
-//            if (title != null) {
-//                titleUi.text = title
-//            } else {
-//                titleUi.text = ""
-//                titleUi.visibility = View.GONE
-//            }
-//
-//            val snippet: String = marker.getSnippet()
-//            val snippetUi = (view
-//                .findViewById<View>(R.id.snippet) as TextView)
-//
-//            if (snippet != null) {
-//                val SnippetArray: Array<String> =
-//                    snippet.split(SEPARATOR.toRegex()).dropLastWhile { it.isEmpty() }
-//                        .toTypedArray()
+//            val textTitle = (view.findViewById<View>(R.id.textTitle) as AppCompatTextView)
 //
 //
-//                snippetUi.text = SnippetArray[0]
-//            } else {
-//                snippetUi.text = ""
-//            }
+//            var ccc = Gson().fromJson(marker.snippet, ItemFranchise::class.java)
+//            textTitle.text = ccc.name
 
-            return view
+//            val textAddr = (view.findViewById<View>(R.id.textAddr) as AppCompatTextView)
+//            textAddr.text = dataClass.register_address
+//
+//            val textPincode = (view.findViewById<View>(R.id.textPincode) as AppCompatTextView)
+//            textPincode.text = "Pincode - " + dataClass.d_pincode
+//
+//            val textContact = (view.findViewById<View>(R.id.textContact) as AppCompatTextView)
+//            textContact.text = "Contact - " + dataClass.mobile_number
+
+            viewBinding.apply {
+                val data = Gson().fromJson(marker.snippet, ItemFranchise::class.java)
+                textTitle.text = data.name
+                textAddr.text = data.register_address
+                textPincode.text = "Pincode - " + data.d_pincode
+                textContact.text = "Contact - " + data.mobile_number
+            }
+            return viewBinding.root
         }
     }
 

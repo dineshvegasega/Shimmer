@@ -141,4 +141,55 @@
     <string name="EnterConfirmNewPassword">Enter Confirm New Password</string>
     <string name="CreatePasswordReEnterPasswordisnotsame">*Password Not Match</string>
 
+    <string name="select_your_choice">Select Your Choice</string>
+    <string name="register_complaint">Register Complaint</string>
+    <string name="subject_of_complaint">Subject Of Complaint</string>
+    <string name="type_here">Type Here</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_full_name">Your Full Name</string>
+    <string name="your_mobile_number">Your Mobile Number</string>
+    <string name="description">Description</string>
+
+    <string name="type">Type</string>
+    <string name="select_complaint_type">Select Complaint Type</string>
+    <string name="subject_of_feedback">Subject Of Feedback</string>
+    <string name="not_complaint_type">You Have No Complaint Type</string>
+    <string name="tracking_id">Tracking ID</string>
+    <string name="feedback">Feedback</string>
+    <string name="complaint">Complaint</string>
+    <string name="Pleaseentertextormedia">Please Enter Text or Media</string>
+    <string name="re_open">Re-Open</string>
+    <string name="pending">Pending</string>
+    <string name="resolved">Resolved</string>
+    <string name="in_progress">In-Progress</string>
+    <string name="close_conversation">Are you sure you want to close this conversation?</string>
+    <string name="open_conversation">Are you sure you want to open this conversation?</string>
+    <string name="upload_media">Upload Media</string>
+    <string name="submit">Submit</string>
+
+    <string name="valid_date">Valid Date</string>
+    <string name="status">Status</string>
+    <string name="x_close">X Close</string>
+
+    <string name="typeColon">Type:</string>
+    <string name="registration_dateColon">Registration Date:</string>
+    <string name="subjectColon">Subject:</string>
+    <string name="complaint_typeColon">Complaint Type:</string>
+
+    <string name="message_by_admin">Message By Admin</string>
+    <string name="message_by_member">Message By Member</string>
+    <string name="admin_txt">Admin</string>
+    <string name="member_txt">Member</string>
+
+    <string-array name="type_array">
+        <item>Register Complaint</item>
+        <item>Submit Feedback</item>
+    </string-array>
+
+    <string name="camera">Camera</string>
+    <string name="open_camera_to_capture_image">Open Camera to Capture Image</string>
+    <string name="photos">Photos</string>
+    <string name="browse_images_from_gallery">Browse Images From Gallery</string>
+    <string name="closed">Closed</string>
+
 </resources>

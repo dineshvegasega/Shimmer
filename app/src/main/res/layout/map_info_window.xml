@@ -35,7 +35,7 @@
         tools:ignore="HardcodedText" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textColor"
+        android:id="@+id/textAddr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -51,7 +51,7 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textPurity"
+        android:id="@+id/textPincode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -61,14 +61,14 @@
         app:fontFamily="@font/nunitosans_semibold"
         app:layout_constraintStart_toEndOf="@+id/ivIcon"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/textColor"
+        app:layout_constraintTop_toBottomOf="@+id/textAddr"
         android:layout_marginTop="@dimen/_3sdp"
         tools:ignore="HardcodedText" />
 
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textRingSize"
+        android:id="@+id/textContact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
@@ -78,7 +78,7 @@
         app:fontFamily="@font/nunitosans_semibold"
         app:layout_constraintStart_toEndOf="@+id/ivIcon"
         android:layout_marginHorizontal="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/textPurity"
+        app:layout_constraintTop_toBottomOf="@+id/textPincode"
         android:layout_marginTop="@dimen/_3sdp"
         tools:ignore="HardcodedText" />
 

@@ -14,6 +14,9 @@ import android.content.res.Configuration
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -29,6 +32,7 @@ import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.provider.Settings
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -37,6 +41,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
@@ -53,6 +58,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
@@ -62,12 +69,14 @@ import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
+import com.shimmer.store.models.ItemReturn
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.io.OutputStream
 import java.io.Serializable
 import java.math.RoundingMode
@@ -901,6 +910,26 @@ fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
 }
 
 
+fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int) {
+    StfalconImageViewer.Builder<String>(MainActivity.mainActivity.get()!!, this) { view, image ->
+        Glide.with(MainActivity.mainActivity.get()!!)
+            .load(image)
+            .apply(if (type == 1) myOptionsGlide else if (type == 2) myOptionsGlideUser else myOptionsGlide)
+            .into(view)
+    }
+        .withTransitionFrom(ivImage)
+        .withBackgroundColor(
+            ContextCompat.getColor(
+                MainActivity.mainActivity.get()!!,
+                R.color._D9000000
+            )
+        )
+        .show()
+}
+
+
+
+
 fun ViewPager2.getRecyclerView(): RecyclerView {
     val recyclerViewField = ViewPager2::class.java.getDeclaredField("mRecyclerView")
     recyclerViewField.isAccessible = true
@@ -1036,6 +1065,124 @@ fun getSize(size: Int) : Int {
 fun AppCompatTextView.endDrawable(@DrawableRes id: Int = 0) {
     this.setCompoundDrawablesWithIntrinsicBounds(0, 0, id, 0)
 }
+
+
+
+
+
+fun Activity.showDropDownDialog(
+    type: Int = 0,
+    arrayList: Array<String?> = emptyArray(),
+    callBack: ItemReturn.() -> Unit
+) {
+    hideKeyboard()
+
+    when (type) {
+        1 -> {
+            val list=resources.getStringArray(R.array.type_array)
+            MaterialAlertDialogBuilder(this, R.style.DropdownDialogTheme)
+                .setTitle(resources.getString(R.string.select_your_choice))
+                .setItems(list) {_,which->
+                    callBack(ItemReturn(which, list[which]))
+                }.show()
+        }
+    }
+}
+
+
+
+
+
+fun Activity.showOptions(callBack: Int.() -> Unit) = try {
+    val dialogView = layoutInflater.inflate(R.layout.dialog_choose_image_option, null)
+    val btnCancel = dialogView.findViewById<AppCompatButton>(R.id.btnCancel)
+    val tvPhotos = dialogView.findViewById<AppCompatTextView>(R.id.tvPhotos)
+    val tvPhotosDesc = dialogView.findViewById<AppCompatTextView>(R.id.tvPhotosDesc)
+    val tvCamera = dialogView.findViewById<AppCompatTextView>(R.id.tvCamera)
+    val tvCameraDesc = dialogView.findViewById<AppCompatTextView>(R.id.tvCameraDesc)
+    val dialog = BottomSheetDialog(this, R.style.TransparentDialog)
+    dialog.setContentView(dialogView)
+    dialog.show()
+
+    btnCancel.singleClick {
+        dialog.dismiss()
+    }
+    tvCamera.singleClick {
+        dialog.dismiss()
+        callBack(1)
+    }
+    tvCameraDesc.singleClick {
+        dialog.dismiss()
+        callBack(1)
+    }
+
+    tvPhotos.singleClick {
+        dialog.dismiss()
+        callBack(2)
+    }
+    tvPhotosDesc.singleClick {
+        dialog.dismiss()
+        callBack(2)
+    }
+} catch (e: Exception) {
+    e.printStackTrace()
+}
+
+
+//fun getLocationFromAddress11(context: Context?, strAddress: String?): Location? {
+//    val coder = Geocoder(context!!)
+//    var address: List<Address>? = ArrayList()
+//    val p1: Location = Location("pickup")
+//    try {
+//        address = coder.getFromLocationName(strAddress!!, 5)
+//        if (address == null) {
+//            return null
+//        }
+//        Log.e(TAG, "address111 $address")
+//
+//        if (address.size > 0) {
+//            val location = address[0]
+//            location.latitude
+//            location.longitude
+//            p1.setLatitude(location.latitude)
+//            p1.setLongitude(location.longitude)
+//        }
+//    } catch (ex: IOException) {
+//        ex.printStackTrace()
+//        Log.e(TAG, "getMessage111 " + ex.message)
+//    }
+//    return p1
+//}
+
+public fun String.getLocationFromAddress(): LatLng {
+    val coder = Geocoder(MainActivity.mainActivity.get()!!, Locale.getDefault())
+    var p1: LatLng = LatLng(0.0, 0.0)
+    try {
+        val address: MutableList<Address>? = coder.getFromLocationName(this, 5)
+        address?.let {
+            if (it.size > 0) {
+                address[0].let { add ->
+                    p1 = LatLng(
+                        (add.latitude),
+                        (add.longitude)
+                    )
+                }
+            }
+            Log.d("locationFRR", "getLocationFromAddress: $p1")
+        }
+    } catch (e: IOException) {
+        e.printStackTrace()
+        Log.d("locationFRR", "getLocationFromAddress: ${e.message}")
+    }
+    return p1
+}
+
+
+
+
+
+
+
 
 
 

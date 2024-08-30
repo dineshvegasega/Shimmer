@@ -563,4 +563,40 @@
             app:popUpToInclusive="true" />
     </fragment>
 
+
+
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.complaintsFeedback.createNew.CreateNew"
+        android:label="CreateNew"
+        android:id="@+id/createNew"
+        tools:layout="@layout/create_new">
+        <action
+            android:id="@+id/action_createNew_to_history"
+            app:destination="@id/history"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/createNew"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.complaintsFeedback.history.History"
+        android:label="History"
+        android:id="@+id/history"
+        tools:layout="@layout/history">
+        <action
+            android:id="@+id/action_history_to_historyDetail"
+            app:destination="@id/historyDetail"
+            app:launchSingleTop="true"
+            />
+    </fragment>
+
+    <fragment
+        android:name="com.shimmer.store.ui.main.complaintsFeedback.historyDetail.HistoryDetail"
+        android:label="HistoryDetail"
+        android:id="@+id/historyDetail"
+        tools:layout="@layout/history_detail">
+    </fragment>
+
 </navigation>

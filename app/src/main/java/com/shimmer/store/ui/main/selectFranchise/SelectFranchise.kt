@@ -1,10 +1,15 @@
 package com.shimmer.store.ui.main.selectFranchise
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,6 +19,7 @@ import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
+import com.shimmer.store.utils.isValidPassword
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,21 +93,36 @@ class SelectFranchise : Fragment() {
 //            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
 //            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
-        val userList = listOf(
-            ItemFranchise(banner_id = "1", isSelected = false),
-            ItemFranchise(banner_id = "1", isSelected = false),
-            ItemFranchise(banner_id = "1", isSelected = false),
-            ItemFranchise(banner_id = "1", isSelected = false),
-            ItemFranchise(banner_id = "1", isSelected = false),
-            )
-
-            rvList.setHasFixedSize(true)
-            rvList.adapter = viewModel.franchiseListAdapter
-            viewModel.franchiseListAdapter.notifyDataSetChanged()
-            viewModel.franchiseListAdapter.submitList(userList)
-            rvList.visibility = View.VISIBLE
 
 
+
+
+            viewModel.franchiseList(){
+                val fList = this
+                rvList.setHasFixedSize(true)
+                rvList.adapter = viewModel.franchiseListAdapter
+                viewModel.franchiseListAdapter.notifyDataSetChanged()
+                viewModel.franchiseListAdapter.submitList(fList)
+                rvList.visibility = View.VISIBLE
+
+                ivEditSearch.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                    }
+
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    }
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        val filteredNot = fList.filter { it.name.lowercase().contains(ivEditSearch.text.toString().lowercase()) }
+                        Log.e("TAG", "filteredNot "+filteredNot.toString())
+                        viewModel.franchiseListAdapter.submitList(filteredNot)
+                        viewModel.franchiseListAdapter.notifyDataSetChanged()
+                    }
+                })
+
+
+            }
 
 
             layoutSort.singleClick {
