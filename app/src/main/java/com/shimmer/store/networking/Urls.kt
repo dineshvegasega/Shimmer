@@ -6,6 +6,9 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 const val BASE_URL = "https://shop.vegasega.com/"
 const val URL = BASE_URL+"rest/"
 const val IMAGE_URL = BASE_URL+"media/catalog/product"
+const val BANNER_IMAGE_URL = BASE_URL+"media/mageplaza/bannerslider/banner/image/"
+
+//https://shop.vegasega.com/media/mageplaza/bannerslider/banner/image/l/o/logo-1.png
 
 const val ADMIN_TOKEN = "V1/integration/admin/token"
 const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"

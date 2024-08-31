@@ -11,5 +11,5 @@ data class ItemBannerItem(
     val title: String,
     val type: String,
     val updated_at: String,
-    val url_banner: Any
+    val url_banner: String = ""
 )

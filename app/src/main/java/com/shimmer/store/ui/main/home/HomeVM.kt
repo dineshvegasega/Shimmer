@@ -1,6 +1,10 @@
 package com.shimmer.store.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,6 +21,7 @@ import com.shimmer.store.models.ItemBannerItem
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.networking.ApiInterface
+import com.shimmer.store.networking.BANNER_IMAGE_URL
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
@@ -29,6 +34,7 @@ import com.shimmer.store.utils.glideImageBanner
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
+import com.shimmer.store.utils.singleClick
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.isFilterFrom
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
 //import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
@@ -129,7 +135,6 @@ class HomeVM @Inject constructor(private val repository: Repository) : ViewModel
     }
 
 
-
     val bannerAdapter = object : GenericAdapter<ItemHome3Binding, ItemBannerItem>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -143,48 +148,32 @@ class HomeVM @Inject constructor(private val repository: Repository) : ViewModel
             position: Int
         ) {
             binding.apply {
-                glideImageBanner(binding.ivIcon.context, binding.ivIcon, IMAGE_URL+dataClass.image)
-//                Glide.with(binding.ivIcon.context)
-//                    .load(IMAGE_URL+dataClass.image)
-//                    .apply(myOptionsGlidePortrait)
-//                    .into(binding.ivIcon)
-//                Log.e("TAG", "onBindHolder: "+IMAGE_URL+dataClass.image)
+                glideImageBanner(
+                    binding.ivIcon.context,
+                    binding.ivIcon,
+                    BANNER_IMAGE_URL + dataClass.image
+                )
 
-//                ivIcon.setOnClickListener {
-//                    currentList.forEach {
-//                        it.isSelected = false
-//                        it.isCollapse = false
-//                        it.subCategory.forEach {
-//                            it.isSelected = false
-////                            it.isChildSelect = false
-//                        }
-//                    }
-//                    dataClass.apply {
-//                        isSelected = true
-//                        subCategory.forEach {
-//                            it.isSelected = true
-////                            it.isChildSelect = true
-//                        }
-//                    }
-//                    mainPrice.forEach {
-//                        it.isSelected = false
-////                        it.isChildSelect = false
-//                    }
-//                    mainMaterial.forEach {
-//                        it.isSelected = false
-////                        it.isChildSelect = false
-//                    }
-//                    mainShopFor.forEach {
-//                        it.isSelected = false
-////                        it.isChildSelect = false
-//                    }
-
-//                    it.findNavController().navigate(R.id.action_home_to_products)
-//                }
+                ivIcon.singleClick {
+                    if (dataClass.newtab == "0") {
+                        root.findNavController().navigate(R.id.action_home_to_webPage, Bundle().apply {
+                            putString("url", dataClass.url_banner)
+                        })
+                    } else {
+                        dataClass.url_banner?.let {
+                            val webIntent = Intent(
+                                Intent.ACTION_VIEW, Uri.parse(dataClass.url_banner)
+                            )
+                            try {
+                                root.context.startActivity(webIntent)
+                            } catch (ex: ActivityNotFoundException) {
+                            }
+                        }
+                    }
+                }
             }
         }
     }
-
 
 
     fun banner(callBack: ItemBanner.() -> Unit) =
