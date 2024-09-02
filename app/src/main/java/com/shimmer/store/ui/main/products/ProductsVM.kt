@@ -193,11 +193,11 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if(message.contains("fieldName")){
+//                        if(message.contains("fieldName")){
                             showSnackBar("Something went wrong!")
-                        } else {
-                            sessionExpired()
-                        }
+//                        } else {
+//                            //sessionExpired()
+//                        }
 
                     }
 

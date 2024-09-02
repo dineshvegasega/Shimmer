@@ -1,5 +1,6 @@
 package com.shimmer.store.ui.main.products
 
+//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,10 +18,7 @@ import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
-import com.shimmer.store.datastore.db.CartModel
-import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosans_light
@@ -29,13 +26,12 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.typefacenunitosa
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
-import com.shimmer.store.utils.mainThread
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+import com.shimmer.store.utils.SortByPriceAsc
+import com.shimmer.store.utils.SortByPriceDesc
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Collections
 
 
 @AndroidEntryPoint
@@ -48,10 +44,8 @@ class Products : Fragment() {
 
 
     companion object {
-
         @JvmStatic
         lateinit var adapter2: ProductsAdapter
-
     }
 
 
@@ -301,15 +295,23 @@ class Products : Fragment() {
             var mainPriceBoolean = false
             var priceFrom : Double = 0.0
             var priceTo : Double = 0.0
+            var xCount = 0
             mainPrice.forEach {
                 if (it.isSelected) {
                     count += 1
                     countFrom1 += 1
                     mainPriceBoolean = true
-                    priceFrom = it.name.replace("₹","").split("-")[0].trim().toDouble()
+                    if (xCount == 0){
+                        priceFrom = it.name.replace("₹","").split("-")[0].trim().toDouble()
+                        xCount = 1
+                    }
                     priceTo = if(it.name.replace("₹","").split("-")[1].trim() == "Above") 10000000.00 else it.name.replace("₹","").split("-")[1].trim().toDouble()
                 }
             }
+
+            Log.e("TAG", "countFrom2BBB "+priceFrom)
+            Log.e("TAG", "countFrom2CCC "+priceTo)
+
 //            Log.e("TAG", "countFrom2BBB "+countFrom1)
             if (mainPriceBoolean){
                 countFrom2 += 1
@@ -325,41 +327,41 @@ class Products : Fragment() {
             }
             Log.e("TAG", "countFrom2BBB "+emptyMap.toString())
 
-            var materialIds : String = ""
-            var mainMaterialBoolean = false
-            mainMaterial.forEach {
-                if (it.isSelected) {
-                    materialIds += ""+it.id+","
-                    count += 1
-                    countFrom1 += 1
-                    mainMaterialBoolean = true
-                }
-            }
-//            Log.e("TAG", "countFromCCC "+countFrom1)
-            if (mainMaterialBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "metal_type"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = materialIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
-            }
-            Log.e("TAG", "countFromCCC "+emptyMap.toString())
-
-            var genderIds : String = ""
-            var mainShopForBoolean = false
-            mainShopFor.forEach {
-                if (it.isSelected) {
-                    genderIds += ""+it.id+","
-                    count += 1
-                    countFrom1 += 1
-                    mainShopForBoolean = true
-                }
-            }
+//            var materialIds : String = ""
+//            var mainMaterialBoolean = false
+//            mainMaterial.forEach {
+//                if (it.isSelected) {
+//                    materialIds += ""+it.id+","
+//                    count += 1
+//                    countFrom1 += 1
+//                    mainMaterialBoolean = true
+//                }
+//            }
+////            Log.e("TAG", "countFromCCC "+countFrom1)
+//            if (mainMaterialBoolean){
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "metal_type"
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = materialIds
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
+//            }
+//            Log.e("TAG", "countFromCCC "+emptyMap.toString())
+//
+//            var genderIds : String = ""
+//            var mainShopForBoolean = false
+//            mainShopFor.forEach {
+//                if (it.isSelected) {
+//                    genderIds += ""+it.id+","
+//                    count += 1
+//                    countFrom1 += 1
+//                    mainShopForBoolean = true
+//                }
+//            }
 //            Log.e("TAG", "countFromDDD "+countFrom1)
-            if (mainShopForBoolean){
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "gender"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = genderIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
-            }
-            Log.e("TAG", "countFromDDD "+emptyMap.toString())
+//            if (mainShopForBoolean){
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "gender"
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = genderIds
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "in"
+//            }
+//            Log.e("TAG", "countFromDDD "+emptyMap.toString())
 
             countFrom1 += 1
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "visibility"
@@ -368,25 +370,25 @@ class Products : Fragment() {
             Log.e("TAG", "countFromDDD "+emptyMap.toString())
 
 
-            when(viewModel.sortFilter){
-                  0 -> {
-
-                  }
-                  1 -> {
-
-                  }
-                  2 -> {
-                      countFrom2 += 1
-                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
-                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "ASC"
-                  }
-                  3 -> {
-                      countFrom2 += 1
-                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
-                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "DESC"
-                  }
-            }
-            Log.e("TAG", "countFrom2EEE "+countFrom2)
+//            when(viewModel.sortFilter){
+//                  0 -> {
+//
+//                  }
+//                  1 -> {
+//
+//                  }
+//                  2 -> {
+//                      countFrom2 += 1
+//                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
+//                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "ASC"
+//                  }
+//                  3 -> {
+//                      countFrom2 += 1
+//                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][field]"] = "price"
+//                      emptyMap["searchCriteria[sortOrders][" + countFrom2 + "][direction]"] = "DESC"
+//                  }
+//            }
+//            Log.e("TAG", "countFrom2EEE "+countFrom2)
 
 
             Log.e("TAG", "count ${count}")
@@ -394,12 +396,28 @@ class Products : Fragment() {
 
 
 
-
             binding.rvList2.adapter = adapter2
             readData(ADMIN_TOKEN) { token ->
                 viewModel.getProducts(token.toString(), requireView(), emptyMap) {
 //                    Log.e("TAG", "itAAA " + this)
-                    adapter2.submitData(this.items)
+                    val items = this.items
+                    when(viewModel.sortFilter){
+                        0 -> {
+
+                        }
+                        1 -> {
+
+                        }
+                        2 -> {
+                            Collections.sort(items, SortByPriceAsc())
+                        }
+                        3 -> {
+                            Collections.sort(items, SortByPriceDesc())
+                        }
+                    }
+
+
+                    adapter2.submitData(items)
                     adapter2.notifyDataSetChanged()
 
                     if(this.items.size == 0){

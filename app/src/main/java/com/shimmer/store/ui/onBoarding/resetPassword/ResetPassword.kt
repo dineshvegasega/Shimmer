@@ -15,11 +15,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ResetPasswordBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.isValidPassword
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class ResetPassword : Fragment() {
@@ -118,15 +124,41 @@ class ResetPassword : Fragment() {
                     showSnackBar(getString(R.string.CreatePasswordReEnterPasswordisnotsame))
                 } else {
                     Log.e("TAG", "count: $this")
-//                    val obj: JSONObject = JSONObject().apply {
-//                        put(mobile_number, binding.editTextMobileNumber.text.toString())
-//                        put(password, binding.editTextPassword.text.toString())
-//                    }
-//                    if(networkFailed) {
-//                        viewModel.login(view = requireView(), obj)
-//                    } else {
-//                        requireContext().callNetworkDialog()
-//                    }
+
+//                    mobileNumber
+                    val adminJSON: JSONObject = JSONObject().apply {
+                        put("username", "admin")
+                        put("password", "admin123")
+                    }
+                    viewModel.adminToken(adminJSON) {
+                        val adminToken = this
+                        saveData(ADMIN_TOKEN, adminToken)
+                        Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
+                        readData(ADMIN_TOKEN) {
+                            val customerJSON: JSONObject = JSONObject().apply {
+                                put("mobilenumber", arguments?.getString("mobileNumber"))
+                                put("password", editTextNewPassword.text.toString())
+                            }
+                            viewModel.websiteUrl(it.toString(), customerJSON) {
+                                Log.e("TAG", "itAAA " + this)
+                                val website_id = JSONObject(this).getString("website_id")
+                                saveData(WEBSITE_ID, website_id)
+                                storeWebUrl = website_id
+                                Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+
+                                viewModel.resetPassword(it.toString(), customerJSON) {
+                                    Log.e("TAG", "itAAAc " + this)
+                                    val succeess = JSONObject(this).getString("succeess")
+                                    if(succeess == "true"){
+                                        showSnackBar(JSONObject(this).getString("successmsg"))
+                                        findNavController().navigate(R.id.action_resetPassword_to_login)
+                                    } else {
+                                        showSnackBar(JSONObject(this).getString("successmsg"))
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

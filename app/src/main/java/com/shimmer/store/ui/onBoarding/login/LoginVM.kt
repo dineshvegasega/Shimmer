@@ -42,7 +42,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.websiteUrl(jsonObject.getString("username"))
+                        apiInterface.websiteUrl(jsonObject.getString("emailmobile"))
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
@@ -112,14 +112,14 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.customerLoginToken("Bearer " +adminToken, storeWebUrl,  requestBody = jsonObject.getJsonRequestBody())
+                    @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
-                                val token = response.body().toString()
-                                    .substring(1, response.body().toString().length - 1)
-                                //  Log.e("TAG", "successAA: ${token}")
-                                storeToken = token
-                                callBack(token)
+                                val jsonObject = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\", "")
+                                  Log.e("TAG", "successAAB: ${jsonObject}")
+                                storeToken = JSONObject(jsonObject).getString("token")
+                                callBack(storeToken)
                             } catch (e: Exception) {
                             }
                         }

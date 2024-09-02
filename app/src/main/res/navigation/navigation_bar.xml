@@ -104,6 +104,12 @@
         android:label="ResetPassword"
         android:id="@+id/resetPassword"
         tools:layout="@layout/reset_password">
+        <action
+            android:id="@+id/action_resetPassword_to_login"
+            app:destination="@id/login"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
     </fragment>
 
 

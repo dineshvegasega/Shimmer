@@ -15,11 +15,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ForgotPasswordBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class ForgotPassword : Fragment() {
@@ -49,7 +56,9 @@ class ForgotPassword : Fragment() {
             }
 
             btResetPassword.singleClick {
-                findNavController().navigate(R.id.action_forgotPassword_to_resetPassword)
+                findNavController().navigate(R.id.action_forgotPassword_to_resetPassword, Bundle().apply {
+                    putString("mobileNumber", editTextMobileNumber.text.toString())
+                })
             }
 
 
@@ -77,6 +86,43 @@ class ForgotPassword : Fragment() {
 
             textTitleRequestOTP.singleClick {
                 Log.e("TAG", "count: $this")
+                val adminJSON: JSONObject = JSONObject().apply {
+                    put("username", "admin")
+                    put("password", "admin123")
+                }
+                if (editTextMobileNumber.text.toString().isEmpty()){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editTextMobileNumber.text.toString().length != 10){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else {
+                    viewModel.adminToken(adminJSON) {
+                        val adminToken = this
+                        saveData(ADMIN_TOKEN, adminToken)
+                        Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
+                        readData(ADMIN_TOKEN) {
+                            val customerJSON: JSONObject = JSONObject().apply {
+                                put("emailmobile", editTextMobileNumber.text.toString())
+                                put("mobpassword", editTextPassword.text.toString())
+                            }
+                            viewModel.websiteUrl(it.toString(), customerJSON) {
+                                Log.e("TAG", "itAAA " + this)
+                                val website_id = JSONObject(this).getString("website_id")
+                                saveData(WEBSITE_ID, website_id)
+                                storeWebUrl = website_id
+                                Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+
+                                viewModel.sendOTP(it.toString(), customerJSON) {
+                                    Log.e("TAG", "itAAA " + this)
+                                    val website_id = JSONObject(this).getString("website_id")
+                                    saveData(WEBSITE_ID, website_id)
+                                    storeWebUrl = website_id
+                                    Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
 
 

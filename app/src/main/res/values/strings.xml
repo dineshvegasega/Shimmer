@@ -141,6 +141,9 @@
     <string name="EnterConfirmNewPassword">Enter Confirm New Password</string>
     <string name="CreatePasswordReEnterPasswordisnotsame">*Password Not Match</string>
 
+    <string name="EnterValidMobileNumber">Enter Valid Mobile Number</string>">
+    <string name="EnterPassword">Enter Password</string>
+
     <string name="select_your_choice">Select Your Choice</string>
     <string name="register_complaint">Register Complaint</string>
     <string name="subject_of_complaint">Subject Of Complaint</string>

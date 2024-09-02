@@ -11,9 +11,12 @@ const val BANNER_IMAGE_URL = BASE_URL+"media/mageplaza/bannerslider/banner/image
 //https://shop.vegasega.com/media/mageplaza/bannerslider/banner/image/l/o/logo-1.png
 
 const val ADMIN_TOKEN = "V1/integration/admin/token"
-const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"
+//const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"
+const val CUSTOMER_LOGIN_TOKEN = "/V1/mobilelogin/account/login/?"
 const val CUSTOMER_DETAIL = "/V1/customers/me"
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
+
+const val CUSTOMER_RESET_PASSWORD = "/V1/mobilelogin/otp/resetpassword/?"
 
 const val PRODUCTS = "/V1/products/?"
 const val PRODUCTS_DETAIL = "/V1/products/"

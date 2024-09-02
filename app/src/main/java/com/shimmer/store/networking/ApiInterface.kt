@@ -39,6 +39,14 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
+    @POST("{id}"+CUSTOMER_RESET_PASSWORD)
+    suspend fun customerResetPassword(
+        @Header("Authorization") adminToken : String,
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
     @GET("{id}"+CUSTOMER_DETAIL)
     suspend fun customerDetail(
         @Header("Authorization") authHeader : String,

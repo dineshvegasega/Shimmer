@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,8 @@ import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.isValidPassword
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -63,67 +66,69 @@ class Login : Fragment() {
 
 
             btLogin.singleClick {
-                val customerJSON: JSONObject = JSONObject().apply {
-                    put("username", editTextMobileNumber.text.toString())
-                    put("password", editTextPassword.text.toString())
-                }
-//                viewModel.adminToken(obj) {
-//                    val adminToken = this
-//                    Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
-//                    saveData(ADMIN_TOKEN, adminToken)
-//
-//                    readData(ADMIN_TOKEN) {
-//                        viewModel.websiteUrl(it.toString(), obj, view){
-//                            Log.e("TAG", "itAAA "+this)
-//                        }
-////                    viewModel.customerLoginToken(it.toString(), obj, view){
-////                        Log.e("TAG", "itAAA "+this)
-////                    }
-//                    }
-//                }
+                if (editTextMobileNumber.text.toString().isEmpty()){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editTextMobileNumber.text.toString().length != 10){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (binding.editTextPassword.text.toString().isEmpty()){
+                    showSnackBar(getString(R.string.EnterPassword))
+                } else if(binding.editTextPassword.text.toString().length >= 0 && binding.editTextPassword.text.toString().length < 8){
+                    showSnackBar(getString(R.string.InvalidPassword))
+                } else if(!isValidPassword(editTextPassword.text.toString().trim())){
+                    showSnackBar(getString(R.string.InvalidPassword))
+                } else {
+                    Log.e("TAG", "XXXXXXXX")
+                    val customerJSON: JSONObject = JSONObject().apply {
+                        put("emailmobile", editTextMobileNumber.text.toString())
+                        put("mobpassword", editTextPassword.text.toString())
+                    }
 
-                val adminJSON: JSONObject = JSONObject().apply {
-                    put("username", "admin")
-                    put("password", "admin123")
-                }
-                viewModel.adminToken(adminJSON) {
-                    val adminToken = this
-                    saveData(ADMIN_TOKEN, adminToken)
-                    Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
-                    readData(ADMIN_TOKEN) {
-                        viewModel.websiteUrl(it.toString(), customerJSON){
-                            Log.e("TAG", "itAAA "+this)
-                            val website_id = JSONObject(this).getString("website_id")
-                            saveData(WEBSITE_ID, website_id)
-                            storeWebUrl = website_id
-                            viewModel.customerLoginToken(it.toString(), customerJSON){
-                                val storeToken = this
-                                Log.e("TAG", "itBBB "+storeToken)
-                                viewModel.customerDetail(storeToken){
-                                    Log.e("TAG", "itCCC "+this)
-                                    saveData(CUSTOMER_TOKEN, storeToken)
-                                    saveObject(
-                                        LOGIN_DATA,
-                                        Gson().fromJson(
-                                            this,
-                                            ItemStore::class.java
+                    val adminJSON: JSONObject = JSONObject().apply {
+                        put("username", "admin")
+                        put("password", "admin123")
+                    }
+                    viewModel.adminToken(adminJSON) {
+                        val adminToken = this
+                        saveData(ADMIN_TOKEN, adminToken)
+                        Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
+                        readData(ADMIN_TOKEN) {
+                            viewModel.websiteUrl(it.toString(), customerJSON){
+                                Log.e("TAG", "itAAA "+this)
+                                val website_id = JSONObject(this).getString("website_id")
+                                saveData(WEBSITE_ID, website_id)
+                                storeWebUrl = website_id
+                                viewModel.customerLoginToken(it.toString(), customerJSON){
+                                    val storeToken = this
+                                    Log.e("TAG", "itBBB "+storeToken)
+                                    viewModel.customerDetail(storeToken){
+                                        Log.e("TAG", "itCCC "+this)
+                                        saveData(CUSTOMER_TOKEN, storeToken)
+                                        saveObject(
+                                            LOGIN_DATA,
+                                            Gson().fromJson(
+                                                this,
+                                                ItemStore::class.java
+                                            )
                                         )
-                                    )
-                                    viewModel.getQuoteId(storeToken, JSONObject()) {
-                                        val quoteId = this
-                                        saveData(QUOTE_ID, quoteId)
-                                        loginType = LoginType.VENDOR
-                                        findNavController().navigate(R.id.action_login_to_home)
+//                                        viewModel.getQuoteId(storeToken, JSONObject()) {
+//                                            val quoteId = this
+//                                            saveData(QUOTE_ID, quoteId)
+                                            loginType = LoginType.VENDOR
+                                            findNavController().navigate(R.id.action_login_to_home)
+//                                        }
                                     }
                                 }
-                            }
 //                        }
-                        }
+                            }
 //                    viewModel.customerLoginToken(it.toString(), obj, view){
 //                        Log.e("TAG", "itAAA "+this)
 //                    }
+                        }
                     }
                 }
+
+
+
 
             }
 

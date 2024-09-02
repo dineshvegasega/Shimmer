@@ -51,7 +51,6 @@ class WebPage : Fragment() {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
-
                 topBarBack.ivCartLayout.visibility = View.GONE
             }
 
