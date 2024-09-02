@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_bar"
-    app:startDestination="@id/splash"
+    app:startDestination="@id/login"
     >
 
     <fragment
@@ -234,7 +234,7 @@
 
         <action
             android:id="@+id/action_profile_to_complaintFeedback"
-            app:destination="@id/complaintFeedback"
+            app:destination="@id/history"
             app:launchSingleTop="true"
             />
 
@@ -314,23 +314,23 @@
             />
     </fragment>
 
-    <fragment
-        android:name="com.shimmer.store.ui.main.complaintFeedback.ComplaintFeedback"
-        android:label="ComplaintFeedback"
-        android:id="@+id/complaintFeedback"
-        tools:layout="@layout/complaint_feedback">
-        <action
-            android:id="@+id/action_complaintFeedback_to_search"
-            app:destination="@id/search"
-            app:launchSingleTop="true"
-            />
+<!--    <fragment-->
+<!--        android:name="com.shimmer.store.ui.main.complaintFeedback.ComplaintFeedback"-->
+<!--        android:label="ComplaintFeedback"-->
+<!--        android:id="@+id/complaintFeedback"-->
+<!--        tools:layout="@layout/complaint_feedback">-->
+<!--        <action-->
+<!--            android:id="@+id/action_complaintFeedback_to_search"-->
+<!--            app:destination="@id/search"-->
+<!--            app:launchSingleTop="true"-->
+<!--            />-->
 
-        <action
-            android:id="@+id/action_complaintFeedback_to_cart"
-            app:destination="@id/cart"
-            app:launchSingleTop="true"
-            />
-    </fragment>
+<!--        <action-->
+<!--            android:id="@+id/action_complaintFeedback_to_cart"-->
+<!--            app:destination="@id/cart"-->
+<!--            app:launchSingleTop="true"-->
+<!--            />-->
+<!--    </fragment>-->
 
     <fragment
         android:name="com.shimmer.store.ui.main.changePassword.ChangePassword"

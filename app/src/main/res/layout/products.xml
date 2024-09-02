@@ -52,7 +52,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/filterLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_45sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,7 +1,11 @@
 package com.shimmer.store.ui.onBoarding.login
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +30,9 @@ import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.isValidPassword
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,17 +70,75 @@ class Login : Fragment() {
 
 
 
+            var counter = 0
+            var start: Int
+            var end: Int
+            imgCreatePassword.singleClick {
+                if(counter == 0){
+                    counter = 1
+                    imgCreatePassword.setImageResource(R.drawable.ic_eye_open)
+                    start=editTextPassword.getSelectionStart()
+                    end=editTextPassword.getSelectionEnd()
+                    editTextPassword.setTransformationMethod(null)
+                    editTextPassword.setSelection(start,end)
+                }else{
+                    counter = 0
+                    imgCreatePassword.setImageResource(R.drawable.ic_eye_closed)
+                    start=editTextPassword.getSelectionStart()
+                    end=editTextPassword.getSelectionEnd()
+                    editTextPassword.setTransformationMethod(PasswordTransformationMethod())
+                    editTextPassword.setSelection(start,end)
+                }
+            }
+
+
+
+            editTextPassword.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                @SuppressLint("SuspiciousIndentation")
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (editTextMobileNumber.text.toString().length == 10 && isValidPassword(editTextPassword.text.toString().trim())){
+                        btLogin.isEnabled = true
+                        btLogin.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._07FFFC
+                                )
+                            )
+                    } else {
+                        btLogin.isEnabled = false
+                        btLogin.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    requireContext(),
+                                    R.color._00b3b0
+                                )
+                            )
+                    }
+                }
+            })
+
 
             btLogin.singleClick {
                 if (editTextMobileNumber.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.EnterValidMobileNumber))
                 } else if (editTextMobileNumber.text.toString().length != 10){
                     showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editTextMobileNumber.text.toString().startsWith("0")){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
                 } else if (binding.editTextPassword.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.EnterPassword))
                 } else if(binding.editTextPassword.text.toString().length >= 0 && binding.editTextPassword.text.toString().length < 8){
                     showSnackBar(getString(R.string.InvalidPassword))
                 } else if(!isValidPassword(editTextPassword.text.toString().trim())){
+                    showSnackBar(getString(R.string.InvalidPassword))
+                } else if(editTextPassword.text.toString().contains(" ")){
                     showSnackBar(getString(R.string.InvalidPassword))
                 } else {
                     Log.e("TAG", "XXXXXXXX")
@@ -87,49 +151,49 @@ class Login : Fragment() {
                         put("username", "admin")
                         put("password", "admin123")
                     }
-                    viewModel.adminToken(adminJSON) {
-                        val adminToken = this
-                        saveData(ADMIN_TOKEN, adminToken)
-                        Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
-                        readData(ADMIN_TOKEN) {
-                            viewModel.websiteUrl(it.toString(), customerJSON){
-                                Log.e("TAG", "itAAA "+this)
-                                val website_id = JSONObject(this).getString("website_id")
-                                saveData(WEBSITE_ID, website_id)
-                                storeWebUrl = website_id
-                                viewModel.customerLoginToken(it.toString(), customerJSON){
-                                    val storeToken = this
-                                    Log.e("TAG", "itBBB "+storeToken)
-                                    viewModel.customerDetail(storeToken){
-                                        Log.e("TAG", "itCCC "+this)
-                                        saveData(CUSTOMER_TOKEN, storeToken)
-                                        saveObject(
-                                            LOGIN_DATA,
-                                            Gson().fromJson(
-                                                this,
-                                                ItemStore::class.java
+
+//                        mainThread {
+                            viewModel.show()
+//                        }
+                        viewModel.adminToken(adminJSON) {
+                            val adminToken = this
+                            saveData(ADMIN_TOKEN, adminToken)
+                            Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
+                            readData(ADMIN_TOKEN) {
+                                viewModel.websiteUrl(it.toString(), customerJSON){
+                                    Log.e("TAG", "itAAA "+this)
+                                    val website_id = JSONObject(this).getString("website_id")
+                                    saveData(WEBSITE_ID, website_id)
+                                    storeWebUrl = website_id
+                                    viewModel.customerLoginToken(it.toString(), customerJSON){
+                                        val storeToken = this
+                                        Log.e("TAG", "itBBB "+storeToken)
+                                        viewModel.customerDetail(storeToken){
+                                            Log.e("TAG", "itCCC "+this)
+                                            saveData(CUSTOMER_TOKEN, storeToken)
+                                            saveObject(
+                                                LOGIN_DATA,
+                                                Gson().fromJson(
+                                                    this,
+                                                    ItemStore::class.java
+                                                )
                                             )
-                                        )
-//                                        viewModel.getQuoteId(storeToken, JSONObject()) {
-//                                            val quoteId = this
-//                                            saveData(QUOTE_ID, quoteId)
-                                            loginType = LoginType.VENDOR
-                                            findNavController().navigate(R.id.action_login_to_home)
-//                                        }
+                                            viewModel.getQuoteId(storeToken, JSONObject()) {
+//                                                mainThread {
+                                                    viewModel.hide()
+//                                                }
+                                                val quoteId = this
+                                                saveData(QUOTE_ID, quoteId)
+                                                loginType = LoginType.VENDOR
+                                                findNavController().navigate(R.id.action_login_to_home)
+                                            }
+                                        }
                                     }
                                 }
-//                        }
                             }
-//                    viewModel.customerLoginToken(it.toString(), obj, view){
-//                        Log.e("TAG", "itAAA "+this)
-//                    }
                         }
                     }
-                }
-
-
-
-
+//                }
             }
 
 

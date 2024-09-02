@@ -193,12 +193,11 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-//                        if(message.contains("fieldName")){
+                        if(message.contains("authorized")){
+                            sessionExpired()
+                        } else {
                             showSnackBar("Something went wrong!")
-//                        } else {
-//                            //sessionExpired()
-//                        }
-
+                        }
                     }
 
                     override fun loading() {

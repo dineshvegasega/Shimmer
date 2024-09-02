@@ -8,10 +8,12 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -145,6 +147,7 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onMapReady(p0: GoogleMap) {
         map = p0
         //setUpMap()
@@ -181,8 +184,10 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
                     BitmapDescriptorFactory
                         .fromResource(R.drawable.marker)
                 )
-            map?.addMarker(markerOptions)
-            map?.setInfoWindowAdapter(InfoWindowAdapter(requireContext()));
+
+            map?.addMarker(markerOptions)?.hideInfoWindow()
+
+//            map?.setInfoWindowAdapter(InfoWindowAdapter(requireContext()));
         }
 
 
@@ -190,12 +195,41 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
 //            .target(array[0]).zoom(5.0f).build()
 //        map?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
 
-//        map?.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
-//            // which is clicked and displaying it in a toast message.
+        map?.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+            // which is clicked and displaying it in a toast message.
 //            val markerName: String = "" + marker.title
 //            Toast.makeText(requireActivity(), "Clicked location is $markerName", Toast.LENGTH_SHORT)
 //                .show()
-//            false
+
+            binding.apply {
+                val data = Gson().fromJson(marker.snippet, ItemFranchise::class.java)
+                textTitle.text = data.name
+                textAddr.text = data.register_address
+                textPincode.text = "Pincode - " + data.d_pincode
+                textContact.text = "Contact - " + data.mobile_number
+                if(mapinfo.isVisible == true){
+                    mapinfo.visibility = View.GONE
+                } else{
+                    mapinfo.visibility = View.VISIBLE
+                }
+            }
+
+            marker.hideInfoWindow();
+            true
+        })
+
+
+
+//        binding.layoutMap.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
+//            when (motionEvent.action){
+//                MotionEvent.ACTION_DOWN -> {
+//                    binding.mapinfo.visibility = View.GONE
+//                }
+//                MotionEvent.ACTION_UP -> {
+//                    binding.mapinfo.visibility = View.GONE
+//                }
+//            }
+//            return@OnTouchListener true
 //        })
 
 
@@ -312,7 +346,7 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
                 }
 
                 map?.moveCamera(CameraUpdateFactory.newLatLng(LatLng(location.latitude, location.longitude)))
-                    map?.animateCamera(CameraUpdateFactory.zoomTo(15f))
+                    map?.animateCamera(CameraUpdateFactory.zoomTo(5f))
                     map?.isMyLocationEnabled = true
             }
 

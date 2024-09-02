@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -105,6 +106,75 @@ class ChangePassword : Fragment() {
 ////                    }
 //                }
 //            }
+
+
+            var counter0 = 0
+            var start0: Int
+            var end0: Int
+            imgOldPassword.singleClick {
+                if(counter0 == 0){
+                    counter0 = 1
+                    imgOldPassword.setImageResource(R.drawable.ic_eye_open)
+                    start0=editTextOldPassword.getSelectionStart()
+                    end0=editTextOldPassword.getSelectionEnd()
+                    editTextOldPassword.setTransformationMethod(null)
+                    editTextOldPassword.setSelection(start0,end0)
+                }else{
+                    counter0 = 0
+                    imgOldPassword.setImageResource(R.drawable.ic_eye_closed)
+                    start0=editTextOldPassword.getSelectionStart()
+                    end0=editTextOldPassword.getSelectionEnd()
+                    editTextOldPassword.setTransformationMethod(PasswordTransformationMethod())
+                    editTextOldPassword.setSelection(start0,end0)
+                }
+            }
+
+
+
+            var counter = 0
+            var start: Int
+            var end: Int
+            imgCreatePassword.singleClick {
+                if(counter == 0){
+                    counter = 1
+                    imgCreatePassword.setImageResource(R.drawable.ic_eye_open)
+                    start=editTextNewPassword.getSelectionStart()
+                    end=editTextNewPassword.getSelectionEnd()
+                    editTextNewPassword.setTransformationMethod(null)
+                    editTextNewPassword.setSelection(start,end)
+                }else{
+                    counter = 0
+                    imgCreatePassword.setImageResource(R.drawable.ic_eye_closed)
+                    start=editTextNewPassword.getSelectionStart()
+                    end=editTextNewPassword.getSelectionEnd()
+                    editTextNewPassword.setTransformationMethod(PasswordTransformationMethod())
+                    editTextNewPassword.setSelection(start,end)
+                }
+            }
+
+
+
+            var counter2 = 0
+            var start2: Int
+            var end2: Int
+            imgConfirmCreatePassword.singleClick {
+                if(counter2 == 0){
+                    counter2 = 1
+                    imgConfirmCreatePassword.setImageResource(R.drawable.ic_eye_open)
+                    start2=editTextConfirmNewPassword.getSelectionStart()
+                    end2=editTextConfirmNewPassword.getSelectionEnd()
+                    editTextConfirmNewPassword.setTransformationMethod(null)
+                    editTextConfirmNewPassword.setSelection(start2,end2)
+                }else{
+                    counter2 = 0
+                    imgConfirmCreatePassword.setImageResource(R.drawable.ic_eye_closed)
+                    start2=editTextConfirmNewPassword.getSelectionStart()
+                    end2=editTextConfirmNewPassword.getSelectionEnd()
+                    editTextConfirmNewPassword.setTransformationMethod(PasswordTransformationMethod())
+                    editTextConfirmNewPassword.setSelection(start2,end2)
+                }
+            }
+
 
             editTextConfirmNewPassword.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {

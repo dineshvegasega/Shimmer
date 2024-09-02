@@ -59,8 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         style="@style/PrimaryEditText"
-        android:hint="@string/mobile_number"
-        android:text="8750713101"
+        android:text=""
         android:maxLength="10"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/textTitleMobileNumber"
@@ -88,21 +87,45 @@
         />
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editTextPassword"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCreatePassword"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        style="@style/PrimaryEditText"
-        android:hint="@string/password"
-        android:text="Admin@123"
-        android:inputType="textPassword"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/textTitlePassword"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:maxLength="25"
-        android:textColor="@color/white"
-        android:visibility="visible"
-        android:backgroundTint="@color/_002630"
-        />
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            style="@style/PrimaryEditText"
+            android:text=""
+            android:inputType="textPassword"
+            android:maxLength="25"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:backgroundTint="@color/_002630"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="0dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCreatePassword"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/_10sdp"
+            android:tint="@android:color/darker_gray"
+            app:srcCompat="@drawable/ic_eye_closed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_15sdp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     <com.google.android.material.button.MaterialButton
@@ -116,10 +139,10 @@
         android:text="@string/login"
         app:iconTint="@color/black"
         android:textColor="@color/black"
-        android:backgroundTint="@color/_07FFFC"
+        android:backgroundTint="@color/_00b3b0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPassword"
+        app:layout_constraintTop_toBottomOf="@id/layoutCreatePassword"
         android:layout_marginTop="@dimen/_25sdp"
         app:cornerRadius="@dimen/_7sdp"
         android:visibility="visible"
@@ -127,6 +150,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
         android:clickable="true"
+        android:enabled="true"
         />
 
 

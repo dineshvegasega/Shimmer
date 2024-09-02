@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.text.TextUtils
 import android.util.ArraySet
@@ -26,6 +27,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.databinding.ItemSizeBinding
+import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
@@ -46,6 +48,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getSize
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.uriToFile
@@ -67,6 +70,39 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     var arrayItemProductOptionsColor: MutableList<Value> = ArrayList()
     var arrayItemProductOptionsPurity: MutableList<Value> = ArrayList()
     var arrayItemProductOptionsSize: MutableList<Value> = ArrayList()
+
+
+
+
+
+    var alertDialog: AlertDialog? = null
+    init {
+        val alert = AlertDialog.Builder(MainActivity.activity.get())
+        val binding =
+            LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
+        alert.setView(binding.root)
+        alert.setCancelable(false)
+        alertDialog = alert.create()
+        alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+
+    fun show() {
+        mainThread {
+            if (alertDialog != null) {
+                alertDialog?.dismiss()
+                alertDialog?.show()
+            }
+        }
+    }
+
+    fun hide() {
+        mainThread {
+            if (alertDialog != null) {
+                alertDialog?.dismiss()
+            }
+        }
+    }
+
 
 
     fun getCartCount(callBack: Int.() -> Unit){
@@ -123,7 +159,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
     fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiWithoutLoader(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
 //                    if (loginType == "vendor") {
@@ -191,7 +227,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
     fun getProductOptions(_id: String, callBack: JsonElement.() -> Unit) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiWithoutLoader(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.productsOptions(_id)

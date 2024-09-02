@@ -132,6 +132,7 @@ class SelectFranchise : Fragment() {
                     }
                     LoginType.CUSTOMER ->  {
                         if(viewModel.selectedPosition != -1){
+
                             findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
                         }
                     }

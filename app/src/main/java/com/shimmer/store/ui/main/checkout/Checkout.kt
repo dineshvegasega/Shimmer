@@ -18,6 +18,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,13 +71,14 @@ class Checkout : Fragment() {
 //            }
 
 
-            when(loginType){
-                LoginType.VENDOR ->  {
+            when (loginType) {
+                LoginType.VENDOR -> {
                     groupVendor.visibility = View.VISIBLE
                     groupGuest.visibility = View.VISIBLE
                     textPayment.text = resources.getString(R.string.proceed_to_payment)
                 }
-                LoginType.CUSTOMER ->  {
+
+                LoginType.CUSTOMER -> {
                     groupVendor.visibility = View.GONE
                     groupGuest.visibility = View.VISIBLE
                     textPayment.text = resources.getString(R.string.select_franchise)
@@ -93,7 +95,7 @@ class Checkout : Fragment() {
                     viewModel.ordersAdapter.submitList(userList)
                 }
 
-                var price : Double = 0.0
+                var price: Double = 0.0
                 userList?.forEach {
                     price += (it.price!! * it.quantity)
                     Log.e(
@@ -110,13 +112,14 @@ class Checkout : Fragment() {
 
                 val priceANDdiscountPrice = price + discountPriceAfter
 
-                val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice ) / 100
+                val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice) / 100
 //                textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
 
                 val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
 //                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
 
-                val priceANDGSTPrice = priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
+                val priceANDGSTPrice =
+                    priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
                 textSubtotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
                 textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
 
@@ -134,12 +137,27 @@ class Checkout : Fragment() {
 //            viewModel.ordersAdapter.submitList(viewModel.item1)
 
             layoutSort.singleClick {
-                when(loginType){
-                    LoginType.VENDOR ->  {
+                when (loginType) {
+                    LoginType.VENDOR -> {
                         findNavController().navigate(R.id.action_checkout_to_payment)
                     }
-                    LoginType.CUSTOMER ->  {
-                        findNavController().navigate(R.id.action_checkout_to_franchiseList)
+
+                    LoginType.CUSTOMER -> {
+                        if (editTextN.text.toString().isEmpty()) {
+                            showSnackBar("Enter Full Name")
+                        } else if (editEmail.text.toString().isEmpty()) {
+                            showSnackBar("Enter Email")
+                        } else if (editMobileNo.text.toString().isEmpty()) {
+                            showSnackBar("Enter Mobile No")
+                        } else {
+                            findNavController().navigate(
+                                R.id.action_checkout_to_franchiseList,
+                                Bundle().apply {
+                                    putString("name", editTextN.text.toString())
+                                    putString("email", editEmail.text.toString())
+                                    putString("mobile", editMobileNo.text.toString())
+                                })
+                        }
                     }
                 }
             }
