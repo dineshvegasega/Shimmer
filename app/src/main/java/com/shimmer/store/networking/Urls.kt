@@ -17,6 +17,7 @@ const val CUSTOMER_DETAIL = "/V1/customers/me"
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
 const val CUSTOMER_RESET_PASSWORD = "/V1/mobilelogin/otp/resetpassword/?"
+const val USER_DETAIL = "V1/vegasega-apis/franchisebyid?"
 
 const val PRODUCTS = "/V1/products/?"
 const val PRODUCTS_DETAIL = "/V1/products/"

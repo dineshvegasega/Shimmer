@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.LoginBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
@@ -25,7 +26,7 @@ import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
-import com.shimmer.store.models.ItemStore
+import com.shimmer.store.models.demo.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -173,9 +174,8 @@ class Login : Fragment() {
                                             saveData(CUSTOMER_TOKEN, storeToken)
                                             saveObject(
                                                 LOGIN_DATA,
-                                                Gson().fromJson(
-                                                    this,
-                                                    ItemStore::class.java
+                                                Gson().fromJson(this,
+                                                    ItemUserItem::class.java
                                                 )
                                             )
                                             viewModel.getQuoteId(storeToken, JSONObject()) {

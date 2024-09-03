@@ -9,10 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CheckoutBinding
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.models.demo.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
+import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -41,7 +46,7 @@ class Checkout : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
-
+        MainActivity.mainActivity.get()!!.callBack(0)
 
         binding.apply {
             topBarBack.includeBackButton.apply {
@@ -51,6 +56,23 @@ class Checkout : Fragment() {
 
                 topBarBack.ivCartLayout.visibility = View.GONE
             }
+
+
+            readData(LOGIN_DATA) { loginUser ->
+                if (loginUser != null){
+                    val data = Gson().fromJson(loginUser,
+                        ItemUserItem::class.java
+                    )
+                    textFNTxt.text = "Name : "+data.contact_person
+                    textCompanyNameTxt.text = "Franchise Name : "+data.name
+                    textMobileTxt.text = "Mobile No : "+data.mobile_number
+                    textAdrressTxt.text = "Address : "+data.register_address
+                    textCityTxt.text = "City : "+data.d_city
+                    textStateTxt.text = "State : "+data.d_state
+                    textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                }
+            }
+
 //            topBar.apply {
 //                textViewTitle.visibility = View.VISIBLE
 ////                cardSearch.visibility = View.GONE

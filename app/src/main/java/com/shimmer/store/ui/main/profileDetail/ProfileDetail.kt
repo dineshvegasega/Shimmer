@@ -10,9 +10,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ProfileDetailBinding
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.models.demo.ItemUserItem
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -43,7 +47,7 @@ class ProfileDetail : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = false
         hideValueOff = 2
-        MainActivity.mainActivity.get()!!.callBack(2)
+        MainActivity.mainActivity.get()!!.callBack(0)
         MainActivity.mainActivity.get()!!.callCartApi()
 
         binding.apply {
@@ -62,6 +66,23 @@ class ProfileDetail : Fragment() {
             cartItemLiveData.observe(viewLifecycleOwner) {
                 topBarBack.menuBadge.text = "$cartItemCount"
                 topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
+
+
+
+            readData(LOGIN_DATA) { loginUser ->
+                if (loginUser != null){
+                   val data = Gson().fromJson(loginUser,
+                        ItemUserItem::class.java
+                    )
+                    textFNTxt.text = "Name : "+data.contact_person
+                    textCompanyNameTxt.text = "Franchise Name : "+data.name
+                    textMobileTxt.text = "Mobile No : "+data.mobile_number
+                    textAdrressTxt.text = "Address : "+data.register_address
+                    textCityTxt.text = "City : "+data.d_city
+                    textStateTxt.text = "State : "+data.d_state
+                    textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                }
             }
 
 //            topBar.apply {

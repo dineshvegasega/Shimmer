@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemSelectFranchiseBinding
 import com.shimmer.store.datastore.db.SearchModel
@@ -15,9 +16,11 @@ import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.models.ItemFranchiseArray
+import com.shimmer.store.models.demo.ItemUser
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
@@ -148,5 +151,46 @@ class SelectFranchiseVM @Inject constructor(private val repository: Repository) 
                 }
             )
         }
+
+
+
+
+
+    fun customerDetail(token: String, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemUser>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.userDetail(token)
+                    override fun success(response: Response<ItemUser>) {
+                        if (response.isSuccessful) {
+                            try {
+//                            val token = response.body().toString().substring(1, response.body().toString().length - 1)
+                                if(response.body()?.size!! > 0){
+                                    val item = Gson().toJson(response.body()?.get(0))
+                                    Log.e("TAG", "customerDetailvvv: ${item}")
+                                    callBack(item)
+                                } else {
+                                    callBack("false")
+                                }
+                            } catch (e: Exception) {
+                            }
+
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        super.error(message)
+//                    showSnackBar(message)
+                        callBack(message.toString())
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
 
 }

@@ -111,6 +111,7 @@ class Splash : Fragment() {
         ioThread {
             delay(1000)
             readData(LOGIN_DATA) { loginUser ->
+
 //                val fragmentInFrame = navHostFragment!!.getChildFragmentManager().getFragments().get(0)
                 if (loginUser == null) {
 //                    if (fragmentInFrame !is Start){

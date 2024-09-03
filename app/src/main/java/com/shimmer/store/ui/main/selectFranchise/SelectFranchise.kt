@@ -1,27 +1,26 @@
 package com.shimmer.store.ui.main.selectFranchise
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
-import com.shimmer.store.datastore.db.SearchModel
-import com.shimmer.store.models.ItemFranchise
+import com.shimmer.store.models.demo.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.shimmer.store.utils.isValidPassword
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class SelectFranchise : Fragment() {
@@ -93,36 +92,64 @@ class SelectFranchise : Fragment() {
 //            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
 //            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
-
-
-
-
-            viewModel.franchiseList(){
-                val fList = this
-                rvList.setHasFixedSize(true)
-                rvList.adapter = viewModel.franchiseListAdapter
-                viewModel.franchiseListAdapter.notifyDataSetChanged()
-                viewModel.franchiseListAdapter.submitList(fList)
-                rvList.visibility = View.VISIBLE
-
-                ivEditSearch.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
+            ivEditSearch.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    if (ivEditSearch.text.toString().isEmpty()){
+                        showSnackBar("Enter Franchise Code")
+                    } else {
+                        viewModel.customerDetail(ivEditSearch.text.toString()){
+                            Log.e("TAG", "itCCC "+this)
+                            if (this == "false"){
+                                groupVendor.visibility = View.GONE
+                            } else {
+                                val data = Gson().fromJson(this,
+                                    ItemUserItem::class.java
+                                )
+                                textFNTxt.text = "Name : "+data.contact_person
+                                textCompanyNameTxt.text = "Franchise Name : "+data.name
+                                textMobileTxt.text = "Mobile No : "+data.mobile_number
+                                textAdrressTxt.text = "Address : "+data.register_address
+                                textCityTxt.text = "City : "+data.d_city
+                                textStateTxt.text = "State : "+data.d_state
+                                textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                                groupVendor.visibility = View.VISIBLE
+                            }
+                        }
                     }
-
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                    }
-
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        val filteredNot = fList.filter { it.name.lowercase().contains(ivEditSearch.text.toString().lowercase()) }
-                        Log.e("TAG", "filteredNot "+filteredNot.toString())
-                        viewModel.franchiseListAdapter.submitList(filteredNot)
-                        viewModel.franchiseListAdapter.notifyDataSetChanged()
-                    }
-                })
-
-
+                }
+                true
             }
+
+
+
+
+
+//            viewModel.franchiseList(){
+//                val fList = this
+//                rvList.setHasFixedSize(true)
+//                rvList.adapter = viewModel.franchiseListAdapter
+//                viewModel.franchiseListAdapter.notifyDataSetChanged()
+//                viewModel.franchiseListAdapter.submitList(fList)
+//                rvList.visibility = View.VISIBLE
+//
+//                ivEditSearch.addTextChangedListener(object : TextWatcher {
+//                    override fun afterTextChanged(s: Editable?) {
+//                    }
+//
+//                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                    }
+//
+//                    @SuppressLint("SuspiciousIndentation")
+//                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                        val filteredNot = fList.filter { it.name.lowercase().contains(ivEditSearch.text.toString().lowercase()) }
+//                        Log.e("TAG", "filteredNot "+filteredNot.toString())
+//                        viewModel.franchiseListAdapter.submitList(filteredNot)
+//                        viewModel.franchiseListAdapter.notifyDataSetChanged()
+//                    }
+//                })
+//
+//
+//            }
 
 
             layoutSort.singleClick {
@@ -132,7 +159,6 @@ class SelectFranchise : Fragment() {
                     }
                     LoginType.CUSTOMER ->  {
                         if(viewModel.selectedPosition != -1){
-
                             findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
                         }
                     }

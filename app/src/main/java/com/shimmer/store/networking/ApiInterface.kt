@@ -5,6 +5,7 @@ import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
+import com.shimmer.store.models.demo.ItemUser
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -53,6 +54,11 @@ interface ApiInterface {
         @Path("id") id: String,
     ): Response<JsonElement>
 
+
+    @GET(USER_DETAIL)
+    suspend fun userDetail(
+        @Query("franchise") franchise: String,
+    ): Response<ItemUser>
 
     @GET("{id}"+PRODUCTS)
     suspend fun products(

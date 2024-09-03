@@ -49,7 +49,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:text="@string/first_name"
+            android:text="@string/name"
             android:visibility="visible"
             android:layout_marginTop="@dimen/_15sdp"
             />
@@ -81,7 +81,7 @@
             app:fontFamily="@font/nunitosans_semibold"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="@string/last_name"
-            android:visibility="visible"
+            android:visibility="gone"
             />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -111,7 +111,24 @@
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Company Name"
+            android:text="Franchise Name"
+            android:visibility="visible"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textMobileTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Mobile No"
             android:visibility="visible"
             />
 
@@ -123,7 +140,7 @@
             android:hint="Company Name"
             android:paddingHorizontal="@dimen/_10sdp"
             android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
+            app:layout_constraintTop_toBottomOf="@+id/textMobileTxt"
             android:layout_marginTop="@dimen/_5sdp"
             android:maxLength="25"
             android:visibility="gone"
@@ -142,7 +159,7 @@
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
             android:layout_marginTop="@dimen/_10sdp"
-            android:text="Adrress"
+            android:text="Address"
             android:visibility="visible"
             />
 

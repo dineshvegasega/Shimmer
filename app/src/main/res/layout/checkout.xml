@@ -100,7 +100,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/_000000"
                 android:textSize="@dimen/_13sdp"
-                app:fontFamily="@font/nunitosans_semibold"
+                app:fontFamily="@font/nunitosans_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view1655"
                 tools:ignore="HardcodedText"
@@ -117,7 +117,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/nunitosans_semibold"
-                android:text="@string/first_name"
+                android:text="@string/name"
                 android:visibility="visible"
                 android:layout_marginTop="@dimen/_5sdp"
                 />
@@ -138,7 +138,23 @@
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/nunitosans_semibold"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Company Name"
+                android:text="Franchise Name"
+                android:visibility="visible"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textMobileTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/nunitosans_semibold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Mobile No"
                 android:visibility="visible"
                 />
 
@@ -150,12 +166,12 @@
                 android:textColor="@color/_2C2C2C"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
+                app:layout_constraintTop_toBottomOf="@+id/textMobileTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/nunitosans_semibold"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:text="Adrress"
+                android:text="Address"
                 android:visibility="visible"
                 />
 
@@ -177,7 +193,21 @@
                 android:visibility="visible"
                 />
 
-
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textStateTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/_2C2C2C"
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/nunitosans_semibold"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="State"
+                android:visibility="visible"
+                />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textPinCodeTxt"
@@ -186,7 +216,7 @@
                 android:textColor="@color/_2C2C2C"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
+                app:layout_constraintTop_toBottomOf="@+id/textStateTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints"
                 app:fontFamily="@font/nunitosans_semibold"
@@ -639,7 +669,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:constraint_referenced_ids="textBillingDetails, textFNTxt, textCompanyNameTxt, textAdrressTxt, textAdrressTxt, textCityTxt, textPinCodeTxt, view1" />
+                app:constraint_referenced_ids="textBillingDetails, textFNTxt, textCompanyNameTxt, textAdrressTxt, textMobileTxt, textStateTxt, textAdrressTxt, textCityTxt, textPinCodeTxt, view1" />
 
 
             <androidx.constraintlayout.widget.Group

@@ -20,7 +20,8 @@ import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
-import com.shimmer.store.models.ItemStore
+import com.shimmer.store.models.demo.ItemUser
+import com.shimmer.store.models.demo.ItemUserItem
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -195,18 +196,22 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
     fun customerDetail(token: String, callBack: String.() -> Unit) =
         viewModelScope.launch {
             repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
+                callHandler = object : CallHandler<Response<ItemUser>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.customerDetail("Bearer " + token, storeWebUrl)
+                        apiInterface.userDetail(storeWebUrl)
 
-                    override fun success(response: Response<JsonElement>) {
+                    override fun success(response: Response<ItemUser>) {
                         if (response.isSuccessful) {
                             try {
 //                            val token = response.body().toString().substring(1, response.body().toString().length - 1)
-                                Log.e("TAG", "customerDetail: ${response.body().toString()}")
-                                callBack(response.body().toString())
+                                if(response.body()?.size!! > 0){
+                                    val item = Gson().toJson(response.body()?.get(0))
+                                    Log.e("TAG", "customerDetailvvv: ${item}")
+                                    callBack(item)
+                                }
                             } catch (e: Exception) {
                             }
+
                         }
                     }
 

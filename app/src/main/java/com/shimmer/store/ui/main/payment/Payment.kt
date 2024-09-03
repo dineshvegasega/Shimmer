@@ -39,7 +39,7 @@ class Payment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = false
         hideValueOff = 2
-        MainActivity.mainActivity.get()!!.callBack(1)
+        MainActivity.mainActivity.get()!!.callBack(0)
         //MainActivity.mainActivity.get()!!.callCartApi()
         binding.apply {
             topBarBack.apply {
