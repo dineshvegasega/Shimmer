@@ -14,15 +14,33 @@
     app:layout_constraintBottom_toBottomOf="parent"
     >
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCustomImageLeft"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:src="@drawable/custom_ring"
+        android:scaleType="fitCenter"
+        android:visibility="visible"
+        app:rippleColor="@color/black"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textSortBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Customise Your Design"
-        android:textColor="@color/_000000"
+        android:textColor="@color/_0098BD"
         android:textSize="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         app:fontFamily="@font/nunitosans_semibold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivCustomImageLeft"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:paddingVertical="@dimen/_3sdp"
@@ -33,7 +51,8 @@
         android:id="@+id/ivCustomDesign"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/baseline_arrow_right_24"
+        android:src="@drawable/arrow_right"
+        android:tint="@color/black"
         android:scaleType="fitCenter"
         android:visibility="visible"
         app:rippleColor="@color/black"

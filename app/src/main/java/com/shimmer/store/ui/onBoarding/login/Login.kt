@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.LoginBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
@@ -26,14 +25,12 @@ import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
-import com.shimmer.store.models.demo.ItemUserItem
+import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.isValidPassword
-import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -103,7 +100,7 @@ class Login : Fragment() {
 
                 @SuppressLint("SuspiciousIndentation")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (editTextMobileNumber.text.toString().length == 10 && isValidPassword(editTextPassword.text.toString().trim())){
+                    if (editTextMobileNumber.text.toString().length == 10 && editTextPassword.text.toString().length >= 8){
                         btLogin.isEnabled = true
                         btLogin.backgroundTintList =
                             ColorStateList.valueOf(
@@ -135,12 +132,12 @@ class Login : Fragment() {
                     showSnackBar(getString(R.string.EnterValidMobileNumber))
                 } else if (binding.editTextPassword.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.EnterPassword))
-                } else if(binding.editTextPassword.text.toString().length >= 0 && binding.editTextPassword.text.toString().length < 8){
-                    showSnackBar(getString(R.string.InvalidPassword))
-                } else if(!isValidPassword(editTextPassword.text.toString().trim())){
-                    showSnackBar(getString(R.string.InvalidPassword))
-                } else if(editTextPassword.text.toString().contains(" ")){
-                    showSnackBar(getString(R.string.InvalidPassword))
+//                } else if(binding.editTextPassword.text.toString().length >= 0 && binding.editTextPassword.text.toString().length < 8){
+//                    showSnackBar(getString(R.string.InvalidPassword))
+//                } else if(!isValidPassword(editTextPassword.text.toString().trim())){
+//                    showSnackBar(getString(R.string.InvalidPassword))
+//                } else if(editTextPassword.text.toString().contains(" ")){
+//                    showSnackBar(getString(R.string.InvalidPassword))
                 } else {
                     Log.e("TAG", "XXXXXXXX")
                     val customerJSON: JSONObject = JSONObject().apply {

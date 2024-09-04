@@ -78,7 +78,7 @@
     <string name="profile_details">Profile Details</string>
     <string name="first_nameStar">First Name*</string>
     <string name="last_nameStar">Last Name*</string>
-    <string name="app_version_1_0">App Version %s</string>
+    <string name="app_version_1_0">Version %s</string>
     <string name="search_by_product">Search By Product</string>
     <string name="search_by_sku">Search By SKU</string>
     <string name="are_your_sure_want_to_logout">Are you sure, You want to Logout?</string>
@@ -106,6 +106,7 @@
     <string name="please_identify_yourself">Please Identify Yourself</string>
     <string name="type_here_to_search">Type here to search</string>
     <string name="categories">Categories</string>
+
     <string name="faqs">FAQs</string>
     <string name="profile">Profile</string>
     <string name="notifications">Notifications</string>
@@ -118,14 +119,15 @@
     <string name="thank_you">Thank You!</string>
     <string name="logout">Logout</string>
     <string name="change_password">Change Password</string>
-    <string name="search_for_your_nearest_franchise">Search for your nearest franchise</string>
-    <string name="search_your_order">Search your order</string>
+    <string name="search_for_your_nearest_franchise">Search For Your Nearest Franchise</string>
+    <string name="search_your_order">Search Your Order</string>
     <string name="order_history">Order History</string>
     <string name="customer_orders">Customer Orders</string>
     <string name="search_mobile_no_name">Search Mobile NO/Name</string>
     <string name="order_details">Order Details</string>
     <string name="old_password">Old Password</string>
     <string name="no_item_available">No Item Available</string>
+
 
     <string name="default_lat">00.000000</string>
     <string name="default_lng">00.000000</string>
@@ -195,5 +197,8 @@
     <string name="photos">Photos</string>
     <string name="browse_images_from_gallery">Browse Images From Gallery</string>
     <string name="closed">Closed</string>
+    <string name="customize_your_design">Customize your design</string>
+    <string name="customer_details">Customer Details</string>
+    <string name="enter_your_details">Enter Your Details</string>
 
 </resources>

@@ -48,6 +48,13 @@ class CustomDesign : Fragment() {
                     findNavController().navigate(R.id.action_customDesign_to_cart)
                 }
             }
+
+
+            layoutSort.singleClick {
+                findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
+                    putString("from" ,"customDesign")
+                })
+            }
         }
     }
 

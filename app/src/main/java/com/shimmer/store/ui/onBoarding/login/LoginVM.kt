@@ -6,31 +6,21 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import com.shimmer.store.R
 import com.shimmer.store.databinding.LoaderBinding
-import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
-import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
-import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.saveData
-import com.shimmer.store.datastore.DataStoreUtil.saveObject
-import com.shimmer.store.models.demo.ItemUser
-import com.shimmer.store.models.demo.ItemUserItem
+import com.shimmer.store.models.user.ItemUser
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.mainThread
-import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -171,8 +161,13 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                     .substring(1, response.body().toString().length - 1).toString()
                                     .replace("\\", "")
                                 Log.e("TAG", "successAAB: ${jsonObject}")
-                                storeToken = JSONObject(jsonObject).getString("token")
-                                callBack(storeToken)
+                                if (JSONObject(jsonObject).getString("success") == "true"){
+                                    storeToken = JSONObject(jsonObject).getString("token")
+                                    callBack(storeToken)
+                                } else {
+                                    showSnackBar("Invalid Credentials")
+                                    hide()
+                                }
                             } catch (e: Exception) {
                             }
                         }

@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
-import com.shimmer.store.models.demo.ItemUserItem
+import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.showSnackBar
@@ -101,6 +100,7 @@ class SelectFranchise : Fragment() {
                             Log.e("TAG", "itCCC "+this)
                             if (this == "false"){
                                 groupVendor.visibility = View.GONE
+                                viewModel.selectedPosition = -1
                             } else {
                                 val data = Gson().fromJson(this,
                                     ItemUserItem::class.java
@@ -113,6 +113,7 @@ class SelectFranchise : Fragment() {
                                 textStateTxt.text = "State : "+data.d_state
                                 textPinCodeTxt.text = "Pincode : "+data.d_pincode
                                 groupVendor.visibility = View.VISIBLE
+                                viewModel.selectedPosition = 1
                             }
                         }
                     }
@@ -158,9 +159,9 @@ class SelectFranchise : Fragment() {
 //                        findNavController().navigate(R.id.action_orderSummary_to_home)
                     }
                     LoginType.CUSTOMER ->  {
-                        if(viewModel.selectedPosition != -1){
+//                        if(viewModel.selectedPosition != -1){
                             findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
-                        }
+//                        }
                     }
                 }
             }

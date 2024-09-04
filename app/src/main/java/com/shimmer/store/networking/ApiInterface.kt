@@ -5,7 +5,7 @@ import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
-import com.shimmer.store.models.demo.ItemUser
+import com.shimmer.store.models.user.ItemUser
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body

@@ -41,15 +41,22 @@ class ThankYou : Fragment() {
 
         binding.apply {
 
-            when(loginType){
-                LoginType.VENDOR ->  {
-                    textTitle2.text = "Your order has been successfully placed."
-                }
-                LoginType.CUSTOMER ->  {
-                    textTitle2.text = "Your order has been successfully placed.\n" +
-                            "Franchise will contact you within 24hrs"
+
+            if(arguments?.getString("from") == "customDesign"){
+                textTitle2.text = "Your request has been submitted regarding Custom Design. Someone from our team will get in touch with you within 24 hours"
+            } else {
+                when(loginType){
+                    LoginType.VENDOR ->  {
+                        textTitle2.text = "Your order has been successfully placed."
+                    }
+                    LoginType.CUSTOMER ->  {
+                        textTitle2.text = "Your order has been successfully placed.\n" +
+                                "Franchise will contact you within 24hrs"
+                    }
                 }
             }
+
+
 
             btHome.singleClick {
                 findNavController().navigate(R.id.action_thankyou_to_home)

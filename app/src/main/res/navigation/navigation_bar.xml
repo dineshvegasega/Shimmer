@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_bar"
-    app:startDestination="@id/selectFranchise"
+    app:startDestination="@id/splash"
     >
 
     <fragment
@@ -496,6 +496,15 @@
             app:destination="@id/cart"
             app:launchSingleTop="true"
            />
+
+        <action
+            android:id="@+id/action_customDesign_to_thankyou"
+            app:destination="@id/thankyou"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/navigation_bar"
+            app:popUpToInclusive="true"
+            />
+
     </fragment>
 
 

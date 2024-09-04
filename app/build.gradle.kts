@@ -9,6 +9,7 @@ plugins {
     id("kotlin-parcelize")
     id ("com.apollographql.apollo3") version ("3.7.0")
     id ("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -130,13 +131,15 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation (platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation ("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-database-ktx")
     implementation ("com.google.firebase:firebase-messaging-ktx")
     implementation ("com.google.firebase:firebase-analytics-ktx")
-//    implementation ("com.google.firebase:firebase-crashlytics-ktx")
+//    implementation("com.google.firebase:firebase-crashlytics")
+//    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-crashlytics-ktx")
     implementation ("com.google.firebase:firebase-config-ktx")
     implementation ("com.google.firebase:firebase-dynamic-links-ktx")
 

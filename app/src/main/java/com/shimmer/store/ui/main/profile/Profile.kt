@@ -103,10 +103,12 @@ class Profile : Fragment() {
                 LoginType.VENDOR ->  {
                     groupVendor.visibility = View.VISIBLE
                     groupGuest.visibility = View.GONE
+                    textLogout.text = getString(R.string.logout)
                 }
                 LoginType.CUSTOMER ->  {
                     groupVendor.visibility = View.GONE
                     groupGuest.visibility = View.VISIBLE
+                    textLogout.text = getString(R.string.login)
                 }
             }
 
@@ -133,6 +135,11 @@ class Profile : Fragment() {
                 topBarOthers.menuBadge.text = "$cartItemCount"
                 topBarOthers.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
+
+            val manager = requireContext().packageManager
+            val info = manager?.getPackageInfo(requireContext().packageName, 0)
+            val versionName = info?.versionName
+            textAppVersionTxt.text = getString(R.string.app_version_1_0, versionName)
 
 
             btProfileDetails.singleClick {
@@ -165,22 +172,34 @@ class Profile : Fragment() {
 
 
             textLogout.singleClick {
-               MaterialAlertDialogBuilder(requireContext(), R.style.LogoutDialogTheme)
-                    .setTitle(resources.getString(R.string.app_name))
-                    .setMessage(resources.getString(R.string.are_your_sure_want_to_logout))
-                    .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
-                        dialog.dismiss()
+                when(loginType){
+                    LoginType.VENDOR ->  {
+                        MaterialAlertDialogBuilder(requireContext(), R.style.LogoutDialogTheme)
+                            .setTitle(resources.getString(R.string.app_name))
+                            .setMessage(resources.getString(R.string.are_your_sure_want_to_logout))
+                            .setPositiveButton(resources.getString(R.string.yes)) { dialog, _ ->
+                                dialog.dismiss()
+                                removeKey(LOGIN_DATA) {}
+                                removeKey(CUSTOMER_TOKEN) {}
+                                removeKey(WEBSITE_ID) {}
+                                clearDataStore { }
+                                findNavController().navigate(R.id.action_profile_to_loginOptions)
+                            }
+                            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .setCancelable(false)
+                            .show()
+                    }
+                    LoginType.CUSTOMER ->  {
                         removeKey(LOGIN_DATA) {}
                         removeKey(CUSTOMER_TOKEN) {}
                         removeKey(WEBSITE_ID) {}
                         clearDataStore { }
                         findNavController().navigate(R.id.action_profile_to_loginOptions)
                     }
-                    .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .setCancelable(false)
-                    .show()
+                }
+
             }
 
         }
