@@ -109,51 +109,51 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(name = "Everyday"))
             ))
             mainCategory.add(Items(id = 7, parent_id = 18, name = "Mangalsutras", image = R.drawable.mangalsutra_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Mangalsutras", isAll = true),
-                    Items(name = "Casual"),
-                    Items(name = "Bangles"),
-                    Items(name = "Everyday"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Mangalsutras", isAll = true),
+//                    Items(name = "Casual"),
+//                    Items(name = "Bangles"),
+//                    Items(name = "Everyday"))
             ))
             mainCategory.add(Items(id = 8, parent_id = 18, name = "Nosepins", image = R.drawable.nosepin_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Nosepins", isAll = true),
-                    Items(name = "Balis"),
-                    Items(name = "Studs"),
-                    Items(name = "Drops"),
-                    Items(name = "Hoops"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Nosepins", isAll = true),
+//                    Items(name = "Balis"),
+//                    Items(name = "Studs"),
+//                    Items(name = "Drops"),
+//                    Items(name = "Hoops"))
             ))
             mainCategory.add(Items(id = 9, parent_id = 18, name = "Solitaire", image = R.drawable.solitire_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Solitaire", isAll = true),
-                    Items(name = "Balis"),
-                    Items(name = "Studs"),
-                    Items(name = "Drops"),
-                    Items(name = "Hoops"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Solitaire", isAll = true),
+//                    Items(name = "Balis"),
+//                    Items(name = "Studs"),
+//                    Items(name = "Drops"),
+//                    Items(name = "Hoops"))
             ))
             mainCategory.add(Items(id = 10, parent_id = 18, name = "Accessories", image = R.drawable.access_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Accessories", isAll = true),
-                    Items(name = "Balis"),
-                    Items(name = "Studs"),
-                    Items(name = "Drops"),
-                    Items(name = "Hoops"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Accessories", isAll = true),
+//                    Items(name = "Balis"),
+//                    Items(name = "Studs"),
+//                    Items(name = "Drops"),
+//                    Items(name = "Hoops"))
             ))
             mainCategory.add(Items(id = 11, parent_id = 18, name = "Bangles", image = R.drawable.bangles_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Bangles", isAll = true),
-                    Items(name = "Balis"),
-                    Items(name = "Studs"),
-                    Items(name = "Drops"),
-                    Items(name = "Hoops"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Bangles", isAll = true),
+//                    Items(name = "Balis"),
+//                    Items(name = "Studs"),
+//                    Items(name = "Drops"),
+//                    Items(name = "Hoops"))
             ))
             mainCategory.add(Items(id = 12, parent_id = 18, name = "Watches", image = R.drawable.watch_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Watches", isAll = true),
-                    Items(name = "Balis"),
-                    Items(name = "Studs"),
-                    Items(name = "Drops"),
-                    Items(name = "Hoops"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Watches", isAll = true),
+//                    Items(name = "Balis"),
+//                    Items(name = "Studs"),
+//                    Items(name = "Drops"),
+//                    Items(name = "Hoops"))
             ))
 
 

@@ -20,7 +20,12 @@
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/layout_custom_design"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:scrollbars="vertical"
+        android:scrollbarSize="@dimen/_3sdp"
+        android:scrollbarThumbVertical="@color/app_color"
+        android:fadeScrollbars="false"
+        android:paddingBottom="@dimen/_10sdp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,6 +70,7 @@
                 tools:listitem="@layout/item_home_category"
                 android:paddingHorizontal="@dimen/_6sdp"
                 app:layout_constraintTop_toTopOf="parent"
+                android:paddingVertical="@dimen/_10sdp"
                 />
 
 
@@ -104,59 +110,67 @@
                 app:cardUseCompatPadding="false"
                 app:layout_constraintTop_toBottomOf="@+id/rvList3"
                 app:cardBackgroundColor="@color/_002630"
+
                 >
-
-
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_margin="@dimen/_15sdp"
-                    android:padding="@dimen/_15sdp"
-                    android:background="@drawable/frame_50"
+                    android:paddingBottom="@dimen/_50sdp"
                     >
-                    <androidx.appcompat.widget.AppCompatTextView
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Know about"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp"
-                        app:fontFamily="@font/nunitosans_regular"
-                        android:letterSpacing="0.1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:padding="@dimen/_15sdp"
+                        android:background="@drawable/frame_50"
+                        >
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Know about"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+                            app:fontFamily="@font/nunitosans_regular"
+                            android:letterSpacing="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Shimmer"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_20sdp"
-                        app:fontFamily="@font/nunitosans_semibold"
-                        android:letterSpacing="0.1"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="HardcodedText" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Shimmer"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_20sdp"
+                            app:fontFamily="@font/nunitosans_semibold"
+                            android:letterSpacing="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Decompiling our Android app’s APK file is essential to ensure our applications' integrity, security, and efficiency. This article explores why decompiling our APK is crucial and provides insights into some good practices for safeguarding our app. In Android Studio, inspecting the contents of an APK is a simple process. If we build our app on Android Studio, the APK file is typically located at /app/build/outputs/apk. Double-clicking on the APK file will display its contents. Alternatively, under the Build pull-down menu, selecting Analyze APK allows us to pick an APK file from any location."
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp"
-                        app:fontFamily="@font/nunitosans_light"
-                        android:letterSpacing="0.1"
-                        android:lineSpacingExtra="@dimen/_2sdp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        tools:ignore="HardcodedText" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Decompiling our Android app’s APK file is essential to ensure our applications' integrity, security, and efficiency. This article explores why decompiling our APK is crucial and provides insights into some good practices for safeguarding our app. In Android Studio, inspecting the contents of an APK is a simple process. If we build our app on Android Studio, the APK file is typically located at /app/build/outputs/apk. Double-clicking on the APK file will display its contents. Alternatively, under the Build pull-down menu, selecting Analyze APK allows us to pick an APK file from any location."
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_10sdp"
+                            app:fontFamily="@font/nunitosans_light"
+                            android:letterSpacing="0.1"
+                            android:lineSpacingExtra="@dimen/_2sdp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
 
             </androidx.cardview.widget.CardView>

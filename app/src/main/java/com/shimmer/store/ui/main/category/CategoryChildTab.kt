@@ -2,6 +2,8 @@ package com.shimmer.store.ui.main.category
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +12,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
+import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.models.Items
-import com.shimmer.store.ui.main.products.Products
-import com.shimmer.store.ui.main.products.Products.Companion
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.endDrawable
 import com.shimmer.store.utils.singleClick
@@ -76,13 +74,26 @@ class CategoryChildTab(
             itemCategory9.textName.text = mainCategory[8].name
             itemCategory10.textName.text = mainCategory[9].name
 
+            itemCategory5.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            itemCategory6.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            itemCategory7.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            itemCategory8.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            itemCategory9.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            itemCategory10.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
 
             itemCategory1.rvListCategory.adapter = viewModel.subCategoryAdapter1
             itemCategory1.linearLayout.singleClick {
                 itemCategory1.rvListCategory.adapter = viewModel.subCategoryAdapter1
                 viewModel.subCategoryAdapter1.notifyDataSetChanged()
                 viewModel.subCategoryAdapter1.submitList(mainCategory[0].subCategory)
-                itemCategory1.rvListCategory.visibility = View.VISIBLE
+
+                if (itemCategory1.rvListCategory.isVisible == true) {
+                    itemCategory1.rvListCategory.visibility = View.GONE
+                    itemCategory1.textName.endDrawable(R.drawable.arrow_right)
+                } else {
+                    itemCategory1.rvListCategory.visibility = View.VISIBLE
+                    itemCategory1.textName.endDrawable(R.drawable.arrow_down)
+                }
                 itemCategory2.rvListCategory.visibility = View.GONE
                 itemCategory3.rvListCategory.visibility = View.GONE
                 itemCategory4.rvListCategory.visibility = View.GONE
@@ -92,17 +103,20 @@ class CategoryChildTab(
                 itemCategory8.rvListCategory.visibility = View.GONE
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
-                itemCategory1.textName.endDrawable(R.drawable.arrow_down)
+//                itemCategory1.textName.endDrawable(R.drawable.arrow_down)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 1
+                Handler(Looper.myLooper()!!).postDelayed({
+                    itemCategory1.rvListCategory.scrollTo(0, itemCategory1.rvListCategory.bottom)
+                }, 100)
             }
 
 
@@ -112,7 +126,13 @@ class CategoryChildTab(
                 viewModel.subCategoryAdapter2.notifyDataSetChanged()
                 viewModel.subCategoryAdapter2.submitList(mainCategory[1].subCategory)
                 itemCategory1.rvListCategory.visibility = View.GONE
-                itemCategory2.rvListCategory.visibility = View.VISIBLE
+                if (itemCategory2.rvListCategory.isVisible == true) {
+                    itemCategory2.rvListCategory.visibility = View.GONE
+                    itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+                } else {
+                    itemCategory2.rvListCategory.visibility = View.VISIBLE
+                    itemCategory2.textName.endDrawable(R.drawable.arrow_down)
+                }
                 itemCategory3.rvListCategory.visibility = View.GONE
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
@@ -122,16 +142,19 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_down)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_down)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 2
+                Handler(Looper.myLooper()!!).postDelayed({
+                    itemCategory2.rvListCategory.scrollTo(0, itemCategory2.rvListCategory.bottom)
+                }, 100)
             }
 
 
@@ -141,7 +164,13 @@ class CategoryChildTab(
                 viewModel.subCategoryAdapter3.submitList(mainCategory[2].subCategory)
                 itemCategory1.rvListCategory.visibility = View.GONE
                 itemCategory2.rvListCategory.visibility = View.GONE
-                itemCategory3.rvListCategory.visibility = View.VISIBLE
+                if (itemCategory3.rvListCategory.isVisible == true) {
+                    itemCategory3.rvListCategory.visibility = View.GONE
+                    itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+                } else {
+                    itemCategory3.rvListCategory.visibility = View.VISIBLE
+                    itemCategory3.textName.endDrawable(R.drawable.arrow_down)
+                }
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
@@ -151,15 +180,18 @@ class CategoryChildTab(
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_down)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_down)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 3
+                Handler(Looper.myLooper()!!).postDelayed({
+                    itemCategory3.rvListCategory.scrollTo(0, itemCategory3.rvListCategory.bottom)
+                }, 100)
             }
 
 
@@ -170,7 +202,13 @@ class CategoryChildTab(
                 itemCategory1.rvListCategory.visibility = View.GONE
                 itemCategory2.rvListCategory.visibility = View.GONE
                 itemCategory3.rvListCategory.visibility = View.GONE
-                itemCategory4.rvListCategory.visibility = View.VISIBLE
+                if (itemCategory4.rvListCategory.isVisible == true) {
+                    itemCategory4.rvListCategory.visibility = View.GONE
+                    itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+                } else {
+                    itemCategory4.rvListCategory.visibility = View.VISIBLE
+                    itemCategory4.textName.endDrawable(R.drawable.arrow_down)
+                }
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
@@ -180,14 +218,17 @@ class CategoryChildTab(
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_down)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 4
+                Handler(Looper.myLooper()!!).postDelayed({
+                    itemCategory4.rvListCategory.scrollTo(0, itemCategory4.rvListCategory.bottom)
+                }, 100)
             }
 
 
@@ -199,7 +240,7 @@ class CategoryChildTab(
                 itemCategory2.rvListCategory.visibility = View.GONE
                 itemCategory3.rvListCategory.visibility = View.GONE
                 itemCategory4.rvListCategory.visibility = View.GONE
-                itemCategory5.rvListCategory.visibility = View.VISIBLE
+                itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
                 itemCategory8.rvListCategory.visibility = View.GONE
@@ -209,13 +250,35 @@ class CategoryChildTab(
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 5
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[4].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 
@@ -228,7 +291,7 @@ class CategoryChildTab(
                 itemCategory3.rvListCategory.visibility = View.GONE
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
-                itemCategory6.rvListCategory.visibility = View.VISIBLE
+                itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
                 itemCategory8.rvListCategory.visibility = View.GONE
                 itemCategory9.rvListCategory.visibility = View.GONE
@@ -237,13 +300,35 @@ class CategoryChildTab(
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 6
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[5].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 
@@ -257,7 +342,7 @@ class CategoryChildTab(
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
-                itemCategory7.rvListCategory.visibility = View.VISIBLE
+                itemCategory7.rvListCategory.visibility = View.GONE
                 itemCategory8.rvListCategory.visibility = View.GONE
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
@@ -265,13 +350,35 @@ class CategoryChildTab(
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 7
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[6].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 
@@ -286,20 +393,42 @@ class CategoryChildTab(
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
-                itemCategory8.rvListCategory.visibility = View.VISIBLE
+                itemCategory8.rvListCategory.visibility = View.GONE
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 8
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[7].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 
@@ -315,19 +444,41 @@ class CategoryChildTab(
                 itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
                 itemCategory8.rvListCategory.visibility = View.GONE
-                itemCategory9.rvListCategory.visibility = View.VISIBLE
+                itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 9
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[8].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 
@@ -344,18 +495,40 @@ class CategoryChildTab(
                 itemCategory7.rvListCategory.visibility = View.GONE
                 itemCategory8.rvListCategory.visibility = View.GONE
                 itemCategory9.rvListCategory.visibility = View.GONE
-                itemCategory10.rvListCategory.visibility = View.VISIBLE
+                itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory2.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory3.textName.endDrawable(R.drawable.arrow_right)
                 itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory10.textName.endDrawable(R.drawable.arrow_down)
+//                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory8.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 10
+
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[9].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
             }
 
 

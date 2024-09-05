@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_1sdp"
+    android:layout_marginVertical="@dimen/_3sdp"
+    android:layout_marginHorizontal="@dimen/_4sdp"
     android:foreground="?android:attr/selectableItemBackground"
     android:id="@+id/layoutChild"
     android:layout_marginTop="@dimen/_3sdp"
@@ -18,11 +19,10 @@
         android:orientation="horizontal"
         android:id="@+id/linearLayout"
         android:foreground="?android:attr/selectableItemBackground"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintDimensionRatio="H,0.9:0.35"
+        app:layout_constraintDimensionRatio="H,0.9:0.40"
 
         >
 
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Ring"
         android:textColor="@color/black"
-        android:textSize="@dimen/_11sdp"
+        android:textSize="@dimen/_10sdp"
         app:fontFamily="@font/nunitosans_semibold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

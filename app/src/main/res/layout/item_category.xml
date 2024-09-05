@@ -9,7 +9,7 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:focusable="true"
         android:clickable="true"
-        android:paddingVertical="@dimen/_7sdp"
+        android:paddingVertical="@dimen/_5sdp"
     >
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -38,7 +38,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:drawableEnd="@drawable/arrow_right"
-                android:drawablePadding="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_3sdp"
                 android:drawableTint="@color/white"
                 tools:ignore="HardcodedText" />
 
@@ -60,8 +60,8 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         android:layout_marginBottom="@dimen/_5sdp"
         android:visibility="gone"
-        android:layout_marginTop="@dimen/_5sdp"
-
+        android:layout_marginTop="@dimen/_3sdp"
+android:layout_marginHorizontal="@dimen/_4sdp"
         />
 
 

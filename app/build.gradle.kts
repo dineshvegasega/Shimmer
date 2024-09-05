@@ -88,8 +88,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.5.2")
-    implementation ("androidx.databinding:databinding-runtime:8.5.2")
+    implementation ("androidx.databinding:databinding-ktx:8.6.0")
+    implementation ("androidx.databinding:databinding-runtime:8.6.0")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
@@ -172,9 +172,9 @@ dependencies {
     implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
     implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
 
-    implementation ("androidx.media3:media3-exoplayer:1.4.0")
-    implementation ("androidx.media3:media3-ui:1.4.0")
-    implementation ("androidx.media3:media3-exoplayer-hls:1.4.0")
+    implementation ("androidx.media3:media3-exoplayer:1.4.1")
+    implementation ("androidx.media3:media3-ui:1.4.1")
+    implementation ("androidx.media3:media3-exoplayer-hls:1.4.1")
 
 //    implementation ("com.reginald.swiperefresh:library:1.0.0")
 //    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")

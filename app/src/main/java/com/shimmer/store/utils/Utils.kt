@@ -149,7 +149,7 @@ fun showSnackBar(string: String, type: Int = 1, navController: NavController? = 
             message,
             Snackbar.LENGTH_LONG
         ).apply {
-            setBackgroundTint(ContextCompat.getColor(context, R.color._000000))
+            setBackgroundTint(ContextCompat.getColor(context, R.color.app_color))
             animationMode = Snackbar.ANIMATION_MODE_SLIDE
             setTextColor(ContextCompat.getColor(context, R.color._ffffff))
             view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).textSize =

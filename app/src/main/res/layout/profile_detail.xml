@@ -20,22 +20,18 @@
         app:layout_constraintTop_toBottomOf="@+id/top_bar_back">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textBillingDetails"
-            android:layout_width="match_parent"
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:background="@color/_f2f2f2"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_5sdp"
-            android:text="@string/profile_details"
-            android:textAllCaps="true"
-            android:textColor="@color/_000000"
-            android:textSize="@dimen/_13sdp"
-            app:fontFamily="@font/nunitosans_regular"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/billing_details"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_17sdp"
+            app:fontFamily="@font/nunitosans_semibold"
             tools:ignore="HardcodedText"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -44,14 +40,14 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textBillingDetails"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
             android:text="@string/name"
             android:visibility="visible"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             />
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -105,13 +101,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/editTextLN"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Franchise Name"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/franchise_name"
             android:visibility="visible"
             />
 
@@ -122,13 +118,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxt"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Mobile No"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/mobile_no"
             android:visibility="visible"
             />
 
@@ -153,13 +149,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/editCompanyName"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="Address"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/address"
             android:visibility="visible"
             />
 
@@ -183,13 +179,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/editAdrress"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="City"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/city"
             android:visibility="visible"
             />
 
@@ -215,13 +211,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/editCity"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="State"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/state"
             android:visibility="visible"
             />
 
@@ -246,13 +242,13 @@
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
             app:layout_constraintTop_toBottomOf="@+id/editState"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="PinCode"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/pincode"
             android:visibility="visible"
             />
 
@@ -271,6 +267,170 @@
             />
 
 
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textShippingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/shipping_details"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/editCountry"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_17sdp"
+            app:fontFamily="@font/nunitosans_semibold"
+            tools:ignore="HardcodedText"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textShippingAddr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textShippingTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/address"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textShippingCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textShippingAddr"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/city"
+            android:visibility="visible"
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textShippingState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textShippingCity"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/state"
+            android:visibility="visible"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textShippingPincode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textShippingState"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/pincode"
+            android:visibility="visible"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textTitleBank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bank_details"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/textShippingPincode"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_17sdp"
+            app:fontFamily="@font/nunitosans_semibold"
+            tools:ignore="HardcodedText"
+            android:layout_marginVertical="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAccountHolderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleBank"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/account_holder"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAccountNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textAccountHolderName"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/account_number"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAccountIFSC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textAccountNumber"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/ifsc_code"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textGST"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textAccountIFSC"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/gst_number"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

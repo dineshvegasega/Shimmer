@@ -170,7 +170,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                    "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
 
                 layoutChild.singleClick {
                     mainCategory.forEach {
@@ -253,7 +259,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -335,7 +347,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -417,7 +435,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -499,7 +523,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -581,8 +611,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
-
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -664,7 +699,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -746,7 +787,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -828,7 +875,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false
@@ -910,7 +963,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
             position: Int
         ) {
             binding.apply {
-                textName.text = dataClass.name
+                if (dataClass.name.contains(" ")){
+                    val txt = dataClass.name.split(" ")[0]+
+                            "\n"+dataClass.name.split(" ")[1]
+                    textName.text = txt
+                } else {
+                    textName.text = dataClass.name
+                }
                 layoutChild.singleClick {
                     mainCategory.forEach {
                         it.isSelected = false

@@ -67,9 +67,9 @@ class Checkout : Fragment() {
                     textCompanyNameTxt.text = "Franchise Name : "+data.name
                     textMobileTxt.text = "Mobile No : "+data.mobile_number
                     textAdrressTxt.text = "Address : "+data.register_address
-                    textCityTxt.text = "City : "+data.d_city
-                    textStateTxt.text = "State : "+data.d_state
-                    textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                    textCityTxt.text = "City : "+data.register_city
+                    textStateTxt.text = "State : "+data.register_state
+                    textPinCodeTxt.text = "Pincode : "+data.register_pincode
                 }
             }
 
@@ -161,7 +161,19 @@ class Checkout : Fragment() {
             layoutSort.singleClick {
                 when (loginType) {
                     LoginType.VENDOR -> {
-                        findNavController().navigate(R.id.action_checkout_to_payment)
+                        if (editTextN.text.toString().isEmpty()) {
+                            showSnackBar("Enter Full Name")
+                        } else if (editEmail.text.toString().isEmpty()) {
+                            showSnackBar("Enter Email")
+                        } else if (editMobileNo.text.toString().isEmpty()) {
+                            showSnackBar("Enter Mobile No")
+                        } else {
+                            findNavController().navigate(R.id.action_checkout_to_payment, Bundle().apply {
+                                putString("name", editTextN.text.toString())
+                                putString("email", editEmail.text.toString())
+                                putString("mobile", editMobileNo.text.toString())
+                            })
+                        }
                     }
 
                     LoginType.CUSTOMER -> {

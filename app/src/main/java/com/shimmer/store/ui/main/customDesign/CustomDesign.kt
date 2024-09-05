@@ -13,6 +13,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.CustomDesignBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,9 +52,17 @@ class CustomDesign : Fragment() {
 
 
             layoutSort.singleClick {
-                findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
-                    putString("from" ,"customDesign")
-                })
+                if (editTextN.text.toString().isEmpty()) {
+                    showSnackBar("Enter Full Name")
+                } else if (editEmail.text.toString().isEmpty()) {
+                    showSnackBar("Enter Email")
+                } else if (editMobileNo.text.toString().isEmpty()) {
+                    showSnackBar("Enter Mobile No")
+                } else {
+                    findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
+                        putString("from" ,"customDesign")
+                    })
+                }
             }
         }
     }

@@ -282,9 +282,9 @@ class Products : Fragment() {
                         categoryIds += ""+sub.id+","
                     }
                 }
-                categoryIds = if(categoryIds.length > 0) categoryIds.substring(0, categoryIds.length-1) else ""
             }
-
+            categoryIds = if(categoryIds.length > 0) categoryIds.substring(0, categoryIds.length-1) else ""
+            Log.e("TAG", "mainCategoryXX "+categoryIds)
             if (mainCategoryBoolean){
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "category_id"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = categoryIds

@@ -74,9 +74,20 @@ class ProfileDetail : Fragment() {
                     textCompanyNameTxt.text = "Franchise Name : "+data.name
                     textMobileTxt.text = "Mobile No : "+data.mobile_number
                     textAdrressTxt.text = "Address : "+data.register_address
-                    textCityTxt.text = "City : "+data.d_city
-                    textStateTxt.text = "State : "+data.d_state
-                    textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                    textCityTxt.text = "City : "+data.register_city
+                    textStateTxt.text = "State : "+data.register_state
+                    textPinCodeTxt.text = "Pincode : "+data.register_pincode
+
+                    textShippingAddr.text = "Address : "+data.d_address
+                    textShippingCity.text = "City : "+data.d_city
+                    textShippingState.text = "State : "+data.d_state
+                    textShippingPincode.text = "Pincode : "+data.d_pincode
+
+                    textAccountHolderName.text = "Account Holder : "+data.account_number
+                    textAccountNumber.text = "Account Number : "+data.bank_account_number
+                    textAccountIFSC.text = "IFSC Code : "+data.ifsc_number
+                    textGST.text = "GST Number : "+data.gst
+
                 }
             }
 
