@@ -5,6 +5,7 @@ import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
+import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
 import com.shimmer.store.models.user.ItemUser
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -148,7 +149,11 @@ interface ApiInterface {
     @GET(FRANCHISE_LIST)
     suspend fun franchiseList(): Response<ItemFranchiseArray>
 
-
+    @GET(ORDERS)
+    suspend fun getOrderHistory(
+        @Header("Authorization") authHeader: String,
+        @QueryMap parms: Map<String, String>,
+    ): Response<ItemOrderHistoryModel>
 
 }
 

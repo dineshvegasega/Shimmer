@@ -85,8 +85,8 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.0")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.8.0")
     //noinspection GradleCompatible,GradleCompatible
     implementation ("androidx.databinding:databinding-ktx:8.6.0")
     implementation ("androidx.databinding:databinding-runtime:8.6.0")

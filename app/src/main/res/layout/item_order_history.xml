@@ -42,7 +42,7 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textColor"
+                android:id="@+id/textOrderNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -66,14 +66,14 @@
                 android:textSize="@dimen/_9sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textColor"
+                app:layout_constraintTop_toBottomOf="@+id/textOrderNo"
                 android:layout_marginTop="@dimen/_3sdp"
                 tools:ignore="HardcodedText" />
 
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textRingSize"
+                android:id="@+id/textOrderPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
@@ -104,7 +104,7 @@
                 />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btState"
+                android:id="@+id/btStatus"
                 style="@style/PrimaryButtonBlue"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_24sdp"

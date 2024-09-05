@@ -34,6 +34,8 @@ const val ADD_CART = "/V1/carts/mine/items"
 const val BANNER = "V1/vegasega-apis/banner?homebanner=1"
 const val FRANCHISE_LIST = "V1/vegasega-apis/franchise?franchise=true"
 
+const val ORDERS = "V1/orders/?"
+
 //https://shop.vegasega.com/rest/V1/vegasega-apis/franchise?franchise=true
 
 

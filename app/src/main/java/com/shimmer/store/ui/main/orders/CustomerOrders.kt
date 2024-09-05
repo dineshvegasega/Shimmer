@@ -2,6 +2,7 @@ package com.shimmer.store.ui.main.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.databinding.CustomerOrdersBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,11 +54,18 @@ class CustomerOrders (
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
-            rvListCategory1.setHasFixedSize(true)
-            viewModel.customerOrders.notifyDataSetChanged()
-            viewModel.customerOrders.submitList(viewModel.ordersTypesArray)
-            rvListCategory1.adapter = viewModel.customerOrders
-
+            readData(ADMIN_TOKEN) { token ->
+                val emptyMap = mutableMapOf<String, String>()
+                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
+                viewModel.getOrderHistory(token.toString(), emptyMap){
+                    Log.e("TAG", "this.items "+this.items.size)
+                    rvListCategory1.setHasFixedSize(true)
+                    rvListCategory1.adapter = viewModel.customerOrders
+                    viewModel.customerOrders.notifyDataSetChanged()
+                    viewModel.customerOrders.submitList(this.items)
+                }
+            }
         }
 
     }

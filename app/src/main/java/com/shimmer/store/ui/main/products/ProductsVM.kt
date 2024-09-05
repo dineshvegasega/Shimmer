@@ -30,37 +30,6 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 
     var sortFilter : Int = 0
 
-    var item1 : ArrayList<Items> = ArrayList()
-    var item2 : ArrayList<String> = ArrayList()
-    var item3 : ArrayList<String> = ArrayList()
-
-
-    init {
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-        item1.add(Items())
-
-        item2.add("1")
-        item2.add("2")
-
-        item3.add("1")
-        item3.add("2")
-        item3.add("3")
-        item3.add("4")
-    }
 
 
 
