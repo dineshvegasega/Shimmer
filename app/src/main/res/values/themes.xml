@@ -215,6 +215,8 @@
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
     </style>
 
+
+
     <style name="PrimaryEditText_Blue" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/blue_border_round</item>
         <item name="cornerRadius">@dimen/_5sdp</item>
