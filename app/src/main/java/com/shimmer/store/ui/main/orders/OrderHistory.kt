@@ -60,7 +60,7 @@ class OrderHistory (
                 emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
                 viewModel.getOrderHistory(token.toString(), emptyMap){
-                    Log.e("TAG", "this.items "+this.items.size)
+//                    Log.e("TAG", "this.items "+this.items.size)
                     rvListCategory1.setHasFixedSize(true)
                     rvListCategory1.adapter = viewModel.orderHistory
                     viewModel.orderHistory.notifyDataSetChanged()

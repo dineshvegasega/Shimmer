@@ -2,12 +2,15 @@ package com.shimmer.store.ui.main.orders
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -20,6 +23,8 @@ import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.orderHistory.Item
 import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
 import com.shimmer.store.models.products.ItemProductRoot
@@ -79,9 +84,9 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
         ordersTypesArray.add(Items(id = 11, name = "Customer Orders"))
     }
 
-    fun getCartCount(callBack: Int.() -> Unit){
+    fun getCartCount(callBack: Int.() -> Unit) {
         viewModelScope.launch {
-            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            val userList: List<CartModel>? = db?.cartDao()?.getAll()
             var countBadge = 0
             userList?.forEach {
                 countBadge += it.quantity
@@ -89,9 +94,6 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
             callBack(countBadge)
         }
     }
-
-
-
 
 
     val orderHistory = object : GenericAdapter<ItemOrderHistoryBinding, Item>() {
@@ -107,61 +109,126 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
             position: Int
         ) {
             binding.apply {
-                val date = dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
+                val date =
+                    dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
                 btDate.text = date
                 textOrderPrice.text = "₹" + dataClass.base_grand_total
-                val status = when(dataClass.status){
-                    "pending" -> "In Progress"
-                    else -> {""}
+
+
+                when (dataClass.status) {
+                    "pending" -> {
+                        btStatus.text = "Pending"
+                        btStatus.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color._E87103
+                                )
+                            )
+                        btStatus.visibility = View.VISIBLE
+                    }
+                    "inprogress" -> {
+                        btStatus.text = "In Progress"
+                        btStatus.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color._F7879A
+                                )
+                            )
+                        btStatus.visibility = View.VISIBLE
+                    }
+                    "complete" -> {
+                        btStatus.text = "Complete"
+                        btStatus.backgroundTintList =
+                            ColorStateList.valueOf(
+                                ContextCompat.getColor(
+                                    binding.root.context,
+                                    R.color._2eb82e
+                                )
+                            )
+                        btStatus.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        btStatus.visibility = View.GONE
+                    }
                 }
-                btStatus.text = status
 
                 root.singleClick {
-                    root.findNavController().navigate(R.id.action_orders_to_orderDetail)
+                    root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
+                        putString("key" , dataClass.toString())
+                    })
                 }
             }
         }
     }
 
 
-    val customerOrders = object : GenericAdapter<ItemCustomerOrderBinding, Item>() {
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            parent: ViewGroup,
-            viewType: Int
-        ) = ItemCustomerOrderBinding.inflate(inflater, parent, false)
+    val customerOrders =
+        object : GenericAdapter<ItemCustomerOrderBinding, ItemGuestOrderListItem>() {
+            override fun onCreateView(
+                inflater: LayoutInflater,
+                parent: ViewGroup,
+                viewType: Int
+            ) = ItemCustomerOrderBinding.inflate(inflater, parent, false)
 
-        override fun onBindHolder(
-            binding: ItemCustomerOrderBinding,
-            dataClass: Item,
-            position: Int
-        ) {
-            binding.apply {
+            override fun onBindHolder(
+                binding: ItemCustomerOrderBinding,
+                dataClass: ItemGuestOrderListItem,
+                position: Int
+            ) {
+                binding.apply {
 
-                val date = dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
-                btDate.text = date
+                    val date =
+                        dataClass.updatedtime.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
+                    btDate.text = date
 
-                textName.text = dataClass.customer_firstname
-                textMobile.text = dataClass.customer_email
-                val status = when(dataClass.status){
-                    "pending" -> "Pending"
-                    else -> {""}
-                }
-                btStatus.text = status
+                    textName.text = dataClass.CustomerName
+                    textMobile.text = dataClass.customerEmail
+                    textMobile.text = dataClass.customerMobile
+                    when (dataClass.status) {
+                        "pending" -> {
+                            btStatus.text = "Pending"
+                            btStatus.backgroundTintList =
+                                ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._E87103
+                                        )
+                                    )
+                            btStatus.visibility = View.VISIBLE
+                        }
+                        "complete" -> {
+                            btStatus.text = "Complete"
+                            btStatus.backgroundTintList =
+                                ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color._2eb82e
+                                    )
+                                )
+                            btStatus.visibility = View.VISIBLE
+                        }
+                        else -> {
+                            btStatus.visibility = View.GONE
+                        }
+                    }
 
-                root.singleClick {
-                    root.findNavController().navigate(R.id.action_orders_to_orderDetail)
+                    root.singleClick {
+                        root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
+                            putString("key" , ""+Gson().toJson(dataClass.toString()))
+                        })
+                    }
                 }
             }
         }
-    }
 
 
-
-
-
-
-    fun getOrderHistory(adminToken: String, emptyMap: MutableMap<String, String>, callBack: ItemOrderHistoryModel.() -> Unit) =
+    fun getOrderHistory(
+        adminToken: String,
+        emptyMap: MutableMap<String, String>,
+        callBack: ItemOrderHistoryModel.() -> Unit
+    ) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemOrderHistoryModel>> {
@@ -169,7 +236,8 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 //                        if (loginType == "vendor") {
 //                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
 //                        } else if (loginType == "guest") {
-                        apiInterface.getOrderHistory("Bearer " +adminToken, emptyMap)
+                        apiInterface.getOrderHistory("Bearer " + adminToken, emptyMap)
+
                     //                        } else {
 //                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
 //                        }
@@ -187,7 +255,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                     }
 
                     override fun error(message: String) {
-                        if(message.contains("authorized")){
+                        if (message.contains("authorized")) {
                             sessionExpired()
                         } else {
                             showSnackBar("Something went wrong!")
@@ -202,7 +270,46 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
         }
 
 
+    fun guestOrderList(franchiseId: String, callBack: ItemGuestOrderList.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        } else if (loginType == "guest") {
+                        apiInterface.guestOrderList(franchiseId)
 
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemGuestOrderList>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+                                callBack(response.body()!!)
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        if (message.contains("authorized")) {
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 
 }

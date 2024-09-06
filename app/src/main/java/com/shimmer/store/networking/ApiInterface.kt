@@ -5,6 +5,7 @@ import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
 import com.shimmer.store.models.user.ItemUser
 import okhttp3.RequestBody
@@ -154,6 +155,18 @@ interface ApiInterface {
         @Header("Authorization") authHeader: String,
         @QueryMap parms: Map<String, String>,
     ): Response<ItemOrderHistoryModel>
+
+
+    @POST(PLACE_ORDER_GUEST)
+    suspend fun placeOrderGuest(
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
+    @GET(GUEST_ORDER_LIST)
+    suspend fun guestOrderList(
+        @Query("franchise") franchise: String,
+    ): Response<ItemGuestOrderList>
 
 }
 

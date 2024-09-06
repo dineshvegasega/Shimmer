@@ -402,7 +402,7 @@
             />
 
         <action
-            android:id="@+id/action_checkout_to_franchiseList"
+            android:id="@+id/action_checkout_to_selectFranchise"
             app:destination="@id/selectFranchise"
             app:launchSingleTop="true"
             />

@@ -2,18 +2,21 @@ package com.shimmer.store.ui.main.orderDetail
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.shimmer.store.R
+import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.shimmer.store.databinding.OrderDetailBinding
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class OrderDetail : Fragment() {
@@ -68,10 +71,25 @@ class OrderDetail : Fragment() {
 
 
 
+            val data = arguments?.getString("key")
+            Log.e("TAG", "onViewCreated: $data")
+            if(data?.length!! > 2){
+                val token = data?.substring(1, data.toString().length - 1)
+                val element: ItemGuestOrderListItem = Gson().fromJson(token, ItemGuestOrderListItem::class.java)
+                Log.e("TAG", "elementelement: $element")
+            }
+
+
+
+
+
             rvListCategory1.setHasFixedSize(true)
             viewModel.orderSKU.notifyDataSetChanged()
             viewModel.orderSKU.submitList(arrayListOf("","",""))
             rvListCategory1.adapter = viewModel.orderSKU
+
+
+
 
         }
 

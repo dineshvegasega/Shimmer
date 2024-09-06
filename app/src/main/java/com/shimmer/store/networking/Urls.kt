@@ -36,6 +36,13 @@ const val FRANCHISE_LIST = "V1/vegasega-apis/franchise?franchise=true"
 
 const val ORDERS = "V1/orders/?"
 
+const val PLACE_ORDER_GUEST = "V1/vegasega-apis/setGuestcart"
+
+const val GUEST_ORDER_LIST = "V1/vegasega-apis/franchisegorderhistory?"
+
+//https://shop.vegasega.com/rest/V1/vegasega-apis/franchisegorderhistory?franchise=newvs
+
+
 //https://shop.vegasega.com/rest/V1/vegasega-apis/franchise?franchise=true
 
 

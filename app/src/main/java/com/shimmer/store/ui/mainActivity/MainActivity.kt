@@ -157,6 +157,35 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+//
+//        mainThread {
+////            var cart = CartModel(
+////                product_id=174,
+////                name="Posy Cluster Diamond Ring-G-18-YG-6",
+////                price=29000.0,
+////                quantity=1,
+////                sku="SRI00010-G-18-YG-6",
+////                color="19",
+////                material_type="12",
+////                purity="15",
+////                size="4",
+////                currentTime=1725617662842)
+//
+//            var cart = CartModel(
+//                product_id=178,
+//                name="Posy Cluster Diamond Ring-G-18-YG-6",
+//                price=29000.0,
+//              )
+//
+//            db?.cartDao()?.insertAll(cart)
+//
+//            Log.e("TAG", "newUser.toString() " + cart.toString())
+//
+//            val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//            Log.e("TAG", "metal_typeBBB " + userList?.size)
+//        }
+
+
 
 //        readData(CUSTOMER_TOKEN) { token ->
 //            Log.e("TAG", "itAAAtoken " + token)

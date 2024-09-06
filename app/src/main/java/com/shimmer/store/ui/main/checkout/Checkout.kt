@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CheckoutBinding
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
@@ -26,6 +29,8 @@ import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class Checkout : Fragment() {
@@ -59,17 +64,18 @@ class Checkout : Fragment() {
 
 
             readData(LOGIN_DATA) { loginUser ->
-                if (loginUser != null){
-                    val data = Gson().fromJson(loginUser,
+                if (loginUser != null) {
+                    val data = Gson().fromJson(
+                        loginUser,
                         ItemUserItem::class.java
                     )
-                    textFNTxt.text = "Name : "+data.contact_person
-                    textCompanyNameTxt.text = "Franchise Name : "+data.name
-                    textMobileTxt.text = "Mobile No : "+data.mobile_number
-                    textAdrressTxt.text = "Address : "+data.register_address
-                    textCityTxt.text = "City : "+data.register_city
-                    textStateTxt.text = "State : "+data.register_state
-                    textPinCodeTxt.text = "Pincode : "+data.register_pincode
+                    textFNTxt.text = "Name : " + data.contact_person
+                    textCompanyNameTxt.text = "Franchise Name : " + data.name
+                    textMobileTxt.text = "Mobile No : " + data.mobile_number
+                    textAdrressTxt.text = "Address : " + data.register_address
+                    textCityTxt.text = "City : " + data.register_city
+                    textStateTxt.text = "State : " + data.register_state
+                    textPinCodeTxt.text = "Pincode : " + data.register_pincode
                 }
             }
 
@@ -153,10 +159,7 @@ class Checkout : Fragment() {
 //                textSGST.text = "SGST (${viewModel.sgstPrice}%)"
             }
 
-//            rvList.setHasFixedSize(true)
-//            rvList.adapter = viewModel.ordersAdapter
-//            viewModel.ordersAdapter.notifyDataSetChanged()
-//            viewModel.ordersAdapter.submitList(viewModel.item1)
+
 
             layoutSort.singleClick {
                 when (loginType) {
@@ -168,11 +171,13 @@ class Checkout : Fragment() {
                         } else if (editMobileNo.text.toString().isEmpty()) {
                             showSnackBar("Enter Mobile No")
                         } else {
-                            findNavController().navigate(R.id.action_checkout_to_payment, Bundle().apply {
-                                putString("name", editTextN.text.toString())
-                                putString("email", editEmail.text.toString())
-                                putString("mobile", editMobileNo.text.toString())
-                            })
+                            findNavController().navigate(
+                                R.id.action_checkout_to_payment,
+                                Bundle().apply {
+                                    putString("name", editTextN.text.toString())
+                                    putString("email", editEmail.text.toString())
+                                    putString("mobile", editMobileNo.text.toString())
+                                })
                         }
                     }
 
@@ -184,14 +189,77 @@ class Checkout : Fragment() {
                         } else if (editMobileNo.text.toString().isEmpty()) {
                             showSnackBar("Enter Mobile No")
                         } else {
-                            findNavController().navigate(
-                                R.id.action_checkout_to_franchiseList,
-                                Bundle().apply {
-                                    putString("name", editTextN.text.toString())
-                                    putString("email", editEmail.text.toString())
-                                    putString("mobile", editMobileNo.text.toString())
-                                })
+
+                            mainThread {
+                                val userList: List<CartModel>? = db?.cartDao()?.getAll()
+
+                                if (userList?.size!! > 0) {
+                                    findNavController().navigate(
+                                        R.id.action_checkout_to_selectFranchise,
+                                        Bundle().apply {
+                                            putString("name", editTextN.text.toString())
+                                            putString("email", editEmail.text.toString())
+                                            putString("mobile", editMobileNo.text.toString())
+                                        })
+                                }
+
+//                                val jsonArrayCartItem = JSONArray()
+//
+//                                userList?.forEach {
+//                                    jsonArrayCartItem.apply {
+//                                        put(JSONObject().apply {
+//                                            put("name", it.name)
+//                                            put("price", it.price)
+//                                            put("sku", it.sku)
+//                                            put("qty", it.quantity)
+//                                        })
+//                                    }
+//                                }
+//
+//                                val jsonObject = JSONObject().apply {
+//                                    put("customerName", editTextN.text.toString())
+//                                    put("customerEmail", editEmail.text.toString())
+//                                    put("customerMobile", editMobileNo.text.toString())
+//                                    put("franchiseCode", "")
+//                                    put("status", "pending")
+//                                    put("cartItem", jsonArrayCartItem)
+//                                }
+//
+//
+//                                val jsonObjectGuestcart = JSONObject().apply {
+//                                    put("guestcart", jsonObject)
+//                                }
+//                                Log.e("TAG", "jsonObjectGuestcart " + jsonObjectGuestcart)
+//
+//                                val jsonObjectXX = Gson().fromJson(
+//                                    jsonObjectGuestcart.toString(),
+//                                    JsonElement::class.java
+//                                )
+//
+//                                var dd = jsonObjectXX.getAsJsonObject().get("guestcart")
+//
+//                                var vv = dd.getAsJsonObject().get("customerMobile")
+//                                vv.apply {
+//                                    "asfsdfdf"
+//                                }
+//
+//
+//                                Log.e("TAG", "jsonObjectXX " + jsonObjectXX)
+////                            findNavController().navigate(
+////                                R.id.action_checkout_to_selectFranchise,
+////                                Bundle().apply {
+//////                                    putString("name", editTextN.text.toString())
+//////                                    putString("email", editEmail.text.toString())
+//////                                    putString("mobile", editMobileNo.text.toString())
+////                                })
+//                            }
                         }
+                        }
+//
+//                            }
+//                        }
+
+
                     }
                 }
             }

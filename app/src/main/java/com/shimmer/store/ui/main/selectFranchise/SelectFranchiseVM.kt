@@ -9,19 +9,25 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.google.gson.JsonElement
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemSelectFranchiseBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.models.ItemFranchiseArray
+import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.user.ItemUser
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
+import com.shimmer.store.networking.getJsonRequestBody
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -186,6 +192,53 @@ class SelectFranchiseVM @Inject constructor(private val repository: Repository) 
                 }
             )
         }
+
+
+
+
+
+
+
+
+    fun placeOrderGuest(jsonObject: JSONObject, callBack: JsonElement.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+//                        if (loginType == "vendor") {
+                        apiInterface.placeOrderGuest(requestBody = jsonObject.getJsonRequestBody())
+                    //                        } else if (loginType == "guest") {
+//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+                    //                        } else {
+//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//                        }
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        if(message.contains("fieldName")){
+                            showSnackBar("Something went wrong!")
+                        } else {
+                            //sessionExpired()
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
 
 
 }

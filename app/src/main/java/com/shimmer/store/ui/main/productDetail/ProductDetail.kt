@@ -423,7 +423,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
                                     itemProductThis.custom_attributes.forEach { againAttributes ->
                                         if (againAttributes.attribute_code == "metal_purity"){
-                                            Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+                                            Log.e("TAG", "metal_typeCCC " + againAttributes.value)
                                             newUser.apply {
                                                 this.purity = ""+againAttributes.value
                                             }

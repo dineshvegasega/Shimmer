@@ -13,12 +13,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
+import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
+import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 @AndroidEntryPoint
@@ -26,6 +31,9 @@ class SelectFranchise : Fragment() {
     private val viewModel: SelectFranchiseVM by viewModels()
     private var _binding: SelectFranchiseBinding? = null
     private val binding get() = _binding!!
+
+
+    var franchiseCode = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +56,7 @@ class SelectFranchise : Fragment() {
             }
 
             topBarBack.ivCartLayout.visibility = View.GONE
-            
+
 //            topBarSearch.apply {
 //                appicon.setImageDrawable(
 //                    ContextCompat.getDrawable(
@@ -91,38 +99,51 @@ class SelectFranchise : Fragment() {
 //            Log.e("TAG", "onViewCreated: "+resources.getInteger(R.integer.layout_value))
 //            topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, iconTypeSearch, 0)
 
+
+
+
+
+
+
+//            val jsonObject = Gson().fromJson(data, JSONObject::class.java)
+//            Log.e("TAG", "jsonObject: "+jsonObject)
+//
+////            jsonObject.getJSONObject("guestcart").getString("franchiseCode").apply {
+////                this.
+////            }
+
             ivEditSearch.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    if (ivEditSearch.text.toString().isEmpty()){
+                    if (ivEditSearch.text.toString().isEmpty()) {
                         showSnackBar("Enter Franchise Code")
                     } else {
-                        viewModel.customerDetail(ivEditSearch.text.toString()){
-                            Log.e("TAG", "itCCC "+this)
-                            if (this == "false"){
+                        viewModel.customerDetail(ivEditSearch.text.toString()) {
+                            Log.e("TAG", "itCCC " + this)
+                            if (this == "false") {
                                 groupVendor.visibility = View.GONE
                                 viewModel.selectedPosition = -1
+                                franchiseCode = ""
                             } else {
-                                val data = Gson().fromJson(this,
+                                val data = Gson().fromJson(
+                                    this,
                                     ItemUserItem::class.java
                                 )
-                                textFNTxt.text = "Name : "+data.contact_person
-                                textCompanyNameTxt.text = "Franchise Name : "+data.name
-                                textMobileTxt.text = "Mobile No : "+data.mobile_number
-                                textAdrressTxt.text = "Address : "+data.register_address
-                                textCityTxt.text = "City : "+data.d_city
-                                textStateTxt.text = "State : "+data.d_state
-                                textPinCodeTxt.text = "Pincode : "+data.d_pincode
+                                textFNTxt.text = "Name : " + data.contact_person
+                                textCompanyNameTxt.text = "Franchise Name : " + data.name
+                                textMobileTxt.text = "Mobile No : " + data.mobile_number
+                                textAdrressTxt.text = "Address : " + data.register_address
+                                textCityTxt.text = "City : " + data.register_city
+                                textStateTxt.text = "State : " + data.register_state
+                                textPinCodeTxt.text = "Pincode : " + data.register_pincode
                                 groupVendor.visibility = View.VISIBLE
                                 viewModel.selectedPosition = 1
+                                franchiseCode = data.name
                             }
                         }
                     }
                 }
                 true
             }
-
-
-
 
 
 //            viewModel.franchiseList(){
@@ -154,20 +175,78 @@ class SelectFranchise : Fragment() {
 
 
             layoutSort.singleClick {
-                when(loginType){
-                    LoginType.VENDOR ->  {
+                when (loginType) {
+                    LoginType.VENDOR -> {
 //                        findNavController().navigate(R.id.action_orderSummary_to_home)
                     }
-                    LoginType.CUSTOMER ->  {
+
+                    LoginType.CUSTOMER -> {
 //                        if(viewModel.selectedPosition != -1){
-                            findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
+//                        findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
 //                        }
+
+                        mainThread {
+                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
+
+                            val jsonArrayCartItem = JSONArray()
+
+                            userList?.forEach {
+                                jsonArrayCartItem.apply {
+                                    put(JSONObject().apply {
+                                        put("name", it.name)
+                                        put("price", it.price)
+                                        put("sku", it.sku)
+                                        put("qty", it.quantity)
+                                    })
+                                }
+                            }
+
+                            val jsonObject = JSONObject().apply {
+                                put("customerName", arguments?.getString("name"))
+                                put("customerEmail", arguments?.getString("email"))
+                                put("customerMobile", arguments?.getString("mobile"))
+                                put("franchiseCode", franchiseCode)
+                                put("status", "pending")
+                                put("cartItem", jsonArrayCartItem)
+                            }
+
+
+                            val jsonObjectGuestcart = JSONObject().apply {
+                                put("guestcart", jsonObject)
+                            }
+                            Log.e("TAG", "jsonObjectGuestcart " + jsonObjectGuestcart)
+
+
+                            viewModel.placeOrderGuest(jsonObjectGuestcart){
+                                Log.e("TAG", "placeOrderGuest " + this)
+                                if (this.toString().contains("success")){
+                                    findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
+                                } else {
+                                    showSnackBar("Something went wrong!")
+                                }
+                            }
+
+
+//
+//
+//                                Log.e("TAG", "jsonObjectXX " + jsonObjectXX)
+////                            findNavController().navigate(
+////                                R.id.action_checkout_to_selectFranchise,
+////                                Bundle().apply {
+//////                                    putString("name", editTextN.text.toString())
+//////                                    putString("email", editEmail.text.toString())
+//////                                    putString("mobile", editMobileNo.text.toString())
+////                                })
+//                            }
+                        }
+
+
+
                     }
                 }
             }
 
         }
-
 
 
     }

@@ -9,15 +9,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import com.google.gson.Gson
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.databinding.CustomerOrdersBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.user.ItemUserItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CustomerOrders (
+class CustomerOrders(
     private val activity: FragmentActivity,
     private val videoPath: Items,
     position: Int
@@ -44,6 +47,7 @@ class CustomerOrders (
         _binding = CustomerOrdersBinding.inflate(inflater)
         return binding.root
     }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,18 +58,32 @@ class CustomerOrders (
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
-            readData(ADMIN_TOKEN) { token ->
-                val emptyMap = mutableMapOf<String, String>()
-                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
-                viewModel.getOrderHistory(token.toString(), emptyMap){
-                    Log.e("TAG", "this.items "+this.items.size)
-                    rvListCategory1.setHasFixedSize(true)
-                    rvListCategory1.adapter = viewModel.customerOrders
-                    viewModel.customerOrders.notifyDataSetChanged()
-                    viewModel.customerOrders.submitList(this.items)
+//            readData(ADMIN_TOKEN) { token ->
+//                val emptyMap = mutableMapOf<String, String>()
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
+//
+//            }
+
+
+            readData(LOGIN_DATA) { loginUser ->
+                if (loginUser != null) {
+                    val data = Gson().fromJson(
+                        loginUser,
+                        ItemUserItem::class.java
+                    )
+
+                    viewModel.guestOrderList(data.name) {
+                        Log.e("TAG", "this.items " + this.toString())
+                        rvListCategory1.setHasFixedSize(true)
+                        rvListCategory1.adapter = viewModel.customerOrders
+                        viewModel.customerOrders.notifyDataSetChanged()
+                        viewModel.customerOrders.submitList(this)
+                    }
                 }
             }
+
+
         }
 
     }
