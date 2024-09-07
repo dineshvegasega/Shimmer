@@ -168,6 +168,13 @@ interface ApiInterface {
         @Query("franchise") franchise: String,
     ): Response<ItemGuestOrderList>
 
+
+
+    @POST(UPDATE_STATUS)
+    suspend fun updateStatus(
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
 }
 
 

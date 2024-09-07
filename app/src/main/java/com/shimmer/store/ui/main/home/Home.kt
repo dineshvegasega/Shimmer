@@ -85,7 +85,7 @@ class Home : Fragment() {
 //                findNavController().navigate(R.id.action_home_to_products)
 //            }
 
-            layoutCustomDesign.ivCustomDesign.setOnClickListener {
+            layoutCustomDesign.layout11.setOnClickListener {
                 findNavController().navigate(R.id.action_home_to_customDesign)
             }
 

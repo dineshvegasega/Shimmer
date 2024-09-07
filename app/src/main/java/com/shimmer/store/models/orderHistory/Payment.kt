@@ -1,17 +1,27 @@
 package com.shimmer.store.models.orderHistory
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
+
+@Parcelize
 data class Payment(
-    val account_status: Any,
-    val additional_information: List<String>,
+    val account_status: String,
+    val additional_information: @RawValue List<String> = ArrayList(),
     val amount_ordered: Double,
     val base_amount_ordered: Double,
-    val base_shipping_amount: Int,
+    val base_shipping_amount: Int ?= null,
     val cc_exp_year: String,
-    val cc_last4: Any,
+    val cc_last4: String,
     val cc_ss_start_month: String,
     val cc_ss_start_year: String,
-    val entity_id: Int,
+    val entity_id: Int ?= null,
     val method: String,
-    val parent_id: Int,
-    val shipping_amount: Int
-)
+    val parent_id: Int ?= null,
+    val shipping_amount: Int ?= null
+): Parcelable {
+    override fun hashCode(): Int {
+        val result = entity_id.hashCode()
+        return result
+    }
+}

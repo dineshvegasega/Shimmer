@@ -412,7 +412,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                         if(message.contains("fieldName")){
                             showSnackBar("Something went wrong!")
                         } else {
-                            sessionExpired()
+//                            sessionExpired()
                         }
                     }
 
@@ -452,7 +452,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                         if(message.contains("fieldName")){
                             showSnackBar("Something went wrong!")
                         } else {
-                            sessionExpired()
+//                            sessionExpired()
                         }
                     }
 

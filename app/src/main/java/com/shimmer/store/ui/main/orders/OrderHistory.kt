@@ -14,6 +14,7 @@ import com.shimmer.store.databinding.OrderHistoryBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +55,21 @@ class OrderHistory (
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
+            orderDetailLive.value = true
+            orderDetailLive.observe(viewLifecycleOwner){
+                Log.e("TAG", "orderDetailLive: $it")
+                loadData()
+            }
 
+
+        }
+
+    }
+
+
+
+    fun loadData() {
+        binding.apply {
             readData(ADMIN_TOKEN) { token ->
                 val emptyMap = mutableMapOf<String, String>()
                 emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
@@ -67,29 +82,6 @@ class OrderHistory (
                     viewModel.orderHistory.submitList(this.items)
                 }
             }
-
-
-
-
         }
-
-    }
-
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onResume() {
-        super.onResume()
-//        Log.e("TAG", "onViewCreated: Fragment Position : ${videoPath.name}")
-//        mainShopFor.forEach {
-//            if (videoPath.name == it.name){
-//                it.isSelected = true
-//                Log.e("TAG", "onViewCreated: Fragment PositionIF : ${it.name}")
-//            } else {
-//                it.isSelected = false
-//                Log.e("TAG", "onViewCreated: Fragment PositionELSE : ${it.name}")
-//            }
-//        }
-
-        viewModel.orderHistory.notifyDataSetChanged()
     }
 }

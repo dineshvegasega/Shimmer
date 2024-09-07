@@ -79,24 +79,6 @@ class Checkout : Fragment() {
                 }
             }
 
-//            topBar.apply {
-//                textViewTitle.visibility = View.VISIBLE
-////                cardSearch.visibility = View.GONE
-//                ivSearch.visibility = View.GONE
-//                ivCartLayout.visibility = View.GONE
-//                textViewTitle.text = "YOUR ORDER"
-//
-//                appicon.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        MainActivity.context.get()!!,
-//                        R.drawable.baseline_west_24
-//                    )
-//                )
-//
-//                appicon.singleClick {
-//                    findNavController().navigateUp()
-//                }
-//            }
 
 
             when (loginType) {

@@ -1,5 +1,9 @@
 package com.shimmer.store.models.guestOrderList
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
+@Parcelize
 data class ItemGuestOrderListItem(
     val CustomerName: String,
     val cartItem: String,
@@ -10,4 +14,4 @@ data class ItemGuestOrderListItem(
     val guestcustomeroder_id: String,
     val status: String,
     val updatedtime: String
-)
+): Parcelable

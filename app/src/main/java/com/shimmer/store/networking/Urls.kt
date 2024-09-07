@@ -40,6 +40,8 @@ const val PLACE_ORDER_GUEST = "V1/vegasega-apis/setGuestcart"
 
 const val GUEST_ORDER_LIST = "V1/vegasega-apis/franchisegorderhistory?"
 
+const val UPDATE_STATUS = "V1/vegasega-apis/updategorderhistory"
+
 //https://shop.vegasega.com/rest/V1/vegasega-apis/franchisegorderhistory?franchise=newvs
 
 

@@ -10,13 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.databinding.CustomerOrdersBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.user.ItemUserItem
+import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,6 +70,20 @@ class CustomerOrders(
 //            }
 
 
+//            loadData()
+        }
+
+        orderDetailLive.value = true
+        orderDetailLive.observe(viewLifecycleOwner) {
+            Log.e("TAG", "orderDetailLive: $it")
+            loadData()
+        }
+
+    }
+
+
+    fun loadData() {
+        binding.apply {
             readData(LOGIN_DATA) { loginUser ->
                 if (loginUser != null) {
                     val data = Gson().fromJson(
@@ -75,6 +93,12 @@ class CustomerOrders(
 
                     viewModel.guestOrderList(data.name) {
                         Log.e("TAG", "this.items " + this.toString())
+//                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
+//                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type
+//                        val changeValue =
+//                            Gson().fromJson<List<ItemGuestOrderListItem>>(Gson().toJson(this.toString()), typeToken)
+
+
                         rvListCategory1.setHasFixedSize(true)
                         rvListCategory1.adapter = viewModel.customerOrders
                         viewModel.customerOrders.notifyDataSetChanged()
@@ -82,27 +106,8 @@ class CustomerOrders(
                     }
                 }
             }
-
-
         }
-
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onResume() {
-        super.onResume()
-//        Log.e("TAG", "onViewCreated: Fragment Position : ${videoPath.name}")
-//        mainShopFor.forEach {
-//            if (videoPath.name == it.name){
-//                it.isSelected = true
-//                Log.e("TAG", "onViewCreated: Fragment PositionIF : ${it.name}")
-//            } else {
-//                it.isSelected = false
-//                Log.e("TAG", "onViewCreated: Fragment PositionELSE : ${it.name}")
-//            }
-//        }
-
-        viewModel.customerOrders.notifyDataSetChanged()
-    }
 }

@@ -124,6 +124,7 @@ class Splash : Fragment() {
 //                    if (fragmentInFrame !is Dashboard){
 //                        if(!MainActivity.isBackStack){
                     loginType = LoginType.VENDOR
+//                    navHostFragment?.navController?.navigate(R.id.action_splash_to_home)
                     navHostFragment?.navController?.navigate(R.id.action_splash_to_home)
 //                        }
                     //isHide.value = true

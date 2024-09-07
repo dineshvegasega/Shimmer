@@ -43,6 +43,8 @@
             android:id="@+id/upperLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -98,7 +100,7 @@
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textColor"
+                        android:id="@+id/textName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -122,14 +124,14 @@
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textColor"
+                        app:layout_constraintTop_toBottomOf="@+id/textName"
                         android:layout_marginTop="@dimen/_3sdp"
                         tools:ignore="HardcodedText" />
 
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textRingSize"
+                        android:id="@+id/textMobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -154,13 +156,13 @@
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textRingSize"
+                        app:layout_constraintTop_toBottomOf="@+id/textMobile"
                         android:layout_marginTop="@dimen/_3sdp"
                         tools:ignore="HardcodedText" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textRingSize324"
+                        android:id="@+id/textEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -189,7 +191,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textColorr3rwt"
+                        android:id="@+id/textDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -203,7 +205,7 @@
                         tools:ignore="HardcodedText" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/textColorrt65346"
+                        android:id="@+id/textTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -212,7 +214,7 @@
                         android:textSize="@dimen/_11sdp"
                         app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textColorr3rwt"
+                        app:layout_constraintTop_toBottomOf="@+id/textDate"
                         android:layout_marginTop="@dimen/_3sdp"
                         tools:ignore="HardcodedText" />
 
@@ -230,7 +232,7 @@
                 android:textSize="@dimen/_13sdp"
                 app:fontFamily="@font/nunitosans_bold"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutCustomer"
                 tools:ignore="HardcodedText" />
@@ -248,7 +250,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textOrders"
                 android:layout_marginBottom="@dimen/_5sdp"
                 android:visibility="visible"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 />
 
 
@@ -264,6 +266,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rvListCategory1"
+                android:visibility="gone"
                 >
 
 
@@ -442,7 +445,7 @@
                         android:id="@+id/textSubTotalPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="SubTotal"
+                        android:text="0.0"
                         android:textColor="@color/_141414"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
@@ -464,20 +467,22 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textSubTotal"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText"
+                        android:visibility="gone"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/textDiscountPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="DiscountPrice"
+                        android:text="0.0"
                         android:textColor="@color/_141414"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
                         android:layout_marginTop="@dimen/_8sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textSubTotal"
-                        tools:ignore="HardcodedText" />
+                        tools:ignore="HardcodedText"
+                        android:visibility="gone"/>
 
 
 
@@ -499,7 +504,7 @@
                         android:id="@+id/textGSTPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GST"
+                        android:text="0.0"
                         android:textColor="@color/_141414"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
@@ -528,7 +533,7 @@
                         android:id="@+id/textTotalAmountPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Amount"
+                        android:text="0.0"
                         android:textColor="@color/_141414"
                         android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_bold"

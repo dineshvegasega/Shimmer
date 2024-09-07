@@ -156,7 +156,8 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
                 root.singleClick {
                     root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
-                        putString("key" , dataClass.toString())
+                        putString("from" , "orderHistory")
+                        putParcelable("key" , dataClass)
                     })
                 }
             }
@@ -216,7 +217,8 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
                     root.singleClick {
                         root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
-                            putString("key" , ""+Gson().toJson(dataClass.toString()))
+                            putString("from" , "customerOrders")
+                            putParcelable("key" , dataClass)
                         })
                     }
                 }
@@ -289,8 +291,8 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                             try {
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
 //                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+//                                callBack(response.body()!!.toString().toString().replace("\\", ""))
                                 callBack(response.body()!!)
-
                             } catch (e: Exception) {
                             }
                         }
