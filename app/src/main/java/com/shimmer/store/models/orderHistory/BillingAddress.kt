@@ -1,7 +1,7 @@
 package com.shimmer.store.models.orderHistory
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import kotlinx.android.parcel.RawValue
 
 @Parcelize
@@ -18,7 +18,7 @@ data class BillingAddress(
     val region: String,
     val region_code: String,
     val region_id: Int?= null,
-    val street: @RawValue List<String> = ArrayList(),
+    val street: List<String> = ArrayList(),
     val telephone: String
 ): Parcelable{
     override fun hashCode(): Int {

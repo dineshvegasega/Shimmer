@@ -1,13 +1,13 @@
 package com.shimmer.store.models.orderHistory
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class Payment(
     val account_status: String,
-    val additional_information: @RawValue List<String> = ArrayList(),
+    val additional_information: List<String> = ArrayList(),
     val amount_ordered: Double,
     val base_amount_ordered: Double,
     val base_shipping_amount: Int ?= null,

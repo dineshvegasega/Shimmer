@@ -60,8 +60,6 @@ class OrderHistory (
                 Log.e("TAG", "orderDetailLive: $it")
                 loadData()
             }
-
-
         }
 
     }
