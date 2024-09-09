@@ -212,5 +212,9 @@
     <string name="account_number">Account Number</string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="gst_number">GST Number</string>
+    <string name="price">Price</string>
+    <string name="total">Total</string>
+    <string name="sku">SKU</string>
+    <string name="quantity">Quantity</string>
 
 </resources>

@@ -94,9 +94,9 @@ class OrderDetail : Fragment() {
                     )
 
                 rvListCategory1.setHasFixedSize(true)
-                viewModel.orderSKU.notifyDataSetChanged()
-                viewModel.orderSKU.submitList(changeValue)
-                rvListCategory1.adapter = viewModel.orderSKU
+                viewModel.orderSKUCustomerOrders.notifyDataSetChanged()
+                viewModel.orderSKUCustomerOrders.submitList(changeValue)
+                rvListCategory1.adapter = viewModel.orderSKUCustomerOrders
 
                 var price = 0.0
                 changeValue.forEach {
@@ -147,9 +147,9 @@ class OrderDetail : Fragment() {
 
 
                 rvListCategory1.setHasFixedSize(true)
-                viewModel.orderSKUHistory.notifyDataSetChanged()
-                viewModel.orderSKUHistory.submitList(consentIntent?.items)
-                rvListCategory1.adapter = viewModel.orderSKUHistory
+                viewModel.orderSKUOrderHistory.notifyDataSetChanged()
+                viewModel.orderSKUOrderHistory.submitList(consentIntent?.items)
+                rvListCategory1.adapter = viewModel.orderSKUOrderHistory
 
                 layoutSort.visibility = View.GONE
 
@@ -158,10 +158,7 @@ class OrderDetail : Fragment() {
                 textGSTPrice.text = "₹" +consentIntent?.base_shipping_incl_tax
                 textTotalAmountPrice.text = "₹" +consentIntent?.base_grand_total
             }
-
-
         }
-
     }
 
 
@@ -175,4 +172,4 @@ class OrderDetail : Fragment() {
 }
 
 
-data class CartItem(val name: String, val price: Double, val sku: String, val qty: Int)
+data class CartItem(val name: String, val price: Double, val sku: String, val qty: Int, var isSelected: Boolean = false)

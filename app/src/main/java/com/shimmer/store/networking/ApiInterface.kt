@@ -169,9 +169,24 @@ interface ApiInterface {
     ): Response<ItemGuestOrderList>
 
 
-
     @POST(UPDATE_STATUS)
     suspend fun updateStatus(
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
+    @POST("{id}"+UPDATE_SHIPPING)
+    suspend fun updateShipping(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
+    @POST("{id}"+UPDATE_ORDER_PAYMENT)
+    suspend fun createOrder(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Response<JsonElement>
 

@@ -8,6 +8,7 @@
     android:background="@drawable/all_round_5"
     android:backgroundTint="@color/_B9F2FF"
     android:layout_marginVertical="@dimen/_6sdp"
+    android:layout_marginHorizontal="@dimen/_10sdp"
    >
 
 

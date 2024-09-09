@@ -198,6 +198,46 @@ class MainActivity : AppCompatActivity() {
 //        }
 
 
+
+//        val shipping_address = JSONObject().apply {
+//            put("region", "arguments?.getString")
+//            put("region_id", "arguments?.getString")
+//            put("region_code", "arguments?.getString")
+//            put("country_id", "IN")
+//            put("street", "pending")
+//            put("postcode", "pending")
+//            put("city", "pending")
+//            put("firstname", "pending")
+//            put("lastname", "pending")
+//            put("email", "pending")
+//            put("telephone", "pending")
+//        }
+//
+//        val billing_address = JSONObject().apply {
+//            put("region", "arguments?.getString")
+//            put("region_id", "arguments?.getString")
+//            put("region_code", "arguments?.getString")
+//            put("country_id", "IN")
+//            put("street", "pending")
+//            put("postcode", "pending")
+//            put("city", "pending")
+//            put("firstname", "pending")
+//            put("lastname", "pending")
+//            put("email", "pending")
+//            put("telephone", "pending")
+//        }
+//
+//        val addressInformation = JSONObject().apply {
+//            put("addressInformation", JSONObject().apply {
+//                put("shipping_address", shipping_address)
+//                put("billing_address", billing_address)
+//                put("shipping_carrier_code", "flatrate")
+//                put("shipping_method_code", "flatrate")
+//            })
+//        }
+//
+//        Log.e("TAG", "jsonObjectaddressInformation "+addressInformation)
+
     }
 
     @SuppressLint("RestrictedApi")

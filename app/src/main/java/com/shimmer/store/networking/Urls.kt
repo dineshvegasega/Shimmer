@@ -4,27 +4,35 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 
 //https://shop.vegasega.com/media/catalog/product/u/r/ur01473-yg0000_4_lar.jpg
 const val BASE_URL = "https://shop.vegasega.com/"
+
 const val URL = BASE_URL+"rest/"
+
 const val IMAGE_URL = BASE_URL+"media/catalog/product"
+
 const val BANNER_IMAGE_URL = BASE_URL+"media/mageplaza/bannerslider/banner/image/"
 
-//https://shop.vegasega.com/media/mageplaza/bannerslider/banner/image/l/o/logo-1.png
-
 const val ADMIN_TOKEN = "V1/integration/admin/token"
-//const val CUSTOMER_LOGIN_TOKEN = "/V1/integration/customer/token"
+
 const val CUSTOMER_LOGIN_TOKEN = "/V1/mobilelogin/account/login/?"
+
 const val CUSTOMER_DETAIL = "/V1/customers/me"
+
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
 const val CUSTOMER_RESET_PASSWORD = "/V1/mobilelogin/otp/resetpassword/?"
+
 const val USER_DETAIL = "V1/vegasega-apis/franchisebyid?"
 
 const val PRODUCTS = "/V1/products/?"
+
 const val PRODUCTS_DETAIL = "/V1/products/"
+
 const val PRODUCTS_ID = "V1/products/?"
+
 const val PRODUCTS_DETAIL_ID = "V1/products/"
 
 const val ALL_PRODUCTS = "all/V1/configurable-products/"
+
 const val PRODUCT_OPTIONS = "V1/vegasega-apis/productdetails?"
 
 const val QUOTE_ID = "/V1/carts/mine"
@@ -32,6 +40,7 @@ const val QUOTE_ID = "/V1/carts/mine"
 const val ADD_CART = "/V1/carts/mine/items"
 
 const val BANNER = "V1/vegasega-apis/banner?homebanner=1"
+
 const val FRANCHISE_LIST = "V1/vegasega-apis/franchise?franchise=true"
 
 const val ORDERS = "V1/orders/?"
@@ -41,6 +50,13 @@ const val PLACE_ORDER_GUEST = "V1/vegasega-apis/setGuestcart"
 const val GUEST_ORDER_LIST = "V1/vegasega-apis/franchisegorderhistory?"
 
 const val UPDATE_STATUS = "V1/vegasega-apis/updategorderhistory"
+
+const val UPDATE_SHIPPING = "/V1/carts/mine/shipping-information"
+
+const val UPDATE_ORDER_PAYMENT = "/V1/carts/mine/payment-information"
+
+
+//https://shop.vegasega.com/rest/newvs/V1/carts/mine/shipping-information
 
 //https://shop.vegasega.com/rest/V1/vegasega-apis/franchisegorderhistory?franchise=newvs
 

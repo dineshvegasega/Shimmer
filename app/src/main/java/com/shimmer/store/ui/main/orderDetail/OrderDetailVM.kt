@@ -3,7 +3,10 @@ package com.shimmer.store.ui.main.orderDetail
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -38,13 +41,15 @@ import javax.inject.Inject
 @HiltViewModel
 class OrderDetailVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    val orderSKU = object : GenericAdapter<ItemSkusBinding, CartItem>() {
+    var selectedPositionCustomerOrders = -1
+    val orderSKUCustomerOrders = object : GenericAdapter<ItemSkusBinding, CartItem>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
         ) = ItemSkusBinding.inflate(inflater, parent, false)
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemSkusBinding,
             dataClass: CartItem,
@@ -65,21 +70,48 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 //                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
 //                                    .apply(myOptionsGlide)
 //                                    .into(binding.ivIcon)
-
+                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIconChild)
                             }
                         }
                     }
                 }
 
-                root.singleClick {
-                   // root.findNavController().navigate(R.id.action_orders_to_orderDetail)
+
+                skuChild.text = "${dataClass.sku}"
+                textQtyChild.text = "${dataClass.qty}"
+                textPriceChild.text = "₹${dataClass.price}"
+                textTotalPriceChild.text = "₹${dataClass.price * dataClass.qty}"
+
+                layoutChild.visibility =
+                    if (selectedPositionCustomerOrders == position) View.VISIBLE else View.GONE
+                imageCross.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        root.context,
+                        if (selectedPositionCustomerOrders == position) R.drawable.arrow_down else R.drawable.arrow_right
+                    )
+                )
+
+                imageCross.singleClick {
+
+                    if (selectedPositionCustomerOrders == position){
+                        if (layoutChild.isVisible == true){
+                            selectedPositionCustomerOrders = -1
+                        }
+                        if (layoutChild.isVisible == false){
+                            selectedPositionCustomerOrders = position
+                        }
+                    } else{
+                        selectedPositionCustomerOrders = position
+                    }
+                    notifyDataSetChanged()
                 }
             }
         }
     }
 
 
-    val orderSKUHistory = object : GenericAdapter<ItemSkusBinding, ItemXX>() {
+    var selectedPositionOrderHistory = -1
+    val orderSKUOrderHistory = object : GenericAdapter<ItemSkusBinding, ItemXX>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -102,22 +134,45 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
                                 (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
-//                                Glide.with(binding.ivIcon.context)
-//                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
-//                                    .apply(myOptionsGlide)
-//                                    .into(binding.ivIcon)
-
+                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIconChild)
                             }
                         }
                     }
                 }
 
-                root.singleClick {
-                    // root.findNavController().navigate(R.id.action_orders_to_orderDetail)
+                skuChild.text = "${dataClass.sku}"
+                textQtyChild.text = "${dataClass.qty_ordered}"
+                textPriceChild.text = "₹${dataClass.price}"
+                textTotalPriceChild.text = "₹${dataClass.price * dataClass.qty_ordered!!}"
+
+                layoutChild.visibility =
+                    if (selectedPositionOrderHistory == position) View.VISIBLE else View.GONE
+                imageCross.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        root.context,
+                        if (selectedPositionOrderHistory == position) R.drawable.arrow_down else R.drawable.arrow_right
+                    )
+                )
+
+                imageCross.singleClick {
+                    if (selectedPositionOrderHistory == position) {
+                        if (layoutChild.isVisible == true) {
+                            selectedPositionOrderHistory = -1
+                        }
+                        if (layoutChild.isVisible == false) {
+                            selectedPositionOrderHistory = position
+                        }
+                    } else {
+                        selectedPositionOrderHistory = position
+                    }
+                    notifyDataSetChanged()
                 }
             }
         }
     }
+
+
+
 
 
     fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =

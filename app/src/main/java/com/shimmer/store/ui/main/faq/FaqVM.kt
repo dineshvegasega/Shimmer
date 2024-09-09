@@ -1,10 +1,12 @@
 package com.shimmer.store.ui.main.faq
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shimmer.store.R
@@ -15,6 +17,7 @@ import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -88,13 +91,20 @@ class FaqVM @Inject constructor() : ViewModel() {
                     )
                 )
 
-                ivHideShow.singleClick {
-//                    dataClass.isCollapse = !dataClass.isCollapse
-                    selectedPosition = position
-                    notifyDataSetChanged()
-//                    notifyItemChanged(position)
-                }
 
+                ivHideShow.singleClick {
+                    if (selectedPosition == position){
+                        if (textDesc.isVisible == true){
+                            selectedPosition = -1
+                        }
+                        if (textDesc.isVisible == false){
+                            selectedPosition = position
+                        }
+                    } else{
+                        selectedPosition = position
+                    }
+                    notifyDataSetChanged()
+                }
             }
         }
     }

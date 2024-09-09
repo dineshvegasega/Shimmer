@@ -2,21 +2,29 @@ package com.shimmer.store.ui.main.payment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.FaqBinding
 import com.shimmer.store.databinding.PaymentBinding
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.faq.FaqVM
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class Payment : Fragment() {
@@ -53,7 +61,47 @@ class Payment : Fragment() {
 
 
             layoutSort.singleClick {
-                findNavController().navigate(R.id.action_payment_to_thankyou)
+
+                readData(LOGIN_DATA) { loginUser ->
+                    if (loginUser != null) {
+                        val data = Gson().fromJson(
+                            loginUser,
+                            ItemUserItem::class.java
+                        )
+
+
+                        val billing_address = JSONObject().apply {
+                            put("region", data.register_state)
+                            put("region_id", data.register_resignid)
+                            put("region_code", data.register_resigncode)
+                            put("country_id", "IN")
+                            put("street", JSONArray().put(data.register_address))
+                            put("postcode", data.register_pincode)
+                            put("city", data.register_city)
+                            put("firstname", data.contact_person)
+                            put("lastname", data.contact_person)
+                            put("email", "")
+                            put("telephone", data.mobile_number)
+                        }
+
+                        val addressInformation = JSONObject().apply {
+                                put("billing_address", billing_address)
+                                put("paymentMethod", JSONObject().apply {
+                                    put("method", "checkmo")
+                                })
+                        }
+
+                        Log.e("TAG", "jsonObjectMethod " + addressInformation)
+
+                        readData(CUSTOMER_TOKEN) { token ->
+                            viewModel.createOrder(token!!, addressInformation) {
+                                Log.e("TAG", "onCallBack: ${this.toString()}")
+                                findNavController().navigate(R.id.action_payment_to_thankyou)
+                            }
+                        }
+                    }
+                }
+
             }
         }
     }
