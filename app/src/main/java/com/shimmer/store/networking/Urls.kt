@@ -55,6 +55,14 @@ const val UPDATE_SHIPPING = "/V1/carts/mine/shipping-information"
 
 const val UPDATE_ORDER_PAYMENT = "/V1/carts/mine/payment-information"
 
+const val POST_CUSTOM_DETAILS = "/V1/carts/mine/set-order-custom-fields"
+
+const val ORDER_HISTORY_LIST = "V1/vegasega-apis/getorderlist?"
+
+const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
+
+
+//https://shop.vegasega.com/rest/V1/vegasega-apis/getorderlist?customerID=6
 
 //https://shop.vegasega.com/rest/newvs/V1/carts/mine/shipping-information
 

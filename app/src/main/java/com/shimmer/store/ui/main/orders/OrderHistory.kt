@@ -66,20 +66,30 @@ class OrderHistory (
 
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun loadData() {
         binding.apply {
-            readData(ADMIN_TOKEN) { token ->
-                val emptyMap = mutableMapOf<String, String>()
-                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
-                viewModel.getOrderHistory(token.toString(), emptyMap){
-//                    Log.e("TAG", "this.items "+this.items.size)
-                    rvListCategory1.setHasFixedSize(true)
-                    rvListCategory1.adapter = viewModel.orderHistory
-                    viewModel.orderHistory.notifyDataSetChanged()
-                    viewModel.orderHistory.submitList(this.items)
-                }
+//            readData(ADMIN_TOKEN) { token ->
+//                val emptyMap = mutableMapOf<String, String>()
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
+//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
+//                viewModel.getOrderHistory(token.toString(), emptyMap){
+////                    Log.e("TAG", "this.items "+this.items.size)
+//                    rvListCategory1.setHasFixedSize(true)
+//                    rvListCategory1.adapter = viewModel.orderHistory
+//                    viewModel.orderHistory.notifyDataSetChanged()
+//                    viewModel.orderHistory.submitList(this.items)
+//                }
+//            }
+
+
+            viewModel.orderHistoryList("6"){
+                rvListCategory1.setHasFixedSize(true)
+                rvListCategory1.adapter = viewModel.orderHistory
+                viewModel.orderHistory.notifyDataSetChanged()
+                viewModel.orderHistory.submitList(this)
             }
+
         }
     }
 }

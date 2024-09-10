@@ -25,6 +25,8 @@ import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
+import com.shimmer.store.models.myOrdersList.ItemOrders
+import com.shimmer.store.models.myOrdersList.ItemOrdersItem
 import com.shimmer.store.models.orderHistory.Item
 import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
 import com.shimmer.store.models.products.ItemProductRoot
@@ -96,7 +98,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
     }
 
 
-    val orderHistory = object : GenericAdapter<ItemOrderHistoryBinding, Item>() {
+    val orderHistory = object : GenericAdapter<ItemOrderHistoryBinding, ItemOrdersItem>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
@@ -105,7 +107,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
         override fun onBindHolder(
             binding: ItemOrderHistoryBinding,
-            dataClass: Item,
+            dataClass: ItemOrdersItem,
             position: Int
         ) {
             binding.apply {
@@ -114,6 +116,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                 btDate.text = date
                 textOrderPrice.text = "₹" + dataClass.base_grand_total
 
+                textOrderNo.text =  dataClass.entity_id
 
                 when (dataClass.status) {
                     "pending" -> {
@@ -157,7 +160,8 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                 root.singleClick {
                     root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
                         putString("from" , "orderHistory")
-                        putParcelable("key" , dataClass)
+                        putString("_id" , ""+dataClass.entity_id)
+//                        putParcelable("key" , dataClass)
                     })
                 }
             }
@@ -292,6 +296,41 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
 //                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
 //                                callBack(response.body()!!.toString().toString().replace("\\", ""))
+                                callBack(response.body()!!)
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        if (message.contains("authorized")) {
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+
+    fun orderHistoryList(id: String, callBack: ItemOrders.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemOrders>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.orderHistoryList(id)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemOrders>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
                                 callBack(response.body()!!)
                             } catch (e: Exception) {
                             }

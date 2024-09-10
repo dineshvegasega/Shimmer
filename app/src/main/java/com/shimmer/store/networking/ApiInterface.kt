@@ -6,6 +6,8 @@ import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
+import com.shimmer.store.models.myOrdersDetail.ItemOrderDetail
+import com.shimmer.store.models.myOrdersList.ItemOrders
 import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
 import com.shimmer.store.models.user.ItemUser
 import okhttp3.RequestBody
@@ -189,6 +191,28 @@ interface ApiInterface {
         @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Response<JsonElement>
+
+
+    @PUT("{id}"+POST_CUSTOM_DETAILS)
+    suspend fun postCustomDetails(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+
+    @GET(ORDER_HISTORY_LIST)
+    suspend fun orderHistoryList(
+        @Query("customerID") franchise: String,
+    ): Response<ItemOrders>
+
+
+    @GET(ORDER_HISTORY_LIST_DETAIL+"/{id}")
+    suspend fun orderHistoryListDetail(
+        @Header("Authorization") authHeader : String,
+        @Path("id") id: String
+    ): Response<ItemOrderDetail>
+
 
 }
 

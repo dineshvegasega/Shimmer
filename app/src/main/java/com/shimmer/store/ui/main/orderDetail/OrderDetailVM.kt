@@ -20,6 +20,8 @@ import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.myOrdersDetail.ItemOrderDetail
+import com.shimmer.store.models.myOrdersDetail.ItemX
 import com.shimmer.store.models.orderHistory.ItemXX
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.networking.ApiInterface
@@ -111,16 +113,17 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 
 
     var selectedPositionOrderHistory = -1
-    val orderSKUOrderHistory = object : GenericAdapter<ItemSkusBinding, ItemXX>() {
+    val orderSKUOrderHistory = object : GenericAdapter<ItemSkusBinding, ItemX>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
         ) = ItemSkusBinding.inflate(inflater, parent, false)
 
+        @SuppressLint("NotifyDataSetChanged")
         override fun onBindHolder(
             binding: ItemSkusBinding,
-            dataClass: ItemXX,
+            dataClass: ItemX,
             position: Int
         ) {
             binding.apply {
@@ -271,6 +274,39 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                         } else {
                             //sessionExpired()
                         }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+
+    fun orderHistoryListDetail(adminToken: String, id: String, callBack: ItemOrderDetail.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemOrderDetail>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.orderHistoryListDetail("Bearer " +adminToken, id)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemOrderDetail>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
                     }
 
                     override fun loading() {

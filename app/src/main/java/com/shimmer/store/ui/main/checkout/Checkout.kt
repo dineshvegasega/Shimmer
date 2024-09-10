@@ -17,6 +17,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.CheckoutBinding
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.models.user.ItemUserItem
@@ -195,83 +196,109 @@ class Checkout : Fragment() {
             layoutSort.singleClick {
                 when (loginType) {
                     LoginType.VENDOR -> {
-//                        if (editTextN.text.toString().isEmpty()) {
-//                            showSnackBar("Enter Full Name")
-//                        } else if (editEmail.text.toString().isEmpty()) {
-//                            showSnackBar("Enter Email")
-//                        } else if (editMobileNo.text.toString().isEmpty()) {
-//                            showSnackBar("Enter Mobile No")
-//                        } else {
-////                            findNavController().navigate(
-////                                R.id.action_checkout_to_payment,
-////                                Bundle().apply {
-////                                    putString("name", editTextN.text.toString())
-////                                    putString("email", editEmail.text.toString())
-////                                    putString("mobile", editMobileNo.text.toString())
-////                                })
-//                        }
+                        if (editTextN.text.toString().isEmpty()) {
+                            showSnackBar("Enter Full Name")
+                        } else if (editEmail.text.toString().isEmpty()) {
+                            showSnackBar("Enter Email")
+                        } else if (editMobileNo.text.toString().isEmpty()) {
+                            showSnackBar("Enter Mobile No")
+                        } else {
+//                            findNavController().navigate(
+//                                R.id.action_checkout_to_payment,
+//                                Bundle().apply {
+//                                    putString("name", editTextN.text.toString())
+//                                    putString("email", editEmail.text.toString())
+//                                    putString("mobile", editMobileNo.text.toString())
+//                                })
 
-                        readData(LOGIN_DATA) { loginUser ->
-                            if (loginUser != null) {
-                                val data = Gson().fromJson(
-                                    loginUser,
-                                    ItemUserItem::class.java
-                                )
 
-                                val shipping_address = JSONObject().apply {
-                                    put("region", data.d_state)
-                                    put("region_id", data.d_resignid)
-                                    put("region_code", data.d_resigncode)
-                                    put("country_id", "IN")
-                                    put("street", JSONArray().put(data.d_address))
-                                    put("postcode", data.d_pincode)
-                                    put("city", data.d_city)
-                                    put("firstname", data.contact_person)
-                                    put("lastname", data.contact_person)
-                                    put("email", "")
-                                    put("telephone", data.mobile_number)
-                                }
+                            readData(LOGIN_DATA) { loginUser ->
+                                if (loginUser != null) {
+                                    val data = Gson().fromJson(
+                                        loginUser,
+                                        ItemUserItem::class.java
+                                    )
 
-                                val billing_address = JSONObject().apply {
-                                    put("region", data.register_state)
-                                    put("region_id", data.register_resignid)
-                                    put("region_code", data.register_resigncode)
-                                    put("country_id", "IN")
-                                    put("street", JSONArray().put(data.register_address))
-                                    put("postcode", data.register_pincode)
-                                    put("city", data.register_city)
-                                    put("firstname", data.contact_person)
-                                    put("lastname", data.contact_person)
-                                    put("email", "")
-                                    put("telephone", data.mobile_number)
-                                }
+                                    val shipping_address = JSONObject().apply {
+                                        put("region", data.d_state)
+                                        put("region_id", data.d_resignid)
+                                        put("region_code", data.d_resigncode)
+                                        put("country_id", "IN")
+                                        put("street", JSONArray().put(data.d_address))
+                                        put("postcode", data.d_pincode)
+                                        put("city", data.d_city)
+                                        put("firstname", data.contact_person)
+                                        put("lastname", data.contact_person)
+                                        put("email", "")
+                                        put("telephone", data.mobile_number)
+                                    }
 
-                                val addressInformation = JSONObject().apply {
-                                    put("addressInformation", JSONObject().apply {
-                                        put("shipping_address", shipping_address)
-                                        put("billing_address", billing_address)
-                                        put("shipping_carrier_code", "flatrate")
-                                        put("shipping_method_code", "flatrate")
-                                    })
-                                }
+                                    val billing_address = JSONObject().apply {
+                                        put("region", data.register_state)
+                                        put("region_id", data.register_resignid)
+                                        put("region_code", data.register_resigncode)
+                                        put("country_id", "IN")
+                                        put("street", JSONArray().put(data.register_address))
+                                        put("postcode", data.register_pincode)
+                                        put("city", data.register_city)
+                                        put("firstname", data.contact_person)
+                                        put("lastname", data.contact_person)
+                                        put("email", "")
+                                        put("telephone", data.mobile_number)
+                                    }
 
-                                Log.e("TAG", "jsonObjectaddressInformation " + addressInformation)
+                                    val addressInformation = JSONObject().apply {
+                                        put("addressInformation", JSONObject().apply {
+                                            put("shipping_address", shipping_address)
+                                            put("billing_address", billing_address)
+                                            put("shipping_carrier_code", "flatrate")
+                                            put("shipping_method_code", "flatrate")
+                                        })
+                                    }
 
-                                readData(CUSTOMER_TOKEN) { token ->
-                                    viewModel.updateShipping(token!!, addressInformation) {
-                                        Log.e("TAG", "onCallBack: ${this.toString()}")
-                                        findNavController().navigate(
-                                            R.id.action_checkout_to_payment,
-                                            Bundle().apply {
-                                                putString("name", editTextN.text.toString())
-                                                putString("email", editEmail.text.toString())
-                                                putString("mobile", editMobileNo.text.toString())
-                                            })
+                                    Log.e(
+                                        "TAG",
+                                        "jsonObjectaddressInformation " + addressInformation
+                                    )
+
+                                    readData(CUSTOMER_TOKEN) { token ->
+                                        viewModel.updateShipping(token!!, addressInformation) {
+                                            Log.e("TAG", "onCallBack22: ${this.toString()}")
+//                                            findNavController().navigate(
+//                                                R.id.action_checkout_to_payment,
+//                                                Bundle().apply {
+//                                                    putString("name", editTextN.text.toString())
+//                                                    putString("email", editEmail.text.toString())
+//                                                    putString(
+//                                                        "mobile",
+//                                                        editMobileNo.text.toString()
+//                                                    )
+//                                                })
+
+
+                                            readData(QUOTE_ID) { quoteId->
+                                                val customerData = JSONObject().apply {
+                                                    put("cartId", quoteId)
+                                                    put("customFields", JSONObject().apply {
+                                                        put("checkout_buyer_name", editTextN.text.toString())
+                                                        put("checkout_buyer_email", editEmail.text.toString())
+                                                        put("checkout_purchase_order_no", editMobileNo.text.toString())
+                                                        put("checkout_goods_mark", "")
+                                                    })
+                                                }
+
+                                                viewModel.postCustomDetails(token!!, customerData) {
+                                                    Log.e("TAG", "postCustomDetailsonCallBack22: ${this.toString()}")
+                                                    findNavController().navigate(R.id.action_checkout_to_payment)
+                                                }
+
+                                            }
+                                        }
                                     }
                                 }
                             }
-                        }
 
+                        }
 
                     }
 

@@ -21,7 +21,6 @@ import javax.inject.Inject
 class PaymentVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
 
-
     fun createOrder(adminToken: String, jsonObject: JSONObject, callBack: JsonElement.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
@@ -55,5 +54,38 @@ class PaymentVM @Inject constructor(private val repository: Repository) : ViewMo
             )
         }
 
+
+    fun postCustomDetails(adminToken: String, jsonObject: JSONObject, callBack: JsonElement.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.postCustomDetails("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXXZZ: ${response.body().toString()}")
+                                callBack(response.body()!!)
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        showSnackBar(message)
+//                        if(message.contains("fieldName")){
+//                            showSnackBar("Something went wrong!")
+//                        } else {
+//                            sessionExpired()
+//                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 }

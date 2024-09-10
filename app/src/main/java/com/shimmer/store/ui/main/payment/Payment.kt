@@ -15,6 +15,7 @@ import com.shimmer.store.databinding.FaqBinding
 import com.shimmer.store.databinding.PaymentBinding
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.faq.FaqVM
@@ -61,14 +62,12 @@ class Payment : Fragment() {
 
 
             layoutSort.singleClick {
-
                 readData(LOGIN_DATA) { loginUser ->
                     if (loginUser != null) {
                         val data = Gson().fromJson(
                             loginUser,
                             ItemUserItem::class.java
                         )
-
 
                         val billing_address = JSONObject().apply {
                             put("region", data.register_state)
@@ -95,8 +94,25 @@ class Payment : Fragment() {
 
                         readData(CUSTOMER_TOKEN) { token ->
                             viewModel.createOrder(token!!, addressInformation) {
-                                Log.e("TAG", "onCallBack: ${this.toString()}")
+                                Log.e("TAG", "createOrderonCallBack: ${this.toString()}")
                                 findNavController().navigate(R.id.action_payment_to_thankyou)
+
+//                                readData(QUOTE_ID) {quoteId->
+//                                    val customerData = JSONObject().apply {
+//                                        put("cartId", quoteId)
+//                                        put("customFields", JSONObject().apply {
+//                                            put("checkout_buyer_name", arguments?.getString("name"))
+//                                            put("checkout_buyer_email", arguments?.getString("email"))
+//                                            put("checkout_purchase_order_no", arguments?.getString("mobile"))
+//                                            put("checkout_goods_mark", "")
+//                                        })
+//                                    }
+//
+//                                    viewModel.postCustomDetails(token!!, customerData) {
+//                                        Log.e("TAG", "postCustomDetailsonCallBack: ${this.toString()}")
+//                                        findNavController().navigate(R.id.action_payment_to_thankyou)
+//                                    }
+//                                }
                             }
                         }
                     }

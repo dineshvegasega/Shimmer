@@ -15,6 +15,8 @@ import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.OrderDetailBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.di.AppModule_GsonFactory.gson
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.orderHistory.Item
@@ -131,32 +133,52 @@ class OrderDetail : Fragment() {
                     }
                 }
             } else if (arguments?.getString("from") == "orderHistory") {
-                val consentIntent = arguments?.parcelable<Item>("key")
-                Log.e("TAG", "onViewCreated: ${consentIntent.toString()}")
-
-                textName.text = consentIntent?.customer_firstname
-                textMobile.text = consentIntent?.customer_email
-                textEmail.text = consentIntent?.customer_email
-
-                textDate.text = consentIntent?.updated_at?.changeDateFormat(
-                    "yyyy-MM-dd HH:mm:ss",
-                    "dd-MMM-yyyy"
-                )
-                textTime.text =
-                    consentIntent?.updated_at?.changeDateFormat("yyyy-MM-dd HH:mm:ss", "HH:mm")
+//                val consentIntent = arguments?.parcelable<Item>("key")
+                val _id = arguments?.getString("_id")
+                Log.e("TAG", "onViewCreated: ${_id.toString()}")
 
 
-                rvListCategory1.setHasFixedSize(true)
-                viewModel.orderSKUOrderHistory.notifyDataSetChanged()
-                viewModel.orderSKUOrderHistory.submitList(consentIntent?.items)
-                rvListCategory1.adapter = viewModel.orderSKUOrderHistory
+                _id?.let {
+                    readData(ADMIN_TOKEN) { token ->
+                        viewModel.orderHistoryListDetail(token.toString(), _id) {
+                            val itemOrderDetail = this
+//                            textName.text = itemOrderDetail?.customer_firstname
+//                            textMobile.text = consentIntent?.customer_email
+//                            textEmail.text = consentIntent?.customer_email
 
-                layoutSort.visibility = View.GONE
+
+                            textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(
+                                "yyyy-MM-dd HH:mm:ss",
+                                "dd-MMM-yyyy"
+                            )
+                            textTime.text =
+                                itemOrderDetail?.updated_at?.changeDateFormat(
+                                    "yyyy-MM-dd HH:mm:ss",
+                                    "HH:mm"
+                                )
 
 
-                textSubTotalPrice.text = "₹" +consentIntent?.base_subtotal
-                textGSTPrice.text = "₹" +consentIntent?.base_shipping_incl_tax
-                textTotalAmountPrice.text = "₹" +consentIntent?.base_grand_total
+
+
+                            rvListCategory1.setHasFixedSize(true)
+                            viewModel.orderSKUOrderHistory.notifyDataSetChanged()
+                            viewModel.orderSKUOrderHistory.submitList(itemOrderDetail?.items)
+                            rvListCategory1.adapter = viewModel.orderSKUOrderHistory
+
+                            layoutSort.visibility = View.GONE
+
+
+                            textSubTotalPrice.text = "₹" +itemOrderDetail?.base_subtotal
+                            textGSTPrice.text = "₹" +itemOrderDetail?.base_shipping_incl_tax
+                            textTotalAmountPrice.text = "₹" +itemOrderDetail?.base_grand_total
+
+                        }
+                    }
+
+                }
+
+
+
             }
         }
     }
@@ -172,4 +194,10 @@ class OrderDetail : Fragment() {
 }
 
 
-data class CartItem(val name: String, val price: Double, val sku: String, val qty: Int, var isSelected: Boolean = false)
+data class CartItem(
+    val name: String,
+    val price: Double,
+    val sku: String,
+    val qty: Int,
+    var isSelected: Boolean = false
+)
