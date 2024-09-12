@@ -203,7 +203,7 @@ interface ApiInterface {
 
     @GET(ORDER_HISTORY_LIST)
     suspend fun orderHistoryList(
-        @Query("customerID") franchise: String,
+        @Query("franchise") franchise: String,
     ): Response<ItemOrders>
 
 

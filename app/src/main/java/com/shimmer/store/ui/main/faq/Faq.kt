@@ -93,8 +93,6 @@ class Faq : Fragment() {
 ////                        menuBadge.visibility = if (countBadge != 0) View.VISIBLE else View.GONE
 ////                    }
 //                }
-//
-//
 //            }
 
 

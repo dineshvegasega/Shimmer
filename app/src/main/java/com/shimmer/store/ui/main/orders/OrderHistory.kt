@@ -9,11 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
+import com.google.gson.Gson
 import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.databinding.OrderHistoryBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
+import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -83,12 +86,24 @@ class OrderHistory (
 //            }
 
 
-            viewModel.orderHistoryList("6"){
-                rvListCategory1.setHasFixedSize(true)
-                rvListCategory1.adapter = viewModel.orderHistory
-                viewModel.orderHistory.notifyDataSetChanged()
-                viewModel.orderHistory.submitList(this)
+            readData(LOGIN_DATA) { loginUser ->
+                if (loginUser != null) {
+                    val data = Gson().fromJson(
+                        loginUser,
+                        ItemUserItem::class.java
+                    )
+
+
+                    viewModel.orderHistoryList(data.name){
+                        rvListCategory1.setHasFixedSize(true)
+                        rvListCategory1.adapter = viewModel.orderHistory
+                        viewModel.orderHistory.notifyDataSetChanged()
+                        viewModel.orderHistory.submitList(this)
+                    }
+                }
             }
+
+
 
         }
     }

@@ -50,6 +50,8 @@ class CustomDesign : Fragment() {
                 }
             }
 
+            topBarBack.ivCartLayout.visibility = View.GONE
+
 
             layoutSort.singleClick {
                 if (editTextN.text.toString().isEmpty()) {

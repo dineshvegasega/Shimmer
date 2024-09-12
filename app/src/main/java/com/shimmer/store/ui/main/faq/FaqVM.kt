@@ -16,6 +16,7 @@ import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
@@ -23,7 +24,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
-class FaqVM @Inject constructor() : ViewModel() {
+class FaqVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
     var item1 : ArrayList<Items> = ArrayList()
 
