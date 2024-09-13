@@ -137,14 +137,13 @@ class OrderDetail : Fragment() {
                 val _id = arguments?.getString("_id")
                 Log.e("TAG", "onViewCreated: ${_id.toString()}")
 
-
                 _id?.let {
                     readData(ADMIN_TOKEN) { token ->
                         viewModel.orderHistoryListDetail(token.toString(), _id) {
                             val itemOrderDetail = this
-//                            textName.text = itemOrderDetail?.customer_firstname
-//                            textMobile.text = consentIntent?.customer_email
-//                            textEmail.text = consentIntent?.customer_email
+                            textName.text = arguments?.getString("name")
+                            textMobile.text = arguments?.getString("mobile")
+                            textEmail.text = arguments?.getString("email")
 
 
                             textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(

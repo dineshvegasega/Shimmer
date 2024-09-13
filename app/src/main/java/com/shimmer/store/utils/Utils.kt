@@ -16,7 +16,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Address
 import android.location.Geocoder
-import android.location.Location
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
@@ -1178,9 +1177,12 @@ public fun String.getLocationFromAddress(): LatLng {
 }
 
 
-
-
-
+fun isNumeric(str: String): Boolean {
+    for (c in str.toCharArray()) {
+        if (!Character.isDigit(c)) return false
+    }
+    return true
+}
 
 
 

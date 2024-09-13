@@ -281,6 +281,14 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                        } else {
 //                            sessionExpired()
 //                        }
+
+                        if(message.contains("%fieldValue")){
+                            sessionExpired()
+                        } else if(message.contains("authorized")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
                     }
 
                     override fun loading() {

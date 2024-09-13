@@ -28,9 +28,6 @@
             app:srcCompat="@mipmap/ic_launcher"
             android:background="@color/app_color"
             android:scaleType="centerCrop"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:focusable="true"
-            android:clickable="true"
             android:theme="@style/RoundCorner50"
             />
 

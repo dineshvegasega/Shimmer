@@ -346,43 +346,43 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
     }
 
 
-    fun getQuoteId(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
-        viewModelScope.launch {
-            repository.callApi(
-                callHandler = object : CallHandler<Response<JsonElement>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-//                        if (loginType == "vendor") {
-                            apiInterface.getQuoteId("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
-//                        } else if (loginType == "guest") {
-//                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
-                    //                        } else {
-//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//    fun getQuoteId(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
+//        viewModelScope.launch {
+//            repository.callApi(
+//                callHandler = object : CallHandler<Response<JsonElement>> {
+//                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+////                        if (loginType == "vendor") {
+//                            apiInterface.getQuoteId("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+////                        } else if (loginType == "guest") {
+////                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
+//                    //                        } else {
+////                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+////                        }
+//                    @SuppressLint("SuspiciousIndentation")
+//                    override fun success(response: Response<JsonElement>) {
+//                        if (response.isSuccessful) {
+//                            try {
+//                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+//                                callBack(response.body().toString())
+//                            } catch (_: Exception) {
+//                            }
 //                        }
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
-                        if (response.isSuccessful) {
-                            try {
-                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
-                                callBack(response.body().toString())
-                            } catch (_: Exception) {
-                            }
-                        }
-                    }
-
-                    override fun error(message: String) {
-                        if(message.contains("fieldName")){
-                            showSnackBar("Something went wrong!")
-                        } else {
-                            sessionExpired()
-                        }
-                    }
-
-                    override fun loading() {
-                        super.loading()
-                    }
-                }
-            )
-        }
+//                    }
+//
+//                    override fun error(message: String) {
+//                        if(message.contains("customerId")){
+//                            sessionExpired()
+//                        } else {
+//                            showSnackBar("Something went wrong!")
+//                        }
+//                    }
+//
+//                    override fun loading() {
+//                        super.loading()
+//                    }
+//                }
+//            )
+//        }
 
 
     fun getCart(customerToken: String, callBack: ItemCart.() -> Unit) =
@@ -409,10 +409,11 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                     }
 
                     override fun error(message: String) {
-                        if(message.contains("fieldName")){
-                            showSnackBar("Something went wrong!")
+                        Log.e("TAG", "customerIdXX "+message)
+                        if(message.contains("%fieldValue")){
+                            sessionExpired()
                         } else {
-//                            sessionExpired()
+                           // showSnackBar("Something went wrong!")
                         }
                     }
 
@@ -489,11 +490,11 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                     }
 
                     override fun error(message: String) {
-//                        if(message.contains("fieldName")){
+                        if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
                             showSnackBar("Something went wrong!")
-//                        } else {
-//                            sessionExpired()
-//                        }
+                        }
                     }
 
                     override fun loading() {
@@ -532,11 +533,16 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                         if(message.contains("Cart doesn't contain")){
                             showSnackBar(message)
                         } else {
-                            if(message.contains("fieldName")){
-                                showSnackBar("Something went wrong!")
-                            } else {
+                            if(message.contains("customerId")){
                                 sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
                             }
+//                            if(message.contains("fieldName")){
+//                                showSnackBar("Something went wrong!")
+//                            } else {
+//                                sessionExpired()
+//                            }
                         }
                     }
 
@@ -612,7 +618,11 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 //                        } else {
 //                            sessionExpired()
 //                        }
-
+                        if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
                     }
 
                     override fun loading() {

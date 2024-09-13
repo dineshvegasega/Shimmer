@@ -2,6 +2,8 @@ package com.shimmer.store.ui.main.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,7 @@ import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
 import dagger.hilt.android.AndroidEntryPoint
+import org.jsoup.internal.StringUtil.isNumeric
 
 @AndroidEntryPoint
 class CustomerOrders(
@@ -71,18 +74,41 @@ class CustomerOrders(
 
 
 //            loadData()
+
+            orderDetailLive.value = true
+            orderDetailLive.observe(viewLifecycleOwner) {
+                Log.e("TAG", "orderDetailLive: $it")
+                loadData("" , "")
+            }
+            editTextSearch.addTextChangedListener(object : TextWatcher {
+                    override fun afterTextChanged(s: Editable?) {
+                    }
+
+                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                    }
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                        val isNumeric = isNumeric(editTextSearch.text.toString())
+                        if(isNumeric == true){
+                            loadData(""+editTextSearch.text.toString() , "")
+                        } else {
+                            loadData("" , ""+editTextSearch.text.toString())
+                        }
+                    }
+                })
+
         }
 
-        orderDetailLive.value = true
-        orderDetailLive.observe(viewLifecycleOwner) {
-            Log.e("TAG", "orderDetailLive: $it")
-            loadData()
-        }
+
+
+
 
     }
 
 
-    fun loadData() {
+    @SuppressLint("NotifyDataSetChanged")
+    fun loadData(mobile : String, name : String) {
         binding.apply {
             readData(LOGIN_DATA) { loginUser ->
                 if (loginUser != null) {
@@ -91,7 +117,7 @@ class CustomerOrders(
                         ItemUserItem::class.java
                     )
 
-                    viewModel.guestOrderList(data.name) {
+                    viewModel.guestOrderList(data.name, mobile, name) {
                         Log.e("TAG", "this.items " + this.toString())
 //                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
 //                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type

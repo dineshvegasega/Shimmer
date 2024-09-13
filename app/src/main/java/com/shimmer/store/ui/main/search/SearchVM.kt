@@ -31,6 +31,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
+import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
@@ -47,6 +48,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
    var isListVisible : Boolean = false
 
+    var searchType = 1
 
 
     val searchAdapter = object : GenericAdapter<ItemSearchBinding, ItemProduct>() {
@@ -75,32 +77,59 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                 textPrice.text = "Price: ₹"+ getPatternFormat("1", dataClass.price!!)
                 dataClass.custom_attributes.forEach {
                     if (it.attribute_code == "size"){
-                        textRingsize.text = "Ring size: "+it.value
+//                        textRingsize.text = "Ring size: "+it.value
+                        textRingsize.text = "Size: "+ getSize(it.value.toString().toInt())
+                        textRingsize.visibility=View.VISIBLE
                     }
 
                     if (it.attribute_code == "metal_color"){
-                        textColor.text = "Color: "+it.value
+                        Log.e("TAG", "ColorAAAA: " + it.value)
+                        val colorW = when(it.value.toString()){
+                            "19" -> {"Yellow Gold"}
+                            "20" -> {"Gold White"}
+                            "25" -> {"Rose Gold"}
+                            else -> {"No color"}
+                        }
+                        textColor.text = "Color: "+colorW
+//                        textColor.text = "Color: "+it.value
+                        textColor.visibility=View.VISIBLE
+                    }
+
+                    if (it.attribute_code == "metal_purity"){
+                        val purityW = when(it.value.toString()){
+                            "26" -> {"9Kt"}
+                            "14" -> {"14Kt"}
+                            "15" -> {"18Kt"}
+                            "16" -> {"22Kt"}
+                            "17" -> {"24Kt"}
+                            "18" -> {"95(Platinum)"}
+                            else -> {"No purity"}
+                        }
+                        textPurity.text = "Purity: "+purityW
+                        textPurity.visibility=View.VISIBLE
                     }
 
 
-                    if (it.attribute_code == "metal_type"){
-                        Log.e("TAG", "metal_typeAAA " + it.value)
-                        if (it.value == "12"){
-                            dataClass.custom_attributes.forEach { againAttributes ->
-                                if (againAttributes.attribute_code == "metal_purity"){
-                                    Log.e("TAG", "metal_typeBBB " + againAttributes.value)
-                                    textPurity.text = "Purity: "+againAttributes.value
-                                }
-                            }
-                        }
-                    } else {
-                        dataClass.custom_attributes.forEach { againAttributes ->
-                            if (againAttributes.attribute_code == "metal_purity"){
-                                Log.e("TAG", "metal_typeBBB " + againAttributes.value)
-                                textPurity.text = "Purity: "+againAttributes.value
-                            }
-                        }
-                    }
+//                    if (it.attribute_code == "metal_type"){
+//                        Log.e("TAG", "metal_typeAAA " + it.value)
+//                        if (it.value == "12"){
+//                            dataClass.custom_attributes.forEach { againAttributes ->
+//                                if (againAttributes.attribute_code == "metal_purity"){
+//                                    Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+//                                    textPurity.text = "Purity: "+againAttributes.value
+//                                    textRingsize.visibility=View.VISIBLE
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        dataClass.custom_attributes.forEach { againAttributes ->
+//                            if (againAttributes.attribute_code == "metal_purity"){
+//                                Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+//                                textPurity.text = "Purity: "+againAttributes.value
+//                                textRingsize.visibility=View.VISIBLE
+//                            }
+//                        }
+//                    }
                 }
 
 
@@ -111,8 +140,20 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                 root.singleClick {
                     root.findNavController()
                         .navigate(R.id.action_search_to_productDetail, Bundle().apply {
-                            putString("baseSku", dataClass.sku.split("-")[0])
-                            putString("sku", dataClass.sku)
+                            if (searchType == 1){
+                                if (dataClass.sku.contains(" ")){
+                                    putString("baseSku", dataClass.sku.split("-")[0])
+                                } else {
+                                    putString("baseSku", dataClass.sku)
+                                }
+                            } else if (searchType == 2) {
+                                if (dataClass.sku.contains(" ")){
+                                    putString("baseSku", dataClass.sku.split("-")[0])
+                                    putString("sku", dataClass.sku)
+                                } else {
+                                    putString("baseSku", dataClass.sku)
+                                }
+                            }
                         })
                 }
             }

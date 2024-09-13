@@ -297,6 +297,8 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                val jsonObject = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\", "")
+//                                Log.e("TAG", "successAAB: ${jsonObject}")
                                 callBack(response.body()!!)
                             } catch (e: Exception) {
                             }

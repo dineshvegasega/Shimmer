@@ -53,11 +53,11 @@ class SearchOrder : Fragment() {
                 SearchModel(_id = 1, search_name = "Search1", currentTime = System.currentTimeMillis()),
             )
 
-            rvList.setHasFixedSize(true)
-            rvList.adapter = viewModel.searchOrderAdapter
-            viewModel.searchOrderAdapter.notifyDataSetChanged()
-            viewModel.searchOrderAdapter.submitList(userList)
-            rvList.visibility = View.VISIBLE
+//            rvList.setHasFixedSize(true)
+//            rvList.adapter = viewModel.searchOrderAdapter
+//            viewModel.searchOrderAdapter.notifyDataSetChanged()
+//            viewModel.searchOrderAdapter.submitList(userList)
+//            rvList.visibility = View.VISIBLE
 
         }
 

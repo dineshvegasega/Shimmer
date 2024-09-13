@@ -93,6 +93,66 @@ class Repository @Inject constructor(
     /**
      * Call Api
      * */
+    suspend fun <T> callApiNoHideKeyboard(
+        loader: Boolean = false,
+        callHandler: CallHandler<T>
+    ) {
+
+        /**
+         * Hide Soft Keyboard
+         * */
+//        hideKeyboard()
+
+
+        /**
+         * Coroutine Exception Handler
+         * */
+        val coRoutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            throwable.printStackTrace()
+            mainThread {
+                throwable.message.let {
+//                    hideLoader()
+                    callHandler.error(it.getErrorMessage())
+                }
+            }
+        }
+
+        /**
+         * Call Api
+         * */
+        CoroutineScope(Dispatchers.IO + coRoutineExceptionHandler + Job()).launch {
+            flow {
+                emit(callHandler.sendRequest(apiInterface = apiInterface) as Response<*>)
+            }.flowOn(ioDispatcher)
+                .retryWhen { cause, attempt ->
+                    (attempt < RETRY_COUNT) && (cause is IOException)
+                }.onStart {
+//                    callHandler.loading()
+                    withContext(mainDispatcher) {
+                        if (loader) MainActivity.context?.get()?.showLoader()
+                    }
+                }.catch { error ->
+                    withContext(mainDispatcher) {
+//                        hideLoader()
+                        callHandler.error(error.getErrorMessage())
+                    }
+                }.collect { response ->
+                    withContext(mainDispatcher) {
+//                        hideLoader()
+                        if (response.isSuccessful)
+                            callHandler.success(response as T)
+                        else
+                            response.errorBody()?.string()
+                                ?.let { callHandler.error(it.getErrorMessage()) }
+                    }
+                }
+        }
+    }
+
+
+    /**
+     * Call Api
+     * */
     fun callApiTranslate(_lang : String, _words: String) : String{
         val res = apiTranslateInterface.translate(_lang, _words).execute()
         return if(res.isSuccessful){

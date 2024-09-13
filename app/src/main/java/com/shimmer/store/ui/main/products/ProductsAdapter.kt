@@ -190,8 +190,8 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
-            itemRowBinding.ivAddCart.visibility = if (model.type_id == "configurable") View.GONE else View.VISIBLE
-            itemRowBinding.btAddCart.visibility = if (model.type_id == "configurable") View.GONE else View.VISIBLE
+//            itemRowBinding.ivAddCart.visibility = if (model.type_id == "configurable") View.GONE else View.VISIBLE
+//            itemRowBinding.btAddCart.visibility = if (model.type_id == "configurable") View.GONE else View.VISIBLE
 
         }
     }

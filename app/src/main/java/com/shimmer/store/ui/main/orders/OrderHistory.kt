@@ -2,6 +2,8 @@ package com.shimmer.store.ui.main.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
 import dagger.hilt.android.AndroidEntryPoint
+import org.jsoup.internal.StringUtil.isNumeric
 
 @AndroidEntryPoint
 class OrderHistory (
@@ -61,8 +64,28 @@ class OrderHistory (
             orderDetailLive.value = true
             orderDetailLive.observe(viewLifecycleOwner){
                 Log.e("TAG", "orderDetailLive: $it")
-                loadData()
+                loadData("" ,"")
             }
+
+
+
+            editTextSearch.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                @SuppressLint("SuspiciousIndentation")
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    val isNumeric = isNumeric(editTextSearch.text.toString())
+                    if(isNumeric == true){
+                        loadData(""+editTextSearch.text.toString() , "")
+                    } else {
+                        loadData("" , ""+editTextSearch.text.toString())
+                    }
+                }
+            })
         }
 
     }
@@ -70,7 +93,7 @@ class OrderHistory (
 
 
     @SuppressLint("NotifyDataSetChanged")
-    fun loadData() {
+    fun loadData(mobile : String, name : String) {
         binding.apply {
 //            readData(ADMIN_TOKEN) { token ->
 //                val emptyMap = mutableMapOf<String, String>()
@@ -94,7 +117,7 @@ class OrderHistory (
                     )
 
 
-                    viewModel.orderHistoryList(data.name){
+                    viewModel.orderHistoryList(data.name, mobile, name) {
                         rvListCategory1.setHasFixedSize(true)
                         rvListCategory1.adapter = viewModel.orderHistory
                         viewModel.orderHistory.notifyDataSetChanged()

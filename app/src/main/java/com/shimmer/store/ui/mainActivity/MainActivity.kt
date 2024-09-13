@@ -45,6 +45,7 @@ import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import org.jsoup.internal.StringUtil.isNumeric
 import java.lang.ref.WeakReference
 
 
@@ -238,6 +239,10 @@ class MainActivity : AppCompatActivity() {
 //
 //        Log.e("TAG", "jsonObjectaddressInformation "+addressInformation)
 
+
+
+//        val isNumeric = isNumeric("312424a")
+//        Log.e("TAG", "jsonObjectaddressInformation "+isNumeric)
     }
 
     @SuppressLint("RestrictedApi")
@@ -489,7 +494,7 @@ class MainActivity : AppCompatActivity() {
     fun adminToken() {
         val obj: JSONObject = JSONObject().apply {
             put("username", "admin")
-            put("password", "admin123")
+            put("password", "Admin@1234")
         }
         viewModel.adminToken(obj){
             Log.e("TAG", "ADMIN_TOKENAAAA: "+this)

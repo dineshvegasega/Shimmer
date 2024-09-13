@@ -216,5 +216,6 @@
     <string name="total">Total</string>
     <string name="sku">SKU</string>
     <string name="quantity">Quantity</string>
+    <string name="payment_page">Payment Page</string>
 
 </resources>

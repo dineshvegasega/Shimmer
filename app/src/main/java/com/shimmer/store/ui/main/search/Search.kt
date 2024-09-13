@@ -43,7 +43,6 @@ class Search : Fragment() {
     private val binding get() = _binding!!
 
 
-    var searchType = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -111,12 +110,12 @@ class Search : Fragment() {
             setSearchButtons()
 
             btProduct.singleClick {
-                searchType = 1
+                viewModel.searchType = 1
                 setSearchButtons()
             }
 
             btSKU.singleClick {
-                searchType = 2
+                viewModel.searchType = 2
                 setSearchButtons()
             }
 
@@ -169,7 +168,7 @@ class Search : Fragment() {
     }
 
     private fun setSearchButtons() {
-        if (searchType == 1) {
+        if (viewModel.searchType == 1) {
             binding.topBarSearch.editTextSearch.hint = resources.getString(R.string.search_by_product)
             binding.btProduct.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.white))
             binding.btSKU.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.black))
@@ -241,12 +240,17 @@ class Search : Fragment() {
         var mainCategoryBoolean = false
 
 
-        if(searchType == 1){
+        if(viewModel.searchType == 1){
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "name"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "%"+topBarSearch.editTextSearch.text.toString()+"%"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "like"
 
-        } else  if(searchType == 2){
+            countFrom1 = 1
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] = "visibility"
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] = "4"
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] = "eq"
+
+        } else if(viewModel.searchType == 2){
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
             emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
         }
@@ -263,7 +267,6 @@ class Search : Fragment() {
                     rvList2.visibility = View.VISIBLE
 
                     viewModel.isListVisible = true
-
 
                     if(this.items.size == 0){
                         binding.idDataNotFound.root.visibility = View.VISIBLE

@@ -104,6 +104,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/textPurity"
                 tools:ignore="HardcodedText" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="Quantity: 1"
+                android:textColor="@color/_484848"
+                android:textSize="@dimen/_11sdp"
+                app:fontFamily="@font/nunitosans_semibold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textRingSize"
+                tools:ignore="HardcodedText" />
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textPrice"
@@ -115,7 +128,7 @@
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textRingSize"
+                app:layout_constraintTop_toBottomOf="@+id/textQty"
                 tools:ignore="HardcodedText" />
 
 

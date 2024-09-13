@@ -161,7 +161,9 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                     root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
                         putString("from" , "orderHistory")
                         putString("_id" , ""+dataClass.entity_id)
-//                        putParcelable("key" , dataClass)
+                        putString("name" , ""+dataClass.checkout_buyer_name)
+                        putString("mobile" , ""+dataClass.checkout_purchase_order_no)
+                        putString("email" , ""+dataClass.checkout_buyer_email)
                     })
                 }
             }
@@ -230,65 +232,58 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
         }
 
 
-    fun getOrderHistory(
-        adminToken: String,
-        emptyMap: MutableMap<String, String>,
-        callBack: ItemOrderHistoryModel.() -> Unit
-    ) =
-        viewModelScope.launch {
-            repository.callApi(
-                callHandler = object : CallHandler<Response<ItemOrderHistoryModel>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-//                        if (loginType == "vendor") {
-//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-//                        } else if (loginType == "guest") {
-                        apiInterface.getOrderHistory("Bearer " + adminToken, emptyMap)
-
-                    //                        } else {
-//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+//    fun getOrderHistory(
+//        adminToken: String,
+//        emptyMap: MutableMap<String, String>,
+//        callBack: ItemOrderHistoryModel.() -> Unit
+//    ) =
+//        viewModelScope.launch {
+//            repository.callApi(
+//                callHandler = object : CallHandler<Response<ItemOrderHistoryModel>> {
+//                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+////                        if (loginType == "vendor") {
+////                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+////                        } else if (loginType == "guest") {
+//                        apiInterface.getOrderHistory("Bearer " + adminToken, emptyMap)
+//
+//                    //                        } else {
+////                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
+////                        }
+//                    @SuppressLint("SuspiciousIndentation")
+//                    override fun success(response: Response<ItemOrderHistoryModel>) {
+//                        if (response.isSuccessful) {
+//                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+////                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+//                                callBack(response.body()!!)
+//
+//                            } catch (e: Exception) {
+//                            }
 //                        }
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<ItemOrderHistoryModel>) {
-                        if (response.isSuccessful) {
-                            try {
-                                Log.e("TAG", "successAA: ${response.body().toString()}")
-//                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
-                                callBack(response.body()!!)
-
-                            } catch (e: Exception) {
-                            }
-                        }
-                    }
-
-                    override fun error(message: String) {
-                        if (message.contains("authorized")) {
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
-                        }
-                    }
-
-                    override fun loading() {
-                        super.loading()
-                    }
-                }
-            )
-        }
+//                    }
+//
+//                    override fun error(message: String) {
+//                        if (message.contains("authorized")) {
+//                            sessionExpired()
+//                        } else {
+//                            showSnackBar("Something went wrong!")
+//                        }
+//                    }
+//
+//                    override fun loading() {
+//                        super.loading()
+//                    }
+//                }
+//            )
+//        }
 
 
-    fun guestOrderList(franchiseId: String, callBack: ItemGuestOrderList.() -> Unit) =
+    fun guestOrderList(franchiseId: String, mobile : String, name : String, callBack: ItemGuestOrderList.() -> Unit) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiNoHideKeyboard(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-//                        if (loginType == "vendor") {
-//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-//                        } else if (loginType == "guest") {
-                        apiInterface.guestOrderList(franchiseId)
-
-                    //                        } else {
-//                            apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-//                        }
+                        apiInterface.guestOrderList(franchiseId, mobile, name)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemGuestOrderList>) {
                         if (response.isSuccessful) {
@@ -320,12 +315,12 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
 
 
-    fun orderHistoryList(id: String, callBack: ItemOrders.() -> Unit) =
+    fun orderHistoryList(franchiseId: String, mobile : String, name : String, callBack: ItemOrders.() -> Unit) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiNoHideKeyboard(
                 callHandler = object : CallHandler<Response<ItemOrders>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.orderHistoryList(id)
+                        apiInterface.orderHistoryList(franchiseId, mobile, name)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemOrders>) {
                         if (response.isSuccessful) {

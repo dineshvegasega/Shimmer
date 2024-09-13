@@ -88,7 +88,7 @@ class ForgotPassword : Fragment() {
                 Log.e("TAG", "count: $this")
                 val adminJSON: JSONObject = JSONObject().apply {
                     put("username", "admin")
-                    put("password", "admin123")
+                    put("password", "Admin@1234")
                 }
                 if (editTextMobileNumber.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.EnterValidMobileNumber))

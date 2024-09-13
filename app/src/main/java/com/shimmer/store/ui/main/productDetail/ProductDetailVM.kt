@@ -147,6 +147,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                        } else {
 //                            sessionExpired()
 //                        }
+                        hide()
                     }
 
                     override fun loading() {
@@ -215,6 +216,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                             sessionExpired()
                         }
 
+                        hide()
                     }
 
                     override fun loading() {
@@ -254,10 +256,12 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                             showSnackBar("Something went wrong!")
                         } else if(message.contains("The product that was requested doesn't exist")){
                             showSnackBar(message)
+                        } else if(message.contains("error")){
+                            showSnackBar(message)
                         } else {
                             sessionExpired()
                         }
-
+                        hide()
                     }
 
                     override fun loading() {

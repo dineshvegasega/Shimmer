@@ -91,7 +91,7 @@ dependencies {
     implementation ("androidx.databinding:databinding-ktx:8.6.0")
     implementation ("androidx.databinding:databinding-runtime:8.6.0")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.5")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
@@ -105,7 +105,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
     implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
     implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
-    implementation ("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-scalars:2.11.0")
 
     implementation ("com.google.code.gson:gson:2.10.1")
 

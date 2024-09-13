@@ -107,6 +107,8 @@ class ProductDetailPageFragment(
             binding.ivIcon.singleClick {
                 ProductDetail.callBackListener!!.onCallBack(0)
             }
+
+            Log.e(TAG, "onResumeAA: "+(IMAGE_URL+videoPath.file))
         } else if(videoPath.file.endsWith(".mp4")) {
             binding.ivIcon.visibility = View.GONE
             binding.playerView.visibility = View.VISIBLE

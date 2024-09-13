@@ -47,28 +47,7 @@ import javax.inject.Inject
 class HomeVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
 
-    var item1: ArrayList<String> = ArrayList()
-    var item2: ArrayList<String> = ArrayList()
-    var item3: ArrayList<String> = ArrayList()
 
-
-    init {
-        item1.add("1")
-        item1.add("2")
-        item1.add("3")
-
-        item2.add("1")
-        item2.add("2")
-        item2.add("1")
-        item2.add("2")
-        item2.add("1")
-        item2.add("2")
-
-        item3.add("1")
-        item3.add("2")
-        item3.add("3")
-        item3.add("4")
-    }
 
 
     fun getCartCount(callBack: Int.() -> Unit) {

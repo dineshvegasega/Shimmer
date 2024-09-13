@@ -121,7 +121,8 @@ class ProductDetail : Fragment(), CallBackListener {
             cartItemLiveData.value = false
             cartItemLiveData.observe(viewLifecycleOwner) {
                 topBarBack.menuBadge.text = "$cartItemCount"
-                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+                topBarBack.menuBadge.visibility =
+                    if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
 
 
@@ -161,6 +162,11 @@ class ProductDetail : Fragment(), CallBackListener {
 //            val model = arguments?.parcelable<ItemProduct>("model")
 
             val baseSku = arguments?.getString("baseSku")
+            val sku = arguments?.getString("sku")
+
+            Log.e("TAG", "baseSkuAA " + baseSku)
+            Log.e("TAG", "skuAA " + sku)
+
             callSKUDetails(baseSku)
 
 //            if (isApiCall == false){
@@ -382,50 +388,63 @@ class ProductDetail : Fragment(), CallBackListener {
             }
 
 
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility =
+                    if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
 
             layoutAddtoCart.singleClick {
                 if (LoginType.CUSTOMER == loginType) {
                     mainThread {
-                        val newUser = CartModel(product_id = itemProductThis.id, name = itemProductThis.name, price = itemProductThis.price, quantity = 1, sku = itemProductThis.sku, currentTime = System.currentTimeMillis())
+                        val newUser = CartModel(
+                            product_id = itemProductThis.id,
+                            name = itemProductThis.name,
+                            price = itemProductThis.price,
+                            quantity = 1,
+                            sku = itemProductThis.sku,
+                            currentTime = System.currentTimeMillis()
+                        )
                         itemProductThis.custom_attributes.forEach {
-                            if (it.attribute_code == "size"){
+                            if (it.attribute_code == "size") {
                                 newUser.apply {
-                                    this.size = ""+it.value
+                                    this.size = "" + it.value
                                 }
                             }
 
 
-                            if (it.attribute_code == "metal_color"){
+                            if (it.attribute_code == "metal_color") {
                                 newUser.apply {
-                                    this.color = ""+it.value
+                                    this.color = "" + it.value
                                 }
                             }
 
-                            if (it.attribute_code == "metal_type"){
+                            if (it.attribute_code == "metal_type") {
                                 Log.e("TAG", "metal_typeAAA " + it.value)
-                                if (it.value == "12"){
+                                if (it.value == "12") {
                                     newUser.apply {
-                                        this.material_type = ""+it.value
+                                        this.material_type = "" + it.value
                                     }
                                     itemProductThis.custom_attributes.forEach { againAttributes ->
-                                        if (againAttributes.attribute_code == "metal_purity"){
+                                        if (againAttributes.attribute_code == "metal_purity") {
                                             Log.e("TAG", "metal_typeBBB " + againAttributes.value)
                                             newUser.apply {
-                                                this.purity = ""+againAttributes.value
+                                                this.purity = "" + againAttributes.value
                                             }
                                         }
                                     }
                                 }
 
-                                if (it.value == "13"){
+                                if (it.value == "13") {
                                     newUser.apply {
-                                        this.material_type = ""+it.value
+                                        this.material_type = "" + it.value
                                     }
                                     itemProductThis.custom_attributes.forEach { againAttributes ->
-                                        if (againAttributes.attribute_code == "metal_purity"){
+                                        if (againAttributes.attribute_code == "metal_purity") {
                                             Log.e("TAG", "metal_typeCCC " + againAttributes.value)
                                             newUser.apply {
-                                                this.purity = ""+againAttributes.value
+                                                this.purity = "" + againAttributes.value
                                             }
                                         }
                                     }
@@ -434,6 +453,7 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                         db?.cartDao()?.insertAll(newUser)
                         showSnackBar("Item added to cart")
+                        MainActivity.mainActivity.get()!!.callCartApi()
                     }
                 } else if (LoginType.VENDOR == loginType) {
                     readData(QUOTE_ID) {
@@ -450,6 +470,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                 //cartMutableList.value = true
                                 Log.e("TAG", "onCallBack: ${this.toString()}")
                                 showSnackBar("Item added to cart")
+                                MainActivity.mainActivity.get()!!.callCartApi()
                             }
                         }
                     }
@@ -481,35 +502,65 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
             layoutDescription.singleClick {
-                if (layoutProductDetails.isVisible == true){
+                if (layoutProductDetails.isVisible == true) {
                     layoutProductDetails.visibility = View.GONE
-                    ivHideShow.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                    ivHideShow.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_right
+                        )
+                    )
                 } else {
                     layoutProductDetails.visibility = View.VISIBLE
-                    ivHideShow.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
+                    ivHideShow.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_down
+                        )
+                    )
                 }
             }
 
             layoutDiamondAndGemstones.singleClick {
-                if (layoutWD.isVisible == true){
+                if (layoutWD.isVisible == true) {
                     layoutWD.visibility = View.GONE
                     webView.visibility = View.GONE
-                    ivHideShow2.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                    ivHideShow2.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_right
+                        )
+                    )
                 } else {
                     layoutWD.visibility = View.VISIBLE
                     webView.visibility = View.VISIBLE
-                    ivHideShow2.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
+                    ivHideShow2.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_down
+                        )
+                    )
                 }
             }
 
 
             layoutPriceBreakup.singleClick {
-                if (groupPriceBreakup.isVisible == true){
+                if (groupPriceBreakup.isVisible == true) {
                     groupPriceBreakup.visibility = View.GONE
-                    ivHideShow3.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_right))
+                    ivHideShow3.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_right
+                        )
+                    )
                 } else {
                     groupPriceBreakup.visibility = View.VISIBLE
-                    ivHideShow3.setImageDrawable(ContextCompat.getDrawable(root.context, R.drawable.arrow_down))
+                    ivHideShow3.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            root.context,
+                            R.drawable.arrow_down
+                        )
+                    )
                 }
             }
         }
@@ -594,49 +645,69 @@ class ProductDetail : Fragment(), CallBackListener {
                     viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProduct = this
 
-                        if (itemProduct.type_id == "simple" || itemProduct.type_id == "virtual") {
-                            Log.e("TAG", "getProductDetailAA11 " + itemProduct.id)
-//                            callApiDetailsVirtual(skuId, itemProduct)
-                        } else if (itemProduct.type_id == "configurable") {
-                            Log.e("TAG", "getProductDetailAA22 ")
-                            viewModel.getProductOptions("" + itemProduct.id) {
-                                val jsonObject = JSONObject(this.toString())
-                                Log.e("TAG", "arrayItemProduct.sizeB " + jsonObject)
-                                val ids =
-                                    itemProduct.extension_attributes.configurable_product_links.toString()
-                                        .replace("[", "").replace("]", "").replace(" ", "")
-                                        .split(",")
+//                        if (itemProduct.type_id == "simple" || itemProduct.type_id == "virtual") {
+//                            Log.e("TAG", "getProductDetailAA11 " + itemProduct.id)
+////                            callApiDetailsVirtual(skuId, itemProduct)
+//                        } else if (itemProduct.type_id == "configurable") {
+                        Log.e("TAG", "getProductDetailAA22 ")
+                        viewModel.getProductOptions("" + itemProduct.id) {
+                            val jsonObject = JSONObject(this.toString())
+                            Log.e("TAG", "arrayItemProduct.sizeB " + jsonObject)
+                            val ids =
+                                itemProduct.extension_attributes.configurable_product_links.toString()
+                                    .replace("[", "").replace("]", "").replace(" ", "")
+                                    .split(",")
 
-                                Log.e("TAG", "arrayItemProduct.sizeC " + ids)
+                            Log.e("TAG", "arrayItemProduct.sizeC " + ids)
 
-                                ids.forEach { idsInner ->
-                                    val jsonObjectData = jsonObject.getJSONObject(idsInner)
-                                    val jsonString = Gson().fromJson(
-                                        jsonObjectData.toString(),
-                                        ItemProductOptions::class.java
-                                    )
-                                    arrayItemProduct.add(jsonString)
+                            ids.forEach { idsInner ->
+                                val jsonObjectData = jsonObject.getJSONObject(idsInner)
+                                val jsonString = Gson().fromJson(
+                                    jsonObjectData.toString(),
+                                    ItemProductOptions::class.java
+                                )
+                                arrayItemProduct.add(jsonString)
+                            }
+
+                            viewModel.hide()
+                            if (arrayItemProduct.size > 0) {
+                                if (currentSku == "") {
+                                    currentSku = arrayItemProduct[0].sku
                                 }
+                                Log.e("TAG", "arrayItemProductcurrentSku " + currentSku)
 
-                                viewModel.hide()
-                                if (arrayItemProduct.size > 0) {
-                                    if (currentSku == "") {
-                                        currentSku = arrayItemProduct[0].sku
-                                    }
-                                    Log.e("TAG", "arrayItemProductcurrentSku " + currentSku)
+                                val sku = arguments?.getString("sku")
 
-                                    val sku = arguments?.getString("sku")
-                                    if(sku!!.isNotEmpty()){
+                                if(sku == ""){
+                                    Log.e("TAG", "skuXXX1 " + sku)
+                                } else {
+                                    Log.e("TAG", "skuXXX2 " + sku)
+                                    if (sku == null) {
+
+                                    } else {
                                         currentSku = sku
                                     }
 
-                                    callApiDetailsConfigurable(
-                                        currentSku,
-                                        itemProduct
-                                    )
                                 }
+
+//                                if (sku != null) {
+//                                    currentSku = sku!!
+//                                }
+
+//                                if (sku != "") {
+//                                    currentSku = sku!!
+//                                }
+
+
+
+                                Log.e("TAG", "arrayItemProductcurrentSkuAfter " + currentSku)
+                                callApiDetailsConfigurable(
+                                    currentSku,
+                                    itemProduct
+                                )
                             }
                         }
+//                        }
                     }
                 }
             }
@@ -683,7 +754,7 @@ class ProductDetail : Fragment(), CallBackListener {
                         textTitle.text = itemProductThis.name
                         textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
 
-                        textTotalPrice.text =  "₹ " +itemProductThis.price
+                        textTotalPrice.text = "₹ " + itemProductThis.price
 
                         textSKU.text = "SKU: " + itemProductThis.sku
 
@@ -722,7 +793,6 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
 
-
                         }
 
 
@@ -741,7 +811,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹"+itemProductAttr.value
+                                textDiamondPrice.text = "₹" + itemProductAttr.value
                             }
 
                             if (itemProductAttr.attribute_code == "metal_purity") {
@@ -797,24 +867,24 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                             if (itemProductAttr.attribute_code == "diamond_weight") {
-                                textWeightCt.text = "Weight "+itemProductAttr.value
+                                textWeightCt.text = "Weight " + itemProductAttr.value
                             }
 
                             if (itemProductAttr.attribute_code == "diamond_number") {
-                                textDiamonds.text = "Diamonds "+itemProductAttr.value
+                                textDiamonds.text = "Diamonds " + itemProductAttr.value
                             }
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹"+itemProductAttr.value
+                                textDiamondPrice.text = "₹" + itemProductAttr.value
                             }
 
                             if (itemProductAttr.attribute_code == "totel_gold_rate") {
-                                textGoldPrice.text = "₹"+itemProductAttr.value
+                                textGoldPrice.text = "₹" + itemProductAttr.value
                             }
 
 
                             if (itemProductAttr.attribute_code == "totel_making_charge") {
-                                textMakingChargesPrice.text = "₹"+itemProductAttr.value
+                                textMakingChargesPrice.text = "₹" + itemProductAttr.value
                             }
                         }
 
@@ -1106,8 +1176,6 @@ class ProductDetail : Fragment(), CallBackListener {
         }
 
     }
-
-
 
 
     private fun setAllImages() {

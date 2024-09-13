@@ -50,7 +50,7 @@ class LoginOptions : Fragment() {
             layoutUser.singleClick {
                 val obj: JSONObject = JSONObject().apply {
                     put("username", "admin")
-                    put("password", "admin123")
+                    put("password", "Admin@1234")
                 }
                 viewModel.adminToken(obj) {
                     Log.e("TAG", "ADMIN_TOKENBBBB " + this)

@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
 import com.shimmer.store.datastore.db.CartModel
+import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
@@ -120,7 +121,7 @@ class SelectFranchise : Fragment() {
                         viewModel.customerDetail(ivEditSearch.text.toString()) {
                             Log.e("TAG", "itCCC " + this)
                             if (this == "false") {
-                                groupVendor.visibility = View.GONE
+                                layoutTop.visibility = View.GONE
                                 viewModel.selectedPosition = -1
                                 franchiseCode = ""
                             } else {
@@ -128,16 +129,33 @@ class SelectFranchise : Fragment() {
                                     this,
                                     ItemUserItem::class.java
                                 )
-                                textFNTxt.text = "Name : " + data.contact_person
-                                textCompanyNameTxt.text = "Franchise Name : " + data.name
-                                textMobileTxt.text = "Mobile No : " + data.mobile_number
-                                textAdrressTxt.text = "Address : " + data.register_address
-                                textCityTxt.text = "City : " + data.register_city
-                                textStateTxt.text = "State : " + data.register_state
-                                textPinCodeTxt.text = "Pincode : " + data.register_pincode
-                                groupVendor.visibility = View.VISIBLE
+//                                textTitleB.text = "Name : " + data.contact_person
+                                textTitleB.text = "Name : " + data.name
+                                textAddr.text = "Address : "+data.register_address +", "+ data.register_city+", "+ data.register_state
+                                textPincode.text = "Pincode : " + data.register_pincode
+                                textContact.text = "Contact : " + data.mobile_number
+
+//                                textCityTxt.text = "City : " + data.register_city
+//                                textStateTxt.text = "State : " + data.register_state
+//                                textPinCodeTxt.text = "Pincode : " + data.register_pincode
+                                layoutTop.visibility = View.VISIBLE
                                 viewModel.selectedPosition = 1
                                 franchiseCode = data.name
+
+//                                rvList.setHasFixedSize(true)
+//                                rvList.adapter = viewModel.franchiseListAdapter
+//                                viewModel.franchiseListAdapter.notifyDataSetChanged()
+//                                var itemFranchise = ItemFranchise(
+//                                    contact_person = data.contact_person,
+//                                    d_address =
+//                                    d_data.name,
+//                                    data.register_address,
+//                                    data.d_pincode,
+//                                    data.mobile_number
+//                                )
+//                                viewModel.franchiseListAdapter.submitList(arrayListOf(ItemFranchise(data.name, data.register_address, data.d_pincode, data.mobile_number)))
+//                                rvList.visibility = View.VISIBLE
+
                             }
                         }
                     }

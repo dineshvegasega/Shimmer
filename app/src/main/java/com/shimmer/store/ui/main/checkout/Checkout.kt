@@ -26,6 +26,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
+import com.shimmer.store.utils.Utility.Companion.isValidEmailId
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
@@ -71,13 +72,25 @@ class Checkout : Fragment() {
                         loginUser,
                         ItemUserItem::class.java
                     )
-                    textFNTxt.text = "Name : " + data.contact_person
-                    textCompanyNameTxt.text = "Franchise Name : " + data.name
-                    textMobileTxt.text = "Mobile No : " + data.mobile_number
-                    textAdrressTxt.text = "Address : " + data.register_address
-                    textCityTxt.text = "City : " + data.register_city
-                    textStateTxt.text = "State : " + data.register_state
-                    textPinCodeTxt.text = "Pincode : " + data.register_pincode
+//                    textFNTxt.text = "Name : " + data.contact_person
+//                    textCompanyNameTxt.text = "Franchise Name : " + data.name
+//                    textMobileTxt.text = "Mobile No : " + data.mobile_number
+//                    textAdrressTxt.text = "Address : " + data.register_address
+//                    textCityTxt.text = "City : " + data.register_city
+//                    textStateTxt.text = "State : " + data.register_state
+//                    textPinCodeTxt.text = "Pincode : " + data.register_pincode
+
+
+                    textNameTxt.text = "Name : "+data.contact_person
+                    textCompanyNameTxt.text = "Franchise Name : "+data.name
+                    textMobileTxt.text = "Mobile No : "+data.mobile_number
+                    textAdrressTxt.text = "Address : "+data.register_address +", "+ data.register_city+", "+ data.register_state+", "+ data.register_pincode
+
+                    textNameTxtS.text = "Name : "+data.contact_person
+                    textCompanyNameTxtS.text = "Franchise Name : "+data.name
+                    textMobileTxtS.text = "Mobile No : "+data.mobile_number
+                    textAdrressTxtS.text = "Address : "+data.d_address +", "+ data.d_city+", "+ data.d_state+", "+ data.d_pincode
+
                 }
             }
 
@@ -200,6 +213,8 @@ class Checkout : Fragment() {
                             showSnackBar("Enter Full Name")
                         } else if (editEmail.text.toString().isEmpty()) {
                             showSnackBar("Enter Email")
+                        } else if (!isValidEmailId(editEmail.text.toString().trim())) {
+                            showSnackBar("Enter Valid Email")
                         } else if (editMobileNo.text.toString().isEmpty()) {
                             showSnackBar("Enter Mobile No")
                         } else {
@@ -210,8 +225,6 @@ class Checkout : Fragment() {
 //                                    putString("email", editEmail.text.toString())
 //                                    putString("mobile", editMobileNo.text.toString())
 //                                })
-
-
                             readData(LOGIN_DATA) { loginUser ->
                                 if (loginUser != null) {
                                     val data = Gson().fromJson(
@@ -307,6 +320,8 @@ class Checkout : Fragment() {
                             showSnackBar("Enter Full Name")
                         } else if (editEmail.text.toString().isEmpty()) {
                             showSnackBar("Enter Email")
+                        } else if (!isValidEmailId(editEmail.text.toString().trim())) {
+                            showSnackBar("Enter Valid Email")
                         } else if (editMobileNo.text.toString().isEmpty()) {
                             showSnackBar("Enter Mobile No")
                         } else {

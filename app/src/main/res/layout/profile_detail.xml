@@ -34,8 +34,9 @@
             android:layout_marginHorizontal="@dimen/_15sdp"
             />
 
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textFNTxt"
+            android:id="@+id/textNameTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
@@ -50,50 +51,6 @@
             android:layout_marginTop="@dimen/_5sdp"
             />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextFN"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="@string/first_nameStar"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textFNTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textLNTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextFN"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/last_name"
-            android:visibility="gone"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextLN"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="@string/last_nameStar"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textLNTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
-
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textCompanyNameTxt"
@@ -102,7 +59,7 @@
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editTextLN"
+            app:layout_constraintTop_toBottomOf="@+id/textNameTxt"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
@@ -128,19 +85,6 @@
             android:visibility="visible"
             />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editCompanyName"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="Company Name"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textMobileTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -150,120 +94,13 @@
             android:textColor="@color/_2C2C2C"
             android:textSize="@dimen/_12sdp"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/textMobileTxt"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
             android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/address"
             android:visibility="visible"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editAdrress"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="Adrress"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textCityTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editAdrress"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/city"
-            android:visibility="visible"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editCity"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="City"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textCityTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
-
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textStateTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editCity"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/state"
-            android:visibility="visible"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editState"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="State"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textStateTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textPinCodeTxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/editState"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/pincode"
-            android:visibility="visible"
-            />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editCountry"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            style="@style/PrimaryEditText"
-            android:hint="PinCode"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:text=""
-            app:layout_constraintTop_toBottomOf="@+id/textPinCodeTxt"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:maxLength="25"
-            android:visibility="gone"
             />
 
 
@@ -274,7 +111,7 @@
             android:layout_height="wrap_content"
             android:text="@string/shipping_details"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/editCountry"
+            app:layout_constraintTop_toBottomOf="@+id/textAdrressTxt"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="@dimen/_17sdp"
             app:fontFamily="@font/nunitosans_semibold"
@@ -284,7 +121,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textShippingAddr"
+            android:id="@+id/textNameTxtS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/_2C2C2C"
@@ -294,63 +131,64 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_semibold"
+            android:text="@string/name"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textCompanyNameTxtS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textNameTxtS"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/franchise_name"
+            android:visibility="visible"
+            />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textMobileTxtS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textCompanyNameTxtS"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/mobile_no"
+            android:visibility="visible"
+            />
+
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textAdrressTxtS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/_2C2C2C"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textMobileTxtS"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints"
+            app:fontFamily="@font/nunitosans_semibold"
+            android:layout_marginTop="@dimen/_5sdp"
             android:text="@string/address"
             android:visibility="visible"
-            android:layout_marginTop="@dimen/_5sdp"
             />
 
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textShippingCity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textShippingAddr"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/city"
-            android:visibility="visible"
-            />
-
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textShippingState"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textShippingCity"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/state"
-            android:visibility="visible"
-            />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textShippingPincode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/_2C2C2C"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            app:layout_constraintTop_toBottomOf="@+id/textShippingState"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="MissingConstraints"
-            app:fontFamily="@font/nunitosans_semibold"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/pincode"
-            android:visibility="visible"
-            />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -359,7 +197,7 @@
             android:layout_height="wrap_content"
             android:text="@string/bank_details"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/textShippingPincode"
+            app:layout_constraintTop_toBottomOf="@+id/textAdrressTxtS"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="@dimen/_17sdp"
             app:fontFamily="@font/nunitosans_semibold"

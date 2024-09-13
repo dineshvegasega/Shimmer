@@ -152,6 +152,7 @@ class Cart : Fragment() {
                                 totalPrice += (it.price * it.qty)
                                 qunty += it.qty
                             }
+                            textSubtotalPrice.text = "₹"+totalPrice
                             textTotalPrice.text = "₹"+totalPrice
                             textItems.text = "${qunty} Item"
 

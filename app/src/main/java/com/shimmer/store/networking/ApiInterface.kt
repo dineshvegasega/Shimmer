@@ -168,6 +168,8 @@ interface ApiInterface {
     @GET(GUEST_ORDER_LIST)
     suspend fun guestOrderList(
         @Query("franchise") franchise: String,
+        @Query("customermobile") customermobile: String,
+        @Query("customername") customername: String
     ): Response<ItemGuestOrderList>
 
 
@@ -204,6 +206,8 @@ interface ApiInterface {
     @GET(ORDER_HISTORY_LIST)
     suspend fun orderHistoryList(
         @Query("franchise") franchise: String,
+        @Query("customermobile") customermobile: String,
+        @Query("customername") customername: String
     ): Response<ItemOrders>
 
 
