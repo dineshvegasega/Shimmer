@@ -121,6 +121,7 @@ class SelectFranchise : Fragment() {
                         viewModel.customerDetail(ivEditSearch.text.toString()) {
                             Log.e("TAG", "itCCC " + this)
                             if (this == "false") {
+                                textBillingDetails.visibility = View.GONE
                                 layoutTop.visibility = View.GONE
                                 viewModel.selectedPosition = -1
                                 franchiseCode = ""
@@ -138,6 +139,7 @@ class SelectFranchise : Fragment() {
 //                                textCityTxt.text = "City : " + data.register_city
 //                                textStateTxt.text = "State : " + data.register_state
 //                                textPinCodeTxt.text = "Pincode : " + data.register_pincode
+                                textBillingDetails.visibility = View.VISIBLE
                                 layoutTop.visibility = View.VISIBLE
                                 viewModel.selectedPosition = 1
                                 franchiseCode = data.name
