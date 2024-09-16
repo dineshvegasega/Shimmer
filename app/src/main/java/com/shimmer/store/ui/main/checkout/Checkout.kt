@@ -132,25 +132,25 @@ class Checkout : Fragment() {
                             )
                         }
 
-                        viewModel.subTotalPrice = price
-//                textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
-
-                        val discountPriceAfter =
-                            (viewModel.subTotalPrice * viewModel.discountPrice) / 100
-                        textDiscountPrice.text = "₹${getPatternFormat("1", discountPriceAfter)}"
-
-                        val priceANDdiscountPrice = price + discountPriceAfter
-
-                        val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice) / 100
-//                textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
-
-                        val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
-//                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
-
-                        val priceANDGSTPrice =
-                            priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
-                        textSubtotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
-                        textTotalPrice.text = "₹${getPatternFormat("1", priceANDGSTPrice)}"
+//                        viewModel.subTotalPrice = price
+////                textSubtotalPrice.text = "₹${getPatternFormat("1", price)}"
+//
+//                        val discountPriceAfter =
+//                            (viewModel.subTotalPrice * viewModel.discountPrice) / 100
+//                        textDiscountPrice.text = "₹${getPatternFormat("1", discountPriceAfter)}"
+//
+//                        val priceANDdiscountPrice = price + discountPriceAfter
+//
+//                        val cstPriceAfter = (priceANDdiscountPrice * viewModel.cgstPrice) / 100
+////                textCGSTPrice.text = "₹${getPatternFormat("1", cstPriceAfter)}"
+//
+//                        val sgstPriceAfter = (priceANDdiscountPrice * viewModel.sgstPrice) / 100
+////                textSGSTPrice.text = "₹${getPatternFormat("1", sgstPriceAfter)}"
+//
+//                        val priceANDGSTPrice =
+//                            priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
+                        textSubtotalPrice.text = "₹ ${getPatternFormat("1", price)}"
+                        textTotalPrice.text = "₹ ${getPatternFormat("1", price)}"
 
 //                textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
 
@@ -178,8 +178,8 @@ class Checkout : Fragment() {
                                     totalPrice += (it.price * it.qty)
                                     qunty += it.qty
                                 }
-                                textSubtotalPrice.text = "₹" + totalPrice
-                                textTotalPrice.text = "₹" + totalPrice
+                                textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+                                textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
 //                                textItems.text = "${qunty} Item"
 
                                 if (!itemCart.items.isNullOrEmpty()) {

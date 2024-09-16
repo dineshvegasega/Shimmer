@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.nearetFranchise
+package com.shimmer.store.ui.main.nearestFranchise
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -15,7 +15,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class NearetFranchiseVM @Inject constructor(private val repository: Repository) : ViewModel() {
+class NearestFranchiseVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
     fun franchiseList(callBack: ItemFranchiseArray.() -> Unit) =
         viewModelScope.launch {

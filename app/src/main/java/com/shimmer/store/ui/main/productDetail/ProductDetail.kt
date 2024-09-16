@@ -272,6 +272,8 @@ class ProductDetail : Fragment(), CallBackListener {
                         if (itemCustomSizeAttr.attribute_code == "size") {
                             itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
                                 if (itemCustomPurityAttr.attribute_code == "metal_purity") {
+//                                    Log.e("TAG", "AAAA "+itemCustomSizeAttr.attribute_code +"  :::  "+itemCustomPurityAttr.attribute_code)
+//                                }
                                     if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "19") {
                                         Log.e(
                                             "TAG",
@@ -321,6 +323,10 @@ class ProductDetail : Fragment(), CallBackListener {
                         if (itemCustomSizeAttr.attribute_code == "size") {
                             itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
                                 if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                   // if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value) {
+//                                        Log.e("TAG", "AAAA "+itemCustomSizeAttr.value +"  :::  "+itemCustomColorAttr.value + "  ::  "+itemProductOptions.metal_purity)
+//
+//                                    }
                                     if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "14") {
                                         Log.e(
                                             "TAG",
@@ -645,6 +651,9 @@ class ProductDetail : Fragment(), CallBackListener {
                     viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProduct = this
 
+                        textTitle.text = itemProduct.name
+
+
 //                        if (itemProduct.type_id == "simple" || itemProduct.type_id == "virtual") {
 //                            Log.e("TAG", "getProductDetailAA11 " + itemProduct.id)
 ////                            callApiDetailsVirtual(skuId, itemProduct)
@@ -751,10 +760,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         setAllImages()
 
-                        textTitle.text = itemProductThis.name
                         textPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
 
-                        textTotalPrice.text = "₹ " + itemProductThis.price
+                        textTotalPrice.text = "₹ " + getPatternFormat("1", itemProductThis.price)
 
                         textSKU.text = "SKU: " + itemProductThis.sku
 
@@ -811,7 +819,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹" + itemProductAttr.value
+                                textDiamondPrice.text = "₹ " + itemProductAttr.value
                             }
 
                             if (itemProductAttr.attribute_code == "metal_purity") {
@@ -875,16 +883,16 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹" + itemProductAttr.value
+                                textDiamondPrice.text = "₹ " + getPatternFormat("1", itemProductAttr.value.toString().toDouble())
                             }
 
                             if (itemProductAttr.attribute_code == "totel_gold_rate") {
-                                textGoldPrice.text = "₹" + itemProductAttr.value
+                                textGoldPrice.text = "₹ " + getPatternFormat("1", itemProductAttr.value.toString().toDouble())
                             }
 
 
                             if (itemProductAttr.attribute_code == "totel_making_charge") {
-                                textMakingChargesPrice.text = "₹" + itemProductAttr.value
+                                textMakingChargesPrice.text = "₹ " + getPatternFormat("1", itemProductAttr.value.toString().toDouble())
                             }
                         }
 
@@ -1170,7 +1178,6 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         }
                     }
-
                 }
             }
         }

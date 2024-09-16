@@ -36,6 +36,7 @@ import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.utils.changeDateFormat
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
@@ -114,7 +115,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                 val date =
                     dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
                 btDate.text = date
-                textOrderPrice.text = "₹" + dataClass.base_grand_total
+                textOrderPrice.text = "₹ " + getPatternFormat("1", dataClass.base_grand_total.toDouble())
 
                 textOrderNo.text =  dataClass.entity_id
 
@@ -161,9 +162,9 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                     root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {
                         putString("from" , "orderHistory")
                         putString("_id" , ""+dataClass.entity_id)
-                        putString("name" , ""+dataClass.checkout_buyer_name)
-                        putString("mobile" , ""+dataClass.checkout_purchase_order_no)
-                        putString("email" , ""+dataClass.checkout_buyer_email)
+//                        putString("name" , ""+dataClass.checkout_buyer_name)
+//                        putString("mobile" , ""+dataClass.checkout_purchase_order_no)
+//                        putString("email" , ""+dataClass.checkout_buyer_email)
                     })
                 }
             }
@@ -280,7 +281,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
     fun guestOrderList(franchiseId: String, mobile : String, name : String, callBack: ItemGuestOrderList.() -> Unit) =
         viewModelScope.launch {
-            repository.callApiNoHideKeyboard(
+            repository.callApi(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.guestOrderList(franchiseId, mobile, name)
@@ -317,7 +318,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
     fun orderHistoryList(franchiseId: String, mobile : String, name : String, callBack: ItemOrders.() -> Unit) =
         viewModelScope.launch {
-            repository.callApiNoHideKeyboard(
+            repository.callApi(
                 callHandler = object : CallHandler<Response<ItemOrders>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.orderHistoryList(franchiseId, mobile, name)

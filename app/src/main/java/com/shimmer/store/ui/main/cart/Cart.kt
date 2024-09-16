@@ -117,8 +117,8 @@ class Cart : Fragment() {
                             totalPrice += (it.price!! * it.quantity)
                             qunty += it.quantity
                         }
-                        textSubtotalPrice.text = "₹"+totalPrice
-                        textTotalPrice.text = "₹"+totalPrice
+                        textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+                        textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
                         textItems.text = "${qunty} Item"
 
                         if (!userList.isNullOrEmpty()) {
@@ -152,8 +152,8 @@ class Cart : Fragment() {
                                 totalPrice += (it.price * it.qty)
                                 qunty += it.qty
                             }
-                            textSubtotalPrice.text = "₹"+totalPrice
-                            textTotalPrice.text = "₹"+totalPrice
+                            textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+                            textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
                             textItems.text = "${qunty} Item"
 
                             if (!itemCart.items.isNullOrEmpty()) {

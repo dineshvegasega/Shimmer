@@ -74,7 +74,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 //                )
 
                 textTitle.text = dataClass.name
-                textPrice.text = "Price: ₹"+ getPatternFormat("1", dataClass.price!!)
+                textPrice.text = "Price: ₹ "+ getPatternFormat("1", dataClass.price!!)
                 dataClass.custom_attributes.forEach {
                     if (it.attribute_code == "size"){
 //                        textRingsize.text = "Ring size: "+it.value

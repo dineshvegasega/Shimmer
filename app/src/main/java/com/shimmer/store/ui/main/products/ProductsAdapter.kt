@@ -103,7 +103,7 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val model = obj as ItemProduct
 
             itemRowBinding.textTitle.text = model.name
-            itemRowBinding.textPrice.text = "₹"+ getPatternFormat("1", model.price)
+            itemRowBinding.textPrice.text = "₹ "+ getPatternFormat("1", model.price)
 
             (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
             itemRowBinding.ivIcon.setOnClickListener {

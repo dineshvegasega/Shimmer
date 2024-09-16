@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -24,12 +25,14 @@ import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.changeDateFormat
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.parcelable
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
 import org.json.JSONObject
+import org.jsoup.internal.StringUtil.isNumeric
 
 
 @AndroidEntryPoint
@@ -105,8 +108,8 @@ class OrderDetail : Fragment() {
                     price += it.price * it.qty
                 }
 
-                textSubTotalPrice.text = "₹ ${price}"
-                textTotalAmountPrice.text = "₹ ${price}"
+                textSubTotalPrice.text = "₹ " + getPatternFormat("1", price)
+                textTotalAmountPrice.text = "₹ " + getPatternFormat("1", price)
 
 
                 if (consentIntent?.status == "pending") {
@@ -137,14 +140,14 @@ class OrderDetail : Fragment() {
                 val _id = arguments?.getString("_id")
                 Log.e("TAG", "onViewCreated: ${_id.toString()}")
 
+
+
+
+
                 _id?.let {
                     readData(ADMIN_TOKEN) { token ->
                         viewModel.orderHistoryListDetail(token.toString(), _id) {
                             val itemOrderDetail = this
-                            textName.text = arguments?.getString("name")
-                            textMobile.text = arguments?.getString("mobile")
-                            textEmail.text = arguments?.getString("email")
-
 
                             textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(
                                 "yyyy-MM-dd HH:mm:ss",
@@ -167,17 +170,28 @@ class OrderDetail : Fragment() {
                             layoutSort.visibility = View.GONE
 
 
-                            textSubTotalPrice.text = "₹" +itemOrderDetail?.base_subtotal
-                            textGSTPrice.text = "₹" +itemOrderDetail?.base_shipping_incl_tax
-                            textTotalAmountPrice.text = "₹" +itemOrderDetail?.base_grand_total
+                            textSubTotalPrice.text = "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
+//                            textGSTPrice.text = "₹" +itemOrderDetail?.base_shipping_incl_tax
+                            textTotalAmountPrice.text = "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
 
                         }
                     }
 
+
+
+
+
+                    viewModel.orderHistoryDetail(_id!!){
+                        val checkout_buyer_name = JSONObject(this).getString("checkout_buyer_name")
+                        val checkout_buyer_email = JSONObject(this).getString("checkout_buyer_email")
+                        val checkout_purchase_order_no = JSONObject(this).getString("checkout_purchase_order_no")
+
+                        textName.text = checkout_buyer_name
+                        textMobile.text = checkout_buyer_email
+                        textEmail.text = checkout_purchase_order_no
+
+                    }
                 }
-
-
-
             }
         }
     }

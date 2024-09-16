@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
@@ -80,23 +81,38 @@ class CustomerOrders(
                 Log.e("TAG", "orderDetailLive: $it")
                 loadData("" , "")
             }
-            editTextSearch.addTextChangedListener(object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                    }
 
-                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                    }
 
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                        val isNumeric = isNumeric(editTextSearch.text.toString())
-                        if(isNumeric == true){
-                            loadData(""+editTextSearch.text.toString() , "")
-                        } else {
-                            loadData("" , ""+editTextSearch.text.toString())
-                        }
+            editTextSearch.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    val isNumeric = isNumeric(editTextSearch.text.toString())
+                    if(isNumeric == true){
+                        loadData(""+editTextSearch.text.toString() , "")
+                    } else {
+                        loadData("" , ""+editTextSearch.text.toString())
                     }
-                })
+                }
+                true
+            }
+
+//
+//            editTextSearch.addTextChangedListener(object : TextWatcher {
+//                    override fun afterTextChanged(s: Editable?) {
+//                    }
+//
+//                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//                    }
+//
+//                    @SuppressLint("SuspiciousIndentation")
+//                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                        val isNumeric = isNumeric(editTextSearch.text.toString())
+//                        if(isNumeric == true){
+//                            loadData(""+editTextSearch.text.toString() , "")
+//                        } else {
+//                            loadData("" , ""+editTextSearch.text.toString())
+//                        }
+//                    }
+//                })
 
         }
 

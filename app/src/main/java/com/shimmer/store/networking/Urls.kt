@@ -61,6 +61,11 @@ const val ORDER_HISTORY_LIST = "V1/vegasega-apis/getorderlist?"
 
 const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
 
+const val ORDER_HISTORY_DETAIL = "V1/vegasega-apis/getorderbyid?"
+
+//https://shop.vegasega.com/rest/V1/vegasega-apis/getorderbyid?orderid=6
+
+
 
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderlist?customerID=6
 

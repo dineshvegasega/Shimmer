@@ -76,7 +76,7 @@ class Orders : Fragment() {
             viewModel.show()
             mainThread {
                 pagerAdapter = OrdersPagerAdapter(requireActivity(), viewModel.ordersTypesArray)
-                rvList1.offscreenPageLimit = 3
+                rvList1.offscreenPageLimit = 2
                 rvList1.overScrollMode = OVER_SCROLL_NEVER
 
                 rvList1.adapter = pagerAdapter

@@ -30,6 +30,7 @@ import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
@@ -81,8 +82,8 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 
                 skuChild.text = "${dataClass.sku}"
                 textQtyChild.text = "${dataClass.qty}"
-                textPriceChild.text = "₹${dataClass.price}"
-                textTotalPriceChild.text = "₹${dataClass.price * dataClass.qty}"
+                textPriceChild.text = "₹ " + getPatternFormat("1", dataClass.price)
+                textTotalPriceChild.text = "₹ " + getPatternFormat("1", dataClass.price * dataClass.qty)
 
                 layoutChild.visibility =
                     if (selectedPositionCustomerOrders == position) View.VISIBLE else View.GONE
@@ -145,8 +146,8 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 
                 skuChild.text = "${dataClass.sku}"
                 textQtyChild.text = "${dataClass.qty_ordered}"
-                textPriceChild.text = "₹${dataClass.price}"
-                textTotalPriceChild.text = "₹${dataClass.price * dataClass.qty_ordered!!}"
+                textPriceChild.text = "₹ " + getPatternFormat("1", dataClass.price.toDouble())
+                textTotalPriceChild.text ="₹ " + getPatternFormat("1", dataClass.price.toDouble() * dataClass.qty_ordered)
 
                 layoutChild.visibility =
                     if (selectedPositionOrderHistory == position) View.VISIBLE else View.GONE
@@ -300,6 +301,47 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 //                                val jsonObject = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\", "")
 //                                Log.e("TAG", "successAAB: ${jsonObject}")
                                 callBack(response.body()!!)
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+
+        fun orderHistoryDetail(id: String, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.orderHistoryDetail(id)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                val jsonObject = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\n", "").replace("\\", "").trim()
+                                Log.e("TAG", "successAAB: ${jsonObject}")
+//                                val item = Gson().fromJson<>(response.body()?.get(0))
+
+//                                var ddd = JSONObject(jsonObject).getString("checkout_buyer_email")
+//                                Log.e("TAG", "jsonObjectAA: ${ddd}")
+//                                val jsonObjectAA = Gson().fromJson(Gson().toJson(jsonObject), ItemOrderDetail::class.java)
+//                                Log.e("TAG", "jsonObjectAA: ${jsonObjectAA}")
+                                callBack(jsonObject)
                             } catch (e: Exception) {
                             }
                         }

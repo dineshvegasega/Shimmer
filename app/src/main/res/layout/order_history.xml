@@ -16,7 +16,7 @@
         android:drawableEnd="@drawable/search"
         android:drawableTint="@color/_868686"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:imeOptions="actionDone"
+        android:imeOptions="actionSearch"
         android:inputType="text|textNoSuggestions"
         android:maxLines="1"
         android:lines="1"

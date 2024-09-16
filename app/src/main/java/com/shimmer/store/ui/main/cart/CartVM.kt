@@ -160,7 +160,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                 textSKU.text =  "SKU: "+dataClass.sku
 
                 ivCount.text = dataClass.qty.toString()
-                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
+                textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
 
 
                 mainThread {
@@ -286,7 +286,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                 textSKU.text =  "SKU: "+dataClass.sku
 
                 ivCount.text = dataClass.quantity.toString()
-                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!)
+                textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
 
 
                 mainThread {

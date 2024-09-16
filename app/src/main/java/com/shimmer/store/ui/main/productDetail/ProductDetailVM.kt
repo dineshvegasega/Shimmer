@@ -240,9 +240,10 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                                 Log.e("TAG", "successAACCC: ${response.body().toString()}")
                            //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
                                 callBack(response.body()!!)
-
                             } catch (e: Exception) {
+                                showSnackBar("Product not available!")
                             }
+                            hide()
                         }
                     }
 

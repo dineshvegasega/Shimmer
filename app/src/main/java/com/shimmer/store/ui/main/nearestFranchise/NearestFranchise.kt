@@ -1,4 +1,4 @@
-package com.shimmer.store.ui.main.nearetFranchise
+package com.shimmer.store.ui.main.nearestFranchise
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -8,9 +8,7 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -30,7 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.MapInfoWindowBinding
-import com.shimmer.store.databinding.NearetFranchiseBinding
+import com.shimmer.store.databinding.NearestFranchiseBinding
 import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.PermissionUtils
@@ -41,9 +39,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class NearetFranchise : Fragment(), OnMapReadyCallback {
-    private val viewModel: NearetFranchiseVM by viewModels()
-    private var _binding: NearetFranchiseBinding? = null
+class NearestFranchise : Fragment(), OnMapReadyCallback {
+    private val viewModel: NearestFranchiseVM by viewModels()
+    private var _binding: NearestFranchiseBinding? = null
     private val binding get() = _binding!!
     protected var map: GoogleMap? = null
 
@@ -58,7 +56,7 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = NearetFranchiseBinding.inflate(inflater)
+        _binding = NearestFranchiseBinding.inflate(inflater)
         return binding.root
     }
 
@@ -74,7 +72,7 @@ class NearetFranchise : Fragment(), OnMapReadyCallback {
             }
             topBarBack.ivCartLayout.visibility = View.GONE
             topBarBack.ivCart.singleClick {
-                findNavController().navigate(R.id.action_nearetFranchise_to_cart)
+                findNavController().navigate(R.id.action_nearestFranchise_to_cart)
             }
 
 

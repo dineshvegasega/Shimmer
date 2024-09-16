@@ -163,7 +163,7 @@ class Profile : Fragment() {
             }
 
             btSearchNearFranchise.singleClick {
-                findNavController().navigate(R.id.action_profile_to_nearetFranchise)
+                findNavController().navigate(R.id.action_profile_to_nearestFranchise)
             }
 
             btSearchOrder.singleClick {

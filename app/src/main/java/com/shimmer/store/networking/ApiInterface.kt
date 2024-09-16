@@ -218,6 +218,14 @@ interface ApiInterface {
     ): Response<ItemOrderDetail>
 
 
+
+
+
+    @GET(ORDER_HISTORY_DETAIL)
+    suspend fun orderHistoryDetail(
+        @Query("orderid") orderid: String,
+    ): Response<JsonElement>
+
 }
 
 
