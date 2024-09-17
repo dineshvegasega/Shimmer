@@ -18,6 +18,8 @@ object DataStoreKeys {
     val FILTER_MATERIAL by lazy { stringPreferencesKey("FILTER_MATERIAL") }
     val FILTER_GENDER by lazy { stringPreferencesKey("FILTER_GENDER") }
 
+    val MOBILE_NUMBER by lazy { stringPreferencesKey("MOBILE_NUMBER") }
+
     val AUTH by lazy { stringPreferencesKey("AUTH") }
     val LIVE_SCHEME_DATA by lazy { stringPreferencesKey("LIVE_SCHEME_DATA") }
     val LIVE_NOTICE_DATA by lazy { stringPreferencesKey("LIVE_NOTICE_DATA") }

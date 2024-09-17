@@ -123,6 +123,7 @@ class SelectFranchise : Fragment() {
                             if (this == "false") {
                                 textBillingDetails.visibility = View.GONE
                                 layoutTop.visibility = View.GONE
+                                filterLayout.visibility = View.GONE
                                 viewModel.selectedPosition = -1
                                 franchiseCode = ""
                             } else {
@@ -141,6 +142,7 @@ class SelectFranchise : Fragment() {
 //                                textPinCodeTxt.text = "Pincode : " + data.register_pincode
                                 textBillingDetails.visibility = View.VISIBLE
                                 layoutTop.visibility = View.VISIBLE
+                                filterLayout.visibility = View.VISIBLE
                                 viewModel.selectedPosition = 1
                                 franchiseCode = data.name
 
@@ -205,46 +207,56 @@ class SelectFranchise : Fragment() {
 //                        findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
 //                        }
 
-                        mainThread {
-                            val userList: List<CartModel>? = db?.cartDao()?.getAll()
 
-                            val jsonArrayCartItem = JSONArray()
+                        if (franchiseCode == "") {
+                            showSnackBar("Search Franchise Here")
+                        } else {
+                            mainThread {
+                                val userList: List<CartModel>? = db?.cartDao()?.getAll()
 
-                            userList?.forEach {
-                                jsonArrayCartItem.apply {
-                                    put(JSONObject().apply {
-                                        put("name", it.name)
-                                        put("price", it.price)
-                                        put("sku", it.sku)
-                                        put("qty", it.quantity)
-                                    })
+                                val jsonArrayCartItem = JSONArray()
+
+                                userList?.forEach {
+                                    jsonArrayCartItem.apply {
+                                        put(JSONObject().apply {
+                                            put("name", it.name)
+                                            put("price", it.price)
+                                            put("sku", it.sku)
+                                            put("qty", it.quantity)
+                                        })
+                                    }
                                 }
-                            }
 
-                            val jsonObject = JSONObject().apply {
-                                put("customerName", arguments?.getString("name"))
-                                put("customerEmail", arguments?.getString("email"))
-                                put("customerMobile", arguments?.getString("mobile"))
-                                put("franchiseCode", franchiseCode)
-                                put("status", "pending")
-                                put("cartItem", jsonArrayCartItem)
-                            }
-
-
-                            val jsonObjectGuestcart = JSONObject().apply {
-                                put("guestcart", jsonObject)
-                            }
-                            Log.e("TAG", "jsonObjectGuestcart " + jsonObjectGuestcart)
-
-
-                            viewModel.placeOrderGuest(jsonObjectGuestcart){
-                                Log.e("TAG", "placeOrderGuest " + this)
-                                if (this.toString().contains("success")){
-                                    findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
-                                } else {
-                                    showSnackBar("Something went wrong!")
+                                val jsonObject = JSONObject().apply {
+                                    put("customerName", arguments?.getString("name"))
+                                    put("customerEmail", arguments?.getString("email"))
+                                    put("customerMobile", arguments?.getString("mobile"))
+                                    put("franchiseCode", franchiseCode)
+                                    put("status", "pending")
+                                    put("cartItem", jsonArrayCartItem)
                                 }
-                            }
+
+
+
+                                val jsonObjectGuestcart = JSONObject().apply {
+                                    put("guestcart", jsonObject)
+                                }
+                                Log.e("TAG", "jsonObjectGuestcart " + jsonObjectGuestcart)
+
+
+                                viewModel.placeOrderGuest(jsonObjectGuestcart){
+                                    Log.e("TAG", "placeOrderGuest " + this)
+                                    if (this.toString().contains("success")){
+                                        mainThread {
+                                            userList?.forEach {
+                                                db?.cartDao()?.delete(it)
+                                            }
+                                            findNavController().navigate(R.id.action_selectFranchise_to_thankyou)
+                                        }
+                                    } else {
+                                        showSnackBar("Something went wrong!")
+                                    }
+                                }
 
 
 //
@@ -258,10 +270,8 @@ class SelectFranchise : Fragment() {
 //////                                    putString("mobile", editMobileNo.text.toString())
 ////                                })
 //                            }
+                            }
                         }
-
-
-
                     }
                 }
             }

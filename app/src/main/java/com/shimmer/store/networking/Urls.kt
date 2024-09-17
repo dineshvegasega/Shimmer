@@ -63,6 +63,14 @@ const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
 
 const val ORDER_HISTORY_DETAIL = "V1/vegasega-apis/getorderbyid?"
 
+const val CUSTOM_PRODUCT = "V1/vegasega-customizeproduct/customizeproduct?"
+
+
+
+const val username = "admin"
+const val password = "Admin@1234"
+
+
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderbyid?orderid=6
 
 
@@ -86,7 +94,7 @@ const val forgot = "forgot"
 const val user_type = "user_type"
 const val otp = "otp"
 const val mobile_number = "mobile_number"
-const val password = "password"
+//const val password = "password"
 const val login = "login"
 const val mobile_token = "mobile_token"
 const val user_id = "user_id"

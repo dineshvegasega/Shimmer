@@ -169,7 +169,8 @@ interface ApiInterface {
     suspend fun guestOrderList(
         @Query("franchise") franchise: String,
         @Query("customermobile") customermobile: String,
-        @Query("customername") customername: String
+        @Query("customername") customername: String,
+        @Query("ordernumber") ordernumber: String = ""
     ): Response<ItemGuestOrderList>
 
 
@@ -225,6 +226,16 @@ interface ApiInterface {
     suspend fun orderHistoryDetail(
         @Query("orderid") orderid: String,
     ): Response<JsonElement>
+
+
+
+
+
+    @POST(CUSTOM_PRODUCT)
+    suspend fun customProduct(
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
 
 }
 

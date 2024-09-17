@@ -15,12 +15,14 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.shimmer.store.R
 import com.shimmer.store.databinding.OrdersBinding
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.main.category.CategoryPagerAdapter
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
@@ -48,6 +50,7 @@ class Orders : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        loginType = LoginType.VENDOR
         isBackStack = false
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(2)

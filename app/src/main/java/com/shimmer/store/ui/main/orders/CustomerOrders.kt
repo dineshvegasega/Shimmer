@@ -133,7 +133,7 @@ class CustomerOrders(
                         ItemUserItem::class.java
                     )
 
-                    viewModel.guestOrderList(data.name, mobile, name) {
+                    viewModel.guestOrderList(data.name, mobile, name ) {
                         Log.e("TAG", "this.items " + this.toString())
 //                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
 //                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type
@@ -145,6 +145,8 @@ class CustomerOrders(
                         rvListCategory1.adapter = viewModel.customerOrders
                         viewModel.customerOrders.notifyDataSetChanged()
                         viewModel.customerOrders.submitList(this)
+
+                        viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount());
                     }
                 }
             }

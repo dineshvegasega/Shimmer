@@ -32,6 +32,8 @@ import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.db.AppDatabase
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.networking.ConnectivityManager
+import com.shimmer.store.networking.password
+import com.shimmer.store.networking.username
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.main.category.Category
 import com.shimmer.store.ui.main.home.Home
@@ -493,8 +495,8 @@ class MainActivity : AppCompatActivity() {
 
     fun adminToken() {
         val obj: JSONObject = JSONObject().apply {
-            put("username", "admin")
-            put("password", "Admin@1234")
+            put("username", username)
+            put("password", password)
         }
         viewModel.adminToken(obj){
             Log.e("TAG", "ADMIN_TOKENAAAA: "+this)

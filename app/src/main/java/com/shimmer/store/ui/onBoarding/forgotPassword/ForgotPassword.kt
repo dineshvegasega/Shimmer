@@ -21,6 +21,8 @@ import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
+import com.shimmer.store.networking.password
+import com.shimmer.store.networking.username
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.showSnackBar
@@ -87,8 +89,8 @@ class ForgotPassword : Fragment() {
             textTitleRequestOTP.singleClick {
                 Log.e("TAG", "count: $this")
                 val adminJSON: JSONObject = JSONObject().apply {
-                    put("username", "admin")
-                    put("password", "Admin@1234")
+                    put("username", username)
+                    put("password", password)
                 }
                 if (editTextMobileNumber.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.EnterValidMobileNumber))

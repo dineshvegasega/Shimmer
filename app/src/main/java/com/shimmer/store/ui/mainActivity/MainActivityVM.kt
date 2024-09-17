@@ -283,7 +283,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                        }
 
                         if(message.contains("%fieldValue")){
-                            sessionExpired()
+//                            sessionExpired()
                         } else if(message.contains("authorized")){
                             sessionExpired()
                         } else {

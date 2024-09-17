@@ -16,6 +16,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ChangePasswordBinding
+import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.MOBILE_NUMBER
+import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
+import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.main.faq.FaqVM
 import com.shimmer.store.ui.mainActivity.MainActivity
@@ -31,7 +39,7 @@ import org.json.JSONObject
 
 @AndroidEntryPoint
 class ChangePassword : Fragment() {
-    private val viewModel: FaqVM by viewModels()
+    private val viewModel: ChangePasswordVM by viewModels()
     private var _binding: ChangePasswordBinding? = null
     private val binding get() = _binding!!
 
@@ -259,6 +267,44 @@ class ChangePassword : Fragment() {
 //                    } else {
 //                        requireContext().callNetworkDialog()
 //                    }
+
+
+                    readData(MOBILE_NUMBER) { number ->
+                        val customerJSON: JSONObject = JSONObject().apply {
+                            put("emailmobile", number)
+                            put("mobpassword", binding.editTextOldPassword.text.toString())
+                        }
+                        readData(ADMIN_TOKEN) {
+                            viewModel.customerLoginToken(it.toString(), customerJSON){
+                                val customerChangeJSON: JSONObject = JSONObject().apply {
+                                    put("mobilenumber", number)
+                                    put("password", binding.editTextConfirmNewPassword.text.toString())
+                                }
+                                viewModel.resetPassword(it.toString(), customerChangeJSON) {
+                                    Log.e("TAG", "itAAAc " + this)
+                                    val succeess = JSONObject(this).getString("succeess")
+                                    if(succeess == "true"){
+                                        showSnackBar(JSONObject(this).getString("successmsg"))
+                                        removeKey(LOGIN_DATA) {}
+                                        removeKey(CUSTOMER_TOKEN) {}
+                                        removeKey(WEBSITE_ID) {}
+                                        clearDataStore { }
+                                        findNavController().navigate(R.id.action_changePassword_to_login)
+                                    } else {
+                                        showSnackBar(JSONObject(this).getString("successmsg"))
+                                    }
+                                }
+                            }
+                        }
+
+
+
+
+//                        updateCart(token!!, jsonCartItem, dataClass.item_id) {
+//                            notifyItemChanged(position)
+//                            cartMutableList.value = true
+//                        }
+                    }
                 }
             }
 

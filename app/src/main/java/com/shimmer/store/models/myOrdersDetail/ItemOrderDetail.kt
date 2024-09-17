@@ -62,5 +62,6 @@ data class ItemOrderDetail(
     val total_item_count: Int,
     val total_qty_ordered: Int,
     val updated_at: String,
-    val weight: Int
+    val weight: Int,
+    val msg: Int
 )

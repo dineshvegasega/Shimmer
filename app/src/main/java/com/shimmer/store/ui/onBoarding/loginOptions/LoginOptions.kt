@@ -15,6 +15,8 @@ import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
+import com.shimmer.store.networking.password
+import com.shimmer.store.networking.username
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -49,8 +51,8 @@ class LoginOptions : Fragment() {
 
             layoutUser.singleClick {
                 val obj: JSONObject = JSONObject().apply {
-                    put("username", "admin")
-                    put("password", "Admin@1234")
+                    put("username", username)
+                    put("password", password)
                 }
                 viewModel.adminToken(obj) {
                     Log.e("TAG", "ADMIN_TOKENBBBB " + this)

@@ -214,6 +214,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="horizontal"
+        android:visibility="gone"
         >
 
         <androidx.appcompat.widget.LinearLayoutCompat

@@ -20,12 +20,15 @@ import com.shimmer.store.databinding.LoginBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
+import com.shimmer.store.datastore.DataStoreKeys.MOBILE_NUMBER
 import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.models.user.ItemUserItem
+import com.shimmer.store.networking.password
+import com.shimmer.store.networking.username
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -146,8 +149,8 @@ class Login : Fragment() {
                     }
 
                     val adminJSON: JSONObject = JSONObject().apply {
-                        put("username", "admin")
-                        put("password", "Admin@1234")
+                        put("username", username)
+                        put("password", password)
                     }
 
 //                        mainThread {
@@ -182,6 +185,7 @@ class Login : Fragment() {
                                                 val quoteId = this
                                                 saveData(QUOTE_ID, quoteId)
                                                 loginType = LoginType.VENDOR
+                                                saveData(MOBILE_NUMBER, editTextMobileNumber.text.toString())
                                                 findNavController().navigate(R.id.action_login_to_home)
                                             }
                                         }

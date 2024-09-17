@@ -115,7 +115,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                 val date =
                     dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
                 btDate.text = date
-                textOrderPrice.text = "₹ " + getPatternFormat("1", dataClass.base_grand_total.toDouble())
+                textOrderPrice.text = "₹ " + getPatternFormat("1", dataClass.base_subtotal.toDouble())
 
                 textOrderNo.text =  dataClass.entity_id
 
@@ -284,7 +284,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.guestOrderList(franchiseId, mobile, name)
+                        apiInterface.guestOrderList(franchiseId, mobile, name, "")
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemGuestOrderList>) {
                         if (response.isSuccessful) {

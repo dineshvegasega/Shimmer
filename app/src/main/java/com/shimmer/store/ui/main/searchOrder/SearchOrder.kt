@@ -2,6 +2,7 @@ package com.shimmer.store.ui.main.searchOrder
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,13 @@ import com.shimmer.store.databinding.SearchOrderBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.SearchModel
+import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
+import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.changeDateFormat
 import com.shimmer.store.utils.getPatternFormat
+import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.internal.StringUtil.isNumeric
@@ -42,6 +47,7 @@ class SearchOrder : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.mainActivity.get()!!.callBack(0)
+//        loginType = LoginType.CUSTOMER
         binding.apply {
             topBarBack.includeBackButton.apply {
                 layoutBack.singleClick {
@@ -62,7 +68,6 @@ class SearchOrder : Fragment() {
 //            )
 
 
-            val userList = mutableListOf<SearchOrderModel>()
 
 //            rvList.setHasFixedSize(true)
 //            rvList.adapter = viewModel.searchOrderAdapter
@@ -71,30 +76,80 @@ class SearchOrder : Fragment() {
 //            rvList.visibility = View.VISIBLE
 
 
-            ivEditSearch.setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    readData(ADMIN_TOKEN) { token ->
-                        viewModel.orderHistoryListDetail(token.toString(), "12") {
-                            val itemOrderDetail = this
+            viewModel.orderHistoryListMutableLiveData.observe(viewLifecycleOwner) { orderHistoryMutable ->
+                Log.e("TAG", "statusErrorAA: " + orderHistoryMutable)
 
-                            userList.add(SearchOrderModel(
-                                orderNo = ""+itemOrderDetail.entity_id,
-                                noofItems = itemOrderDetail.items.size,
-                                dateTime = itemOrderDetail.created_at,
-                                base_subtotal = itemOrderDetail.base_subtotal,
-                            ))
-
-                            rvList.setHasFixedSize(true)
-                            rvList.adapter = viewModel.searchOrderAdapter
-                            viewModel.searchOrderAdapter.notifyDataSetChanged()
-                            viewModel.searchOrderAdapter.submitList(userList)
-                        }
-                    }
+                if(orderHistoryMutable?.size!! > 0){
+                    viewModel.searchOrderAdapter.notifyDataSetChanged()
+                        viewModel.searchOrderAdapter.submitList(orderHistoryMutable)
+                        rvList.setHasFixedSize(true)
+                        rvList.adapter = viewModel.searchOrderAdapter
+                } else {
+                    showSnackBar("No result")
+                    viewModel.searchOrderAdapter.notifyDataSetChanged()
+                    viewModel.searchOrderAdapter.submitList(orderHistoryMutable)
+                    rvList.setHasFixedSize(true)
+                    rvList.adapter = viewModel.searchOrderAdapter
                 }
-                true
+
+
+//                val userList = mutableListOf<ItemGuestOrderList>()
+//                if (orderHistoryMutable != null){
+//                    userList.add(SearchOrderModel(
+//                        orderNo = ""+orderHistoryMutable.entity_id,
+//                        noofItems = orderHistoryMutable.items.size,
+//                        dateTime = orderHistoryMutable.created_at,
+//                        base_subtotal = orderHistoryMutable.base_subtotal))
+//                        viewModel.searchOrderAdapter.notifyDataSetChanged()
+//                        viewModel.searchOrderAdapter.submitList(userList)
+//                        rvList.setHasFixedSize(true)
+//                        rvList.adapter = viewModel.searchOrderAdapter
+//                } else{
+//                    userList.clear()
+//                    viewModel.searchOrderAdapter.notifyDataSetChanged()
+//                    viewModel.searchOrderAdapter.submitList(userList)
+//                    rvList.setHasFixedSize(true)
+//                    rvList.adapter = viewModel.searchOrderAdapter
+//                    showSnackBar("No result")
+//                }
             }
 
+                ivEditSearch.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                        readData(ADMIN_TOKEN) { token ->
+//                            viewModel.orderHistoryListDetail(token.toString(), ivEditSearch.text.toString())
 
+                            viewModel.guestOrderList(ivEditSearch.text.toString())
+
+//                            viewModel.orderHistoryListDetail(token.toString(), ivEditSearch.text.toString()) {
+//                                val userList = mutableListOf<SearchOrderModel>()
+////                                if (orderHistoryMutable == true){
+//                                    val itemOrderDetail = this
+//                                    Log.e("TAG", "itemOrderDetail "+itemOrderDetail.created_at)
+//                                    userList.add(SearchOrderModel(
+//                                        orderNo = ""+itemOrderDetail.entity_id,
+//                                        noofItems = itemOrderDetail.items.size,
+//                                        dateTime = itemOrderDetail.created_at,
+//                                        base_subtotal = itemOrderDetail.base_subtotal,
+//                                    ))
+//                                    viewModel.searchOrderAdapter.notifyDataSetChanged()
+//                                    viewModel.searchOrderAdapter.submitList(userList)
+//                                    rvList.setHasFixedSize(true)
+//                                    rvList.adapter = viewModel.searchOrderAdapter
+////                                } else {
+////                                    userList.clear()
+////                                    viewModel.searchOrderAdapter.notifyDataSetChanged()
+////                                    viewModel.searchOrderAdapter.submitList(userList)
+////                                    rvList.setHasFixedSize(true)
+////                                    rvList.adapter = viewModel.searchOrderAdapter
+////                                }
+//
+//                            }
+                        }
+                    }
+                    true
+//                }
+            }
         }
 
     }

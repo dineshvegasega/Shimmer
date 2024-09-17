@@ -16,6 +16,7 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
 class CustomDesign : Fragment() {
@@ -61,9 +62,19 @@ class CustomDesign : Fragment() {
                 } else if (editMobileNo.text.toString().isEmpty()) {
                     showSnackBar("Enter Mobile No")
                 } else {
-                    findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
-                        putString("from" ,"customDesign")
-                    })
+                    val customerJSON: JSONObject = JSONObject().apply {
+                        put("sku", "")
+                        put("name", editTextN.text.toString())
+                        put("email", editEmail.text.toString())
+                        put("mobile", editMobileNo.text.toString())
+                    }
+                    viewModel.customProduct(customerJSON) {
+                        showSnackBar("Your query has been send successfully")
+                        findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
+                            putString("from" ,"customDesign")
+                        })
+                    }
+
                 }
             }
         }
