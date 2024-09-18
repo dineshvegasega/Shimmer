@@ -22,7 +22,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/no_image"
+                app:srcCompat="@drawable/place_image"
                 android:background="@color/white"
                 android:scaleType="fitCenter"
                 android:visibility="visible"

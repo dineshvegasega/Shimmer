@@ -163,9 +163,9 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 
 
 
-            mainShopFor.add(Items(id = 10, name = "Men"))
-            mainShopFor.add(Items(id = 11, name = "Women"))
-            mainShopFor.add(Items(id = 9, name = "Kids"))
+            mainShopFor.add(Items(id = 20, name = "Men"))
+            mainShopFor.add(Items(id = 21, name = "Women"))
+            mainShopFor.add(Items(id = 22, name = "Kids"))
         }
     }
 

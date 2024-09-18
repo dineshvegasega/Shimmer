@@ -141,17 +141,28 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                     root.findNavController()
                         .navigate(R.id.action_search_to_productDetail, Bundle().apply {
                             if (searchType == 1){
-                                if (dataClass.sku.contains(" ")){
+                                if (dataClass.sku.contains("-")){
                                     putString("baseSku", dataClass.sku.split("-")[0])
+                                } else if (dataClass.sku.contains(" ")){
+                                    putString("baseSku", dataClass.sku.split(" ")[0])
                                 } else {
                                     putString("baseSku", dataClass.sku)
                                 }
                             } else if (searchType == 2) {
-                                if (dataClass.sku.contains(" ")){
+                                if (dataClass.sku.contains("-")){
                                     putString("baseSku", dataClass.sku.split("-")[0])
+                                    putString("sku", dataClass.sku)
+
+//                                    Log.e("TAG", "baseSkuAA " + dataClass.sku.split("-")[0])
+//                                    Log.e("TAG", "skuAA " + dataClass.sku)
+
+                                } else if (dataClass.sku.contains(" ")) {
+                                    putString("baseSku", dataClass.sku.split(" ")[0])
                                     putString("sku", dataClass.sku)
                                 } else {
                                     putString("baseSku", dataClass.sku)
+//                                    Log.e("TAG", "baseSkuBB " + dataClass.sku)
+//                                    Log.e("TAG", "skuBB " + dataClass.sku)
                                 }
                             }
                         })

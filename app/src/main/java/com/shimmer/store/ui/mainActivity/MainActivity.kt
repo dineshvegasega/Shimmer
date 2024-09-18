@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     private val connectivityManager by lazy { ConnectivityManager(this) }
 
+
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,7 +143,6 @@ class MainActivity : AppCompatActivity() {
         typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
 
 //        setBar()
-
 
 
         binding.apply {

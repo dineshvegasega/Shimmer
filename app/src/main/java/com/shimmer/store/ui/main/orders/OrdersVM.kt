@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
@@ -279,7 +281,10 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 //        }
 
 
-    fun guestOrderList(franchiseId: String, mobile : String, name : String, callBack: ItemGuestOrderList.() -> Unit) =
+
+    private var itemCustomerOrdersResult = MutableLiveData<ItemGuestOrderList>()
+    val itemLiveCustomerOrders : LiveData<ItemGuestOrderList> get() = itemCustomerOrdersResult
+    fun guestOrderList(franchiseId: String, mobile : String, name : String) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
@@ -288,13 +293,15 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemGuestOrderList>) {
                         if (response.isSuccessful) {
-                            try {
-                                Log.e("TAG", "successAA: ${response.body().toString()}")
-//                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
-//                                callBack(response.body()!!.toString().toString().replace("\\", ""))
-                                callBack(response.body()!!)
-                            } catch (e: Exception) {
-                            }
+                            itemCustomerOrdersResult.value = response.body()!!
+//                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+////                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+////                                callBack(response.body()!!.toString().toString().replace("\\", ""))
+//                                callBack(response.body()!!)
+//
+//                            } catch (e: Exception) {
+//                            }
                         }
                     }
 
@@ -315,8 +322,9 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
 
 
-
-    fun orderHistoryList(franchiseId: String, mobile : String, name : String, callBack: ItemOrders.() -> Unit) =
+    private var itemOrderHistoryResult = MutableLiveData<ItemOrders>()
+    val itemLiveOrderHistory : LiveData<ItemOrders> get() = itemOrderHistoryResult
+    fun orderHistoryList(franchiseId: String, mobile : String, name : String) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemOrders>> {
@@ -325,11 +333,12 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemOrders>) {
                         if (response.isSuccessful) {
-                            try {
-                                Log.e("TAG", "successAA: ${response.body().toString()}")
-                                callBack(response.body()!!)
-                            } catch (e: Exception) {
-                            }
+                            itemOrderHistoryResult.value = response.body()!!
+//                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                callBack(response.body()!!)
+//                            } catch (e: Exception) {
+//                            }
                         }
                     }
 

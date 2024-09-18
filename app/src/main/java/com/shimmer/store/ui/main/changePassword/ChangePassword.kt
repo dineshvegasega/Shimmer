@@ -35,6 +35,7 @@ import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import org.json.JSONObject
 
 @AndroidEntryPoint
@@ -211,23 +212,23 @@ class ChangePassword : Fragment() {
                                     R.color._00b3b0
                                 )
                             )
-                    } else if(editTextNewPassword.text.toString() == editTextConfirmNewPassword.text.toString()){
-                        Log.e("TAG", "onTextChanged")
+//                    } else if(editTextNewPassword.text.toString() == editTextConfirmNewPassword.text.toString()){
+//                        Log.e("TAG", "onTextChanged")
+//                        btLogin.isEnabled = true
+//                        btLogin.backgroundTintList =
+//                            ColorStateList.valueOf(
+//                                ContextCompat.getColor(
+//                                    requireContext(),
+//                                    R.color._07FFFC
+//                                )
+//                            )
+                    } else {
                         btLogin.isEnabled = true
                         btLogin.backgroundTintList =
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
                                     R.color._07FFFC
-                                )
-                            )
-                    } else {
-                        btLogin.isEnabled = false
-                        btLogin.backgroundTintList =
-                            ColorStateList.valueOf(
-                                ContextCompat.getColor(
-                                    requireContext(),
-                                    R.color._00b3b0
                                 )
                             )
                     }
@@ -289,7 +290,11 @@ class ChangePassword : Fragment() {
                                         removeKey(CUSTOMER_TOKEN) {}
                                         removeKey(WEBSITE_ID) {}
                                         clearDataStore { }
-                                        findNavController().navigate(R.id.action_changePassword_to_login)
+                                        mainThread {
+                                            delay(1000)
+                                            findNavController().navigate(R.id.action_changePassword_to_login)
+                                        }
+
                                     } else {
                                         showSnackBar(JSONObject(this).getString("successmsg"))
                                     }

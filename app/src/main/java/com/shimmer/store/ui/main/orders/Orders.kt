@@ -50,7 +50,7 @@ class Orders : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        loginType = LoginType.VENDOR
+        loginType = LoginType.VENDOR
         isBackStack = false
         hideValueOff = 2
         MainActivity.mainActivity.get()!!.callBack(2)
@@ -85,9 +85,9 @@ class Orders : Fragment() {
                 rvList1.adapter = pagerAdapter
                 delay(200)
 
-                rvList1.setPageTransformer { page, position ->
-                    rvList1.updatePagerHeightForChild(page)
-                }
+//                rvList1.setPageTransformer { page, position ->
+//                    rvList1.updatePagerHeightForChild(page)
+//                }
 //                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
 //                    tab.text = viewModel.ordersTypesArray[position].name
 //                }.attach()

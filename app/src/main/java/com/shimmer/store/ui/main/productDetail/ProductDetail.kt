@@ -70,7 +70,6 @@ class ProductDetail : Fragment(), CallBackListener {
 
         var callBackListener: CallBackListener? = null
 
-
         @JvmStatic
         lateinit var adapter2: RelatedProductAdapter
 
@@ -678,7 +677,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                 arrayItemProduct.add(jsonString)
                             }
 
-                            viewModel.hide()
+//                            viewModel.hide()
                             if (arrayItemProduct.size > 0) {
                                 if (currentSku == "") {
                                     currentSku = arrayItemProduct[0].sku
@@ -714,6 +713,8 @@ class ProductDetail : Fragment(), CallBackListener {
                                     currentSku,
                                     itemProduct
                                 )
+                            } else {
+                                viewModel.hide()
                             }
                         }
 //                        }
@@ -729,7 +730,7 @@ class ProductDetail : Fragment(), CallBackListener {
         skuId: String?,
         itemProduct: ItemProduct
     ) {
-        viewModel.show()
+//        viewModel.show()
         binding.apply {
             textCategories.visibility = View.GONE
             linearRoseGold.visibility = View.GONE
@@ -749,7 +750,6 @@ class ProductDetail : Fragment(), CallBackListener {
             mainThread {
                 readData(ADMIN_TOKEN) { token ->
                     viewModel.getProductDetail(token.toString(), skuId!!) {
-                        viewModel.hide()
                         itemProductThis = this
 
                         viewModel.arrayItemProductOptionsSize.clear()
@@ -1179,6 +1179,7 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+                viewModel.hide()
             }
         }
 

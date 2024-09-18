@@ -80,6 +80,7 @@ class Search : Fragment() {
 
                 viewModel.searchValue.observe(viewLifecycleOwner) {
                     binding.topBarSearch.editTextSearch.setText(it)
+                    binding.topBarSearch.editTextSearch.setSelection(binding.topBarSearch.editTextSearch.text!!.length)
                 }
 
                 viewModel.searchDelete.observe(viewLifecycleOwner) {

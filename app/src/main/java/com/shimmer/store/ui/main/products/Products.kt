@@ -27,6 +27,7 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
+import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.utils.SortByPriceAsc
 import com.shimmer.store.utils.SortByPriceDesc
 import com.shimmer.store.utils.singleClick
@@ -260,6 +261,20 @@ class Products : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     fun filters() {
         binding.apply {
+
+            viewModel.itemLiveNotice?.observe(viewLifecycleOwner) {
+                adapter2.submitData(it.items)
+                adapter2.notifyDataSetChanged()
+                Log.e("TAG", "it.itemsAAA " + it.items.size)
+
+                if (it.items.size == 0) {
+                    binding.idDataNotFound.root.visibility = View.VISIBLE
+                } else {
+                    binding.idDataNotFound.root.visibility = View.GONE
+                }
+            }
+
+
             val emptyMap = mutableMapOf<String, String>()
             var count = 0
 
@@ -281,8 +296,8 @@ class Products : Fragment() {
                     }
                 }
             }
-            categoryIds =
-                if (categoryIds.length > 0) categoryIds.substring(0, categoryIds.length - 1) else ""
+//            categoryIds =
+//                if (categoryIds.length > 0) categoryIds.substring(0, categoryIds.length - 1) else ""
             Log.e("TAG", "mainCategoryXX " + categoryIds)
             if (mainCategoryBoolean) {
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
@@ -293,6 +308,29 @@ class Products : Fragment() {
                     "in"
             }
             Log.e("TAG", "countFromAAA " + emptyMap.toString())
+
+
+            var genderIds : String = ""
+            var mainShopForBoolean = false
+            mainShopFor.forEach {
+                if (it.isSelected) {
+                    genderIds += ""+it.id+","
+                    count += 1
+//                    countFrom1 += 1
+                    mainShopForBoolean = true
+                }
+            }
+            Log.e("TAG", "countFromDDD "+countFrom1)
+            if (mainShopForBoolean){
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
+                    "category_id"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
+                    categoryIds+genderIds
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
+                    "in"
+            }
+
+
 
             var mainPriceBoolean = false
             var priceFrom: Double = 0.0
@@ -424,6 +462,8 @@ class Products : Fragment() {
 
                 1 -> {
                     Log.e("TAG", "BBBBBBBBBBB")
+                    emptyMap["searchCriteria[sortOrders][0][field]"] = "created_at"
+                    emptyMap["searchCriteria[sortOrders][0][direction]"] = "DESC"
                 }
 
                 2 -> {
@@ -440,17 +480,19 @@ class Products : Fragment() {
             }
 
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
-                    adapter2.submitData(items)
-                    adapter2.notifyDataSetChanged()
-
-                    if(this.items.size == 0){
-                        binding.idDataNotFound.root.visibility = View.VISIBLE
-                    }else{
-                        binding.idDataNotFound.root.visibility = View.GONE
-                    }
-                }
+                viewModel.getProducts(token.toString(), requireView(), emptyMap)
+//                {
+//                    if(this.items.size == 0){
+//                        binding.idDataNotFound.root.visibility = View.VISIBLE
+//                    }else{
+//                        binding.idDataNotFound.root.visibility = View.GONE
+//                    }
+//                }
             }
+
+//            cartItemLiveData.observe(viewLifecycleOwner) {
+//
+//            }
 
 
 //            readData(ADMIN_TOKEN) { token ->

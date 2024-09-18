@@ -39,7 +39,7 @@
                     android:scaleType="centerCrop"
                     android:theme="@style/RoundCorner5"
                     app:layout_constraintDimensionRatio="H,1:1.1"
-                    app:srcCompat="@drawable/no_image"
+                    app:srcCompat="@drawable/place_image"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 

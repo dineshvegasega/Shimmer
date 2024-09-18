@@ -23,7 +23,8 @@ import com.shimmer.store.models.Items
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.user.ItemUserItem
-import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
+import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLiveA
+import com.shimmer.store.ui.main.products.Products.Companion.adapter2
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.internal.StringUtil.isNumeric
 
@@ -76,9 +77,9 @@ class CustomerOrders(
 
 //            loadData()
 
-            orderDetailLive.value = true
-            orderDetailLive.observe(viewLifecycleOwner) {
-                Log.e("TAG", "orderDetailLive: $it")
+            orderDetailLiveA.value = true
+            orderDetailLiveA.observe(viewLifecycleOwner) {
+                Log.e("TAG", "orderDetailLiveAA: $it")
                 loadData("" , "")
             }
 
@@ -114,10 +115,24 @@ class CustomerOrders(
 //                    }
 //                })
 
+            rvListCategory1.setHasFixedSize(true)
+            rvListCategory1.adapter = viewModel.customerOrders
+
         }
 
 
 
+
+        viewModel.itemLiveCustomerOrders?.observe(viewLifecycleOwner) {
+            viewModel.customerOrders.notifyDataSetChanged()
+            viewModel.customerOrders.submitList(it)
+            viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount());
+            if (it.size == 0) {
+                binding.idDataNotFound.root.visibility = View.VISIBLE
+            } else {
+                binding.idDataNotFound.root.visibility = View.GONE
+            }
+        }
 
 
     }
@@ -125,7 +140,9 @@ class CustomerOrders(
 
     @SuppressLint("NotifyDataSetChanged")
     fun loadData(mobile : String, name : String) {
+
         binding.apply {
+
             readData(LOGIN_DATA) { loginUser ->
                 if (loginUser != null) {
                     val data = Gson().fromJson(
@@ -133,21 +150,21 @@ class CustomerOrders(
                         ItemUserItem::class.java
                     )
 
-                    viewModel.guestOrderList(data.name, mobile, name ) {
-                        Log.e("TAG", "this.items " + this.toString())
-//                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
-//                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type
-//                        val changeValue =
-//                            Gson().fromJson<List<ItemGuestOrderListItem>>(Gson().toJson(this.toString()), typeToken)
-
-
-                        rvListCategory1.setHasFixedSize(true)
-                        rvListCategory1.adapter = viewModel.customerOrders
-                        viewModel.customerOrders.notifyDataSetChanged()
-                        viewModel.customerOrders.submitList(this)
-
-                        viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount());
-                    }
+                    viewModel.guestOrderList(data.name, mobile, name )
+//                    viewModel.guestOrderList(data.name, mobile, name ) {
+//                        Log.e("TAG", "this.items " + this.toString())
+////                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
+////                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type
+////                        val changeValue =
+////                            Gson().fromJson<List<ItemGuestOrderListItem>>(Gson().toJson(this.toString()), typeToken)
+//
+//
+//
+//                        viewModel.customerOrders.notifyDataSetChanged()
+//                        viewModel.customerOrders.submitList(this)
+//
+//                        viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount());
+//                    }
                 }
             }
         }

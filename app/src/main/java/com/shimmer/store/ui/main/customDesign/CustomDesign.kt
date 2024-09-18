@@ -13,6 +13,7 @@ import com.shimmer.store.R
 import com.shimmer.store.databinding.CustomDesignBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.shimmer.store.utils.Utility.Companion.isValidEmailId
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +60,8 @@ class CustomDesign : Fragment() {
                     showSnackBar("Enter Full Name")
                 } else if (editEmail.text.toString().isEmpty()) {
                     showSnackBar("Enter Email")
+                } else if (!isValidEmailId(editEmail.text.toString().trim())) {
+                    showSnackBar("Enter Valid Email")
                 } else if (editMobileNo.text.toString().isEmpty()) {
                     showSnackBar("Enter Mobile No")
                 } else {
@@ -70,9 +73,11 @@ class CustomDesign : Fragment() {
                     }
                     viewModel.customProduct(customerJSON) {
                         showSnackBar("Your query has been send successfully")
-                        findNavController().navigate(R.id.action_customDesign_to_thankyou, Bundle().apply {
-                            putString("from" ,"customDesign")
-                        })
+                        findNavController().navigate(
+                            R.id.action_customDesign_to_thankyou,
+                            Bundle().apply {
+                                putString("from", "customDesign")
+                            })
                     }
 
                 }

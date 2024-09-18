@@ -11,6 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.request.RequestOptions
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR
@@ -106,6 +110,14 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             itemRowBinding.textPrice.text = "₹ "+ getPatternFormat("1", model.price)
 
             (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
+
+//            Glide.with(itemRowBinding.root.context)
+//                .load(IMAGE_URL+model.media_gallery_entries[0].file)
+////                .transition(withCrossFade(factory))
+//                .apply(RequestOptions().placeholder(R.drawable.no_image))
+//                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//                .into(itemRowBinding.ivIcon)
+
             itemRowBinding.ivIcon.setOnClickListener {
 //                it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
 //                    putParcelable("model", model)

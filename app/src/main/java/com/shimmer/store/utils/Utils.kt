@@ -69,6 +69,7 @@ import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.models.ItemReturn
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
@@ -411,7 +412,7 @@ fun ViewPager2.updatePagerHeightForChild(view: View) {
 
 
 val myOptionsGlide: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.no_image)
+//    .placeholder(R.drawable.no_image)
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .dontAnimate()
     .apply(RequestOptions().placeholder(R.drawable.no_image))
@@ -425,10 +426,18 @@ val myOptionsGlideUser: RequestOptions = RequestOptions()
     .skipMemoryCache(false)
 
 fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
+//    Glide.with(context)
+//        .load(this)
+//        .apply(myOptionsGlide)
+//        .into(ivMap)
+
     Glide.with(context)
         .load(this)
-        .apply(myOptionsGlide)
+//                .transition(withCrossFade(factory))
+        .apply(RequestOptions().placeholder(R.drawable.place_image))
+        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
         .into(ivMap)
+
 }
 
 

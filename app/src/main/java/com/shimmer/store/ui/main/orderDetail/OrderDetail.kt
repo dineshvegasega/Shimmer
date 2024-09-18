@@ -42,7 +42,8 @@ class OrderDetail : Fragment() {
     private val viewModel: OrderDetailVM by viewModels()
 
     companion object {
-        var orderDetailLive = MutableLiveData<Boolean>(false)
+        var orderDetailLiveA = MutableLiveData<Boolean>(false)
+        var orderDetailLiveB = MutableLiveData<Boolean>(false)
     }
 
 
@@ -200,7 +201,11 @@ class OrderDetail : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         Log.e("TAG", "onDestroyView:")
-        orderDetailLive.value = true
+//        if (arguments?.getString("from") == "customerOrders") {
+            orderDetailLiveA.value = true
+//        } else if (arguments?.getString("from") == "orderHistory") {
+            orderDetailLiveB.value = true
+//        }
     }
 
 

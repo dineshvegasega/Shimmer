@@ -39,10 +39,12 @@ class ABC  : AppCompatActivity() {
 
     lateinit var videoList: ArrayList<String>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AbcBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         //setupPermissions()
 

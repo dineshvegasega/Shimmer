@@ -20,7 +20,7 @@ import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.user.ItemUserItem
-import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLive
+import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLiveB
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.internal.StringUtil.isNumeric
 
@@ -62,9 +62,9 @@ class OrderHistory (
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
-            orderDetailLive.value = true
-            orderDetailLive.observe(viewLifecycleOwner){
-                Log.e("TAG", "orderDetailLive: $it")
+            orderDetailLiveB.value = true
+            orderDetailLiveB.observe(viewLifecycleOwner){
+                Log.e("TAG", "orderDetailLiveBB: $it")
                 loadData("" ,"")
             }
 
@@ -83,6 +83,23 @@ class OrderHistory (
             }
 
 
+
+            rvListCategory1.setHasFixedSize(true)
+            rvListCategory1.adapter = viewModel.orderHistory
+
+        }
+
+
+
+        viewModel.itemLiveOrderHistory?.observe(viewLifecycleOwner) {
+            viewModel.orderHistory.notifyDataSetChanged()
+            viewModel.orderHistory.submitList(it)
+            viewModel.orderHistory.notifyItemRangeChanged(0, viewModel.orderHistory.getItemCount());
+            if (it.size == 0) {
+                binding.idDataNotFound.root.visibility = View.VISIBLE
+            } else {
+                binding.idDataNotFound.root.visibility = View.GONE
+            }
         }
 
     }
@@ -113,13 +130,14 @@ class OrderHistory (
                         ItemUserItem::class.java
                     )
 
+                    viewModel.orderHistoryList(data.name, mobile, name)
 
-                    viewModel.orderHistoryList(data.name, mobile, name) {
-                        rvListCategory1.setHasFixedSize(true)
-                        rvListCategory1.adapter = viewModel.orderHistory
-                        viewModel.orderHistory.notifyDataSetChanged()
-                        viewModel.orderHistory.submitList(this)
-                    }
+//                    viewModel.orderHistoryList(data.name, mobile, name) {
+//                        rvListCategory1.setHasFixedSize(true)
+//                        rvListCategory1.adapter = viewModel.orderHistory
+//                        viewModel.orderHistory.notifyDataSetChanged()
+//                        viewModel.orderHistory.submitList(this)
+//                    }
                 }
             }
 
