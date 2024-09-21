@@ -186,6 +186,8 @@ class ProductDetail : Fragment(), CallBackListener {
                 viewModel.openDialogPdf(1, "Ring-Size-Guide-Shimmer.pdf")
             }
 
+            var isAvailable : Boolean = false
+
             viewModel.sizeMutableList.value = -1
             viewModel.sizeMutableList.observe(viewLifecycleOwner) {
                 if (it != -1) {
@@ -202,6 +204,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                     "jsonObjectSizeAA: ${itemProductOptions.toString()}"
                                                 )
                                                 currentSku = itemProductOptions.sku
+                                                isAvailable = true
                                                 callApiDetailsConfigurable(
                                                     itemProductOptions.sku,
                                                     itemProduct
@@ -212,6 +215,11 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (!isAvailable){
+                            showSnackBar(getString(R.string.product_not_available))
+                        }
+                        isAvailable = false
                     }
                 }
             }
@@ -229,6 +237,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -239,6 +248,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
             linearWhiteGold.singleClick { // 20
@@ -253,6 +267,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -263,6 +278,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
             linearYellowGold.singleClick { // 19
@@ -279,6 +299,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -289,6 +310,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
 
@@ -304,6 +330,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -314,6 +341,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
             bt14.singleClick {
@@ -332,6 +364,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -342,6 +375,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
             bt18.singleClick {
@@ -356,6 +394,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -366,6 +405,75 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
+            }
+
+            bt22.singleClick {
+                arrayItemProduct.forEach { itemProductOptions ->
+                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                        if (itemCustomSizeAttr.attribute_code == "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    // if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value) {
+//                                        Log.e("TAG", "AAAA "+itemCustomSizeAttr.value +"  :::  "+itemCustomColorAttr.value + "  ::  "+itemProductOptions.metal_purity)
+//
+//                                    }
+                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
+            }
+
+            bt24.singleClick {
+                arrayItemProduct.forEach { itemProductOptions ->
+                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                        if (itemCustomSizeAttr.attribute_code == "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
             bt95.singleClick {
@@ -380,6 +488,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
                                         )
                                         currentSku = itemProductOptions.sku
+                                        isAvailable = true
                                         callApiDetailsConfigurable(
                                             itemProductOptions.sku,
                                             itemProduct
@@ -390,6 +499,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
+
+                if (!isAvailable){
+                    showSnackBar(getString(R.string.product_not_available))
+                }
+                isAvailable = false
             }
 
 
@@ -483,24 +597,87 @@ class ProductDetail : Fragment(), CallBackListener {
             }
 
             layoutBuyNow.singleClick {
-                readData(QUOTE_ID) {
-                    val json: JSONObject = JSONObject().apply {
-                        put("sku", currentSku)
-                        put("qty", 1)
-                        put("quote_id", it.toString())
+                if (LoginType.CUSTOMER == loginType) {
+                    mainThread {
+                        val newUser = CartModel(
+                            product_id = itemProductThis.id,
+                            name = itemProductThis.name,
+                            price = itemProductThis.price,
+                            quantity = 1,
+                            sku = itemProductThis.sku,
+                            currentTime = System.currentTimeMillis()
+                        )
+                        itemProductThis.custom_attributes.forEach {
+                            if (it.attribute_code == "size") {
+                                newUser.apply {
+                                    this.size = "" + it.value
+                                }
+                            }
+
+
+                            if (it.attribute_code == "metal_color") {
+                                newUser.apply {
+                                    this.color = "" + it.value
+                                }
+                            }
+
+                            if (it.attribute_code == "metal_type") {
+                                Log.e("TAG", "metal_typeAAA " + it.value)
+                                if (it.value == "12") {
+                                    newUser.apply {
+                                        this.material_type = "" + it.value
+                                    }
+                                    itemProductThis.custom_attributes.forEach { againAttributes ->
+                                        if (againAttributes.attribute_code == "metal_purity") {
+                                            Log.e("TAG", "metal_typeBBB " + againAttributes.value)
+                                            newUser.apply {
+                                                this.purity = "" + againAttributes.value
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (it.value == "13") {
+                                    newUser.apply {
+                                        this.material_type = "" + it.value
+                                    }
+                                    itemProductThis.custom_attributes.forEach { againAttributes ->
+                                        if (againAttributes.attribute_code == "metal_purity") {
+                                            Log.e("TAG", "metal_typeCCC " + againAttributes.value)
+                                            newUser.apply {
+                                                this.purity = "" + againAttributes.value
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        db?.cartDao()?.insertAll(newUser)
+                        showSnackBar("Item added to cart")
+                        MainActivity.mainActivity.get()!!.callCartApi()
+                        findNavController().navigate(R.id.action_productDetail_to_cart)
                     }
-                    val jsonCartItem: JSONObject = JSONObject().apply {
-                        put("cartItem", json)
-                    }
-                    readData(CUSTOMER_TOKEN) { token ->
-                        viewModel.addCart(token!!, jsonCartItem) {
-                            //cartMutableList.value = true
-                            Log.e("TAG", "onCallBack: ${this.toString()}")
-                            showSnackBar("Item added to cart")
-                            findNavController().navigate(R.id.action_productDetail_to_cart)
+                } else if (LoginType.VENDOR == loginType) {
+                    readData(QUOTE_ID) {
+                        val json: JSONObject = JSONObject().apply {
+                            put("sku", currentSku)
+                            put("qty", 1)
+                            put("quote_id", it.toString())
+                        }
+                        val jsonCartItem: JSONObject = JSONObject().apply {
+                            put("cartItem", json)
+                        }
+                        readData(CUSTOMER_TOKEN) { token ->
+                            viewModel.addCart(token!!, jsonCartItem) {
+                                //cartMutableList.value = true
+                                Log.e("TAG", "onCallBack: ${this.toString()}")
+                                showSnackBar("Item added to cart")
+                                findNavController().navigate(R.id.action_productDetail_to_cart)
+                            }
                         }
                     }
                 }
+
             }
 
 
@@ -865,6 +1042,34 @@ class ProductDetail : Fragment(), CallBackListener {
                                     }
                                 }
 
+                                if (itemProductAttr.value == "16") {
+                                    itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+                                        if (itemProductChildAttr.attribute_code == "metal_color") {
+                                            if (itemProductChildAttr.value == "19") {
+                                                textPurity1.text = "14 kt Yellow Gold"
+                                            } else if (itemProductChildAttr.value == "20") {
+                                                textPurity1.text = "14 kt White Gold"
+                                            } else if (itemProductChildAttr.value == "25") {
+                                                textPurity1.text = "14 kt Rose Gold"
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (itemProductAttr.value == "17") {
+                                    itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
+                                        if (itemProductChildAttr.attribute_code == "metal_color") {
+                                            if (itemProductChildAttr.value == "19") {
+                                                textPurity1.text = "18 kt Yellow Gold"
+                                            } else if (itemProductChildAttr.value == "20") {
+                                                textPurity1.text = "18 kt White Gold"
+                                            } else if (itemProductChildAttr.value == "25") {
+                                                textPurity1.text = "18 kt Rose Gold"
+                                            }
+                                        }
+                                    }
+                                }
+
                                 if (itemProductAttr.value == "18") {
                                     textPurity1.text = "Platinum 95"
                                 }
@@ -1067,6 +1272,84 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         )
                                                                     )
                                                                     bt18.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 16) {
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "16") {
+                                                                    bt22.visibility = View.VISIBLE
+                                                                    bt22.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._003E4D
+                                                                            )
+                                                                        )
+                                                                    bt22.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "16") {
+                                                                    bt22.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt22.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._003E4D
+                                                                        )
+                                                                    )
+                                                                    bt22.visibility = View.VISIBLE
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if (itemConfigurableProductMetalPurityAttr.value_index == 17) {
+                                                        itemProductThis.custom_attributes.forEach { itemProductAttr ->
+                                                            if (itemProductAttr.attribute_code == "metal_purity") {
+                                                                if (itemProductAttr.value == "17") {
+                                                                    bt24.visibility = View.VISIBLE
+                                                                    bt24.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._003E4D
+                                                                            )
+                                                                        )
+                                                                    bt24.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._ffffff
+                                                                        )
+                                                                    )
+                                                                }
+                                                                if (itemProductAttr.value != "17") {
+                                                                    bt24.backgroundTintList =
+                                                                        ColorStateList.valueOf(
+                                                                            ContextCompat.getColor(
+                                                                                requireContext(),
+                                                                                R.color._ffffff
+                                                                            )
+                                                                        )
+                                                                    bt24.setTextColor(
+                                                                        ContextCompat.getColor(
+                                                                            requireContext(),
+                                                                            R.color._003E4D
+                                                                        )
+                                                                    )
+                                                                    bt24.visibility = View.VISIBLE
                                                                 }
                                                             }
                                                         }

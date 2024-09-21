@@ -85,20 +85,20 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.0")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.8.0")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.1")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.8.1")
     //noinspection GradleCompatible,GradleCompatible
     implementation ("androidx.databinding:databinding-ktx:8.6.1")
     implementation ("androidx.databinding:databinding-runtime:8.6.1")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.5")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
 
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation ("com.squareup.picasso:picasso:2.8")
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")

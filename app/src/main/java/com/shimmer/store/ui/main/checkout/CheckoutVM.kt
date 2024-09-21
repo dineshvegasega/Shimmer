@@ -79,13 +79,13 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 textTitle.text = dataClass.name
-                textColor.text = "Color: "+dataClass.color
+//                textColor.text = "Color: "+dataClass.color
 //                if (dataClass.material_type == "12"){
-                    textPurity.text = "Purity: "+dataClass.purity
+//                    textPurity.text = "Purity: "+dataClass.purity
 //                } else if (dataClass.material_type == ""){
 //                    textPurity.text = "Purity: "+dataClass.purity
 //                }
-                textRingSize.text = "Ring size: "+dataClass.size
+//                textRingSize.text = "Ring size: "+dataClass.size
                 textQty.text = "Quantity: "+dataClass.quantity
                 textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
 
@@ -192,6 +192,10 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
                                         textPurity.text = "Purity: 14 kt"
                                     } else if (itemProductAttr.value == "15") {
                                         textPurity.text = "Purity: 18 kt"
+                                    } else if (itemProductAttr.value == "16") {
+                                        textPurity.text = "Purity: 22 kt"
+                                    } else if (itemProductAttr.value == "17") {
+                                        textPurity.text = "Purity: 24 kt"
                                     } else if (itemProductAttr.value == "18") {
                                         textPurity.text = "Purity: Platinum 95"
                                     }

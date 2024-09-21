@@ -63,7 +63,7 @@
             android:text="A"
             android:gravity="center"
             android:textColor="@color/white"
-            android:backgroundTint="@color/_E79D46"
+            android:backgroundTint="@color/app_color"
             android:textSize="@dimen/_10sdp"
             android:background="@drawable/all_radius"
             android:fontFamily="@font/nunitosans_semibold"
@@ -80,7 +80,7 @@
             app:layout_constraintStart_toEndOf="@+id/ivUserImage"
             app:layout_constraintTop_toBottomOf="@+id/ivDate"
             android:background="@drawable/white_round_corner"
-            android:backgroundTint="@color/_E79D46"
+            android:backgroundTint="@color/app_color"
             android:padding="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_10sdp"
             >

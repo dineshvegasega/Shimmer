@@ -321,6 +321,50 @@
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
 
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt22"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="22Kt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/bt24"
+                        style="@style/PrimaryButtonBlue"
+                        android:layout_width="wrap_content"
+                        android:minWidth="@dimen/_50sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:backgroundTint="@color/white"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:text="24Kt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone"
+                        app:cornerRadius="@dimen/_4sdp"
+                        app:iconTint="@color/black"
+                        app:strokeColor="@color/_1E1E1E"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imageLayout"
+                        />
+
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/bt95"
                         style="@style/PrimaryButtonBlue"

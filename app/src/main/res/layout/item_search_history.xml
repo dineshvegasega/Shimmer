@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_history_24"
             android:padding="@dimen/_5sdp"
-            app:tint="@color/_424041" />
+            app:tint="@color/app_color" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cross_white"
             android:padding="@dimen/_8sdp"
-            app:tint="@color/_424041" />
+            app:tint="@color/app_color" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

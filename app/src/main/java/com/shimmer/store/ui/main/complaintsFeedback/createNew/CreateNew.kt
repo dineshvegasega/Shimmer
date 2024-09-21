@@ -57,6 +57,12 @@ class CreateNew : Fragment() {
 //               findNavController().navigateUp()
 //            }
 
+            topBarClose.apply {
+                includeBackButton.layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
             editTextSelectYourChoice.singleClick {
                 requireActivity().showDropDownDialog(type = 1){
                     binding.editTextSelectYourChoice.setText(name)

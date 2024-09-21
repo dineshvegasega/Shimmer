@@ -83,7 +83,7 @@ class HistoryAdapter(liveSchemesVM: HistoryVM) : RecyclerView.Adapter<RecyclerVi
             itemRowBinding.executePendingBindings()
             val dataClass = obj as ItemHistory
             itemRowBinding.apply {
-                dataClass.media?.url?.glideImagePortrait(itemRowBinding.root.context, ivIcon)
+               // dataClass.media?.url?.glideImagePortrait(itemRowBinding.root.context, ivIcon)
                val complaintfeedback = if (dataClass.type == "complaint"){
                     root.context.getString(R.string.complaint)
                 } else {
@@ -95,21 +95,21 @@ class HistoryAdapter(liveSchemesVM: HistoryVM) : RecyclerView.Adapter<RecyclerVi
                 textTrackValue.setText(""+dataClass.feedback_id)
 //                textStatusValueTxt.setText(dataClass.status.titlecaseFirstCharIfItIsLowercase())
 
-                textStatusValueTxt.setText(
-                    if (dataClass.status == "in-progress") root.context.getString(R.string.in_progress)
-                    else if (dataClass.status == "Pending" || dataClass.status == "pending") root.context.getString(R.string.pending)
-                    else if (dataClass.status == "resolved") root.context.getString(R.string.resolved)
-                    else if (dataClass.status == "re-open") root.context.getString(R.string.re_open)
-                    else if (dataClass.status == "Closed") root.context.getString(R.string.closed)
-                    else root.context.getString(R.string.pending))
-
-                textStatusValueTxt.setTextColor(
-                if (dataClass.status == "in-progress") ContextCompat.getColor(root.context, R.color._E79D46)
-                else if (dataClass.status == "Pending" || dataClass.status == "pending") ContextCompat.getColor(root.context, R.color.black)
-                else if (dataClass.status == "resolved") ContextCompat.getColor(root.context, R.color._138808)
-                else if (dataClass.status == "re-open") ContextCompat.getColor(root.context, R.color._ED2525)
-                else if (dataClass.status == "Closed") ContextCompat.getColor(root.context, R.color.black)
-                else ContextCompat.getColor(root.context, R.color._ffffffff))
+//                textStatusValueTxt.setText(
+//                    if (dataClass.status == "in-progress") root.context.getString(R.string.in_progress)
+//                    else if (dataClass.status == "Pending" || dataClass.status == "pending") root.context.getString(R.string.pending)
+//                    else if (dataClass.status == "resolved") root.context.getString(R.string.resolved)
+//                    else if (dataClass.status == "re-open") root.context.getString(R.string.re_open)
+//                    else if (dataClass.status == "Closed") root.context.getString(R.string.closed)
+//                    else root.context.getString(R.string.pending))
+//
+//                textStatusValueTxt.setTextColor(
+//                if (dataClass.status == "in-progress") ContextCompat.getColor(root.context, R.color._E79D46)
+//                else if (dataClass.status == "Pending" || dataClass.status == "pending") ContextCompat.getColor(root.context, R.color.black)
+//                else if (dataClass.status == "resolved") ContextCompat.getColor(root.context, R.color._138808)
+//                else if (dataClass.status == "re-open") ContextCompat.getColor(root.context, R.color._ED2525)
+//                else if (dataClass.status == "Closed") ContextCompat.getColor(root.context, R.color.black)
+//                else ContextCompat.getColor(root.context, R.color._ffffffff))
 
                 dataClass.date?.let {
                     textValidDateValue.text = "${dataClass.date.changeDateFormat("dd-MM-yyyy", "dd MMM, yyyy")}"

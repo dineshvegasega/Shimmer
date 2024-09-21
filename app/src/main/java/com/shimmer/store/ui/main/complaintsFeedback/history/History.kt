@@ -12,13 +12,16 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.shimmer.store.R
 import com.shimmer.store.databinding.HistoryBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.PaginationScrollListener
+import com.shimmer.store.utils.singleClick
 
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -62,15 +65,32 @@ class History : Fragment() {
 //            idDataNotFound.textDesc.text = getString(R.string.currently_no_complaints)
 
 //            loadFirstPage()
+
+            topBarSearch.apply {
+                includeBackButton.layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
             recyclerView.setHasFixedSize(true)
             binding.recyclerView.adapter = viewModel.adapter
             binding.recyclerView.itemAnimator = DefaultItemAnimator()
+
+
+//            viewModel.adapter.addAllSearch(results)
+
 
 //            observerDataRequest()
 
             recyclerViewScroll()
 
             searchHandler()
+
+
+
+            ivFabIcon.singleClick {
+                findNavController().navigate(R.id.action_history_to_createNew)
+            }
         }
     }
 

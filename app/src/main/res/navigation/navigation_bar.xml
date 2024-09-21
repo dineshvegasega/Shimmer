@@ -615,10 +615,17 @@
         android:id="@+id/history"
         tools:layout="@layout/history">
         <action
+            android:id="@+id/action_history_to_createNew"
+            app:destination="@id/createNew"
+            app:launchSingleTop="true"
+            />
+
+        <action
             android:id="@+id/action_history_to_historyDetail"
             app:destination="@id/historyDetail"
             app:launchSingleTop="true"
             />
+
     </fragment>
 
     <fragment

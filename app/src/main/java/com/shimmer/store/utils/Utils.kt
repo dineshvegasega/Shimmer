@@ -735,13 +735,13 @@ fun Activity.getCameraPath(callBack: Uri.() -> Unit) {
 
 
 fun getImageName(): String {
-    return "${"StreetSaarthi_" + SimpleDateFormat("HHmmss").format(Date())}.png"
+    return "${"Shimmer_" + SimpleDateFormat("HHmmss").format(Date())}.png"
 }
 
 
 @SuppressLint("SimpleDateFormat")
 fun getPdfName(): String {
-    return "${"StreetSaarthi_" + SimpleDateFormat("HHmmss").format(Date())}.pdf"
+    return "${"Shimmer_" + SimpleDateFormat("HHmmss").format(Date())}.pdf"
 }
 
 
@@ -1058,7 +1058,27 @@ fun getSize(size: Int) : Int {
         5 -> 7
         6 -> 8
         7 -> 9
-        24 -> 10
+        27 -> 10
+        24 -> 11
+        31 -> 12
+        32 -> 13
+        33 -> 14
+        34 -> 15
+        35 -> 16
+        36 -> 17
+        37 -> 18
+        38 -> 19
+        39 -> 20
+        40 -> 21
+        41 -> 22
+        42 -> 23
+        43 -> 24
+        44 -> 25
+        45 -> 26
+        46 -> 27
+        47 -> 28
+        48 -> 29
+        49 -> 30
         else -> 0
     }
 
@@ -1225,9 +1245,10 @@ fun isNumeric(str: String): Boolean {
 //yg 19
 //gw 20
 
+
+//26 9
 //14 14
 //15 18
 //16 22
 //17 24
 //18 95
-//26 9
