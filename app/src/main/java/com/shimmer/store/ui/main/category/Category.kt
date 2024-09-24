@@ -75,9 +75,12 @@ class Category : Fragment() {
                 }
             }
 
-            layoutCustomDesign.ivCustomDesign.setOnClickListener {
+            layoutCustomDesign.layout11.setOnClickListener {
                 findNavController().navigate(R.id.action_category_to_customDesign)
             }
+//            layoutCustomDesign.ivCustomDesign.setOnClickListener {
+//
+//            }
 
 
 
@@ -212,46 +215,46 @@ class Category : Fragment() {
         binding.apply {
             if (viewModel.positionSelect == 0) {
                 linear1.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
                 linear2.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
                 linear3.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
 
                 view1.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
                 view2.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
                 view3.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
             } else if (viewModel.positionSelect == 1) {
                 linear1.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
                 linear2.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
                 linear3.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
 
                 view1.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
                 view2.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
                 view3.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
             } else if (viewModel.positionSelect == 2) {
                 linear1.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
                 linear2.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._B9F2FF)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._D6DBDF)
                 linear3.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
 
                 view1.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
                 view2.backgroundTintList =
                     ContextCompat.getColorStateList(binding.root.context, R.color.white)
                 view3.backgroundTintList =
-                    ContextCompat.getColorStateList(binding.root.context, R.color._003E4D)
+                    ContextCompat.getColorStateList(binding.root.context, R.color._74071E)
             }
         }
     }

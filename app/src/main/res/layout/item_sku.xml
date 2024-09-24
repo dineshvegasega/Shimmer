@@ -20,7 +20,7 @@
         android:layout_marginVertical="@dimen/_5sdp"
         android:layout_marginHorizontal="@dimen/_6sdp"
         android:background="@drawable/bg_all_round_orders"
-        android:backgroundTint="@color/_0098BD"
+        android:backgroundTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -36,7 +36,8 @@
             app:layout_constraintDimensionRatio="H,1:1.1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/place_image" />
+            app:srcCompat="@drawable/place_image"
+            />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textTitle"
@@ -62,7 +63,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:padding="@dimen/_6sdp"
-            android:tint="@color/_28E0DE"
+            android:tint="@color/_E2B476"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -103,7 +104,7 @@
                     app:layout_constraintDimensionRatio="H,1:1.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/no_image" />
+                    app:srcCompat="@drawable/place_image" />
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat

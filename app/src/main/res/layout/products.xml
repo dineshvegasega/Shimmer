@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/all_products"
-        android:textColor="@color/black"
+        android:textColor="@color/_2A3740"
         app:layout_constraintTop_toBottomOf="@+id/top_bar_products"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="@dimen/_17sdp"
@@ -101,7 +101,7 @@ android:layout_marginHorizontal="@dimen/_45sdp"
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/_07FFFC"
+            android:background="@color/_E2B476"
             android:orientation="horizontal"
             android:layout_marginVertical="@dimen/_3sdp"
             >

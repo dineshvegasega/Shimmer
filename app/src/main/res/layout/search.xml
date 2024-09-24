@@ -35,7 +35,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btProduct"
             style="@style/PrimaryButtonBlue"
-            app:backgroundTint="@color/_363438"
+            app:backgroundTint="@color/_9F0625"
             app:rippleColor="@color/_868686"
             android:clickable="true"
             android:focusable="true"

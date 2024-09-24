@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sort By"
-            android:textColor="@color/_000000"
+            android:textColor="@color/_2A3740"
             android:textSize="@dimen/_12sdp"
             app:fontFamily="@font/nunitosans_semibold"
             app:layout_constraintStart_toStartOf="parent"
@@ -142,17 +142,18 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginEnd="1dp"
                 android:background="@drawable/menu_top_round"
-                android:backgroundTint="@color/_0098BD"
+                android:backgroundTint="@color/_D6DBDF"
                 android:gravity="center">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_13sdp"
                     android:gravity="center"
                     android:text="@string/clear"
+
                     />
 
 
@@ -172,7 +173,7 @@
                 android:foreground="?android:attr/selectableItemBackground"
                 android:layout_marginStart="1dp"
                 android:background="@drawable/menu_top_round"
-                android:backgroundTint="@color/_003E4D"
+                android:backgroundTint="@color/app_color"
                 android:gravity="center">
 
 

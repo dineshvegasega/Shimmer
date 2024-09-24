@@ -61,7 +61,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:text=""
-                android:textColor="@color/_000000"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_14sdp"
                 app:fontFamily="@font/nunitosans_bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="₹ 0.0"
-                android:textColor="@color/_000000"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_14sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +132,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:text="Customization Details"
-                android:textColor="@color/black"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -189,7 +189,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -209,7 +209,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -274,7 +274,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -295,7 +295,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -316,7 +316,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -338,7 +338,7 @@
                         android:visibility="gone"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
 
@@ -360,7 +360,7 @@
                         android:visibility="gone"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -381,7 +381,7 @@
                         android:visibility="visible"
                         app:cornerRadius="@dimen/_4sdp"
                         app:iconTint="@color/black"
-                        app:strokeColor="@color/_1E1E1E"
+                        app:strokeColor="@color/app_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageLayout"
                         />
@@ -603,20 +603,21 @@
                     android:layout_height="@dimen/_24sdp"
                     android:backgroundTint="@color/white"
                     android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+                   android:drawableTint="@color/_2A3740"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:drawablePadding="0dp"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:ems="5"
                     android:text="10"
-                    android:textColor="@color/_1E1E1E"
+                    android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_10sdp"
                     android:visibility="visible"
                     app:cornerRadius="@dimen/_4sdp"
-                    app:iconTint="@color/black"
+                    app:iconTint="@color/app_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageLayout"
-                    app:strokeColor="@color/black" />
+                    app:strokeColor="@color/app_color" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -682,7 +683,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view1214"
                 android:background="@drawable/all_round_5"
-                android:backgroundTint="@color/_0098BD"
+                android:backgroundTint="@color/app_color"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -714,7 +715,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/arrow_right"
-                    android:tint="@color/white"
+                    android:tint="@color/_E2B476"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:padding="@dimen/_3sdp"
@@ -864,7 +865,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/layoutProductDetails"
                 android:background="@drawable/all_round_5"
-                android:backgroundTint="@color/_0098BD"
+                android:backgroundTint="@color/app_color"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -896,7 +897,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/arrow_right"
-                    android:tint="@color/white"
+                    android:tint="@color/_E2B476"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:padding="@dimen/_3sdp"
@@ -971,7 +972,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/webView"
                 android:background="@drawable/all_round_5"
-                android:backgroundTint="@color/_0098BD"
+                android:backgroundTint="@color/app_color"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 app:layout_constraintEnd_toEndOf="parent">
@@ -1003,7 +1004,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:srcCompat="@drawable/arrow_right"
-                    android:tint="@color/white"
+                    android:tint="@color/_E2B476"
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:padding="@dimen/_3sdp"
@@ -1311,7 +1312,7 @@
                     android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
                     android:background="@drawable/rounds_black_5"
-                    android:backgroundTint="@color/_D9F8FF"
+                    android:backgroundTint="@color/_E2B476"
                     android:padding="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_weight="1"
@@ -1353,7 +1354,7 @@
                     android:gravity="center"
                     app:layout_constraintTop_toBottomOf="@+id/layoutTotal"
                     android:background="@drawable/rounds_black_5"
-                    android:backgroundTint="@color/_D9F8FF"
+                    android:backgroundTint="@color/_E2B476"
                     android:padding="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_8sdp"
                     android:layout_weight="1"
@@ -1464,14 +1465,14 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginEnd="1dp"
             android:background="@drawable/menu_top_round"
-            android:backgroundTint="@color/_0098BD"
+            android:backgroundTint="@color/_D6DBDF"
             android:gravity="center">
 
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
                 android:text="Add To Cart"
@@ -1494,7 +1495,7 @@
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_marginStart="1dp"
             android:background="@drawable/menu_top_round"
-            android:backgroundTint="@color/_003E4D"
+            android:backgroundTint="@color/app_color"
             android:gravity="center">
 
 

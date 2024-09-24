@@ -14,7 +14,7 @@ android:background="@color/_00000000">
     android:layout_width="@dimen/_7sdp"
     android:layout_height="@dimen/_7sdp"
     android:orientation="horizontal"
-    android:backgroundTint="@color/_9A9A9A"
+    android:backgroundTint="@color/app_color"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/bg_all_round_black">
 </View>
@@ -54,7 +54,7 @@ android:background="@color/_00000000">
     android:layout_width="@dimen/_7sdp"
     android:layout_height="@dimen/_7sdp"
     android:orientation="horizontal"
-    android:backgroundTint="@color/_9A9A9A"
+    android:backgroundTint="@color/app_color"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/bg_all_round_black">
 </View>
@@ -95,7 +95,7 @@ android:background="@color/_00000000">
     android:layout_width="@dimen/_7sdp"
     android:layout_height="@dimen/_7sdp"
     android:orientation="horizontal"
-    android:backgroundTint="@color/_9A9A9A"
+    android:backgroundTint="@color/app_color"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/bg_all_round_black">
 </View>
@@ -136,7 +136,7 @@ android:background="@color/_00000000">
     android:layout_width="@dimen/_7sdp"
     android:layout_height="@dimen/_7sdp"
     android:orientation="horizontal"
-    android:backgroundTint="@color/_9A9A9A"
+    android:backgroundTint="@color/app_color"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/bg_all_round_black">
 </View>
@@ -177,7 +177,7 @@ android:background="@color/_00000000">
     android:layout_width="@dimen/_7sdp"
     android:layout_height="@dimen/_7sdp"
     android:orientation="horizontal"
-    android:backgroundTint="@color/_9A9A9A"
+    android:backgroundTint="@color/app_color"
     android:layout_margin="@dimen/_3sdp"
     android:background="@drawable/bg_all_round_black">
 </View>

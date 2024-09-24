@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/_003E4D"
+    android:background="@color/white"
     android:paddingVertical="@dimen/_15sdp">
 
 
@@ -74,16 +74,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/menu_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:background="@drawable/bg_all_round_orders"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
             android:text="20"
             android:gravity="center"
-            android:textColor="@color/_07FFFC"
             android:fontFamily="@font/nunitosans_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

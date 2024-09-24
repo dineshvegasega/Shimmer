@@ -19,7 +19,7 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_10sdp"
         android:background="@drawable/bg_all_round_orders"
-        android:backgroundTint="@color/_0098BD"
+        android:backgroundTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -61,7 +61,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:padding="@dimen/_6sdp"
-            android:tint="@color/_28E0DE"
+            android:tint="@color/_E2B476"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

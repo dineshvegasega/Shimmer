@@ -71,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:visibility="visible"
             android:background="@drawable/menu_top_round"
-            android:backgroundTint="@color/_003E4D"
+            android:backgroundTint="@color/app_color"
             app:itemIconSize="@dimen/_22sdp"
             />
 

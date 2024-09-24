@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="₹10000 - ₹15000"
-            android:textColor="@color/_000000"
+            android:textColor="@color/_2A3740"
             android:textSize="@dimen/_11sdp"
             app:fontFamily="@font/nunitosans_light"
             app:layout_constraintStart_toEndOf="@+id/ivIconCheck"

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboarding_2">
+    android:background="@drawable/background_1">
 
 
 
@@ -23,12 +23,12 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageLogo"
-                android:layout_width="@dimen/_170sdp"
-                android:layout_height="@dimen/_170sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/logo_transparent"
+                android:src="@drawable/logo_silver"
                 android:layout_marginBottom="@dimen/_5sdp"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -86,7 +86,7 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/all_round_options"
-                android:backgroundTint="@color/_07FFFC"
+                android:backgroundTint="@color/_C08D54"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/_17sdp"
                 android:gravity="center">
@@ -99,13 +99,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/shopping_store"
+                    app:tint="@color/white"
                     android:layout_marginBottom="@dimen/_5sdp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/_13sdp"
                     android:gravity="center"
                     android:text="@string/franchise"
@@ -138,13 +139,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:src="@drawable/user_outline"
+                    app:tint="@color/_2A3740"
                     android:layout_marginBottom="@dimen/_5sdp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/app_color"
+                    app:tint="@color/_2A3740"
                     android:textSize="@dimen/_13sdp"
                     android:gravity="center"
                     android:text="@string/customer"

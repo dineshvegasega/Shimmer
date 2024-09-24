@@ -53,7 +53,7 @@ class Splash : Fragment() {
         //  handleSplashTime()
 
 //        binding.avFromCode.setAnimation("drink.json")
-        binding.avFromCode.playAnimation()
+//        binding.avFromCode.playAnimation()
 //        binding.avFromCode.addAnimatorListener(object : Animator.AnimatorListener {
 //            override fun onAnimationStart(animation: Animator) {
 //                Log.e("TAG", "onAnimationStart")

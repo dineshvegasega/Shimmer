@@ -20,7 +20,7 @@
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginVertical="@dimen/_12sdp"
         android:text="@string/profile"
-        android:textColor="@color/black"
+        android:textColor="@color/_2A3740"
         android:textSize="@dimen/_17sdp"
         app:fontFamily="@font/nunitosans_semibold"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginVertical="@dimen/_12sdp"
         android:text="@string/logout"
-        android:textColor="@color/_0098BD"
+        android:textColor="@color/app_color"
         android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_3sdp"
         app:fontFamily="@font/nunitosans_semibold"
@@ -79,12 +79,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8" />
+        app:strokeColor="@color/app_color" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -111,12 +111,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btProfileDetails"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8" />
+        app:strokeColor="@color/app_color" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -144,12 +144,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btOrders"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8" />
+        app:strokeColor="@color/app_color" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btChangePassword"
@@ -175,12 +175,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btComplaints"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8" />
+        app:strokeColor="@color/app_color" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchNotifications"
@@ -229,12 +229,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchNotifications"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8"
+        app:strokeColor="@color/app_color"
         />
 
 
@@ -262,12 +262,12 @@
         app:icon="@drawable/arrow_right"
         app:iconGravity="end"
         app:iconPadding="@dimen/_15sdp"
-        app:iconTint="@color/_07FFFC"
+        app:iconTint="@color/app_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btSearchNearFranchise"
         app:rippleColor="@color/white"
-        app:strokeColor="@color/_D8D8D8" />
+        app:strokeColor="@color/app_color" />
 
 
 

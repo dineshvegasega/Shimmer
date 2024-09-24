@@ -109,7 +109,7 @@ class Login : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._07FFFC
+                                    R.color._E2B476
                                 )
                             )
                     } else {
@@ -118,7 +118,7 @@ class Login : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     }

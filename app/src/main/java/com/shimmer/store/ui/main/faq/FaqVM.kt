@@ -73,7 +73,6 @@ class FaqVM @Inject constructor(private val repository: Repository) : ViewModel(
             position: Int
         ) {
             binding.apply {
-
 //                textDesc.visibility =
 //                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
 //                ivHideShow.setImageDrawable(
@@ -93,7 +92,7 @@ class FaqVM @Inject constructor(private val repository: Repository) : ViewModel(
                 )
 
 
-                ivHideShow.singleClick {
+                root.singleClick {
                     if (selectedPosition == position){
                         if (textDesc.isVisible == true){
                             selectedPosition = -1

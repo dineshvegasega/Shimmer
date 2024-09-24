@@ -5,7 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/background_login">
+    android:background="@color/app_color"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bigLogo"
+            android:background="@drawable/background_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-2dp"
+            android:layout_marginStart="-2dp"/>
+    </RelativeLayout>
 
 
     <include
@@ -66,7 +86,7 @@
         android:layout_marginTop="@dimen/_5sdp"
         android:visibility="visible"
         android:textColor="@color/white"
-        android:backgroundTint="@color/_002630"
+        android:backgroundTint="@color/app_color"
         />
 
 
@@ -104,7 +124,7 @@
             android:maxLength="25"
             android:textColor="@color/white"
             android:visibility="visible"
-            android:backgroundTint="@color/_002630"
+            android:backgroundTint="@color/app_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="0dp"
@@ -139,7 +159,7 @@
         android:text="@string/login"
         app:iconTint="@color/black"
         android:textColor="@color/black"
-        android:backgroundTint="@color/_00b3b0"
+        android:backgroundTint="@color/_E2B476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutCreatePassword"
@@ -161,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/forgot_password"
-        android:textColor="@color/_0098BD"
+        android:textColor="@color/_E2B476"
         android:textSize="@dimen/_12sdp"
         app:fontFamily="@font/nunitosans_semibold"
         tools:ignore="HardcodedText"

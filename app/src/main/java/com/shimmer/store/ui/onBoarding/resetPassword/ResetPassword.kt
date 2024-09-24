@@ -118,7 +118,7 @@ class ResetPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     } else if(!isValidPassword(editTextConfirmNewPassword.text.toString().trim())){
@@ -127,7 +127,7 @@ class ResetPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     } else if(editTextNewPassword.text.toString() == editTextConfirmNewPassword.text.toString()){
@@ -137,7 +137,7 @@ class ResetPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._07FFFC
+                                    R.color._E2B476
                                 )
                             )
                     } else {
@@ -146,7 +146,7 @@ class ResetPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     }

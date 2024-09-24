@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Order No: SRI00867ghvkjTY"
-                android:textColor="@color/black"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_bold"
                 app:layout_constraintStart_toStartOf="parent"

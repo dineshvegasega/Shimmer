@@ -155,7 +155,6 @@ class Home : Fragment() {
 
 
             topBar.apply {
-                textViewTitle.visibility = View.VISIBLE
                 ivSearch.visibility = View.VISIBLE
                 ivCart.visibility = View.VISIBLE
 

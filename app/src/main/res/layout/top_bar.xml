@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/home_top_bg"
+    android:background="@color/white"
     android:paddingVertical="@dimen/_14sdp">
 
 
@@ -19,11 +19,13 @@
         android:paddingBottom="@dimen/_18sdp"
         android:paddingTop="@dimen/_5sdp"
         >
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appicon"
-            android:layout_width="@dimen/_35sdp"
+            android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_35sdp"
-            android:src="@drawable/logo_transparent"
+            android:src="@drawable/logo_silver"
+            app:tint="@color/app_color"
             android:scaleType="fitCenter"
             android:text="@string/toolbar_title"
             android:paddingTop="@dimen/_2sdp"
@@ -36,20 +38,6 @@
             />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/app_name_slash"
-            app:textAllCaps="false"
-            android:fontFamily="@font/nunitosans_regular"
-            android:textAllCaps="true"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/_12sdp"
-            android:visibility="visible"
-            android:lineSpacingExtra="@dimen/_minus2sdp"
-            />
 
 
 
@@ -65,7 +53,7 @@
         android:hint="@string/type_here_to_search"
         android:text="@string/type_here_to_search"
         android:drawableEnd="@drawable/search"
-        android:drawableTint="@color/white"
+        android:drawableTint="@color/_2A3740"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:imeOptions="actionSearch"
         android:inputType="text|textNoSuggestions"
@@ -112,16 +100,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/menu_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
             android:text="20"
             android:gravity="center"
-            android:textColor="@color/_07FFFC"
+            android:background="@drawable/bg_all_round_orders"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
             android:fontFamily="@font/nunitosans_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

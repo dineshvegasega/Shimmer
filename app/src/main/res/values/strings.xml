@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shimmer Diamonds</string>
+    <string name="app_name">KLIFORA</string>
     <string name="app_name_slash">Shimmer\nDiamonds</string>
 
     <string name="google_maps_key">AIzaSyCENjVM2ONRbk-jYtJvp4UFRvN1oGPZPEo</string>
@@ -218,5 +218,6 @@
     <string name="quantity">Quantity</string>
     <string name="payment_page">Payment Page</string>
     <string name="product_not_available">Product not available</string>
+    <string name="item_added_to_cart">Item added to cart</string>
 
 </resources>

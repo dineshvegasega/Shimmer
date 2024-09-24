@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Silver Color Gold Ring"
-                android:textColor="@color/_000000"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"

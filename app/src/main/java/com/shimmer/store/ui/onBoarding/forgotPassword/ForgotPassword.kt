@@ -77,10 +77,10 @@ class ForgotPassword : Fragment() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if (editTextMobileNumber.text.toString().length == 10){
                         textTitleRequestOTP.isEnabled = true
-                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._0098BD))
+                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._E2B476))
                     } else {
                         textTitleRequestOTP.isEnabled = false
-                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._007a99))
+                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._C08D54))
                     }
                 }
             })
@@ -145,7 +145,7 @@ class ForgotPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._07FFFC
+                                    R.color._E2B476
                                 )
                             )
                     } else {
@@ -154,7 +154,7 @@ class ForgotPassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     }

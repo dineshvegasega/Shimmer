@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/feedback"
-                android:textColor="@color/black"
+                android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_12sdp"
                 app:fontFamily="@font/nunitosans_bold"
                 tools:ignore="HardcodedText"

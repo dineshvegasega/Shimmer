@@ -571,7 +571,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
                         }
                         db?.cartDao()?.insertAll(newUser)
-                        showSnackBar("Item added to cart")
+                        showSnackBar(getString(R.string.item_added_to_cart))
                         MainActivity.mainActivity.get()!!.callCartApi()
                     }
                 } else if (LoginType.VENDOR == loginType) {
@@ -588,7 +588,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             viewModel.addCart(token!!, jsonCartItem) {
                                 //cartMutableList.value = true
                                 Log.e("TAG", "onCallBack: ${this.toString()}")
-                                showSnackBar("Item added to cart")
+                                showSnackBar(getString(R.string.item_added_to_cart))
                                 MainActivity.mainActivity.get()!!.callCartApi()
                             }
                         }
@@ -653,7 +653,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
                         }
                         db?.cartDao()?.insertAll(newUser)
-                        showSnackBar("Item added to cart")
+                        showSnackBar(getString(R.string.item_added_to_cart))
                         MainActivity.mainActivity.get()!!.callCartApi()
                         findNavController().navigate(R.id.action_productDetail_to_cart)
                     }
@@ -671,7 +671,7 @@ class ProductDetail : Fragment(), CallBackListener {
                             viewModel.addCart(token!!, jsonCartItem) {
                                 //cartMutableList.value = true
                                 Log.e("TAG", "onCallBack: ${this.toString()}")
-                                showSnackBar("Item added to cart")
+                                showSnackBar(getString(R.string.item_added_to_cart))
                                 findNavController().navigate(R.id.action_productDetail_to_cart)
                             }
                         }
@@ -1148,7 +1148,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             ColorStateList.valueOf(
                                                 ContextCompat.getColor(
                                                     requireContext(),
-                                                    R.color._003E4D
+                                                    R.color.app_color
                                                 )
                                             )
                                         bt12.setTextColor(
@@ -1169,7 +1169,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt9.setTextColor(
@@ -1190,7 +1190,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt9.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                     bt9.visibility = View.VISIBLE
@@ -1208,7 +1208,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt14.setTextColor(
@@ -1229,7 +1229,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt14.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                     bt14.visibility = View.VISIBLE
@@ -1247,7 +1247,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt18.setTextColor(
@@ -1268,7 +1268,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt18.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                     bt18.visibility = View.VISIBLE
@@ -1286,7 +1286,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt22.setTextColor(
@@ -1307,7 +1307,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt22.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                     bt22.visibility = View.VISIBLE
@@ -1325,7 +1325,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt24.setTextColor(
@@ -1346,7 +1346,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt24.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                     bt24.visibility = View.VISIBLE
@@ -1365,7 +1365,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             ColorStateList.valueOf(
                                                 ContextCompat.getColor(
                                                     requireContext(),
-                                                    R.color._003E4D
+                                                    R.color.app_color
                                                 )
                                             )
                                         bt13.setTextColor(
@@ -1386,7 +1386,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                         ColorStateList.valueOf(
                                                                             ContextCompat.getColor(
                                                                                 requireContext(),
-                                                                                R.color._003E4D
+                                                                                R.color.app_color
                                                                             )
                                                                         )
                                                                     bt95.setTextColor(
@@ -1408,7 +1408,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                     bt95.setTextColor(
                                                                         ContextCompat.getColor(
                                                                             requireContext(),
-                                                                            R.color._003E4D
+                                                                            R.color.app_color
                                                                         )
                                                                     )
                                                                 }

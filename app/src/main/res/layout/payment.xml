@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/payment_page"
-        android:textColor="@color/black"
+        android:textColor="@color/_2A3740"
         app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
         app:layout_constraintStart_toStartOf="parent"
         android:textSize="@dimen/_17sdp"
@@ -67,7 +67,7 @@
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:background="@drawable/menu_top_round"
-            android:backgroundTint="@color/_003E4D"
+            android:backgroundTint="@color/app_color"
             android:gravity="center">
 
 

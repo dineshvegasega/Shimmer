@@ -38,7 +38,7 @@
         style="@style/PrimaryEditText_Blue"
         android:hint="@string/enter_franchise_code"
         android:drawableEnd="@drawable/search"
-        android:drawableTint="@color/black"
+        android:drawableTint="@color/_2A3740"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:imeOptions="actionSearch"
         android:inputType="text|textNoSuggestions"

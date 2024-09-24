@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/all_round_5"
-    android:backgroundTint="@color/_B9F2FF"
     android:layout_marginVertical="@dimen/_6sdp"
     android:layout_marginHorizontal="@dimen/_10sdp"
    >
@@ -19,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/all_round_5"
-        android:backgroundTint="@color/_003E4D"
+        android:backgroundTint="@color/_9F0625"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -49,6 +48,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:srcCompat="@drawable/arrow_right"
+            app:tint="@color/_E2B476"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:padding="@dimen/_3sdp"
