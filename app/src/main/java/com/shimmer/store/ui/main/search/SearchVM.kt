@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,6 +33,7 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getSize
+import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
@@ -51,6 +53,8 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
     var searchType = 1
 
 
+    val itemsSearch: ArrayList<ItemProduct> = ArrayList()
+
     val searchAdapter = object : GenericAdapter<ItemSearchBinding, ItemProduct>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -64,15 +68,6 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
             position: Int
         ) {
             binding.apply {
-//                textDesc.visibility =
-//                    if (dataClass.isCollapse == true) View.VISIBLE else View.GONE
-//                ivHideShow.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        root.context,
-//                        if (dataClass.isCollapse == true) R.drawable.baseline_remove_24 else R.drawable.baseline_add_24
-//                    )
-//                )
-
                 textTitle.text = dataClass.name
                 textPrice.text = "Price: ₹ "+ getPatternFormat("1", dataClass.price!!)
                 dataClass.custom_attributes.forEach {
@@ -134,7 +129,7 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
 
                 if (dataClass.media_gallery_entries.size > 0){
-                    (IMAGE_URL +dataClass.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+                    (IMAGE_URL +dataClass.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                 }
 
                 root.singleClick {
@@ -219,98 +214,21 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
 
 
-
-    fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>, callBack: ItemProductRoot.() -> Unit) =
+    private var itemProductsResult = MutableLiveData<ItemProductRoot>()
+    val itemProducts : LiveData<ItemProductRoot> get() = itemProductsResult
+    fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>) =
         viewModelScope.launch {
-            repository.callApi(
+            repository.callApiWithoutLoader(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-//                    if (loginType == "vendor") {
-//                        apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-//                    } else if (loginType == "guest") {
                         apiInterface.productsID("Bearer " +adminToken, emptyMap)
-//                    } else {
-//                        apiInterface.products("Bearer " +adminToken, storeWebUrl, emptyMap)
-//                    }
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
                                 val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
-
-                                mainThread {
-                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
-//                                    userList?.forEach { itemsDB ->
-////                                        Log.e( "TAG", "VVVVVVVVV: " +itemsDB.product_id+"  "+itemsDB.isSelected+"  "+itemsDB.price)
-//                                    }
-
-                                    mMineUserEntity.items.forEach {items ->
-                                        userList?.forEach { user ->
-                                            if (items.id == user.product_id) {
-                                                items.apply {
-                                                    isSelected = true
-                                                }
-//                                                Log.e( "TAG", "YYYYYYYYY: " +items.price)
-                                            }
-//                                            else {
-//                                                items.apply {
-//                                                    isSelected = false
-//                                                }
-//                                                Log.e( "TAG", "NNNNNNNNNN: " )
-//                                            }
-                                        }
-                                    }
-
-
-//                                    mMineUserEntity.items.forEach { items ->
-//                                        Log.e( "TAG", "YYYYYYYYY: " +items.isSelected+"  "+items.price)
-//                                    }
-
-                                    if(mMineUserEntity.items.isNotEmpty()){
-                                        callBack(mMineUserEntity)
-                                    } else {
-                                        callBack(mMineUserEntity)
-//                                        showSnackBar("No Products Available!")
-                                    }
-                                }
-
-//                                viewModelScope.launch {
-//
-//                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
-//                                    userList?.forEach { itemsDB ->
-//                                        Log.e( "TAG", "VVVVVVVVV: " +itemsDB.product_id+"  "+itemsDB.isSelected+"  "+itemsDB.price)
-//                                    }
-//
-//                                    mMineUserEntity.items.forEach {items ->
-//                                        userList?.forEach { user ->
-//                                            if (items.id == user.product_id) {
-//                                                items.apply {
-//                                                    isSelected = true
-//                                                }
-////                                                Log.e( "TAG", "YYYYYYYYY: " +items.price)
-//                                            } else {
-//                                                items.apply {
-//                                                    isSelected = false
-//                                                }
-////                                                Log.e( "TAG", "NNNNNNNNNN: " )
-//                                            }
-//                                        }
-//                                    }
-//
-//
-//                                    mMineUserEntity.items.forEach { items ->
-//                                        Log.e( "TAG", "YYYYYYYYY: " +items.isSelected+"  "+items.price)
-//                                    }
-//
-//                                    if(mMineUserEntity.items.isNotEmpty()){
-//                                        callBack(mMineUserEntity)
-//                                    } else {
-//                                        showSnackBar("No Products Available!")
-//                                    }
-//                                }
-
-
+                                itemProductsResult.value = mMineUserEntity
                             } catch (e: Exception) {
                             }
                         }

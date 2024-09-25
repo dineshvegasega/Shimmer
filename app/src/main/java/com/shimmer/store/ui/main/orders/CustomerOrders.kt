@@ -24,7 +24,6 @@ import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLiveA
-import com.shimmer.store.ui.main.products.Products.Companion.adapter2
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.internal.StringUtil.isNumeric
 

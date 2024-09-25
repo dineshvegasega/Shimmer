@@ -31,22 +31,44 @@
         />
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList2"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/idNestedSV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
-        app:spanCount="2"
-        tools:itemCount="20"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/item_product"
-        android:paddingHorizontal="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTitle"
         app:layout_constraintBottom_toTopOf="@+id/filterLayout"
-        android:layout_marginVertical="@dimen/_5sdp"
-        />
+        tools:context=".MainActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:visibility="visible"
+                app:spanCount="2"
+                tools:itemCount="2"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_product"
+                 />
+
+            <ProgressBar
+                android:id="@+id/idPBLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
 
     <androidx.appcompat.widget.LinearLayoutCompat

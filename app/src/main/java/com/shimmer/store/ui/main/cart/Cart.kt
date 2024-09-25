@@ -19,7 +19,6 @@ import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.networking.login
 import com.shimmer.store.ui.enums.LoginType
-import com.shimmer.store.ui.main.products.Products.Companion.adapter2
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack

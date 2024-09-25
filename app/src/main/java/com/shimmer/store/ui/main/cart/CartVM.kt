@@ -33,6 +33,7 @@ import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
+import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.myOptionsGlide
@@ -169,7 +170,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                         getProductDetail(token.toString(), dataClass.sku) {
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                             }
                         }
                     }

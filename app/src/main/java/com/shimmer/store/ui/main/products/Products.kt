@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import com.shimmer.store.databinding.DialogSortBinding
 import com.shimmer.store.databinding.ProductsBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -28,11 +30,9 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveDa
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
-import com.shimmer.store.utils.SortByPriceAsc
-import com.shimmer.store.utils.SortByPriceDesc
+import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Collections
 
 
 @AndroidEntryPoint
@@ -43,11 +43,12 @@ class Products : Fragment() {
 
     var sortAlert: BottomSheetDialog? = null
 
+    var page: Int = 1
 
-    companion object {
-        @JvmStatic
-        lateinit var adapter2: ProductsAdapter
-    }
+//    companion object {
+//        @JvmStatic
+//        lateinit var adapter2: ProductsAdapter
+//    }
 
 
     override fun onCreateView(
@@ -67,8 +68,8 @@ class Products : Fragment() {
         MainActivity.mainActivity.get()!!.callBack(2)
         MainActivity.mainActivity.get()!!.callCartApi()
 
-        adapter2 = ProductsAdapter()
-        binding.rvList2.adapter = adapter2
+//        viewModel.searchAdapter = ProductsAdapter()
+//        binding.rvList2.adapter = viewModel.searchAdapter
 
         binding.apply {
             topBarProducts.includeBackButton.apply {
@@ -94,63 +95,81 @@ class Products : Fragment() {
             }
 
 
-//            button.setOnClickListener {
-//                findNavController().navigate(R.id.action_products_to_productsDetail)
-//            }
+            rvList2.setHasFixedSize(true)
+            rvList2.adapter = viewModel.productAdapter
 
-
-//           val leftMaxima = requireArguments().serializable("filters") as HashMap<String, Any?>?
-//
-//            Log.e("TAG", "leftMaxima "+leftMaxima?.get("category"))
-
-
-//            mainCategory.forEach {
-//                Log.e("TAG", "itmainCategory "+it.isSelected)
-//            }
-
-
-//            topBar.apply {
-//                textViewTitle.visibility = View.GONE
-////                cardSearch.visibility = View.GONE
-//
-//                appicon.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        MainActivity.context.get()!!,
-//                        R.drawable.baseline_west_24
-//                    )
-//                )
-//
-//                appicon.singleClick {
-//                    findNavController().navigateUp()
-//                }
-//
-//                ivSearch.singleClick {
-//                    findNavController().navigate(R.id.action_products_to_search)
-//                }
-//
-//                ivCart.singleClick {
-//                    findNavController().navigate(R.id.action_products_to_cart)
-//                }
-//
-//                badgeCount.observe(viewLifecycleOwner) { badgeCount ->
-//                    viewModel.getCartCount() {
-//                        Log.e("TAG", "countAA: $this")
-//                        menuBadge.text = "${this}"
-//                        menuBadge.visibility = if (this != 0) View.VISIBLE else View.GONE
-//                    }
-//                }
-//            }
-
-
+            viewModel.sortFilter = 1
             filters()
+
+
+
+
+
+            viewModel.itemProducts?.observe(viewLifecycleOwner) {
+                mainThread {
+                    if (it.items.size != 0) {
+//                        it.items.forEach { itemApi ->
+//                            val bool = getArrayValue(viewModel.itemsProduct, itemApi)
+//                            if (!bool) {
+//                                viewModel.itemsProduct.add(itemApi)
+//                            }
+//                        }
+
+//                        if (viewModel.itemsProduct.size == 0) {
+                        it.items.forEach {
+                            viewModel.itemsProduct.add(it)
+                        }
+
+//                        viewModel.itemsProduct.addAll(it.items)
+//                        } else {
+//                            it.items.forEach { itemApi ->
+//                                viewModel.itemsProduct.forEach { itemArray ->
+//                                    if (itemApi.id != itemArray.id) {
+//                                        viewModel.itemsProduct.add(itemApi)
+//                                    }
+//                                }
+//                            }
+//                        }
+                        Log.e("TAG", "it.itemsAAA " + it.items.size)
+                    } else {
+                        idPBLoading.visibility = View.GONE
+                        Log.e("TAG", "it.itemsBBB " + it.items.size)
+                    }
+
+                    viewModel.productAdapter.submitList(viewModel.itemsProduct)
+                    viewModel.productAdapter.notifyDataSetChanged()
+
+
+                    Log.e("TAG", "it.itemsCCC " + it.items.size)
+
+                    if (viewModel.itemsProduct.size == 0) {
+                        binding.idDataNotFound.root.visibility = View.VISIBLE
+                    } else {
+                        binding.idDataNotFound.root.visibility = View.GONE
+                    }
+                }
+            }
+
+
+            idNestedSV.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                // on scroll change we are checking when users scroll as bottom.
+                val aa = v.getChildAt(0).measuredHeight - v.measuredHeight
+
+                Log.e("TAG", "scrollYAA $scrollY  ::  $aa")
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    page++
+                    idPBLoading.visibility = View.VISIBLE
 //
-//            searchCriteria[filter_groups][0][filters][0][field]
-//            searchCriteria[filter_groups][0][filters][1][field]
-//            searchCriteria[filter_groups][0][filters][2][field]
-//
-//
-//            searchCriteria[filter_groups][0][filters][0][field]
-//            searchCriteria[filter_groups][1][filters][0][field]
+//                    getDataFromAPI(page)
+                    filters()
+                }
+            })
+
+
+
+
 
 
             layoutSort.singleClick {
@@ -232,11 +251,16 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefacenunitosans_light)
                         textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
                         textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
+                        page = 1
+                        viewModel.itemsProduct.clear()
                         viewModel.sortFilter = 0
                         filters()
+                        dialog.dismiss()
                     }
 
                     layoutApply.singleClick {
+                        page = 1
+                        viewModel.itemsProduct.clear()
                         filters()
                         dialog.dismiss()
                     }
@@ -257,22 +281,35 @@ class Products : Fragment() {
         }
     }
 
+    private fun getArrayValue(itemProductArray: ArrayList<ItemProduct>, itemApi: ItemProduct): Boolean {
+
+        itemProductArray.forEach {
+            if(it.id == itemApi.id){
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
+    }
+
 
     @SuppressLint("NotifyDataSetChanged")
     fun filters() {
         binding.apply {
+////            if (viewModel.productAdapter != null) {
+//                if (page > viewModel.productAdapter.getItemCount()) {
+//                    idPBLoading.visibility = View.GONE
+//                    return
+//                }
+////            }
 
-            viewModel.itemLiveNotice?.observe(viewLifecycleOwner) {
-                adapter2.submitData(it.items)
-                adapter2.notifyDataSetChanged()
-                Log.e("TAG", "it.itemsAAA " + it.items.size)
 
-                if (it.items.size == 0) {
-                    binding.idDataNotFound.root.visibility = View.VISIBLE
-                } else {
-                    binding.idDataNotFound.root.visibility = View.GONE
-                }
-            }
+//            if (viewModel.itemsProduct.size == 10 && viewModel.itemsProduct.size <= 1){
+//                return
+//            } else {
+//
+//            }
 
 
             val emptyMap = mutableMapOf<String, String>()
@@ -310,26 +347,25 @@ class Products : Fragment() {
             Log.e("TAG", "countFromAAA " + emptyMap.toString())
 
 
-            var genderIds : String = ""
+            var genderIds: String = ""
             var mainShopForBoolean = false
             mainShopFor.forEach {
                 if (it.isSelected) {
-                    genderIds += ""+it.id+","
+                    genderIds += "" + it.id + ","
                     count += 1
 //                    countFrom1 += 1
                     mainShopForBoolean = true
                 }
             }
-            Log.e("TAG", "countFromDDD "+countFrom1)
-            if (mainShopForBoolean){
+            Log.e("TAG", "countFromDDD " + countFrom1)
+            if (mainShopForBoolean) {
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
                     "category_id"
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
-                    categoryIds+genderIds
+                    categoryIds + genderIds
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
                     "in"
             }
-
 
 
             var mainPriceBoolean = false
@@ -452,7 +488,6 @@ class Products : Fragment() {
 
 
 
-            binding.rvList2.adapter = adapter2
 
 
             when (viewModel.sortFilter) {
@@ -478,6 +513,9 @@ class Products : Fragment() {
                     emptyMap["searchCriteria[sortOrders][0][direction]"] = "DESC"
                 }
             }
+
+            emptyMap["searchCriteria[currentPage]"] = "" + page
+            emptyMap["searchCriteria[pageSize]"] = "10"
 
             readData(ADMIN_TOKEN) { token ->
                 viewModel.getProducts(token.toString(), requireView(), emptyMap)

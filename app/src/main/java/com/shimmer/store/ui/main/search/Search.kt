@@ -14,9 +14,9 @@ import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogSearchHistoryBinding
@@ -27,13 +27,11 @@ import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
-import com.shimmer.store.utils.defaultThread
 import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.onRightDrawableClicked
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -42,7 +40,7 @@ class Search : Fragment() {
     private var _binding: SearchBinding? = null
     private val binding get() = _binding!!
 
-
+    var page: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,22 +59,10 @@ class Search : Fragment() {
 
 
         binding.apply {
-//            appicon.singleClick {
-//                findNavController().navigateUp()
-//            }
-
             topBarSearch.apply {
-//                appicon.setImageDrawable(
-//                    ContextCompat.getDrawable(
-//                        MainActivity.context.get()!!,
-//                        R.drawable.baseline_west_24
-//                    )
-//                )
-
                 includeBackButton.layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
-
 
                 viewModel.searchValue.observe(viewLifecycleOwner) {
                     binding.topBarSearch.editTextSearch.setText(it)
@@ -121,9 +107,14 @@ class Search : Fragment() {
             }
 
             ivSearch.singleClick {
-                if(topBarSearch.editTextSearch.text.toString().isNotEmpty()){
+                if (topBarSearch.editTextSearch.text.toString().isNotEmpty()) {
+                    viewModel.itemsSearch.clear()
+                    page = 1
                     searchFilter()
-                    val newUser = SearchModel(search_name = topBarSearch.editTextSearch.text.toString(), currentTime = System.currentTimeMillis())
+                    val newUser = SearchModel(
+                        search_name = topBarSearch.editTextSearch.text.toString(),
+                        currentTime = System.currentTimeMillis()
+                    )
                     ioThread {
                         db?.searchDao()?.insertAll(newUser)
                     }
@@ -136,7 +127,51 @@ class Search : Fragment() {
             rvList2.adapter = viewModel.searchAdapter
 
 
-            if (viewModel.isListVisible){
+
+            viewModel.itemProducts?.observe(viewLifecycleOwner) {
+                Log.e("TAG", "onViewCreated: " + it.toString())
+
+                if (it.items.size != 0) {
+                    viewModel.itemsSearch.addAll(it.items)
+                    idPBLoading.visibility = View.VISIBLE
+                } else {
+                    idPBLoading.visibility = View.GONE
+                }
+
+                viewModel.searchAdapter.submitList(viewModel.itemsSearch)
+                viewModel.searchAdapter.notifyDataSetChanged()
+
+                rvListSearchHistory.visibility = View.GONE
+                rvList2.visibility = View.VISIBLE
+
+                viewModel.isListVisible = true
+
+                if (viewModel.itemsSearch.size == 0) {
+                    binding.idDataNotFound.root.visibility = View.VISIBLE
+                } else {
+                    binding.idDataNotFound.root.visibility = View.GONE
+                }
+            }
+
+
+            // adding on scroll change listener method for our nested scroll view.
+            idNestedSV.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+                // on scroll change we are checking when users scroll as bottom.
+                val aa = v.getChildAt(0).measuredHeight - v.measuredHeight
+
+                Log.e("TAG", "scrollYAA $scrollY  ::  $aa")
+                if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight) {
+                    // in this method we are incrementing page number,
+                    // making progress bar visible and calling get data method.
+                    page++
+                    idPBLoading.visibility = View.VISIBLE
+//
+//                    getDataFromAPI(page)
+                    searchFilter()
+                }
+            })
+
+            if (viewModel.isListVisible) {
                 rvList2.visibility = View.VISIBLE
                 rvListSearchHistory.visibility = View.GONE
             }
@@ -150,7 +185,7 @@ class Search : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun openSearchHistory() {
         mainThread {
-            val userList: List<SearchModel> ?= db?.searchDao()?.getAll()
+            val userList: List<SearchModel>? = db?.searchDao()?.getAll()
             binding.apply {
                 rvListSearchHistory.setHasFixedSize(true)
                 rvListSearchHistory.adapter = viewModel.searchHistoryAdapter
@@ -161,7 +196,6 @@ class Search : Fragment() {
             }
 
 
-
 //            userList?.forEach {
 //                Log.e("TAG", "onViewCreated: "+it.search_name + " it.currentTime "+it.currentTime)
 //            }
@@ -170,21 +204,50 @@ class Search : Fragment() {
 
     private fun setSearchButtons() {
         if (viewModel.searchType == 1) {
-            binding.topBarSearch.editTextSearch.hint = resources.getString(R.string.search_by_product)
-            binding.btProduct.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.white))
-            binding.btSKU.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.black))
-            binding.btProduct.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
-            binding.btSKU.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.btProduct.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
-            binding.btSKU.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.topBarSearch.editTextSearch.hint =
+                resources.getString(R.string.search_by_product)
+            binding.btProduct.setTextColor(
+                ContextCompat.getColor(
+                    MainActivity.context.get()!!,
+                    R.color.white
+                )
+            )
+            binding.btSKU.setTextColor(
+                ContextCompat.getColor(
+                    MainActivity.context.get()!!,
+                    R.color.black
+                )
+            )
+            binding.btProduct.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.btSKU.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.btProduct.strokeColor =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.btSKU.strokeColor =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
         } else {
             binding.topBarSearch.editTextSearch.hint = getString(R.string.search_by_sku)
-            binding.btProduct.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.black))
-            binding.btSKU.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.white))
-            binding.btProduct.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.btSKU.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
-            binding.btProduct.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
-            binding.btSKU.strokeColor = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.btProduct.setTextColor(
+                ContextCompat.getColor(
+                    MainActivity.context.get()!!,
+                    R.color.black
+                )
+            )
+            binding.btSKU.setTextColor(
+                ContextCompat.getColor(
+                    MainActivity.context.get()!!,
+                    R.color.white
+                )
+            )
+            binding.btProduct.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.btSKU.backgroundTintList =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.btProduct.strokeColor =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
+            binding.btSKU.strokeColor =
+                ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color._9F0625))
         }
 
 //        btProduct.setTextColor(ContextCompat.getColor(MainActivity.context.get()!!, R.color.white))
@@ -198,7 +261,7 @@ class Search : Fragment() {
         binding.apply {
             topBarSearch.editTextSearch.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                   // loadFirstPage()
+                    // loadFirstPage()
                 }
                 true
             }
@@ -206,16 +269,28 @@ class Search : Fragment() {
             topBarSearch.editTextSearch.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
+                    val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)) {
                         1 -> R.drawable.baseline_search_24
                         2 -> R.drawable.baseline_search_32
                         3 -> R.drawable.baseline_search_50
                         else -> R.drawable.baseline_search_24
                     }
-                    topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(0, 0, if(count >= 1) R.drawable.ic_cross_white else iconTypeSearch, 0);
+                    topBarSearch.editTextSearch.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        if (count >= 1) R.drawable.ic_cross_white else iconTypeSearch,
+                        0
+                    );
                 }
             })
 
@@ -227,67 +302,83 @@ class Search : Fragment() {
     }
 
 
-
-
     @SuppressLint("NotifyDataSetChanged")
-    fun searchFilter(){
+    fun searchFilter() {
         binding.apply {
-        val emptyMap = mutableMapOf<String, String>()
-        var count = 0
 
-        var categoryIds : String = ""
-        var countFrom1 = 0
-        var countFrom2 = 0
-        var mainCategoryBoolean = false
+//            if (viewModel.searchAdapter != null) {
+//                if (page > viewModel.searchAdapter.getItemCount()) {
+//                    idPBLoading.visibility = View.GONE
+//                    return
+//                }
+//            }
 
+            val emptyMap = mutableMapOf<String, String>()
+            var count = 0
 
-        if(viewModel.searchType == 1){
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "name"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "%"+topBarSearch.editTextSearch.text.toString()+"%"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] = "like"
-
-            countFrom1 = 1
-            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] = "visibility"
-            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] = "4"
-            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] = "eq"
-
-        } else if(viewModel.searchType == 2){
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] = "sku"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = ""+topBarSearch.editTextSearch.text.toString()
-        }
+            var categoryIds: String = ""
+            var countFrom1 = 0
+            var countFrom2 = 0
+            var mainCategoryBoolean = false
 
 
+            if (viewModel.searchType == 1) {
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
+                    "name"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
+                    "%" + topBarSearch.editTextSearch.text.toString() + "%"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
+                    "like"
+
+                countFrom1 = 1
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
+                    "visibility"
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
+                    "4"
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] =
+                    "eq"
+
+            } else if (viewModel.searchType == 2) {
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
+                    "sku"
+                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
+                    "" + topBarSearch.editTextSearch.text.toString()
+            }
+
+            emptyMap["searchCriteria[currentPage]"] = "" + page
+            emptyMap["searchCriteria[pageSize]"] = "10"
+
+            idPBLoading.visibility = View.VISIBLE
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
-                    Log.e("TAG", "itAAA " + this)
-
-                    viewModel.searchAdapter.submitList(this.items)
-                    viewModel.searchAdapter.notifyDataSetChanged()
-
-                    rvListSearchHistory.visibility = View.GONE
-                    rvList2.visibility = View.VISIBLE
-
-                    viewModel.isListVisible = true
-
-                    if(this.items.size == 0){
-                        binding.idDataNotFound.root.visibility = View.VISIBLE
-                    }else{
-                        binding.idDataNotFound.root.visibility = View.GONE
-                    }
-                }
+                viewModel.getProducts(token.toString(), requireView(), emptyMap)
+//                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
+//                    Log.e("TAG", "itAAA " + this)
+//
+//                    viewModel.searchAdapter.submitList(this.items)
+//                    viewModel.searchAdapter.notifyDataSetChanged()
+//
+//                    rvListSearchHistory.visibility = View.GONE
+//                    rvList2.visibility = View.VISIBLE
+//
+//                    viewModel.isListVisible = true
+//
+//                    if(this.items.size == 0){
+//                        binding.idDataNotFound.root.visibility = View.VISIBLE
+//                    }else{
+//                        binding.idDataNotFound.root.visibility = View.GONE
+//                    }
+//                }
             }
         }
-
-
     }
-
-
 
 
     @SuppressLint("NotifyDataSetChanged")
     private fun openDialog() {
-        val dialogBinding = DialogSearchHistoryBinding.inflate(requireContext().getSystemService(
-            Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val dialogBinding = DialogSearchHistoryBinding.inflate(
+            requireContext().getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE
+            ) as LayoutInflater
         )
         val dialog = Dialog(requireContext())
         dialog.setContentView(dialogBinding.root)
@@ -311,7 +402,6 @@ class Search : Fragment() {
 //        viewModel.searchHistoryAdapter.submitList(viewModel.item1)
 
     }
-
 
 
 }

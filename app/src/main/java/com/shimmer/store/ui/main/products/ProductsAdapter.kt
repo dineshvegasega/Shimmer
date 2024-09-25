@@ -111,13 +111,6 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
 
-//            Glide.with(itemRowBinding.root.context)
-//                .load(IMAGE_URL+model.media_gallery_entries[0].file)
-////                .transition(withCrossFade(factory))
-//                .apply(RequestOptions().placeholder(R.drawable.no_image))
-//                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
-//                .into(itemRowBinding.ivIcon)
-
             itemRowBinding.ivIcon.setOnClickListener {
 //                it.findNavController().navigate(R.id.action_products_to_productsDetail, Bundle().apply {
 //                    putParcelable("model", model)
@@ -185,10 +178,6 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     notifyItemChanged(position)
                 }
             }
-
-
-
-
 
 
             itemRowBinding.btAddCart.setOnClickListener {

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,137 +11,146 @@
         layout="@layout/top_bar_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/searchLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar_search"
-        android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
-        android:visibility="visible"
         android:gravity="center_vertical"
-        >
-
-
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_search">
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btProduct"
             style="@style/PrimaryButtonBlue"
-            app:backgroundTint="@color/_9F0625"
-            app:rippleColor="@color/_868686"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_weight="1"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingVertical="@dimen/_7sdp"
-            android:textColor="@color/white"
-            android:text="@string/search_by_product"
-            android:textSize="@dimen/_9sdp"
-            app:cornerRadius="@dimen/_4sdp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            />
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_7sdp"
+            android:text="@string/search_by_product"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_9sdp"
+            app:backgroundTint="@color/_9F0625"
+            app:cornerRadius="@dimen/_4sdp"
+            app:rippleColor="@color/_868686" />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btSKU"
             style="@style/PrimaryButtonBlue"
-            app:backgroundTint="@color/white"
-            app:rippleColor="@color/_868686"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1"
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_weight="1"
-            android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingVertical="@dimen/_7sdp"
-            android:textColor="@color/black"
-            app:strokeColor="@color/black"
-            android:text="@string/search_by_sku"
-            android:textSize="@dimen/_9sdp"
-            app:cornerRadius="@dimen/_4sdp"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            />
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_7sdp"
+            android:text="@string/search_by_sku"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_9sdp"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="@dimen/_4sdp"
+            app:rippleColor="@color/_868686"
+            app:strokeColor="@color/black" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivSearch"
             android:layout_width="@dimen/_35sdp"
             android:layout_height="@dimen/_35sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@drawable/search_border"
-            android:scaleType="centerInside"
-            android:layout_marginEnd="@dimen/_15sdp"
             app:rippleColor="@color/black"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            />
+            app:srcCompat="@drawable/search_border" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList2"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/idNestedSV"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
-        tools:itemCount="10"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_search"
-        android:paddingHorizontal="@dimen/_6sdp"
-        android:paddingVertical="@dimen/_5sdp"
-        app:layout_constraintTop_toBottomOf="@+id/searchLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+        tools:context=".MainActivity">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_6sdp"
+                android:paddingVertical="@dimen/_5sdp"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="10"
+                tools:listitem="@layout/item_search" />
+
+            <ProgressBar
+                android:id="@+id/idPBLoading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListSearchHistory"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:background="@color/white"
         android:nestedScrollingEnabled="false"
-        tools:itemCount="10"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_search_history"
+        android:orientation="vertical"
         android:paddingHorizontal="@dimen/_6sdp"
         android:paddingVertical="@dimen/_5sdp"
-        app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"
-        android:background="@color/white"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+        tools:itemCount="10"
+        tools:listitem="@layout/item_search_history" />
 
-    <include layout="@layout/data_not_found"
+    <include
         android:id="@+id/id_data_not_found"
+        layout="@layout/data_not_found"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:visibility="gone"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
