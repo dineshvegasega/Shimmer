@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.shimmer.store.R
 import com.shimmer.store.databinding.FiltersBinding
 import com.shimmer.store.datastore.DataStoreKeys.FILTER_PRICE
 import com.shimmer.store.datastore.DataStoreKeys.FILTER_CATEGORY
@@ -21,6 +22,8 @@ import com.shimmer.store.datastore.DataStoreKeys.FILTER_GENDER
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.models.Items
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isFilterLoad
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -40,7 +43,7 @@ class Filters : Fragment() {
     private val binding get() = _binding!!
 
 
-    companion object{
+    companion object {
 //        var headerAdapter : GenericAdapter<ItemFilterCategoryBinding, Items>? = null
     }
 
@@ -99,7 +102,7 @@ class Filters : Fragment() {
                     mainShopFor.addAll(changeValue)
                 }
 
-
+                isFilterLoad = false
                 findNavController().navigateUp()
             }
 
@@ -111,7 +114,7 @@ class Filters : Fragment() {
 
                 mainCategory.forEach {
                     it.isSelected = false
-                    if(it.isSelected == false){
+                    if (it.isSelected == false) {
                         it.subCategory.forEach { sub ->
                             sub.isSelected = false
                         }
@@ -131,22 +134,25 @@ class Filters : Fragment() {
                 viewModel.itemMaterialCount.value = 0
                 viewModel.itemShopForCount.value = 0
 
-                when(defaultRun){
+                when (defaultRun) {
                     1 -> {
                         rvList2.adapter = viewModel.priceAdapter
                         viewModel.priceAdapter.notifyDataSetChanged()
                         viewModel.priceAdapter.submitList(mainPrice)
                     }
+
                     2 -> {
                         rvList2.adapter = viewModel.categoryAdapter
                         viewModel.categoryAdapter.notifyDataSetChanged()
                         viewModel.categoryAdapter.submitList(mainCategory)
                     }
+
                     3 -> {
                         rvList2.adapter = viewModel.materialAdapter
                         viewModel.materialAdapter.notifyDataSetChanged()
                         viewModel.materialAdapter.submitList(mainMaterial)
                     }
+
                     4 -> {
                         rvList2.adapter = viewModel.shopForAdapter
                         viewModel.shopForAdapter.notifyDataSetChanged()
@@ -156,10 +162,9 @@ class Filters : Fragment() {
             }
 
             layoutApply.singleClick {
-//                isFilterFromFrom = false
-                findNavController().navigateUp()
+                isFilterLoad = true
+                findNavController().navigate(R.id.action_filters_to_products)
             }
-
 
 
             val filteredPrice = mainPrice.filter { it.isSelected == true }
@@ -175,38 +180,37 @@ class Filters : Fragment() {
             viewModel.itemMaterialCount.value = filteredMaterial.size
 
 
-
             val filteredShopFor = mainShopFor.filter { it.isSelected == true }
             viewModel.itemShopForCount.value = filteredShopFor.size
 
 
 
             viewModel.itemPriceCount.observe(viewLifecycleOwner) {
-                textPrice.text = if(it == 0) "Price" else "Price ($it)"
+                textPrice.text = if (it == 0) "Price" else "Price ($it)"
             }
 
             viewModel.itemCategoryCount.observe(viewLifecycleOwner) {
                 var count = 0
                 mainCategory.forEach {
                     it.subCategory.forEach { sub ->
-                        if(sub.isSelected && sub.isAll == false){
-                            Log.e("TAG" , "it.isSelected ${sub.isSelected}")
+                        if (sub.isSelected && sub.isAll == false) {
+                            Log.e("TAG", "it.isSelected ${sub.isSelected}")
                             count += 1
                         }
                     }
                 }
 
 
-                Log.e("TAG" , "count ${count}")
-                textCategories.text = if(count == 0) "Categories" else "Categories ($count)"
+                Log.e("TAG", "count ${count}")
+                textCategories.text = if (count == 0) "Categories" else "Categories ($count)"
             }
 
             viewModel.itemMaterialCount.observe(viewLifecycleOwner) {
-                textMaterial.text = if(it == 0) "Material" else "Material ($it)"
+                textMaterial.text = if (it == 0) "Material" else "Material ($it)"
             }
 
             viewModel.itemShopForCount.observe(viewLifecycleOwner) {
-                textShopFor.text = if(it == 0) "Shop For" else "Shop For ($it)"
+                textShopFor.text = if (it == 0) "Shop For" else "Shop For ($it)"
             }
 
             textPrice.singleClick {
@@ -302,4 +306,10 @@ class Filters : Fragment() {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        itemsProduct.clear()
+//        page = 1
+//        isProductLoad = true
+    }
 }

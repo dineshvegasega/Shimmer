@@ -170,8 +170,10 @@ interface ApiInterface {
         @Query("franchise") franchise: String,
         @Query("customermobile") customermobile: String,
         @Query("customername") customername: String,
-        @Query("ordernumber") ordernumber: String = ""
-    ): Response<ItemGuestOrderList>
+        @Query("ordernumber") ordernumber: String = "",
+        @Query("pagenumber") pagenumber: Int,
+        @Query("pagesize") pagesize: Int = 10,
+        ): Response<ItemGuestOrderList>
 
 
     @POST(UPDATE_STATUS)
@@ -208,7 +210,9 @@ interface ApiInterface {
     suspend fun orderHistoryList(
         @Query("franchise") franchise: String,
         @Query("customermobile") customermobile: String,
-        @Query("customername") customername: String
+        @Query("customername") customername: String,
+        @Query("pagenumber") pagenumber: Int,
+        @Query("pagesize") pagesize: Int = 10,
     ): Response<ItemOrders>
 
 

@@ -31,6 +31,7 @@ import com.shimmer.store.models.myOrdersList.ItemOrders
 import com.shimmer.store.models.myOrdersList.ItemOrdersItem
 import com.shimmer.store.models.orderHistory.Item
 import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
+import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
@@ -50,6 +51,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrdersVM @Inject constructor(private val repository: Repository) : ViewModel() {
+
+    val itemsCustomerOrders: ArrayList<ItemGuestOrderListItem> = ArrayList()
+
+    val itemsOrderHistory: ArrayList<ItemOrdersItem> = ArrayList()
+
+
 
     var ordersTypesArray: ArrayList<Items> = ArrayList()
 
@@ -284,12 +291,12 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
     private var itemCustomerOrdersResult = MutableLiveData<ItemGuestOrderList>()
     val itemLiveCustomerOrders : LiveData<ItemGuestOrderList> get() = itemCustomerOrdersResult
-    fun guestOrderList(franchiseId: String, mobile : String, name : String) =
+    fun guestOrderList(franchiseId: String, mobile : String, name : String, pageNumber: Int) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.guestOrderList(franchiseId, mobile, name, "")
+                        apiInterface.guestOrderList(franchiseId, mobile, name, "", pageNumber)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemGuestOrderList>) {
                         if (response.isSuccessful) {
@@ -324,12 +331,12 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 
     private var itemOrderHistoryResult = MutableLiveData<ItemOrders>()
     val itemLiveOrderHistory : LiveData<ItemOrders> get() = itemOrderHistoryResult
-    fun orderHistoryList(franchiseId: String, mobile : String, name : String) =
+    fun orderHistoryList(franchiseId: String, mobile : String, name : String, pageNumber : Int) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemOrders>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.orderHistoryList(franchiseId, mobile, name)
+                        apiInterface.orderHistoryList(franchiseId, mobile, name, pageNumber)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemOrders>) {
                         if (response.isSuccessful) {

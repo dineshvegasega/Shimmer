@@ -154,7 +154,6 @@ class Search : Fragment() {
             }
 
 
-            // adding on scroll change listener method for our nested scroll view.
             idNestedSV.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
                 // on scroll change we are checking when users scroll as bottom.
                 val aa = v.getChildAt(0).measuredHeight - v.measuredHeight

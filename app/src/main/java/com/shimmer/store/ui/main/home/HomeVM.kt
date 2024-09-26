@@ -107,6 +107,7 @@ class HomeVM @Inject constructor(private val repository: Repository) : ViewModel
 //                        it.isChildSelect = false
                     }
 
+
                     it.findNavController().navigate(R.id.action_home_to_products)
                 }
             }

@@ -26,6 +26,7 @@ import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.main.category.CategoryChildTab.Companion.mainSelect
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
@@ -236,7 +237,7 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
 
 
@@ -324,7 +325,7 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
 
 
@@ -412,7 +413,7 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
 
 
@@ -500,10 +501,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }
@@ -588,7 +587,7 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
 
 
@@ -676,10 +675,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }
@@ -764,10 +761,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
 //                        it.isChildSelect = false
                     }
 
-
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }
@@ -853,9 +848,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
                     }
 
 
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }
@@ -941,9 +935,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
                     }
 
 
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }
@@ -1029,9 +1022,8 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
                     }
 
 
+                    isProductLoad = true
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }

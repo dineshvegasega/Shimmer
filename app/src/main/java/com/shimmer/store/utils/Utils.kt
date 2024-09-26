@@ -48,6 +48,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.navigation.NavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.viewpager.widget.ViewPager
@@ -1155,6 +1156,20 @@ fun Activity.showOptions(callBack: Int.() -> Unit) = try {
 } catch (e: Exception) {
     e.printStackTrace()
 }
+
+
+
+fun RecyclerView.isLastItemDisplaying(): Boolean {
+    if (this.adapter!!.itemCount != 0) {
+        val lastVisibleItemPosition =
+            (this.layoutManager as LinearLayoutManager?)!!.findLastCompletelyVisibleItemPosition()
+        if (lastVisibleItemPosition != RecyclerView.NO_POSITION && lastVisibleItemPosition == this.adapter!!
+                .itemCount - 1
+        ) return true
+    }
+    return false
+}
+
 
 
 //fun getLocationFromAddress11(context: Context?, strAddress: String?): Location? {

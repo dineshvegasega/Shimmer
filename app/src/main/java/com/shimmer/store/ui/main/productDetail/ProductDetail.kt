@@ -38,6 +38,7 @@ import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.models.products.Value
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.interfaces.CallBackListener
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -1510,4 +1511,11 @@ class ProductDetail : Fragment(), CallBackListener {
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isProductLoad = false
+    }
+
 }
+
+

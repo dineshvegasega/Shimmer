@@ -18,6 +18,7 @@ import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.ui.enums.LoginType
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -210,5 +211,13 @@ class Home : Fragment() {
 
     }
 
+    override fun onStop() {
+        super.onStop()
+        isProductLoad = true
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        isProductLoad = false
+    }
 }

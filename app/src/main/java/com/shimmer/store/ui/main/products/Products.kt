@@ -20,6 +20,8 @@ import com.shimmer.store.databinding.ProductsBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.products.ItemProduct
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isFilterLoad
+import com.shimmer.store.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
@@ -45,11 +47,8 @@ class Products : Fragment() {
 
     var page: Int = 1
 
-//    companion object {
-//        @JvmStatic
-//        lateinit var adapter2: ProductsAdapter
-//    }
 
+    lateinit var adapter2: ProductsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,13 +62,13 @@ class Products : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("TAG", "onViewCreatedQQ")
         isBackStack = true
         hideValueOff = 1
         MainActivity.mainActivity.get()!!.callBack(2)
         MainActivity.mainActivity.get()!!.callCartApi()
 
-//        viewModel.searchAdapter = ProductsAdapter()
-//        binding.rvList2.adapter = viewModel.searchAdapter
+
 
         binding.apply {
             topBarProducts.includeBackButton.apply {
@@ -95,8 +94,20 @@ class Products : Fragment() {
             }
 
 
-            rvList2.setHasFixedSize(true)
-            rvList2.adapter = viewModel.productAdapter
+//            rvList2.setHasFixedSize(true)
+            adapter2 = ProductsAdapter()
+            binding.rvList2.adapter = adapter2
+
+
+
+            if (isFilterLoad) {
+                page = 1
+                isProductLoad = true
+                viewModel.itemsProduct.clear()
+            }
+
+            Log.e("TAG", "isFilterLoad " + isFilterLoad)
+            Log.e("TAG", "isProductLoadAA " + isProductLoad)
 
             viewModel.sortFilter = 1
             filters()
@@ -106,48 +117,87 @@ class Products : Fragment() {
 
 
             viewModel.itemProducts?.observe(viewLifecycleOwner) {
-                mainThread {
-                    if (it.items.size != 0) {
-//                        it.items.forEach { itemApi ->
-//                            val bool = getArrayValue(viewModel.itemsProduct, itemApi)
-//                            if (!bool) {
-//                                viewModel.itemsProduct.add(itemApi)
-//                            }
+//                it.items.forEach { itemApi ->
+//                    Log.e("TAG", "it.itemsAAA " + itemApi.id)
+//                    val bool = getArrayValue(itemsProduct, itemApi)
+//                    if (!bool) {
+//                        itemsProduct.add(itemApi)
+//                    }
+//                }
+
+//                itemsProduct.forEach { itemsProduct ->
+//                    Log.e("TAG", "it.itemsBBB " + itemsProduct.id)
+//                }
+
+//                mainThread {
+//                    if (it.items.size != 0) {
+////                        it.items.forEach { itemApi ->
+////                            val bool = getArrayValue(viewModel.itemsProduct, itemApi)
+////                            if (!bool) {
+////                                viewModel.itemsProduct.add(itemApi)
+////                            }
+////                        }
+//
+////                        if (viewModel.itemsProduct.size == 0) {
+//                        it.items.forEach {
+//                            viewModel.itemsProduct.add(it)
 //                        }
+//
+////                        viewModel.itemsProduct.addAll(it.items)
+////                        } else {
+////                            it.items.forEach { itemApi ->
+////                                viewModel.itemsProduct.forEach { itemArray ->
+////                                    if (itemApi.id != itemArray.id) {
+////                                        viewModel.itemsProduct.add(itemApi)
+////                                    }
+////                                }
+////                            }
+////                        }
+//                        Log.e("TAG", "it.itemsAAA " + it.items.size)
+//                    } else {
+//                        idPBLoading.visibility = View.GONE
+//                        Log.e("TAG", "it.itemsBBB " + it.items.size)
+//                    }
+//
+//                    viewModel.productAdapter.submitList(viewModel.itemsProduct)
+//                    viewModel.productAdapter.notifyDataSetChanged()
+//
+//
+//                    Log.e("TAG", "it.itemsCCC " + it.items.size)
+//
+//                    if (viewModel.itemsProduct.size == 0) {
+//                        binding.idDataNotFound.root.visibility = View.VISIBLE
+//                    } else {
+//                        binding.idDataNotFound.root.visibility = View.GONE
+//                    }
+//                }
 
-//                        if (viewModel.itemsProduct.size == 0) {
-                        it.items.forEach {
-                            viewModel.itemsProduct.add(it)
-                        }
-
-//                        viewModel.itemsProduct.addAll(it.items)
-//                        } else {
-//                            it.items.forEach { itemApi ->
-//                                viewModel.itemsProduct.forEach { itemArray ->
-//                                    if (itemApi.id != itemArray.id) {
-//                                        viewModel.itemsProduct.add(itemApi)
-//                                    }
-//                                }
-//                            }
-//                        }
-                        Log.e("TAG", "it.itemsAAA " + it.items.size)
-                    } else {
-                        idPBLoading.visibility = View.GONE
-                        Log.e("TAG", "it.itemsBBB " + it.items.size)
-                    }
-
-                    viewModel.productAdapter.submitList(viewModel.itemsProduct)
-                    viewModel.productAdapter.notifyDataSetChanged()
-
-
-                    Log.e("TAG", "it.itemsCCC " + it.items.size)
-
-                    if (viewModel.itemsProduct.size == 0) {
-                        binding.idDataNotFound.root.visibility = View.VISIBLE
-                    } else {
-                        binding.idDataNotFound.root.visibility = View.GONE
-                    }
+//                itemsProduct.addAll(it.items)
+                if (it.items.size != 0) {
+//                    idPBLoading.visibility = View.VISIBLE
+                } else {
+                    idPBLoading.visibility = View.GONE
                 }
+
+
+                if (viewModel.itemsProduct.size == 0) {
+                    binding.idDataNotFound.root.visibility = View.VISIBLE
+                } else {
+                    binding.idDataNotFound.root.visibility = View.GONE
+                }
+
+                Log.e("TAG", "isProductLoad " + isProductLoad)
+                if (isProductLoad) {
+                    viewModel.itemsProduct.addAll(it.items)
+                    isProductLoad = false
+                }
+
+
+
+                adapter2.submitData(viewModel.itemsProduct)
+                adapter2.notifyDataSetChanged()
+
+
             }
 
 
@@ -163,6 +213,7 @@ class Products : Fragment() {
                     idPBLoading.visibility = View.VISIBLE
 //
 //                    getDataFromAPI(page)
+                    isProductLoad = true
                     filters()
                 }
             })
@@ -251,6 +302,7 @@ class Products : Fragment() {
                         textDefaultSort.setTypeface(typefacenunitosans_light)
                         textPriceLowToHighSort.setTypeface(typefacenunitosans_light)
                         textPriceHighToLowSort.setTypeface(typefacenunitosans_light)
+                        isProductLoad = true
                         page = 1
                         viewModel.itemsProduct.clear()
                         viewModel.sortFilter = 0
@@ -259,14 +311,13 @@ class Products : Fragment() {
                     }
 
                     layoutApply.singleClick {
+                        isProductLoad = true
                         page = 1
                         viewModel.itemsProduct.clear()
                         filters()
                         dialog.dismiss()
                     }
-
                 }
-
             }
 
             layoutFilter.singleClick {
@@ -281,10 +332,13 @@ class Products : Fragment() {
         }
     }
 
-    private fun getArrayValue(itemProductArray: ArrayList<ItemProduct>, itemApi: ItemProduct): Boolean {
+    private fun getArrayValue(
+        itemProductArray: ArrayList<ItemProduct>,
+        itemApi: ItemProduct
+    ): Boolean {
 
         itemProductArray.forEach {
-            if(it.id == itemApi.id){
+            if (it.id == itemApi.id) {
                 return true
             } else {
                 return false
@@ -517,6 +571,7 @@ class Products : Fragment() {
             emptyMap["searchCriteria[currentPage]"] = "" + page
             emptyMap["searchCriteria[pageSize]"] = "10"
 
+
             readData(ADMIN_TOKEN) { token ->
                 viewModel.getProducts(token.toString(), requireView(), emptyMap)
 //                {
@@ -573,10 +628,13 @@ class Products : Fragment() {
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-//        MainActivity.mainActivity.get()!!.callBack(true)
+    override fun onStart() {
+        super.onStart()
+//        if (isFilterLoad){
+//            page = 1
+//            isProductLoad = true
+//            viewModel.itemsProduct.clear()
+//        }
     }
 
 }

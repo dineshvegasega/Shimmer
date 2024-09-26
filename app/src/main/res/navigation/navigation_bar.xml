@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_bar"
-    app:startDestination="@id/splash"
+    app:startDestination="@id/orders"
     >
 
     <fragment
@@ -485,6 +485,13 @@
         android:label="Filters"
         android:id="@+id/filters"
         tools:layout="@layout/filters">
+        <action
+            android:id="@+id/action_filters_to_products"
+            app:destination="@id/products"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/filters"
+            app:popUpToInclusive="true" />
+
     </fragment>
 
     <fragment

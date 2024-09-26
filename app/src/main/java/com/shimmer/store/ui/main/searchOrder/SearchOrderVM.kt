@@ -165,7 +165,7 @@ class SearchOrderVM @Inject constructor(private val repository: Repository) : Vi
             repository.callApi(
                 callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.guestOrderList("", "", "", orderId)
+                        apiInterface.guestOrderList("", "", "", orderId , 1)
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<ItemGuestOrderList>) {
                         if (response.isSuccessful) {
