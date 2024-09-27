@@ -92,7 +92,7 @@ class RelatedProductAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val model = obj as Items
 
             itemRowBinding.ivIcon.setOnClickListener {
-                it.findNavController().navigate(R.id.action_productDetail_to_productsDetail)
+                it.findNavController().navigate(R.id.action_productDetail_to_productDetail)
             }
 
             itemRowBinding.ivAddCart.imageTintList = if(model.isSelected == true) ContextCompat.getColorStateList(itemRowBinding.root.context,

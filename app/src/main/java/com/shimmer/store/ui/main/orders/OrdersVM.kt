@@ -6,7 +6,6 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
-import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCustomerOrderBinding
 import com.shimmer.store.databinding.ItemOrderHistoryBinding
@@ -29,10 +26,6 @@ import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
 import com.shimmer.store.models.myOrdersList.ItemOrders
 import com.shimmer.store.models.myOrdersList.ItemOrdersItem
-import com.shimmer.store.models.orderHistory.Item
-import com.shimmer.store.models.orderHistory.ItemOrderHistoryModel
-import com.shimmer.store.models.products.ItemProduct
-import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -40,7 +33,6 @@ import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.utils.changeDateFormat
 import com.shimmer.store.utils.getPatternFormat
-import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
@@ -86,7 +78,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
         val alert = AlertDialog.Builder(MainActivity.activity.get())
         val binding =
             LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
-        alert.setView(binding.root)
+        alert.setView(binding.root.rootView)
         alert.setCancelable(false)
         alertDialog = alert.create()
         alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -293,14 +285,15 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
     val itemLiveCustomerOrders : LiveData<ItemGuestOrderList> get() = itemCustomerOrdersResult
     fun guestOrderList(franchiseId: String, mobile : String, name : String, pageNumber: Int) =
         viewModelScope.launch {
-            repository.callApi(
-                callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.guestOrderList(franchiseId, mobile, name, "", pageNumber)
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<ItemGuestOrderList>) {
-                        if (response.isSuccessful) {
-                            itemCustomerOrdersResult.value = response.body()!!
+            if(pageNumber == 0 || pageNumber == 1){
+                repository.callApi(
+                    callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.guestOrderList(franchiseId, mobile, name, "", pageNumber)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<ItemGuestOrderList>) {
+                            if (response.isSuccessful) {
+                                itemCustomerOrdersResult.value = response.body()!!
 //                            try {
 //                                Log.e("TAG", "successAA: ${response.body().toString()}")
 ////                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
@@ -309,22 +302,57 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
 //
 //                            } catch (e: Exception) {
 //                            }
+                            }
+                        }
+
+                        override fun error(message: String) {
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
                         }
                     }
+                )
+            } else {
+                repository.callApiWithoutLoader(
+                    callHandler = object : CallHandler<Response<ItemGuestOrderList>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.guestOrderList(franchiseId, mobile, name, "", pageNumber)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<ItemGuestOrderList>) {
+                            if (response.isSuccessful) {
+                                itemCustomerOrdersResult.value = response.body()!!
+//                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+////                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+////                                callBack(response.body()!!.toString().toString().replace("\\", ""))
+//                                callBack(response.body()!!)
+//
+//                            } catch (e: Exception) {
+//                            }
+                            }
+                        }
 
-                    override fun error(message: String) {
-                        if (message.contains("authorized")) {
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
+                        override fun error(message: String) {
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
                         }
                     }
+                )
+            }
 
-                    override fun loading() {
-                        super.loading()
-                    }
-                }
-            )
         }
 
 
@@ -333,35 +361,68 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
     val itemLiveOrderHistory : LiveData<ItemOrders> get() = itemOrderHistoryResult
     fun orderHistoryList(franchiseId: String, mobile : String, name : String, pageNumber : Int) =
         viewModelScope.launch {
-            repository.callApi(
-                callHandler = object : CallHandler<Response<ItemOrders>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.orderHistoryList(franchiseId, mobile, name, pageNumber)
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<ItemOrders>) {
-                        if (response.isSuccessful) {
-                            itemOrderHistoryResult.value = response.body()!!
+            if(pageNumber == 0 || pageNumber == 1){
+                repository.callApi(
+                    callHandler = object : CallHandler<Response<ItemOrders>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.orderHistoryList(franchiseId, mobile, name, pageNumber)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<ItemOrders>) {
+                            if (response.isSuccessful) {
+                                itemOrderHistoryResult.value = response.body()!!
 //                            try {
 //                                Log.e("TAG", "successAA: ${response.body().toString()}")
 //                                callBack(response.body()!!)
 //                            } catch (e: Exception) {
 //                            }
+                            }
+                        }
+
+                        override fun error(message: String) {
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
                         }
                     }
+                )
+            } else {
+                repository.callApiWithoutLoader(
+                    callHandler = object : CallHandler<Response<ItemOrders>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.orderHistoryList(franchiseId, mobile, name, pageNumber)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<ItemOrders>) {
+                            if (response.isSuccessful) {
+                                itemOrderHistoryResult.value = response.body()!!
+//                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                callBack(response.body()!!)
+//                            } catch (e: Exception) {
+//                            }
+                            }
+                        }
 
-                    override fun error(message: String) {
-                        if (message.contains("authorized")) {
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
+                        override fun error(message: String) {
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
                         }
                     }
+                )
+            }
 
-                    override fun loading() {
-                        super.loading()
-                    }
-                }
-            )
         }
 
 

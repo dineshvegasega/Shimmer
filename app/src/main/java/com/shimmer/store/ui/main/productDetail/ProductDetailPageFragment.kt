@@ -21,10 +21,8 @@ import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
 import com.shimmer.store.databinding.FragmentExoPlayerBinding
-import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.networking.IMAGE_URL
-import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint

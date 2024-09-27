@@ -3,7 +3,6 @@ package com.shimmer.store.di
 
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.PACKAGE_NAME
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.SIGNATURE_NAME
-import com.shimmer.store.ui.onBoarding.login.LoginVM.Companion.storeToken
 import okhttp3.Interceptor
 
 

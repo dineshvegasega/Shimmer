@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_bar"
-    app:startDestination="@id/orders"
+    app:startDestination="@id/splash"
     >
 
     <fragment
@@ -467,7 +467,7 @@
             />
 
         <action
-            android:id="@+id/action_productDetail_to_productsDetail"
+            android:id="@+id/action_productDetail_to_productDetail"
             app:destination="@id/productDetail"
             app:launchSingleTop="false"
             />
@@ -477,7 +477,6 @@
             app:destination="@id/productZoom"
             app:launchSingleTop="true"
             />
-
     </fragment>
 
     <fragment

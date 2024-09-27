@@ -227,11 +227,11 @@ class Repository @Inject constructor(
     /**
      * Show Loader
      * */
-    private fun Context.showLoader() {
+    public fun Context.showLoader() {
         if (alertDialog == null) {
             val alert = AlertDialog.Builder(this)
             val binding = LoaderBinding.inflate(LayoutInflater.from(this), null, false)
-            alert.setView(binding.root)
+            alert.setView(binding.root.rootView)
             alert.setCancelable(false)
             alertDialog = alert.create()
             alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -245,7 +245,7 @@ class Repository @Inject constructor(
         if (alertDialog == null) {
             val alert = AlertDialog.Builder(MainActivity.activity.get())
             val binding = LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
-            alert.setView(binding.root)
+            alert.setView(binding.root.rootView)
             alert.setCancelable(false)
             alertDialog = alert.create()
             alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

@@ -58,9 +58,55 @@ class ForgotPassword : Fragment() {
             }
 
             btResetPassword.singleClick {
-                findNavController().navigate(R.id.action_forgotPassword_to_resetPassword, Bundle().apply {
-                    putString("mobileNumber", editTextMobileNumber.text.toString())
-                })
+                Log.e("TAG", "count: $this")
+                val adminJSON: JSONObject = JSONObject().apply {
+                    put("username", username)
+                    put("password", password)
+                }
+                if (editTextMobileNumber.text.toString().isEmpty()) {
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editTextMobileNumber.text.toString().length != 10) {
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editTextOtp.text.toString().isEmpty()) {
+                    showSnackBar(getString(R.string.EnterValidOTP))
+                }  else {
+                    viewModel.adminToken(adminJSON) {
+                        val adminToken = this
+                        saveData(ADMIN_TOKEN, adminToken)
+                        Log.e("TAG", "ADMIN_TOKENAAAA: " + adminToken)
+                        readData(ADMIN_TOKEN) {
+                            val customerJSON: JSONObject = JSONObject().apply {
+                                put("emailmobile", editTextMobileNumber.text.toString())
+                            }
+                            viewModel.websiteUrl(it.toString(), customerJSON) {
+                                Log.e("TAG", "itAAA " + this)
+                                val website_id = JSONObject(this).getString("website_id")
+                                saveData(WEBSITE_ID, website_id)
+                                storeWebUrl = website_id
+                                Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+
+                                val sendOtpJSON: JSONObject = JSONObject().apply {
+                                    put("mobilenumber", editTextMobileNumber.text.toString())
+                                    put("otptype", "forgot")
+                                    put("otpcode", editTextOtp.text.toString())
+                                    put("oldmobile", "")
+                                }
+                                viewModel.verifyOTP(it.toString(), sendOtpJSON) {
+                                    Log.e("TAG", "itAAA " + this)
+//                                    val website_id = JSONObject(this).getString("website_id")
+//                                    saveData(WEBSITE_ID, website_id)
+//                                    storeWebUrl = website_id
+//                                    Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+                                    findNavController().navigate(
+                                        R.id.action_forgotPassword_to_resetPassword,
+                                        Bundle().apply {
+                                            putString("mobileNumber", editTextMobileNumber.text.toString())
+                                        })
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
 
@@ -70,17 +116,32 @@ class ForgotPassword : Fragment() {
                 override fun afterTextChanged(s: Editable?) {
                 }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
 
                 @SuppressLint("SuspiciousIndentation")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (editTextMobileNumber.text.toString().length == 10){
+                    if (editTextMobileNumber.text.toString().length == 10) {
                         textTitleRequestOTP.isEnabled = true
-                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._E2B476))
+                        textTitleRequestOTP.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color._E2B476
+                            )
+                        )
                     } else {
                         textTitleRequestOTP.isEnabled = false
-                        textTitleRequestOTP.setTextColor(ContextCompat.getColor(binding.root.context, R.color._C08D54))
+                        textTitleRequestOTP.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color._C08D54
+                            )
+                        )
                     }
                 }
             })
@@ -92,9 +153,9 @@ class ForgotPassword : Fragment() {
                     put("username", username)
                     put("password", password)
                 }
-                if (editTextMobileNumber.text.toString().isEmpty()){
+                if (editTextMobileNumber.text.toString().isEmpty()) {
                     showSnackBar(getString(R.string.EnterValidMobileNumber))
-                } else if (editTextMobileNumber.text.toString().length != 10){
+                } else if (editTextMobileNumber.text.toString().length != 10) {
                     showSnackBar(getString(R.string.EnterValidMobileNumber))
                 } else {
                     viewModel.adminToken(adminJSON) {
@@ -104,7 +165,6 @@ class ForgotPassword : Fragment() {
                         readData(ADMIN_TOKEN) {
                             val customerJSON: JSONObject = JSONObject().apply {
                                 put("emailmobile", editTextMobileNumber.text.toString())
-                                put("mobpassword", editTextPassword.text.toString())
                             }
                             viewModel.websiteUrl(it.toString(), customerJSON) {
                                 Log.e("TAG", "itAAA " + this)
@@ -113,33 +173,45 @@ class ForgotPassword : Fragment() {
                                 storeWebUrl = website_id
                                 Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
 
-                                viewModel.sendOTP(it.toString(), customerJSON) {
+                                val sendOtpJSON: JSONObject = JSONObject().apply {
+                                    put("mobilenumber", editTextMobileNumber.text.toString())
+                                    put("otptype", "forgot")
+                                    put("resendotp", "")
+                                    put("oldmobile", "")
+                                }
+                                viewModel.sendOTP(it.toString(), sendOtpJSON) {
                                     Log.e("TAG", "itAAA " + this)
-                                    val website_id = JSONObject(this).getString("website_id")
-                                    saveData(WEBSITE_ID, website_id)
-                                    storeWebUrl = website_id
-                                    Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+//                                    val website_id = JSONObject(this).getString("website_id")
+//                                    saveData(WEBSITE_ID, website_id)
+//                                    storeWebUrl = website_id
+//                                    Log.e("TAG", "websiteUrlAAAA: " + storeWebUrl)
+
+
                                 }
                             }
                         }
                     }
                 }
-
             }
 
 
 
 
-            editTextPassword.addTextChangedListener(object : TextWatcher {
+            editTextOtp.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                 }
 
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
 
                 @SuppressLint("SuspiciousIndentation")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (editTextPassword.text.toString().length == 6){
+                    if (editTextOtp.text.toString().length == 6) {
                         btResetPassword.isEnabled = true
                         btResetPassword.backgroundTintList =
                             ColorStateList.valueOf(

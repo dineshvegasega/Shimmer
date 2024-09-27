@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,11 +11,8 @@ import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.databinding.ItemCheckoutBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
-import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
-import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter

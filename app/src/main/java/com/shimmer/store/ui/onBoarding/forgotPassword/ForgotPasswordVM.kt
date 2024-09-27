@@ -96,22 +96,69 @@ class ForgotPasswordVM @Inject constructor(private val repository: Repository) :
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.websiteUrl(jsonObject.getString("emailmobile"))
+                        apiInterface.sendOTP(storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
 //                                val token = response.body().toString()
 //                                    .substring(1, response.body().toString().length - 1)
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
-                                //val token = response.body().toString().substring(1, response.body().toString().length - 1)
+                                val token = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\" ,"")
+                                val json = JSONObject(token)
+                                if (json.has("status")){
+                                    showSnackBar("Something went wrong!")
+                                    callBack(response.body().toString())
+                                } else {
+                                    val successmsg = json.getString("successmsg")
+                                    showSnackBar(successmsg)
+                                    callBack(response.body().toString())
+                                }
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
 
-//                                storeToken = token
+                    override fun error(message: String) {
+                        showSnackBar(message)
+                    }
 
-                                val json = JSONObject(response.body().toString())
-                                val website_id = json.getString("website_id")
-                                saveData(WEBSITE_ID, website_id)
-                                storeWebUrl = website_id
-                                callBack(response.body().toString())
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+    fun verifyOTP(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.verifyOTP(storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                val token = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\" ,"")
+                                val json = JSONObject(token)
+                                if (json.has("status")){
+                                    val errormsg = json.getString("errormsg")
+                                    showSnackBar(errormsg)
+                                } else {
+                                    if (json.has("success")){
+                                        val success = json.getString("success")
+                                        if (success == "true"){
+                                            val successmsg = json.getString("successmsg")
+                                            showSnackBar(successmsg)
+                                            callBack(response.body().toString())
+                                        } else {
+                                            val errormsg = json.getString("errormsg")
+                                            showSnackBar(errormsg)
+                                        }
+                                    }
+
+                                }
                             } catch (e: Exception) {
                             }
                         }

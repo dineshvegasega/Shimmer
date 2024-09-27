@@ -3,8 +3,6 @@ package com.shimmer.store.ui.main.productZoom
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,13 +18,9 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.media3.ui.AspectRatioFrameLayout
-import com.shimmer.store.databinding.FragmentExoPlayerBinding
 import com.shimmer.store.databinding.ProductZoomPageBinding
 import com.shimmer.store.networking.IMAGE_URL
-import com.shimmer.store.ui.main.productDetail.ProductDetail
-import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glidePhotoView
-import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.UnstableApi
 

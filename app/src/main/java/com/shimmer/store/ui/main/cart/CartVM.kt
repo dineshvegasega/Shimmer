@@ -4,27 +4,30 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemCartBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN
+import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreKeys.QUOTE_ID
+import com.shimmer.store.datastore.DataStoreKeys.WEBSITE_ID
+import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.readData
+import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.products.ItemProduct
-import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.IMAGE_URL
@@ -36,8 +39,6 @@ import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.glideImageChache
 import com.shimmer.store.utils.mainThread
-import com.shimmer.store.utils.myOptionsGlide
-import com.shimmer.store.utils.myOptionsGlideUserChache
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
@@ -249,12 +250,24 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 //                        val jsonCartItem: JSONObject = JSONObject().apply {
 //                            put("cartItem", json)
 //                        }
-                        readData(CUSTOMER_TOKEN) { token ->
-                            deleteCart(token!!, dataClass.item_id) {
-                                notifyItemChanged(position)
-                                cartMutableList.value = true
+
+
+                        MaterialAlertDialogBuilder(root.context, R.style.LogoutDialogTheme)
+                            .setTitle(root.context.getString(R.string.app_name))
+                            .setMessage(root.context.getString(R.string.are_your_sure_want_to_delete))
+                            .setPositiveButton(root.context.getString(R.string.yes)) { dialog, _ ->
+                                dialog.dismiss()
+                                readData(CUSTOMER_TOKEN) { token ->
+                                    deleteCart(token!!, dataClass.item_id) {
+                                        notifyItemChanged(position)
+                                        cartMutableList.value = true
+                                    }
+                                }                            }
+                            .setNegativeButton(root.context.getString(R.string.cancel)) { dialog, _ ->
+                                dialog.dismiss()
                             }
-                        }
+                            .setCancelable(false)
+                            .show()
                     }
                 }
             }
@@ -336,11 +349,21 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                 }
 
                 btDelete.singleClick {
-                    mainThread {
-                        db?.cartDao()?.deleteById(dataClass.product_id!!)
-                        notifyItemChanged(position)
-                        cartMutableList.value = true
-                    }
+                    MaterialAlertDialogBuilder(root.context, R.style.LogoutDialogTheme)
+                        .setTitle(root.context.getString(R.string.app_name))
+                        .setMessage(root.context.getString(R.string.are_your_sure_want_to_delete))
+                        .setPositiveButton(root.context.getString(R.string.yes)) { dialog, _ ->
+                            dialog.dismiss()
+                            mainThread {
+                                db?.cartDao()?.deleteById(dataClass.product_id!!)
+                                notifyItemChanged(position)
+                                cartMutableList.value = true
+                            }                           }
+                        .setNegativeButton(root.context.getString(R.string.cancel)) { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .setCancelable(false)
+                        .show()
                 }
             }
         }

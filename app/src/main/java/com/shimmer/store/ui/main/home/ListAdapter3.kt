@@ -1,15 +1,10 @@
 package com.shimmer.store.ui.main.home
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -22,8 +17,6 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayCategory
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.arrayMaterial
 
 class ListAdapter3() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

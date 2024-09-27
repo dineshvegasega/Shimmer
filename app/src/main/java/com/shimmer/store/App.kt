@@ -1,15 +1,8 @@
 package com.shimmer.store
 
-//import com.google.android.datatransport.runtime.scheduling.SchedulingConfigModule_ConfigFactory.config
-//import com.google.firebase.FirebaseApp
-//import com.google.firebase.remoteconfig.BuildConfig
-//import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-//import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
 import android.app.Application
-import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.shimmer.store.datastore.DataStoreUtil
-//import com.shimmer.store.datastore.DataStoreUtil
 import dagger.hilt.android.HiltAndroidApp
 
 

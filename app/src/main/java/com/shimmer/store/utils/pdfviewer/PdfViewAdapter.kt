@@ -1,26 +1,18 @@
 package com.shimmer.store.utils.pdfviewer
 
 import android.content.Context
-import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.graphics.Rect
-import android.graphics.pdf.PdfRenderer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.LinearInterpolator
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.shimmer.store.databinding.ListItemPdfPageBinding
 import com.shimmer.store.utils.pdfviewer.util.CommonUtils
-import com.shimmer.store.utils.pdfviewer.util.hide
-import com.shimmer.store.utils.pdfviewer.util.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.util.*
 
 /**
  * Created by Rajat on 11,July,2020

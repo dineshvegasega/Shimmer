@@ -1,7 +1,6 @@
 package com.shimmer.store.ui.main.faq
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,14 +10,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemFaqBinding
-import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.models.ItemSizes
 import com.shimmer.store.models.Items
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

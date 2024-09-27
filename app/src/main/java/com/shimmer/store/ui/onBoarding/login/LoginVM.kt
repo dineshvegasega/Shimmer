@@ -42,7 +42,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
         val alert = AlertDialog.Builder(MainActivity.activity.get())
         val binding =
             LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
-        alert.setView(binding.root)
+        alert.setView(binding.root.rootView)
         alert.setCancelable(false)
         alertDialog = alert.create()
         alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

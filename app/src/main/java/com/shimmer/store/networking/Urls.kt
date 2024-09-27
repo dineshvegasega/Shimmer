@@ -15,6 +15,10 @@ const val ADMIN_TOKEN = "V1/integration/admin/token"
 
 const val CUSTOMER_LOGIN_TOKEN = "/V1/mobilelogin/account/login/?"
 
+const val SEND_OTP = "/V1/mobilelogin/otp/send/?"
+
+const val VERIFY_OTP = "/V1/mobilelogin/otp/verify/?"
+
 const val CUSTOMER_DETAIL = "/V1/customers/me"
 
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
@@ -65,11 +69,10 @@ const val ORDER_HISTORY_DETAIL = "V1/vegasega-apis/getorderbyid?"
 
 const val CUSTOM_PRODUCT = "V1/vegasega-customizeproduct/customizeproduct?"
 
-
+const val RELATED_PRODUCTS = "V1/vegasega-apis/relatedproduct"
 
 const val username = "admin"
 const val password = "Admin@1234"
-
 
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderbyid?orderid=6
 

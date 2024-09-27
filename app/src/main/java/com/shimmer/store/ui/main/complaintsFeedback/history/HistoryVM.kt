@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonElement
-import com.shimmer.store.models.BaseResponseDC
+import com.shimmer.store.models.ItemHistory
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -18,6 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HistoryVM @Inject constructor(private val repository: Repository): ViewModel() {
+    var itemModels: MutableList<ItemHistory> = ArrayList()
+
     val adapter by lazy { HistoryAdapter(this) }
 
 

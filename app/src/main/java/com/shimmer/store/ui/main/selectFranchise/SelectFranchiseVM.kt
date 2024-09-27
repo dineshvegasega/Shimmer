@@ -15,14 +15,11 @@ import com.shimmer.store.databinding.ItemSelectFranchiseBinding
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.models.ItemFranchiseArray
-import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.user.ItemUser
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CreateNewBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
@@ -21,14 +20,10 @@ import com.shimmer.store.utils.getCameraPath
 import com.shimmer.store.utils.getMediaFilePathFor
 import com.shimmer.store.utils.showDropDownDialog
 import com.shimmer.store.utils.showOptions
-import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 
 @AndroidEntryPoint

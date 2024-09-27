@@ -1,6 +1,5 @@
 package com.shimmer.store.utils
 
-//import com.stfalcon.imageviewer.StfalconImageViewer
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
@@ -70,7 +69,6 @@ import com.shimmer.store.datastore.DataStoreKeys.STORE_DETAIL
 import com.shimmer.store.datastore.DataStoreUtil.clearDataStore
 import com.shimmer.store.datastore.DataStoreUtil.removeKey
 import com.shimmer.store.models.ItemReturn
-import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
@@ -150,9 +148,9 @@ fun showSnackBar(string: String, type: Int = 1, navController: NavController? = 
             message,
             Snackbar.LENGTH_LONG
         ).apply {
-            setBackgroundTint(ContextCompat.getColor(context, R.color.app_color))
+            setBackgroundTint(ContextCompat.getColor(context, R.color.white))
             animationMode = Snackbar.ANIMATION_MODE_SLIDE
-            setTextColor(ContextCompat.getColor(context, R.color._ffffff))
+            setTextColor(ContextCompat.getColor(context, R.color._2A3740))
             view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).textSize =
                 (MainActivity.scale10 + 1).toFloat()
             view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).maxLines = 5

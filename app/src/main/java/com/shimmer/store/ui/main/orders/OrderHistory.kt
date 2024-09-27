@@ -2,8 +2,6 @@ package com.shimmer.store.ui.main.orders
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,14 +12,11 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.shimmer.store.databinding.CategoryChildTabBinding
 import com.shimmer.store.databinding.OrderHistoryBinding
-import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreKeys.LOGIN_DATA
 import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.user.ItemUserItem
-import com.shimmer.store.ui.main.orderDetail.OrderDetail.Companion.orderDetailLiveB
 import com.shimmer.store.utils.isLastItemDisplaying
 import dagger.hilt.android.AndroidEntryPoint
 import org.jsoup.internal.StringUtil.isNumeric

@@ -2,7 +2,6 @@ package com.shimmer.store.ui.main.thankYou
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.shimmer.store.utils.Utility
-import com.shimmer.store.utils.Utility.Companion.getColoredSpanned
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -133,11 +133,11 @@ class Search : Fragment() {
 
                 if (it.items.size != 0) {
                     viewModel.itemsSearch.addAll(it.items)
-                    idPBLoading.visibility = View.VISIBLE
+//                    idPBLoading.visibility = View.VISIBLE
                 } else {
-                    idPBLoading.visibility = View.GONE
-                }
 
+                }
+                idPBLoading.visibility = View.GONE
                 viewModel.searchAdapter.submitList(viewModel.itemsSearch)
                 viewModel.searchAdapter.notifyDataSetChanged()
 
@@ -349,7 +349,7 @@ class Search : Fragment() {
 
             idPBLoading.visibility = View.VISIBLE
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), requireView(), emptyMap)
+                viewModel.getProducts(token.toString(), requireView(), emptyMap, page)
 //                viewModel.getProducts(token.toString(), requireView(), emptyMap) {
 //                    Log.e("TAG", "itAAA " + this)
 //

@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,13 +14,10 @@ import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemFaqBinding
 import com.shimmer.store.databinding.ItemSearchBinding
 import com.shimmer.store.databinding.ItemSearchHistoryBinding
-import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
 import com.shimmer.store.networking.ApiInterface
@@ -29,13 +25,9 @@ import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.glideImage
-import com.shimmer.store.utils.glideImageChache
-import com.shimmer.store.utils.ioThread
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
@@ -216,43 +208,82 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
     private var itemProductsResult = MutableLiveData<ItemProductRoot>()
     val itemProducts : LiveData<ItemProductRoot> get() = itemProductsResult
-    fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>) =
+    fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>, pageNumber : Int) =
         viewModelScope.launch {
-            repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.productsID("Bearer " +adminToken, emptyMap)
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
-                        if (response.isSuccessful) {
-                            try {
-                                Log.e("TAG", "successAA: ${response.body().toString()}")
-                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
-                                itemProductsResult.value = mMineUserEntity
-                            } catch (e: Exception) {
+            if(pageNumber == 0 || pageNumber == 1){
+                repository.callApi(
+                    callHandler = object : CallHandler<Response<JsonElement>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.productsID("Bearer " +adminToken, emptyMap)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<JsonElement>) {
+                            if (response.isSuccessful) {
+                                try {
+                                    Log.e("TAG", "successAA: ${response.body().toString()}")
+                                    val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+                                    itemProductsResult.value = mMineUserEntity
+                                } catch (e: Exception) {
+                                }
                             }
                         }
-                    }
 
-                    override fun error(message: String) {
+                        override fun error(message: String) {
 //                        Log.e("TAG", "successAA: ${message}")
 //                        super.error(message)
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if(message.contains("fieldName")){
-                            showSnackBar("Something went wrong!")
-                        } else {
-                            sessionExpired()
+                            if(message.contains("fieldName")){
+                                showSnackBar("Something went wrong!")
+                            } else {
+                                sessionExpired()
+                            }
+
                         }
 
+                        override fun loading() {
+                            super.loading()
+                        }
                     }
+                )
+            } else {
+                repository.callApiWithoutLoader(
+                    callHandler = object : CallHandler<Response<JsonElement>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.productsID("Bearer " +adminToken, emptyMap)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<JsonElement>) {
+                            if (response.isSuccessful) {
+                                try {
+                                    Log.e("TAG", "successAA: ${response.body().toString()}")
+                                    val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+                                    itemProductsResult.value = mMineUserEntity
+                                } catch (e: Exception) {
+                                }
+                            }
+                        }
 
-                    override fun loading() {
-                        super.loading()
+                        override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                            if(message.contains("fieldName")){
+                                showSnackBar("Something went wrong!")
+                            } else {
+                                sessionExpired()
+                            }
+
+                        }
+
+                        override fun loading() {
+                            super.loading()
+                        }
                     }
-                }
-            )
+                )
+            }
+
         }
 
 }

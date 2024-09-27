@@ -23,6 +23,7 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
@@ -87,6 +88,14 @@ class HistoryDetail : Fragment() {
         feedbackId = ""+arguments?.getString("key")
 //        var feedbackId = "84"
         binding.apply {
+
+
+            topBarClose.apply {
+                includeBackButton.layoutBack.singleClick {
+                    findNavController().navigateUp()
+                }
+            }
+
 //            inclideHeaderSearch.textHeaderTxt.text = HtmlCompat.fromHtml(getString(R.string.trackingId, "<b>"+feedbackId+"</b>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
 //         //   "Tracking Id: #12344682"
 //            val typeface: Typeface? = ResourcesCompat.getFont(requireContext(), R.font.roboto_medium)

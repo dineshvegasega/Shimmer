@@ -87,6 +87,7 @@
         android:visibility="visible"
         android:textColor="@color/white"
         android:backgroundTint="@color/app_color"
+        android:textCursorDrawable="@drawable/cursor_color"
         />
 
 
@@ -128,6 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="0dp"
+            android:textCursorDrawable="@drawable/cursor_color"
             />
 
         <androidx.appcompat.widget.AppCompatImageView

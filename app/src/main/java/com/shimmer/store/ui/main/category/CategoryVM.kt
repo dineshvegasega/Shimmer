@@ -6,17 +6,12 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemChildBinding
-//import com.shimmer.store.databinding.ItemCategoryRoundBinding
-import com.shimmer.store.databinding.ItemFaqBinding
-import com.shimmer.store.databinding.ItemHomeCategoryBinding
 import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
@@ -32,7 +27,6 @@ import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainMaterial
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainPrice
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
@@ -75,7 +69,7 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         val alert = AlertDialog.Builder(MainActivity.activity.get())
         val binding =
             LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
-        alert.setView(binding.root)
+        alert.setView(binding.root.rootView)
         alert.setCancelable(false)
         alertDialog = alert.create()
         alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

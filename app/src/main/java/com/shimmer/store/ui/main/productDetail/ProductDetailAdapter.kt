@@ -2,8 +2,6 @@ package com.shimmer.store.ui.main.productDetail
 
 import android.annotation.SuppressLint
 import android.net.Uri
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -22,11 +20,6 @@ import androidx.media3.exoplayer.hls.HlsMediaSource
 import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.source.ProgressiveMediaSource
 import androidx.recyclerview.widget.RecyclerView
-//import com.google.android.exoplayer2.ExoPlayer
-//import com.google.android.exoplayer2.SimpleExoPlayer
-//import com.google.android.exoplayer2.source.ProgressiveMediaSource
-//import com.google.android.exoplayer2.upstream.DefaultDataSource
-//import com.google.android.exoplayer2.util.MimeTypes
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.BR

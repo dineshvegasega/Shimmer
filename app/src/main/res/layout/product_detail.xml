@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout">
 
     <include
         android:id="@+id/top_bar_back"
@@ -1390,6 +1391,8 @@
 
 
 
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutRelated"
                 android:layout_width="match_parent"
@@ -1407,14 +1410,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:background="@color/_f2f2f2"
-                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:paddingHorizontal="@dimen/_2sdp"
                     android:paddingVertical="@dimen/_3sdp"
                     android:text="Related Products"
-                    android:textAllCaps="true"
-                    android:textColor="@color/_000000"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_13sdp"
-                    app:fontFamily="@font/nunitosans_regular"
+                    app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="HardcodedText" />

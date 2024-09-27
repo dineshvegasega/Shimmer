@@ -29,7 +29,7 @@
         android:drawableEnd="@drawable/search"
         android:drawableTint="@color/app_color"
         android:layout_marginHorizontal="@dimen/_15sdp"
-        android:imeOptions="actionSearch"
+        android:imeOptions="actionDone"
         android:inputType="text|textNoSuggestions"
         android:maxLines="1"
         android:lines="1"

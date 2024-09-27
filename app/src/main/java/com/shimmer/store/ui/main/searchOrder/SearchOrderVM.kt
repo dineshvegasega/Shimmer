@@ -14,12 +14,9 @@ import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemSearchOrderBinding
-import com.shimmer.store.datastore.db.SearchModel
 import com.shimmer.store.genericAdapter.GenericAdapter
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderListItem
-import com.shimmer.store.models.myOrdersDetail.ItemOrderDetail
-import com.shimmer.store.models.products.Value
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
 import com.shimmer.store.networking.Repository
@@ -31,7 +28,6 @@ import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 

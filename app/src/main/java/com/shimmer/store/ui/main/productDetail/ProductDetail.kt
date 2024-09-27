@@ -53,7 +53,6 @@ import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.getSize
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.showSnackBar
-//import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
@@ -806,6 +805,7 @@ class ProductDetail : Fragment(), CallBackListener {
         arrayItemProduct.clear()
 
         binding.apply {
+            mainLayout.visibility = View.GONE
             textCategories.visibility = View.GONE
             linearRoseGold.visibility = View.GONE
             linearWhiteGold.visibility = View.GONE
@@ -1461,12 +1461,31 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
                         }
+
+
+
+                        viewModel.relatedProducts(itemProduct.id) {
+                            Log.e("TAG", "relatedProductsAA "+this.size)
+                            if (this.size == 0){
+                                layoutRelated.visibility = View.GONE
+                            } else {
+                                layoutRelated.visibility = View.VISIBLE
+                            }
+
+                            rvRelatedProducts.setHasFixedSize(true)
+                            rvRelatedProducts.adapter = viewModel.productAdapter
+                            viewModel.productAdapter.submitList(this)
+                            viewModel.productAdapter.notifyDataSetChanged()
+                            mainLayout.visibility = View.VISIBLE
+                            viewModel.hide()
+                        }
+
                     }
                 }
-                viewModel.hide()
+
+
             }
         }
-
     }
 
 

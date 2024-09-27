@@ -15,8 +15,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.shimmer.store.R
-import com.shimmer.store.databinding.HomeBinding
 import com.shimmer.store.databinding.WebpageBinding
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.hideValueOff

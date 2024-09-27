@@ -1,6 +1,5 @@
 package com.shimmer.store.ui.main.products
 
-//import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
@@ -180,11 +179,7 @@ class Products : Fragment() {
                 }
 
 
-                if (viewModel.itemsProduct.size == 0) {
-                    binding.idDataNotFound.root.visibility = View.VISIBLE
-                } else {
-                    binding.idDataNotFound.root.visibility = View.GONE
-                }
+
 
                 Log.e("TAG", "isProductLoad " + isProductLoad)
                 if (isProductLoad) {
@@ -192,7 +187,11 @@ class Products : Fragment() {
                     isProductLoad = false
                 }
 
-
+                if (viewModel.itemsProduct.size == 0) {
+                    binding.idDataNotFound.root.visibility = View.VISIBLE
+                } else {
+                    binding.idDataNotFound.root.visibility = View.GONE
+                }
 
                 adapter2.submitData(viewModel.itemsProduct)
                 adapter2.notifyDataSetChanged()
@@ -573,7 +572,7 @@ class Products : Fragment() {
 
 
             readData(ADMIN_TOKEN) { token ->
-                viewModel.getProducts(token.toString(), requireView(), emptyMap)
+                viewModel.getProducts(token.toString(), emptyMap, page)
 //                {
 //                    if(this.items.size == 0){
 //                        binding.idDataNotFound.root.visibility = View.VISIBLE

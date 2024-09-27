@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +14,6 @@ import com.shimmer.store.BR
 import com.shimmer.store.R
 import com.shimmer.store.databinding.ItemLoadingBinding
 import com.shimmer.store.utils.changeDateFormat
-import com.shimmer.store.utils.glideImagePortrait
 import com.shimmer.store.utils.singleClick
 
 
@@ -89,10 +87,10 @@ class HistoryAdapter(liveSchemesVM: HistoryVM) : RecyclerView.Adapter<RecyclerVi
                 } else {
                     root.context.getString(R.string.feedback)
                 }
-                textTitle.text = complaintfeedback
-
-                textDesc.setText(dataClass.subject)
-                textTrackValue.setText(""+dataClass.feedback_id)
+//                textTitle.text = complaintfeedback
+//
+//                textDesc.setText(dataClass.subject)
+//                textTrackValue.setText(""+dataClass.feedback_id)
 //                textStatusValueTxt.setText(dataClass.status.titlecaseFirstCharIfItIsLowercase())
 
 //                textStatusValueTxt.setText(
@@ -110,15 +108,15 @@ class HistoryAdapter(liveSchemesVM: HistoryVM) : RecyclerView.Adapter<RecyclerVi
 //                else if (dataClass.status == "re-open") ContextCompat.getColor(root.context, R.color._ED2525)
 //                else if (dataClass.status == "Closed") ContextCompat.getColor(root.context, R.color.black)
 //                else ContextCompat.getColor(root.context, R.color._ffffffff))
-
-                dataClass.date?.let {
-                    textValidDateValue.text = "${dataClass.date.changeDateFormat("dd-MM-yyyy", "dd MMM, yyyy")}"
-                }
-                root.singleClick {
-                    view.findNavController().navigate(R.id.action_history_to_historyDetail, Bundle().apply {
-                        putString("key", ""+dataClass.feedback_id)
-                    })
-                }
+//
+//                dataClass.date?.let {
+//                    textValidDateValue.text = "${dataClass.date.changeDateFormat("dd-MM-yyyy", "dd MMM, yyyy")}"
+//                }
+//                root.singleClick {
+//                    view.findNavController().navigate(R.id.action_history_to_historyDetail, Bundle().apply {
+//                        putString("key", ""+dataClass.feedback_id)
+//                    })
+//                }
 
             }
         }

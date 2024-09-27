@@ -82,6 +82,7 @@
     <string name="search_by_product">Search By Product</string>
     <string name="search_by_sku">Search By SKU</string>
     <string name="are_your_sure_want_to_logout">Are you sure, You want to Logout?</string>
+    <string name="are_your_sure_want_to_delete">Are you sure, You want to Delete?</string>
     <string name="sessionExpired">Session Expired</string>
     <string name="name">Name</string>
     <string name="first_name">First Name</string>
@@ -145,6 +146,8 @@
     <string name="CreatePasswordReEnterPasswordisnotsame">*Password Not Match</string>
 
     <string name="EnterValidMobileNumber">Enter Valid Mobile Number</string>">
+    <string name="EnterValidOTP">Enter Valid OTP</string>">
+
     <string name="EnterPassword">Enter Password</string>
 
     <string name="select_your_choice">Select Your Choice</string>

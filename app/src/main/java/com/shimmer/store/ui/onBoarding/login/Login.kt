@@ -27,6 +27,7 @@ import com.shimmer.store.datastore.DataStoreUtil.readData
 import com.shimmer.store.datastore.DataStoreUtil.saveData
 import com.shimmer.store.datastore.DataStoreUtil.saveObject
 import com.shimmer.store.models.user.ItemUserItem
+import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.password
 import com.shimmer.store.networking.username
 import com.shimmer.store.ui.enums.LoginType
@@ -38,6 +39,7 @@ import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Login : Fragment() {
@@ -58,7 +60,6 @@ class Login : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.mainActivity.get()!!.callBack(0)
-
 
 
         binding.apply {

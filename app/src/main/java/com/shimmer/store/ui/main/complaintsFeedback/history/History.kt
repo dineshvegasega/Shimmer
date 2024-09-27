@@ -4,27 +4,21 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.HistoryBinding
+import com.shimmer.store.models.ItemHistory
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.utils.PaginationScrollListener
 import com.shimmer.store.utils.singleClick
-
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 
 @AndroidEntryPoint
 class History : Fragment() {
@@ -75,9 +69,14 @@ class History : Fragment() {
             recyclerView.setHasFixedSize(true)
             binding.recyclerView.adapter = viewModel.adapter
             binding.recyclerView.itemAnimator = DefaultItemAnimator()
+            viewModel.itemModels.add(ItemHistory())
+            viewModel.itemModels.add(ItemHistory())
+            viewModel.itemModels.add(ItemHistory())
+            viewModel.itemModels.add(ItemHistory())
+            viewModel.itemModels.add(ItemHistory())
+            viewModel.itemModels.add(ItemHistory())
 
-
-//            viewModel.adapter.addAllSearch(results)
+            viewModel.adapter.addAllSearch(viewModel.itemModels)
 
 
 //            observerDataRequest()

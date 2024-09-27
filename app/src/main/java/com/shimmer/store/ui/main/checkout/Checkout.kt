@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.shimmer.store.R
 import com.shimmer.store.databinding.CheckoutBinding
 import com.shimmer.store.datastore.DataStoreKeys.CUSTOMER_TOKEN

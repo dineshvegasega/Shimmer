@@ -3,6 +3,7 @@ package com.shimmer.store.networking
 import com.google.gson.JsonElement
 import com.shimmer.store.models.ItemBanner
 import com.shimmer.store.models.ItemFranchiseArray
+import com.shimmer.store.models.ItemRelatedProducts
 import com.shimmer.store.models.cart.ItemCart
 import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
@@ -33,6 +34,19 @@ interface ApiInterface {
     @GET(WEBSITE_URL)
     suspend fun websiteUrl(
         @Query("email") email: String
+    ): Response<JsonElement>
+
+
+    @POST("{id}"+SEND_OTP)
+    suspend fun sendOTP(
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+    @POST("{id}"+VERIFY_OTP)
+    suspend fun verifyOTP(
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
     ): Response<JsonElement>
 
 
@@ -241,6 +255,13 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
+
+
+
+    @GET(RELATED_PRODUCTS)
+    suspend fun relatedProducts(
+        @Query("productid") productid: Int,
+    ): Response<ItemRelatedProducts>
 }
 
 

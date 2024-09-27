@@ -8,6 +8,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Bundle
 import android.text.TextUtils
 import android.util.ArraySet
 import android.util.Log
@@ -20,19 +21,23 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.shimmer.store.R
 import com.shimmer.store.databinding.DialogPdfBinding
+import com.shimmer.store.databinding.ItemProductBinding
 import com.shimmer.store.databinding.ItemProductDiamondsBinding
 import com.shimmer.store.databinding.ItemSizeBinding
 import com.shimmer.store.databinding.LoaderBinding
 import com.shimmer.store.databinding.ProductDetailBinding
 import com.shimmer.store.datastore.db.CartModel
 import com.shimmer.store.genericAdapter.GenericAdapter
+import com.shimmer.store.models.ItemFranchiseArray
 import com.shimmer.store.models.ItemProductOptions
-import com.shimmer.store.models.ItemSizes
+import com.shimmer.store.models.ItemRelatedProducts
+import com.shimmer.store.models.ItemRelatedProductsItem
 import com.shimmer.store.models.Items
 import com.shimmer.store.models.cart.ItemCartModel
 import com.shimmer.store.models.products.ItemProduct
@@ -41,13 +46,16 @@ import com.shimmer.store.models.products.MediaGalleryEntry
 import com.shimmer.store.models.products.Value
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
+import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.networking.getJsonRequestBody
 import com.shimmer.store.ui.mainActivity.MainActivity
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
+import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.getSize
+import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.pdfviewer.PdfRendererView
 import com.shimmer.store.utils.pdfviewer.util.FileUtils.fileFromAsset
@@ -72,15 +80,13 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     var arrayItemProductOptionsSize: MutableList<Value> = ArrayList()
 
 
-
-
-
     var alertDialog: AlertDialog? = null
+
     init {
         val alert = AlertDialog.Builder(MainActivity.activity.get())
         val binding =
             LoaderBinding.inflate(LayoutInflater.from(MainActivity.activity.get()), null, false)
-        alert.setView(binding.root)
+        alert.setView(binding.root.rootView)
         alert.setCancelable(false)
         alertDialog = alert.create()
         alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -104,10 +110,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
-
-    fun getCartCount(callBack: Int.() -> Unit){
+    fun getCartCount(callBack: Int.() -> Unit) {
         viewModelScope.launch {
-            val userList: List<CartModel> ?= db?.cartDao()?.getAll()
+            val userList: List<CartModel>? = db?.cartDao()?.getAll()
             var countBadge = 0
             userList?.forEach {
                 countBadge += it.quantity
@@ -123,7 +128,12 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 callHandler = object : CallHandler<Response<ItemCartModel>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
 //                        if (loginType == "vendor") {
-                        apiInterface.addCart("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+                        apiInterface.addCart(
+                            "Bearer " + adminToken,
+                            storeWebUrl,
+                            requestBody = jsonObject.getJsonRequestBody()
+                        )
+
                     //                        } else if (loginType == "guest") {
 //                        apiInterface.getQuoteId("Bearer " +adminToken, emptyMap)
                     //                        } else {
@@ -166,8 +176,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                    if (loginType == "vendor") {
 //                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
 //                    } else if (loginType == "guest") {
-                        apiInterface.productsDetailID("Bearer " +adminToken, skuId)
-//                    } else {
+                        apiInterface.productsDetailID("Bearer " + adminToken, skuId)
+
+                    //                    } else {
 //                        apiInterface.productsDetail("Bearer " +adminToken, storeWebUrl, skuId)
 //                    }
                     @SuppressLint("SuspiciousIndentation")
@@ -175,7 +186,8 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
-                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+                                val mMineUserEntity =
+                                    Gson().fromJson(response.body(), ItemProduct::class.java)
 
 //                                viewModelScope.launch {
 ////                                    mMineUserEntity.forEach {items ->
@@ -208,9 +220,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if(message.contains("fieldName")){
+                        if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
-                        } else if(message.contains("The product that was requested doesn't exist")){
+                        } else if (message.contains("The product that was requested doesn't exist")) {
                             showSnackBar(message)
                         } else {
                             sessionExpired()
@@ -233,17 +245,18 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.productsOptions(_id)
+
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAACCC: ${response.body().toString()}")
-                           //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+                                //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
                                 callBack(response.body()!!)
                             } catch (e: Exception) {
                                 showSnackBar("Product not available!")
+                                hide()
                             }
-                            hide()
                         }
                     }
 
@@ -253,11 +266,11 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if(message.contains("fieldName")){
+                        if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
-                        } else if(message.contains("The product that was requested doesn't exist")){
+                        } else if (message.contains("The product that was requested doesn't exist")) {
                             showSnackBar(message)
-                        } else if(message.contains("error")){
+                        } else if (message.contains("error")) {
                             showSnackBar(message)
                         } else {
                             sessionExpired()
@@ -273,23 +286,32 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
-    fun allProducts(adminToken: String, view: View, skuId: String, callBack: ArrayList<ItemProduct>.() -> Unit) =
+    fun allProducts(
+        adminToken: String,
+        view: View,
+        skuId: String,
+        callBack: ArrayList<ItemProduct>.() -> Unit
+    ) =
         viewModelScope.launch {
             repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.allProducts("Bearer " +adminToken, skuId)
+                        apiInterface.allProducts("Bearer " + adminToken, skuId)
+
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAABBCC: ${response.body().toString()}")
                                 val typeToken = object : TypeToken<ArrayList<ItemProduct>>() {}.type
-                                val changeValue = Gson().fromJson<ArrayList<ItemProduct>>(response.body(), typeToken)
+                                val changeValue = Gson().fromJson<ArrayList<ItemProduct>>(
+                                    response.body(),
+                                    typeToken
+                                )
 //                                changeValue.forEach {
 //                                    Log.e("TAG", "allProductsAA: "+it.sku)
 //                                }
-                                if(changeValue.isNotEmpty()){
+                                if (changeValue.isNotEmpty()) {
                                     callBack(changeValue)
                                 }
                             } catch (e: Exception) {
@@ -303,9 +325,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if(message.contains("fieldName")){
+                        if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
-                        } else if(message.contains("The product that was requested doesn't exist")){
+                        } else if (message.contains("The product that was requested doesn't exist")) {
                             showSnackBar(message)
                         } else {
                             sessionExpired()
@@ -321,8 +343,6 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
-
-
     val recentAdapter = object : GenericAdapter<ItemProductDiamondsBinding, ItemProduct>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -336,7 +356,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             position: Int
         ) {
             binding.apply {
-                dataClass.custom_attributes.forEach{ itemProductAttr ->
+                dataClass.custom_attributes.forEach { itemProductAttr ->
 
 //                    if (itemProductAttr.attribute_code == "metal_color") {
 //                        textDiamondColorText.text = "" + itemProductAttr.value
@@ -384,17 +404,17 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 textDiamondClarityText.text = ""
                 textDiamondShapeText.text = ""
                 textDiamondNoText.text = ""
-                textDiamondTotalWeightText.text = ""+dataClass.weight
+                textDiamondTotalWeightText.text = "" + dataClass.weight
 
             }
         }
     }
 
 
-
     var sizeMutableListClose = MutableLiveData<Boolean>(false)
     var sizeMutableList = MutableLiveData<Int>(0)
-//    var sizeValue : Int = 0
+
+    //    var sizeValue : Int = 0
     var selectedPosition = -1
     val sizeAdapter = object : GenericAdapter<ItemSizeBinding, Value>() {
         override fun onCreateView(
@@ -410,7 +430,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             position: Int
         ) {
             binding.apply {
-                textSize.text = ""+getSize(dataClass.value_index)
+                textSize.text = "" + getSize(dataClass.value_index)
 //                textMM.text = dataClass.mm.toString() +" mm"
 
                 ivIcon.singleClick {
@@ -426,7 +446,6 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                    notifyItemChanged(position)
 
 
-
                     sizeMutableList.value = dataClass.value_index.toInt()
                     sizeMutableListClose.value = true
                     notifyDataSetChanged()
@@ -438,20 +457,33 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 //                    ivIcon.setBackgroundColor(ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
 //                }
 
-                textSize.setTextColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.white)
-                else ContextCompat.getColor(binding.root.context, R.color._000000))
+                textSize.setTextColor(
+                    if (dataClass.isSelected) ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.white
+                    )
+                    else ContextCompat.getColor(binding.root.context, R.color._000000)
+                )
 
-                ivIcon.setBackgroundColor( if(dataClass.isSelected) ContextCompat.getColor(binding.root.context, R.color.app_color)
-                else ContextCompat.getColor(binding.root.context, R.color._E1E2DB))
+                ivIcon.setBackgroundColor(
+                    if (dataClass.isSelected) ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.app_color
+                    )
+                    else ContextCompat.getColor(binding.root.context, R.color._E1E2DB)
+                )
             }
         }
     }
 
 
-
     @SuppressLint("UseCompatLoadingForDrawables")
-    public fun indicator(binding: ProductDetailBinding, arrayList: ArrayList<MediaGalleryEntry>, current: Int) {
-        val views : ArrayList<View> = ArrayList()
+    public fun indicator(
+        binding: ProductDetailBinding,
+        arrayList: ArrayList<MediaGalleryEntry>,
+        current: Int
+    ) {
+        val views: ArrayList<View> = ArrayList()
         views.add(binding.indicatorLayout.view1)
         views.add(binding.indicatorLayout.view2)
         views.add(binding.indicatorLayout.view3)
@@ -475,22 +507,26 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
 
         var index = 0
         views.forEach {
-            Log.e("TAG", " index "+index+" size "+arrayList.size+" current "+current)
-            if (index <= (arrayList.size -1)){
+            Log.e("TAG", " index " + index + " size " + arrayList.size + " current " + current)
+            if (index <= (arrayList.size - 1)) {
                 it.visibility = VISIBLE
-                if (arrayList[index].file.endsWith(".mp4")){
+                if (arrayList[index].file.endsWith(".mp4")) {
                     it.setBackgroundResource(R.drawable.ic_triangle_right)
                 } else {
                     it.setBackgroundResource(R.drawable.bg_all_round_black)
                 }
-                if (index == current){
+                if (index == current) {
                     it.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(
-                            MainActivity.context.get()!!, R.color.app_color))
+                            MainActivity.context.get()!!, R.color.app_color
+                        )
+                    )
                 } else {
                     it.backgroundTintList = ColorStateList.valueOf(
                         ContextCompat.getColor(
-                            MainActivity.context.get()!!, R.color._9A9A9A))
+                            MainActivity.context.get()!!, R.color._9A9A9A
+                        )
+                    )
                 }
             } else {
                 it.visibility = GONE
@@ -498,9 +534,6 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             index++
         }
     }
-
-
-
 
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -511,11 +544,13 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 binding.linearWhiteGold.setBackgroundColor(Color.WHITE)
                 binding.linearYellowGold.setBackgroundColor(Color.WHITE)
             }
+
             2 -> {
                 binding.linearRoseGold.setBackgroundColor(Color.WHITE)
                 binding.linearWhiteGold.setBackgroundResource(R.drawable.rounds_black_5)
                 binding.linearYellowGold.setBackgroundColor(Color.WHITE)
             }
+
             3 -> {
                 binding.linearRoseGold.setBackgroundColor(Color.WHITE)
                 binding.linearWhiteGold.setBackgroundColor(Color.WHITE)
@@ -525,10 +560,11 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
-
-    public fun openDialogPdf(type: Int, pdf : String) {
-        val dialogBinding = DialogPdfBinding.inflate(MainActivity.activity.get()?.getSystemService(
-            Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    public fun openDialogPdf(type: Int, pdf: String) {
+        val dialogBinding = DialogPdfBinding.inflate(
+            MainActivity.activity.get()?.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE
+            ) as LayoutInflater
         )
         val dialog = Dialog(MainActivity.context.get()!!)
         dialog.setContentView(dialogBinding.root)
@@ -556,11 +592,8 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
-
-
-
     var isFromAssets = true
-    private fun initPdfViewerWithPath(bindingPdf : DialogPdfBinding, filePath: String?) {
+    private fun initPdfViewerWithPath(bindingPdf: DialogPdfBinding, filePath: String?) {
         if (TextUtils.isEmpty(filePath)) {
             onPdfError(bindingPdf, "")
             return
@@ -615,8 +648,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
-
-    private fun onPdfError(bindingPdf : DialogPdfBinding, e: String) {
+    private fun onPdfError(bindingPdf: DialogPdfBinding, e: String) {
         Log.e("Pdf render error", e)
         AlertDialog.Builder(MainActivity.context.get())
             .setTitle("pdf_viewer_error")
@@ -635,4 +667,69 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
     }
 
 
+    fun relatedProducts(_id: Int, callBack: ItemRelatedProducts.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<ItemRelatedProducts>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.relatedProducts(_id)
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemRelatedProducts>) {
+                        if (response.isSuccessful) {
+                            callBack(response.body()!!)
+                            Log.e("TAG", "successAA: ${response.body().toString()}")
+                        } else {
+                            hide()
+                            callBack(ItemRelatedProducts())
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        showSnackBar(message.toString())
+                        hide()
+                        callBack(ItemRelatedProducts())
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+    val productAdapter = object : GenericAdapter<ItemProductBinding, ItemRelatedProductsItem>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemProductBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemProductBinding,
+            dataClass: ItemRelatedProductsItem,
+            position: Int
+        ) {
+            binding.apply {
+
+                textTitle.text = dataClass.name
+                textPrice.text = "₹ " + getPatternFormat("1", dataClass.price.toDouble())
+
+                val image = IMAGE_URL + dataClass.image
+                image.glideImage(
+                    this.root.context,
+                    ivIcon
+                )
+
+                ivIcon.setOnClickListener {
+                    it.findNavController()
+                        .navigate(R.id.action_productDetail_to_productDetail, Bundle().apply {
+                            putString("baseSku", dataClass.sku)
+                            putString("sku", "")
+                        })
+                }
+            }
+        }
+    }
 }

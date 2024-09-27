@@ -1,43 +1,23 @@
 package com.shimmer.store.ui.main.products
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import com.shimmer.store.R
-import com.shimmer.store.databinding.ItemProductBinding
-import com.shimmer.store.databinding.ItemSearchBinding
 import com.shimmer.store.datastore.db.CartModel
-import com.shimmer.store.genericAdapter.GenericAdapter
-import com.shimmer.store.models.Items
 import com.shimmer.store.models.products.ItemProduct
 import com.shimmer.store.models.products.ItemProductRoot
-import com.shimmer.store.models.products.Value
 import com.shimmer.store.networking.ApiInterface
 import com.shimmer.store.networking.CallHandler
-import com.shimmer.store.networking.IMAGE_URL
 import com.shimmer.store.networking.Repository
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.shimmer.store.utils.getPatternFormat
-import com.shimmer.store.utils.getSize
-import com.shimmer.store.utils.glideImage
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.sessionExpired
 import com.shimmer.store.utils.showSnackBar
-import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -204,23 +184,23 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 
     private var itemProducstResult = MutableLiveData<ItemProductRoot>()
     val itemProducts: LiveData<ItemProductRoot> get() = itemProducstResult
-    fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>) =
+    fun getProducts(adminToken: String, emptyMap: MutableMap<String, String>, pageNumber : Int) =
         viewModelScope.launch {
-            repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
-                    override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.productsID("Bearer " + adminToken, emptyMap)
-
-                    @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
-                        if (response.isSuccessful) {
-                            mainThread {
-                                try {
-                                    Log.e("TAG", "successAA: ${response.body().toString()}")
-                                    val mMineUserEntity = Gson().fromJson(
-                                        response.body(),
-                                        ItemProductRoot::class.java
-                                    )
+            if(pageNumber == 0 || pageNumber == 1){
+                repository.callApi(
+                    callHandler = object : CallHandler<Response<JsonElement>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.productsID("Bearer " + adminToken, emptyMap)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<JsonElement>) {
+                            if (response.isSuccessful) {
+                                mainThread {
+                                    try {
+                                        Log.e("TAG", "successAA: ${response.body().toString()}")
+                                        val mMineUserEntity = Gson().fromJson(
+                                            response.body(),
+                                            ItemProductRoot::class.java
+                                        )
 //                                    mMineUserEntity.items.forEach { itemApi ->
 //                                        val bool = getArrayValue(itemsProduct, itemApi)
 //                                        Log.e("TAG", "boolAA: ${bool}")
@@ -247,32 +227,100 @@ class ProductsVM @Inject constructor(private val repository: Repository) : ViewM
 
 
 
-                                    itemProducstResult.value = mMineUserEntity
-                                } catch (e: Exception) {
+                                        itemProducstResult.value = mMineUserEntity
+                                    } catch (e: Exception) {
+                                    }
                                 }
+
                             }
-
                         }
-                    }
 
-                    override fun error(message: String) {
+                        override fun error(message: String) {
 //                        Log.e("TAG", "successAA: ${message}")
 //                        super.error(message)
 //                        showSnackBar(message)
 //                        callBack(message.toString())
 
-                        if (message.contains("authorized")) {
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
                         }
                     }
+                )
+            } else {
+                repository.callApiWithoutLoader(
+                    callHandler = object : CallHandler<Response<JsonElement>> {
+                        override suspend fun sendRequest(apiInterface: ApiInterface) =
+                            apiInterface.productsID("Bearer " + adminToken, emptyMap)
+                        @SuppressLint("SuspiciousIndentation")
+                        override fun success(response: Response<JsonElement>) {
+                            if (response.isSuccessful) {
+                                mainThread {
+                                    try {
+                                        Log.e("TAG", "successAA: ${response.body().toString()}")
+                                        val mMineUserEntity = Gson().fromJson(
+                                            response.body(),
+                                            ItemProductRoot::class.java
+                                        )
+//                                    mMineUserEntity.items.forEach { itemApi ->
+//                                        val bool = getArrayValue(itemsProduct, itemApi)
+//                                        Log.e("TAG", "boolAA: ${bool}")
+//                                        if (!bool) {
+//                                            itemsProduct.add(itemApi)
+//                                        }
+//                                    }
 
-                    override fun loading() {
-                        super.loading()
+//                                    if (itemsProduct.size != 0) {
+//                                        mMineUserEntity.items.forEach { itemApi ->
+//                                            itemsProduct.forEach { array ->
+//                                                Log.e(
+//                                                    "TAG",
+//                                                    "itemApiZZ " + itemApi.id + "   " + array.id
+//                                                )
+//                                                if (array.id != itemApi.id) {
+//                                                    itemsProduct.add(itemApi)
+//                                                }
+//                                            }
+//                                        }
+//                                    } else {
+//                                        itemsProduct.addAll(mMineUserEntity.items)
+//                                    }
+
+
+
+                                        itemProducstResult.value = mMineUserEntity
+                                    } catch (e: Exception) {
+                                    }
+                                }
+
+                            }
+                        }
+
+                        override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                            if (message.contains("authorized")) {
+                                sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
+                            }
+                        }
+
+                        override fun loading() {
+                            super.loading()
+                        }
                     }
-                }
-            )
+                )
+            }
         }
 
 

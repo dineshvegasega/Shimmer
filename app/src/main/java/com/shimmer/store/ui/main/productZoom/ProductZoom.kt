@@ -12,8 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.SimpleItemAnimator
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.common.api.Status
 import com.shimmer.store.databinding.ProductZoomBinding
 import com.shimmer.store.models.ItemParcelable
 import com.shimmer.store.ui.mainActivity.MainActivity
@@ -23,7 +21,6 @@ import com.shimmer.store.utils.getRecyclerView
 import com.shimmer.store.utils.parcelable
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-//import com.stfalcon.imageviewer.StfalconImageViewer
 
 
 @AndroidEntryPoint

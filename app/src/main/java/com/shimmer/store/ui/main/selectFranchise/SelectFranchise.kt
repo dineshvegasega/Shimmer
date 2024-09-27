@@ -14,7 +14,6 @@ import com.google.gson.Gson
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SelectFranchiseBinding
 import com.shimmer.store.datastore.db.CartModel
-import com.shimmer.store.models.ItemFranchise
 import com.shimmer.store.models.user.ItemUserItem
 import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity.Companion.db

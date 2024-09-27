@@ -10,23 +10,14 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.room.ColumnInfo
-import androidx.room.PrimaryKey
 import com.shimmer.store.R
 import com.shimmer.store.databinding.SearchOrderBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.shimmer.store.datastore.DataStoreUtil.readData
-import com.shimmer.store.datastore.db.SearchModel
-import com.shimmer.store.models.guestOrderList.ItemGuestOrderList
-import com.shimmer.store.ui.enums.LoginType
 import com.shimmer.store.ui.mainActivity.MainActivity
-import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.shimmer.store.utils.changeDateFormat
-import com.shimmer.store.utils.getPatternFormat
 import com.shimmer.store.utils.showSnackBar
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import org.jsoup.internal.StringUtil.isNumeric
 
 @AndroidEntryPoint
 class SearchOrder : Fragment() {
