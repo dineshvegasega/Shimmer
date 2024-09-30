@@ -22,6 +22,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
+import com.google.firebase.FirebaseOptions
 import com.shimmer.store.R
 import com.shimmer.store.databinding.MainActivityBinding
 import com.shimmer.store.datastore.DataStoreKeys.ADMIN_TOKEN
@@ -43,6 +44,7 @@ import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.shimmer.store.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.shimmer.store.utils.getDensityName
+import com.shimmer.store.utils.getToken
 import com.shimmer.store.utils.mainThread
 import com.shimmer.store.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -245,6 +247,15 @@ class MainActivity : AppCompatActivity() {
 
 //        val isNumeric = isNumeric("312424a")
 //        Log.e("TAG", "jsonObjectaddressInformation "+isNumeric)
+
+
+
+        getToken() {
+            Log.e("TAG", "thisgetToken "+this)
+        }
+
+        var dd = FirebaseOptions.fromResource(context.get()!!)?.getApiKey()
+        Log.e("TAG", "thisgetTokendd "+dd)
     }
 
     @SuppressLint("RestrictedApi")
