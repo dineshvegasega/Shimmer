@@ -61,6 +61,7 @@
                 android:textColor="@color/_322F35"
                 android:focusable="false"
                 android:drawableEnd="@drawable/arrow_down"
+                android:drawableTint="@color/_9F0625"
                 app:layout_constraintTop_toBottomOf="@+id/textSelectYourChoiceTxt" />
 
 
@@ -69,7 +70,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:text="@string/subject_of_complaint"
+                android:text="@string/subject"
                 android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_10sdp"
                 app:fontFamily="@font/nunitosans_semibold"
@@ -77,8 +78,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextSelectYourChoice"
                 tools:ignore="MissingConstraints"
-
                 />
+
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/editTextSubjectOfComplaint"
@@ -95,10 +96,10 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textTypeTxt"
+                android:id="@+id/textPriorityTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/type"
+                android:text="@string/select_priority"
                 android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -109,7 +110,7 @@
                 tools:ignore="MissingConstraints" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/editTextSelectComplaintType"
+                android:id="@+id/editTextSelectPriorityType"
                 style="@style/PrimaryEditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
@@ -120,9 +121,74 @@
                 android:textColor="@color/_322F35"
                 android:focusable="false"
                 android:drawableEnd="@drawable/arrow_down"
-                app:layout_constraintTop_toBottomOf="@+id/textTypeTxt" />
+                android:drawableTint="@color/_9F0625"
+                app:layout_constraintTop_toBottomOf="@+id/textPriorityTxt" />
 
 
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textOrderTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/select_order"
+                android:textColor="@color/_2A3740"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:fontFamily="@font/nunitosans_semibold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextSelectPriorityType"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextSelectOrder"
+                style="@style/PrimaryEditText"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginHorizontal="0dp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:hint="@string/select_order"
+                android:text="@string/select_order"
+                android:textColor="@color/_322F35"
+                android:focusable="false"
+                android:drawableEnd="@drawable/arrow_down"
+                android:drawableTint="@color/_9F0625"
+                app:layout_constraintTop_toBottomOf="@+id/textOrderTxt" />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textOrdersTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/orders"
+                android:textColor="@color/_2A3740"
+                android:textSize="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:fontFamily="@font/nunitosans_semibold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextSelectOrder"
+                tools:ignore="MissingConstraints"
+                android:visibility="gone"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvListCategory1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="false"
+                tools:itemCount="2"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_skus"
+                android:paddingHorizontal="@dimen/_8sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textOrdersTxt"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_3sdp"
+                />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -136,8 +202,9 @@
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextSelectComplaintType"
+                app:layout_constraintTop_toBottomOf="@+id/rvListCategory1"
                 tools:ignore="MissingConstraints"
+                android:visibility="visible"
                 />
 
             <androidx.appcompat.widget.AppCompatEditText

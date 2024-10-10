@@ -1,46 +1,21 @@
 {
   "project_info": {
-    "project_number": "839047795865",
-    "project_id": "shimmer-c982d",
-    "storage_bucket": "shimmer-c982d.appspot.com"
+    "project_number": "901768166466",
+    "project_id": "klifora-93bf1",
+    "storage_bucket": "klifora-93bf1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:839047795865:android:612677cd9859e8ddbf1408",
+        "mobilesdk_app_id": "1:901768166466:android:aa6ad1f078925a7496c1db",
         "android_client_info": {
-          "package_name": "com.shimmer.admin"
+          "package_name": "com.klifora.franchise"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCENjVM2ONRbk-jYtJvp4UFRvN1oGPZPEo"
-        },
-        {
-          "current_key": "AIzaSyB1vpo_mCaAEZghU4MhZwbuUwLxJh-aH2c"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:839047795865:android:c6e3ec4fd3399555bf1408",
-        "android_client_info": {
-          "package_name": "com.shimmer.store"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCENjVM2ONRbk-jYtJvp4UFRvN1oGPZPEo"
-        },
-        {
-          "current_key": "AIzaSyB1vpo_mCaAEZghU4MhZwbuUwLxJh-aH2c"
+          "current_key": "AIzaSyBVy1OcP5R0trBNuXiGF42iE-lvFcWzLBs"
         }
       ],
       "services": {

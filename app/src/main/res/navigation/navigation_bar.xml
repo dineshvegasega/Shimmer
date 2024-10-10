@@ -7,7 +7,7 @@
     >
 
     <fragment
-        android:name="com.shimmer.store.ui.splash.Splash"
+        android:name="com.klifora.franchise.ui.splash.Splash"
         android:label="Splash"
         android:id="@+id/splash"
         tools:layout="@layout/splash">
@@ -37,7 +37,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.onBoarding.loginOptions.LoginOptions"
+        android:name="com.klifora.franchise.ui.onBoarding.loginOptions.LoginOptions"
         android:label="LoginOptions"
         android:id="@+id/loginOptions"
         tools:layout="@layout/login_options">
@@ -61,7 +61,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.onBoarding.login.Login"
+        android:name="com.klifora.franchise.ui.onBoarding.login.Login"
         android:label="Login"
         android:id="@+id/login"
         tools:layout="@layout/login">
@@ -86,7 +86,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.onBoarding.forgotPassword.ForgotPassword"
+        android:name="com.klifora.franchise.ui.onBoarding.forgotPassword.ForgotPassword"
         android:label="ForgotPassword"
         android:id="@+id/forgotPassword"
         tools:layout="@layout/forgot_password">
@@ -100,7 +100,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.onBoarding.resetPassword.ResetPassword"
+        android:name="com.klifora.franchise.ui.onBoarding.resetPassword.ResetPassword"
         android:label="ResetPassword"
         android:id="@+id/resetPassword"
         tools:layout="@layout/reset_password">
@@ -114,7 +114,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.home.Home"
+        android:name="com.klifora.franchise.ui.main.home.Home"
         android:label="Home"
         android:id="@+id/home"
         tools:layout="@layout/home">
@@ -151,7 +151,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.category.Category"
+        android:name="com.klifora.franchise.ui.main.category.Category"
         android:label="Category"
         android:id="@+id/category"
         tools:layout="@layout/category">
@@ -183,7 +183,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.faq.Faq"
+        android:name="com.klifora.franchise.ui.main.faq.Faq"
         android:label="Faq"
         android:id="@+id/faq"
         tools:layout="@layout/faq">
@@ -203,7 +203,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.profile.Profile"
+        android:name="com.klifora.franchise.ui.main.profile.Profile"
         android:label="Profile"
         android:id="@+id/profile"
         tools:layout="@layout/profile">
@@ -273,7 +273,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.profileDetail.ProfileDetail"
+        android:name="com.klifora.franchise.ui.main.profileDetail.ProfileDetail"
         android:label="ProfileDetail"
         android:id="@+id/profileDetail"
         tools:layout="@layout/product_detail">
@@ -291,7 +291,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.orders.Orders"
+        android:name="com.klifora.franchise.ui.main.orders.Orders"
         android:label="Orders"
         android:id="@+id/orders"
         tools:layout="@layout/orders">
@@ -315,7 +315,7 @@
     </fragment>
 
 <!--    <fragment-->
-<!--        android:name="com.shimmer.store.ui.main.complaintFeedback.ComplaintFeedback"-->
+<!--        android:name="com.klifora.franchise.ui.main.complaintFeedback.ComplaintFeedback"-->
 <!--        android:label="ComplaintFeedback"-->
 <!--        android:id="@+id/complaintFeedback"-->
 <!--        tools:layout="@layout/complaint_feedback">-->
@@ -333,7 +333,7 @@
 <!--    </fragment>-->
 
     <fragment
-        android:name="com.shimmer.store.ui.main.changePassword.ChangePassword"
+        android:name="com.klifora.franchise.ui.main.changePassword.ChangePassword"
         android:label="ChangePassword"
         android:id="@+id/changePassword"
         tools:layout="@layout/change_password">
@@ -359,7 +359,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.search.Search"
+        android:name="com.klifora.franchise.ui.main.search.Search"
         android:label="Search"
         android:id="@+id/search"
         tools:layout="@layout/search">
@@ -373,7 +373,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.cart.Cart"
+        android:name="com.klifora.franchise.ui.main.cart.Cart"
         android:label="Cart"
         android:id="@+id/cart"
         tools:layout="@layout/cart">
@@ -392,7 +392,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.checkout.Checkout"
+        android:name="com.klifora.franchise.ui.main.checkout.Checkout"
         android:label="Checkout"
         android:id="@+id/checkout"
         tools:layout="@layout/checkout">
@@ -424,7 +424,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.products.Products"
+        android:name="com.klifora.franchise.ui.main.products.Products"
         android:label="Products"
         android:id="@+id/products"
         tools:layout="@layout/products">
@@ -455,7 +455,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.productDetail.ProductDetail"
+        android:name="com.klifora.franchise.ui.main.productDetail.ProductDetail"
         android:label="ProductDetail"
         android:id="@+id/productDetail"
         tools:layout="@layout/product_detail">
@@ -480,7 +480,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.filters.Filters"
+        android:name="com.klifora.franchise.ui.main.filters.Filters"
         android:label="Filters"
         android:id="@+id/filters"
         tools:layout="@layout/filters">
@@ -494,14 +494,14 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.productZoom.ProductZoom"
+        android:name="com.klifora.franchise.ui.main.productZoom.ProductZoom"
         android:label="Filters"
         android:id="@+id/productZoom"
         tools:layout="@layout/product_zoom">
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.customDesign.CustomDesign"
+        android:name="com.klifora.franchise.ui.main.customDesign.CustomDesign"
         android:label="CustomDesign"
         android:id="@+id/customDesign"
         tools:layout="@layout/custom_design">
@@ -523,7 +523,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.selectFranchise.SelectFranchise"
+        android:name="com.klifora.franchise.ui.main.selectFranchise.SelectFranchise"
         android:label="SelectFranchise"
         android:id="@+id/selectFranchise"
         tools:layout="@layout/select_franchise">
@@ -538,15 +538,20 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.orderDetail.OrderDetail"
+        android:name="com.klifora.franchise.ui.main.orderDetail.OrderDetail"
         android:label="OrderDetail"
         android:id="@+id/orderDetail"
         tools:layout="@layout/order_detail">
+        <action
+            android:id="@+id/action_orderDetail_to_productDetail"
+            app:destination="@id/productDetail"
+            app:launchSingleTop="true" />
+
     </fragment>
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.thankYou.ThankYou"
+        android:name="com.klifora.franchise.ui.main.thankYou.ThankYou"
         android:label="ThankYou"
         android:id="@+id/thankyou"
         tools:layout="@layout/thankyou">
@@ -562,7 +567,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.nearestFranchise.NearestFranchise"
+        android:name="com.klifora.franchise.ui.main.nearestFranchise.NearestFranchise"
         android:label="NearestFranchise"
         android:id="@+id/nearestFranchise"
         tools:layout="@layout/nearest_franchise">
@@ -574,7 +579,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.searchOrder.SearchOrder"
+        android:name="com.klifora.franchise.ui.main.searchOrder.SearchOrder"
         android:label="SearchOrder"
         android:id="@+id/searchOrder"
         tools:layout="@layout/search_order">
@@ -586,7 +591,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.payment.Payment"
+        android:name="com.klifora.franchise.ui.main.payment.Payment"
         android:label="Payment"
         android:id="@+id/payment"
         tools:layout="@layout/payment">
@@ -602,7 +607,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.complaintsFeedback.createNew.CreateNew"
+        android:name="com.klifora.franchise.ui.main.complaintsFeedback.createNew.CreateNew"
         android:label="CreateNew"
         android:id="@+id/createNew"
         tools:layout="@layout/create_new">
@@ -616,7 +621,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.complaintsFeedback.history.History"
+        android:name="com.klifora.franchise.ui.main.complaintsFeedback.history.History"
         android:label="History"
         android:id="@+id/history"
         tools:layout="@layout/history">
@@ -625,7 +630,11 @@
             app:destination="@id/createNew"
             app:launchSingleTop="true"
             />
-
+        <action
+            android:id="@+id/action_history_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
         <action
             android:id="@+id/action_history_to_historyDetail"
             app:destination="@id/historyDetail"
@@ -635,7 +644,7 @@
     </fragment>
 
     <fragment
-        android:name="com.shimmer.store.ui.main.complaintsFeedback.historyDetail.HistoryDetail"
+        android:name="com.klifora.franchise.ui.main.complaintsFeedback.historyDetail.HistoryDetail"
         android:label="HistoryDetail"
         android:id="@+id/historyDetail"
         tools:layout="@layout/history_detail">
@@ -643,7 +652,7 @@
 
 
     <fragment
-        android:name="com.shimmer.store.ui.main.webPage.WebPage"
+        android:name="com.klifora.franchise.ui.main.webPage.WebPage"
         android:label="WebPage"
         android:id="@+id/webPage"
         tools:layout="@layout/webpage">

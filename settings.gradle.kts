@@ -21,6 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ShimmerStore"
+rootProject.name = "klifora"
 include(":app")
  

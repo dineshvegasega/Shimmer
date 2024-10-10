@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.shimmer.store.utils.pdfviewer.PdfRendererView
+        <com.klifora.franchise.utils.pdfviewer.PdfRendererView
             android:id="@+id/pdfView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

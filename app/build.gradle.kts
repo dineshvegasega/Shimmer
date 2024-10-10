@@ -13,11 +13,11 @@ plugins {
 }
 
 android {
-    namespace = "com.shimmer.store"
+    namespace = "com.klifora.franchise"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.shimmer.store"
+        applicationId = "com.klifora.franchise"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -85,11 +85,11 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.1")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.8.1")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.2")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.8.2")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.6.1")
-    implementation ("androidx.databinding:databinding-runtime:8.6.1")
+    implementation ("androidx.databinding:databinding-ktx:8.7.0")
+    implementation ("androidx.databinding:databinding-runtime:8.7.0")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
@@ -131,7 +131,7 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
     implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation (platform("com.google.firebase:firebase-bom:33.4.0"))
     implementation ("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-database-ktx")
@@ -192,6 +192,6 @@ dependencies {
 //}
 
 apollo {
-    packageName.set("com.shimmer.store")
+    packageName.set("com.klifora.franchise")
 }
 

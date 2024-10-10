@@ -51,6 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingVertical="@dimen/_4sdp"
         android:paddingHorizontal="@dimen/_13sdp"
+        android:visibility="gone"
         />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -60,7 +61,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/_1sdp"
-            android:text="M"
+            android:text="C"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
@@ -89,12 +90,13 @@
                 android:layout_height="@dimen/_100sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:theme="@style/RoundCorner5"
                 app:srcCompat="@drawable/no_image"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="@dimen/_5sdp"
                 app:layout_constraintBottom_toTopOf="@+id/tvMessage"
+
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -136,10 +138,10 @@
                 android:layout_below="@+id/constant1"
                 android:text="12 PM"
                 android:textColor="@color/_484848"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:textSize="@dimen/_7sdp"
                 android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="MissingConstraints" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
