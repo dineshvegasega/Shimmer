@@ -420,7 +420,11 @@
             app:destination="@id/payment"
             app:launchSingleTop="true"
             />
-
+        <action
+            android:id="@+id/action_checkout_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
     </fragment>
 
     <fragment
@@ -534,6 +538,13 @@
             app:popUpTo="@id/navigation_bar"
             app:popUpToInclusive="true"
         />
+
+        <action
+            android:id="@+id/action_selectFranchise_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true"
+            />
+
     </fragment>
 
 
@@ -545,6 +556,11 @@
         <action
             android:id="@+id/action_orderDetail_to_productDetail"
             app:destination="@id/productDetail"
+            app:launchSingleTop="true" />
+
+        <action
+            android:id="@+id/action_orderDetail_to_cart"
+            app:destination="@id/cart"
             app:launchSingleTop="true" />
 
     </fragment>

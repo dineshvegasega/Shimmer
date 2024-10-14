@@ -12,6 +12,8 @@ import com.klifora.franchise.R
 import com.klifora.franchise.databinding.CustomDesignBinding
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.utils.Utility.Companion.isValidEmailId
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
@@ -38,6 +40,8 @@ class CustomDesign : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
         MainActivity.mainActivity.get()!!.callBack(2)
+        MainActivity.mainActivity.get()!!.callCartApi()
+
 //        Log.e("TAG", "onViewCreated: ${isHide.value}")
         binding.apply {
 
@@ -51,8 +55,14 @@ class CustomDesign : Fragment() {
                 }
             }
 
-            topBarBack.ivCartLayout.visibility = View.GONE
+            topBarBack.ivCartLayout.visibility = View.VISIBLE
 
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
 
             layoutSort.singleClick {
                 if (editTextN.text.toString().isEmpty()) {

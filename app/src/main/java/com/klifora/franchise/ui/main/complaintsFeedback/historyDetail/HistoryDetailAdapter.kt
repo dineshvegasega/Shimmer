@@ -38,7 +38,7 @@ class HistoryDetailAdapter () :
 
                 tvMessage.text = model.body
 
-                if (model.imgeurl != null && model.imgeurl.endsWith(".png")){
+                if (model.imgeurl != null && model.imgeurl.endsWith(".png") || model.imgeurl.endsWith(".jpg") || model.imgeurl.endsWith(".jpeg")){
                     model.imgeurl.glideImage(binding.root.context, ivMap)
                     ivMap.visibility = View.VISIBLE
                     ivMap.singleClick {

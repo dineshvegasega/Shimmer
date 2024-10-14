@@ -23,6 +23,8 @@ import com.klifora.franchise.models.guestOrderList.ItemGuestOrderListItem
 import com.klifora.franchise.models.orderHistory.Item
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.changeDateFormat
 import com.klifora.franchise.utils.getPatternFormat
@@ -60,6 +62,8 @@ class OrderDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         MainActivity.mainActivity.get()!!.callBack(2)
+        MainActivity.mainActivity.get()!!.callCartApi()
+
         binding.apply {
 //            rvListCategory1.setHasFixedSize(true)
 //            viewModel.customerOrders.notifyDataSetChanged()
@@ -72,7 +76,21 @@ class OrderDetail : Fragment() {
                     findNavController().navigateUp()
                 }
             }
-            topBarBack.ivCartLayout.visibility = View.GONE
+
+
+            topBarBack.ivCart.singleClick {
+                findNavController().navigate(R.id.action_orderDetail_to_cart)
+            }
+
+            topBarBack.ivCartLayout.visibility = View.VISIBLE
+
+
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
 
             if (arguments?.getString("from") == "customerOrders") {
                 val consentIntent = arguments?.parcelable<ItemGuestOrderListItem>("key")

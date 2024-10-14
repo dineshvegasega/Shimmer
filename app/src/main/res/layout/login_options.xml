@@ -86,7 +86,7 @@
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:background="@drawable/all_round_options"
-                android:backgroundTint="@color/_C08D54"
+                android:backgroundTint="@color/_e3ceb5"
                 android:layout_weight="1"
                 android:layout_margin="@dimen/_17sdp"
                 android:gravity="center">

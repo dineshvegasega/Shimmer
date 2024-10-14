@@ -200,7 +200,7 @@ class ChangePassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
                     } else if(!isValidPassword(editTextConfirmNewPassword.text.toString().trim())){
@@ -209,7 +209,7 @@ class ChangePassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._00b3b0
+                                    R.color._C08D54
                                 )
                             )
 //                    } else if(editTextNewPassword.text.toString() == editTextConfirmNewPassword.text.toString()){
@@ -228,7 +228,7 @@ class ChangePassword : Fragment() {
                             ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     requireContext(),
-                                    R.color._07FFFC
+                                    R.color._E2B476
                                 )
                             )
                     }

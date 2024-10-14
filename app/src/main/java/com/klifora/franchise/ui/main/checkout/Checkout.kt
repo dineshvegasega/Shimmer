@@ -22,6 +22,8 @@ import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.Utility.Companion.isValidEmailId
 import com.klifora.franchise.utils.getPatternFormat
@@ -52,16 +54,25 @@ class Checkout : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         isBackStack = true
         MainActivity.mainActivity.get()!!.callBack(0)
+        MainActivity.mainActivity.get()!!.callCartApi()
 
         binding.apply {
             topBarBack.includeBackButton.apply {
                 layoutBack.singleClick {
                     findNavController().navigateUp()
                 }
-
-                topBarBack.ivCartLayout.visibility = View.GONE
             }
 
+            topBarBack.ivCartLayout.visibility = View.GONE
+            topBarBack.ivCart.singleClick {
+                findNavController().navigate(R.id.action_checkout_to_cart)
+            }
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
 
             readData(LOGIN_DATA) { loginUser ->
                 if (loginUser != null) {

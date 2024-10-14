@@ -16,7 +16,10 @@ import com.klifora.franchise.databinding.SelectFranchiseBinding
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.user.ItemUserItem
 import com.klifora.franchise.ui.enums.LoginType
+import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.showSnackBar
@@ -47,6 +50,7 @@ class SelectFranchise : Fragment() {
     @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        MainActivity.mainActivity.get()!!.callCartApi()
 
         binding.apply {
             topBarBack.includeBackButton.apply {
@@ -56,6 +60,16 @@ class SelectFranchise : Fragment() {
             }
 
             topBarBack.ivCartLayout.visibility = View.GONE
+            topBarBack.ivCart.singleClick {
+                findNavController().navigate(R.id.action_selectFranchise_to_cart)
+            }
+
+
+            cartItemLiveData.value = false
+            cartItemLiveData.observe(viewLifecycleOwner) {
+                topBarBack.menuBadge.text = "$cartItemCount"
+                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+            }
 
 //            topBarSearch.apply {
 //                appicon.setImageDrawable(
