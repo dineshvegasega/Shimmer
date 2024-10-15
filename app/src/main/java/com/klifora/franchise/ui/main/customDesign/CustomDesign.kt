@@ -5,15 +5,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.CustomDesignBinding
+import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
+import com.klifora.franchise.datastore.DataStoreUtil.readData
+import com.klifora.franchise.models.ItemWebsite
+import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.Utility.Companion.isValidEmailId
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
@@ -63,6 +70,27 @@ class CustomDesign : Fragment() {
                 topBarBack.menuBadge.text = "$cartItemCount"
                 topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
+
+            when(loginType){
+                LoginType.VENDOR ->  {
+                    readData(WEBSITE_DATA) { webData ->
+                        if (webData != null) {
+                            val data = Gson().fromJson(
+                                webData,
+                                ItemWebsite::class.java
+                            )
+                            editTextN.setText(""+data.name)
+                            editEmail.setText(""+data.email)
+                            editMobileNo.setText(""+data.mobile_number)
+                        }
+                    }
+                }
+                LoginType.CUSTOMER ->  {
+
+                }
+            }
+
+
 
             layoutSort.singleClick {
                 if (editTextN.text.toString().isEmpty()) {

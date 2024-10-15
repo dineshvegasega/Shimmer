@@ -1269,7 +1269,7 @@ fun encodeImage(path: String): String {
     }
     val bm = BitmapFactory.decodeStream(fis)
     val baos = ByteArrayOutputStream()
-    bm.compress(Bitmap.CompressFormat.JPEG, 10, baos)
+    bm.compress(Bitmap.CompressFormat.JPEG, 20, baos)
     val b = baos.toByteArray()
     val encImage: String = android.util.Base64.encodeToString(b, android.util.Base64.DEFAULT)
     //Base64.de

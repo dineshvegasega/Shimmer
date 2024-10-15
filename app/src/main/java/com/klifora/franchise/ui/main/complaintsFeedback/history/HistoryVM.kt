@@ -78,7 +78,7 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
                     btStatus.backgroundTintList =
                         ContextCompat.getColorStateList(binding.root.context, R.color._138808)
                 } else if (dataClass.status_id == "1") {
-                    btStatus.text = "In Progress"
+                    btStatus.text = "Open"
                     btStatus.backgroundTintList =
                         ContextCompat.getColorStateList(binding.root.context, R.color._E87103)
                 } else {

@@ -88,8 +88,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.8.2")
     implementation ("androidx.navigation:navigation-ui-ktx:2.8.2")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.7.0")
-    implementation ("androidx.databinding:databinding-runtime:8.7.0")
+    implementation ("androidx.databinding:databinding-ktx:8.7.1")
+    implementation ("androidx.databinding:databinding-runtime:8.7.1")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")

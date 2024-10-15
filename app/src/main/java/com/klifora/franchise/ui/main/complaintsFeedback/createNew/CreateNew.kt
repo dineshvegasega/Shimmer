@@ -199,8 +199,8 @@ class CreateNew : Fragment() {
                     showSnackBar(getString(R.string.your_mobile_number))
                 } else if (editTextTypeHere.text.toString().isEmpty()){
                     showSnackBar(getString(R.string.description))
-                } else if (viewModel.uploadMediaImageBase64.isEmpty()){
-                    showSnackBar(getString(R.string.upload_media))
+//                } else if (viewModel.uploadMediaImageBase64.isEmpty()){
+//                    showSnackBar(getString(R.string.upload_media))
                 } else {
                     readData(WEBSITE_DATA) { webData ->
                         if (webData != null) {

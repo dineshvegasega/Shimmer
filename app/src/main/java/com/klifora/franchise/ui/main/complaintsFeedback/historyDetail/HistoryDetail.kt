@@ -244,11 +244,8 @@ class HistoryDetail : Fragment() {
 //                } else if (editTextYourMobileNumber.text.toString().isEmpty() || editTextYourMobileNumber.text.toString().length != 10){
 //                    showSnackBar(getString(R.string.your_mobile_number))
 //                } else
-                    if (etTypingMessage.text.toString().isEmpty()){
+                if (etTypingMessage.text!!.isEmpty() && viewModel.uploadMediaImageBase64.isEmpty()){
                         showSnackBar(getString(R.string.enter_message))
-
-//                    else if (viewModel.uploadMediaImageBase64.isEmpty()){
-//                    showSnackBar(getString(R.string.upload_media))
                 } else {
                     readData(WEBSITE_DATA) { webData ->
                         if (webData != null) {
@@ -268,27 +265,11 @@ class HistoryDetail : Fragment() {
                                 put("ticket_id",  feedbackId)
                                 put("is_read",  "0")
                             }
-
-//                            if (viewModel.uploadMediaImageBase64 != ""){
-//                                jsonObjectStatus.put("file", viewModel.uploadMediaImageBase64)
-//                            }
-
                             viewModel.sendMessage(jsonObjectStatus){
                                 viewModel.uploadMediaImage = null
                                 viewModel.uploadMediaImageBase64 = ""
                                 binding.relative1.visibility = View.GONE
                                 binding.etTypingMessage.setText("")
-
-//                                if (this.contains("Ticket was successfully sent")){
-//                                    showSnackBar("Ticket created successfully")
-//                                    Handler(Looper.getMainLooper()).postDelayed({
-//                                        findNavController().navigateUp()
-//                                    }, 1000)
-//                                } else {
-//                                    showSnackBar("Something went wrong!")
-//                                }
-
-
                                 viewModel.messageHistory(feedbackId, data.entity_id)
                             }
                         }

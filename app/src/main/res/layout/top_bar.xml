@@ -15,27 +15,39 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
         android:visibility="visible"
-        android:gravity="center_horizontal"
-        android:paddingBottom="@dimen/_18sdp"
-        android:paddingTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:paddingTop="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         >
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:gravity="center"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:background="@color/mehroon"
+        >
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appicon"
             android:layout_width="@dimen/_110sdp"
             android:layout_height="@dimen/_35sdp"
             android:src="@drawable/logo_silver"
-            app:tint="@color/app_color"
             android:scaleType="fitCenter"
             android:text="@string/toolbar_title"
-            android:paddingTop="@dimen/_2sdp"
+            android:padding="@dimen/_2sdp"
             android:visibility="visible"
-            android:layout_marginStart="@dimen/_15sdp"
             app:rippleColor="@color/black"
             android:clickable="true"
             android:focusable="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
 
@@ -62,7 +74,7 @@
         android:singleLine="true"
         android:ellipsize="end"
         app:layout_constraintTop_toBottomOf="@+id/logoLayout"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:rippleColor="@color/white"
@@ -108,7 +120,7 @@
             android:id="@+id/menu_badge"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:text="20"
+            android:text="0"
             android:gravity="center"
             android:background="@drawable/bg_all_round_orders"
             android:backgroundTint="@color/black"
