@@ -147,6 +147,8 @@
     <string name="EnterConfirmNewPassword">Enter Confirm New Password</string>
     <string name="CreatePasswordReEnterPasswordisnotsame">*Password Not Match</string>
 
+    <string name="EnterFullName">Enter Full Name</string>">
+    <string name="EnterValidEmail">Enter Valid Email Address</string>">
     <string name="EnterValidMobileNumber">Enter Valid Mobile Number</string>">
     <string name="EnterValidOTP">Enter Valid OTP</string>">
 

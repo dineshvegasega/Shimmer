@@ -188,6 +188,7 @@ dependencies {
 //    implementation ("io.github.afreakyelf:Pdf-Viewer:2.0.7")
 
     implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
+    implementation ("com.github.vipulasri:timelineview:1.1.5")
 
 }
 

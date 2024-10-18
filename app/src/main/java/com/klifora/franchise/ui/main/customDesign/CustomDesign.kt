@@ -94,13 +94,17 @@ class CustomDesign : Fragment() {
 
             layoutSort.singleClick {
                 if (editTextN.text.toString().isEmpty()) {
-                    showSnackBar("Enter Full Name")
+                    showSnackBar(getString(R.string.EnterFullName))
                 } else if (editEmail.text.toString().isEmpty()) {
-                    showSnackBar("Enter Email")
+                    showSnackBar(getString(R.string.EnterValidEmail))
                 } else if (!isValidEmailId(editEmail.text.toString().trim())) {
-                    showSnackBar("Enter Valid Email")
-                } else if (editMobileNo.text.toString().isEmpty()) {
-                    showSnackBar("Enter Mobile No")
+                    showSnackBar(getString(R.string.EnterValidEmail))
+                } else if (editMobileNo.text.toString().isEmpty()){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editMobileNo.text.toString().length != 10){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
+                } else if (editMobileNo.text.toString().startsWith("0")){
+                    showSnackBar(getString(R.string.EnterValidMobileNumber))
                 } else {
                     val customerJSON: JSONObject = JSONObject().apply {
                         put("sku", "")

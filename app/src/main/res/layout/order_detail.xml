@@ -585,6 +585,240 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTitle0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                app:layout_constraintTop_toBottomOf="@+id/layoutPriceBreakup"
+                tools:ignore="MissingConstraints"
+                app:fontFamily="@font/nunitosans_bold"
+                android:text="Track Order"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                />
+
+
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textTitle0"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle11"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="Prepare"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="Prepare"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+
+
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="Prepare"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="Prepare"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="Prepare"
+                        android:textSize="@dimen/_13sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

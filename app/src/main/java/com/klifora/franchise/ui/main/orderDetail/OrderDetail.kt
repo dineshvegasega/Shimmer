@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
@@ -84,7 +85,15 @@ class OrderDetail : Fragment() {
 
             topBarBack.ivCartLayout.visibility = View.VISIBLE
 
+            timeline1.initLine(1)
+            timeline2.initLine(0)
+            timeline3.initLine(0)
+            timeline4.initLine(0)
+            timeline5.initLine(2)
 
+            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color._138808), 1)
+            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color._138808), 1)
 
 
             cartItemLiveData.value = false
