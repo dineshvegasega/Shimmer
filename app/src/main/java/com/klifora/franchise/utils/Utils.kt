@@ -1145,6 +1145,14 @@ fun Activity.showDropDownDialog(
                     callBack(ItemReturn(which, arrayList[which]!!))
                 }.show()
         }
+        4 -> {
+            val list=resources.getStringArray(R.array.type_array_subject)
+            MaterialAlertDialogBuilder(this, R.style.DropdownDialogTheme)
+                .setTitle(resources.getString(R.string.select_subject))
+                .setItems(list) {_,which->
+                    callBack(ItemReturn(which, list[which]))
+                }.show()
+        }
     }
 }
 

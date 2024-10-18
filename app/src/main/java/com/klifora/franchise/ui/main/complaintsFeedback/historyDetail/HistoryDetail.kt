@@ -135,9 +135,28 @@ class HistoryDetail : Fragment() {
                         webData,
                         ItemWebsite::class.java
                     )
+                    viewModel.getComplaintDetail(feedbackId)
                     viewModel.messageHistory(feedbackId, data.entity_id)
                 }
             }
+
+
+            topBarClose.btClose.visibility = View.INVISIBLE
+            viewModel.itemComplaintDetail?.observe(viewLifecycleOwner) {
+                if (it.size > 0) {
+                    if (it[0].status_id == "1") {
+                        vBottom.visibility = View.VISIBLE
+                        topBarClose.btClose.text = requireContext().getString(R.string.x_close)
+                        topBarClose.btClose.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color._ED2525)
+                    } else if (it[0].status_id == "0") {
+                        vBottom.visibility = View.GONE
+                        topBarClose.btClose.text = requireContext().getString(R.string.reopen)
+                        topBarClose.btClose.backgroundTintList = ContextCompat.getColorStateList(binding.root.context, R.color._2eb82e)
+                    }
+                }
+            }
+
+
 
 
 

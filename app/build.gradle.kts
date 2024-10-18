@@ -85,8 +85,8 @@ dependencies {
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.2")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.8.2")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.3")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.8.3")
     //noinspection GradleCompatible,GradleCompatible
     implementation ("androidx.databinding:databinding-ktx:8.7.1")
     implementation ("androidx.databinding:databinding-runtime:8.7.1")
@@ -181,9 +181,14 @@ dependencies {
 
     implementation ("com.github.chrisbanes:PhotoView:2.2.0")
 
+    implementation ("com.github.fuzz-productions:RatingBar:1.0.6")
+
 //    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
 
 //    implementation ("io.github.afreakyelf:Pdf-Viewer:2.0.7")
+
+    implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
+
 }
 
 

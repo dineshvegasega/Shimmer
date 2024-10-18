@@ -25,16 +25,54 @@
         android:textSize="@dimen/_17sdp"
         app:fontFamily="@font/nunitosans_semibold"
         tools:ignore="HardcodedText"
-        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btComplainFeedback"
+        style="@style/PrimaryButtonBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_25sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/complaints_feedback"
+        app:iconTint="@color/white"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/app_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:cornerRadius="@dimen/_4sdp"
+        android:textSize="@dimen/_10sdp"
+        android:visibility="visible"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textOrderNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/order_no"
+        android:textColor="@color/_2A3740"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_13sdp"
+        app:fontFamily="@font/nunitosans_bold"
+        tools:ignore="HardcodedText"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:visibility="gone"
+        />
+
 
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textOrderNo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/filterLayout"
         >

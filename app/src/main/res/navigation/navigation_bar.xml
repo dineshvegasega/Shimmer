@@ -563,6 +563,12 @@
             app:destination="@id/cart"
             app:launchSingleTop="true" />
 
+        <action
+            android:id="@+id/action_orderDetail_to_createNew"
+            app:destination="@id/createNew"
+            app:launchSingleTop="true" />
+
+
     </fragment>
 
 
@@ -657,6 +663,11 @@
             app:launchSingleTop="true"
             />
 
+        <action
+            android:id="@+id/action_history_to_historyFeedbackDetail"
+            app:destination="@id/historyFeedbackDetail"
+            app:launchSingleTop="true"
+            />
     </fragment>
 
     <fragment
@@ -664,6 +675,14 @@
         android:label="HistoryDetail"
         android:id="@+id/historyDetail"
         tools:layout="@layout/history_detail">
+    </fragment>
+
+
+    <fragment
+        android:name="com.klifora.franchise.ui.main.complaintsFeedback.historyFeedbackDetail.HistoryFeedbackDetail"
+        android:label="HistoryFeedbackDetail"
+        android:id="@+id/historyFeedbackDetail"
+        tools:layout="@layout/history_feedback_detail">
     </fragment>
 
 

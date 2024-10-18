@@ -156,8 +156,10 @@
     <string name="register_complaint">Register Complaint</string>
     <string name="subject_of_complaint">Subject Of Complaint</string>
     <string name="subject">Subject</string>
+    <string name="select_subject">Select Subject</string>
 
-    <string name="type_here">Type Here</string>
+    <string name="description_150">Description (Max 150 characters)</string>
+    <string name="type_here">Type Here (Max 150 characters)</string>
     <string name="your_name">Your Name</string>
     <string name="your_full_name">Your Full Name</string>
     <string name="your_mobile_number">Your Mobile Number</string>
@@ -186,7 +188,8 @@
 
     <string name="valid_date">Date</string>
     <string name="status">Status</string>
-    <string name="x_close">X Close</string>
+    <string name="x_close">✕ Close</string>
+    <string name="reopen">✓ Re-Open</string>
 
     <string name="typeColon">Type:</string>
     <string name="registration_dateColon">Registration Date:</string>
@@ -208,6 +211,13 @@
         <item>Medium</item>
         <item>High</item>
     </string-array>
+
+
+    <string-array name="type_array_subject">
+        <item>Order No</item>
+        <item>Mislennious</item>
+    </string-array>
+
 
     <string name="camera">Camera</string>
     <string name="open_camera_to_capture_image">Open Camera to Capture Image</string>
@@ -241,4 +251,8 @@
     <string name="select_order">Select Order</string>
     <string name="select_products">Select Products</string>
     <string name="mobile_number_not_registered">Mobile Number not registered</string>
+    <string name="comments">Comments</string>
+    <string name="comments_150">Comments (Max 150 characters)</string>
+    <string name="how_satisfied_were_you_with_tge_resolution_of_your_complaint">How satisfied were you with the resolution of your complaint.</string>
+    <string name="order_no">Order No</string>
 </resources>

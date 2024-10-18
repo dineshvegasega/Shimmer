@@ -32,12 +32,14 @@
         android:insetBottom="0dp"
         android:text="@string/x_close"
         app:iconTint="@color/white"
+        android:textColor="@color/white"
         android:backgroundTint="@color/_ED2525"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:cornerRadius="@dimen/_4sdp"
         android:textSize="@dimen/_10sdp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginEnd="@dimen/_10sdp"
         />
 
@@ -55,7 +57,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:padding="@dimen/_4sdp"
         tools:ignore="MissingConstraints"
-
+        android:visibility="gone"
         />
 
 

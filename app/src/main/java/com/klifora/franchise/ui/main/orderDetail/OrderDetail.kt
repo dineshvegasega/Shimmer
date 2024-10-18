@@ -86,6 +86,7 @@ class OrderDetail : Fragment() {
 
 
 
+
             cartItemLiveData.value = false
             cartItemLiveData.observe(viewLifecycleOwner) {
                 topBarBack.menuBadge.text = "$cartItemCount"
@@ -96,6 +97,9 @@ class OrderDetail : Fragment() {
                 val consentIntent = arguments?.parcelable<ItemGuestOrderListItem>("key")
 
                 Log.e("TAG", "onViewCreatedAA: ${consentIntent.toString()}")
+
+
+                textOrderNo.visibility = View.GONE
 
                 textName.text = consentIntent?.CustomerName
                 textMobile.text = consentIntent?.customerMobile
@@ -159,10 +163,20 @@ class OrderDetail : Fragment() {
                 val _id = arguments?.getString("_id")
                 Log.e("TAG", "onViewCreatedBB: ${_id.toString()}")
 
+                btComplainFeedback.singleClick {
+                    findNavController().navigate(R.id.action_orderDetail_to_createNew , Bundle().apply {
+                        putString("order_id", _id)
+                    })
+                }
+
+
                 _id?.let {
                     readData(ADMIN_TOKEN) { token ->
                         viewModel.orderHistoryListDetail(token.toString(), _id) {
                             val itemOrderDetail = this
+
+                            textOrderNo.text = "Order No. : "+itemOrderDetail?.entity_id
+                            textOrderNo.visibility = View.VISIBLE
 
                             textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(
                                 "yyyy-MM-dd HH:mm:ss",

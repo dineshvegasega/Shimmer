@@ -15,9 +15,12 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemHistoryBinding
+import com.klifora.franchise.databinding.ItemHistoryFeedbackBinding
 import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.ItemComplaint
 import com.klifora.franchise.models.ItemComplaintItem
+import com.klifora.franchise.models.ItemFeedback
+import com.klifora.franchise.models.ItemFeedbackItem
 import com.klifora.franchise.models.ItemHistory
 import com.klifora.franchise.models.products.ItemProductRoot
 import com.klifora.franchise.networking.ApiInterface
@@ -148,17 +151,17 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
 
 
 
-    val feedbackAdapter = object : GenericAdapter<ItemHistoryBinding, ItemComplaintItem>() {
+    val feedbackAdapter = object : GenericAdapter<ItemHistoryFeedbackBinding, ItemFeedbackItem>() {
         override fun onCreateView(
             inflater: LayoutInflater,
             parent: ViewGroup,
             viewType: Int
-        ) = ItemHistoryBinding.inflate(inflater, parent, false)
+        ) = ItemHistoryFeedbackBinding.inflate(inflater, parent, false)
 
         @SuppressLint("SetTextI18n")
         override fun onBindHolder(
-            binding: ItemHistoryBinding,
-            dataClass: ItemComplaintItem,
+            binding: ItemHistoryFeedbackBinding,
+            dataClass: ItemFeedbackItem,
             position: Int
         ) {
             binding.apply {
@@ -174,30 +177,30 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
 //                    }
 //                }
                 textTitle.text = "Feedback"
-                textDesc.text = dataClass.subject
-                textTrackValue.text = dataClass.ticket_id
+                textDesc.text = dataClass.detail
+                textTrackValue.text = dataClass.review_id
                 val date =
-                    dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
+                    dataClass.created_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
                 textValidDateValue.text = date
 
-                if (dataClass.status_id == "0") {
-                    btStatus.text = "Resolved"
-                    btStatus.backgroundTintList =
-                        ContextCompat.getColorStateList(binding.root.context, R.color._138808)
-                } else if (dataClass.status_id == "1") {
-                    btStatus.text = "In Progress"
-                    btStatus.backgroundTintList =
-                        ContextCompat.getColorStateList(binding.root.context, R.color._E87103)
-                } else {
-                    btStatus.text = "Resolved"
-                    btStatus.backgroundTintList =
-                        ContextCompat.getColorStateList(binding.root.context, R.color._138808)
-                }
+//                if (dataClass.status_id == "0") {
+//                    btStatus.text = "Resolved"
+//                    btStatus.backgroundTintList =
+//                        ContextCompat.getColorStateList(binding.root.context, R.color._138808)
+//                } else if (dataClass.status_id == "1") {
+//                    btStatus.text = "In Progress"
+//                    btStatus.backgroundTintList =
+//                        ContextCompat.getColorStateList(binding.root.context, R.color._E87103)
+//                } else {
+//                    btStatus.text = "Resolved"
+//                    btStatus.backgroundTintList =
+//                        ContextCompat.getColorStateList(binding.root.context, R.color._138808)
+//                }
 
 
                 root.singleClick {
                     root.findNavController()
-                        .navigate(R.id.action_history_to_historyDetail, Bundle().apply {
+                        .navigate(R.id.action_history_to_historyFeedbackDetail, Bundle().apply {
                             putParcelable("key", dataClass)
                         })
                 }
@@ -205,18 +208,18 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
         }
     }
 
-    private var itemFeedbackResult = MutableLiveData<ItemComplaint>()
-    val itemFeedback: LiveData<ItemComplaint> get() = itemFeedbackResult
+    private var itemFeedbackResult = MutableLiveData<ItemFeedback>()
+    val itemFeedback: LiveData<ItemFeedback> get() = itemFeedbackResult
 
     fun getFeedback(_id: String) =
         viewModelScope.launch {
             repository.callApi(
-                callHandler = object : CallHandler<Response<ItemComplaint>> {
+                callHandler = object : CallHandler<Response<ItemFeedback>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.complaintList(storeWebUrl, _id)
+                        apiInterface.feedbackList(storeWebUrl, _id)
 
                     @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<ItemComplaint>) {
+                    override fun success(response: Response<ItemFeedback>) {
                         Log.e("TAG", "success222:")
                         if (response.isSuccessful) {
                             try {

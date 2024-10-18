@@ -32,6 +32,7 @@ import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.onRightDrawableClicked
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
+import org.jsoup.internal.StringUtil.isNumeric
 
 
 @AndroidEntryPoint
@@ -260,7 +261,18 @@ class Search : Fragment() {
         binding.apply {
             topBarSearch.editTextSearch.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    // loadFirstPage()
+                    if (topBarSearch.editTextSearch.text.toString().isNotEmpty()) {
+                        viewModel.itemsSearch.clear()
+                        page = 1
+                        searchFilter()
+                        val newUser = SearchModel(
+                            search_name = topBarSearch.editTextSearch.text.toString(),
+                            currentTime = System.currentTimeMillis()
+                        )
+                        ioThread {
+                            db?.searchDao()?.insertAll(newUser)
+                        }
+                    }
                 }
                 true
             }

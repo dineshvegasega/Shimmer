@@ -60,7 +60,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shimmer"
         android:usesCleartextTraffic="true"
-        tools:targetApi="tiramisu">
+        tools:targetApi="tiramisu"
+        tools:replace="android:allowBackup"
+        >
 
 
         <activity

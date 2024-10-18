@@ -63,6 +63,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:padding="@dimen/_6sdp"
             android:buttonTint="@color/_E2B476"
+            android:visibility="gone"
+            />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:padding="@dimen/_6sdp"
+            android:buttonTint="@color/_E2B476"
             android:visibility="visible"
             />
 

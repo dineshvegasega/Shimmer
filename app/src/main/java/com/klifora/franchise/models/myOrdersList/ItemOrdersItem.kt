@@ -144,5 +144,6 @@ data class ItemOrdersItem(
     val total_refunded: Any,
     val updated_at: String,
     val weight: String,
-    val x_forwarded_for: Any
-)
+    val x_forwarded_for: Any,
+
+    )

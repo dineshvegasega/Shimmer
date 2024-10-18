@@ -5,20 +5,14 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import com.google.gson.Gson
 import com.google.gson.JsonElement
-import com.klifora.franchise.R
-import com.klifora.franchise.databinding.ItemSkusBinding
 import com.klifora.franchise.databinding.ItemTicketSkuBinding
 import com.klifora.franchise.databinding.LoaderBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
@@ -37,23 +31,24 @@ import com.klifora.franchise.networking.getJsonRequestBody
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.mainThread
-import com.klifora.franchise.utils.sessionExpired
 import com.klifora.franchise.utils.showSnackBar
-import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject
 
+
 @HiltViewModel
 class CreateNewVM @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    var type: String = "1"
-    var priorityType: String = ""
+    companion object{
+        var type: String = "1"
+    }
+    var typeSubject: String = ""
+    var priorityType: String = "High"
 //    var productsIds: String = ""
     var uploadMediaImage: String? = null
     var uploadMediaImageBase64: String = ""
@@ -215,8 +210,10 @@ class CreateNewVM @Inject constructor(private val repository: Repository) : View
         }
 
 
+
+
+
     var idsArray : ArrayList<String> = ArrayList()
-    var selectedPositionOrderHistory = -1
     val orderSKUOrderHistory = object : GenericAdapter<ItemTicketSkuBinding, ItemX>() {
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -250,19 +247,89 @@ class CreateNewVM @Inject constructor(private val repository: Repository) : View
                 }
 
 
+                checkbox.visibility = View.VISIBLE
+                radioButton.visibility = View.GONE
+//                if (type == "2"){
+//                    Log.e("TAG", "selectedPositionOrderHistory "+selectedPositionOrderHistory)
+//                    checkbox.setChecked((if (selectedPositionOrderHistory == position) false else true))
+//                }
 
                 checkbox.setOnCheckedChangeListener { buttonView, isChecked ->
-                    if (isChecked == true) {
-//                        productsIds += ""+dataClass.product_id+","
-                        idsArray.add(""+dataClass.product_id)
-                    }
-                    if (isChecked == false) {
-                        idsArray.remove(""+dataClass.product_id)
-                    }
+                    Log.e("TAG", "typeAA "+type)
+
+//                    if (type == "1"){
+                        if (isChecked == true) {
+                            idsArray.add(""+dataClass.product_id)
+                        }
+                        if (isChecked == false) {
+                            idsArray.remove(""+dataClass.product_id)
+                        }
+//                    }
+
+//                    if (type == "2"){
+//                        selectedPositionOrderHistory = position
+//                        notifyDataSetChanged()
+//                    }
                 }
             }
         }
     }
+
+
+
+
+
+    var idsArrayFeedback : String = ""
+    var selectedPositionOrderHistoryFeedback = -1
+    val orderSKUOrderHistoryFeedback = object : GenericAdapter<ItemTicketSkuBinding, ItemX>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemTicketSkuBinding.inflate(inflater, parent, false)
+
+        @SuppressLint("NotifyDataSetChanged")
+        override fun onBindHolder(
+            binding: ItemTicketSkuBinding,
+            dataClass: ItemX,
+            position: Int
+        ) {
+            binding.apply {
+
+                textTitle.text = "SKU : ${dataClass.sku}"
+
+                mainThread {
+                    readData(ADMIN_TOKEN) { token ->
+                        Log.e("TAG", "tokenOO: " + token)
+                        getProductDetail(token.toString(), dataClass.sku) {
+                            Log.e("TAG", "getProductDetailOO: " + this.name)
+                            if (this.media_gallery_entries.size > 0) {
+                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
+                                    binding.ivIcon.context,
+                                    binding.ivIcon
+                                )
+                            }
+                        }
+                    }
+                }
+
+                checkbox.visibility = View.GONE
+                radioButton.visibility = View.VISIBLE
+
+                radioButton.setChecked(if (position == selectedPositionOrderHistoryFeedback) true else false)
+
+
+                radioButton.setOnClickListener {
+                    selectedPositionOrderHistoryFeedback = position
+                    idsArrayFeedback = ""+dataClass.product_id
+                    notifyDataSetChanged()
+                }
+            }
+        }
+    }
+
+
+
 
 
     fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
@@ -384,6 +451,45 @@ class CreateNewVM @Inject constructor(private val repository: Repository) : View
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.createTicket(
+                            storeWebUrl,
+                            requestBody = jsonObject.getJsonRequestBody()
+                        )
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+                                callBack(response.body().toString())
+                            } catch (_: Exception) {
+                                showSnackBar(response.body().toString())
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        if(message.contains("fieldName")){
+                        showSnackBar(message)
+//                        } else {
+//                            sessionExpired()
+//                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
+    fun createFeedback(jsonObject: JSONObject, callBack: String.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.createFeedback(
                             storeWebUrl,
                             requestBody = jsonObject.getJsonRequestBody()
                         )

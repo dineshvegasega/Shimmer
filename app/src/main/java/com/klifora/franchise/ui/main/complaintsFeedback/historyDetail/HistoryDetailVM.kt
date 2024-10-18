@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonElement
+import com.klifora.franchise.models.ItemComplaint
+import com.klifora.franchise.models.ItemComplaintItem
 import com.klifora.franchise.models.ItemMessageHistory
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
@@ -150,5 +152,53 @@ class HistoryDetailVM @Inject constructor(private val repository: Repository): V
 //            }
 //        )
 //    }
+
+
+
+    private var itemComplaintDetailResult = MutableLiveData<ItemComplaint>()
+    val itemComplaintDetail: LiveData<ItemComplaint> get() = itemComplaintDetailResult
+
+    fun getComplaintDetail(_id: String) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemComplaint>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.complaintDetail(storeWebUrl, _id)
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemComplaint>) {
+                        Log.e("TAG", "success222:")
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                val mMineUserEntity =
+//                                    Gson().fromJson(response.body(), ItemProductRoot::class.java)
+                                itemComplaintDetailResult.value = response.body()
+                            } catch (_: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "success333:")
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                        if (message.contains("fieldName")) {
+                            showSnackBar("Something went wrong!")
+                        } else {
+//                            sessionExpired()
+                        }
+
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 }

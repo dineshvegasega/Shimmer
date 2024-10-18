@@ -3,6 +3,8 @@ package com.klifora.franchise.networking
 import com.google.gson.JsonElement
 import com.klifora.franchise.models.ItemBanner
 import com.klifora.franchise.models.ItemComplaint
+import com.klifora.franchise.models.ItemComplaintItem
+import com.klifora.franchise.models.ItemFeedback
 import com.klifora.franchise.models.ItemFranchiseArray
 import com.klifora.franchise.models.ItemMessageHistory
 import com.klifora.franchise.models.ItemRelatedProducts
@@ -270,9 +272,28 @@ interface ApiInterface {
         @Query("customerids") ids: String,
     ): Response<ItemComplaint>
 
+    @GET("{id}"+FEEDBACK_LIST)
+    suspend fun feedbackList(
+//        @Header("Authorization") authHeader : String,
+        @Path("id") webId: String,
+        @Query("customerids") ids: String,
+    ): Response<ItemFeedback>
+
+
+    @GET("{id}"+COMPLAINT_DETAIL)
+    suspend fun complaintDetail(
+        @Path("id") webId: String,
+        @Query("ticket_id") ticket_id: String,
+    ): Response<ItemComplaint>
 
     @POST("{id}"+CREATE_TICKET)
     suspend fun createTicket(
+        @Path("id") id: String,
+        @Body requestBody: RequestBody
+    ): Response<JsonElement>
+
+    @POST("{id}"+CREATE_FEEDBACK)
+    suspend fun createFeedback(
         @Path("id") id: String,
         @Body requestBody: RequestBody
     ): Response<JsonElement>

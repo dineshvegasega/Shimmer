@@ -25,7 +25,11 @@ import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.models.ItemWebsite
 import com.klifora.franchise.models.myOrdersList.ItemOrders
+import com.klifora.franchise.models.myOrdersList.ItemOrdersItem
+import com.klifora.franchise.ui.main.complaintsFeedback.createNew.CreateNewVM.Companion.type
 import com.klifora.franchise.ui.mainActivity.MainActivity
+import com.klifora.franchise.ui.mainActivity.MainActivityVM
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.changeDateFormat
 import com.klifora.franchise.utils.encodeImage
 import com.klifora.franchise.utils.getCameraPath
@@ -47,8 +51,9 @@ class CreateNew : Fragment() {
     private val viewModel: CreateNewVM by viewModels()
     private var _binding: CreateNewBinding? = null
     private val binding get() = _binding!!
+    var itemOrders: ArrayList<ItemOrdersItem> = ArrayList()
 
-    var itemOrders : ItemOrders = ItemOrders()
+    //    var itemOrders: ItemOrders = ItemOrders()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -76,7 +81,7 @@ class CreateNew : Fragment() {
                 }
             }
 
-
+            topBarClose.btClose.visibility = View.INVISIBLE
 
             readData(WEBSITE_DATA) { webData ->
                 if (webData != null) {
@@ -85,55 +90,79 @@ class CreateNew : Fragment() {
                         ItemWebsite::class.java
                     )
 
-                    editTextYourName.setText(""+data.name)
-                    editTextYourMobileNumber.setText(""+data.mobile_number)
+                    editTextYourName.setText("" + data.name)
+                    editTextYourMobileNumber.setText("" + data.mobile_number)
 
-                    viewModel.orderHistoryList(data.website_id, "", ""){
+
+                    viewModel.orderHistoryList(data.website_id, "", "") {
+                        itemOrders.clear()
 //                        Log.e("TAG", "success111:"+this.toString())
-                        itemOrders = this
+                        val order_id = arguments?.getString("order_id")
+                        if (order_id != null) {
+                            for (value in this) {
+                                if (order_id == "" + value.entity_id) {
+                                    Log.e("TAG", "34" + "thisAA " + value.entity_id)
+                                    itemOrders.add(value)
+                                }
+                            }
+                        } else {
+                            itemOrders = this
+                        }
                     }
                 }
             }
 
             editTextSelectYourChoice.singleClick {
-                requireActivity().showDropDownDialog(type = 1){
+                requireActivity().showDropDownDialog(type = 1) {
                     editTextSelectYourChoice.setText(name)
-                    when(position){
-                        0-> {
-                            viewModel.type = "1"
-                            textSubjectOfComplaintTxt.text = getString(R.string.subject_of_complaint)
+                    when (position) {
+                        0 -> {
+                            type = "1"
+                            textSubjectOfComplaintTxt.text =
+                                getString(R.string.subject_of_complaint)
+                            groupComplaint.visibility = View.VISIBLE
+                            groupFeedback.visibility = View.GONE
                         }
-                        1-> {
-                            viewModel.type = "2"
+
+                        1 -> {
+                            type = "2"
                             textSubjectOfComplaintTxt.text = getString(R.string.subject_of_feedback)
+                            groupComplaint.visibility = View.GONE
+                            groupFeedback.visibility = View.VISIBLE
                         }
                     }
-
-//                    Handler(Looper.getMainLooper()).postDelayed({
-//                        textSubjectOfComplaintTxt.text = "sdasdf"
-//                    }, 50)
                 }
             }
 
-//            if(networkFailed) {
-//                viewModel.complaintType(view)
-//            } else {
-//                requireContext().callNetworkDialog()
-//            }
+            editTextSelectSubject.singleClick {
+                requireActivity().showDropDownDialog(type = 4) {
+                    editTextSelectSubject.setText(name)
+                    when (position) {
+                        0 -> {
+                            viewModel.typeSubject = name
+                        }
 
+                        1 -> {
+                            viewModel.typeSubject = name
+                        }
+                    }
+                }
+            }
 
 
             editTextSelectPriorityType.singleClick {
-                requireActivity().showDropDownDialog(type = 2){
+                requireActivity().showDropDownDialog(type = 2) {
                     editTextSelectPriorityType.setText(name)
-                    when(position){
-                        0-> {
+                    when (position) {
+                        0 -> {
                             viewModel.priorityType = "1"
                         }
-                        1-> {
+
+                        1 -> {
                             viewModel.priorityType = "2"
                         }
-                        2-> {
+
+                        2 -> {
                             viewModel.priorityType = "3"
                         }
                     }
@@ -142,25 +171,42 @@ class CreateNew : Fragment() {
 
 
             editTextSelectOrder.singleClick {
-                if(itemOrders.size > 0){
+                if (itemOrders.size > 0) {
                     var index = 0
                     val list = arrayOfNulls<String>(itemOrders.size)
                     for (value in itemOrders) {
                         list[index] = value.entity_id
                         index++
                     }
-                    requireActivity().showDropDownDialog(type = 3, list){
+
+                    requireActivity().showDropDownDialog(type = 3, list) {
                         editTextSelectOrder.setText(name)
-//                        viewModel.complaintTypeId =  viewModel.itemComplaintType[position].id
                         readData(ADMIN_TOKEN) { token ->
-                            viewModel.orderHistoryListDetail(token.toString(), itemOrders[position].entity_id) {
+                            viewModel.orderHistoryListDetail(
+                                token.toString(),
+                                itemOrders[position].entity_id
+                            ) {
                                 val itemOrderDetail = this
-                                rvListCategory1.setHasFixedSize(true)
-                                viewModel.orderSKUOrderHistory.notifyDataSetChanged()
-                                viewModel.orderSKUOrderHistory.submitList(itemOrderDetail?.items)
-                                rvListCategory1.adapter = viewModel.orderSKUOrderHistory
-                                textOrdersTxt.visibility = View.VISIBLE
-                                rvListCategory1.visibility = View.VISIBLE
+                                itemOrderDetail.apply {
+                                    if (type == "1") {
+                                        rvListCategory1.setHasFixedSize(true)
+                                        viewModel.orderSKUOrderHistory.notifyDataSetChanged()
+                                        viewModel.orderSKUOrderHistory.submitList(itemOrderDetail?.items)
+                                        rvListCategory1.adapter = viewModel.orderSKUOrderHistory
+                                        textOrdersTxt.visibility = View.VISIBLE
+                                        rvListCategory1.visibility = View.VISIBLE
+                                    } else if (type == "2") {
+                                        rvListCategory1.setHasFixedSize(true)
+                                        viewModel.orderSKUOrderHistoryFeedback.notifyDataSetChanged()
+                                        viewModel.orderSKUOrderHistoryFeedback.submitList(
+                                            itemOrderDetail?.items
+                                        )
+                                        rvListCategory1.adapter =
+                                            viewModel.orderSKUOrderHistoryFeedback
+                                        textOrdersTxt.visibility = View.VISIBLE
+                                        rvListCategory1.visibility = View.VISIBLE
+                                    }
+                                }
                             }
                         }
                     }
@@ -179,63 +225,119 @@ class CreateNew : Fragment() {
 
 
             layoutSort.singleClick {
-                if(editTextSelectYourChoice.text.toString().isEmpty()){
-                    if (viewModel.type == "1"){
-                        showSnackBar(getString(R.string.subject_of_complaint))
-                    } else if (viewModel.type == "2"){
-                        showSnackBar(getString(R.string.subject_of_feedback))
-                    }
-                } else if (editTextSubjectOfComplaint.text.toString().isEmpty()){
-                    showSnackBar(getString(R.string.enter_subject))
-                } else if (viewModel.priorityType.isEmpty()){
-                    showSnackBar(getString(R.string.select_priority_type))
-                } else if (editTextSelectOrder.text.toString().isEmpty()){
-                    showSnackBar(getString(R.string.select_order))
-                } else if (viewModel.idsArray.size == 0){
-                    showSnackBar(getString(R.string.select_products))
-                } else if (editTextYourName.text.toString().isEmpty()){
-                    showSnackBar(getString(R.string.your_full_name))
-                } else if (editTextYourMobileNumber.text.toString().isEmpty() || editTextYourMobileNumber.text.toString().length != 10){
-                    showSnackBar(getString(R.string.your_mobile_number))
-                } else if (editTextTypeHere.text.toString().isEmpty()){
-                    showSnackBar(getString(R.string.description))
-//                } else if (viewModel.uploadMediaImageBase64.isEmpty()){
-//                    showSnackBar(getString(R.string.upload_media))
-                } else {
-                    readData(WEBSITE_DATA) { webData ->
-                        if (webData != null) {
-                            val data = Gson().fromJson(
-                                webData,
-                                ItemWebsite::class.java
-                            )
+                if (type == "1") {
+                    if (editTextSelectYourChoice.text.toString().isEmpty()) {
+                        if (type == "1") {
+                            showSnackBar(getString(R.string.subject_of_complaint))
+                        } else if (type == "2") {
+                            showSnackBar(getString(R.string.subject_of_feedback))
+                        }
+                    } else if (viewModel.typeSubject.isEmpty()) {
+                        showSnackBar(getString(R.string.select_subject))
+                    } else if (editTextSelectOrder.text.toString().isEmpty()) {
+                        showSnackBar(getString(R.string.select_order))
+                    } else if (viewModel.idsArray.size == 0) {
+                        showSnackBar(getString(R.string.select_products))
+                    } else if (editTextYourName.text.toString().isEmpty()) {
+                        showSnackBar(getString(R.string.your_full_name))
+                    } else if (editTextYourMobileNumber.text.toString()
+                            .isEmpty() || editTextYourMobileNumber.text.toString().length != 10
+                    ) {
+                        showSnackBar(getString(R.string.your_mobile_number))
+                    } else if (editTextTypeHere.text.toString().isEmpty()) {
+                        showSnackBar(getString(R.string.description))
+                    } else {
+                        readData(WEBSITE_DATA) { webData ->
+                            if (webData != null) {
+                                val data = Gson().fromJson(
+                                    webData,
+                                    ItemWebsite::class.java
+                                )
 
-                            val jsonObjectStatus = JSONObject().apply {
-                                put("file", viewModel.uploadMediaImageBase64)
-                                put("name", data?.name)
-                                put("mobile",  data?.mobile_number)
-                                put("customerid",  data?.entity_id)
-                                put("storename",  data?.website_id)
-                                put("discription", editTextTypeHere.text.toString())
-                                put("subject", editTextSubjectOfComplaint.text.toString())
-                                put("category", "1")
-                                put("priority", viewModel.priorityType)
-                                put("orderid", editTextSelectOrder.text.toString())
-                                put("productid", viewModel.idsArray.joinToString (separator = ",") { it -> "${it}" })
+                                val jsonObjectStatus = JSONObject().apply {
+                                    put("file", viewModel.uploadMediaImageBase64)
+                                    put("name", data?.name)
+                                    put("mobile", data?.mobile_number)
+                                    put("customerid", data?.entity_id)
+                                    put("storename", data?.website_id)
+                                    put("discription", editTextTypeHere.text.toString())
+                                    put("subject", viewModel.typeSubject)
+                                    put("category", "1")
+                                    put("priority", viewModel.priorityType)
+                                    put("orderid", editTextSelectOrder.text.toString())
+                                    put(
+                                        "productid",
+                                        viewModel.idsArray.joinToString(separator = ",") { it -> "${it}" })
+                                }
+                                viewModel.createTicket(jsonObjectStatus) {
+                                    if (this.contains("Ticket was successfully sent")) {
+                                        showSnackBar("Ticket created successfully")
+                                        Handler(Looper.getMainLooper()).postDelayed({
+                                            findNavController().navigateUp()
+                                        }, 1000)
+                                    } else {
+                                        showSnackBar("Something went wrong!")
+                                    }
+                                }
                             }
-                            viewModel.createTicket(jsonObjectStatus){
-                                if (this.contains("Ticket was successfully sent")){
-                                    showSnackBar("Ticket created successfully")
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        findNavController().navigateUp()
-                                    }, 1000)
-                                } else {
-                                    showSnackBar("Something went wrong!")
+                        }
+                    }
+                } else if (type == "2") {
+                    Log.e("TAG", "viewModel.idsArrayFeedback" + viewModel.idsArrayFeedback)
+                    if (editTextSelectYourChoice.text.toString().isEmpty()) {
+                        if (type == "1") {
+                            showSnackBar(getString(R.string.subject_of_complaint))
+                        } else if (type == "2") {
+                            showSnackBar(getString(R.string.subject_of_feedback))
+                        }
+//                    } else if (viewModel.typeSubject.isEmpty()){
+//                        showSnackBar(getString(R.string.select_subject))
+                    } else if (editTextSelectOrder.text.toString().isEmpty()) {
+                        showSnackBar(getString(R.string.select_order))
+                    } else if (viewModel.idsArrayFeedback.isEmpty()) {
+                        showSnackBar(getString(R.string.select_products))
+//                    } else if (editTextYourName.text.toString().isEmpty()){
+//                        showSnackBar(getString(R.string.your_full_name))
+//                    } else if (editTextYourMobileNumber.text.toString().isEmpty() || editTextYourMobileNumber.text.toString().length != 10){
+//                        showSnackBar(getString(R.string.your_mobile_number))
+                    } else if (editTextComments.text.toString().isEmpty()) {
+                        showSnackBar(getString(R.string.comments))
+                    } else {
+                        readData(WEBSITE_DATA) { webData ->
+                            if (webData != null) {
+                                val data = Gson().fromJson(
+                                    webData,
+                                    ItemWebsite::class.java
+                                )
+
+                                val jsonObjectStatus = JSONObject().apply {
+                                    put("customer_name", data?.name)
+//                                    put("mobile",  "")
+                                    put("titel", "")
+                                    put("body", editTextComments.text.toString())
+                                    put("rating", "" + ratingBar.rating.toInt())
+//                                    put("subject", "")
+//                                    put("category", "1")
+//                                    put("priority", viewModel.priorityType)
+//                                    put("orderid", editTextSelectOrder.text.toString())
+                                    put("productid", viewModel.idsArrayFeedback)
+                                }
+                                viewModel.createFeedback(jsonObjectStatus) {
+                                    if (this.contains("[]")) {
+                                        showSnackBar("Feedback sent successfully")
+                                        Handler(Looper.getMainLooper()).postDelayed({
+                                            findNavController().navigateUp()
+                                        }, 1000)
+                                    } else {
+                                        showSnackBar("Something went wrong!")
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+
 
 //            layoutSort.singleClick {
 //                if(editTextSubjectOfComplaint.text.toString().isEmpty()){
@@ -299,41 +401,45 @@ class CreateNew : Fragment() {
     }
 
 
-
-
     var imagePosition = 0
-    private var pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
-        lifecycleScope.launch {
-            if (uri != null) {
-                when (imagePosition) {
-                    1 -> {
-                        val compressedImageFile = Compressor.compress(requireContext(), File(requireContext().getMediaFilePathFor(uri)))
-                        viewModel.uploadMediaImage = compressedImageFile.path
-                        binding.textViewUploadMedia.setText(File(viewModel.uploadMediaImage!!).name)
+    private var pickMedia =
+        registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            lifecycleScope.launch {
+                if (uri != null) {
+                    when (imagePosition) {
+                        1 -> {
+                            val compressedImageFile = Compressor.compress(
+                                requireContext(),
+                                File(requireContext().getMediaFilePathFor(uri))
+                            )
+                            viewModel.uploadMediaImage = compressedImageFile.path
+                            binding.textViewUploadMedia.setText(File(viewModel.uploadMediaImage!!).name)
 //                        val encodedUrl = Base64.getUrlEncoder().encodeToString(compressedImageFile.path.toByteArray())
-                        val encodedUrl = encodeImage(compressedImageFile.path)
-                        Log.e("TAG", "encodedUrlA "+encodedUrl)
-                        viewModel.uploadMediaImageBase64 = encodedUrl
+                            val encodedUrl = encodeImage(compressedImageFile.path)
+                            Log.e("TAG", "encodedUrlA " + encodedUrl)
+                            viewModel.uploadMediaImageBase64 = encodedUrl
+                        }
                     }
                 }
             }
         }
-    }
 
 
-
-    var uriReal : Uri?= null
+    var uriReal: Uri? = null
     val captureMedia = registerForActivityResult(ActivityResultContracts.TakePicture()) { uri ->
         lifecycleScope.launch {
             if (uri == true) {
                 when (imagePosition) {
                     1 -> {
-                        val compressedImageFile = Compressor.compress(requireContext(), File(requireContext().getMediaFilePathFor(uriReal!!)))
+                        val compressedImageFile = Compressor.compress(
+                            requireContext(),
+                            File(requireContext().getMediaFilePathFor(uriReal!!))
+                        )
                         viewModel.uploadMediaImage = compressedImageFile.path
                         binding.textViewUploadMedia.setText(compressedImageFile.name)
-                       // val encodedUrl = Base64.getUrlEncoder().encodeToString(compressedImageFile.path.toByteArray())
+                        // val encodedUrl = Base64.getUrlEncoder().encodeToString(compressedImageFile.path.toByteArray())
                         val encodedUrl = encodeImage(compressedImageFile.path)
-                        Log.e("TAG", "encodedUrlB "+encodedUrl)
+                        Log.e("TAG", "encodedUrlB " + encodedUrl)
                         viewModel.uploadMediaImageBase64 = encodedUrl
                     }
                 }
@@ -342,28 +448,30 @@ class CreateNew : Fragment() {
     }
 
 
-
     private fun callMediaPermissions() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             activityResultLauncher.launch(
                 arrayOf(
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_MEDIA_IMAGES,
                     Manifest.permission.READ_MEDIA_VIDEO,
-                    Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED)
+                    Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
+                )
             )
-        }else if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             activityResultLauncher.launch(
                 arrayOf(
                     Manifest.permission.CAMERA,
-                    Manifest.permission.READ_MEDIA_IMAGES)
+                    Manifest.permission.READ_MEDIA_IMAGES
+                )
             )
-        } else{
+        } else {
             activityResultLauncher.launch(
                 arrayOf(
                     Manifest.permission.CAMERA,
                     Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
             )
         }
     }
@@ -372,15 +480,16 @@ class CreateNew : Fragment() {
     var isFree = false
     private val activityResultLauncher =
         registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions())
+            ActivityResultContracts.RequestMultiplePermissions()
+        )
         { permissions ->
             permissions.entries.forEach {
                 val permissionName = it.key
                 val isGranted = it.value
                 if (isGranted) {
-                    if(isFree){
+                    if (isFree) {
                         requireActivity().showOptions {
-                            when(this){
+                            when (this) {
                                 1 -> forCamera()
                                 2 -> forGallery()
                             }
@@ -392,9 +501,6 @@ class CreateNew : Fragment() {
         }
 
 
-
-
-
     private fun forCamera() {
         requireActivity().getCameraPath {
             uriReal = this
@@ -403,7 +509,7 @@ class CreateNew : Fragment() {
     }
 
     private fun forGallery() {
-        requireActivity().runOnUiThread(){
+        requireActivity().runOnUiThread() {
             pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
     }

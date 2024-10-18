@@ -161,9 +161,74 @@ class MainActivity : AppCompatActivity() {
             Log.e("TAG", "thisgetToken "+this)
         }
 
+
+        val mentors = arrayOf(
+            Mentor(1, "Amit Shekhar"),
+            Mentor(2, "Anand Gaurav"),
+            Mentor(1, "Amit Kumar"),
+            Mentor(3, "Lionel Messi"))
+
+        data class Item(val id: String, val text: String)
+
+        fun distinct(data : List<Item>) = data.reversed().distinctBy{it.id}
+
+
+        val data = listOf(
+            Item("32701", "First"),
+            Item("32702", "Second"),
+            Item("32702", "Second2"),
+            Item("32701", "First True"),
+            Item("32701", "First True 2")
+        ).distinctBy { it.id }
+        println(distinct(data))
+        println(data)
+
+//        val Data = ArrayList<List<String>>()
+//
+//        Data.add(listOf("32701", "First"))
+//        Data.add(listOf("32702", "Second"))
+//        Data.add(listOf("32702", "Second"))
+//        Data.add(listOf("32701", "First True"))
+//
+//
+//        println(Data.reversed().distinctBy{it[0]} )
+
+
+//        var count = 0
+//        var qq = 0
+//        mentors.forEach {
+//            if (qq == 0){
+//                qq = it.id
+//                count++
+//                Log.e("TAG", ""+count+" itAAA "+it)
+//            } else {
+//                if (qq != it.id){
+//                    Log.e("TAG", ""+count+"itBBB "+it)
+////                    qq = 0
+//                    count = 0
+//                } else if (qq == it.id){
+//                    qq = 0
+//                    Log.e("TAG", ""+count+"itCCC "+it)
+//                } else {
+//                    Log.e("TAG", ""+count+"itCCC "+it)
+//                    count++
+//                }
+//            }
+//
+//
+//        }
+
+
+
+//        val distinct = mentors.distinctBy()
+//        println(distinct)
+        Log.e("TAG", "thisgetTokendd "+mentors)
+
 //        val dd = FirebaseOptions.fromResource(context.get()!!)?.getApiKey()
 //        Log.e("TAG", "thisgetTokendd "+dd)
     }
+
+    data class Mentor(val id: Int, val name: String)
 
 
     private fun observeConnectivityManager() = try {

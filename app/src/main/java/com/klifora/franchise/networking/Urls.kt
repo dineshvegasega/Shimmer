@@ -75,7 +75,13 @@ const val RELATED_PRODUCTS = "V1/vegasega-apis/relatedproduct"
 
 const val COMPLAINT_LIST = "/V1/vegasega-apis/helpdesk-ticket-list?"
 
+const val FEEDBACK_LIST = "/V1/vegasega-apis/feedback-list?"
+
+const val COMPLAINT_DETAIL = "/V1/vegasega-apis/helpdesk-chat-api?"
+
 const val CREATE_TICKET = "/V1/vegasega-apis/helpdesk-ticket"
+
+const val CREATE_FEEDBACK = "/V1/vegasega-apis/feedbacksave"
 
 const val MESSAGE_HISTORY = "/V1/vegasega-apis/helpdesk-message-by-ticket?"
 

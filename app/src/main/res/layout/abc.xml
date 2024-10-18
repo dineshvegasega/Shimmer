@@ -10,14 +10,14 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:visibility="gone"/>
 
     <FrameLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="100dp"
         android:visibility="gone">
 
         <com.klifora.franchise.utils.pdfviewer.PdfRendererView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:text="OK"
-        android:visibility="visible"/>
+        android:visibility="gone"/>
 
 
 
@@ -57,6 +57,7 @@
         android:layout_marginTop="@dimen/_100sdp"
         android:orientation="horizontal"
         android:gravity="center"
+        android:visibility="gone"
         android:background="@color/white">
 
         <View
@@ -271,8 +272,37 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/_103sdp"
+        android:visibility="gone"
        >
     </WebView>
 
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/library_tinted_normal_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:rating="2.5"
+        android:minHeight="48dp"
+        android:maxHeight="48dp"
+        app:mrb_progressTint="@color/app_color"
+        app:mrb_secondaryProgressTint="@color/app_color"
+        style="@style/Widget.MaterialRatingBar.RatingBar" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/library_normal_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:stepSize="0.1"
+        android:visibility="visible"
+        android:rating="3.5"
+        android:minHeight="@dimen/_50sdp"
+        android:maxHeight="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_100sdp"
+        style="@style/Widget.MaterialRatingBar.RatingBar"
+        />
 
 </RelativeLayout>

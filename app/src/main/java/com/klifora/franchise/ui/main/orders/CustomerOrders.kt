@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -53,7 +54,7 @@ class CustomerOrders(
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        adapter2 = CategoryChildTabAdapter()
@@ -93,6 +94,34 @@ class CustomerOrders(
                 }
                 true
             }
+
+
+
+            editTextSearch.setOnTouchListener(View.OnTouchListener { v, event ->
+                val DRAWABLE_LEFT = 0
+                val DRAWABLE_TOP = 1
+                val DRAWABLE_RIGHT = 2
+                val DRAWABLE_BOTTOM = 3
+
+                if (event.action == MotionEvent.ACTION_UP) {
+                    if (event.rawX >= (editTextSearch.getRight() - editTextSearch.getCompoundDrawables()
+                            .get(DRAWABLE_RIGHT).getBounds().width())
+                    ) {
+                        val isNumeric = isNumeric(editTextSearch.text.toString())
+                        viewModel.itemsCustomerOrders.clear()
+                        page = 1
+                        if(isNumeric == true){
+                            loadData(""+editTextSearch.text.toString() , "")
+                        } else {
+                            loadData("" , ""+editTextSearch.text.toString())
+                        }
+                        return@OnTouchListener true
+                    }
+                }
+                false
+            })
+
+
 
 //
 //            editTextSearch.addTextChangedListener(object : TextWatcher {

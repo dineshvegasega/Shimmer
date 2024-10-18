@@ -48,4 +48,5 @@ data class ItemX(
     val tax_percent: Double = 0.0,
     val updated_at: String,
     val weight: Double = 0.0,
-)
+    var isComplete: Boolean = false,
+    )

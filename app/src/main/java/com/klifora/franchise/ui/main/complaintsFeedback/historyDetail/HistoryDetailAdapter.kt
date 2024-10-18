@@ -136,12 +136,15 @@ class HistoryDetailAdapter () :
         fun bind(model: ItemMessageHistoryItem) {
             binding.apply {
                 tvMessage.text = model.body
-                var allNames = ""
-                val names = model.customer_name.split(" ")
-                names.map {
-                    allNames += it.first()
-                }
-                ivUserImage.text = allNames.uppercase().toString()
+//                var allNames = ""
+//                val names = model.customer_name.split(" ")
+//                names.map {
+//                    allNames += it.first()
+//                }
+//                ivUserImage.text = allNames.uppercase().toString()
+
+
+                ivUserImage.text = model.customer_name.first().uppercase()
 
 
                 if (model.imgeurl != null && model.imgeurl.endsWith(".png")){
