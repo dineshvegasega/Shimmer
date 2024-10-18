@@ -64,7 +64,7 @@
                 android:id="@+id/textTrackTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tracking_id"
+                android:text="@string/feedback_id"
                 android:textColor="@color/_79747E"
                 android:textSize="@dimen/_10sdp"
                 app:fontFamily="@font/nunitosans_semibold"
