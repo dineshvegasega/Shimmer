@@ -662,6 +662,11 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="layoutRingSize,layoutGuide, view1214" />
 
 
             <View

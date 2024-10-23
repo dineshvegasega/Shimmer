@@ -246,6 +246,25 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
+                                if (itemCustomPurityAttr.attribute_code == "metal_purity") {
+                                    if (itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "25") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectColorAA: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -261,7 +280,26 @@ class ProductDetail : Fragment(), CallBackListener {
                         if (itemCustomSizeAttr.attribute_code == "size") {
                             itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
                                 if (itemCustomPurityAttr.attribute_code == "metal_purity") {
-                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "20") {
+                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "50") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectColorAA: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
+                                if (itemCustomPurityAttr.attribute_code == "metal_purity") {
+                                    if (itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "50") {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectColorAA: ${itemProductOptions.toString()}"
@@ -308,6 +346,27 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomPurityAttr ->
+                                if (itemCustomPurityAttr.attribute_code == "metal_purity") {
+//                                    Log.e("TAG", "AAAA "+itemCustomSizeAttr.attribute_code +"  :::  "+itemCustomPurityAttr.attribute_code)
+//                                }
+                                    if (itemProductOptions.metal_purity == itemCustomPurityAttr.value && itemProductOptions.metal_color == "19") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectColorAA: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -339,6 +398,25 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "26") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -352,13 +430,36 @@ class ProductDetail : Fragment(), CallBackListener {
                 arrayItemProduct.forEach { itemProductOptions ->
                     itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
                         if (itemCustomSizeAttr.attribute_code == "size") {
+                            Log.e(
+                                "TAG",
+                                "jsonObjectPurityAA14AA: ${itemCustomSizeAttr.toString()}"
+                            )
                             itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
                                 if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                   // if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value) {
-//                                        Log.e("TAG", "AAAA "+itemCustomSizeAttr.value +"  :::  "+itemCustomColorAttr.value + "  ::  "+itemProductOptions.metal_purity)
-//
-//                                    }
                                     if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "14") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            Log.e(
+                                "TAG",
+                                "jsonObjectPurityAA14BB: ${itemCustomSizeAttr.toString()}"
+                            )
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "14") {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
@@ -403,6 +504,26 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "15") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
 
@@ -418,11 +539,26 @@ class ProductDetail : Fragment(), CallBackListener {
                         if (itemCustomSizeAttr.attribute_code == "size") {
                             itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
                                 if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    // if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value) {
-//                                        Log.e("TAG", "AAAA "+itemCustomSizeAttr.value +"  :::  "+itemCustomColorAttr.value + "  ::  "+itemProductOptions.metal_purity)
-//
-//                                    }
                                     if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectPurityAA14: ${itemProductOptions.toString()}"
@@ -467,6 +603,25 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
                         }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -483,6 +638,25 @@ class ProductDetail : Fragment(), CallBackListener {
                             itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
                                 if (itemCustomColorAttr.attribute_code == "metal_color") {
                                     if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "18") {
+                                        Log.e(
+                                            "TAG",
+                                            "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
+                                        )
+                                        currentSku = itemProductOptions.sku
+                                        isAvailable = true
+                                        callApiDetailsConfigurable(
+                                            itemProductOptions.sku,
+                                            itemProduct
+                                        )
+                                    }
+                                }
+                            }
+                        }
+
+                        if (itemCustomSizeAttr.attribute_code != "size") {
+                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "18") {
                                         Log.e(
                                             "TAG",
                                             "jsonObjectPurityAA18: ${itemProductOptions.toString()}"
@@ -910,6 +1084,9 @@ class ProductDetail : Fragment(), CallBackListener {
     ) {
 //        viewModel.show()
         binding.apply {
+            mainThread {
+                viewModel.show()
+            }
             textCategories.visibility = View.GONE
             linearRoseGold.visibility = View.GONE
             linearWhiteGold.visibility = View.GONE
@@ -1433,7 +1610,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                     if (itemConfigurableProductMetalColorAttr.value_index == 19) {
                                         linearYellowGold.visibility = View.VISIBLE
                                     }
-                                    if (itemConfigurableProductMetalColorAttr.value_index == 20) {
+                                    if (itemConfigurableProductMetalColorAttr.value_index == 50) {
                                         linearWhiteGold.visibility = View.VISIBLE
                                     }
                                     if (itemConfigurableProductMetalColorAttr.value_index == 25) {
@@ -1453,7 +1630,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         linearYellowGold.visibility = View.VISIBLE
                                         viewModel.colors(binding, 3)
                                     }
-                                    if ("" + itemProductAttr.value == "20") {
+                                    if ("" + itemProductAttr.value == "50") {
                                         linearWhiteGold.visibility = View.VISIBLE
                                         viewModel.colors(binding, 2)
                                     }
@@ -1462,6 +1639,21 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         }
 
+
+
+                        if (viewModel.arrayItemProductOptionsSize.size == 0) {
+                            groupSize.visibility = View.GONE
+                        } else if (viewModel.arrayItemProductOptionsSize.size == 1) {
+                            viewModel.arrayItemProductOptionsSize.forEach {
+                                if (it.value_index == 51) {
+                                    groupSize.visibility = View.GONE
+                                } else {
+                                    groupSize.visibility = View.VISIBLE
+                                }
+                            }
+                        } else {
+                            groupSize.visibility = View.VISIBLE
+                        }
 
 
                         viewModel.relatedProducts(itemProduct.id) {

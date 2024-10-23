@@ -134,8 +134,10 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
 
                         if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
+                        } else if(message.contains("customerId")){
+                            sessionExpired()
                         } else {
-//                            sessionExpired()
+                            showSnackBar("Something went wrong!")
                         }
 
                     }
@@ -241,8 +243,10 @@ class HistoryVM @Inject constructor(private val repository: Repository) : ViewMo
 
                         if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
+                        } else if(message.contains("customerId")){
+                            sessionExpired()
                         } else {
-//                            sessionExpired()
+                            showSnackBar("Something went wrong!")
                         }
 
                     }

@@ -374,7 +374,11 @@ class Products : Fragment() {
             var mainCategoryBoolean = false
             mainCategory.forEach {
                 if (it.isSelected) {
-                    categoryIds += "" + it.id + ","
+                    if(it.id != 0){
+                        if(!categoryIds.contains(it.id.toString())){
+                            categoryIds += "" + it.id + ","
+                        }
+                    }
                     mainCategoryBoolean = true
                 }
 
@@ -382,12 +386,16 @@ class Products : Fragment() {
                     if (sub.isSelected && sub.isAll == false) {
                         Log.e("TAG", "it.isSelected ${sub.isSelected} ids:${sub.id}")
                         count += 1
-                        categoryIds += "" + sub.id + ","
+                        if(it.id != 0){
+                            if(!categoryIds.contains(it.id.toString())){
+                                categoryIds += "" + it.id + ","
+                            }
+                        }
                     }
                 }
             }
-//            categoryIds =
-//                if (categoryIds.length > 0) categoryIds.substring(0, categoryIds.length - 1) else ""
+            categoryIds =
+                if (categoryIds.length > 1) categoryIds.substring(0, categoryIds.length - 1) else ""
             Log.e("TAG", "mainCategoryXX " + categoryIds)
             if (mainCategoryBoolean) {
                 emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =

@@ -224,8 +224,10 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                             showSnackBar("Something went wrong!")
                         } else if (message.contains("The product that was requested doesn't exist")) {
                             showSnackBar(message)
-                        } else {
+                        } else if(message.contains("customerId")){
                             sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
                         }
 
                         hide()
@@ -272,8 +274,10 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                             showSnackBar(message)
                         } else if (message.contains("error")) {
                             showSnackBar(message)
-                        } else {
+                        } else if(message.contains("customerId")){
                             sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
                         }
                         hide()
                     }
@@ -329,8 +333,10 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                             showSnackBar("Something went wrong!")
                         } else if (message.contains("The product that was requested doesn't exist")) {
                             showSnackBar(message)
-                        } else {
+                        } else if(message.contains("customerId")){
                             sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
                         }
 
                     }

@@ -234,8 +234,10 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     override fun error(message: String) {
                         if(message.contains("fieldName")){
                             showSnackBar("Something went wrong!")
-                        } else {
+                        } else if(message.contains("customerId")){
                             sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
                         }
                     }
 

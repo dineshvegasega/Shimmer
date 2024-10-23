@@ -648,8 +648,8 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="Prepare"
-                        android:textSize="@dimen/_13sdp"
+                        android:text="@string/pending"
+                        android:textSize="@dimen/_11sdp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -689,8 +689,8 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="Prepare"
-                        android:textSize="@dimen/_13sdp"
+                        android:text="@string/work_in_progress"
+                        android:textSize="@dimen/_11sdp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -732,8 +732,8 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="Prepare"
-                        android:textSize="@dimen/_13sdp"
+                        android:text="@string/qc_photography"
+                        android:textSize="@dimen/_11sdp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -772,8 +772,8 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="Prepare"
-                        android:textSize="@dimen/_13sdp"
+                        android:text="@string/qc_certification"
+                        android:textSize="@dimen/_11sdp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -812,11 +812,92 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="Prepare"
-                        android:textSize="@dimen/_13sdp"
+                        android:text="@string/qc_packaging"
+                        android:textSize="@dimen/_11sdp"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="@string/qc_dispatch"
+                        android:textSize="@dimen/_11sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.95"
+                    >
+                    <com.github.vipulasri.timelineview.TimelineView
+                        android:id="@+id/timeline7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:markerSize="@dimen/_8sdp"
+                        app:lineWidth="@dimen/_1sdp"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        app:startLineColor="@color/_C4C4C4"
+                        app:marker="@drawable/ellipse_grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:endLineColor="@color/_C4C4C4"
+                        app:lineStyle="dash"
+                        />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/textTitle7"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints"
+                        app:fontFamily="@font/nunitosans_regular"
+                        android:lines="2"
+                        android:text="@string/qc_delivered"
+                        android:textSize="@dimen/_11sdp"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

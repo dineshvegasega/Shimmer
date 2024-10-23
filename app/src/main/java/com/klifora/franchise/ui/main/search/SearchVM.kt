@@ -235,8 +235,10 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
                             if(message.contains("fieldName")){
                                 showSnackBar("Something went wrong!")
-                            } else {
+                            } else if(message.contains("customerId")){
                                 sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
                             }
 
                         }
@@ -271,8 +273,10 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
                             if(message.contains("fieldName")){
                                 showSnackBar("Something went wrong!")
-                            } else {
+                            } else if(message.contains("customerId")){
                                 sessionExpired()
+                            } else {
+                                showSnackBar("Something went wrong!")
                             }
 
                         }

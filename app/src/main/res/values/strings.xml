@@ -259,4 +259,10 @@
     <string name="comments_150">Comments (Max 150 characters)</string>
     <string name="how_satisfied_were_you_with_tge_resolution_of_your_complaint">How satisfied were you with the resolution of your complaint.</string>
     <string name="order_no">Order No</string>
+    <string name="qc_delivered">QC - Delivered</string>
+    <string name="qc_dispatch">QC - Dispatch</string>
+    <string name="qc_packaging">QC - Packaging</string>
+    <string name="qc_certification">QC - Certification</string>
+    <string name="qc_photography">QC - Photography</string>
+    <string name="work_in_progress">Work In Progress</string>
 </resources>

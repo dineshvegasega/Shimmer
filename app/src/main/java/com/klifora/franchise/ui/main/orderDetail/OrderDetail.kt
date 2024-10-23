@@ -90,6 +90,8 @@ class OrderDetail : Fragment() {
             timeline3.initLine(0)
             timeline4.initLine(0)
             timeline5.initLine(2)
+            timeline6.initLine(0)
+            timeline7.initLine(2)
 
             timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
             timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color._138808), 1)

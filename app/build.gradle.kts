@@ -7,7 +7,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
-    id ("com.apollographql.apollo3") version ("3.7.0")
+//    id ("com.apollographql.apollo3") version ("3.7.0")
     id ("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -19,6 +19,7 @@ android {
     defaultConfig {
         applicationId = "com.klifora.franchise"
         minSdk = 26
+        //noinspection EditedTargetSdkVersion
         targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
@@ -71,6 +72,9 @@ android {
     }
 }
 
+//composeCompiler {
+//    enableStrongSkippingMode = true
+//}
 
 dependencies {
     implementation("androidx.core:core-ktx:1.13.1")
@@ -92,7 +96,7 @@ dependencies {
     implementation ("androidx.databinding:databinding-runtime:8.7.1")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
     implementation("com.intuit.ssp:ssp-android:1.1.0")
@@ -130,8 +134,8 @@ dependencies {
     debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
-    implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.4.0"))
+//    implementation ("com.google.android.play:core-ktx:1.8.1")
+    implementation (platform("com.google.firebase:firebase-bom:33.5.0"))
     implementation ("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-database-ktx")
@@ -170,7 +174,7 @@ dependencies {
     implementation ("androidx.work:work-runtime-ktx:2.9.1")
     implementation ("com.hbb20:ccp:2.7.0")
     implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
-    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
+//    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
 
     implementation ("androidx.media3:media3-exoplayer:1.4.1")
     implementation ("androidx.media3:media3-ui:1.4.1")
@@ -189,6 +193,7 @@ dependencies {
 
     implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
     implementation ("com.github.vipulasri:timelineview:1.1.5")
+    implementation ("com.razorpay:checkout:1.6.20")
 
 }
 
@@ -197,7 +202,7 @@ dependencies {
 //    generateModelBuilder = true
 //}
 
-apollo {
-    packageName.set("com.klifora.franchise")
-}
+//apollo {
+//    packageName.set("com.klifora.franchise")
+//}
 
