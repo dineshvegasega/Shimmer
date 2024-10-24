@@ -220,9 +220,6 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
                     }
 
 
-//                    currentList.forEach {
-//                        Log.e("TAG", "currentList: " + it.isSelected)
-//                    }
 
                     mainPrice.forEach {
                         it.isSelected = false
@@ -234,9 +231,13 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
                     }
 
                     isProductLoad = true
+
+
+//                    currentList.forEach {
+//                        Log.e("TAG", "currentListZZ: " + it.isSelected + " :: "+it.isSelected)
+//                    }
+
                     root.findNavController().navigate(R.id.action_category_to_products)
-
-
                 }
             }
         }

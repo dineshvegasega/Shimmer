@@ -170,6 +170,14 @@ class FiltersVM @Inject constructor() : ViewModel() {
 
                 textItem.text = dataClass.name
 
+                if(dataClass.subCategory.isEmpty()){
+                    layoutChild.visibility = View.GONE
+                    ivHideShow.visibility = View.GONE
+                } else {
+                    layoutChild.visibility = View.VISIBLE
+                    ivHideShow.visibility = View.VISIBLE
+                }
+
                 textItem.setTypeface(if (dataClass.isSelected == true) typefacenunitosans_semibold else typefacenunitosans_light)
                 ivIconCheck.imageTintList =
                     if (dataClass.isSelected == true) ContextCompat.getColorStateList(

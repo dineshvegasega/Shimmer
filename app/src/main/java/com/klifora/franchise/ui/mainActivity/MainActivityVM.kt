@@ -87,26 +87,26 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(id = 17, parent_id = 19, name = "Bands"))
             ))
             mainCategory.add(Items(id = 4, parent_id = 18, name = "Earrings", image = R.drawable.earring_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Earrings", isAll = true),
-                    Items(name = "Long Necklace"),
-                    Items(name = "Short Necklace"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Earrings", isAll = true),
+//                    Items(name = "Long Necklace"),
+//                    Items(name = "Short Necklace"))
             ))
             mainCategory.add(Items(id = 5, parent_id = 18, name = "Pendants", image = R.drawable.pendant_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Pendants", isAll = true),
-                    Items(name = "Alphabets"),
-                    Items(name = "Zodiac"),
-                    Items(name = "Casual"),
-                    Items(name = "Everyday"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Pendants", isAll = true),
+//                    Items(name = "Alphabets"),
+//                    Items(name = "Zodiac"),
+//                    Items(name = "Casual"),
+//                    Items(name = "Everyday"))
             ))
             mainCategory.add(Items(id = 6, parent_id = 18, name = "Bracelets", image = R.drawable.bracelet_img,
-                subCategory = arrayListOf(
-                    Items(name = "All Bracelets", isAll = true),
-                    Items(name = "Casual"),
-                    Items(name = "Bangles"),
-                    Items(name = "Occasion"),
-                    Items(name = "Everyday"))
+//                subCategory = arrayListOf(
+//                    Items(name = "All Bracelets", isAll = true),
+//                    Items(name = "Casual"),
+//                    Items(name = "Bangles"),
+//                    Items(name = "Occasion"),
+//                    Items(name = "Everyday"))
             ))
             mainCategory.add(Items(id = 7, parent_id = 18, name = "Mangalsutras", image = R.drawable.mangalsutra_img,
 //                subCategory = arrayListOf(

@@ -143,7 +143,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                     override fun success(response: Response<ItemCartModel>) {
                         if (response.isSuccessful) {
                             try {
-                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
+//                                Log.e("TAG", "successAAXX: ${response.body().toString()}")
                                 callBack(response.body()!!)
                             } catch (_: Exception) {
                             }
@@ -185,7 +185,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
-                                Log.e("TAG", "successAA: ${response.body().toString()}")
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
                                 val mMineUserEntity =
                                     Gson().fromJson(response.body(), ItemProduct::class.java)
 
@@ -252,7 +252,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
-                                Log.e("TAG", "successAACCC: ${response.body().toString()}")
+//                                Log.e("TAG", "successAACCC: ${response.body().toString()}")
                                 //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
                                 callBack(response.body()!!)
                             } catch (e: Exception) {
@@ -306,7 +306,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                     override fun success(response: Response<JsonElement>) {
                         if (response.isSuccessful) {
                             try {
-                                Log.e("TAG", "successAABBCC: ${response.body().toString()}")
+//                                Log.e("TAG", "successAABBCC: ${response.body().toString()}")
                                 val typeToken = object : TypeToken<ArrayList<ItemProduct>>() {}.type
                                 val changeValue = Gson().fromJson<ArrayList<ItemProduct>>(
                                     response.body(),
@@ -684,7 +684,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                     override fun success(response: Response<ItemRelatedProducts>) {
                         if (response.isSuccessful) {
                             callBack(response.body()!!)
-                            Log.e("TAG", "successAA: ${response.body().toString()}")
+//                            Log.e("TAG", "successAA: ${response.body().toString()}")
                         } else {
                             hide()
                             callBack(ItemRelatedProducts())

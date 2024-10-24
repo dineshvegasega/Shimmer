@@ -63,6 +63,8 @@ class CategoryChildTab(
 //            adapter2.notifyDataSetChanged()
 //            binding.rvList2.adapter = adapter2
 
+
+
             itemCategory1.textName.text = mainCategory[0].name
             itemCategory2.textName.text = mainCategory[1].name
             itemCategory3.textName.text = mainCategory[2].name
@@ -74,12 +76,57 @@ class CategoryChildTab(
             itemCategory9.textName.text = mainCategory[8].name
             itemCategory10.textName.text = mainCategory[9].name
 
-            itemCategory5.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
-            itemCategory6.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
-            itemCategory7.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
-            itemCategory8.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
-            itemCategory9.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
-            itemCategory10.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            if (mainCategory[0].subCategory.isEmpty()){
+                itemCategory1.rvListCategory.visibility = View.GONE
+                itemCategory1.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[1].subCategory.isEmpty()){
+                itemCategory2.rvListCategory.visibility = View.GONE
+                itemCategory2.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[2].subCategory.isEmpty()){
+                itemCategory3.rvListCategory.visibility = View.GONE
+                itemCategory3.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[3].subCategory.isEmpty()){
+                itemCategory4.rvListCategory.visibility = View.GONE
+                itemCategory4.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[4].subCategory.isEmpty()){
+                itemCategory5.rvListCategory.visibility = View.GONE
+                itemCategory5.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[5].subCategory.isEmpty()){
+                itemCategory6.rvListCategory.visibility = View.GONE
+                itemCategory6.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+
+            if (mainCategory[6].subCategory.isEmpty()){
+                itemCategory7.rvListCategory.visibility = View.GONE
+                itemCategory7.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[7].subCategory.isEmpty()){
+                itemCategory8.rvListCategory.visibility = View.GONE
+                itemCategory8.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[8].subCategory.isEmpty()){
+                itemCategory9.rvListCategory.visibility = View.GONE
+                itemCategory9.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
+            if (mainCategory[9].subCategory.isEmpty()){
+                itemCategory10.rvListCategory.visibility = View.GONE
+                itemCategory10.textName.setCompoundDrawablesWithIntrinsicBounds (0, 0, 0, 0)
+            }
+
 
             itemCategory1.rvListCategory.adapter = viewModel.subCategoryAdapter1
             itemCategory1.linearLayout.singleClick {
@@ -104,9 +151,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
 //                itemCategory1.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -120,19 +167,18 @@ class CategoryChildTab(
             }
 
 
-
             itemCategory2.linearLayout.singleClick {
                 itemCategory2.rvListCategory.adapter = viewModel.subCategoryAdapter2
                 viewModel.subCategoryAdapter2.notifyDataSetChanged()
                 viewModel.subCategoryAdapter2.submitList(mainCategory[1].subCategory)
                 itemCategory1.rvListCategory.visibility = View.GONE
-                if (itemCategory2.rvListCategory.isVisible == true) {
+//                if (itemCategory2.rvListCategory.isVisible == true) {
                     itemCategory2.rvListCategory.visibility = View.GONE
-                    itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                } else {
-                    itemCategory2.rvListCategory.visibility = View.VISIBLE
-                    itemCategory2.textName.endDrawable(R.drawable.arrow_down)
-                }
+//                    itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                } else {
+//                    itemCategory2.rvListCategory.visibility = View.VISIBLE
+//                    itemCategory2.textName.endDrawable(R.drawable.arrow_down)
+//                }
                 itemCategory3.rvListCategory.visibility = View.GONE
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
@@ -143,8 +189,8 @@ class CategoryChildTab(
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory2.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -152,9 +198,30 @@ class CategoryChildTab(
 //                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 2
-                Handler(Looper.myLooper()!!).postDelayed({
-                    itemCategory2.rvListCategory.scrollTo(0, itemCategory2.rvListCategory.bottom)
-                }, 100)
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[1].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
+//                Handler(Looper.myLooper()!!).postDelayed({
+//                    itemCategory2.rvListCategory.scrollTo(0, itemCategory2.rvListCategory.bottom)
+//                }, 100)
             }
 
 
@@ -164,13 +231,13 @@ class CategoryChildTab(
                 viewModel.subCategoryAdapter3.submitList(mainCategory[2].subCategory)
                 itemCategory1.rvListCategory.visibility = View.GONE
                 itemCategory2.rvListCategory.visibility = View.GONE
-                if (itemCategory3.rvListCategory.isVisible == true) {
+//                if (itemCategory3.rvListCategory.isVisible == true) {
                     itemCategory3.rvListCategory.visibility = View.GONE
-                    itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                } else {
-                    itemCategory3.rvListCategory.visibility = View.VISIBLE
-                    itemCategory3.textName.endDrawable(R.drawable.arrow_down)
-                }
+//                    itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                } else {
+//                    itemCategory3.rvListCategory.visibility = View.VISIBLE
+//                    itemCategory3.textName.endDrawable(R.drawable.arrow_down)
+//                }
                 itemCategory4.rvListCategory.visibility = View.GONE
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
@@ -179,9 +246,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory3.textName.endDrawable(R.drawable.arrow_down)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -189,9 +256,30 @@ class CategoryChildTab(
 //                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 3
-                Handler(Looper.myLooper()!!).postDelayed({
-                    itemCategory3.rvListCategory.scrollTo(0, itemCategory3.rvListCategory.bottom)
-                }, 100)
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[2].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
+//                Handler(Looper.myLooper()!!).postDelayed({
+//                    itemCategory3.rvListCategory.scrollTo(0, itemCategory3.rvListCategory.bottom)
+//                }, 100)
             }
 
 
@@ -202,13 +290,13 @@ class CategoryChildTab(
                 itemCategory1.rvListCategory.visibility = View.GONE
                 itemCategory2.rvListCategory.visibility = View.GONE
                 itemCategory3.rvListCategory.visibility = View.GONE
-                if (itemCategory4.rvListCategory.isVisible == true) {
+//                if (itemCategory4.rvListCategory.isVisible == true) {
                     itemCategory4.rvListCategory.visibility = View.GONE
-                    itemCategory4.textName.endDrawable(R.drawable.arrow_right)
-                } else {
-                    itemCategory4.rvListCategory.visibility = View.VISIBLE
-                    itemCategory4.textName.endDrawable(R.drawable.arrow_down)
-                }
+//                    itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                } else {
+//                    itemCategory4.rvListCategory.visibility = View.VISIBLE
+//                    itemCategory4.textName.endDrawable(R.drawable.arrow_down)
+//                }
                 itemCategory5.rvListCategory.visibility = View.GONE
                 itemCategory6.rvListCategory.visibility = View.GONE
                 itemCategory7.rvListCategory.visibility = View.GONE
@@ -216,8 +304,8 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory4.textName.endDrawable(R.drawable.arrow_down)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
@@ -226,9 +314,30 @@ class CategoryChildTab(
 //                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 4
-                Handler(Looper.myLooper()!!).postDelayed({
-                    itemCategory4.rvListCategory.scrollTo(0, itemCategory4.rvListCategory.bottom)
-                }, 100)
+                mainCategory.forEach {
+                    it.isSelected = false
+                    it.subCategory.forEach {
+                        it.isSelected = false
+                    }
+                }
+                mainCategory.forEach {
+                    if (it.isSelected) {
+                        it.subCategory.forEach { sub ->
+                            sub.isSelected = true
+                        }
+                    }
+                }
+                mainCategory[3].isSelected = true
+                mainPrice.forEach {
+                    it.isSelected = false
+                }
+                mainMaterial.forEach {
+                    it.isSelected = false
+                }
+                findNavController().navigate(R.id.action_category_to_products)
+//                Handler(Looper.myLooper()!!).postDelayed({
+//                    itemCategory4.rvListCategory.scrollTo(0, itemCategory4.rvListCategory.bottom)
+//                }, 100)
             }
 
 
@@ -247,9 +356,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -257,7 +366,6 @@ class CategoryChildTab(
 //                itemCategory9.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory10.textName.endDrawable(R.drawable.arrow_right)
                 mainSelect = 5
-
                 mainCategory.forEach {
                     it.isSelected = false
                     it.subCategory.forEach {
@@ -297,9 +405,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -347,9 +455,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -397,9 +505,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -447,9 +555,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -497,9 +605,9 @@ class CategoryChildTab(
                 itemCategory9.rvListCategory.visibility = View.GONE
                 itemCategory10.rvListCategory.visibility = View.GONE
                 itemCategory1.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
-                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory2.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory3.textName.endDrawable(R.drawable.arrow_right)
+//                itemCategory4.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory5.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory6.textName.endDrawable(R.drawable.arrow_right)
 //                itemCategory7.textName.endDrawable(R.drawable.arrow_right)
@@ -654,9 +762,49 @@ class CategoryChildTab(
             if (videoPath.name == it.name) {
                 it.isSelected = true
                 Log.e("TAG", "onViewCreated: Fragment PositionIF : ${it.name}")
+                binding.apply {
+                    if (it.name == "Men"){
+                        Log.e("TAG", "onViewCreated: Fragment PositionIFA : ${it.name}")
+                        itemCategory5.root.visibility = View.GONE
+                        itemCategory6.root.visibility = View.GONE
+                        itemCategory9.root.visibility = View.GONE
+                    }
+                    if (it.name == "Women"){
+                        Log.e("TAG", "onViewCreated: Fragment PositionIFB : ${it.name}")
+//                        itemCategory5.linearLayout.visibility = View.VISIBLE
+//                        itemCategory6.linearLayout.visibility = View.VISIBLE
+//                        itemCategory9.linearLayout.visibility = View.VISIBLE
+                    }
+                    if (it.name == "Kids"){
+                        Log.e("TAG", "onViewCreated: Fragment PositionIFC : ${it.name}")
+//                        itemCategory5.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory6.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory9.rvListCategory.visibility = View.VISIBLE
+                    }
+                }
             } else {
                 it.isSelected = false
                 Log.e("TAG", "onViewCreated: Fragment PositionELSE : ${it.name}")
+//                binding.apply {
+//                    if (it.name == "Men"){
+//                        Log.e("TAG", "onViewCreated: Fragment PositionELSEA : ${it.name}")
+//                        itemCategory5.rvListCategory.visibility = View.GONE
+//                        itemCategory6.rvListCategory.visibility = View.GONE
+//                        itemCategory9.rvListCategory.visibility = View.GONE
+//                    }
+//                    if (it.name == "Women"){
+//                        Log.e("TAG", "onViewCreated: Fragment PositionELSEB : ${it.name}")
+//                        itemCategory5.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory6.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory9.rvListCategory.visibility = View.VISIBLE
+//                    }
+//                    if (it.name == "Kids"){
+//                        Log.e("TAG", "onViewCreated: FragmentPositionELSEC : ${it.name}")
+//                        itemCategory5.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory6.rvListCategory.visibility = View.VISIBLE
+//                        itemCategory9.rvListCategory.visibility = View.VISIBLE
+//                    }
+//                }
             }
         }
 //        adapter2 = CategoryChildTabAdapter()

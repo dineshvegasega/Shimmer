@@ -1482,7 +1482,7 @@
                 android:textColor="@color/_2A3740"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="Add To Cart"
+                android:text="@string/add_to_cart"
                 />
 
 
@@ -1513,7 +1513,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13sdp"
                 android:gravity="center"
-                android:text="Buy Now"
+                android:text="@string/buy_now"
                 />
 
 
