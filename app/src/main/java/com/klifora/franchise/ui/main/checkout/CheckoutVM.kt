@@ -100,11 +100,12 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
 
                 val colorW = when(dataClass.color){
                     "19" -> {"Yellow Gold"}
-                    "20" -> {"Gold White"}
+                    "50" -> {"Gold White"}
                     "25" -> {"Rose Gold"}
-                    else -> {"No color"}
+                    else -> {""}
                 }
                 textColor.text = "Color: "+colorW
+                Log.e("TAG", "onBindHolderColor: "+dataClass.color)
 
                 val purityW = when(dataClass.purity){
                      "26" -> {"9Kt"}
@@ -113,9 +114,17 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
                      "16" -> {"22Kt"}
                      "17" -> {"24Kt"}
                      "18" -> {"95(Platinum)"}
-                    else -> {"No purity"}
+                    else -> {""}
                 }
                 textPurity.text = "Purity: "+purityW
+
+                Log.e("TAG", "onBindHolderSize: "+dataClass.size)
+
+                if (dataClass.size.isEmpty()){
+                    textRingSize.visibility = ViewGroup.GONE
+                } else {
+                    textRingSize.visibility = ViewGroup.VISIBLE
+                }
 
                 textRingSize.text = "Size: "+ getSize(dataClass.size.toInt())
 
@@ -170,11 +179,10 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
 
 
                             this.custom_attributes.forEach { itemProductAttr ->
-
                                 if (itemProductAttr.attribute_code == "metal_color") {
                                     if (itemProductAttr.value == "19") {
                                         textColor.text = "Color: Yellow Gold"
-                                    } else if (itemProductAttr.value == "20") {
+                                    } else if (itemProductAttr.value == "50") {
                                         textColor.text = "Color: White Gold"
                                     } else if (itemProductAttr.value == "25") {
                                         textColor.text = "Color: Rose Gold"
@@ -200,8 +208,12 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
 
                                 if (itemProductAttr.attribute_code == "size") {
                                     textRingSize.text = "Size: "+ getSize(itemProductAttr.value.toString().toInt())
+                                    textRingSize.visibility = ViewGroup.VISIBLE
                                 }
 
+                                if (itemProductAttr.attribute_code != "size") {
+                                    textRingSize.visibility = ViewGroup.GONE
+                                }
                             }
                         }
                     }

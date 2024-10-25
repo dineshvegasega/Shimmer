@@ -444,6 +444,18 @@ fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
 }
 
 
+
+fun String.glideImageWithoutPlace(context: Context, ivMap: ShapeableImageView) {
+    Glide.with(context)
+        .load(this)
+//                .transition(withCrossFade(factory))
+        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+        .into(ivMap)
+
+}
+
+
+
 val myOptionsGlideUserChache: RequestOptions = RequestOptions()
     .diskCacheStrategy(DiskCacheStrategy.ALL)
     .dontAnimate()

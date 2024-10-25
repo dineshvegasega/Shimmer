@@ -199,6 +199,7 @@
         android:textColor="@color/_1E1E1E"
         android:letterSpacing="0.06"
         android:textSize="@dimen/_11sdp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btChangePassword"
@@ -335,7 +336,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:constraint_referenced_ids="btProfileDetails,btOrders, btComplaints, btChangePassword, switchNotifications" />
+        app:constraint_referenced_ids="btProfileDetails,btOrders, btComplaints, btChangePassword" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group_guest"

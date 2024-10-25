@@ -109,8 +109,8 @@ class OrderDetail : Fragment() {
 
                 Log.e("TAG", "onViewCreatedAA: ${consentIntent.toString()}")
 
-
                 textOrderNo.visibility = View.GONE
+                btComplainFeedback.visibility = View.GONE
 
                 textName.text = consentIntent?.CustomerName
                 textMobile.text = consentIntent?.customerMobile

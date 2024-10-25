@@ -1189,9 +1189,14 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         viewModel.arrayItemProductOptionsSize.clear()
 
-//                        Log.e("TAG", "getProductDetailBB " + itemProductThis.toString())
+//                        images = itemProduct.media_gallery_entries
 
-                        images = itemProduct.media_gallery_entries
+                        if(itemProductThis.media_gallery_entries.size == 0){
+                            images = itemProduct.media_gallery_entries
+                        } else {
+                            images = itemProductThis.media_gallery_entries
+                        }
+                        Log.e("TAG", "getProductDetailBBsize " + images.size)
 
                         setAllImages()
 
@@ -1263,7 +1268,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
                                                 textPurity1.text = "9 kt Yellow Gold"
-                                            } else if (itemProductChildAttr.value == "20") {
+                                            } else if (itemProductChildAttr.value == "50") {
                                                 textPurity1.text = "9 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "9 kt Rose Gold"
@@ -1277,7 +1282,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
                                                 textPurity1.text = "14 kt Yellow Gold"
-                                            } else if (itemProductChildAttr.value == "20") {
+                                            } else if (itemProductChildAttr.value == "50") {
                                                 textPurity1.text = "14 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "14 kt Rose Gold"
@@ -1291,7 +1296,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
                                                 textPurity1.text = "18 kt Yellow Gold"
-                                            } else if (itemProductChildAttr.value == "20") {
+                                            } else if (itemProductChildAttr.value == "50") {
                                                 textPurity1.text = "18 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "18 kt Rose Gold"
@@ -1305,7 +1310,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
                                                 textPurity1.text = "14 kt Yellow Gold"
-                                            } else if (itemProductChildAttr.value == "20") {
+                                            } else if (itemProductChildAttr.value == "50") {
                                                 textPurity1.text = "14 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "14 kt Rose Gold"
@@ -1319,7 +1324,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
                                                 textPurity1.text = "18 kt Yellow Gold"
-                                            } else if (itemProductChildAttr.value == "20") {
+                                            } else if (itemProductChildAttr.value == "50") {
                                                 textPurity1.text = "18 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "18 kt Rose Gold"
@@ -1782,7 +1787,7 @@ class ProductDetail : Fragment(), CallBackListener {
                 .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
                 false
 
-            viewModel.indicator(binding, itemProduct.media_gallery_entries, 1)
+            viewModel.indicator(binding, images, 1)
 
             rvList1.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {

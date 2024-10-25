@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Color: Red"
+                android:text="Color: "
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Purity: 12"
+                android:text="Purity: "
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
@@ -96,13 +96,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Ring Size: 6"
+                android:text="Ring Size: "
                 android:textColor="@color/_484848"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPurity"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textQty"

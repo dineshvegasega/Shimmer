@@ -168,7 +168,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Decompiling our Android app’s APK file is essential to ensure our applications' integrity, security, and efficiency. This article explores why decompiling our APK is crucial and provides insights into some good practices for safeguarding our app. In Android Studio, inspecting the contents of an APK is a simple process. If we build our app on Android Studio, the APK file is typically located at /app/build/outputs/apk. Double-clicking on the APK file will display its contents. Alternatively, under the Build pull-down menu, selecting Analyze APK allows us to pick an APK file from any location."
+                            android:text="@string/about_us"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp"
                             app:fontFamily="@font/nunitosans_light"

@@ -23,7 +23,9 @@ import androidx.media3.ui.AspectRatioFrameLayout
 import com.klifora.franchise.databinding.FragmentExoPlayerBinding
 import com.klifora.franchise.models.products.MediaGalleryEntry
 import com.klifora.franchise.networking.IMAGE_URL
+import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.glideImageChache
+import com.klifora.franchise.utils.glideImageWithoutPlace
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.UnstableApi
@@ -101,7 +103,7 @@ class ProductDetailPageFragment(
         if(videoPath.media_type.endsWith("image")){
             binding.ivIcon.visibility = View.VISIBLE
             binding.playerView.visibility = View.GONE
-            (IMAGE_URL+videoPath.file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+            (IMAGE_URL+videoPath.file).glideImageWithoutPlace(binding.ivIcon.context, binding.ivIcon)
             binding.ivIcon.singleClick {
                 ProductDetail.callBackListener!!.onCallBack(0)
             }
