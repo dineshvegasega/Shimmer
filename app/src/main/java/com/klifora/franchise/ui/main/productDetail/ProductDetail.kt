@@ -1345,10 +1345,26 @@ class ProductDetail : Fragment(), CallBackListener {
                             if (itemProductAttr.attribute_code == "diamond_weight") {
                                 textWeightCt.text = "Weight " + itemProductAttr.value
                             }
+                            if (itemProductAttr.attribute_code != "diamond_weight") {
+                                itemProduct.custom_attributes.forEach { itemMainProductAttr ->
+                                    if (itemMainProductAttr.attribute_code == "diamond_weight") {
+                                        textWeightCt.text = "Weight " + itemMainProductAttr.value
+                                    }
+                                }
+                            }
+
 
                             if (itemProductAttr.attribute_code == "diamond_number") {
                                 textDiamonds.text = "Diamonds " + itemProductAttr.value
                             }
+                            if (itemProductAttr.attribute_code != "diamond_number") {
+                                itemProduct.custom_attributes.forEach { itemMainProductAttr ->
+                                    if (itemMainProductAttr.attribute_code == "diamond_number") {
+                                        textDiamonds.text = "Diamonds " + itemMainProductAttr.value
+                                    }
+                                }
+                            }
+
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
                                 textDiamondPrice.text = "₹ " + getPatternFormat(
