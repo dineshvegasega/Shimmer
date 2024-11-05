@@ -1,18 +1,26 @@
 package com.klifora.franchise.ui.main.products
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
+import com.klifora.franchise.BR
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemLoadingBinding
-import com.klifora.franchise.BR
 import com.klifora.franchise.databinding.ItemProductBinding
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.products.ItemProduct
@@ -22,6 +30,8 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLi
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.mainThread
+import com.squareup.picasso.Picasso
+
 
 class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -98,6 +108,42 @@ class ProductsAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             itemRowBinding.textTitle.text = model.name
             itemRowBinding.textPrice.text = "₹ "+ getPatternFormat("1", model.price)
+
+//            Glide.with(itemRowBinding.ivIcon.context)
+//                .load("https://klifora.com/media/catalog/product/y/g/yg0004_61.png")
+////                .transition(withCrossFade(factory))
+//                .apply(RequestOptions().placeholder(R.drawable.place_image))
+////                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//                .into(itemRowBinding.ivIcon)
+
+
+//            Picasso.get().load(IMAGE_URL + model.media_gallery_entries[0].file)
+//                .placeholder(R.drawable.place_image)
+//                .into(itemRowBinding.ivIcon)
+
+//            Glide.with(itemRowBinding.ivIcon.context)
+//                .load("https://klifora.com/media/catalog/product/y/g/yg0004_61.png")
+//                .listener(object : RequestListener<Drawable?> {
+//                    override fun onResourceReady(
+//                        resource: Drawable,
+//                        model: Any,
+//                        target: Target<Drawable?>?,
+//                        dataSource: DataSource,
+//                        isFirstResource: Boolean,
+//                    ): Boolean {
+//                        return true
+//                    }
+//
+//                    override fun onLoadFailed(
+//                        e: GlideException?,
+//                        model: Any?,
+//                        target: Target<Drawable?>,
+//                        isFirstResource: Boolean,
+//                    ): Boolean {
+//                        return false
+//                    }
+//                })
+//                .into(itemRowBinding.ivIcon)
 
             (IMAGE_URL + if(model.media_gallery_entries.size > 0) model.media_gallery_entries[0].file else "").glideImage(itemRowBinding.ivIcon.context, itemRowBinding.ivIcon)
 

@@ -70,7 +70,10 @@ import com.klifora.franchise.datastore.DataStoreKeys.STORE_DETAIL
 import com.klifora.franchise.datastore.DataStoreUtil.clearDataStore
 import com.klifora.franchise.datastore.DataStoreUtil.removeKey
 import com.klifora.franchise.models.ItemReturn
+import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.ui.mainActivity.MainActivity
+import com.squareup.picasso.MemoryPolicy
+import com.squareup.picasso.Picasso
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray
 import org.json.JSONObject
@@ -414,19 +417,19 @@ fun ViewPager2.updatePagerHeightForChild(view: View) {
 }
 
 
-val myOptionsGlide: RequestOptions = RequestOptions()
-//    .placeholder(R.drawable.no_image)
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .dontAnimate()
-    .apply(RequestOptions().placeholder(R.drawable.place_image))
-    .skipMemoryCache(true)
-
-val myOptionsGlideUser: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.user_icon)
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .dontAnimate()
-    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
-    .skipMemoryCache(false)
+//val myOptionsGlide: RequestOptions = RequestOptions()
+////    .placeholder(R.drawable.no_image)
+//    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//    .dontAnimate()
+//    .apply(RequestOptions().placeholder(R.drawable.place_image))
+//    .skipMemoryCache(true)
+//
+//val myOptionsGlideUser: RequestOptions = RequestOptions()
+//    .placeholder(R.drawable.user_icon)
+//    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//    .dontAnimate()
+//    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
+//    .skipMemoryCache(false)
 
 fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
 //    Glide.with(context)
@@ -434,83 +437,119 @@ fun String.glideImage(context: Context, ivMap: ShapeableImageView) {
 //        .apply(myOptionsGlide)
 //        .into(ivMap)
 
-    Glide.with(context)
-        .load(this)
-//                .transition(withCrossFade(factory))
-        .apply(RequestOptions().placeholder(R.drawable.place_image))
-        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
-        .into(ivMap)
+//    Log.e("TAG", "thisXX "+this)
 
+//    Glide.with(context)
+//        .load(this.replace("https://", "http://"))
+////                .transition(withCrossFade(factory))
+//        .apply(RequestOptions().placeholder(R.drawable.place_image))
+//        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//        .into(ivMap)
+
+    Picasso.get().load(this)
+        .placeholder(R.drawable.place_image)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
+        .into(ivMap)
 }
 
 
 
 fun String.glideImageWithoutPlace(context: Context, ivMap: ShapeableImageView) {
-    Glide.with(context)
-        .load(this)
-//                .transition(withCrossFade(factory))
-        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//    Glide.with(context)
+//        .load(this)
+////                .transition(withCrossFade(factory))
+//        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//        .into(ivMap)
+
+    Picasso.get().load(this)
+        .placeholder(R.drawable.place_image)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 
 }
 
 
 
-val myOptionsGlideUserChache: RequestOptions = RequestOptions()
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .dontAnimate()
-    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
-    .skipMemoryCache(true)
+//val myOptionsGlideUserChache: RequestOptions = RequestOptions()
+//    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//    .dontAnimate()
+//    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
+//    .skipMemoryCache(true)
 
 fun String.glideImageChache(context: Context, ivMap: ShapeableImageView) {
-    Glide.with(context)
-        .load(this)
-        .apply(myOptionsGlideUserChache)
+//    Glide.with(context)
+//        .load(this)
+//        .apply(myOptionsGlideUserChache)
+//        .into(ivMap)
+
+    Picasso.get().load(this)
+        .placeholder(R.drawable.place_image)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 }
 
 
 fun Int.glideImageChache(context: Context, ivMap: AppCompatImageView) {
-    Glide.with(context)
-        .load(this)
-        .apply(myOptionsGlideUserChache)
+//    Glide.with(context)
+//        .load(this)
+//        .apply(myOptionsGlideUserChache)
+//        .into(ivMap)
+
+    Picasso.get().load(this)
+        .placeholder(R.drawable.place_image)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 }
 
 
 fun String.glidePhotoView(context: Context, ivMap: PhotoView) {
-    Glide.with(context)
-        .load(this)
-        .apply(myOptionsGlide)
+//    Glide.with(context)
+//        .load(this)
+//        .apply(myOptionsGlide)
+//        .into(ivMap)
+
+        Picasso.get().load(this)
+        .placeholder(R.drawable.place_image)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 }
 
-val myOptionsGlidePortrait: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.no_image_modified)
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .dontAnimate()
-    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
-    .skipMemoryCache(false)
+//val myOptionsGlidePortrait: RequestOptions = RequestOptions()
+//    .placeholder(R.drawable.no_image_modified)
+//    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//    .dontAnimate()
+//    //  .apply( RequestOptions().centerCrop().circleCrop().placeholder(R.drawable.no_image_2))
+//    .skipMemoryCache(false)
 
-fun String.glideImagePortrait(context: Context, ivMap: ShapeableImageView) {
-    Glide.with(context)
-        .load(this)
-        .apply(myOptionsGlidePortrait)
-        .into(ivMap)
-}
+//fun String.glideImagePortrait(context: Context, ivMap: ShapeableImageView) {
+////    Glide.with(context)
+////        .load(this)
+////        .apply(myOptionsGlidePortrait)
+////        .into(ivMap)
+//
+//    Picasso.get().load(this)
+//        .placeholder(R.drawable.no_image_modified)
+////        .memoryPolicy(MemoryPolicy.NO_CACHE)
+//        .into(ivMap)
+//}
 
 
 
-val myOptionsGlideLand: RequestOptions = RequestOptions()
-    .placeholder(R.drawable.no_image_long)
-    .diskCacheStrategy(DiskCacheStrategy.ALL)
-    .dontAnimate()
-    .skipMemoryCache(true)
+//val myOptionsGlideLand: RequestOptions = RequestOptions()
+//    .placeholder(R.drawable.no_image_long)
+//    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//    .dontAnimate()
+//    .skipMemoryCache(true)
 
 fun glideImageBanner(context: Context, ivMap: ShapeableImageView, s: String) {
-    Glide.with(context)
-        .load(s)
-        .apply(myOptionsGlideLand)
+//    Glide.with(context)
+//        .load(s)
+//        .apply(myOptionsGlideLand)
+//        .into(ivMap)
+
+    Picasso.get().load(s)
+        .placeholder(R.drawable.no_image_long)
+//        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 }
 
@@ -916,10 +955,26 @@ fun pxToDp(px: Int): Int {
 
 fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
     StfalconImageViewer.Builder<String>(MainActivity.mainActivity.get()!!, this) { view, image ->
-        Glide.with(MainActivity.mainActivity.get()!!)
-            .load(image)
-            .apply(if (type == 1) myOptionsGlide else if (type == 2) myOptionsGlideUser else myOptionsGlide)
-            .into(view)
+//        Glide.with(MainActivity.mainActivity.get()!!)
+//            .load(image)
+//            .apply(if (type == 1) myOptionsGlide else if (type == 2) myOptionsGlideUser else myOptionsGlide)
+//            .into(view)
+        if (type == 1) {
+            Picasso.get().load(image)
+                .placeholder(R.drawable.place_image)
+                .into(view)
+
+        } else if (type == 2) {
+            Picasso.get().load(image)
+                .placeholder(R.drawable.user_icon)
+                .into(view)
+        } else {
+
+            Picasso.get().load(image)
+                .placeholder(R.drawable.place_image)
+                .into(view)
+        }
+
 
     }
         .withTransitionFrom(ivImage)
@@ -936,20 +991,30 @@ fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int, position: Int) {
 fun ArrayList<String>.imageZoom(ivImage: ImageView, type: Int) {
     StfalconImageViewer.Builder<String>(MainActivity.mainActivity.get()!!, this) { view, image ->
         if (type == 1) {
-            Glide.with(MainActivity.mainActivity.get()!!)
-                .load(image)
-                .apply(RequestOptions().placeholder(R.drawable.place_image))
-                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//            Glide.with(MainActivity.mainActivity.get()!!)
+//                .load(image)
+//                .apply(RequestOptions().placeholder(R.drawable.place_image))
+//                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
+//                .into(view)
+            Picasso.get().load(image)
+                .placeholder(R.drawable.place_image)
                 .into(view)
         } else if (type == 2) {
-            Glide.with(MainActivity.mainActivity.get()!!)
-                .load(image)
-                .apply(myOptionsGlideUser)
+//            Glide.with(MainActivity.mainActivity.get()!!)
+//                .load(image)
+//                .apply(myOptionsGlideUser)
+//                .into(view)
+            Picasso.get().load(image)
+                .placeholder(R.drawable.user_icon)
                 .into(view)
         } else {
-            Glide.with(MainActivity.mainActivity.get()!!)
-                .load(image)
-                .apply(myOptionsGlide)
+//            Glide.with(MainActivity.mainActivity.get()!!)
+//                .load(image)
+//                .apply(myOptionsGlide)
+//                .into(view)
+
+            Picasso.get().load(image)
+                .placeholder(R.drawable.place_image)
                 .into(view)
         }
     }

@@ -103,7 +103,7 @@ class Splash : Fragment() {
 
     private fun handleSplashTime() {
         ioThread {
-            delay(1000)
+            delay(2000)
             readData(LOGIN_DATA) { loginUser ->
 
 //                val fragmentInFrame = navHostFragment!!.getChildFragmentManager().getFragments().get(0)

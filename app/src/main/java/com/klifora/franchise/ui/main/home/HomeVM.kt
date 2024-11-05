@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemHome3Binding
 import com.klifora.franchise.databinding.ItemHomeCategoryBinding
@@ -29,6 +30,7 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.klifora.franchise.utils.glideImageBanner
 import com.klifora.franchise.utils.glideImageChache
+//import com.klifora.franchise.utils.myOptionsGlideLand
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,10 +40,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeVM @Inject constructor(private val repository: Repository) : ViewModel() {
-
-
-
-
 
     fun getCartCount(callBack: Int.() -> Unit) {
         viewModelScope.launch {
@@ -126,6 +124,12 @@ class HomeVM @Inject constructor(private val repository: Repository) : ViewModel
                     binding.ivIcon,
                     BANNER_IMAGE_URL + dataClass.image
                 )
+
+
+//                Glide.with(binding.ivIcon.context)
+//                    .load(BANNER_IMAGE_URL + dataClass.image)
+//                    .apply(myOptionsGlideLand)
+//                    .into(binding.ivIcon)
 
                 ivIcon.singleClick {
                     if (dataClass.newtab == "0") {

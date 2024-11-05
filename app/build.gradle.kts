@@ -85,7 +85,7 @@ dependencies {
 
     implementation ("androidx.appcompat:appcompat:1.7.0")
 
-    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("com.google.dagger:hilt-android:2.52")
     ksp("com.google.dagger:hilt-android-compiler:2.51.1")
 
 
@@ -107,8 +107,8 @@ dependencies {
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation ("com.squareup.okhttp3:okhttp:5.0.0-alpha.11")
-    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.9")
+    implementation ("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
     implementation ("com.squareup.retrofit2:converter-scalars:2.11.0")
 
     implementation ("com.google.code.gson:gson:2.10.1")
@@ -118,16 +118,16 @@ dependencies {
     implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0") {
         exclude("glide-parent")
     }
-
+    implementation ("com.squareup.picasso:picasso:2.71828")
 
     implementation ("androidx.preference:preference-ktx:1.2.1")
-    implementation ("io.coil-kt:coil:2.6.0")
+    implementation ("io.coil-kt:coil:2.7.0")
 
     implementation ("androidx.datastore:datastore-preferences:1.1.1")
     implementation ("androidx.datastore:datastore-preferences-core:1.1.1")
 
     implementation ("id.zelory:compressor:3.0.1")
-    implementation ("com.airbnb.android:lottie:6.4.0")
+    implementation ("com.airbnb.android:lottie:6.5.2")
 
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
 
@@ -135,7 +135,7 @@ dependencies {
     releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
 //    implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.5.0"))
+    implementation (platform("com.google.firebase:firebase-bom:33.5.1"))
     implementation ("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx")
     implementation ("com.google.firebase:firebase-database-ktx")

@@ -5,7 +5,8 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUr
 //https://shop.vegasega.com/media/catalog/product/u/r/ur01473-yg0000_4_lar.jpg
 
 
-const val BASE_URL = "https://shop.vegasega.com/"
+//const val BASE_URL = "https://shop.vegasega.com/"
+const val BASE_URL = "https://klifora.com/"
 
 const val URL = BASE_URL+"rest/"
 

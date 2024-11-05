@@ -2,9 +2,9 @@ package com.klifora.franchise.di
 
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.klifora.franchise.networking.ApiInterface
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.ApiTranslateInterface
 import com.klifora.franchise.networking.TRANSLATE_URL
 import com.klifora.franchise.networking.URL
@@ -20,6 +20,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import javax.net.ssl.HostnameVerifier
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,10 +34,15 @@ class AppModule {
     @Singleton
     fun provideOkHttpClient(
         cache: Cache,
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+//        val clientCertificates = HandshakeCertificates.Builder()
+//            .addPlatformTrustedCertificates()
+//            .addInsecureHost("myhttpslocalhost")
+//            .build()
+
         return OkHttpClient.Builder()
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
@@ -43,9 +50,13 @@ class AppModule {
             .addInterceptor(loggingInterceptor)
             .addInterceptor(ChuckerInterceptor(context))
             .addInterceptor(NetworkInterceptor.interceptor)
+            .hostnameVerifier { _, _ -> true }
+//            .sslSocketFactory(clientCertificates.sslSocketFactory(), clientCertificates.trustManager)
             .retryOnConnectionFailure(true)
             .cache(cache)
             .build()
+
+
     }
 
 
@@ -58,7 +69,7 @@ class AppModule {
     @Qualifiers.Normal
     fun providesRetrofit(
         gson: Gson,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
@@ -71,7 +82,7 @@ class AppModule {
     @Qualifiers.Translate
     fun providesRetrofitTranslate(
         gson: Gson,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): Retrofit = Retrofit.Builder()
         .baseUrl(TRANSLATE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))

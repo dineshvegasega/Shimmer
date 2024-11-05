@@ -22,13 +22,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             >
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivIcon"
                 android:layout_width="@dimen/_55sdp"
                 android:layout_height="@dimen/_55sdp"
                 app:layout_constraintDimensionRatio="H,1:1.1"
-                app:srcCompat="@drawable/ring_img"
+                app:srcCompat="@drawable/rings"
                 android:scaleType="fitXY"
+                android:theme="@style/RoundCorner50"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
