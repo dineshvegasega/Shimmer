@@ -17,7 +17,7 @@ data class ItemXX(
     val base_row_total: Double,
     val base_row_total_incl_tax: Double,
     val base_tax_amount: Int?= null,
-    val base_tax_invoiced: Int?= null,
+    val base_tax_invoiced: Double?= null,
     val created_at: String,
     val discount_amount: Int?= null,
     val discount_invoiced: Int?= null,

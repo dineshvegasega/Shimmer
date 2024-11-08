@@ -118,57 +118,99 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                 btDate.text = date
                 textOrderPrice.text = "₹ " + getPatternFormat("1", dataClass.base_subtotal.toDouble())
 
-                textOrderNo.text =  dataClass.entity_id
+                textOrderNo.text =  dataClass.increment_id
 
-                when (dataClass.status) {
-                    "pending" -> {
-                        btStatus.text = "Pending"
-                        btStatus.backgroundTintList =
-                            ColorStateList.valueOf(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color._E87103
-                                )
-                            )
-                        btStatus.visibility = View.VISIBLE
+                when (dataClass.state) {
+                    "new" -> {
+                        when (dataClass.status) {
+                            "pending" -> {
+                                btStatus.text = "Pending"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._E87103
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "Accepted" -> {
+                                btStatus.text = "Accepted"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._138808
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                        }
                     }
-                    "inprogress" -> {
-                        btStatus.text = "In Progress"
-                        btStatus.backgroundTintList =
-                            ColorStateList.valueOf(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color._F7879A
-                                )
-                            )
-                        btStatus.visibility = View.VISIBLE
-                    }
-                    "dispatched" -> {
-                        btStatus.text = "Dispatched"
-                        btStatus.backgroundTintList =
-                            ColorStateList.valueOf(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color._2eb82e
-                                )
-                            )
-                        btStatus.visibility = View.VISIBLE
-                    }
-                    "complete" -> {
-                        btStatus.text = "Complete"
-                        btStatus.backgroundTintList =
-                            ColorStateList.valueOf(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color._2A3740
-                                )
-                            )
-                        btStatus.visibility = View.VISIBLE
-                    }
-                    else -> {
-                        btStatus.visibility = View.GONE
+                    "processing" -> {
+                        when (dataClass.status) {
+                            "Accepted" -> {
+                                btStatus.text = "Accepted"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._138808
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "processing" -> {
+                                btStatus.text = "In Progress"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._F7879A
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "approved" -> {
+                                btStatus.text = "Approved"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._0098BD
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "Faild" -> {
+                                btStatus.text = "Failed"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._F11608
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "fraud" -> {
+                                btStatus.text = "Fraud"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._9F0625
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            else -> {
+                                btStatus.visibility = View.GONE
+                            }
+                        }
                     }
                 }
+
 
                 root.singleClick {
                     root.findNavController().navigate(R.id.action_orders_to_orderDetail, Bundle().apply {

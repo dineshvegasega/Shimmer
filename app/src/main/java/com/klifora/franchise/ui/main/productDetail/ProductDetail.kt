@@ -531,12 +531,12 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
 
-                if (!isAvailable) {
-                    showSnackBar(getString(R.string.product_not_available))
+                    if (!isAvailable) {
+                        showSnackBar(getString(R.string.product_not_available))
+                    }
+                    isAvailable = false
+                    isSizeCall1 = false
                 }
-                isAvailable = false
-                isSizeCall1 = false
-            }
             }
 
             bt18.singleClick {
@@ -551,52 +551,52 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
 
-                arrayItemProduct.forEach { itemProductOptions ->
-                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
-                        if (isAvailableSize == true) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "15") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
+                    arrayItemProduct.forEach { itemProductOptions ->
+                        itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                            if (isAvailableSize == true) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "15") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        if (isAvailableSize == false) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "15") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
+                            if (isAvailableSize == false) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "15") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }
 
-                if (!isAvailable) {
-                    showSnackBar(getString(R.string.product_not_available))
+                    if (!isAvailable) {
+                        showSnackBar(getString(R.string.product_not_available))
+                    }
+                    isAvailable = false
+                    isSizeCall1 = false
                 }
-                isAvailable = false
-                isSizeCall1 = false
-            }
             }
 
             bt22.singleClick {
@@ -611,53 +611,53 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
 
-                arrayItemProduct.forEach { itemProductOptions ->
-                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
-                        if (isAvailableSize == true) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
+                    arrayItemProduct.forEach { itemProductOptions ->
+                        itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                            if (isAvailableSize == true) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
                                         }
                                     }
                                 }
                             }
-                        }
 
-                        if (isAvailableSize == false) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
+                            if (isAvailableSize == false) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "16") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
+
                                         }
-
                                     }
                                 }
                             }
                         }
                     }
-                }
 
-                if (!isAvailable) {
-                    showSnackBar(getString(R.string.product_not_available))
+                    if (!isAvailable) {
+                        showSnackBar(getString(R.string.product_not_available))
+                    }
+                    isAvailable = false
+                    isSizeCall1 = false
                 }
-                isAvailable = false
-                isSizeCall1 = false
-            }
             }
 
             bt24.singleClick {
@@ -672,54 +672,54 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
 
-                arrayItemProduct.forEach { itemProductOptions ->
-                    itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
-                        if (isAvailableSize == true) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
-                                        }
+                    arrayItemProduct.forEach { itemProductOptions ->
+                        itemProductThis.custom_attributes.forEach { itemCustomSizeAttr ->
+                            if (isAvailableSize == true) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.size == itemCustomSizeAttr.value && itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
 
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        if (isAvailableSize == false) {
-                            itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
-                                if (itemCustomColorAttr.attribute_code == "metal_color") {
-                                    if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
-                                        if (isSizeCall1 == false) {
-                                            isSizeCall1 = true
-                                            currentSku = itemProductOptions.sku
-                                            isAvailable = true
-                                            callApiDetailsConfigurable(
-                                                itemProductOptions.sku,
-                                                itemProduct
-                                            )
+                            if (isAvailableSize == false) {
+                                itemProductThis.custom_attributes.forEach { itemCustomColorAttr ->
+                                    if (itemCustomColorAttr.attribute_code == "metal_color") {
+                                        if (itemProductOptions.metal_color == itemCustomColorAttr.value && itemProductOptions.metal_purity == "17") {
+                                            if (isSizeCall1 == false) {
+                                                isSizeCall1 = true
+                                                currentSku = itemProductOptions.sku
+                                                isAvailable = true
+                                                callApiDetailsConfigurable(
+                                                    itemProductOptions.sku,
+                                                    itemProduct
+                                                )
+                                            }
+
                                         }
-
                                     }
                                 }
                             }
                         }
                     }
-                }
 
-                if (!isAvailable) {
-                    showSnackBar(getString(R.string.product_not_available))
+                    if (!isAvailable) {
+                        showSnackBar(getString(R.string.product_not_available))
+                    }
+                    isAvailable = false
+                    isSizeCall1 = false
                 }
-                isAvailable = false
-                isSizeCall1 = false
-            }
             }
 
             bt95.singleClick {
@@ -1212,7 +1212,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
 //                        images = itemProduct.media_gallery_entries
 
-                        if(itemProductThis.media_gallery_entries.size == 0){
+                        if (itemProductThis.media_gallery_entries.size == 0) {
                             images = itemProduct.media_gallery_entries
                         } else {
                             images = itemProductThis.media_gallery_entries

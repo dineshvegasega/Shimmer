@@ -13,7 +13,7 @@ data class ItemX(
     val base_row_total: Double = 0.0,
     val base_row_total_incl_tax: Double = 0.0,
     val base_tax_amount: Double = 0.0,
-    val base_tax_invoiced: Int,
+    val base_tax_invoiced: Double,
     val created_at: String,
     val discount_amount: Double = 0.0,
     val discount_invoiced: Double = 0.0,

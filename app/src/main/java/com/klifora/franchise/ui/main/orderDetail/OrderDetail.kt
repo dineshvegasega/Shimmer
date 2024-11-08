@@ -1,6 +1,7 @@
 package com.klifora.franchise.ui.main.orderDetail
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -89,13 +90,12 @@ class OrderDetail : Fragment() {
             timeline2.initLine(0)
             timeline3.initLine(0)
             timeline4.initLine(0)
-            timeline5.initLine(2)
+            timeline5.initLine(0)
             timeline6.initLine(0)
             timeline7.initLine(2)
 
-            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color._138808), 1)
-            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color._138808), 1)
+
+
 
 
             cartItemLiveData.value = false
@@ -169,10 +169,12 @@ class OrderDetail : Fragment() {
                         }
                     }
                 }
+                textTitle0.visibility = View.GONE
+                layoutStatus.visibility = View.GONE
             } else if (arguments?.getString("from") == "orderHistory") {
 //                val consentIntent = arguments?.parcelable<Item>("key")
                 val _id = arguments?.getString("_id")
-                Log.e("TAG", "onViewCreatedBB: ${_id.toString()}")
+//                Log.e("TAG", "onViewCreatedBB: ${_id.toString()}")
 
                 btComplainFeedback.singleClick {
                     findNavController().navigate(R.id.action_orderDetail_to_createNew , Bundle().apply {
@@ -185,8 +187,8 @@ class OrderDetail : Fragment() {
                     readData(ADMIN_TOKEN) { token ->
                         viewModel.orderHistoryListDetail(token.toString(), _id) {
                             val itemOrderDetail = this
-
-                            textOrderNo.text = "Order No. : "+itemOrderDetail?.entity_id
+                            Log.e("TAG", "itemOrderDetailXX: ${itemOrderDetail.toString()}")
+                            textOrderNo.text = "Order No. : "+itemOrderDetail?.increment_id
                             textOrderNo.visibility = View.VISIBLE
 
                             textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(
@@ -198,8 +200,6 @@ class OrderDetail : Fragment() {
                                     "yyyy-MM-dd HH:mm:ss",
                                     "HH:mm"
                                 )
-
-
 
 
                             rvListCategory1.setHasFixedSize(true)
@@ -216,6 +216,205 @@ class OrderDetail : Fragment() {
 //                            textGSTPrice.text = "₹" +itemOrderDetail?.base_shipping_incl_tax
                             textTotalAmountPrice.text =
                                 "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
+
+
+                            textTitle0.visibility = View.VISIBLE
+                            layoutStatus.visibility = View.VISIBLE
+
+                            when (itemOrderDetail.state) {
+                                "new" -> {
+                                    when (itemOrderDetail.status) {
+                                        "pending" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                        }
+                                        "Accepted" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+
+                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                        }
+                                    }
+                                }
+                                "processing" -> {
+                                    when (itemOrderDetail.status) {
+                                        "Accepted" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+
+                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                        }
+                                        "processing" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+
+                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                        }
+                                        "approved" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+
+                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                        }
+                                        "Faild" -> {
+
+                                        }
+                                        "fraud" -> {
+
+                                        }
+                                        else -> {
+                                        }
+                                    }
+                                }
+                            }
+
+
+//                            when (itemOrderDetail.status) {
+//                                "pending" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                }
+//                                "Accepted" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "processing" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "photography" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline3.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline3.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline3.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "certification" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline3.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline3.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline3.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline4.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline4.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline4.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "packaging" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline3.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline3.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline3.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline4.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline4.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline4.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline5.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline5.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline5.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "dispatch" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline3.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline3.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline3.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline4.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline4.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline4.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline5.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline5.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline5.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline6.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline6.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline6.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//                                }
+//                                "delivered" -> {
+//                                    timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//                                    timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+//
+//                                    timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline3.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline3.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline3.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline4.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline4.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline4.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline5.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline5.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline5.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline6.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline6.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline6.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+//
+//                                    timeline7.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
+//                                    timeline7.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                    timeline7.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
+//                                }
+//                                else -> {
+//
+//                                }
+//                            }
 
                         }
                     }

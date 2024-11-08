@@ -548,7 +548,7 @@ fun glideImageBanner(context: Context, ivMap: ShapeableImageView, s: String) {
 //        .into(ivMap)
 
     Picasso.get().load(s)
-        .placeholder(R.drawable.no_image_long)
+        .placeholder(R.drawable.place_image_banner)
 //        .memoryPolicy(MemoryPolicy.NO_CACHE)
         .into(ivMap)
 }

@@ -7,7 +7,7 @@ import kotlinx.android.parcel.RawValue
 @Parcelize
 data class MediaGalleryEntry(
     val disabled: Boolean,
-    val file: String,
+    val `file`: String,
     val id: Int,
 //    val label: @RawValue Any,
     val media_type: String,

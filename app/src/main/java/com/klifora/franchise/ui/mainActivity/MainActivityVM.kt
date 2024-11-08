@@ -84,7 +84,9 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(id = 14, parent_id = 19, name = "Everyday Wear"),
                     Items(id = 15, parent_id = 19, name = "Cocktail Rings"),
                     Items(id = 16, parent_id = 19, name = "Engagement Rings"),
-                    Items(id = 17, parent_id = 19, name = "Bands"))
+                    Items(id = 17, parent_id = 19, name = "Bands"),
+                    Items(id = 104, parent_id = 19, name = "Eternity Band"),
+                    Items(id = 105, parent_id = 19, name = "Wedding Band"))
             ))
             mainCategory.add(Items(id = 4, parent_id = 18, name = "Earrings", image = R.drawable.ear_ring,
 //                subCategory = arrayListOf(
@@ -108,14 +110,14 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                    Items(name = "Occasion"),
 //                    Items(name = "Everyday"))
             ))
-            mainCategory.add(Items(id = 7, parent_id = 18, name = "Mangalsutras", image = R.drawable.mangalsutra_img,
+            mainCategory.add(Items(id = 7, parent_id = 18, name = "Mangalsutras", image = R.drawable.mangalsutras,
 //                subCategory = arrayListOf(
 //                    Items(name = "All Mangalsutras", isAll = true),
 //                    Items(name = "Casual"),
 //                    Items(name = "Bangles"),
 //                    Items(name = "Everyday"))
             ))
-            mainCategory.add(Items(id = 8, parent_id = 18, name = "Nosepins", image = R.drawable.nosepin_img,
+            mainCategory.add(Items(id = 8, parent_id = 18, name = "Nosepins", image = R.drawable.nosepins,
 //                subCategory = arrayListOf(
 //                    Items(name = "All Nosepins", isAll = true),
 //                    Items(name = "Balis"),
@@ -131,7 +133,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                    Items(name = "Drops"),
 //                    Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 10, parent_id = 18, name = "Accessories", image = R.drawable.access_img,
+            mainCategory.add(Items(id = 10, parent_id = 18, name = "Accessories", image = R.drawable.accessories,
 //                subCategory = arrayListOf(
 //                    Items(name = "All Accessories", isAll = true),
 //                    Items(name = "Balis"),
@@ -139,7 +141,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                    Items(name = "Drops"),
 //                    Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 11, parent_id = 18, name = "Bangles", image = R.drawable.bangles_img,
+            mainCategory.add(Items(id = 11, parent_id = 18, name = "Bangles", image = R.drawable.bangles,
 //                subCategory = arrayListOf(
 //                    Items(name = "All Bangles", isAll = true),
 //                    Items(name = "Balis"),
@@ -147,7 +149,7 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
 //                    Items(name = "Drops"),
 //                    Items(name = "Hoops"))
             ))
-            mainCategory.add(Items(id = 12, parent_id = 18, name = "Watches", image = R.drawable.watch_img,
+            mainCategory.add(Items(id = 12, parent_id = 18, name = "Watches", image = R.drawable.watches,
 //                subCategory = arrayListOf(
 //                    Items(name = "All Watches", isAll = true),
 //                    Items(name = "Balis"),

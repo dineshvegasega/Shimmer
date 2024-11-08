@@ -31,7 +31,7 @@ data class ItemOrdersItem(
     val base_subtotal_refunded: Any,
     val base_tax_amount: String,
     val base_tax_canceled: Any,
-    val base_tax_invoiced: Any,
+    val base_tax_invoiced: Double,
     val base_tax_refunded: Any,
     val base_to_global_rate: String,
     val base_to_order_rate: String,
