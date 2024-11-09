@@ -6,9 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.CheckoutBinding
@@ -20,8 +22,10 @@ import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.user.ItemUserItem
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
+import com.klifora.franchise.ui.mainActivity.MainActivity.Companion
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.navHostFragment
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
@@ -30,9 +34,12 @@ import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
+import com.razorpay.Checkout
+import com.razorpay.PaymentData
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray
 import org.json.JSONObject
+
 
 @AndroidEntryPoint
 class Checkout : Fragment() {
@@ -43,7 +50,7 @@ class Checkout : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = CheckoutBinding.inflate(inflater)
         return binding.root
@@ -55,6 +62,7 @@ class Checkout : Fragment() {
         isBackStack = true
         MainActivity.mainActivity.get()!!.callBack(0)
         MainActivity.mainActivity.get()!!.callCartApi()
+
 
         binding.apply {
             topBarBack.includeBackButton.apply {
@@ -308,11 +316,31 @@ class Checkout : Fragment() {
                                                     })
                                                 }
 
-                                                viewModel.postCustomDetails(token!!, customerData) {
+                                                viewModel.postCustomDetails(token, customerData) {
                                                     Log.e("TAG", "postCustomDetailsonCallBack22: ${this.toString()}")
-                                                    findNavController().navigate(R.id.action_checkout_to_payment)
+//                                                    findNavController().navigate(R.id.action_checkout_to_payment)
+                                                    val co = Checkout()
+                                                    co.setKeyID("rzp_test_Ce5CQWqb8wSD9U")
+                                                    try {
+                                                        var options = JSONObject()
+                                                        options = JSONObject()
+                                                        options.put("name","Razorpay Corp")
+                                                        options.put("description","Demoing Charges")
+                                                        options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
+                                                        options.put("currency","INR")
+                                                        options.put("amount","1000")
+                                                        options.put("send_sms_hash",true)
+                                                        val prefill = JSONObject()
+                                                        prefill.put("email","test@razorpay.com")
+                                                        prefill.put("contact","9988397522")
+                                                        options.put("prefill", prefill)
+                                                        co.open(requireActivity(), options)
+                                                    }catch (e: Exception){
+//                                                        onPaymentError 0 ::: undefined ::: com.razorpay.PaymentData@dc1cb00
+                                                        Toast.makeText(requireContext(),"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
+                                                        e.printStackTrace()
+                                                    }
                                                 }
-
                                             }
                                         }
                                     }
@@ -409,4 +437,71 @@ class Checkout : Fragment() {
             }
         }
     }
+
+
+    fun getCheckoutFragment(): com.klifora.franchise.ui.main.checkout.Checkout? {
+        // Get the NavHostFragment
+//        val navHostFragment = getSupportFragmentManager()
+//            .findFragmentById(R.id.navigation_bar)
+
+        if (navHostFragment != null) {
+            // Get the currently displayed fragment inside the NavHostFragment
+            val currentFragment = navHostFragment!!.childFragmentManager.primaryNavigationFragment
+
+            if (currentFragment is com.klifora.franchise.ui.main.checkout.Checkout) {
+                return currentFragment as com.klifora.franchise.ui.main.checkout.Checkout
+            }
+        }
+        return null
+    }
+
+    fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
+        try {
+            MaterialAlertDialogBuilder(MainActivity.activity.get()!!, R.style.LogoutDialogTheme)
+                .setTitle(resources.getString(R.string.app_name))
+                .setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
+                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+        }catch (e: Exception){
+
+        }
+    }
+
+
+
+    fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
+//        Log.e("TAG", "onPaymentError "+p0.toString() +" ::: "+p1.toString() +" ::: "+p2?.data.toString())
+        try {
+            MaterialAlertDialogBuilder(Companion.activity.get()!!, R.style.LogoutDialogTheme)
+                .setTitle(resources.getString(R.string.app_name))
+                .setMessage("Payment Failed : Payment Data: ${p2?.data}")
+                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+    fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {
+        try{
+            MaterialAlertDialogBuilder(Companion.activity.get()!!, R.style.LogoutDialogTheme)
+                .setTitle(resources.getString(R.string.app_name))
+                .setMessage("External wallet was selected : Payment Data: ${p1?.data}")
+                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+
 }

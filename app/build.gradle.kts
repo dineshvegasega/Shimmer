@@ -77,7 +77,7 @@ android {
 //}
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.13.1")
+    implementation("androidx.core:core-ktx:1.15.0")
     implementation("com.google.android.material:material:1.12.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
@@ -92,10 +92,10 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.8.3")
     implementation ("androidx.navigation:navigation-ui-ktx:2.8.3")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.7.1")
-    implementation ("androidx.databinding:databinding-runtime:8.7.1")
+    implementation ("androidx.databinding:databinding-ktx:8.7.2")
+    implementation ("androidx.databinding:databinding-runtime:8.7.2")
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
 
     implementation("com.intuit.sdp:sdp-android:1.1.0")
@@ -107,8 +107,8 @@ dependencies {
     //retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.11.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation ("com.squareup.retrofit2:converter-scalars:2.11.0")
 
     implementation ("com.google.code.gson:gson:2.10.1")
@@ -171,7 +171,7 @@ dependencies {
     ksp ("androidx.room:room-ktx:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
 //    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.work:work-runtime-ktx:2.9.1")
+    implementation ("androidx.work:work-runtime-ktx:2.10.0")
     implementation ("com.hbb20:ccp:2.7.0")
     implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
 //    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
@@ -194,7 +194,6 @@ dependencies {
     implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
     implementation ("com.github.vipulasri:timelineview:1.1.5")
     implementation ("com.razorpay:checkout:1.6.20")
-
 }
 
 

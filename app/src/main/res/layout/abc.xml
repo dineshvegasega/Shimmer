@@ -305,4 +305,29 @@
         style="@style/Widget.MaterialRatingBar.RatingBar"
         />
 
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btLogin"
+        style="@style/PrimaryButtonBlue"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:paddingHorizontal="0dp"
+        android:text="@string/confirm"
+        app:iconTint="@color/black"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/_C08D54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_below="@+id/library_normal_ratingbar"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:cornerRadius="@dimen/_7sdp"
+        android:visibility="visible"
+        app:strokeColor="@color/app_color"
+        android:foreground="?android:attr/selectableItemBackground"
+
+        />
+
+
 </RelativeLayout>

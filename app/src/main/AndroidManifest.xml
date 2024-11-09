@@ -5,7 +5,8 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus"
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
         android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +20,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <uses-permission
@@ -61,19 +62,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shimmer"
         android:usesCleartextTraffic="true"
-        tools:targetApi="tiramisu"
         tools:replace="android:allowBackup"
-        >
+        tools:targetApi="tiramisu">
 
 
         <activity
             android:name=".ui.mainActivity.MainActivity"
+            android:configChanges="orientation"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:configChanges="orientation"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             android:theme="@style/Theme.Shimmer"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
             tools:ignore="DiscouragedApi,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -108,29 +108,32 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-<!--        <service-->
-<!--            android:name=".fcm.MyFirebaseMessagingService"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="false"-->
-<!--            android:stopWithTask="false">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
-<!--            </intent-filter>-->
-<!--        </service>-->
+        <!--        <service-->
+        <!--            android:name=".fcm.MyFirebaseMessagingService"-->
+        <!--            android:enabled="true"-->
+        <!--            android:exported="false"-->
+        <!--            android:stopWithTask="false">-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="com.google.firebase.MESSAGING_EVENT" />-->
+        <!--            </intent-filter>-->
+        <!--        </service>-->
 
 
         <meta-data
-        android:name="com.google.firebase.messaging.default_notification_channel_id"
-        android:value="default_channel_id" />
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="default_channel_id" />
 
-    <meta-data
-        android:name="com.google.firebase.messaging.default_notification_icon"
-        android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
 
-    <meta-data
-        android:name="com.google.firebase.messaging.default_notification_color"
-        android:resource="@color/_EDB678" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/_EDB678" />
 
-</application>
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+    </application>
 
 </manifest>

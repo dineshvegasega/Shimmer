@@ -16,7 +16,7 @@
         android:orientation="horizontal"
         android:visibility="visible"
         android:gravity="center"
-        android:paddingTop="@dimen/_2sdp"
+        android:paddingVertical="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_8sdp"
         >
 
@@ -29,16 +29,14 @@
         android:visibility="visible"
         android:gravity="center"
         android:layout_marginStart="@dimen/_15sdp"
-        android:background="@color/mehroon"
         >
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appicon"
             android:layout_width="@dimen/_110sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:src="@drawable/logo_silver"
-            android:scaleType="fitCenter"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/klifora_logo1"
+            android:scaleType="fitXY"
             android:text="@string/toolbar_title"
-            android:padding="@dimen/_2sdp"
             android:visibility="visible"
             app:rippleColor="@color/black"
             android:clickable="true"

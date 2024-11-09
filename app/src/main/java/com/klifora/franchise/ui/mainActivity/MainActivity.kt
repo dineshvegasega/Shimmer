@@ -3,8 +3,8 @@ package com.klifora.franchise.ui.mainActivity
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.ActivityInfo
-import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +12,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -22,12 +21,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
-import com.google.firebase.FirebaseOptions
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.MainActivityBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
-import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.DataStoreUtil.saveData
 import com.klifora.franchise.datastore.db.AppDatabase
@@ -37,8 +35,8 @@ import com.klifora.franchise.networking.password
 import com.klifora.franchise.networking.username
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.main.category.Category
-import com.klifora.franchise.ui.main.home.Home
 import com.klifora.franchise.ui.main.faq.Faq
+import com.klifora.franchise.ui.main.home.Home
 import com.klifora.franchise.ui.main.profile.Profile
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
@@ -47,14 +45,18 @@ import com.klifora.franchise.utils.getDensityName
 import com.klifora.franchise.utils.getToken
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.singleClick
+import com.razorpay.Checkout
+import com.razorpay.ExternalWalletListener
+import com.razorpay.PaymentData
+import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
-import org.jsoup.internal.StringUtil.isNumeric
 import java.lang.ref.WeakReference
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
+    ExternalWalletListener, DialogInterface.OnClickListener {
 
     private val viewModel: MainActivityVM by viewModels()
 
@@ -140,6 +142,7 @@ class MainActivity : AppCompatActivity() {
 
         typefacenunitosans_light = resources.getFont(R.font.nunitosans_light)
         typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
+        Checkout.preload(applicationContext)
 
         binding.apply {
             toolbar.appicon.singleClick {
@@ -498,8 +501,47 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
     }
 
+
+
+    override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
+        Log.e("TAG", "onPaymentSuccess "+p0.toString() +" ::: "+p1?.data.toString())
+        try{
+            val checkoutFragment: com.klifora.franchise.ui.main.checkout.Checkout? = com.klifora.franchise.ui.main.checkout.Checkout().getCheckoutFragment()
+            if (checkoutFragment != null) {
+                checkoutFragment.onPaymentSuccess(p0, p1)
+            }
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+    override fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
+        Log.e("TAG", "onPaymentError "+p0.toString() +" ::: "+p1.toString() +" ::: "+p2?.data.toString())
+        try{
+            val checkoutFragment: com.klifora.franchise.ui.main.checkout.Checkout? = com.klifora.franchise.ui.main.checkout.Checkout().getCheckoutFragment()
+            if (checkoutFragment != null) {
+                checkoutFragment.onPaymentError(p0, p1, p2)
+            }
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+    override fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {
+        Log.e("TAG", "onExternalWalletSelected "+p0.toString() +" ::: "+p1?.data.toString())
+        try{
+            val checkoutFragment: com.klifora.franchise.ui.main.checkout.Checkout? = com.klifora.franchise.ui.main.checkout.Checkout().getCheckoutFragment()
+            if (checkoutFragment != null) {
+                checkoutFragment.onExternalWalletSelected(p0, p1)
+            }
+        }catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
+    override fun onClick(dialog: DialogInterface?, which: Int) {
+    }
 }
 
