@@ -83,22 +83,25 @@ class ABC  : AppCompatActivity(), PaymentResultWithDataListener, ExternalWalletL
      //   if (!TextUtils.isEmpty("rzp_test_Ce5CQWqb8wSD9U")){
             co.setKeyID("rzp_test_Ce5CQWqb8wSD9U")
 //        }
+
+        var sss = 123.40 * 100
+
         try {
             var options = JSONObject()
 //            if (!TextUtils.isEmpty("etCustomOptions.text.toString()")){
                 options = JSONObject()
 //            }else{
-                options.put("name","Razorpay Corp")
+                options.put("name","Abc")
                 options.put("description","Demoing Charges")
                 //You can omit the image option to fetch the image from dashboard
                 options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
                 options.put("currency","INR")
-                options.put("amount","1000")
+                options.put("amount", ""+sss)
                 options.put("send_sms_hash",true);
 
                 val prefill = JSONObject()
-                prefill.put("email","test@razorpay.com")
-                prefill.put("contact","9988397522")
+                prefill.put("email","abc@gmail.com")
+                prefill.put("contact","9988397521")
 
                 options.put("prefill",prefill)
 //            }

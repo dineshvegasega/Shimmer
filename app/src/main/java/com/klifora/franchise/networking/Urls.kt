@@ -5,6 +5,9 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUr
 //https://shop.vegasega.com/media/catalog/product/u/r/ur01473-yg0000_4_lar.jpg
 
 
+const val RAZORPAY_KEY = "rzp_test_Ce5CQWqb8wSD9U"
+//const val RAZORPAY_KEY = "rzp_live_aLCUvxiL7fqmo3"
+
 //const val BASE_URL = "https://shop.vegasega.com/"
 const val BASE_URL = "https://klifora.com/"
 
