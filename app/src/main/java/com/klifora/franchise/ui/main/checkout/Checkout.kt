@@ -326,21 +326,28 @@ class Checkout : Fragment() {
                                                         val co = Checkout()
                                                         co.setKeyID(RAZORPAY_KEY)
                                                         try {
-                                                            val total = totalPrice * 100
+
+                                                            Log.e("TAG", "totalXXXCC: "+totalPrice)
+                                                            val total : Double = totalPrice * 100
+                                                            Log.e("TAG", "totalXXXDD: "+total)
+
+//                                                            val sss = 130361.0 * 100
+//                                                            Log.e("TAG", "totalXXXEE: "+sss)
+                                                            val totalX = total.toInt()
+
                                                             var options = JSONObject()
-                                                            options = JSONObject()
                                                             options.put("name",editTextN.text.toString())
 //                                                            options.put("name","Razorpay Corp")
                                                             options.put("description", name)
                                                             options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
                                                             options.put("currency","INR")
-                                                            options.put("amount", ""+total)
+                                                            options.put("amount", ""+totalX)
                                                             options.put("send_sms_hash",true)
                                                             val prefill = JSONObject()
-//                                                            prefill.put("email", "test@razorpay.com")
-//                                                            prefill.put("contact", "9988397522")
-                                                            prefill.put("email", editEmail.text.toString())
-                                                            prefill.put("contact", editMobileNo.text.toString())
+                                                            prefill.put("email", "test@razorpay.com")
+                                                            prefill.put("contact", "9988397522")
+//                                                            prefill.put("email", editEmail.text.toString())
+//                                                            prefill.put("contact", editMobileNo.text.toString())
                                                             options.put("prefill", prefill)
                                                             co.open(requireActivity(), options)
                                                         }catch (e: Exception){
@@ -493,7 +500,7 @@ class Checkout : Fragment() {
 
                 Log.e("TAG", "jsonObjectMethod " + addressInformation)
 
-                val payJSON = JSONObject(p1.toString())
+                val payJSON = JSONObject(p1?.data.toString())
                 val payName = payJSON.getString("razorpay_payment_id")
                 Log.e("TAG", "payName " + payName)
 
@@ -513,7 +520,7 @@ class Checkout : Fragment() {
                                 }
                                 .setCancelable(false)
                                 .show()
-                        }catch (e: Exception){
+                        }catch (_: Exception){
 
                         }
                     }
@@ -526,18 +533,21 @@ class Checkout : Fragment() {
 
     fun onPaymentError(p0: Int, p1: String?, p2: PaymentData?) {
 //        Log.e("TAG", "onPaymentError "+p0.toString() +" ::: "+p1.toString() +" ::: "+p2?.data.toString())
-        try {
-            MaterialAlertDialogBuilder(Companion.activity.get()!!, R.style.LogoutDialogTheme)
-                .setTitle(resources.getString(R.string.app_name))
-                .setMessage("Payment Failed : Payment Data: ${p2?.data}")
-                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setCancelable(false)
-                .show()
-        }catch (e: java.lang.Exception){
-            e.printStackTrace()
+        if (!p2?.data.toString().equals("{}")){
+            try {
+                MaterialAlertDialogBuilder(Companion.activity.get()!!, R.style.LogoutDialogTheme)
+                    .setTitle(resources.getString(R.string.app_name))
+                    .setMessage("Payment Failed : Payment Data: ${p2?.data}")
+                    .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .setCancelable(false)
+                    .show()
+            }catch (e: java.lang.Exception){
+                e.printStackTrace()
+            }
         }
+
     }
 
     fun onExternalWalletSelected(p0: String?, p1: PaymentData?) {

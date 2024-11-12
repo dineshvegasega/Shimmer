@@ -84,7 +84,8 @@ class ABC  : AppCompatActivity(), PaymentResultWithDataListener, ExternalWalletL
             co.setKeyID("rzp_test_Ce5CQWqb8wSD9U")
 //        }
 
-        var sss = 123.40 * 100
+        val sss = 130361 * 100
+        Log.e("TAG", "totalXXXDD: "+sss)
 
         try {
             var options = JSONObject()
@@ -115,6 +116,10 @@ class ABC  : AppCompatActivity(), PaymentResultWithDataListener, ExternalWalletL
 
     override fun onPaymentSuccess(p0: String?, p1: PaymentData?) {
         try{
+            val payJSON = JSONObject(p1?.data.toString())
+            val payName = payJSON.getString("razorpay_payment_id")
+            Log.e("TAG", "payName " + payName)
+
             alertDialogBuilder.setMessage("Payment Successful : Payment ID: $p0\nPayment Data: ${p1?.data}")
             alertDialogBuilder.show()
         }catch (e: Exception){
