@@ -21,6 +21,7 @@ import com.klifora.franchise.datastore.DataStoreKeys.QUOTE_ID
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.user.ItemUserItem
+import com.klifora.franchise.networking.GST_PERCENT
 import com.klifora.franchise.networking.RAZORPAY_KEY
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
@@ -132,6 +133,7 @@ class Checkout : Fragment() {
             var name = ""
             var qunty = 0
             var totalPrice: Double = 0.0
+            var gstTotalPrice: Double = 0.0
             when (loginType) {
                 LoginType.CUSTOMER -> {
                     mainThread {
@@ -170,12 +172,20 @@ class Checkout : Fragment() {
 //                        val priceANDGSTPrice =
 //                            priceANDdiscountPrice + (cstPriceAfter + sgstPriceAfter) + viewModel.shippingPrice
                         textSubtotalPrice.text = "₹ ${getPatternFormat("1", price)}"
-                        textTotalPrice.text = "₹ ${getPatternFormat("1", price)}"
+//                        textTotalPrice.text = "₹ ${getPatternFormat("1", price)}"
+
+                        textGST.text = "GST(${GST_PERCENT}%)"
+                        var gstValue: Double = 0.0
+                        gstValue = (price * GST_PERCENT) / 100
+                        textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                        var gstTotalPrice: Double = 0.0
+                        gstTotalPrice = price + gstValue
+                        textTotalPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
 
 //                textShippingPrice.text = "₹${getPatternFormat("1", viewModel.shippingPrice)}"
 
 
-                        textDiscount.text = "Discount (${viewModel.discountPrice}%)"
+//                        textDiscount.text = "Discount (${viewModel.discountPrice}%)"
 //                textCGST.text = "CGST (${viewModel.cgstPrice}%)"
 //                textSGST.text = "SGST (${viewModel.sgstPrice}%)"
                     }
@@ -199,8 +209,15 @@ class Checkout : Fragment() {
                                     name += it.name + ", "
                                 }
                                 textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
-                                textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+//                                textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
 //                                textItems.text = "${qunty} Item"
+
+                                textGST.text = "GST($GST_PERCENT%)"
+                                var gstValue: Double = 0.0
+                                gstValue = (totalPrice * GST_PERCENT) / 100
+                                textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                                gstTotalPrice = totalPrice + gstValue
+                                textTotalPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
 
                                 if (!itemCart.items.isNullOrEmpty()) {
 //                                    upperLayout.visibility = View.VISIBLE
@@ -327,15 +344,15 @@ class Checkout : Fragment() {
                                                         co.setKeyID(RAZORPAY_KEY)
                                                         try {
 
-                                                            Log.e("TAG", "totalXXXCC: "+totalPrice)
-                                                            val total : Double = totalPrice * 100
+                                                            Log.e("TAG", "totalXXXCC: "+gstTotalPrice)
+                                                            val total : Double = gstTotalPrice * 100
                                                             Log.e("TAG", "totalXXXDD: "+total)
 
 //                                                            val sss = 130361.0 * 100
 //                                                            Log.e("TAG", "totalXXXEE: "+sss)
                                                             val totalX = total.toInt()
 
-                                                            var options = JSONObject()
+                                                            val options = JSONObject()
                                                             options.put("name",editTextN.text.toString())
 //                                                            options.put("name","Razorpay Corp")
                                                             options.put("description", name)

@@ -17,6 +17,7 @@ import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.STORE_DETAIL
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
+import com.klifora.franchise.networking.GST_PERCENT
 import com.klifora.franchise.networking.login
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
@@ -117,7 +118,13 @@ class Cart : Fragment() {
                             qunty += it.quantity
                         }
                         textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
-                        textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+                        textGST.text = "GST(${GST_PERCENT}%)"
+                        var gstValue: Double = 0.0
+                        gstValue = (totalPrice * GST_PERCENT) / 100
+                        textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                        var gstTotalPrice: Double = 0.0
+                        gstTotalPrice = totalPrice + gstValue
+                        textTotalPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
                         textItems.text = "${qunty} Item"
 
                         if (!userList.isNullOrEmpty()) {
@@ -152,8 +159,15 @@ class Cart : Fragment() {
                                 qunty += it.qty
                             }
                             textSubtotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
-                            textTotalPrice.text = "₹ " + getPatternFormat("1", totalPrice)
+                            textGST.text = "GST(${GST_PERCENT}%)"
+                            var gstValue: Double = 0.0
+                            gstValue = (totalPrice * GST_PERCENT) / 100
+                            textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                            var gstTotalPrice: Double = 0.0
+                            gstTotalPrice = totalPrice + gstValue
+                            textTotalPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
                             textItems.text = "${qunty} Item"
+
 
                             if (!itemCart.items.isNullOrEmpty()) {
                                 upperLayout.visibility = View.VISIBLE

@@ -23,6 +23,7 @@ import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.di.AppModule_GsonFactory.gson
 import com.klifora.franchise.models.guestOrderList.ItemGuestOrderListItem
 import com.klifora.franchise.models.orderHistory.Item
+import com.klifora.franchise.networking.GST_PERCENT
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
@@ -143,8 +144,15 @@ class OrderDetail : Fragment() {
                 }
 
                 textSubTotalPrice.text = "₹ " + getPatternFormat("1", price)
-                textTotalAmountPrice.text = "₹ " + getPatternFormat("1", price)
+//                textTotalAmountPrice.text = "₹ " + getPatternFormat("1", price)
 
+                textGST.text = "GST(${GST_PERCENT}%)"
+                var gstValue: Double = 0.0
+                gstValue = (price * GST_PERCENT) / 100
+                textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                var gstTotalPrice: Double = 0.0
+                gstTotalPrice = price + gstValue
+                textTotalAmountPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
 
                 if (consentIntent?.status == "pending") {
                     layoutSort.visibility = View.VISIBLE
@@ -214,9 +222,16 @@ class OrderDetail : Fragment() {
                             textSubTotalPrice.text =
                                 "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
 //                            textGSTPrice.text = "₹" +itemOrderDetail?.base_shipping_incl_tax
-                            textTotalAmountPrice.text =
-                                "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
+//                            textTotalAmountPrice.text =
+//                                "₹ " + getPatternFormat("1", itemOrderDetail?.base_subtotal)
 
+                            textGST.text = "GST(${GST_PERCENT}%)"
+                            var gstValue: Double = 0.0
+                            gstValue = (itemOrderDetail!!.base_subtotal * GST_PERCENT) / 100
+                            textGSTPrice.text = "₹ " + getPatternFormat("1", gstValue)
+                            var gstTotalPrice: Double = 0.0
+                            gstTotalPrice = itemOrderDetail!!.base_subtotal + gstValue
+                            textTotalAmountPrice.text = "₹ " + getPatternFormat("1", gstTotalPrice)
 
                             textTitle0.visibility = View.VISIBLE
                             layoutStatus.visibility = View.VISIBLE

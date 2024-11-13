@@ -8,6 +8,7 @@ import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.getJsonRequestBody
+import com.klifora.franchise.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -29,15 +30,16 @@ class LoginOptionsVM @Inject constructor(private val repository: Repository) : V
                             val token = response.body().toString().substring(1, response.body().toString().length - 1)
                             callBack(token)
                         }catch (e : Exception){
+                            showSnackBar("Something went wrong!")
                         }
                     }
                 }
 
                 override fun error(message: String) {
                     super.error(message)
-//                    showSnackBar(message)
+                    showSnackBar(message)
                     Log.e("TAG", "successBB: ${message.toString()}")
-                    callBack(message.toString())
+//                    callBack(message.toString())
                 }
 
                 override fun loading() {

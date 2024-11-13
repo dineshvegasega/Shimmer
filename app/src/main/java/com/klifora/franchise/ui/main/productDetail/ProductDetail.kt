@@ -1364,24 +1364,24 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                             if (itemProductAttr.attribute_code == "diamond_weight") {
-                                textWeightCt.text = "Weight " + itemProductAttr.value
+                                textWeightCt.text = "Total Weight " + itemProductAttr.value
                             }
                             if (itemProductAttr.attribute_code != "diamond_weight") {
                                 itemProduct.custom_attributes.forEach { itemMainProductAttr ->
                                     if (itemMainProductAttr.attribute_code == "diamond_weight") {
-                                        textWeightCt.text = "Weight " + itemMainProductAttr.value
+                                        textWeightCt.text = "Total Weight " + itemMainProductAttr.value
                                     }
                                 }
                             }
 
 
                             if (itemProductAttr.attribute_code == "diamond_number") {
-                                textDiamonds.text = "Diamonds " + itemProductAttr.value
+                                textDiamonds.text = "No of Diamonds " + itemProductAttr.value
                             }
                             if (itemProductAttr.attribute_code != "diamond_number") {
                                 itemProduct.custom_attributes.forEach { itemMainProductAttr ->
                                     if (itemMainProductAttr.attribute_code == "diamond_number") {
-                                        textDiamonds.text = "Diamonds " + itemMainProductAttr.value
+                                        textDiamonds.text = "No of Diamonds " + itemMainProductAttr.value
                                     }
                                 }
                             }
