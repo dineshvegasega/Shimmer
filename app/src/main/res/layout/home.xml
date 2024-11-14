@@ -78,7 +78,7 @@
                 android:id="@+id/textTitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top Brands"
+                android:text="@string/top_brands"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 app:fontFamily="@font/nunitosans_bold"
@@ -142,7 +142,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Know about"
+                            android:text="@string/know_about"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp"
                             app:fontFamily="@font/nunitosans_regular"

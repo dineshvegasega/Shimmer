@@ -25,7 +25,7 @@
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rama Jewellers"
+        android:text="@string/title"
         android:textColor="@color/_2A3740"
         android:textSize="@dimen/_10sdp"
         app:fontFamily="@font/nunitosans_bold"

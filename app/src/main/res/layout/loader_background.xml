@@ -30,7 +30,7 @@
             android:id="@+id/textTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Loading..."
+            android:text="@string/loading"
             android:textColor="@color/_2A3740"
             app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
             app:layout_constraintStart_toStartOf="parent"

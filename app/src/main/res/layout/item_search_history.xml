@@ -37,7 +37,7 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_4sdp"
-            android:text="What is Faq?"
+            android:text="@string/faqs"
             android:textColor="@color/_424041"
             android:textSize="@dimen/_11sdp"
             app:fontFamily="@font/nunitosans_semibold"

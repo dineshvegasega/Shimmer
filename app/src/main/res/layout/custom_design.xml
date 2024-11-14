@@ -46,8 +46,6 @@
             app:layout_constraintTop_toTopOf="parent" >
 
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutTop"
                 android:layout_width="match_parent"
@@ -126,7 +124,7 @@
                 android:id="@+id/textTitleDesc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="For any kind of customization requests, fill this form and get in touch with us today."
+                android:text="@string/for_any_kind_of_customization_requests_fill_this_form_and_get_in_touch_with_us_today"
                 android:textColor="@color/_1E1E1E"
                 app:layout_constraintTop_toBottomOf="@+id/layoutTop"
                 app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 style="@style/PrimaryEditText"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:text=""
                 app:layout_constraintTop_toBottomOf="@+id/textCustomerDetails"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -176,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 style="@style/PrimaryEditText"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:text=""
@@ -192,7 +190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 style="@style/PrimaryEditText"
-                android:hint="Mobile No"
+                android:hint="@string/mobile_no"
                 android:inputType="number"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:text=""

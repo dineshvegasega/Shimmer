@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ivLayout"
             tools:ignore="MissingConstraints"
             app:fontFamily="@font/nunitosans_regular"
-            android:text="Elon Musk"
+            android:text="@string/ring"
             android:textSize="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_3sdp"
             />

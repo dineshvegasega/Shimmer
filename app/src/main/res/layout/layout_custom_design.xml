@@ -41,7 +41,7 @@
             android:id="@+id/textSortBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Customise Your Design"
+            android:text="@string/customise_your_design"
             android:textColor="@color/app_color"
             android:textSize="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_5sdp"

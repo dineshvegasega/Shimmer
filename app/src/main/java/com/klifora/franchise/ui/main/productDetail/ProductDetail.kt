@@ -1266,6 +1266,13 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                         var metal_weight: String = "0.0 gram"
+
+                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+                            if (itemProductAttr.attribute_code == "metal_weight") {
+                                metal_weight = "" + itemProductAttr.value + " gram"
+                            }
+                        }
+
                         itemProductThis.custom_attributes.forEach { itemProductAttr ->
 
                             if (itemProductAttr.attribute_code == "size") {

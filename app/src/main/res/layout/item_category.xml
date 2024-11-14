@@ -29,7 +29,7 @@
                 android:id="@+id/textName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ring"
+                android:text="@string/ring"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11sdp"
                 app:fontFamily="@font/nunitosans_semibold"

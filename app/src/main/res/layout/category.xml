@@ -79,7 +79,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Men"
+                android:text="@string/men"
                 android:textColor="@color/_003E4D"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
                 app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +120,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Women"
+                android:text="@string/women"
                 android:textColor="@color/_003E4D"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
                 app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +161,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kids"
+                android:text="@string/kids"
                 android:textColor="@color/_003E4D"
                 app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
                 app:layout_constraintStart_toStartOf="parent"

@@ -33,7 +33,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_13sdp"
         android:gravity="center"
-        android:text="Back"
+        android:text="@string/back"
         app:fontFamily="@font/nunitosans_semibold"
         />
 

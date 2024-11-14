@@ -51,8 +51,7 @@
             android:id="@+id/textTitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your order has been successfully placed.
-Franchise will contact you within 24hrs"
+            android:text="@string/your_order_has_been_successfully_placed_franchise_will_contact_you_within_24hrs"
             android:textColor="@color/black"
             android:gravity="center_horizontal"
 
