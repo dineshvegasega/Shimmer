@@ -403,24 +403,24 @@ class Products : Fragment() {
 
             Log.e("TAG", "mainCategoryXX " + categoryIds)
             if (mainCategoryBoolean) {
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
                     "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
                     categoryIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] =
                     "in"
             }
             Log.e("TAG", "countFromAAA " + emptyMap.toString())
 
 
-            var categoryIdsgenderIds: String = ""
+//            var categoryIdsgenderIds: String = ""
             var genderIds: String = ""
             var mainShopForBoolean = false
             mainShopFor.forEach {
                 if (it.isSelected) {
                     genderIds += "" + it.id + ","
                     count += 1
-//                    countFrom1 += 1
+                    countFrom1 += 1
                     mainShopForBoolean = true
 //                    Log.e("TAG", "countFromAAAgenderIds " + it.id)
                 }
@@ -428,35 +428,35 @@ class Products : Fragment() {
 //            categoryIdsgenderIds =
 //                if (categoryIds.length > 1) categoryIds.substring(0, categoryIds.length - 1) else ""
 
-            if(categoryIds.endsWith(",")){
-                categoryIds =
-                    if (categoryIds.length > 1) categoryIds.substring(0, categoryIds.length - 1) else ""
-            }
+//            if(categoryIds.endsWith(",")){
+//                categoryIds =
+//                    if (categoryIds.length > 1) categoryIds.substring(0, categoryIds.length - 1) else ""
+//            }
 
             if(genderIds.endsWith(",")){
                 genderIds =
                     if (genderIds.length > 1) genderIds.substring(0, genderIds.length - 1) else ""
             }
 
-            categoryIdsgenderIds = categoryIds+","+genderIds
-
-            if(categoryIdsgenderIds.endsWith(",")){
-                categoryIdsgenderIds =
-                    if (categoryIdsgenderIds.length > 1) categoryIdsgenderIds.substring(0, categoryIdsgenderIds.length - 1) else ""
-            }
-
-            Log.e("TAG", "countFromAAAgenderIds " + categoryIdsgenderIds)
+//            categoryIdsgenderIds = categoryIds+","+genderIds
+//
+//            if(categoryIdsgenderIds.endsWith(",")){
+//                categoryIdsgenderIds =
+//                    if (categoryIdsgenderIds.length > 1) categoryIdsgenderIds.substring(0, categoryIdsgenderIds.length - 1) else ""
+//            }
+//
+//            Log.e("TAG", "countFromAAAgenderIds " + categoryIdsgenderIds)
 
 
 
             Log.e("TAG", "countFromDDD " + countFrom1)
             if (mainShopForBoolean) {
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
-                    "category_id"
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] =
-                    categoryIdsgenderIds
-                emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
-                    "in"
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
+                    "gender"
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
+                    genderIds
+                emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] =
+                    "eq"
             }
 
 
@@ -539,10 +539,10 @@ class Products : Fragment() {
 //            Log.e("TAG", "countFromDDD "+emptyMap.toString())
 
             countFrom1 += 1
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][field]"] =
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
                 "visibility"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][value]"] = "4"
-            emptyMap["searchCriteria[filter_groups][0][filters][" + countFrom1 + "][condition_type]"] =
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] = "4"
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] =
                 "eq"
             Log.e("TAG", "countFromDDD " + emptyMap.toString())
 
