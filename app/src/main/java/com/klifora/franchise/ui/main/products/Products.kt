@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.common.base.Joiner
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.DialogSortBinding
 import com.klifora.franchise.databinding.ProductsBinding
@@ -397,19 +398,29 @@ class Products : Fragment() {
 
             if(categoryIds.endsWith(",")){
                 categoryIds =
-                    if (categoryIds.length > 1) categoryIds.substring(0, categoryIds.length - 1) else ""
+                    if (categoryIds.length > 1) {
+                        if (categoryIds.endsWith(",")){
+                            categoryIds.substring(0, categoryIds.length - 1)
+//                            Log.e("TAG", "categoryIdsA "+categoryIds)
+                        } else {
+                            categoryIds
+//                            Log.e("TAG", "categoryIdsB "+categoryIds)
+                        }
+                    } else {
+                         ""
+                    }
             }
 
 
             Log.e("TAG", "mainCategoryXX " + categoryIds)
-            if (mainCategoryBoolean) {
+//            if (mainCategoryBoolean) {
                 emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
                     "category_id"
                 emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
                     categoryIds
                 emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][condition_type]"] =
                     "in"
-            }
+//            }
             Log.e("TAG", "countFromAAA " + emptyMap.toString())
 
 
@@ -434,8 +445,19 @@ class Products : Fragment() {
 //            }
 
             if(genderIds.endsWith(",")){
+//                genderIds =
+//                    if (genderIds.length > 1) genderIds.substring(0, genderIds.length - 1) else ""
+
                 genderIds =
-                    if (genderIds.length > 1) genderIds.substring(0, genderIds.length - 1) else ""
+                    if (genderIds.length > 1) {
+                        if (genderIds.endsWith(",")){
+                            genderIds.substring(0, genderIds.length - 1)
+                        } else {
+                            genderIds
+                        }
+                    } else {
+                        ""
+                    }
             }
 
 //            categoryIdsgenderIds = categoryIds+","+genderIds
