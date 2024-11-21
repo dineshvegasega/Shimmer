@@ -147,6 +147,7 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                             }
                         }
                     }
+
                     "processing" -> {
                         when (dataClass.status) {
                             "Accepted" -> {
@@ -182,6 +183,61 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                                     )
                                 btStatus.visibility = View.VISIBLE
                             }
+                            "Photography" -> {
+                                btStatus.text = "Photography"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._E79D46
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "Certification" -> {
+                                btStatus.text = "Certification"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._FF5555
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "Packaging" -> {
+                                btStatus.text = "Packaging"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._494949
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "Dispatch" -> {
+                                btStatus.text = "Dispatch"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._0098BD
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
+                            "complete" -> {
+                                btStatus.text = "Delivered"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._138808
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
+                            }
                             "Faild" -> {
                                 btStatus.text = "Failed"
                                 btStatus.backgroundTintList =
@@ -206,6 +262,22 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
                             }
                             else -> {
                                 btStatus.visibility = View.GONE
+                            }
+                        }
+                    }
+
+                    "complete" -> {
+                        when (dataClass.status) {
+                            "complete" -> {
+                                btStatus.text = "Delivered"
+                                btStatus.backgroundTintList =
+                                    ColorStateList.valueOf(
+                                        ContextCompat.getColor(
+                                            binding.root.context,
+                                            R.color._138808
+                                        )
+                                    )
+                                btStatus.visibility = View.VISIBLE
                             }
                         }
                     }

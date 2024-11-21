@@ -262,6 +262,9 @@
     <string name="order_no">Order No</string>
     <string name="order_no_with">Order No: </string>
 
+    <string name="delivered">Delivered</string>
+    <string name="dispatch">Dispatch</string>
+
     <string name="qc_delivered">QC - Delivered</string>
     <string name="qc_dispatch">QC - Dispatch</string>
     <string name="qc_packaging">QC - Packaging</string>

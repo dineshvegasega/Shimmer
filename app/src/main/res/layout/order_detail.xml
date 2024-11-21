@@ -853,7 +853,7 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="@string/qc_dispatch"
+                        android:text="@string/dispatch"
                         android:textSize="@dimen/_11sdp"
                         />
 
@@ -893,7 +893,7 @@
                         tools:ignore="MissingConstraints"
                         app:fontFamily="@font/nunitosans_regular"
                         android:lines="2"
-                        android:text="@string/qc_delivered"
+                        android:text="@string/delivered"
                         android:textSize="@dimen/_11sdp"
                         />
 

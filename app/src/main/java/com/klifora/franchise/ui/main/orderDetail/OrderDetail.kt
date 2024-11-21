@@ -55,7 +55,7 @@ class OrderDetail : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = OrderDetailBinding.inflate(inflater)
         return binding.root
@@ -102,7 +102,8 @@ class OrderDetail : Fragment() {
             cartItemLiveData.value = false
             cartItemLiveData.observe(viewLifecycleOwner) {
                 topBarBack.menuBadge.text = "$cartItemCount"
-                topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+                topBarBack.menuBadge.visibility =
+                    if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
 
             if (arguments?.getString("from") == "customerOrders") {
@@ -185,9 +186,11 @@ class OrderDetail : Fragment() {
 //                Log.e("TAG", "onViewCreatedBB: ${_id.toString()}")
 
                 btComplainFeedback.singleClick {
-                    findNavController().navigate(R.id.action_orderDetail_to_createNew , Bundle().apply {
-                        putString("order_id", _id)
-                    })
+                    findNavController().navigate(
+                        R.id.action_orderDetail_to_createNew,
+                        Bundle().apply {
+                            putString("order_id", _id)
+                        })
                 }
 
 
@@ -196,7 +199,7 @@ class OrderDetail : Fragment() {
                         viewModel.orderHistoryListDetail(token.toString(), _id) {
                             val itemOrderDetail = this
                             Log.e("TAG", "itemOrderDetailXX: ${itemOrderDetail.toString()}")
-                            textOrderNo.text = "Order No. : "+itemOrderDetail?.increment_id
+                            textOrderNo.text = "Order No. : " + itemOrderDetail?.increment_id
                             textOrderNo.visibility = View.VISIBLE
 
                             textDate.text = itemOrderDetail?.updated_at?.changeDateFormat(
@@ -240,57 +243,747 @@ class OrderDetail : Fragment() {
                                 "new" -> {
                                     when (itemOrderDetail.status) {
                                         "pending" -> {
-                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
-                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
                                         }
-                                        "Accepted" -> {
-                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
-                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
 
-                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
-                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                        "Accepted" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
                                         }
                                     }
                                 }
+
                                 "processing" -> {
                                     when (itemOrderDetail.status) {
                                         "Accepted" -> {
-                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
-                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
 
-                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
-                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
                                         }
+
                                         "processing" -> {
-                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
-                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
 
-                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
-                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
                                         }
+
                                         "approved" -> {
-                                            timeline1.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline1.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
-                                            timeline1.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 1)
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
 
-                                            timeline2.marker = ContextCompat.getDrawable(requireContext(), R.drawable.ellipse_black)
-                                            timeline2.setStartLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 2)
-                                            timeline2.setEndLineColor(ContextCompat.getColor(requireContext(), R.color.app_color), 0)
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
                                         }
+
+
+                                        "Photography" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+                                        }
+
+
+                                        "Certification" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline4.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline4.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline4.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+                                        }
+
+
+                                        "Packaging" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline4.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline4.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline4.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline5.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline5.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline5.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+                                        }
+
+
+                                        "Dispatch" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline4.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline4.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline4.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline5.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline5.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline5.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline6.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline6.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline6.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+                                        }
+
+
+                                        "complete" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline4.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline4.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline4.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline5.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline5.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline5.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline6.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline6.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline6.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline7.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline7.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline7.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+                                        }
+
+
                                         "Faild" -> {
 
                                         }
+
                                         "fraud" -> {
 
                                         }
+
                                         else -> {
+                                        }
+                                    }
+                                }
+
+                                "complete" -> {
+                                    when (itemOrderDetail.status) {
+                                        "complete" -> {
+                                            timeline1.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline1.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+                                            timeline1.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 1
+                                            )
+
+                                            timeline2.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline2.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline2.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline3.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline3.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline3.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline4.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline4.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline4.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline5.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline5.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline5.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline6.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline6.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline6.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 0
+                                            )
+
+                                            timeline7.marker = ContextCompat.getDrawable(
+                                                requireContext(),
+                                                R.drawable.ellipse_black
+                                            )
+                                            timeline7.setStartLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
+                                            timeline7.setEndLineColor(
+                                                ContextCompat.getColor(
+                                                    requireContext(),
+                                                    R.color.app_color
+                                                ), 2
+                                            )
                                         }
                                     }
                                 }
@@ -475,5 +1168,5 @@ data class CartItem(
     val price: Double,
     val sku: String,
     val qty: Int,
-    var isSelected: Boolean = false
+    var isSelected: Boolean = false,
 )
