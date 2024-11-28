@@ -176,9 +176,9 @@ dependencies {
     implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
 //    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
 
-    implementation ("androidx.media3:media3-exoplayer:1.4.1")
-    implementation ("androidx.media3:media3-ui:1.4.1")
-    implementation ("androidx.media3:media3-exoplayer-hls:1.4.1")
+    implementation ("androidx.media3:media3-exoplayer:1.5.0")
+    implementation ("androidx.media3:media3-ui:1.5.0")
+    implementation ("androidx.media3:media3-exoplayer-hls:1.5.0")
 
 //    implementation ("com.reginald.swiperefresh:library:1.0.0")
 //    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")

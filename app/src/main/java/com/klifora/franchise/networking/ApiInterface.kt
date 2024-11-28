@@ -222,12 +222,25 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
-    @PUT("{id}"+POST_CUSTOM_DETAILS)
+//    @PUT("{id}"+POST_CUSTOM_DETAILS)
+//    suspend fun postCustomDetails(
+//        @Header("Authorization") authHeader : String,
+//        @Path("id") id: String,
+//        @Body requestBody: RequestBody
+//    ): Response<JsonElement>
+
+    @GET(POST_CUSTOM_DETAILS)
     suspend fun postCustomDetails(
-        @Header("Authorization") authHeader : String,
-        @Path("id") id: String,
-        @Body requestBody: RequestBody
-    ): Response<JsonElement>
+//        @Header("Authorization") authHeader : String,
+//        @Body requestBody: RequestBody
+        @Query("cartId") cartId: String,
+        @Query("checkout_buyer_name") checkout_buyer_name: String,
+        @Query("checkout_buyer_email") checkout_buyer_email: String,
+        @Query("checkout_purchase_order_no") pagenumber: String,
+        @Query("checkout_goods_mark") pagesize: String= ""
+    ): Response<String>
+
+
 
 
     @GET(ORDER_HISTORY_LIST)

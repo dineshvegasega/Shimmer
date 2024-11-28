@@ -375,19 +375,22 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
 
 
 
-    fun postCustomDetails(adminToken: String, jsonObject: JSONObject, callBack: JsonElement.() -> Unit) =
+    fun postCustomDetails(adminToken: String, jsonObject: JSONObject, callBack: String.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(
-                callHandler = object : CallHandler<Response<JsonElement>> {
+                callHandler = object : CallHandler<Response<String>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.postCustomDetails("Bearer " +adminToken, storeWebUrl, requestBody = jsonObject.getJsonRequestBody())
+//                        apiInterface.postCustomDetails( requestBody = jsonObject.getJsonRequestBody())
+                        apiInterface.postCustomDetails(jsonObject.getString("cartId"), jsonObject.getString("checkout_buyer_name"), jsonObject.getString("checkout_buyer_email"), jsonObject.getString("checkout_purchase_order_no"))
                     @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
+                    override fun success(response: Response<String>) {
+                        Log.e("TAG", "successAAXXZZXX: ${response.toString()}")
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "successAAXXZZ: ${response.body().toString()}")
                                 callBack(response.body()!!)
                             } catch (_: Exception) {
+                                showSnackBar("Something went wrong!")
                             }
                         }
                     }

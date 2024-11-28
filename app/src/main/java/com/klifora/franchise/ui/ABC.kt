@@ -67,8 +67,6 @@ class ABC  : AppCompatActivity(), PaymentResultWithDataListener, ExternalWalletL
         binding.btLogin.setOnClickListener {
             startPayment()
         }
-
-
     }
 
     @SuppressLint("SuspiciousIndentation")
