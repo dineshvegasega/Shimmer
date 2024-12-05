@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -36,50 +37,43 @@
             android:layout_height="@dimen/_30sdp"
             android:src="@drawable/klifora_logo1"
             android:scaleType="fitXY"
-            android:text="@string/toolbar_title"
+            android:text="@string/app_name"
             android:visibility="visible"
             app:rippleColor="@color/black"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="?attr/selectableItemBackgroundBorderless"
             />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-
-
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/ivSearch"
+        style="@style/PrimaryEditText_Transparent"
         android:layout_width="0dp"
         android:layout_height="@dimen/_35sdp"
-        style="@style/PrimaryEditText_Transparent"
-        android:hint="@string/type_here_to_search"
-        android:text="@string/type_here_to_search"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:clickable="true"
         android:drawableEnd="@drawable/search"
         android:drawableTint="@color/_2A3740"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:imeOptions="actionSearch"
-        android:inputType="text|textNoSuggestions"
-        android:maxLines="1"
-        android:lines="1"
-        android:singleLine="true"
         android:ellipsize="end"
-        app:layout_constraintTop_toBottomOf="@+id/logoLayout"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:rippleColor="@color/white"
-        android:clickable="true"
         android:focusable="false"
         android:foreground="?android:attr/selectableItemBackground"
-        />
+        android:hint="@string/type_here_to_search"
+        android:imeOptions="actionSearch"
+        android:inputType="text|textNoSuggestions"
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="@string/type_here_to_search"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoLayout"
+        app:rippleColor="@color/white"
+        tools:ignore="TextSizeCheck" />
 
 
 
@@ -119,7 +113,11 @@
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:text="0"
+            android:ems="10"
+            android:minEms="11"
+            android:singleLine="true"
             android:gravity="center"
+            android:maxLength="4"
             android:background="@drawable/bg_all_round_orders"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
@@ -127,7 +125,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="visible"
-            android:textSize="@dimen/_8sdp" />
+            android:textSize="@dimen/_8sdp"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

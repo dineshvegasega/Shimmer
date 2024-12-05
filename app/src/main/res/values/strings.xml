@@ -109,6 +109,7 @@
     <string name="please_identify_yourself">Please Identify Yourself</string>
     <string name="type_here_to_search">Type here to search</string>
     <string name="categories">Categories</string>
+    <string name="category">Category</string>
 
     <string name="faqs">FAQs</string>
     <string name="profile">Profile</string>

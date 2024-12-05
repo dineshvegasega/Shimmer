@@ -28,11 +28,22 @@ import dagger.hilt.android.AndroidEntryPoint
 class CategoryChildTab(
     private val activity: FragmentActivity,
     private val videoPath: Items,
-    position: Int
+    position: Int,
 ) : Fragment() {
     private var _binding: CategoryChildTabBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CategoryVM by viewModels()
+
+    private var activityThis: FragmentActivity ?= null
+    private var itemsThis: Items ?= null
+    private var positionThis: Int ?= null
+
+    init {
+        this.activityThis = activity
+        this.itemsThis = videoPath
+        this.positionThis = position
+    }
+
 
     companion object {
         @JvmStatic
@@ -41,13 +52,13 @@ class CategoryChildTab(
     }
 
 
-//    var adapter2: CategoryChildTabAdapter ?= null
+
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = CategoryChildTabBinding.inflate(inflater)
         return binding.root

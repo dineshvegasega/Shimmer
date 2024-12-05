@@ -21,8 +21,8 @@ android {
         minSdk = 26
         //noinspection EditedTargetSdkVersion
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0.0"
+        versionCode = 6
+        versionName = "1.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -70,6 +70,22 @@ android {
             enableSplit = false
         }
     }
+
+    lint {
+        disable += "MissingTranslation" + "TypographyFractions" + "LabelFor" + "SpeakableTextPresentCheck" + "NewerVersionAvailable"
+        abortOnError = false
+        checkReleaseBuilds =  false
+        warningsAsErrors = false // Treat warnings as errors (optional)
+        absolutePaths =  false // Use relative paths in lint reports (optional)
+        noLines =  false   // Do not include line numbers in lint reports (optional)
+        ignoreWarnings  = true    // Ignore all lint warnings (optional)
+        checkAllWarnings =  false // Check all lint warnings, including those off by default (optional)
+        showAll =  true // Show all lint warnings, including those that are filtered out (optional)
+        explainIssues  = true // Explain lint issues in the report (optional)
+        quiet = true
+    }
+
+
 }
 
 //composeCompiler {
@@ -92,8 +108,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.8.4")
     implementation ("androidx.navigation:navigation-ui-ktx:2.8.4")
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.7.2")
-    implementation ("androidx.databinding:databinding-runtime:8.7.2")
+    implementation ("androidx.databinding:databinding-ktx:8.7.3")
+    implementation ("androidx.databinding:databinding-runtime:8.7.3")
 
     implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")

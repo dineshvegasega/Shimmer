@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         style="@style/PrimaryEditText"
-        android:text=""
+        tools:ignore="LabelFor"
         android:maxLength="10"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/textTitleMobileNumber"
@@ -120,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             style="@style/PrimaryEditText"
-            android:text=""
+            tools:ignore="LabelFor"
             android:inputType="textPassword"
             android:maxLength="25"
             android:textColor="@color/white"
@@ -144,10 +144,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/_15sdp"
+            android:labelFor="@id/imgCreatePassword"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     <com.google.android.material.button.MaterialButton

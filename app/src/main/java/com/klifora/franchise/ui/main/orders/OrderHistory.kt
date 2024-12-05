@@ -34,6 +34,16 @@ class OrderHistory(
     private val binding get() = _binding!!
     private val viewModel: OrdersVM by viewModels()
 
+    private var activityThis: FragmentActivity ?= null
+    private var itemsThis: Items ?= null
+    private var positionThis: Int ?= null
+
+    init {
+        this.activityThis = activity
+        this.itemsThis = videoPath
+        this.positionThis = position
+    }
+
     companion object {
         @JvmStatic
         var mainSelect = 0

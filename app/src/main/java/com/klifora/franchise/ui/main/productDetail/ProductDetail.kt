@@ -1271,6 +1271,14 @@ class ProductDetail : Fragment(), CallBackListener {
                             if (itemProductAttr.attribute_code == "metal_weight") {
                                 metal_weight = "" + itemProductAttr.value + " gram"
                             }
+
+
+                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+                                textDiamondPrice.text = "₹ " + getPatternFormat(
+                                    "1",
+                                    itemProductAttr.value.toString().toDouble()
+                                )
+                            }
                         }
 
                         itemProductThis.custom_attributes.forEach { itemProductAttr ->
@@ -1422,6 +1430,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                         itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
+
                             if (itemConfigurableProductAttr.label == "Size") {
 //                                Log.e(
 //                                    "TAG",

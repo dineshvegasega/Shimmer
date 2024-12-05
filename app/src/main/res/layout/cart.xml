@@ -134,7 +134,7 @@
                     />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btDelete"
+                    android:id="@+id/btApplyCoupon"
                     style="@style/PrimaryButtonBlue"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"

@@ -142,62 +142,65 @@ class Category : Fragment() {
 
             viewModel.show()
             mainThread {
-                val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
+                try{
+                    val pagerAdapter = CategoryPagerAdapter(requireActivity(), mainShopFor)
 //                    pagerAdapter.notifyDataSetChanged()
-                rvList1.offscreenPageLimit = 3
-                rvList1.overScrollMode = OVER_SCROLL_NEVER
+                    rvList1.offscreenPageLimit = 3
+                    rvList1.overScrollMode = OVER_SCROLL_NEVER
 
-                rvList1.adapter = pagerAdapter
-                delay(200)
+                    rvList1.adapter = pagerAdapter
+                    delay(200)
 
-                rvList1.setPageTransformer { page, position ->
-                    rvList1.updatePagerHeightForChild(page)
-                }
+                    rvList1.setPageTransformer { page, position ->
+                        rvList1.updatePagerHeightForChild(page)
+                    }
 //                TabLayoutMediator(tabLayout, rvList1) { tab, position ->
 //                    tab.text = mainShopFor[position].name
 //                }.attach()
-                viewModel.hide()
+                    viewModel.hide()
 
 
 
-                positionSelectFun()
+                    positionSelectFun()
 
-                linearMen.singleClick {
-                    rvList1.currentItem = 0
-                }
-
-                linearWomen.singleClick {
-                    rvList1.currentItem = 1
-                }
-
-                linearKids.singleClick {
-                    rvList1.currentItem = 2
-                }
-
-                rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                    override fun onPageScrolled(
-                        position: Int,
-                        positionOffset: Float,
-                        positionOffsetPixels: Int
-                    ) {
-                        super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                    linearMen.singleClick {
+                        rvList1.currentItem = 0
                     }
 
-
-                    override fun onPageSelected(position: Int) {
-                        super.onPageSelected(position)
-                        Log.e("TAG", "onPageSelectedAA: $position")
-                        viewModel.positionSelect = position
-                        positionSelectFun()
+                    linearWomen.singleClick {
+                        rvList1.currentItem = 1
                     }
 
-
-                    override fun onPageScrollStateChanged(state: Int) {
-                        super.onPageScrollStateChanged(state)
-                        Log.e("TAG", "onPageScrollStateChangedAA: $state")
+                    linearKids.singleClick {
+                        rvList1.currentItem = 2
                     }
 
-                })
+                    rvList1.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageScrolled(
+                            position: Int,
+                            positionOffset: Float,
+                            positionOffsetPixels: Int
+                        ) {
+                            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                        }
+
+
+                        override fun onPageSelected(position: Int) {
+                            super.onPageSelected(position)
+                            Log.e("TAG", "onPageSelectedAA: $position")
+                            viewModel.positionSelect = position
+                            positionSelectFun()
+                        }
+
+
+                        override fun onPageScrollStateChanged(state: Int) {
+                            super.onPageScrollStateChanged(state)
+                            Log.e("TAG", "onPageScrollStateChangedAA: $state")
+                        }
+                    })
+                }catch (e: Exception){
+
+                }
             }
         }
     }

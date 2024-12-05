@@ -144,25 +144,12 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
         typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
         Checkout.preload(applicationContext)
 
-        binding.apply {
-            toolbar.appicon.singleClick {
-                if (isBackStack) {
-                    navHostFragment.findNavController().navigateUp()
-                }
-            }
 
 
 
-            toolbar.editSearch.setOnClickListener {
-                Log.e("TAG", "cardSearch")
-                navHostFragment.findNavController().navigate(R.id.search)
-            }
-        }
-
-
-        getToken() {
-            Log.e("TAG", "thisgetToken "+this)
-        }
+//        getToken() {
+//            Log.e("TAG", "thisgetToken "+this)
+//        }
 
 
         val mentors = arrayOf(
@@ -254,23 +241,23 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
                         destination.id == R.id.faq ||
                         destination.id == R.id.profile
                     ) {
-                        toolbar.appicon.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                context.get()!!,
-                                R.drawable.asl_drawer
-                            )
-                        )
-                        toolbar.cardSearch.visibility = View.VISIBLE
-                        toolbar.textViewTitle.visibility = View.GONE
+//                        toolbar.appicon.setImageDrawable(
+//                            ContextCompat.getDrawable(
+//                                context.get()!!,
+//                                R.drawable.asl_drawer
+//                            )
+//                        )
+//                        toolbar.cardSearch.visibility = View.VISIBLE
+//                        toolbar.textViewTitle.visibility = View.GONE
                     } else {
-                        toolbar.appicon.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                context.get()!!,
-                                R.drawable.baseline_west_24
-                            )
-                        )
-                        toolbar.cardSearch.visibility = View.GONE
-//                        toolbar.textViewTitle.visibility = View.VISIBLE
+//                        toolbar.appicon.setImageDrawable(
+//                            ContextCompat.getDrawable(
+//                                context.get()!!,
+//                                R.drawable.baseline_west_24
+//                            )
+//                        )
+//                        toolbar.cardSearch.visibility = View.GONE
+////                        toolbar.textViewTitle.visibility = View.VISIBLE
                     }
 
                     Log.e("TAG", "addOnDestinationChangedListener " + destination.id)
@@ -303,13 +290,13 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
                             bottomNavMain.getMenu().findItem(R.id.profile).setChecked(true)
                         }
 
-                        R.id.products -> {
-                            toolbar.textViewTitle.visibility = View.GONE
-                        }
-
-                        R.id.productDetail -> {
-                            toolbar.textViewTitle.visibility = View.VISIBLE
-                        }
+//                        R.id.products -> {
+//                            toolbar.textViewTitle.visibility = View.GONE
+//                        }
+//
+//                        R.id.productDetail -> {
+//                            toolbar.textViewTitle.visibility = View.VISIBLE
+//                        }
 
 
                         else -> {
