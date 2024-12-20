@@ -138,9 +138,10 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
 
                 override fun error(message: String) {
                     super.error(message)
-//                    showSnackBar(message)
+                    showSnackBar(message)
                     Log.e("TAG", "successBB: ${message.toString()}")
-                    callBack(message.toString())
+//                    callBack(message.toString())
+                    hide()
                 }
 
                 override fun loading() {
@@ -203,7 +204,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
 
     fun customerDetail(token: String, callBack: String.() -> Unit) =
         viewModelScope.launch {
-            repository.callApiWithoutLoader(
+            repository.callApi(
                 callHandler = object : CallHandler<Response<ItemUser>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.userDetail(storeWebUrl)
@@ -219,14 +220,15 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
                                 }
                             } catch (e: Exception) {
                             }
-
+//                            hide()
                         }
                     }
 
                     override fun error(message: String) {
                         super.error(message)
 //                    showSnackBar(message)
-                        callBack(message.toString())
+//                        callBack(message.toString())
+                        hide()
                     }
 
                     override fun loading() {
@@ -271,6 +273,7 @@ class LoginVM @Inject constructor(private val repository: Repository) : ViewMode
 //                        } else {
 //                            sessionExpired()
 //                        }
+                        hide()
                     }
 
                     override fun loading() {

@@ -43,7 +43,6 @@
         />
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ivCartLayout"
         android:layout_width="wrap_content"
@@ -51,17 +50,17 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginEnd="@dimen/_15sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/cart"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:visibility="visible"
             app:rippleColor="@color/black"
             android:clickable="true"
@@ -71,16 +70,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/menu_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:background="@drawable/bg_all_round_orders"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
             android:text="20"
             android:gravity="center"
-            android:textColor="@color/_07FFFC"
             android:fontFamily="@font/nunitosans_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -88,8 +90,6 @@
             android:textSize="@dimen/_8sdp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 

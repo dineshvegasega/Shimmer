@@ -30,32 +30,32 @@ class FaqVM @Inject constructor(private val repository: Repository) : ViewModel(
     init {
         item1.add(
             ItemFaq(
-                que = "What types of jewelry do you offer?",
-                ans = "We offer a wide range of jewelry including necklaces, rings, bracelets, earrings, and customized pieces made from high-quality materials such as gold, silver, and platinum, often adorned with diamonds, pearls, and other gemstones."
+                que = "What types of Jewellery do you offer?",
+                ans = "We offer a wide range of Jewellery including necklaces, rings, bracelets, earrings, and customized pieces made from high-quality materials such as gold, silver, and platinum, often adorned with diamonds, pearls, and other gemstones."
             )
         )
         item1.add(
             ItemFaq(
-                que = "Do you offer custom jewelry design?",
-                ans = "Yes, we specialize in custom jewelry design. Our expert designers will work with you to create a unique piece tailored to your preferences. Please contact us to schedule a consultation."
+                que = "Do you offer custom Jewellery design?",
+                ans = "Yes, we specialize in custom Jewellery design. Our expert designers will work with you to create a unique piece tailored to your preferences. Please contact us to schedule a consultation."
             )
         )
         item1.add(
             ItemFaq(
                 que = "What is your return policy?",
-                ans = "We accept returns within 30 days of purchase for most items, provided they are in their original condition and packaging. Custom or engraved jewelry is non-returnable. Please refer to our full return policy for more details."
+                ans = "We accept returns within 30 days of purchase for most items, provided they are in their original condition and packaging. Custom or engraved Jewellery is non-returnable. Please refer to our full return policy for more details."
             )
         )
         item1.add(
             ItemFaq(
-                que = "How do I take care of my jewelry?",
-                ans = "To maintain your jewelry's brilliance, we recommend cleaning it with a soft cloth and mild soap, avoiding harsh chemicals, and storing it in a safe place when not in use. Our staff can provide specific care instructions based on the type of material."
+                que = "How do I take care of my Jewellery?",
+                ans = "To maintain your Jewellery's brilliance, we recommend cleaning it with a soft cloth and mild soap, avoiding harsh chemicals, and storing it in a safe place when not in use. Our staff can provide specific care instructions based on the type of material."
             )
         )
         item1.add(
             ItemFaq(
-                que = "Do you offer warranties on your jewelry?",
-                ans = "Yes, we offer warranties on our jewelry to cover any manufacturing defects. Warranty periods vary by product. Please contact our customer service team for more details on warranties for specific items."
+                que = "Do you offer warranties on your Jewellery?",
+                ans = "Yes, we offer warranties on our Jewellery to cover any manufacturing defects. Warranty periods vary by product. Please contact our customer service team for more details on warranties for specific items."
             )
         )
 

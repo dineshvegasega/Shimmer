@@ -94,8 +94,8 @@ const val MESSAGE_HISTORY = "/V1/vegasega-apis/helpdesk-message-by-ticket?"
 const val SEND_MESSAGE = "/V1/vegasega-apis/helpdesk-message?"
 
 
-const val username = "admin"
-const val password = "Admin@1234"
+const val username = "magenew"
+const val password = "WeLovem123"
 
 const val GST_PERCENT = 5
 

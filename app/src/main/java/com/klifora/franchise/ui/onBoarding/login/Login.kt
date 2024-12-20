@@ -64,11 +64,11 @@ class Login : Fragment() {
 
         binding.apply {
 
-            includeBackButton.apply {
-                layoutBack.singleClick {
-                    findNavController().navigateUp()
-                }
-            }
+//            includeBackButton.apply {
+//                layoutBack.singleClick {
+//                    findNavController().navigateUp()
+//                }
+//            }
 
 //            8750713101
 //            Test@123

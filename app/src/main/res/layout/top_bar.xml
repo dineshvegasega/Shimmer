@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:paddingVertical="@dimen/_14sdp">
+    android:paddingVertical="@dimen/_5sdp"
+    >
 
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -18,7 +19,8 @@
         android:visibility="visible"
         android:gravity="center"
         android:paddingVertical="@dimen/_2sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+
         >
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -56,6 +58,7 @@
         android:layout_height="@dimen/_35sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:clickable="true"
         android:drawableEnd="@drawable/search"
         android:drawableTint="@color/_2A3740"
@@ -85,16 +88,16 @@
         android:focusable="true"
         android:gravity="center"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_11sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivCart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
             android:src="@drawable/cart"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:visibility="visible"
             app:rippleColor="@color/black"
             android:clickable="true"
@@ -129,8 +132,6 @@
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 

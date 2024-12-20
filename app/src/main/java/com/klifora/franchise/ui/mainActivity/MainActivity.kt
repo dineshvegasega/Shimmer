@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
     @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+//        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         _binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
