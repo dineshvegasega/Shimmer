@@ -26,7 +26,6 @@ class FaqVM @Inject constructor(private val repository: Repository) : ViewModel(
 
     var item1: ArrayList<ItemFaq> = ArrayList()
 
-
     init {
         item1.add(
             ItemFaq(

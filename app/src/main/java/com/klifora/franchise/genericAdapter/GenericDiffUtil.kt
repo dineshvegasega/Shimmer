@@ -22,11 +22,11 @@ class GenericDiffUtil<T> : DiffUtil.ItemCallback<T>() {
 //    }
 
     override fun areItemsTheSame(oldItem: T & Any, newItem: T & Any): Boolean {
-        return oldItem?.equals(newItem) ?: false
+        return oldItem.equals(newItem) ?: false
     }
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(oldItem: T & Any, newItem: T & Any): Boolean {
-        return oldItem?.equals(newItem) ?: false
+        return oldItem.equals(newItem) ?: false
     }
 }

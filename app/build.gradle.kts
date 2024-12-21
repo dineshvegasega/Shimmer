@@ -99,6 +99,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
+    androidTestImplementation("androidx.test:core:3.6.1")
+    androidTestImplementation("androidx.test:runner:3.6.1")
+    androidTestImplementation("androidx.test:rules:3.6.1")
+
     implementation ("androidx.appcompat:appcompat:1.7.0")
 
     implementation("com.google.dagger:hilt-android:2.52")
@@ -210,6 +214,7 @@ dependencies {
     implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
     implementation ("com.github.vipulasri:timelineview:1.1.5")
     implementation ("com.razorpay:checkout:1.6.20")
+
 }
 
 
