@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_15sdp">
+            android:paddingVertical="@dimen/_5sdp">
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -46,7 +46,6 @@
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_6sdp"
                 tools:ignore="MissingConstraints" />
 
             <androidx.appcompat.widget.AppCompatEditText

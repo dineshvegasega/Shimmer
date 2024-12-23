@@ -25,7 +25,7 @@
         android:textSize="@dimen/_12sdp"
         app:fontFamily="@font/nunitosans_semibold"
         tools:ignore="HardcodedText"
-        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         />
 
@@ -46,7 +46,7 @@
         app:cornerRadius="@dimen/_4sdp"
         android:textSize="@dimen/_7sdp"
         android:visibility="visible"
-        android:layout_marginVertical="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         />
 

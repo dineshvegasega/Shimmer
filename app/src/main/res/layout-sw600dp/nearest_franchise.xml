@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/bg_all_round_franchise"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_margin="@dimen/_3sdp"
         android:paddingHorizontal="@dimen/_7sdp"
         android:paddingVertical="@dimen/_5sdp">

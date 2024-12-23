@@ -84,8 +84,6 @@ android {
         explainIssues  = true // Explain lint issues in the report (optional)
         quiet = true
     }
-
-
 }
 
 //composeCompiler {

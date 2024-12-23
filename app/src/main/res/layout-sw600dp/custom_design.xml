@@ -25,7 +25,7 @@
         android:textSize="@dimen/_12sdp"
         app:fontFamily="@font/nunitosans_semibold"
         tools:ignore="HardcodedText"
-        android:layout_marginVertical="@dimen/_12sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"
         />
 
