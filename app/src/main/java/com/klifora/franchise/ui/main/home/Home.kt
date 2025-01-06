@@ -27,7 +27,6 @@ class Home : Fragment() {
     private var _binding: HomeBinding? = null
     private val binding get() = _binding!!
 
-
     companion object {
         @JvmStatic
         lateinit var adapter1: ListAdapter1

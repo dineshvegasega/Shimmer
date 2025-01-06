@@ -85,6 +85,7 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
 //                textRingSize.text = "Ring size: "+dataClass.size
                 textQty.text = "Quantity: "+dataClass.quantity
                 textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
+                textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.quantity)
 
                 mainThread {
                     readData(ADMIN_TOKEN) { token ->
@@ -166,7 +167,7 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
                 textQty.text = "Quantity: "+dataClass.qty
                 textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
 //                textPrice.text = "Price: ₹"+getPatternFormat("1", dataClass.price!!) + " x "+dataClass.qty + " = ₹"+getPatternFormat("1", (dataClass.price?.times(dataClass.qty.toDouble())))
-
+                textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.qty)
 
                 mainThread {
                     readData(ADMIN_TOKEN) { token ->

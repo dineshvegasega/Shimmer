@@ -163,6 +163,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
                 ivCount.text = dataClass.qty.toString()
                 textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
+                textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.qty)
 
 
                 mainThread {
@@ -301,6 +302,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
                 ivCount.text = dataClass.quantity.toString()
                 textPrice.text = "Price: ₹ "+getPatternFormat("1", dataClass.price!!)
+                textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.quantity)
 
 
                 mainThread {

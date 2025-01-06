@@ -23,7 +23,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
     }
 
-
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
 

@@ -63,6 +63,7 @@ object LocaleHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             configuration.setLayoutDirection(locale)
         }
+        resources.updateConfiguration(configuration, null);
         resources.updateConfiguration(configuration, resources.displayMetrics)
         return context
     }

@@ -81,7 +81,7 @@
             android:background="@drawable/bg_all_round_orders"
             android:backgroundTint="@color/black"
             android:textColor="@color/white"
-            android:text="20"
+            android:text="0"
             android:gravity="center"
             android:fontFamily="@font/nunitosans_regular"
             app:layout_constraintEnd_toEndOf="parent"

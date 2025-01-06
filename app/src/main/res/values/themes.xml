@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Shimmer" parent="Theme.MaterialComponents.DayNight.NoActionBar" >
+    <style name="Theme.Klifora" parent="Theme.MaterialComponents.DayNight.NoActionBar" >
         <item name="colorPrimary">@color/app_color</item>
         <item name="colorPrimaryVariant">@color/app_color</item>
         <item name="colorOnPrimary">@color/_ffffff</item>
@@ -11,6 +11,10 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowIsTranslucent">false</item>
+<!--        <item name="android:windowIsFloating">false</item>-->
+
+        <item name="android:windowSplashScreenAnimatedIcon" tools:ignore="NewApi">@android:color/transparent</item>
+        <item name="android:windowSplashScreenAnimationDuration" tools:ignore="NewApi">0</item>
     </style>
 
 

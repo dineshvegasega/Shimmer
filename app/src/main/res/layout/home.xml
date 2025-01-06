@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:nestedScrollingEnabled="false"
-                tools:itemCount="2"
+                tools:itemCount="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_home_3"
                 android:paddingHorizontal="@dimen/_10sdp"

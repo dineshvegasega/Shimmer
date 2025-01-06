@@ -65,7 +65,7 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Shimmer"
+        android:theme="@style/Theme.Klifora"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon, android:label, android:theme, android:name,android:allowBackup"
         tools:ignore="all"
@@ -77,7 +77,7 @@
             android:name=".ui.mainActivity.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/Theme.Shimmer"
+            android:theme="@style/Theme.Klifora"
             android:screenOrientation="locked"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
            >
