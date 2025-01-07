@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/top_bar_back"
+        layout="@layout/top_bar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/about_us"
+        android:textColor="@color/_2A3740"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_17sdp"
+        app:fontFamily="@font/nunitosans_semibold"
+        tools:ignore="HardcodedText"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/textTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/upperLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ourStory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textOurStoryTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Our Story"
+                    android:textColor="@color/_74071E"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textOurStoryDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Klifora was passionate about exquisite craftsmanship and environmental concerns. Recognizing the growing demand for ethically sourced diamonds the founders were on a journey to offer consumers an alternative that meets their values without compromising on quality or beauty. At Lab Diamond Mart, each diamond tells a story of mastery and artistic creations"
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textOurStoryTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    app:layout_constraintEnd_toStartOf="@+id/ivIconOurStory"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivIconOurStory"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:theme="@style/RoundCorner5"
+                    app:layout_constraintDimensionRatio="H,1:1.3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textOurStoryTitle"
+                    app:srcCompat="@drawable/story" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mid1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ourStory"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmid1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/vision" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmid1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OUR VISION"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_2A3740"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmid1"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmid1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Our vision at Klifora is to provide discerning customers with a superior alternative to mined diamonds. We envision a future where every diamond purchased contributes positively to the environment and society, without compromising on quality or beauty."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmid1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mid2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mid1"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmid2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/mission" />
+                </androidx.cardview.widget.CardView>
+
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmid2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OUR MISSION"
+                    android:textColor="@color/_2A3740"
+                    android:textSize="@dimen/_8sdp"
+                    android:textAllCaps="false"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmid2"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmid2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Klifora is on a mission to redefine luxury with lab-grown diamonds that are not only conflict-free but also environmentally friendly. We aim to empower consumers to make responsible choices without sacrificing style or substance."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmid2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mid3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mid2"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmid3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/values" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmid3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OUR VALUES"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_2A3740"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmid3"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmid3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Our values include integrity, innovation, sustainability, customer-centricity, and excellence in quality."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmid3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ourCommitment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mid3"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textOurCommitmentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Our Commitment"
+                    android:textColor="@color/_74071E"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_regular"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconOurCommitment"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textOurCommitmentDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="At Klifora, we are committed to transparency, integrity, and innovation. Whether you're celebrating a milestone or expressing your love, our exquisite collection of lab-grown diamonds offers a perfect blend of luxury and responsibility."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textOurCommitmentTitle"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconOurCommitment"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivIconOurCommitment"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:theme="@style/RoundCorner5"
+                    app:layout_constraintDimensionRatio="H,1:1.3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textOurCommitmentTitle"
+                    app:srcCompat="@drawable/commitment" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/getInTouch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ourCommitment"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textGetInTouchTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get in Touch"
+                    android:textColor="@color/_74071E"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_regular"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textGetInTouchDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Explore the future of diamonds with Klifora. Join us in creating a sustainable and beautiful world, one diamond at a time. Contact us today to learn more about our collections, custom designs, and ethical practices."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textGetInTouchTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    app:layout_constraintEnd_toStartOf="@+id/ivIconGetInTouch"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivIconGetInTouch"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:theme="@style/RoundCorner5"
+                    app:layout_constraintDimensionRatio="H,1:1.3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textGetInTouchTitle"
+                    app:srcCompat="@drawable/touch" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/whyChooseUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getInTouch"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_15sdp"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textWhyChooseUsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Why Choose Us?"
+                    android:textColor="@color/_74071E"
+                    android:textSize="@dimen/_12sdp"
+                    app:fontFamily="@font/nunitosans_regular"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconWhyChooseUs"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textWhyChooseUsDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Quality Assurance: Each diamond at Klifora is meticulously crafted to meet the highest standards of clarity, cut, and brilliance.\nEthical Sourcing: We guarantee that our diamonds are grown in labs using sustainable practices, ensuring minimal environmental impact and zero involvement in conflict\nExpertise and Experience: With years of experience in the diamond industry, our team of experts is committed to delivering personalized service and expert guidance."
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textWhyChooseUsTitle"
+                    app:layout_constraintStart_toEndOf="@+id/ivIconWhyChooseUs"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivIconWhyChooseUs"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:theme="@style/RoundCorner5"
+                    app:layout_constraintDimensionRatio="H,1:1.3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textWhyChooseUsTitle"
+                    app:srcCompat="@drawable/chooes_us" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

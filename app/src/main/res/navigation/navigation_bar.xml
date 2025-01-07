@@ -118,6 +118,13 @@
         android:label="Home"
         android:id="@+id/home"
         tools:layout="@layout/home">
+
+        <action
+            android:id="@+id/action_home_to_aboutUs"
+            app:destination="@id/aboutUs"
+            app:launchSingleTop="true"
+            />
+
         <action
             android:id="@+id/action_home_to_products"
             app:destination="@id/products"
@@ -149,6 +156,30 @@
             />
 
     </fragment>
+
+
+    <fragment
+        android:name="com.klifora.franchise.ui.main.aboutUs.AboutUs"
+        android:label="AboutUs"
+        android:id="@+id/aboutUs"
+        tools:layout="@layout/about_us">
+        <action
+            android:id="@+id/action_aboutUs_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true" />
+    </fragment>
+
+    <fragment
+        android:name="com.klifora.franchise.ui.main.aboutLabGrownDiamond.AboutLabGrownDiamond"
+        android:label="AboutLabGrownDiamond"
+        android:id="@+id/aboutLabGrownDiamond"
+        tools:layout="@layout/about_lab_grown_diamond">
+        <action
+            android:id="@+id/action_aboutLabGrownDiamond_to_cart"
+            app:destination="@id/cart"
+            app:launchSingleTop="true" />
+    </fragment>
+
 
     <fragment
         android:name="com.klifora.franchise.ui.main.category.Category"

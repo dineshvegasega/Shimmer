@@ -154,8 +154,6 @@ class Home : Fragment() {
                     findNavController().navigate(R.id.action_home_to_cart)
                 }
 
-
-
                 cartItemLiveData.value = false
                 cartItemLiveData.observe(viewLifecycleOwner) {
                     menuBadge.text = "$cartItemCount"
@@ -193,6 +191,11 @@ class Home : Fragment() {
 //                        menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
 //                    }
                 }
+            }
+
+
+            textAboutUsSeemore?.setOnClickListener {
+                findNavController().navigate(R.id.action_home_to_aboutUs)
             }
         }
 

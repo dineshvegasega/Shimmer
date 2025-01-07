@@ -157,6 +157,10 @@
         <item name="cornerSize">10%</item>
     </style>
 
+    <style name="RoundCorner100">
+        <item name="cornerSize">100%</item>
+    </style>
+
     <style name="ImageViewerDialog" parent="android:Theme.Translucent.NoTitleBar"/>
 
     <style name="ImageViewerDialog.NoStatusBar" parent="android:Theme.Translucent.NoTitleBar.Fullscreen"/>

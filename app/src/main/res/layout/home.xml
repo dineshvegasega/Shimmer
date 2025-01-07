@@ -118,7 +118,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/image_red"
-                    app:layout_constraintDimensionRatio="H,1:1.1"
+                    app:layout_constraintDimensionRatio="H,1:0.8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -129,8 +129,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-
                     >
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/know_about"
+                            android:text="Our Story"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp"
                             app:fontFamily="@font/nunitosans_regular"
@@ -166,9 +166,10 @@
                             tools:ignore="HardcodedText" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textAboutUs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/about_us"
+                            android:text="Klifora was passionate about exquisite craftsmanship and environmental concerns. Recognizing the growing demand for ethically sourced diamonds the founders were on a journey to offer consumers an alternative that meets their values without compromising on quality or beauty. At Lab Diamond Mart, each diamond tells a story of mastery and artistic creations."
                             android:textColor="@color/white"
                             android:textSize="@dimen/_10sdp"
                             app:fontFamily="@font/nunitosans_light"
@@ -179,6 +180,22 @@
                             app:layout_constraintTop_toTopOf="parent"
                             android:layout_marginTop="@dimen/_3sdp"
                             tools:ignore="HardcodedText" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/textAboutUsSeemore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="See more"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_13sdp"
+                            app:fontFamily="@font/nunitosans_semibold"
+                            android:paddingVertical="@dimen/_3sdp"
+                            android:letterSpacing="0.1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="HardcodedText" />
+
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
