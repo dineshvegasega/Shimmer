@@ -80,6 +80,8 @@ class ProductDetail : Fragment(), CallBackListener {
 
     var isSizeCall1: Boolean = false
 
+    var ktType = 0
+
 
     val arrayItemProduct = mutableListOf<ItemProductOptions>()
 //    var arrayAllProduct: ArrayList<ItemProduct> = ArrayList()
@@ -1227,7 +1229,7 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         textSKU.text = "SKU: " + itemProductThis.sku
 
-                        textWeight2.text = "" + itemProductThis.weight + " gram"
+//                        textWeight2.text = "" + itemProductThis.weight + " gram"
 
                         var idvalues = ""
 //                        Log.e("TAG", "idsidsCCC " + itemProductThis.extension_attributes.category_links)
@@ -1259,6 +1261,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                     null
                                 )
                                 layoutDiamondAndGemstones.visibility = View.VISIBLE
+                            }
+
+                            if (itemProductAttr.attribute_code == "totel_making_charge") {
+                                textMakingChargesPrice.text = "₹ " + getPatternFormat(
+                                    "1",
+                                    itemProductAttr.value.toString().toDouble()
+                                )
                             }
 
 
@@ -1309,6 +1318,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "9 kt Rose Gold"
                                             }
+
+                                            itemProduct.custom_attributes.forEach { itemProductAttr ->
+                                                if (itemProductAttr.attribute_code == "attr_9kt") {
+                                                    textWeight2.text =
+                                                        "" + itemProductAttr.value + " gram"
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1322,6 +1338,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 textPurity1.text = "14 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "14 kt Rose Gold"
+                                            }
+
+                                            itemProduct.custom_attributes.forEach { itemProductAttr ->
+                                                if (itemProductAttr.attribute_code == "attr_14kt") {
+                                                    textWeight2.text =
+                                                        "" + itemProductAttr.value + " gram"
+                                                }
                                             }
                                         }
                                     }
@@ -1337,6 +1360,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                             } else if (itemProductChildAttr.value == "25") {
                                                 textPurity1.text = "18 kt Rose Gold"
                                             }
+
+                                            itemProduct.custom_attributes.forEach { itemProductAttr ->
+                                                if (itemProductAttr.attribute_code == "attr_18kt") {
+                                                    textWeight2.text =
+                                                        "" + itemProductAttr.value + " gram"
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1345,11 +1375,18 @@ class ProductDetail : Fragment(), CallBackListener {
                                     itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
-                                                textPurity1.text = "14 kt Yellow Gold"
+                                                textPurity1.text = "22 kt Yellow Gold"
                                             } else if (itemProductChildAttr.value == "50") {
-                                                textPurity1.text = "14 kt White Gold"
+                                                textPurity1.text = "22 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
-                                                textPurity1.text = "14 kt Rose Gold"
+                                                textPurity1.text = "22 kt Rose Gold"
+                                            }
+
+                                            itemProduct.custom_attributes.forEach { itemProductAttr ->
+                                                if (itemProductAttr.attribute_code == "attr_22kt") {
+                                                    textWeight2.text =
+                                                        "" + itemProductAttr.value + " gram"
+                                                }
                                             }
                                         }
                                     }
@@ -1359,11 +1396,18 @@ class ProductDetail : Fragment(), CallBackListener {
                                     itemProductThis.custom_attributes.forEach { itemProductChildAttr ->
                                         if (itemProductChildAttr.attribute_code == "metal_color") {
                                             if (itemProductChildAttr.value == "19") {
-                                                textPurity1.text = "18 kt Yellow Gold"
+                                                textPurity1.text = "24 kt Yellow Gold"
                                             } else if (itemProductChildAttr.value == "50") {
-                                                textPurity1.text = "18 kt White Gold"
+                                                textPurity1.text = "24 kt White Gold"
                                             } else if (itemProductChildAttr.value == "25") {
-                                                textPurity1.text = "18 kt Rose Gold"
+                                                textPurity1.text = "24 kt Rose Gold"
+                                            }
+
+                                            itemProduct.custom_attributes.forEach { itemProductAttr ->
+                                                if (itemProductAttr.attribute_code == "attr_24kt") {
+                                                    textWeight2.text =
+                                                        "" + itemProductAttr.value + " gram"
+                                                }
                                             }
                                         }
                                     }
@@ -1417,12 +1461,12 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
 
-                            if (itemProductAttr.attribute_code == "totel_making_charge") {
-                                textMakingChargesPrice.text = "₹ " + getPatternFormat(
-                                    "1",
-                                    itemProductAttr.value.toString().toDouble()
-                                )
-                            }
+//                            if (itemProductAttr.attribute_code == "totel_making_charge") {
+//                                textMakingChargesPrice.text = "₹ " + getPatternFormat(
+//                                    "1",
+//                                    itemProductAttr.value.toString().toDouble()
+//                                )
+//                            }
                         }
 
 
@@ -1430,6 +1474,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
                         itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
+
+
+
 
                             if (itemConfigurableProductAttr.label == "Size") {
 //                                Log.e(
@@ -1561,6 +1608,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                 }
                                                             }
                                                         }
+
+//                                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+//                                                            if (itemProductAttr.attribute_code == "attr_14kt") {
+//                                                                textWeight2.text =
+//                                                                    "" + itemProductAttr.value + " gram"
+//                                                            }
+//                                                        }
                                                     }
 
                                                     if (itemConfigurableProductMetalPurityAttr.value_index == 15) {
@@ -1600,6 +1654,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                                                 }
                                                             }
                                                         }
+
+//                                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+//                                                            if (itemProductAttr.attribute_code == "attr_18kt") {
+//                                                                textWeight2.text =
+//                                                                    "" + itemProductAttr.value + " gram"
+//                                                            }
+//                                                        }
                                                     }
 
                                                     if (itemConfigurableProductMetalPurityAttr.value_index == 16) {
@@ -1784,6 +1845,71 @@ class ProductDetail : Fragment(), CallBackListener {
                                 }
                             }
 
+
+
+//
+//                            itemProduct.custom_attributes.forEach { itemProductAttrP ->
+//                                if (itemProductAttrP.attribute_code == "metal_purity") {
+//
+//                                    if (itemProductAttrP.value == "26") {
+////                                        if (itemProductAttrP.attribute_code == "attr_9kt") {
+////                                            textWeight2.text =
+////                                                "" + itemProductAttrP.value + " gram"
+////                                        }
+////                                        }
+////                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+////                                            if (itemProductAttr.attribute_code == "attr_9kt") {
+////                                                textWeight2.text =
+////                                                    "" + itemProductAttr.value + " gram"
+////                                            }
+////                                        }
+//                                    }
+//
+//                                    if (itemProductAttrP.value == "14") {
+//                                        if (itemProductAttrP.attribute_code == "attr_14kt") {
+//                                            textWeight2.text =
+//                                                "" + itemProductAttrP.value + " gram"
+//                                        }
+////                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+////                                            if (itemProductAttr.attribute_code == "attr_14kt") {
+////                                                textWeight2.text =
+////                                                    "" + itemProductAttr.value + " gram"
+////                                            }
+////                                        }
+//                                    }
+//
+//                                    if (itemProductAttrP.value == "15") {
+//                                        if (itemProductAttrP.attribute_code == "attr_18kt") {
+//                                            textWeight2.text =
+//                                                "" + itemProductAttrP.value + " gram"
+//                                        }
+////                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+////                                            if (itemProductAttr.attribute_code == "attr_18kt") {
+////                                                textWeight2.text =
+////                                                    "" + itemProductAttr.value + " gram"
+////                                            }
+////                                        }
+//                                    }
+//
+//                                    if (itemProductAttrP.value == "16") {
+////                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+////                                            if (itemProductAttr.attribute_code == "attr_22kt") {
+////                                                textWeight2.text =
+////                                                    "" + itemProductAttr.value + " gram"
+////                                            }
+////                                        }
+//                                    }
+//
+//                                    if (itemProductAttrP.value == "17") {
+////                                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+////                                            if (itemProductAttr.attribute_code == "attr_24kt") {
+////                                                textWeight2.text =
+////                                                    "" + itemProductAttr.value + " gram"
+////                                            }
+////                                        }
+//                                    }
+//                                }
+//                            }
                         }
 
 
@@ -1819,11 +1945,8 @@ class ProductDetail : Fragment(), CallBackListener {
 //                        Log.e("TAG", "filteredNotfilteredNotA " )
                             viewModel.hide()
                         }
-
                     }
                 }
-
-
             }
         }
     }

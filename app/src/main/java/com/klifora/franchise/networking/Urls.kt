@@ -97,7 +97,7 @@ const val SEND_MESSAGE = "/V1/vegasega-apis/helpdesk-message?"
 const val username = "magenew"
 const val password = "WeLovem123"
 
-const val GST_PERCENT = 5
+const val GST_PERCENT = 3
 
 
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderbyid?orderid=6
