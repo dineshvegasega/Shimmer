@@ -102,8 +102,6 @@ const val GST_PERCENT = 3
 
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderbyid?orderid=6
 
-
-
 //https://shop.vegasega.com/rest/V1/vegasega-apis/getorderlist?customerID=6
 
 //https://shop.vegasega.com/rest/newvs/V1/carts/mine/shipping-information
