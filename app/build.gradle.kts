@@ -1,15 +1,14 @@
 @file:Suppress("UnstableApiUsage")
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("kotlin-kapt")
-    id("com.google.devtools.ksp")
-    id("com.google.dagger.hilt.android")
-    id("kotlin-parcelize")
-//    id ("com.apollographql.apollo3") version ("3.7.0")
-    id ("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+    alias(libs.plugins.googleservices)
+    alias(libs.plugins.firebasecrashlytics)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -49,7 +48,6 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-//        compose = true
         dataBinding = true
         viewBinding = true
     }
@@ -90,136 +88,107 @@ android {
 //}
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.15.0")
-    implementation("com.google.android.material:material:1.12.0")
-    testImplementation("junit:junit:4.13.2")
-//    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-//    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.google.material)
+    testImplementation(libs.junit)
 
-//    androidTestImplementation("androidx.test:core:3.6.1")
-//    androidTestImplementation("androidx.test:runner:3.6.1")
-//    androidTestImplementation("androidx.test:rules:3.6.1")
+    implementation (libs.androidx.appcompat)
 
-    implementation ("androidx.appcompat:appcompat:1.7.0")
-
-    implementation("com.google.dagger:hilt-android:2.52")
-    ksp("com.google.dagger:hilt-android-compiler:2.52")
+    implementation(libs.dagger.hilt.android)
+    ksp(libs.dagger.hilt.compiler)
 
 
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.8.4")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.8.4")
+    implementation (libs.navigationfragment)
+    implementation (libs.navigationui)
+
     //noinspection GradleCompatible,GradleCompatible
-    implementation ("androidx.databinding:databinding-ktx:8.7.3")
-    implementation ("androidx.databinding:databinding-runtime:8.7.3")
+    implementation (libs.databindingktx)
+    implementation (libs.databindingruntime)
 
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
+    implementation (libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.coroutines.android )
 
-    implementation("com.intuit.sdp:sdp-android:1.1.0")
-    implementation("com.intuit.ssp:ssp-android:1.1.0")
+    implementation(libs.sdp)
+    implementation(libs.ssp)
 
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation ("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.swiperefreshlayout)
+    implementation (libs.picasso)
 
     //retrofit
-    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.12.0")
-    implementation ("com.squareup.retrofit2:converter-scalars:2.11.0")
+    implementation (libs.retrofit2.retrofit)
+    implementation (libs.retrofit2.converter.gson )
+    implementation (libs.retrofit2.converter.scalars)
+    implementation (libs.okhttp3.okhttp)
+    implementation (libs.okhttp3.logging.interceptor)
 
-    implementation ("com.google.code.gson:gson:2.10.1")
+    implementation (libs.gson)
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    ksp ("com.github.bumptech.glide:ksp:4.16.0")
-    implementation("com.github.bumptech.glide:okhttp3-integration:4.16.0") {
-        exclude("glide-parent")
+    implementation (libs.glide)
+    ksp (libs.glideksp)
+    implementation(libs.glideokhttp3) {
+        exclude("glide-parent", "glide")
     }
-    implementation ("com.squareup.picasso:picasso:2.71828")
+//    exclude("glide-parent", "glide")
 
-    implementation ("androidx.preference:preference-ktx:1.2.1")
-    implementation ("io.coil-kt:coil:2.7.0")
+    implementation (libs.preference)
+    implementation (libs.coil)
 
-    implementation ("androidx.datastore:datastore-preferences:1.1.1")
-    implementation ("androidx.datastore:datastore-preferences-core:1.1.1")
+    implementation (libs.datastorepreferences)
+    implementation (libs.datastorepreferencescore)
 
-    implementation ("id.zelory:compressor:3.0.1")
-    implementation ("com.airbnb.android:lottie:6.5.2")
+    implementation (libs.compressor)
+    implementation (libs.lottie)
+    implementation (libs.flexbox)
 
-    implementation ("com.google.android.flexbox:flexbox:3.0.0")
-
-    debugImplementation ("com.github.chuckerteam.chucker:library:4.0.0")
-    releaseImplementation ("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+    debugImplementation (libs.chucker)
+    releaseImplementation (libs.chucker.no.op)
 
 //    implementation ("com.google.android.play:core-ktx:1.8.1")
-    implementation (platform("com.google.firebase:firebase-bom:33.6.0"))
-    implementation ("com.google.firebase:firebase-auth")
-    implementation ("com.google.firebase:firebase-auth-ktx")
-    implementation ("com.google.firebase:firebase-database-ktx")
-    implementation ("com.google.firebase:firebase-messaging-ktx")
-    implementation ("com.google.firebase:firebase-analytics-ktx")
-//    implementation("com.google.firebase:firebase-crashlytics")
-//    implementation("com.google.firebase:firebase-analytics")
-    implementation ("com.google.firebase:firebase-crashlytics-ktx")
-    implementation ("com.google.firebase:firebase-config-ktx")
-    implementation ("com.google.firebase:firebase-dynamic-links-ktx")
+    implementation (platform(libs.firebase.bom))
+    implementation (libs.firebase.auth.ktx)
+    implementation (libs.firebase.database.ktx)
+    implementation (libs.firebase.messaging.ktx)
+    implementation (libs.firebase.analytics.ktx)
+    implementation (libs.firebase.crashlytics.ktx)
+    implementation (libs.firebase.config.ktx)
+    implementation (libs.firebase.dynamic.links.ktx)
 
-    implementation ("com.github.stfalcon-studio:StfalconImageViewer:v1.0.1")
 
-    implementation ("com.google.android.gms:play-services-auth:21.2.0")
-    implementation ("com.google.android.gms:play-services-location:21.3.0")
-    implementation ("com.google.android.gms:play-services-maps:19.0.0")
+    implementation (libs.play.services.auth)
+    implementation (libs.play.services.location)
+    implementation (libs.play.services.maps)
 
-    implementation ("androidx.paging:paging-common-ktx:3.3.4")
-    implementation ("androidx.paging:paging-runtime-ktx:3.3.4")
+    implementation (libs.stfalconImageViewer)
+
+    implementation (libs.paging.common)
+    implementation (libs.paging.runtime)
+
 //    implementation ("com.google.android.play:review-ktx:2.0.1")
-    implementation ("org.jsoup:jsoup:1.17.2")
-    implementation ("com.github.vipulasri:timelineview:1.1.5")
+    implementation (libs.jsoup)
+    implementation (libs.timelineview)
 
 //    implementation ("com.daimajia.swipelayout:library:1.2.0")
 
-//    implementation ("com.chauthai.swipereveallayout:swipe-reveal-layout:c04a9d7")
-//    implementation ("com.github.hydrated:SwipeRevealLayout:cedd8e7")
+    implementation (libs.room.runtime)
+    implementation (libs.room.ktx)
+    annotationProcessor (libs.room.compiler)
+    ksp (libs.room.compiler.ksp)
+    ksp (libs.room.ktx.ksp)
 
-//    implementation ("com.github.qiujayen:sticky-layoutmanager:1.0.1")
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
-    ksp ("androidx.room:room-compiler:2.6.1")
-    ksp ("androidx.room:room-ktx:2.6.1")
-    implementation ("androidx.room:room-ktx:2.6.1")
-//    kapt ("androidx.room:room-compiler:2.6.1")
-    implementation ("androidx.work:work-runtime-ktx:2.10.0")
-    implementation ("com.hbb20:ccp:2.7.0")
-    implementation ("com.github.rajputmukesh748:MukeshOtpView:1.0.0")
-//    implementation ("com.apollographql.apollo3:apollo-runtime:3.7.0")
+    implementation (libs.work.runtime)
+    implementation (libs.ccp)
+    implementation (libs.mukeshOtpView)
 
-    implementation ("androidx.media3:media3-exoplayer:1.5.0")
-    implementation ("androidx.media3:media3-ui:1.5.0")
+    implementation (libs.media3.exoplayer)
+    implementation (libs.media3.ui)
+//    implementation (libs.media3ExoplayerHls)
+
     implementation ("androidx.media3:media3-exoplayer-hls:1.5.0")
 
-//    implementation ("com.reginald.swiperefresh:library:1.0.0")
-//    implementation ("com.google.android.exoplayer:exoplayer:2.19.1")
+    implementation (libs.photoViews)
+    implementation (libs.ratingBar)
 
-    implementation ("com.github.chrisbanes:PhotoView:2.2.0")
-
-    implementation ("com.github.fuzz-productions:RatingBar:1.0.6")
-
-//    implementation ("com.github.barteksc:android-pdf-viewer:3.2.0-beta.1")
-
-//    implementation ("io.github.afreakyelf:Pdf-Viewer:2.0.7")
-
-    implementation ("me.zhanghai.android.materialratingbar:library:1.4.0")
-    implementation ("com.github.vipulasri:timelineview:1.1.5")
-    implementation ("com.razorpay:checkout:1.6.20")
-
+    implementation (libs.materialratingbar)
+    implementation (libs.razorpay)
 }
-
-
-//apollo {
-//    generateModelBuilder = true
-//}
-
-//apollo {
-//    packageName.set("com.klifora.franchise")
-//}
 
