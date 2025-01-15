@@ -27,8 +27,10 @@ import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.DialogPdfBinding
+import com.klifora.franchise.databinding.ItemHomeCategoryBinding
 import com.klifora.franchise.databinding.ItemProductBinding
 import com.klifora.franchise.databinding.ItemProductDiamondsBinding
+import com.klifora.franchise.databinding.ItemProductZoomBinding
 import com.klifora.franchise.databinding.ItemSizeBinding
 import com.klifora.franchise.databinding.LoaderBinding
 import com.klifora.franchise.databinding.ProductDetailBinding
@@ -49,13 +51,18 @@ import com.klifora.franchise.networking.CallHandler
 import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.getJsonRequestBody
+//import com.klifora.franchise.ui.main.productDetail.ProductDetail.Companion.dialogBinding1
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainMaterial
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainPrice
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.getSize
 import com.klifora.franchise.utils.glideImage
+import com.klifora.franchise.utils.glideImageChache
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.pdfviewer.PdfRendererView
 import com.klifora.franchise.utils.pdfviewer.util.FileUtils.fileFromAsset
@@ -105,6 +112,44 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         mainThread {
             if (alertDialog != null) {
                 alertDialog?.dismiss()
+            }
+        }
+    }
+
+    var itemZoomMutable = MutableLiveData<Int>(0)
+    val productZoomAdapter = object : GenericAdapter<ItemProductZoomBinding, String>() {
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            parent: ViewGroup,
+            viewType: Int
+        ) = ItemProductZoomBinding.inflate(inflater, parent, false)
+
+        override fun onBindHolder(
+            binding: ItemProductZoomBinding,
+            dataClass: String,
+            position: Int
+        ) {
+            binding.apply {
+                Log.e("TAG", "IMAGE_URL+dataClass"+IMAGE_URL + dataClass)
+                (IMAGE_URL + dataClass).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+
+                currentList.forEach {
+                    if (itemZoomMutable.value == position) {
+                        constant1111.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.ivIcon.context, R.color.app_color))
+                    } else {
+                        constant1111.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.ivIcon.context, R.color.white))
+                    }
+                }
+
+                ivIcon.setOnClickListener {
+                    itemZoomMutable.value = position
+                    notifyDataSetChanged()
+//                    if (itemZoomMutable.value == position){
+//                        constant1111.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.ivIcon.context, R.color.app_color))
+//                    } else {
+//                        constant1111.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(binding.ivIcon.context, R.color._a5a8ab))
+//                    }
+                }
             }
         }
     }

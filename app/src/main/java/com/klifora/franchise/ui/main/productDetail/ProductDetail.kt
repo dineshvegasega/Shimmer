@@ -1,6 +1,7 @@
 package com.klifora.franchise.ui.main.productDetail
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -23,6 +24,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.klifora.franchise.R
+import com.klifora.franchise.databinding.DialogFullImageBinding
+import com.klifora.franchise.databinding.DialogPdfBinding
 import com.klifora.franchise.databinding.DialogSizesBinding
 import com.klifora.franchise.databinding.ProductDetail2Binding
 import com.klifora.franchise.databinding.ProductDetailBinding
@@ -38,6 +41,9 @@ import com.klifora.franchise.models.products.MediaGalleryEntry
 import com.klifora.franchise.models.products.Value
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.interfaces.CallBackListener
+import com.klifora.franchise.ui.main.productZoom.ProductZoom
+import com.klifora.franchise.ui.main.productZoom.ProductZoom.Companion
+import com.klifora.franchise.ui.main.productZoom.ProductZoomPagerAdapter
 import com.klifora.franchise.ui.main.products.ProductsVM.Companion.isProductLoad
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
@@ -75,6 +81,9 @@ class ProductDetail : Fragment(), CallBackListener {
         lateinit var adapter2: RelatedProductAdapter
 
         var images: ArrayList<MediaGalleryEntry> = ArrayList()
+
+//        var dialogBinding1: DialogFullImageBinding? = null
+
     }
 
 
@@ -1028,9 +1037,11 @@ class ProductDetail : Fragment(), CallBackListener {
 
     override fun onCallBack(pos: Int) {
         Log.e("TAG", "onCallBack: ${images.toString()}")
-        findNavController().navigate(R.id.action_productDetail_to_productZoom, Bundle().apply {
-            putParcelable("arrayList", ItemParcelable(images, binding.rvList1.currentItem))
-        })
+//        findNavController().navigate(R.id.action_productDetail_to_productZoom, Bundle().apply {
+//            putParcelable("arrayList", ItemParcelable(images, binding.rvList1.currentItem))
+//        })
+        openDialogFullImage()
+
     }
 
     override fun onCallBackHideShow() {
@@ -1991,6 +2002,96 @@ class ProductDetail : Fragment(), CallBackListener {
             })
         }
     }
+
+
+
+    fun openDialogFullImage() {
+        val dialogBinding = DialogFullImageBinding.inflate(
+            MainActivity.activity.get()?.getSystemService(
+                Context.LAYOUT_INFLATER_SERVICE
+            ) as LayoutInflater
+        )
+        val dialog = Dialog(MainActivity.context.get()!!, R.style.myFullscreenAlertDialogStyle)
+        dialog.setContentView(dialogBinding.root)
+        dialog.show()
+        val window = dialog.window
+        window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+//        window.setBackgroundDrawableResource(R.color._00000000)
+//        val yes = mybuilder.findViewById<AppCompatImageView>(R.id.imageCross)
+//        val title = mybuilder.findViewById<AppCompatTextView>(R.id.textTitleMain)
+
+        dialogBinding.ivIconCross.singleClick {
+            dialog.dismiss()
+        }
+
+//        dialogBinding1 = dialogBinding
+        val item1 : ArrayList<String> = ArrayList()
+        images?.forEach {
+            if (it.media_type.endsWith("image")){
+                item1.add(it.file)
+            }
+        }
+
+        Log.e("TAG", "arrayList: $item1")
+//        Log.e("TAG", "position: ${images?.position}")
+
+        pagerAdapter = ProductZoomPagerAdapter(requireActivity(), item1)
+        dialogBinding.rvList1.offscreenPageLimit = 1
+        dialogBinding.rvList1.overScrollMode = OVER_SCROLL_NEVER
+        dialogBinding.rvList1.adapter = pagerAdapter
+        dialogBinding.rvList1.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        dialogBinding.rvList1.setCurrentItem(binding.rvList1.currentItem, false)
+
+        dialogBinding.rvList1.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int,
+            ) {
+                super.onPageScrolled(
+                    position,
+                    positionOffset,
+                    positionOffsetPixels
+                )
+            }
+
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                viewModel.itemZoomMutable.value = position
+                viewModel.productZoomAdapter.notifyDataSetChanged()
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+                Log.e("TAG", "state" + state)
+            }
+        })
+
+
+        viewModel.itemZoomMutable.value = binding.rvList1.currentItem
+        viewModel.itemZoomMutable.observe(viewLifecycleOwner) {
+            dialogBinding.rvList1.setCurrentItem(it, false)
+        }
+
+        Log.e("TAG", "videoList "+item1.size)
+        (dialogBinding.rvList1.getRecyclerView()
+            .getItemAnimator() as SimpleItemAnimator).supportsChangeAnimations =
+            false
+
+
+        dialogBinding.rvListSlide.setHasFixedSize(true)
+        dialogBinding.rvListSlide.adapter = viewModel.productZoomAdapter
+        viewModel.productZoomAdapter.submitList(item1)
+        viewModel.productZoomAdapter.notifyDataSetChanged()
+
+//        viewModel.productZoomAdapter
+
+    }
+
 
 
     override fun onDestroyView() {

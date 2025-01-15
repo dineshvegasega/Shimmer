@@ -172,7 +172,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                         getProductDetail(token.toString(), dataClass.sku) {
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                             }
                         }
                     }

@@ -44,8 +44,8 @@ playserviceslocation = "21.3.0"
 playservicesmaps = "19.0.0"
 firebaseBom = "33.7.0"
 glide = "4.16.0"
-
-
+glideParent = "glide-parent"
+glideName = "glide"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
