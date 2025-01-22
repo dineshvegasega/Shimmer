@@ -141,7 +141,6 @@ class Cart : Fragment() {
                             binding.idDataNotFound.root.visibility = View.GONE
                         }
                     }
-
                 } else if (LoginType.VENDOR == loginType) {
                     rvList.adapter = viewModel.cartAdapter
                     readData(CUSTOMER_TOKEN) { token ->
@@ -186,7 +185,6 @@ class Cart : Fragment() {
                         }
                     }
                 }
-
             }
 
 //            viewModel.cartMutableList.observe(viewLifecycleOwner) {

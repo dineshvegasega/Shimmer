@@ -44,9 +44,9 @@ class AppModule {
 //            .build()
 
         return OkHttpClient.Builder()
-            .connectTimeout(20, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES)
             .addInterceptor(loggingInterceptor)
             .addInterceptor(ChuckerInterceptor(context))
             .addInterceptor(NetworkInterceptor.interceptor)
@@ -55,8 +55,6 @@ class AppModule {
             .retryOnConnectionFailure(true)
             .cache(cache)
             .build()
-
-
     }
 
 

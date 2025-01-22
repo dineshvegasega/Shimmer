@@ -343,4 +343,29 @@
     <string name="hallmarked_gold">Hallmarked Gold</string>
     <string name="related_products">Related Products</string>
     <string name="your_order_has_been_successfully_placed_franchise_will_contact_you_within_24hrs">Your order has been successfully placed. Franchise will contact you within 24hrs</string>
+
+    <string name="our_story_txt">Our Story</string>">
+    <string name="our_story">Klifora was passionate about exquisite craftsmanship and environmental concerns. Recognizing the growing demand for ethically sourced diamonds the founders were on a journey to offer consumers an alternative that meets their values without compromising on quality or beauty. At Lab Diamond Mart, each diamond tells a story of mastery and artistic creations.</string>
+    <string name="our_vision_txt">OUR VISION</string>
+    <string name="our_vision">Our vision at Klifora is to provide discerning customers with a superior alternative to mined diamonds. We envision a future where every diamond purchased contributes positively to the environment and society, without compromising on quality or beauty.</string>
+    <string name="our_mission_txt">"OUR MISSION</string>
+    <string name="our_mission">Klifora is on a mission to redefine luxury with lab-grown diamonds that are not only conflict-free but also environmentally friendly. We aim to empower consumers to make responsible choices without sacrificing style or substance.</string>
+    <string name="our_values_txt">OUR VALUES</string>
+    <string name="our_values">Our values include integrity, innovation, sustainability, customer-centricity, and excellence in quality.</string>
+
+    <string name="our_commitment_txt">Our Commitment</string>
+    <string name="our_commitment">At Klifora, we are committed to transparency, integrity, and innovation. Whether you\'re celebrating a milestone or expressing your love, our exquisite collection of lab-grown diamonds offers a perfect blend of luxury and responsibility.</string>
+    <string name="get_in_touch_txt">Get in Touch</string>
+    <string name="get_in_touch">Explore the future of diamonds with Klifora. Join us in creating a sustainable and beautiful world, one diamond at a time. Contact us today to learn more about our collections, custom designs, and ethical practices.</string>
+    <string name="why_choose_us_txt">Why Choose Us?</string>
+    <string name="why_choose_us">Quality Assurance: Each diamond at Klifora is meticulously crafted to meet the highest standards of clarity, cut, and brilliance.\nEthical Sourcing: We guarantee that our diamonds are grown in labs using sustainable practices, ensuring minimal environmental impact and zero involvement in conflict\nExpertise and Experience: With years of experience in the diamond industry, our team of experts is committed to delivering personalized service and expert guidance.</string>
+    <string name="see_more">See more</string>
+    <string name="ankur_jain">Ankur Jain</string>
+    <string name="ankur_jain_txt">Ankur Jain is an old hand at jewellery and one of the first movers from India into the lab grown diamond segment. He is a prominent player in this field and has extensive knowledge in sourcing and production of both lab grown diamonds and jewellery. He is the man behind CVD Diamonds, Delhi and CVD Diamonds Jewels, South Extension Delhi. He has participated in multiple exhibitions and has been recognized as "Pioneer in Lab Grown Diamond Jewellery (North India)" in 2024. He has been prominently featured in Forbes for his expertise as a lab grown diamond jeweller.</string>
+    <string name="prabhkaran_singh_lalli">Prabhkaran Singh Lalli</string>
+    <string name="prabhkaran_singh_lalli_txt">Prabhkaran is an alumni of the renowened University of Oxford where he mastered in Law, He is carrying over 20 years of extensive experience in to legal practices and also he has sat on the board of many Public Limited Companies. His legal and corporate knowledge shall be a great asset to the business and hold it in good stead for the future.</string>
+    <string name="reema_jain">Reema Jain</string>
+    <string name="reema_jain_txt">Reema belongs to a prestigious industrial house of Ludhiana; The Eastman Group which boasts a turnover of Rs. 4000 crores per annum. She has been in the jewellery business for the past 25 years and has owned and operated a High Street Jewellery store which had franchise partners, thus giving her relevant experience in both franchise and jewellery businesses. She is also currently managing the franchise operations for Eastman and has 15 franchisees who are successfully running their businesses under her stewardship.</string>
+    <string name="our_founders_and_shareholders">Our Founders and Shareholders</string>
+
 </resources>

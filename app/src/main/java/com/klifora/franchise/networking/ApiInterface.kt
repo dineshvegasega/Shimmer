@@ -72,11 +72,11 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
-    @GET("{id}"+CUSTOMER_DETAIL)
-    suspend fun customerDetail(
-        @Header("Authorization") authHeader : String,
-        @Path("id") id: String,
-    ): Response<JsonElement>
+//    @GET("{id}"+CUSTOMER_DETAIL)
+//    suspend fun customerDetail(
+//        @Header("Authorization") authHeader : String,
+//        @Path("id") id: String,
+//    ): Response<JsonElement>
 
 
     @GET(USER_DETAIL)
@@ -100,12 +100,12 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
-    @GET("{id}"+PRODUCTS_DETAIL+"{ids}")
-    suspend fun productsDetail(
-        @Header("Authorization") authHeader : String,
-        @Path("id") id: String,
-        @Path("ids") ids: String,
-    ): Response<JsonElement>
+//    @GET("{id}"+PRODUCTS_DETAIL+"{ids}")
+//    suspend fun productsDetail(
+//        @Header("Authorization") authHeader : String,
+//        @Path("id") id: String,
+//        @Path("ids") ids: String,
+//    ): Response<JsonElement>
 
 
     @GET(PRODUCTS_DETAIL_ID+"{ids}")
@@ -176,11 +176,11 @@ interface ApiInterface {
     suspend fun franchiseList(): Response<ItemFranchiseArray>
 
 
-    @GET(ORDERS)
-    suspend fun getOrderHistory(
-        @Header("Authorization") authHeader: String,
-        @QueryMap parms: Map<String, String>,
-    ): Response<ItemOrderHistoryModel>
+//    @GET(ORDERS)
+//    suspend fun getOrderHistory(
+//        @Header("Authorization") authHeader: String,
+//        @QueryMap parms: Map<String, String>,
+//    ): Response<ItemOrderHistoryModel>
 
 
     @POST(PLACE_ORDER_GUEST)

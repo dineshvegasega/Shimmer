@@ -59,7 +59,7 @@
                     android:id="@+id/textOurStoryTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Our Story"
+                    android:text="@string/our_story_txt"
                     android:textColor="@color/_74071E"
                     android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_regular"
@@ -72,8 +72,7 @@
                     android:id="@+id/textOurStoryDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Klifora was passionate about exquisite craftsmanship and environmental concerns. Recognizing the growing demand for ethically sourced diamonds the founders were on a journey to offer consumers an alternative that meets their values without compromising on quality or beauty. At Lab Diamond Mart, each diamond tells a story of mastery and artistic creations"
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/our_story"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textOurStoryTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textSize="@dimen/_7sdp"
@@ -140,7 +139,7 @@
                     android:id="@+id/textmid1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUR VISION"
+                    android:text="@string/our_vision_txt"
                     android:textAllCaps="false"
                     android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_6sdp"
@@ -156,8 +155,7 @@
                     android:id="@+id/textDescmid1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Our vision at Klifora is to provide discerning customers with a superior alternative to mined diamonds. We envision a future where every diamond purchased contributes positively to the environment and society, without compromising on quality or beauty."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/our_vision"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textmid1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -213,7 +211,7 @@
                     android:id="@+id/textmid2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUR MISSION"
+                    android:text="@string/our_mission_txt"
                     android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_6sdp"
                     android:textAllCaps="false"
@@ -229,8 +227,7 @@
                     android:id="@+id/textDescmid2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Klifora is on a mission to redefine luxury with lab-grown diamonds that are not only conflict-free but also environmentally friendly. We aim to empower consumers to make responsible choices without sacrificing style or substance."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/our_mission"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textmid2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -284,7 +281,7 @@
                     android:id="@+id/textmid3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OUR VALUES"
+                    android:text="@string/our_values_txt"
                     android:textAllCaps="false"
                     android:textColor="@color/_2A3740"
                     android:textSize="@dimen/_6sdp"
@@ -300,8 +297,7 @@
                     android:id="@+id/textDescmid3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Our values include integrity, innovation, sustainability, customer-centricity, and excellence in quality."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/our_values"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textmid3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -332,7 +328,7 @@
                     android:id="@+id/textOurCommitmentTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Our Commitment"
+                    android:text="@string/our_commitment_txt"
                     android:textColor="@color/_74071E"
                     android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_regular"
@@ -346,8 +342,7 @@
                     android:id="@+id/textOurCommitmentDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="At Klifora, we are committed to transparency, integrity, and innovation. Whether you're celebrating a milestone or expressing your love, our exquisite collection of lab-grown diamonds offers a perfect blend of luxury and responsibility."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/our_commitment"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textOurCommitmentTitle"
                     app:layout_constraintStart_toEndOf="@+id/ivIconOurCommitment"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +382,7 @@
                     android:id="@+id/textGetInTouchTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Get in Touch"
+                    android:text="@string/get_in_touch_txt"
                     android:textColor="@color/_74071E"
                     android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_regular"
@@ -400,8 +395,7 @@
                     android:id="@+id/textGetInTouchDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Explore the future of diamonds with Klifora. Join us in creating a sustainable and beautiful world, one diamond at a time. Contact us today to learn more about our collections, custom designs, and ethical practices."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/get_in_touch"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textGetInTouchTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     android:textSize="@dimen/_7sdp"
@@ -441,7 +435,7 @@
                     android:id="@+id/textWhyChooseUsTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Why Choose Us?"
+                    android:text="@string/why_choose_us_txt"
                     android:textColor="@color/_74071E"
                     android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_regular"
@@ -455,8 +449,7 @@
                     android:id="@+id/textWhyChooseUsDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Quality Assurance: Each diamond at Klifora is meticulously crafted to meet the highest standards of clarity, cut, and brilliance.\nEthical Sourcing: We guarantee that our diamonds are grown in labs using sustainable practices, ensuring minimal environmental impact and zero involvement in conflict\nExpertise and Experience: With years of experience in the diamond industry, our team of experts is committed to delivering personalized service and expert guidance."
-                    android:textColor="@color/_2A3740"
+                    android:text="@string/why_choose_us"                    android:textColor="@color/_2A3740"
                     app:layout_constraintTop_toBottomOf="@+id/textWhyChooseUsTitle"
                     app:layout_constraintStart_toEndOf="@+id/ivIconWhyChooseUs"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -481,6 +474,237 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textTitleChrs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/our_founders_and_shareholders"
+                android:textColor="@color/app_color"
+                app:layout_constraintTop_toBottomOf="@+id/whyChooseUs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/_12sdp"
+                app:fontFamily="@font/nunitosans_semibold"
+                tools:ignore="HardcodedText"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                />
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/midChr1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textTitleChrs"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmidChr1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/vision" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmidChr1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ankur_jain"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_fb7c00"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmidChr1"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmidChr1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ankur_jain_txt"
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmidChr1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_6sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/midChr2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/midChr1"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmidChr2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/mission" />
+                </androidx.cardview.widget.CardView>
+
+
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmidChr2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prabhkaran_singh_lalli"
+                    android:textColor="@color/_fb7c00"
+                    android:textSize="@dimen/_8sdp"
+                    android:textAllCaps="false"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmidChr2"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmidChr2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/our_mission"
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmidChr2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_6sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/midChr3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/midChr2"
+                android:paddingVertical="@dimen/_5sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivIconmidChr3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_100sdp"
+                    app:cardUseCompatPadding="false"
+                    android:background="@color/_79747E"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    app:cardElevation="@dimen/_1sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@color/white"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_7sdp"
+                        app:layout_constraintDimensionRatio="H,1:1.1"
+                        app:srcCompat="@drawable/values" />
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textmidChr3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reema_jain"
+                    android:textAllCaps="false"
+                    android:textColor="@color/_fb7c00"
+                    android:textSize="@dimen/_8sdp"
+                    app:fontFamily="@font/nunitosans_semibold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivIconmidChr3"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    tools:visibility="visible" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textDescmidChr3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reema_jain_txt"
+                    android:textColor="@color/_2A3740"
+                    app:layout_constraintTop_toBottomOf="@+id/textmidChr3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="@dimen/_6sdp"
+                    app:fontFamily="@font/nunitosans_light"
+                    tools:ignore="HardcodedText"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

@@ -568,6 +568,11 @@ class Products : Fragment() {
                 "eq"
             Log.e("TAG", "countFromDDD " + emptyMap.toString())
 
+            countFrom1 += 1
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
+                "status"
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
+                "1"
 
             emptyMap["searchCriteria[sortOrders][0][field]"] = "created_at"
             emptyMap["searchCriteria[sortOrders][0][direction]"] = "DESC"

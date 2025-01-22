@@ -25,7 +25,7 @@ const val SEND_OTP = "/V1/mobilelogin/otp/send/?"
 
 const val VERIFY_OTP = "/V1/mobilelogin/otp/verify/?"
 
-const val CUSTOMER_DETAIL = "/V1/customers/me"
+//const val CUSTOMER_DETAIL = "/V1/customers/me"
 
 const val WEBSITE_URL = "V1/vegasega-apis/customertoken?"
 
@@ -35,7 +35,7 @@ const val USER_DETAIL = "V1/vegasega-apis/franchisebyid?"
 
 const val PRODUCTS = "/V1/products/?"
 
-const val PRODUCTS_DETAIL = "/V1/products/"
+//const val PRODUCTS_DETAIL = "/V1/products/"
 
 const val PRODUCTS_ID = "V1/products/?"
 
@@ -53,7 +53,7 @@ const val BANNER = "V1/vegasega-apis/banner?homebanner=1"
 
 const val FRANCHISE_LIST = "V1/vegasega-apis/franchise?franchise=true"
 
-const val ORDERS = "V1/orders/?"
+//const val ORDERS = "V1/orders/?"
 
 const val PLACE_ORDER_GUEST = "V1/vegasega-apis/setGuestcart"
 

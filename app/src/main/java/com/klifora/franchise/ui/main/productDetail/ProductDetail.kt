@@ -1301,6 +1301,10 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
                         }
 
+
+                        var totalWe : Double = 0.0
+                        var goldWeight : Double = 0.0
+                        var diamondWeight : Double = 0.0
                         itemProductThis.custom_attributes.forEach { itemProductAttr ->
 
                             if (itemProductAttr.attribute_code == "size") {
@@ -1332,8 +1336,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_9kt") {
-                                                    textWeight2.text =
+                                                    textWeight4.text =
                                                         "" + itemProductAttr.value + " gram"
+                                                    goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
                                         }
@@ -1351,11 +1356,18 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 textPurity1.text = "14 kt Rose Gold"
                                             }
 
+
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_14kt") {
-                                                    textWeight2.text =
+                                                    textWeight4.text =
                                                         "" + itemProductAttr.value + " gram"
+                                                    goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
+
+//                                                if (itemProductAttr.attribute_code == "diamond_weight") {
+////                                                    textWeightCt.text = "Total Weight " + itemProductAttr.value
+//                                                    diamondWeight = itemProductAttr.value.toString().toDouble()
+//                                                }
                                             }
                                         }
                                     }
@@ -1374,8 +1386,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_18kt") {
-                                                    textWeight2.text =
+                                                    textWeight4.text =
                                                         "" + itemProductAttr.value + " gram"
+                                                    goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
                                         }
@@ -1395,8 +1408,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_22kt") {
-                                                    textWeight2.text =
+                                                    textWeight4.text =
                                                         "" + itemProductAttr.value + " gram"
+                                                    goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
                                         }
@@ -1416,8 +1430,9 @@ class ProductDetail : Fragment(), CallBackListener {
 
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_24kt") {
-                                                    textWeight2.text =
+                                                    textWeight4.text =
                                                         "" + itemProductAttr.value + " gram"
+                                                    goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
                                         }
@@ -1435,11 +1450,13 @@ class ProductDetail : Fragment(), CallBackListener {
 
                             if (itemProductAttr.attribute_code == "diamond_weight") {
                                 textWeightCt.text = "Total Weight " + itemProductAttr.value
+                                diamondWeight = itemProductAttr.value.toString().toDouble()
                             }
                             if (itemProductAttr.attribute_code != "diamond_weight") {
                                 itemProduct.custom_attributes.forEach { itemMainProductAttr ->
                                     if (itemMainProductAttr.attribute_code == "diamond_weight") {
                                         textWeightCt.text = "Total Weight " + itemMainProductAttr.value
+                                        diamondWeight = itemMainProductAttr.value.toString().toDouble()
                                     }
                                 }
                             }
@@ -1481,7 +1498,11 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
 
 
-                        textWeight4.text = "" + metal_weight
+
+                        totalWe = goldWeight + diamondWeight
+                        Log.e("TAG", "SSSSDD"+totalWe)
+                        textWeight2.text = "" + totalWe + " gram"
+
 
 
                         itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
