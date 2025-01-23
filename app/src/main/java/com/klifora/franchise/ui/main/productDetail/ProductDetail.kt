@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -69,6 +70,8 @@ class ProductDetail : Fragment(), CallBackListener {
     private val viewModel: ProductDetailVM by viewModels()
     private var _binding: ProductDetailBinding? = null
     private val binding get() = _binding!!
+
+//    viewModel.idsArray.joinToString(separator = ",") { it -> "${it}" })
 
     companion object {
 
@@ -1242,17 +1245,23 @@ class ProductDetail : Fragment(), CallBackListener {
 
 //                        textWeight2.text = "" + itemProductThis.weight + " gram"
 
-                        var idvalues = ""
+//                        var idvalues = ""
 //                        Log.e("TAG", "idsidsCCC " + itemProductThis.extension_attributes.category_links)
                         if (itemProductThis.extension_attributes.category_links != null) {
                             itemProductThis.extension_attributes.category_links.forEach { itemProductAttr ->
                                 val filteredNot =
                                     mainCategory.filter { itemProductAttr.category_id == it.id.toString() }
+                                var idsArray : ArrayList<String> = ArrayList()
                                 filteredNot.forEach { filteredNotInner ->
-                                    idvalues += filteredNotInner.name + ", "
+//                                    idvalues += filteredNotInner.name + ", "
+                                    idsArray.add(""+filteredNotInner.name)
                                 }
 //                                Log.e("TAG", "idsids " + filteredNot)
-                                textCategories.text = "CATEGORIES: " + idvalues
+//                                textCategories.text = "CATEGORIES: " + idvalues
+//                                textCategories.text = "CATEGORIES: " +idsArray.joinToString(separator = ",") { it -> "${it}" }//
+//                                textCategories.text = HtmlCompat.fromHtml(binding.root.resources.getString(R.string.conversation_marked_admin_open_hi, "<b>"+binding.root.resources.getString(R.string.admin_txt)+"</b>" , "<b>"+binding.root.resources.getString(R.string.re_open_info)+"</b>")+" "+model.reply_date.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd MMM, yyyy hh:mm a"), HtmlCompat.FROM_HTML_MODE_LEGACY)
+                                val text1 = "<font color=#383838>CATEGORIES: </font> <font color=#0099cc>"+idsArray.joinToString(separator = ",") { it -> "${it}" }+"</font>"
+                                textCategories.text = HtmlCompat.fromHtml(text1, HtmlCompat.FROM_HTML_MODE_COMPACT)
                                 textCategories.visibility = View.VISIBLE
                             }
                         }
@@ -1260,29 +1269,6 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
 
-                        itemProduct.custom_attributes.forEach { itemProductAttr ->
-//                            Log.e("TAG", "idsids " + "filteredNotAA")
-                            if (itemProductAttr.attribute_code == "short_description") {
-//                                Log.e("TAG", "idsids " + "filteredNotBB")
-                                binding.webView.loadDataWithBaseURL(
-                                    null,
-                                    "" + itemProductAttr.value,
-                                    "text/html",
-                                    "utf-8",
-                                    null
-                                )
-                                layoutDiamondAndGemstones.visibility = View.VISIBLE
-                            }
-
-                            if (itemProductAttr.attribute_code == "totel_making_charge") {
-                                textMakingChargesPrice.text = "₹ " + getPatternFormat(
-                                    "1",
-                                    itemProductAttr.value.toString().toDouble()
-                                )
-                            }
-
-
-                        }
 
 
                         var metal_weight: String = "0.0 gram"
@@ -1504,10 +1490,33 @@ class ProductDetail : Fragment(), CallBackListener {
                         textWeight2.text = "" + totalWe + " gram"
 
 
+                        itemProduct.custom_attributes.forEach { itemProductAttr ->
+//                            Log.e("TAG", "idsids " + "filteredNotAA")
+                            if (itemProductAttr.attribute_code == "short_description") {
+//                                Log.e("TAG", "idsids " + "filteredNotBB")
+                                binding.webView.loadDataWithBaseURL(
+                                    null,
+                                    "" + itemProductAttr.value,
+                                    "text/html",
+                                    "utf-8",
+                                    null
+                                )
+                                layoutDiamondAndGemstones.visibility = View.VISIBLE
+                            }
+
+                            if (itemProductAttr.attribute_code == "totel_making_charge") {
+                                textMakingChargesPrice.text = "₹ " + getPatternFormat(
+                                    "1",
+                                    itemProductAttr.value.toString().toDouble() * goldWeight
+                                )
+                            }
+
+
+                        }
+
+
 
                         itemProduct.extension_attributes.configurable_product_options.forEach { itemConfigurableProductAttr ->
-
-
 
 
                             if (itemConfigurableProductAttr.label == "Size") {

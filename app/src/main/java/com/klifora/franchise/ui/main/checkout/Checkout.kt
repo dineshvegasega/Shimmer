@@ -513,11 +513,11 @@ class Checkout : Fragment() {
                         Log.e("TAG", "createOrderonCallBack: ${this.toString()}")
                         val orderID = this.toString().replace("\"", "")
                         try {
-                            MaterialAlertDialogBuilder(MainActivity.activity.get()!!, R.style.LogoutDialogTheme)
-                                .setTitle(resources.getString(R.string.app_name))
-                                .setMessage("Payment Successful : Payment ID: $p0")
-                                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
-                                    dialog.dismiss()
+//                            MaterialAlertDialogBuilder(MainActivity.activity.get()!!, R.style.LogoutDialogTheme)
+//                                .setTitle(resources.getString(R.string.app_name))
+//                                .setMessage("Payment Successful : Payment ID: $p0")
+//                                .setPositiveButton(resources.getString(R.string.ok)) { dialog, _ ->
+//                                    dialog.dismiss()
                                     cartItemCount = 0
                                     cartItemLiveData.value = false
 
@@ -534,9 +534,9 @@ class Checkout : Fragment() {
 //                                                    findNavController().navigate(R.id.action_checkout_to_payment)
                                         findNavController().navigate(R.id.action_checkout_to_thankyou)
                                     }
-                                }
-                                .setCancelable(false)
-                                .show()
+//                                }
+//                                .setCancelable(false)
+//                                .show()
                         }catch (_: Exception){
 
                         }

@@ -188,7 +188,9 @@ class History : Fragment() {
 
 
             ivFabIcon.singleClick {
-                findNavController().navigate(R.id.action_history_to_createNew)
+                findNavController().navigate(R.id.action_history_to_createNew,Bundle().apply {
+                    putString("from", "history")
+                })
             }
         }
     }

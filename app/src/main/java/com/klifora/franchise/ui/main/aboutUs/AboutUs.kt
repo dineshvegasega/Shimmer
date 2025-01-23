@@ -2,9 +2,12 @@ package com.klifora.franchise.ui.main.aboutUs
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
+import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -56,6 +59,12 @@ class AboutUs : Fragment() {
                 topBarBack.menuBadge.text = "$cartItemCount"
                 topBarBack.menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
             }
+
+
+//            val text = getString(R.string.ankur_jain_txt)
+//            val result = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+            textDescmidChr1.setText(Html.fromHtml(getString(R.string.ankur_jain_txt), FROM_HTML_MODE_LEGACY));
+
         }
     }
 }

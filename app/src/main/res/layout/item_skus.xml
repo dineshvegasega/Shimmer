@@ -103,7 +103,7 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:gravity="center_vertical"
-                android:layout_weight="1">
+                android:layout_weight="0.9">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivIconChild"
@@ -115,7 +115,7 @@
                     app:layout_constraintDimensionRatio="H,1:1.1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/no_image" />
+                    app:srcCompat="@drawable/place_image" />
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -130,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sku"
                         android:textColor="@color/_1E1E1E"
-                        android:textSize="@dimen/_9sdp"
+                        android:textSize="@dimen/_8sdp"
                         app:fontFamily="@font/nunitosans_light"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:text="S100RK49548"
                         android:textColor="@color/_141414"
-                        android:textSize="@dimen/_11sdp"
+                        android:textSize="@dimen/_9sdp"
                         app:fontFamily="@font/nunitosans_semibold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/quantity"
                     android:textColor="@color/_1E1E1E"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_8sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:text="₹ 2000000"
                     android:textColor="@color/_141414"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -224,14 +224,14 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:gravity="center_vertical"
-                android:layout_weight="1">
+                android:layout_weight="0.9">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/price"
                     android:textColor="@color/_1E1E1E"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_8sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -248,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:text="₹ 1000000"
                     android:textColor="@color/_141414"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -276,7 +276,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total"
                     android:textColor="@color/_1E1E1E"
-                    android:textSize="@dimen/_9sdp"
+                    android:textSize="@dimen/_8sdp"
                     app:fontFamily="@font/nunitosans_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -293,7 +293,7 @@
                     android:layout_height="wrap_content"
                     android:text="₹ 2000000"
                     android:textColor="@color/_141414"
-                    android:textSize="@dimen/_11sdp"
+                    android:textSize="@dimen/_9sdp"
                     app:fontFamily="@font/nunitosans_semibold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

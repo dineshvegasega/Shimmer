@@ -190,6 +190,7 @@ class OrderDetail : Fragment() {
                         R.id.action_orderDetail_to_createNew,
                         Bundle().apply {
                             putString("order_id", _id)
+                            putString("from", "order")
                         })
                 }
 
@@ -1139,8 +1140,8 @@ class OrderDetail : Fragment() {
                             JSONObject(this).getString("checkout_purchase_order_no")
 
                         textName.text = checkout_buyer_name
-                        textMobile.text = checkout_buyer_email
-                        textEmail.text = checkout_purchase_order_no
+                        textMobile.text = checkout_purchase_order_no
+                        textEmail.text = checkout_buyer_email
 
                     }
                 }

@@ -27,6 +27,8 @@ import com.klifora.franchise.datastore.db.SearchModel
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
+import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.utils.ioThread
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.onRightDrawableClicked
@@ -84,6 +86,13 @@ class Search : Fragment() {
                         openSearchHistory()
                     }
                 })
+
+
+                cartItemLiveData.value = false
+                cartItemLiveData.observe(viewLifecycleOwner) {
+                    menuBadge.text = "$cartItemCount"
+                    menuBadge.visibility = if (cartItemCount != 0) View.VISIBLE else View.GONE
+                }
             }
 
 //            val iconTypeSearch = when (resources.getInteger(R.integer.layout_value)){
@@ -358,6 +367,12 @@ class Search : Fragment() {
 
             emptyMap["searchCriteria[currentPage]"] = "" + page
             emptyMap["searchCriteria[pageSize]"] = "10"
+
+            countFrom1 += 1
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][field]"] =
+                "status"
+            emptyMap["searchCriteria[filter_groups][" + countFrom1 + "][filters][" + 0 + "][value]"] =
+                "1"
 
             idPBLoading.visibility = View.VISIBLE
             readData(ADMIN_TOKEN) { token ->

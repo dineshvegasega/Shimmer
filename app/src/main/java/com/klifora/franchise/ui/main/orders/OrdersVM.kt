@@ -28,6 +28,7 @@ import com.klifora.franchise.models.myOrdersList.ItemOrders
 import com.klifora.franchise.models.myOrdersList.ItemOrdersItem
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
+import com.klifora.franchise.networking.GST_PERCENT
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
@@ -115,8 +116,12 @@ class OrdersVM @Inject constructor(private val repository: Repository) : ViewMod
             binding.apply {
                 val date =
                     dataClass.updated_at.changeDateFormat("yyyy-MM-dd HH:mm:ss", "dd-MMM-yyyy")
+                var gstValue: Double = 0.0
+                gstValue = (dataClass.base_subtotal.toDouble() * GST_PERCENT) / 100
+                var gstTotalPrice: Double = 0.0
+                gstTotalPrice = dataClass.base_subtotal.toDouble() + gstValue
                 btDate.text = date
-                textOrderPrice.text = "₹ " + getPatternFormat("1", dataClass.base_subtotal.toDouble())
+                textOrderPrice.text = "₹ " + getPatternFormat("1",gstTotalPrice)
 
                 textOrderNo.text =  dataClass.increment_id
 

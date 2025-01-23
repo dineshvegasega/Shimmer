@@ -175,7 +175,7 @@ class CreateNew : Fragment() {
                     var index = 0
                     val list = arrayOfNulls<String>(itemOrders.size)
                     for (value in itemOrders) {
-                        list[index] = value.entity_id
+                        list[index] = value.increment_id
                         index++
                     }
 
@@ -269,12 +269,27 @@ class CreateNew : Fragment() {
                                         "productid",
                                         viewModel.idsArray.joinToString(separator = ",") { it -> "${it}" })
                                 }
+
+                                val from = arguments?.getString("from")
+                                Log.e("TAG", "from:: "+from)
                                 viewModel.createTicket(jsonObjectStatus) {
                                     if (this.contains("Ticket was successfully sent")) {
                                         showSnackBar("Ticket created successfully")
-                                        Handler(Looper.getMainLooper()).postDelayed({
-                                            findNavController().navigateUp()
-                                        }, 1000)
+
+                                        val from = arguments?.getString("from")
+                                        if (from == "order"){
+                                            findNavController().navigate(R.id.action_createNew_to_history)
+                                        } else if (from == "history"){
+                                            Handler(Looper.getMainLooper()).postDelayed({
+                                                findNavController().navigateUp()
+                                            }, 1000)
+
+                                        } else {
+                                            Handler(Looper.getMainLooper()).postDelayed({
+                                                findNavController().navigateUp()
+                                            }, 1000)
+                                        }
+
                                     } else {
                                         showSnackBar("Something went wrong!")
                                     }
