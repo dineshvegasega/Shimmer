@@ -41,10 +41,15 @@ import com.klifora.franchise.ui.main.profile.Profile
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
+import com.klifora.franchise.utils.Utility
+import com.klifora.franchise.utils.formatTo
+import com.klifora.franchise.utils.getDate
+import com.klifora.franchise.utils.getDateToLongTime
 import com.klifora.franchise.utils.getDensityName
 import com.klifora.franchise.utils.getToken
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.singleClick
+import com.klifora.franchise.utils.toDate
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
 import com.razorpay.PaymentData
@@ -52,6 +57,8 @@ import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import java.lang.ref.WeakReference
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 @AndroidEntryPoint
@@ -144,14 +151,31 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
         typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
         Checkout.preload(applicationContext)
 
+        var dateFormat = SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
+        var ts = (dateFormat.parse("2025-01-24 10:48:19").time );
 
-
-
+                    Log.e("TAG", "ts "+ts)
+       var currentDate = Date (ts)
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
+        var date = dateFormat.format(currentDate);
+        Log.e("TAG", "ts22 "+date)
 //        getToken() {
 //            Log.e("TAG", "thisgetToken "+this)
 //        }
 
 
+//        var aa = getDateToLongTime("2025-01-24")
+//        Log.e("TAG", "aaaa "+aa)
+//
+//        var bb = "2025-01-24 10:48:19".toDate("YYYY-MM-dd HH:mm:ss")
+//        Log.e("TAG", "bbbb "+bb)
+//
+//        var cc = Date().formatTo("YYYY-MM-dd HH:mm:ss")
+//        Log.e("TAG", "cccc "+cc)
+
+//        var dddd = "2025-01-24 10:48:19".getDate()
+//
+//        Log.e("TAG", "dddd "+dddd)
         val mentors = arrayOf(
             Mentor(1, "Amit Shekhar"),
             Mentor(2, "Anand Gaurav"),

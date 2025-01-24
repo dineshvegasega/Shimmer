@@ -1,5 +1,8 @@
 package com.klifora.franchise.utils
 
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.TimeZone
 import java.util.regex.Pattern
 
 class Utility {
@@ -23,4 +26,23 @@ class Utility {
 
     }
 
+
+    fun getDate(ourDate: String): String {
+        var ourDate = ourDate
+        try {
+            val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+            formatter.setTimeZone(TimeZone.getTimeZone("UTC"))
+            val value: Date = formatter.parse(ourDate)
+
+            val dateFormatter: SimpleDateFormat =
+                SimpleDateFormat("yyyy-MM-dd HH:mm a") //this format changeable
+            dateFormatter.setTimeZone(TimeZone.getDefault())
+            ourDate = dateFormatter.format(value)
+
+            //Log.d("ourDate", ourDate);
+        } catch (e: Exception) {
+            ourDate = "0000-00-00 00:00:00"
+        }
+        return ourDate
+    }
 }

@@ -213,6 +213,73 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
+    fun updatePrice(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.productsDetailID("Bearer " + adminToken, skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+//                                Log.e("TAG", "successAA: ${response.body().toString()}")
+                                val mMineUserEntity =
+                                    Gson().fromJson(response.body(), ItemProduct::class.java)
+
+//                                viewModelScope.launch {
+////                                    mMineUserEntity.forEach {items ->
+//                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                        userList?.forEach { user ->
+//                                            if (mMineUserEntity.id == user.product_id) {
+//                                                mMineUserEntity.apply {
+//                                                    isSelected = true
+//                                                }
+////                                                Log.e( "TAG", "YYYYYYYYY: " )
+//                                            } else {
+//                                                mMineUserEntity.apply {
+//                                                    isSelected = false
+//                                                }
+////                                                Log.e( "TAG", "NNNNNNNNNN: " )
+//                                            }
+//                                        }
+////                                    }
+//                                }
+                                callBack(mMineUserEntity)
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+//                        Log.e("TAG", "successAA: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+//                        callBack(message.toString())
+
+                        if (message.contains("fieldName")) {
+                            showSnackBar("Something went wrong!")
+                        } else if (message.contains("The product that was requested doesn't exist")) {
+                            showSnackBar(message)
+                        } else if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+
+                        hide()
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+
     fun getProductDetail(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
         viewModelScope.launch {
             repository.callApiWithoutLoader(

@@ -939,6 +939,36 @@ fun getDateToLongTimeNow(): Long {
     return millis1
 }
 
+fun String.toDate(dateFormat: String = "yyyy-MM-dd HH:mm:ss", timeZone: TimeZone = TimeZone.getTimeZone("UTC")): Date? {
+    val parser = SimpleDateFormat(dateFormat, Locale.getDefault())
+    parser.timeZone = timeZone
+    return parser.parse(this)
+}
+
+fun Date.formatTo(dateFormat: String, timeZone: TimeZone = TimeZone.getDefault()): String {
+    val formatter = SimpleDateFormat(dateFormat, Locale.getDefault())
+    formatter.timeZone = timeZone
+    return formatter.format(this)
+}
+
+fun String.getDate(): String {
+    try {
+        val formatter: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val value: Date? = formatter.parse(this)
+
+        val dateFormatter: SimpleDateFormat =
+            SimpleDateFormat("hh:mm a") //this format changeable
+        dateFormatter.setTimeZone(TimeZone.getDefault())
+        return dateFormatter.format(value!!)
+
+        //Log.d("ourDate", ourDate);
+    } catch (e: Exception) {
+        return "0000-00-00 00:00:00"
+    }
+}
+
+
 fun dpToPx(dp: Int): Int {
     val displayMetrics: DisplayMetrics =
         MainActivity.context.get()?.getResources()!!.getDisplayMetrics()

@@ -30,6 +30,7 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCo
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.changeDateFormat
+import com.klifora.franchise.utils.getDate
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.parcelable
 import com.klifora.franchise.utils.showSnackBar
@@ -123,7 +124,9 @@ class OrderDetail : Fragment() {
                     "dd-MMM-yyyy"
                 )
                 textTime.text =
-                    consentIntent?.updatedtime?.changeDateFormat("yyyy-MM-dd HH:mm:ss", "HH:mm")
+                    consentIntent?.updatedtime?.getDate()
+
+                Log.e("TAG", "ddddxx "+consentIntent?.updatedtime?.getDate())
 
                 val typeToken = object : TypeToken<List<CartItem>>() {}.type
                 val changeValue =
@@ -207,12 +210,14 @@ class OrderDetail : Fragment() {
                                 "yyyy-MM-dd HH:mm:ss",
                                 "dd-MMM-yyyy"
                             )
-                            textTime.text =
-                                itemOrderDetail?.updated_at?.changeDateFormat(
-                                    "yyyy-MM-dd HH:mm:ss",
-                                    "HH:mm"
-                                )
+//                            textTime.text =
+//                                itemOrderDetail?.updated_at?.changeDateFormat(
+//                                    "yyyy-MM-dd HH:mm:ss",
+//                                    "HH:mm"
+//                                )
 
+                            textTime.text =
+                                itemOrderDetail?.updated_at?.getDate()
 
                             rvListCategory1.setHasFixedSize(true)
                             viewModel.orderSKUOrderHistory.notifyDataSetChanged()

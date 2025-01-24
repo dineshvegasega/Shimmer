@@ -239,7 +239,6 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                                 Log.e("TAG", "successAA: ${response.body().toString()}")
                                 val mMineUserEntity =
                                     Gson().fromJson(response.body(), ItemProduct::class.java)
-
                                 viewModelScope.launch {
 //                                    mMineUserEntity.forEach {items ->
                                     val userList: List<CartModel>? = db?.cartDao()?.getAll()

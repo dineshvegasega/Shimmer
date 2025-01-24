@@ -87,17 +87,52 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textSKU"
+                android:id="@+id/textUpdateGoldPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:text="Current Gold Rate : ₹ 0.0"
+                android:textColor="@color/_2A3740"
+                android:textSize="@dimen/_9sdp"
+                app:fontFamily="@font/nunitosans_semibold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textPrice"
+                tools:ignore="HardcodedText" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btUpdate"
+                style="@style/PrimaryButtonBlue"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_20sdp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/update_price"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/_9F0625"
+                android:textSize="@dimen/_8sdp"
+                android:visibility="visible"
+                app:cornerRadius="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textPrice"
+                android:layout_marginEnd="@dimen/_10sdp"
+                />
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textSKU"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="SKU: "
                 android:textColor="@color/_383838"
                 android:textSize="@dimen/_8sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textPrice"
+                app:layout_constraintTop_toBottomOf="@+id/textUpdateGoldPrice"
                 tools:ignore="HardcodedText" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -105,13 +140,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Category: Rings"
                 android:textColor="@color/_383838"
                 android:textSize="@dimen/_8sdp"
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textPrice"
+                app:layout_constraintTop_toBottomOf="@+id/textUpdateGoldPrice"
                 tools:ignore="HardcodedText" />
 
 

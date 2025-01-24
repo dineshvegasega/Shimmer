@@ -196,6 +196,12 @@ class ProductDetail : Fragment(), CallBackListener {
 
             Log.e("TAG", "isApiCall " + isApiCall)
 
+            btUpdate.singleClick {
+                viewModel.updatePrice("",currentSku){
+
+                }
+            }
+
             btRingSize.singleClick {
                 openDialogSize()
             }
