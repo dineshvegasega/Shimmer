@@ -14,6 +14,7 @@ import com.klifora.franchise.models.cart.ItemCartModel
 import com.klifora.franchise.models.guestOrderList.ItemGuestOrderList
 import com.klifora.franchise.models.myOrdersDetail.ItemOrderDetail
 import com.klifora.franchise.models.myOrdersList.ItemOrders
+import com.klifora.franchise.models.options.ItemOptions
 import com.klifora.franchise.models.orderHistory.ItemOrderHistoryModel
 import com.klifora.franchise.models.user.ItemUser
 import okhttp3.RequestBody
@@ -118,7 +119,7 @@ interface ApiInterface {
     @GET(PRODUCT_OPTIONS)
     suspend fun productsOptions(
         @Query("con_id") con_id: String
-    ): Response<JsonElement>
+    ): Response<ItemOptions>
 
 
     @GET(ALL_PRODUCTS+"{id}/children")
@@ -241,7 +242,10 @@ interface ApiInterface {
     ): Response<String>
 
 
-
+    @GET(UPDATED_PRICE)
+    suspend fun updatedPrice(
+        @Query("sku") sku: String,
+    ): Response<JsonElement>
 
     @GET(ORDER_HISTORY_LIST)
     suspend fun orderHistoryList(

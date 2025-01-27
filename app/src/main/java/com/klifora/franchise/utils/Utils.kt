@@ -461,9 +461,20 @@ fun String.glideImageWithoutPlace(context: Context, ivMap: ShapeableImageView) {
 //        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL))
 //        .into(ivMap)
 
-    Picasso.get().load(this)
-        .placeholder(R.drawable.place_image)
-//        .memoryPolicy(MemoryPolicy.NO_CACHE)
+//    Picasso.get().load(this)
+//        .placeholder(R.drawable.place_image)
+////        .memoryPolicy(MemoryPolicy.NO_CACHE)
+//        .into(ivMap)
+
+    val circularProgressDrawable = CircularProgressDrawable(context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 50f
+    circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(context, R.color.app_color))
+    circularProgressDrawable.start()
+
+    Glide.with(context)
+        .load(this)
+        .placeholder(circularProgressDrawable)
         .into(ivMap)
 
 }
@@ -507,11 +518,21 @@ fun String.glidePhotoView(context: Context, ivMap: PhotoView) {
 //        .load(this)
 //        .apply(myOptionsGlide)
 //        .into(ivMap)
+    val circularProgressDrawable = CircularProgressDrawable(context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 50f
+    circularProgressDrawable.setColorSchemeColors(ContextCompat.getColor(context, R.color.app_color))
+    circularProgressDrawable.start()
 
-        Picasso.get().load(this)
-        .placeholder(R.drawable.place_image)
-//        .memoryPolicy(MemoryPolicy.NO_CACHE)
+    Glide.with(context)
+        .load(this)
+        .placeholder(circularProgressDrawable)
         .into(ivMap)
+
+//        Picasso.get().load(this)
+//        .placeholder(R.drawable.place_image)
+////        .memoryPolicy(MemoryPolicy.NO_CACHE)
+//        .into(ivMap)
 }
 
 //val myOptionsGlidePortrait: RequestOptions = RequestOptions()
@@ -968,6 +989,8 @@ fun String.getDate(): String {
     }
 }
 
+
+fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 
 fun dpToPx(dp: Int): Int {
     val displayMetrics: DisplayMetrics =

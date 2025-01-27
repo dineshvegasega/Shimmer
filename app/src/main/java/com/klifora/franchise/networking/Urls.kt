@@ -71,6 +71,8 @@ const val POST_CUSTOM_DETAILS = "V1/vegasega-apis/setOrdercustom?"
 
 const val ORDER_HISTORY_LIST = "V1/vegasega-apis/getorderlist?"
 
+const val UPDATED_PRICE = "V1/vegasega-apis/updatedprice?"
+
 const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
 
 const val ORDER_HISTORY_DETAIL = "V1/vegasega-apis/getorderbyid?"

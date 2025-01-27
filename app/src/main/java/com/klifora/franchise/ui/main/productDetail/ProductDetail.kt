@@ -37,6 +37,7 @@ import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.ItemParcelable
 import com.klifora.franchise.models.ItemProductOptions
+import com.klifora.franchise.models.options.ItemOptionsItem
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.models.products.MediaGalleryEntry
 import com.klifora.franchise.models.products.Value
@@ -59,6 +60,7 @@ import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.getRecyclerView
 import com.klifora.franchise.utils.getSize
 import com.klifora.franchise.utils.mainThread
+import com.klifora.franchise.utils.round
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
@@ -95,7 +97,7 @@ class ProductDetail : Fragment(), CallBackListener {
     var ktType = 0
 
 
-    val arrayItemProduct = mutableListOf<ItemProductOptions>()
+    val arrayItemProduct = mutableListOf<ItemOptionsItem>()
 //    var arrayAllProduct: ArrayList<ItemProduct> = ArrayList()
 
     lateinit var itemProduct: ItemProduct
@@ -197,8 +199,14 @@ class ProductDetail : Fragment(), CallBackListener {
             Log.e("TAG", "isApiCall " + isApiCall)
 
             btUpdate.singleClick {
-                viewModel.updatePrice("",currentSku){
-
+                Log.e("TAG", "itemProduct " + itemProduct.id)
+                viewModel.updatePrice(""+itemProduct.id){
+//                    val jsonObject = JSONObject(this.toString())
+//                    Log.e("TAG", "jsonObjectQQ "+jsonObject.toString())
+                    callApiDetailsConfigurable(
+                        currentSku,
+                        itemProduct
+                    )
                 }
             }
 
@@ -1135,25 +1143,30 @@ class ProductDetail : Fragment(), CallBackListener {
 //                        } else if (itemProduct.type_id == "configurable") {
                         Log.e("TAG", "getProductDetailAA22 ")
                         viewModel.getProductOptions("" + itemProduct.id) {
-                            val jsonObject = JSONObject(this.toString())
-                            Log.e("TAG", "arrayItemProduct.sizeB " + jsonObject)
-                            val ids =
-                                itemProduct.extension_attributes.configurable_product_links.toString()
-                                    .replace("[", "").replace("]", "").replace(" ", "")
-                                    .split(",")
-
-                            Log.e("TAG", "arrayItemProduct.sizeC " + ids)
-
-                            ids.forEach { idsInner ->
-                                val jsonObjectData = jsonObject.getJSONObject(idsInner)
-                                val jsonString = Gson().fromJson(
-                                    jsonObjectData.toString(),
-                                    ItemProductOptions::class.java
-                                )
-                                arrayItemProduct.add(jsonString)
-                            }
+//                            val jsonObject = JSONObject(this.toString())
+////                            Log.e("TAG", "arrayItemProduct.sizeB " + jsonObject)
+////                            val ids =
+////                                itemProduct.extension_attributes.configurable_product_links.toString()
+////                                    .replace("[", "").replace("]", "").replace(" ", "")
+////                                    .split(",")
+////
+////                            Log.e("TAG", "arrayItemProduct.sizeC " + ids)
+////
+////                            ids.forEach { idsInner ->
+////                                val jsonObjectData = jsonObject.getJSONObject(idsInner)
+////                                val jsonString = Gson().fromJson(
+////                                    jsonObjectData.toString(),
+////                                    ItemProductOptions::class.java
+////                                )
+////                                arrayItemProduct.add(jsonString)
+////                            }
 
 //                            viewModel.hide()
+
+                            this.forEach {
+                                arrayItemProduct.add(it)
+                            }
+
                             if (arrayItemProduct.size > 0) {
                                 if (currentSku == "") {
                                     currentSku = arrayItemProduct[0].sku
@@ -1229,6 +1242,13 @@ class ProductDetail : Fragment(), CallBackListener {
                 readData(ADMIN_TOKEN) { token ->
                     viewModel.getProductDetail(token.toString(), skuId!!) {
                         itemProductThis = this
+
+//                        arrayItemProduct.forEach {
+//                            if (it.sku == currentSku) {
+//                                textWeight2.text = "" + it.weight.toDouble().round()+ " gram"
+//                                textWeight4.text = "" + it.metal_weight.toDouble().round()+ " gram"
+//                            }
+//                        }
 
                         viewModel.arrayItemProductOptionsSize.clear()
 
@@ -1329,7 +1349,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_9kt") {
                                                     textWeight4.text =
-                                                        "" + itemProductAttr.value + " gram"
+                                                        "" + itemProductAttr.value.toString().toDouble().round() + " gram"
                                                     goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
@@ -1352,7 +1372,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_14kt") {
                                                     textWeight4.text =
-                                                        "" + itemProductAttr.value + " gram"
+                                                        "" + itemProductAttr.value.toString().toDouble().round() + " gram"
                                                     goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
 
@@ -1379,7 +1399,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_18kt") {
                                                     textWeight4.text =
-                                                        "" + itemProductAttr.value + " gram"
+                                                        "" + itemProductAttr.value.toString().toDouble().round() + " gram"
                                                     goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
@@ -1401,7 +1421,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_22kt") {
                                                     textWeight4.text =
-                                                        "" + itemProductAttr.value + " gram"
+                                                        "" + itemProductAttr.value.toString().toDouble().round() + " gram"
                                                     goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
@@ -1423,7 +1443,7 @@ class ProductDetail : Fragment(), CallBackListener {
                                             itemProduct.custom_attributes.forEach { itemProductAttr ->
                                                 if (itemProductAttr.attribute_code == "attr_24kt") {
                                                     textWeight4.text =
-                                                        "" + itemProductAttr.value + " gram"
+                                                        "" + itemProductAttr.value.toString().toDouble().round() + " gram"
                                                     goldWeight = itemProductAttr.value.toString().toDouble()
                                                 }
                                             }
@@ -1478,6 +1498,19 @@ class ProductDetail : Fragment(), CallBackListener {
                                     "1",
                                     itemProductAttr.value.toString().toDouble()
                                 )
+
+//                                arrayItemProduct.forEach {
+//                                    if (this.sku == currentSku){
+//                                        textGoldPrice.text = "₹ " + getPatternFormat(
+//                                            "1",
+//                                            itemProductAttr.value.toString().toDouble() * it.metal_weight.toDouble()
+//                                        )
+//
+////                                        textWeight2.text = "" + this.weight.toDouble().round()+ " gram"
+////                                        textWeight4.text = "" + this.metal_weight.toDouble().round()+ " gram"
+//                                    }
+//                                }
+
                             }
 
 
@@ -1493,8 +1526,8 @@ class ProductDetail : Fragment(), CallBackListener {
 
                         totalWe = goldWeight + diamondWeight
                         Log.e("TAG", "SSSSDD"+totalWe)
-                        textWeight2.text = "" + totalWe + " gram"
-
+                        textWeight2.text = "" + totalWe.round()+ " gram"
+//                        textWeight2.text = "" + totalWe.round()+ " gram"
 
                         itemProduct.custom_attributes.forEach { itemProductAttr ->
 //                            Log.e("TAG", "idsids " + "filteredNotAA")

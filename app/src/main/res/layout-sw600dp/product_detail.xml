@@ -98,7 +98,8 @@
                 app:fontFamily="@font/nunitosans_semibold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textPrice"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                android:visibility="gone"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btUpdate"
@@ -115,7 +116,7 @@
                 app:cornerRadius="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textPrice"
+                app:layout_constraintTop_toBottomOf="@+id/textTitle"
                 android:layout_marginEnd="@dimen/_10sdp"
                 />
 

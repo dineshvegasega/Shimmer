@@ -42,6 +42,7 @@ import com.klifora.franchise.models.ItemRelatedProducts
 import com.klifora.franchise.models.ItemRelatedProductsItem
 import com.klifora.franchise.models.Items
 import com.klifora.franchise.models.cart.ItemCartModel
+import com.klifora.franchise.models.options.ItemOptions
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.models.products.ItemProductRoot
 import com.klifora.franchise.models.products.MediaGalleryEntry
@@ -212,62 +213,42 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             )
         }
 
-
-    fun updatePrice(adminToken: String, skuId: String, callBack: ItemProduct.() -> Unit) =
+    fun updatePrice(_id: String, callBack: JsonElement.() -> Unit) =
         viewModelScope.launch {
-            repository.callApiWithoutLoader(
+            repository.callApi(
                 callHandler = object : CallHandler<Response<JsonElement>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
-                        apiInterface.productsDetailID("Bearer " + adminToken, skuId)
+                        apiInterface.updatedPrice(_id)
+
                     @SuppressLint("SuspiciousIndentation")
                     override fun success(response: Response<JsonElement>) {
-                        if (response.isSuccessful) {
-                            try {
-//                                Log.e("TAG", "successAA: ${response.body().toString()}")
-                                val mMineUserEntity =
-                                    Gson().fromJson(response.body(), ItemProduct::class.java)
-
-//                                viewModelScope.launch {
-////                                    mMineUserEntity.forEach {items ->
-//                                        val userList: List<CartModel>? = db?.cartDao()?.getAll()
-//                                        userList?.forEach { user ->
-//                                            if (mMineUserEntity.id == user.product_id) {
-//                                                mMineUserEntity.apply {
-//                                                    isSelected = true
-//                                                }
-////                                                Log.e( "TAG", "YYYYYYYYY: " )
-//                                            } else {
-//                                                mMineUserEntity.apply {
-//                                                    isSelected = false
-//                                                }
-////                                                Log.e( "TAG", "NNNNNNNNNN: " )
-//                                            }
-//                                        }
-////                                    }
-//                                }
-                                callBack(mMineUserEntity)
-
-                            } catch (e: Exception) {
-                            }
-                        }
+                        Log.e("TAG", "successAACCC: ${response.body()}")
+                        callBack(response.body()!!)
+//                        if (response.isSuccessful) {
+//                        try {
+////                                Log.e("TAG", "successAACCC: ${response.body().toString()}")
+////                                //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+////                                Log.e("TAG", "getProductDetailAAXXXX ")
+//                            callBack(response.body()!!)
+//                        } catch (e: Exception) {
+//                            showSnackBar("Product not available!")
+//                            hide()
+//                        }
+//                        }
                     }
 
                     override fun error(message: String) {
-//                        Log.e("TAG", "successAA: ${message}")
-//                        super.error(message)
-//                        showSnackBar(message)
-//                        callBack(message.toString())
-
                         if (message.contains("fieldName")) {
                             showSnackBar("Something went wrong!")
                         } else if (message.contains("The product that was requested doesn't exist")) {
+                            showSnackBar(message)
+                        } else if (message.contains("error")) {
                             showSnackBar(message)
                         } else if(message.contains("customerId")){
                             sessionExpired()
                         } else {
                             showSnackBar("Something went wrong!")
                         }
-
                         hide()
                     }
 
@@ -277,6 +258,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 }
             )
         }
+
+
+
 
 
 
@@ -346,25 +330,27 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
         }
 
 
-    fun getProductOptions(_id: String, callBack: JsonElement.() -> Unit) =
+    fun getProductOptions(_id: String, callBack: ItemOptions.() -> Unit) =
         viewModelScope.launch {
             repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
+                callHandler = object : CallHandler<Response<ItemOptions>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.productsOptions(_id)
 
                     @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
-                        if (response.isSuccessful) {
+                    override fun success(response: Response<ItemOptions>) {
+                        Log.e("TAG", "successAACCC: ${response.body()}")
+//                        if (response.isSuccessful) {
                             try {
 //                                Log.e("TAG", "successAACCC: ${response.body().toString()}")
-                                //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+//                                //     val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+//                                Log.e("TAG", "getProductDetailAAXXXX ")
                                 callBack(response.body()!!)
                             } catch (e: Exception) {
                                 showSnackBar("Product not available!")
                                 hide()
                             }
-                        }
+//                        }
                     }
 
                     override fun error(message: String) {
@@ -393,6 +379,9 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
                 }
             )
         }
+
+
+
 
 
     fun allProducts(
