@@ -33,6 +33,7 @@
         android:inputType="text|textNoSuggestions"
         android:maxLines="1"
         android:lines="1"
+        android:textSize="@dimen/_8sdp"
         android:singleLine="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

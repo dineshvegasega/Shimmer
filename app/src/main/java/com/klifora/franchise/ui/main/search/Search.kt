@@ -45,6 +45,10 @@ class Search : Fragment() {
 
     var page: Int = 1
 
+    companion object{
+        var itemProductsAdd : Boolean = false
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,7 +64,7 @@ class Search : Fragment() {
         isBackStack = true
         MainActivity.mainActivity.get()!!.callBack(0)
 
-
+        itemProductsAdd = false
         binding.apply {
             topBarSearch.apply {
                 includeBackButton.layoutBack.singleClick {
@@ -136,32 +140,45 @@ class Search : Fragment() {
             rvList2.setHasFixedSize(true)
             rvList2.adapter = viewModel.searchAdapter
 
+           // viewModel.itemProductsAdd.observe(viewLifecycleOwner) {
+//                if (it) {
+                    viewModel.itemProducts?.observe(viewLifecycleOwner) {
+//                        if (it.items.size != 0) {
+////                    viewModel.itemsSearch.clear()
+////                    idPBLoading.visibility = View.VISIBLE
+                            Log.e("TAG", "itemProductsAdd: " + it.items.size)
+////
+//                        } else {
+//
+//                        }
+
+                        mainThread {
+                            if (itemProductsAdd){
+                                viewModel.itemsSearch.addAll(it.items)
+                            }
+                            idPBLoading.visibility = View.GONE
+                            viewModel.searchAdapter.submitList(viewModel.itemsSearch)
+                            viewModel.searchAdapter.notifyDataSetChanged()
+
+                            rvListSearchHistory.visibility = View.GONE
+                            idNestedSV.visibility = View.VISIBLE
+
+                            viewModel.isListVisible = true
+
+                            if (viewModel.itemsSearch.size == 0) {
+                                binding.idDataNotFound.root.visibility = View.VISIBLE
+                            } else {
+                                binding.idDataNotFound.root.visibility = View.GONE
+                            }
+                        }
 
 
-            viewModel.itemProducts?.observe(viewLifecycleOwner) {
-                Log.e("TAG", "onViewCreated: " + it.toString())
+                    }
+//                }
 
-                if (it.items.size != 0) {
-                    viewModel.itemsSearch.addAll(it.items)
-//                    idPBLoading.visibility = View.VISIBLE
-                } else {
 
-                }
-                idPBLoading.visibility = View.GONE
-                viewModel.searchAdapter.submitList(viewModel.itemsSearch)
-                viewModel.searchAdapter.notifyDataSetChanged()
 
-                rvListSearchHistory.visibility = View.GONE
-                rvList2.visibility = View.VISIBLE
-
-                viewModel.isListVisible = true
-
-                if (viewModel.itemsSearch.size == 0) {
-                    binding.idDataNotFound.root.visibility = View.VISIBLE
-                } else {
-                    binding.idDataNotFound.root.visibility = View.GONE
-                }
-            }
+//            }
 
 
             idNestedSV.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
@@ -181,8 +198,10 @@ class Search : Fragment() {
             })
 
             if (viewModel.isListVisible) {
-                rvList2.visibility = View.VISIBLE
-                rvListSearchHistory.visibility = View.GONE
+                mainThread {
+                    idNestedSV.visibility = View.VISIBLE
+                    rvListSearchHistory.visibility = View.GONE
+                }
             }
 
         }
@@ -325,7 +344,8 @@ class Search : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     fun searchFilter() {
         binding.apply {
-
+            itemProductsAdd = false
+            Log.e("TAG", "searchFilter: " + itemProductsAdd)
 //            if (viewModel.searchAdapter != null) {
 //                if (page > viewModel.searchAdapter.getItemCount()) {
 //                    idPBLoading.visibility = View.GONE
@@ -429,5 +449,20 @@ class Search : Fragment() {
 
     }
 
+
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.itemProductsAdd.value = false
+//    }
+//
+    override fun onStart() {
+        super.onStart()
+        itemProductsAdd = false
+    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        viewModel.itemProductsAdd.value = false
+//    }
 
 }

@@ -691,7 +691,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutRingSize"
                     app:strokeColor="@color/white"
-
                     />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

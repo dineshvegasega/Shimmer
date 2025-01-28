@@ -24,6 +24,7 @@ import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
 import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.networking.Repository
+import com.klifora.franchise.ui.main.search.Search.Companion.itemProductsAdd
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.getSize
@@ -205,11 +206,11 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
 
 
 
-
     private var itemProductsResult = MutableLiveData<ItemProductRoot>()
     val itemProducts : LiveData<ItemProductRoot> get() = itemProductsResult
     fun getProducts(adminToken: String, view: View, emptyMap: MutableMap<String, String>, pageNumber : Int) =
         viewModelScope.launch {
+            Log.e("TAG", "getProductsZZ")
             if(pageNumber == 0 || pageNumber == 1){
                 repository.callApi(
                     callHandler = object : CallHandler<Response<JsonElement>> {
@@ -221,8 +222,9 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                                 try {
                                     Log.e("TAG", "successAA: ${response.body().toString()}")
                                     val mMineUserEntity = Gson().fromJson(response.body(), ItemProductRoot::class.java)
+                                    itemProductsAdd = true
                                     itemProductsResult.value = mMineUserEntity
-                                } catch (e: Exception) {
+                                } catch (_: Exception) {
                                 }
                             }
                         }
@@ -287,7 +289,12 @@ class SearchVM @Inject constructor(private val repository: Repository) : ViewMod
                     }
                 )
             }
-
         }
+
+
+    override fun onCleared() {
+        super.onCleared()
+//        itemProductsAdd.value = false
+    }
 
 }

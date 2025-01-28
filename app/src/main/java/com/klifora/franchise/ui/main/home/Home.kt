@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.HomeBinding
 import com.klifora.franchise.ui.main.products.ProductsVM.Companion.isProductLoad
+//import com.klifora.franchise.ui.main.search.SearchVM.Companion.itemProductsAdd
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack

@@ -47,6 +47,7 @@ import com.klifora.franchise.ui.main.productZoom.ProductZoom
 import com.klifora.franchise.ui.main.productZoom.ProductZoom.Companion
 import com.klifora.franchise.ui.main.productZoom.ProductZoomPagerAdapter
 import com.klifora.franchise.ui.main.products.ProductsVM.Companion.isProductLoad
+import com.klifora.franchise.ui.main.search.Search.Companion.itemProductsAdd
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.hideValueOff
@@ -2166,6 +2167,7 @@ class ProductDetail : Fragment(), CallBackListener {
     override fun onDestroyView() {
         super.onDestroyView()
         isProductLoad = false
+        itemProductsAdd = false
     }
 
 }
