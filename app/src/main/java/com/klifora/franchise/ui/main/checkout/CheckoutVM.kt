@@ -31,6 +31,7 @@ import com.klifora.franchise.utils.getSize
 import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.glideImageChache
 import com.klifora.franchise.utils.mainThread
+import com.klifora.franchise.utils.sessionExpired
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -88,13 +89,20 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
                 textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.quantity)
 
                 mainThread {
-                    readData(ADMIN_TOKEN) { token ->
-                        Log.e("TAG", "tokenOO: "+token)
-                        getProductDetail(token.toString(), dataClass.sku) {
-                            Log.e("TAG", "getProductDetailOO: "+this.name)
-                            if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
-                            }
+//                    readData(ADMIN_TOKEN) { token ->
+//                        Log.e("TAG", "tokenOO: "+token)
+//                        getProductDetail(token.toString(), dataClass.sku) {
+//                            Log.e("TAG", "getProductDetailOO: "+this.name)
+//                            if (this.media_gallery_entries.size > 0){
+//                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+//                            }
+//                        }
+//                    }
+
+                    getImages(dataClass.sku) {
+                        Log.e("TAG", "getProductDetailOO: "+this.name)
+                        if (this.media_gallery_entries.size > 0){
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                         }
                     }
                 }
@@ -170,13 +178,21 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
                 textTotalPrice?.text = "Total Price: ₹ "+ getPatternFormat("1",dataClass.price * dataClass.qty)
 
                 mainThread {
+                    getImages(dataClass.sku) {
+                        Log.e("TAG", "getProductDetailOO: "+this.name)
+                        if (this.media_gallery_entries.size > 0){
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                        }
+                    }
+
                     readData(ADMIN_TOKEN) { token ->
                         Log.e("TAG", "tokenOO: "+token)
+
                         getProductDetail(token.toString(), dataClass.sku) {
                             Log.e("TAG", "getProductDetailOO: "+this.name)
-                            if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
-                            }
+//                            if (this.media_gallery_entries.size > 0){
+//                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+//                            }
 
 
                             this.custom_attributes.forEach { itemProductAttr ->
@@ -296,6 +312,58 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
             )
         }
 
+
+
+    fun getImages(skuId: String, callBack: ItemProduct.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.getImages(skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "getImages: ${response.body().toString()}")
+                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+
+//                                viewModelScope.launch {
+//                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                    userList?.forEach { user ->
+//                                        if (mMineUserEntity.id == user.product_id) {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = true
+//                                            }
+//                                        } else {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = false
+//                                            }
+//                                        }
+//                                    }
+//                                    callBack(mMineUserEntity)
+//                                }
+
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
+                        if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 
 

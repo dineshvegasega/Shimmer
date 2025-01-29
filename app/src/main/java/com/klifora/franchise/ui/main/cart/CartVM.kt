@@ -167,14 +167,22 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
 
                 mainThread {
-                    readData(ADMIN_TOKEN) { token ->
-                        Log.e("TAG", "tokenOO: "+token)
-                        getProductDetail(token.toString(), dataClass.sku) {
+//                    readData(ADMIN_TOKEN) { token ->
+//                        Log.e("TAG", "tokenOO: "+token)
+//                        getProductDetail(token.toString(), dataClass.sku) {
+//                            Log.e("TAG", "getProductDetailOO: "+this.name)
+//                            if (this.media_gallery_entries.size > 0){
+//                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+//                            }
+//                        }
+//                    }
+
+
+                    getImages(dataClass.sku) {
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
                                 (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                             }
-                        }
                     }
                 }
 
@@ -308,15 +316,23 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
                 mainThread {
                     readData(ADMIN_TOKEN) { token ->
                         Log.e("TAG", "tokenOO: "+token)
-                        getProductDetail(token.toString(), dataClass.sku) {
+                        Log.e("TAG", "dataClass.sku: "+dataClass.sku)
+//                        getProductDetail(token.toString(), dataClass.sku) {
+//                            Log.e("TAG", "getProductDetailOO: "+this.name)
+//                            if (this.media_gallery_entries.size > 0){
+//                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
+////                                Glide.with(binding.ivIcon.context)
+////                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
+////                                    .apply(myOptionsGlide)
+////                                    .into(binding.ivIcon)
+//
+//                            }
+//                        }
+
+                        getImages(dataClass.sku) {
                             Log.e("TAG", "getProductDetailOO: "+this.name)
                             if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL +this.media_gallery_entries[0].file).glideImageChache(binding.ivIcon.context, binding.ivIcon)
-//                                Glide.with(binding.ivIcon.context)
-//                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
-//                                    .apply(myOptionsGlide)
-//                                    .into(binding.ivIcon)
-
+                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
                             }
                         }
                     }
@@ -644,6 +660,58 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 //                        } else {
 //                            sessionExpired()
 //                        }
+                        if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
+
+    fun getImages(skuId: String, callBack: ItemProduct.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.getImages(skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "getImages: ${response.body().toString()}")
+                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+
+//                                viewModelScope.launch {
+//                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                    userList?.forEach { user ->
+//                                        if (mMineUserEntity.id == user.product_id) {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = true
+//                                            }
+//                                        } else {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = false
+//                                            }
+//                                        }
+//                                    }
+//                                    callBack(mMineUserEntity)
+//                                }
+
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
                         if(message.contains("customerId")){
                             sessionExpired()
                         } else {

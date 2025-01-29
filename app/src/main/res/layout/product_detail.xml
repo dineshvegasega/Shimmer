@@ -111,7 +111,7 @@
                 android:textColor="@color/white"
                 android:backgroundTint="@color/_9F0625"
                 android:textSize="@dimen/_8sdp"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:cornerRadius="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintEnd_toEndOf="parent"

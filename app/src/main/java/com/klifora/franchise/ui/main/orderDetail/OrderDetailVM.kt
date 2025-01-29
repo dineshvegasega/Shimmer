@@ -31,6 +31,7 @@ import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.mainThread
+import com.klifora.franchise.utils.sessionExpired
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -61,26 +62,36 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                 textTitle.text = "SKU : ${dataClass.sku}"
 
                 mainThread {
-                    readData(ADMIN_TOKEN) { token ->
-                        Log.e("TAG", "tokenOO: " + token)
-                        getProductDetail(token.toString(), dataClass.sku) {
-                            Log.e("TAG", "getProductDetailOO: " + this.name)
-                            if (this.media_gallery_entries.size > 0) {
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
-                                    binding.ivIcon.context,
-                                    binding.ivIcon
-                                )
-//                                Glide.with(binding.ivIcon.context)
-//                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
-//                                    .apply(myOptionsGlide)
-//                                    .into(binding.ivIcon)
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
-                                    binding.ivIcon.context,
-                                    binding.ivIconChild
-                                )
-                            }
+
+                    getImages(dataClass.sku) {
+                        Log.e("TAG", "getProductDetailOO: "+this.name)
+                        if (this.media_gallery_entries.size > 0){
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
                         }
                     }
+
+
+//                    readData(ADMIN_TOKEN) { token ->
+//                        Log.e("TAG", "tokenOO: " + token)
+//                        getProductDetail(token.toString(), dataClass.sku) {
+//                            Log.e("TAG", "getProductDetailOO: " + this.name)
+//                            if (this.media_gallery_entries.size > 0) {
+//                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
+//                                    binding.ivIcon.context,
+//                                    binding.ivIcon
+//                                )
+////                                Glide.with(binding.ivIcon.context)
+////                                    .load(IMAGE_URL +this.media_gallery_entries[0].file)
+////                                    .apply(myOptionsGlide)
+////                                    .into(binding.ivIcon)
+//                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
+//                                    binding.ivIcon.context,
+//                                    binding.ivIconChild
+//                                )
+//                            }
+//                        }
+//                    }
                 }
 
 
@@ -152,22 +163,30 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                 textTitle.text = "SKU : ${dataClass.sku}"
 
                 mainThread {
-                    readData(ADMIN_TOKEN) { token ->
-                        Log.e("TAG", "tokenOO: " + token)
-                        getProductDetail(token.toString(), dataClass.sku) {
-                            Log.e("TAG", "getProductDetailOO: " + this.name)
-                            if (this.media_gallery_entries.size > 0) {
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
-                                    binding.ivIcon.context,
-                                    binding.ivIcon
-                                )
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
-                                    binding.ivIcon.context,
-                                    binding.ivIconChild
-                                )
-                            }
+                    getImages(dataClass.sku) {
+                        Log.e("TAG", "getProductDetailOO: "+this.name)
+                        if (this.media_gallery_entries.size > 0){
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
                         }
                     }
+
+//                    readData(ADMIN_TOKEN) { token ->
+//                        Log.e("TAG", "tokenOO: " + token)
+//                        getProductDetail(token.toString(), dataClass.sku) {
+//                            Log.e("TAG", "getProductDetailOO: " + this.name)
+//                            if (this.media_gallery_entries.size > 0) {
+//                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
+//                                    binding.ivIcon.context,
+//                                    binding.ivIcon
+//                                )
+//                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(
+//                                    binding.ivIcon.context,
+//                                    binding.ivIconChild
+//                                )
+//                            }
+//                        }
+//                    }
                 }
 
                 skuChild.text = "${dataClass.sku}"
@@ -289,6 +308,59 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                 }
             )
         }
+
+
+    fun getImages(skuId: String, callBack: ItemProduct.() -> Unit) =
+        viewModelScope.launch {
+            repository.callApiWithoutLoader(
+                callHandler = object : CallHandler<Response<JsonElement>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.getImages(skuId)
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<JsonElement>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "getImages: ${response.body().toString()}")
+                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+
+//                                viewModelScope.launch {
+//                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
+//                                    userList?.forEach { user ->
+//                                        if (mMineUserEntity.id == user.product_id) {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = true
+//                                            }
+//                                        } else {
+//                                            mMineUserEntity.apply {
+//                                                isSelected = false
+//                                            }
+//                                        }
+//                                    }
+//                                    callBack(mMineUserEntity)
+//                                }
+
+
+                            } catch (e: Exception) {
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
+                        if(message.contains("customerId")){
+                            sessionExpired()
+                        } else {
+                            showSnackBar("Something went wrong!")
+                        }
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
+
 
 
     fun updateStatus(jsonObject: JSONObject, callBack: JsonElement.() -> Unit) =

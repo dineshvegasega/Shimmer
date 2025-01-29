@@ -41,6 +41,8 @@ const val PRODUCTS_ID = "V1/products/?"
 
 const val PRODUCTS_DETAIL_ID = "V1/products/"
 
+const val GET_IMAGES = "V1/vegasega-apis/getproductimage?"
+
 const val ALL_PRODUCTS = "all/V1/configurable-products/"
 
 const val PRODUCT_OPTIONS = "V1/vegasega-apis/productdetails?"
@@ -72,6 +74,9 @@ const val POST_CUSTOM_DETAILS = "V1/vegasega-apis/setOrdercustom?"
 const val ORDER_HISTORY_LIST = "V1/vegasega-apis/getorderlist?"
 
 const val UPDATED_PRICE = "V1/vegasega-apis/updatedprice?"
+
+const val UPDATED_CHILD_PRICE = "V1/vegasega-apis/updatedpricechild?"
+
 
 const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
 

@@ -213,6 +213,7 @@ class ProductDetailVM @Inject constructor(private val repository: Repository) : 
             )
         }
 
+
     fun updatePrice(_id: String, callBack: JsonElement.() -> Unit) =
         viewModelScope.launch {
             repository.callApi(

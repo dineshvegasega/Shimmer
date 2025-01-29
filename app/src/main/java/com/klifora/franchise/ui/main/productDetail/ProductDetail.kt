@@ -238,10 +238,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 )
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
                                             }
                                         }
                                     }
@@ -280,10 +290,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -298,10 +318,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -340,10 +370,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -359,10 +399,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -401,10 +451,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -419,10 +479,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -462,12 +532,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -481,12 +560,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -526,10 +614,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -544,10 +642,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -590,10 +698,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -608,10 +726,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -650,10 +778,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -668,12 +806,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -711,12 +858,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -730,12 +886,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -772,12 +937,21 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
-
                                         }
                                     }
                                 }
@@ -791,10 +965,20 @@ class ProductDetail : Fragment(), CallBackListener {
                                                 isSizeCall1 = true
                                                 currentSku = itemProductOptions.sku
                                                 isAvailable = true
-                                                callApiDetailsConfigurable(
-                                                    itemProductOptions.sku,
-                                                    itemProduct
-                                                )
+//                                                callApiDetailsConfigurable(
+//                                                    itemProductOptions.sku,
+//                                                    itemProduct
+//                                                )
+                                                arrayItemProduct.forEach {
+                                                    if (currentSku == it.sku){
+                                                        viewModel.updatePrice(it.entity_id){
+                                                            callApiDetailsConfigurable(
+                                                                currentSku,
+                                                                itemProduct
+                                                            )
+                                                        }
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -1197,11 +1381,24 @@ class ProductDetail : Fragment(), CallBackListener {
 //                                }
 
 
-                                Log.e("TAG", "arrayItemProductcurrentSkuAfter " + currentSku)
-                                callApiDetailsConfigurable(
-                                    currentSku,
-                                    itemProduct
-                                )
+                                arrayItemProduct.forEach {
+                                    if (currentSku == it.sku){
+                                        viewModel.updatePrice(it.entity_id){
+                                            callApiDetailsConfigurable(
+                                                currentSku,
+                                                itemProduct
+                                            )
+                                        }
+                                    }
+                                }
+
+
+
+//                                Log.e("TAG", "arrayItemProductcurrentSkuAfter " + currentSku)
+//                                callApiDetailsConfigurable(
+//                                    currentSku,
+//                                    itemProduct
+//                                )
                             } else {
                                 viewModel.hide()
                             }
@@ -1298,12 +1495,12 @@ class ProductDetail : Fragment(), CallBackListener {
 
 
 
-                        var metal_weight: String = "0.0 gram"
+//                        var metal_weight: String = "0.0 gram"
 
                         itemProduct.custom_attributes.forEach { itemProductAttr ->
-                            if (itemProductAttr.attribute_code == "metal_weight") {
-                                metal_weight = "" + itemProductAttr.value + " gram"
-                            }
+//                            if (itemProductAttr.attribute_code == "metal_weight") {
+//                                metal_weight = "" + itemProductAttr.value + " gram"
+//                            }
 
 
                             if (itemProductAttr.attribute_code == "totel_diamond_rate") {
@@ -1312,6 +1509,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                     itemProductAttr.value.toString().toDouble()
                                 )
                             }
+
+//                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+//                                textDiamondPrice.text = "₹ " + getPatternFormat(
+//                                    "1",
+//                                    itemProductAttr.value.toString().toDouble()
+//                                )
+//                            }
                         }
 
 
@@ -1327,13 +1531,13 @@ class ProductDetail : Fragment(), CallBackListener {
                                 layoutGuide.visibility = View.VISIBLE
                             }
 
-                            if (itemProductAttr.attribute_code == "metal_weight") {
-                                metal_weight = "" + itemProductAttr.value + " gram"
-                            }
+//                            if (itemProductAttr.attribute_code == "metal_weight") {
+//                                metal_weight = "" + itemProductAttr.value + " gram"
+//                            }
 
-                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹ " + itemProductAttr.value
-                            }
+//                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+//                                textDiamondPrice.text = "₹ " + itemProductAttr.value
+//                            }
 
                             if (itemProductAttr.attribute_code == "metal_purity") {
                                 if (itemProductAttr.value == "26") {
@@ -1487,12 +1691,12 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
 
-                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹ " + getPatternFormat(
-                                    "1",
-                                    itemProductAttr.value.toString().toDouble()
-                                )
-                            }
+//                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+//                                textDiamondPrice.text = "₹ " + getPatternFormat(
+//                                    "1",
+//                                    itemProductAttr.value.toString().toDouble()
+//                                )
+//                            }
 
                             if (itemProductAttr.attribute_code == "totel_gold_rate") {
                                 textGoldPrice.text = "₹ " + getPatternFormat(

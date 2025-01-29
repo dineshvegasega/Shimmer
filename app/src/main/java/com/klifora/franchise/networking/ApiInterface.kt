@@ -115,6 +115,11 @@ interface ApiInterface {
         @Path("ids") ids: String,
     ): Response<JsonElement>
 
+    @GET(GET_IMAGES)
+    suspend fun getImages(
+        @Query("productId") _id: String
+    ): Response<JsonElement>
+
 
     @GET(PRODUCT_OPTIONS)
     suspend fun productsOptions(
@@ -242,7 +247,7 @@ interface ApiInterface {
     ): Response<String>
 
 
-    @GET(UPDATED_PRICE)
+    @GET(UPDATED_CHILD_PRICE)
     suspend fun updatedPrice(
         @Query("sku") sku: String,
     ): Response<JsonElement>
