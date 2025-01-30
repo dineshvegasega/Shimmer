@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:background="@drawable/bg_all_round_orders"
         android:paddingHorizontal="@dimen/_40sdp"
-        android:paddingVertical="@dimen/_30sdp"
+        android:paddingVertical="@dimen/_28sdp"
         android:gravity="center_horizontal"
         tools:ignore="MissingConstraints">
 

@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:background="@drawable/bg_all_round_orders"
         android:paddingHorizontal="@dimen/_40sdp"
-        android:paddingVertical="@dimen/_30sdp"
+        android:paddingVertical="@dimen/_28sdp"
         android:gravity="center_horizontal"
         tools:ignore="MissingConstraints">
 
@@ -34,7 +34,7 @@
             android:textColor="@color/_2A3740"
             app:layout_constraintTop_toBottomOf="@+id/top_bar_back"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_14sdp"
             app:fontFamily="@font/nunitosans_semibold"
             tools:ignore="HardcodedText"
             android:layout_marginTop="@dimen/_5sdp"

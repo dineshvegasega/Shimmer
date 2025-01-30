@@ -1166,7 +1166,6 @@ class ProductDetail : Fragment(), CallBackListener {
                         }
                     }
                 }
-
             }
 
 
@@ -1503,12 +1502,12 @@ class ProductDetail : Fragment(), CallBackListener {
 //                            }
 
 
-                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-                                textDiamondPrice.text = "₹ " + getPatternFormat(
-                                    "1",
-                                    itemProductAttr.value.toString().toDouble()
-                                )
-                            }
+//                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+//                                textDiamondPrice.text = "₹ " + getPatternFormat(
+//                                    "1",
+//                                    itemProductAttr.value.toString().toDouble()
+//                                )
+//                            }
 
 //                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
 //                                textDiamondPrice.text = "₹ " + getPatternFormat(
@@ -1691,12 +1690,12 @@ class ProductDetail : Fragment(), CallBackListener {
                             }
 
 
-//                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
-//                                textDiamondPrice.text = "₹ " + getPatternFormat(
-//                                    "1",
-//                                    itemProductAttr.value.toString().toDouble()
-//                                )
-//                            }
+                            if (itemProductAttr.attribute_code == "totel_diamond_rate") {
+                                textDiamondPrice.text = "₹ " + getPatternFormat(
+                                    "1",
+                                    itemProductAttr.value.toString().toDouble()
+                                )
+                            }
 
                             if (itemProductAttr.attribute_code == "totel_gold_rate") {
                                 textGoldPrice.text = "₹ " + getPatternFormat(

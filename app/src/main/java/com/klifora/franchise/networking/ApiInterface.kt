@@ -12,6 +12,7 @@ import com.klifora.franchise.models.ItemWebsite
 import com.klifora.franchise.models.cart.ItemCart
 import com.klifora.franchise.models.cart.ItemCartModel
 import com.klifora.franchise.models.guestOrderList.ItemGuestOrderList
+import com.klifora.franchise.models.images.ItemImages
 import com.klifora.franchise.models.myOrdersDetail.ItemOrderDetail
 import com.klifora.franchise.models.myOrdersList.ItemOrders
 import com.klifora.franchise.models.options.ItemOptions
@@ -118,7 +119,7 @@ interface ApiInterface {
     @GET(GET_IMAGES)
     suspend fun getImages(
         @Query("productId") _id: String
-    ): Response<JsonElement>
+    ): Response<ItemImages>
 
 
     @GET(PRODUCT_OPTIONS)

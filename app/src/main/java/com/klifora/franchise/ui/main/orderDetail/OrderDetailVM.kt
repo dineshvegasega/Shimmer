@@ -19,6 +19,7 @@ import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
+import com.klifora.franchise.models.images.ItemImages
 import com.klifora.franchise.models.myOrdersDetail.ItemOrderDetail
 import com.klifora.franchise.models.myOrdersDetail.ItemX
 import com.klifora.franchise.models.products.ItemProduct
@@ -64,10 +65,20 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
                 mainThread {
 
                     getImages(dataClass.sku) {
-                        Log.e("TAG", "getProductDetailOO: "+this.name)
-                        if (this.media_gallery_entries.size > 0){
-                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
-                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
+                        Log.e("TAG", "getProductDetailOO: "+this.toString())
+//                        if (this.media_gallery_entries.size > 0){
+//                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+//                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
+//                        }
+
+                        val images = this
+                        if (images.size > 0){
+                            val images2 = images[0]
+                            if (images2.size > 0){
+                                val images3 = images2[0]
+                                images3.glideImage(binding.ivIcon.context, binding.ivIcon)
+                                images3.glideImage(binding.ivIconChild.context, binding.ivIconChild)
+                            }
                         }
                     }
 
@@ -164,10 +175,20 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 
                 mainThread {
                     getImages(dataClass.sku) {
-                        Log.e("TAG", "getProductDetailOO: "+this.name)
-                        if (this.media_gallery_entries.size > 0){
-                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
-                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
+                        Log.e("TAG", "getProductDetailOO: "+this.toString())
+//                        if (this.media_gallery_entries.size > 0){
+//                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+//                            (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIconChild.context, binding.ivIconChild)
+//                        }
+
+                        val images = this
+                        if (images.size > 0){
+                            val images2 = images[0]
+                            if (images2.size > 0){
+                                val images3 = images2[0]
+                                images3.glideImage(binding.ivIcon.context, binding.ivIcon)
+                                images3.glideImage(binding.ivIconChild.context, binding.ivIconChild)
+                            }
                         }
                     }
 
@@ -310,18 +331,18 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
         }
 
 
-    fun getImages(skuId: String, callBack: ItemProduct.() -> Unit) =
+    fun getImages(skuId: String, callBack: ItemImages.() -> Unit) =
         viewModelScope.launch {
             repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
+                callHandler = object : CallHandler<Response<ItemImages>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.getImages(skuId)
                     @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
+                    override fun success(response: Response<ItemImages>) {
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "getImages: ${response.body().toString()}")
-                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+//                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
 
 //                                viewModelScope.launch {
 //                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
@@ -339,7 +360,7 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 //                                    callBack(mMineUserEntity)
 //                                }
 
-
+                                response.body()?.let { callBack(it) }
                             } catch (e: Exception) {
                             }
                         }
@@ -347,11 +368,11 @@ class OrderDetailVM @Inject constructor(private val repository: Repository) : Vi
 
                     override fun error(message: String) {
                         Log.e("TAG", "successEE: ${message}")
-                        if(message.contains("customerId")){
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
-                        }
+//                        if(message.contains("customerId")){
+//                            sessionExpired()
+//                        } else {
+//                            showSnackBar("Something went wrong!")
+//                        }
                     }
 
                     override fun loading() {

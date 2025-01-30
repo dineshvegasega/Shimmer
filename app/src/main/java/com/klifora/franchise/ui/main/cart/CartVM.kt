@@ -27,6 +27,7 @@ import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.cart.ItemCart
 import com.klifora.franchise.models.cart.ItemCartModel
+import com.klifora.franchise.models.images.ItemImages
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
@@ -179,9 +180,14 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
 
                     getImages(dataClass.sku) {
-                            Log.e("TAG", "getProductDetailOO: "+this.name)
-                            if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                            Log.e("TAG", "getProductDetailOO: "+this.toString())
+                            val images = this
+                            if (images.size > 0){
+                                val images2 = images[0]
+                                if (images2.size > 0){
+                                    val images3 = images2[0]
+                                    images3.glideImage(binding.ivIcon.context, binding.ivIcon)
+                                }
                             }
                     }
                 }
@@ -330,9 +336,14 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 //                        }
 
                         getImages(dataClass.sku) {
-                            Log.e("TAG", "getProductDetailOO: "+this.name)
-                            if (this.media_gallery_entries.size > 0){
-                                (IMAGE_URL + this.media_gallery_entries[0].file).glideImage(binding.ivIcon.context, binding.ivIcon)
+                            Log.e("TAG", "getProductDetailOO: "+this.toString())
+                            val images = this
+                            if (images.size > 0){
+                                val images2 = images[0]
+                                if (images2.size > 0){
+                                    val images3 = images2[0]
+                                    images3.glideImage(binding.ivIcon.context, binding.ivIcon)
+                                }
                             }
                         }
                     }
@@ -675,18 +686,18 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
         }
 
 
-    fun getImages(skuId: String, callBack: ItemProduct.() -> Unit) =
+    fun getImages(skuId: String, callBack: ItemImages.() -> Unit) =
         viewModelScope.launch {
             repository.callApiWithoutLoader(
-                callHandler = object : CallHandler<Response<JsonElement>> {
+                callHandler = object : CallHandler<Response<ItemImages>> {
                     override suspend fun sendRequest(apiInterface: ApiInterface) =
                         apiInterface.getImages(skuId)
                     @SuppressLint("SuspiciousIndentation")
-                    override fun success(response: Response<JsonElement>) {
+                    override fun success(response: Response<ItemImages>) {
                         if (response.isSuccessful) {
                             try {
                                 Log.e("TAG", "getImages: ${response.body().toString()}")
-                                val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
+                               // val mMineUserEntity = Gson().fromJson(response.body(), ItemProduct::class.java)
 
 //                                viewModelScope.launch {
 //                                    val userList: List<CartModel>? = db?.cartDao()?.getAll()
@@ -703,7 +714,7 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 //                                    }
 //                                    callBack(mMineUserEntity)
 //                                }
-
+                                response.body()?.let { callBack(it) }
 
                             } catch (e: Exception) {
                             }
@@ -712,11 +723,11 @@ class CartVM @Inject constructor(private val repository: Repository) : ViewModel
 
                     override fun error(message: String) {
                         Log.e("TAG", "successEE: ${message}")
-                        if(message.contains("customerId")){
-                            sessionExpired()
-                        } else {
-                            showSnackBar("Something went wrong!")
-                        }
+//                        if(message.contains("customerId")){
+//                            sessionExpired()
+//                        } else {
+//                            showSnackBar("Something went wrong!")
+//                        }
                     }
 
                     override fun loading() {
