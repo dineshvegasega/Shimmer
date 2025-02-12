@@ -109,7 +109,6 @@ class Checkout : Fragment() {
                     textCompanyNameTxtS.text = "Franchise Name : "+data.name
                     textMobileTxtS.text = "Mobile No : "+data.mobile_number
                     textAdrressTxtS.text = "Address : "+data.d_address +", "+ data.d_city+", "+ data.d_state+", "+ data.d_pincode
-
                 }
             }
 

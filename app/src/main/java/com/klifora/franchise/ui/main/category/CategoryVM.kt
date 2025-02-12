@@ -168,9 +168,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                    "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -258,9 +267,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -346,9 +364,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -434,9 +461,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -520,9 +556,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -608,9 +653,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -694,9 +748,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -780,9 +843,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -867,9 +939,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }
@@ -954,9 +1035,18 @@ class CategoryVM @Inject constructor(private val repository: Repository) : ViewM
         ) {
             binding.apply {
                 if (dataClass.name.contains(" ")){
-                    val txt = dataClass.name.split(" ")[0]+
-                            "\n"+dataClass.name.split(" ")[1]
-                    textName.text = txt
+                    val temp = dataClass.name.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+                        .toTypedArray()
+                    var test2 = ""
+                    for (i in temp.indices) {
+                        if (i == 0){
+                            test2 += temp[i]+"\n"
+                            print(temp[i])
+                        } else {
+                            test2 += temp[i]+" "
+                        }
+                    }
+                    textName.text = test2
                 } else {
                     textName.text = dataClass.name
                 }

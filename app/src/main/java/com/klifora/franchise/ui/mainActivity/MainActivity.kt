@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.pm.ActivityInfo
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
@@ -21,7 +19,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.room.Room
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.MainActivityBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
@@ -41,15 +38,8 @@ import com.klifora.franchise.ui.main.profile.Profile
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.klifora.franchise.utils.Utility
-import com.klifora.franchise.utils.formatTo
-import com.klifora.franchise.utils.getDate
-import com.klifora.franchise.utils.getDateToLongTime
 import com.klifora.franchise.utils.getDensityName
-import com.klifora.franchise.utils.getToken
 import com.klifora.franchise.utils.mainThread
-import com.klifora.franchise.utils.singleClick
-import com.klifora.franchise.utils.toDate
 import com.razorpay.Checkout
 import com.razorpay.ExternalWalletListener
 import com.razorpay.PaymentData
@@ -57,8 +47,6 @@ import com.razorpay.PaymentResultWithDataListener
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
 import java.lang.ref.WeakReference
-import java.text.SimpleDateFormat
-import java.util.Date
 
 
 @AndroidEntryPoint
@@ -151,51 +139,51 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
         typefacenunitosans_semibold = resources.getFont(R.font.nunitosans_semibold)
         Checkout.preload(applicationContext)
 
-        var dateFormat = SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
-        var ts = (dateFormat.parse("2025-01-24 10:48:19").time );
-
-                    Log.e("TAG", "ts "+ts)
-       var currentDate = Date (ts)
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
-        var date = dateFormat.format(currentDate);
-        Log.e("TAG", "ts22 "+date)
-//        getToken() {
-//            Log.e("TAG", "thisgetToken "+this)
-//        }
-
-
-//        var aa = getDateToLongTime("2025-01-24")
-//        Log.e("TAG", "aaaa "+aa)
+//        var dateFormat = SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
+//        var ts = (dateFormat.parse("2025-01-24 10:48:19").time );
 //
-//        var bb = "2025-01-24 10:48:19".toDate("YYYY-MM-dd HH:mm:ss")
-//        Log.e("TAG", "bbbb "+bb)
+//                    Log.e("TAG", "ts "+ts)
+//       var currentDate = Date (ts)
+////        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss")
+//        var date = dateFormat.format(currentDate);
+//        Log.e("TAG", "ts22 "+date)
+////        getToken() {
+////            Log.e("TAG", "thisgetToken "+this)
+////        }
 //
-//        var cc = Date().formatTo("YYYY-MM-dd HH:mm:ss")
-//        Log.e("TAG", "cccc "+cc)
-
-//        var dddd = "2025-01-24 10:48:19".getDate()
 //
-//        Log.e("TAG", "dddd "+dddd)
-        val mentors = arrayOf(
-            Mentor(1, "Amit Shekhar"),
-            Mentor(2, "Anand Gaurav"),
-            Mentor(1, "Amit Kumar"),
-            Mentor(3, "Lionel Messi"))
-
-        data class Item(val id: String, val text: String)
-
-        fun distinct(data : List<Item>) = data.reversed().distinctBy{it.id}
-
-
-        val data = listOf(
-            Item("32701", "First"),
-            Item("32702", "Second"),
-            Item("32702", "Second2"),
-            Item("32701", "First True"),
-            Item("32701", "First True 2")
-        ).distinctBy { it.id }
-        println(distinct(data))
-        println(data)
+////        var aa = getDateToLongTime("2025-01-24")
+////        Log.e("TAG", "aaaa "+aa)
+////
+////        var bb = "2025-01-24 10:48:19".toDate("YYYY-MM-dd HH:mm:ss")
+////        Log.e("TAG", "bbbb "+bb)
+////
+////        var cc = Date().formatTo("YYYY-MM-dd HH:mm:ss")
+////        Log.e("TAG", "cccc "+cc)
+//
+////        var dddd = "2025-01-24 10:48:19".getDate()
+////
+////        Log.e("TAG", "dddd "+dddd)
+//        val mentors = arrayOf(
+//            Mentor(1, "Amit Shekhar"),
+//            Mentor(2, "Anand Gaurav"),
+//            Mentor(1, "Amit Kumar"),
+//            Mentor(3, "Lionel Messi"))
+//
+//        data class Item(val id: String, val text: String)
+//
+//        fun distinct(data : List<Item>) = data.reversed().distinctBy{it.id}
+//
+//
+//        val data = listOf(
+//            Item("32701", "First"),
+//            Item("32702", "Second"),
+//            Item("32702", "Second2"),
+//            Item("32701", "First True"),
+//            Item("32701", "First True 2")
+//        ).distinctBy { it.id }
+//        println(distinct(data))
+//        println(data)
 
 //        val Data = ArrayList<List<String>>()
 //
@@ -236,10 +224,33 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
 
 //        val distinct = mentors.distinctBy()
 //        println(distinct)
-        Log.e("TAG", "thisgetTokendd "+mentors)
+//        Log.e("TAG", "thisgetTokendd "+mentors)
 
 //        val dd = FirebaseOptions.fromResource(context.get()!!)?.getApiKey()
 //        Log.e("TAG", "thisgetTokendd "+dd)
+
+//        val test = "Hey Hi"
+//        val temp = test.split(" ".toRegex()).dropLastWhile { it.isEmpty() }
+//            .toTypedArray() //this will split whole string into array using white space.
+//        var test2 = ""
+////        while (temp.size > 0) {
+//////            System.out.println(content.substring(0, 4))
+//////            content = content.substring(4)
+////            test2 =+ ""
+////        }
+//
+//
+//        for (i in temp.indices) {
+//            if (i == 0){
+//                test2 += temp[i]+"\n"
+//                print(temp[i])
+//            } else {
+//                test2 += temp[i]+" "
+//            }
+//        }
+//
+//        Log.e("TAG", "test2 "+test2)
+
     }
 
     data class Mentor(val id: Int, val name: String)

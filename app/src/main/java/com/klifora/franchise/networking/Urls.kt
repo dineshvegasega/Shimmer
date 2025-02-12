@@ -77,7 +77,6 @@ const val UPDATED_PRICE = "V1/vegasega-apis/updatedprice?"
 
 const val UPDATED_CHILD_PRICE = "V1/vegasega-apis/updatedpricechild?"
 
-
 const val ORDER_HISTORY_LIST_DETAIL = "V1/orders"
 
 const val ORDER_HISTORY_DETAIL = "V1/vegasega-apis/getorderbyid?"

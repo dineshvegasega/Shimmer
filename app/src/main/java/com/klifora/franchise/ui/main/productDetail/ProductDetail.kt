@@ -1744,6 +1744,14 @@ class ProductDetail : Fragment(), CallBackListener {
                                     "utf-8",
                                     null
                                 )
+
+//                                binding.webView.loadDataWithBaseURL(
+//                                    null,
+//                                    "" + "<\\/style>\\r\\n<table dir=\\\"ltr\\\" border=\\\"1\\\" cellspacing=\\\"0\\\" cellpadding=\\\"0\\\" data-sheets-root=\\\"1\\\" data-sheets-baot=\\\"1\\\"><colgroup><col width=\\\"100\\\"><col width=\\\"100\\\"><col width=\\\"100\\\"><col width=\\\"100\\\"><col width=\\\"100\\\"><\\/colgroup>\\r\\n<tbody>\\r\\n<tr>\\r\\n<td>Color<\\/td>\\r\\n<td>Clarity<\\/td>\\r\\n<td>Shaped<\\/td>\\r\\n<td>Pieces<\\/td>\\r\\n<td><font color =\"red\">  Weight</font><\\/td>\\r\\n<\\/tr>\\r\\n<tr>\\r\\n<td>EF<\\/td>\\r\\n<td>VVS\\/VS<\\/td>\\r\\n<td>Rounded<\\/td>\\r\\n<td>34<\\/td>\\r\\n<td>0.22<\\/td>\\r\\n<\\/tr>\\r\\n<\\/tbody>\\r\\n<\\/table>",
+//                                    "text/html",
+//                                    "utf-8",
+//                                    null
+//                                )
                                 layoutDiamondAndGemstones.visibility = View.VISIBLE
                             }
 

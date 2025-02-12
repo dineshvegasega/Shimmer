@@ -86,7 +86,10 @@ class MainActivityVM @Inject constructor(private val repository: Repository) : V
                     Items(id = 16, parent_id = 19, name = "Engagement Rings"),
                     Items(id = 17, parent_id = 19, name = "Bands"),
                     Items(id = 104, parent_id = 19, name = "Eternity Band"),
-                    Items(id = 105, parent_id = 19, name = "Wedding Band"))
+                    Items(id = 105, parent_id = 19, name = "Wedding Band"),
+                    Items(id = 437, parent_id = 19, name = "Valentine Love Symbol"),
+                    Items(id = 464, parent_id = 19, name = "Alphabets"),
+                    )
             ))
             mainCategory.add(Items(id = 4, parent_id = 18, name = "Earrings", image = R.drawable.ear_ring,
                 subCategory = arrayListOf(
