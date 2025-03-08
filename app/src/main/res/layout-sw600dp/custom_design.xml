@@ -60,10 +60,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textTitleBanner"
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_70sdp"
                     android:layout_height="wrap_content"
-                    android:text="Banner\nTitle\nhere"
+                    android:text="@string/a_unique_design_as_per_you"
                     android:textColor="@color/black"
+                    android:drawableEnd="@drawable/heart_icon"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"

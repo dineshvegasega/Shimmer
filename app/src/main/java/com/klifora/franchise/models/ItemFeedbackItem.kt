@@ -2,6 +2,7 @@ package com.klifora.franchise.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class ItemFeedbackItem(
@@ -18,5 +19,24 @@ data class ItemFeedbackItem(
     override fun hashCode(): Int {
         val result = review_id.hashCode()
         return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ItemFeedbackItem
+
+        if (created_at != other.created_at) return false
+        if (detail != other.detail) return false
+        if (entity_pk_value != other.entity_pk_value) return false
+        if (nickname != other.nickname) return false
+        if (percent != other.percent) return false
+        if (rating_id != other.rating_id) return false
+        if (review_id != other.review_id) return false
+        if (title != other.title) return false
+        if (value != other.value) return false
+
+        return true
     }
 }

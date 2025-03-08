@@ -123,7 +123,7 @@ class MainActivity : AppCompatActivity() , PaymentResultWithDataListener,
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
 
-        fragmentInFrame = navHostFragment!!.getChildFragmentManager().getFragments().get(0)
+        fragmentInFrame = navHostFragment!!.childFragmentManager.fragments[0]
         context = WeakReference(this)
         activity = WeakReference(this)
         mainActivity = WeakReference(this)

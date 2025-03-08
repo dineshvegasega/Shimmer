@@ -9,11 +9,11 @@ dagger = "2.55"
 googleMaterial = "1.12.0"
 appcompat = "1.7.0"
 googleServices = "4.4.2"
-firebaseCrashlytics = "3.0.2"
-navigation = "2.8.6"
-databinding = "8.8.0"
+firebaseCrashlytics = "3.0.3"
+navigation = "2.8.8"
+databinding = "8.9.0"
 coroutinesAndroid = "1.10.1"
-intuitSdp = "1.1.0"
+intuitSdp = "1.1.1"
 swiperefreshlayoutVer = "1.1.0"
 picassoVer = "2.71828"
 retrofit2 = "2.11.0"
@@ -21,13 +21,13 @@ okhttp3 = "4.12.0"
 gson = "2.10.1"
 preference = "1.2.1"
 coil = "2.7.0"
-datastorepreferences = "1.1.2"
+datastorepreferences = "1.1.3"
 compressor = "3.0.1"
 lottie = "6.6.2"
 flexbox = "3.0.0"
 chucker = "4.0.0"
 stfalconImageViewer = "v1.0.1"
-paging = "3.3.5"
+paging = "3.3.6"
 jsoup = "1.17.2"
 room = "2.6.1"
 workRuntime = "2.10.0"
@@ -41,8 +41,8 @@ timelineview = "1.1.5"
 razorpay = "1.6.41"
 playservicesauth = "21.3.0"
 playserviceslocation = "21.3.0"
-playservicesmaps = "19.0.0"
-firebaseBom = "33.8.0"
+playservicesmaps = "19.1.0"
+firebaseBom = "33.10.0"
 glide = "4.16.0"
 #glideParent = "glide-parent"
 #glideName = "glide"
@@ -100,9 +100,13 @@ paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = 
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+#noinspection SimilarGradleDependency
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+#noinspection SimilarGradleDependency
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+#noinspection SimilarGradleDependency
 room-compiler-ksp = { module = "androidx.room:room-compiler", version.ref = "room" }
+#noinspection SimilarGradleDependency
 room-ktx-ksp = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntime" }

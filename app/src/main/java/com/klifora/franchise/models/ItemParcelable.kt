@@ -1,13 +1,28 @@
 package com.klifora.franchise.models
-
 import android.os.Parcelable
 import com.klifora.franchise.models.products.MediaGalleryEntry
-import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
-//import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class ItemParcelable(
     val item: @RawValue ArrayList<MediaGalleryEntry> = ArrayList(),
     var position: Int = -1
-): Parcelable
+): Parcelable {
+    override fun hashCode(): Int {
+        val result = position.hashCode()
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ItemParcelable
+
+        if (item != other.item) return false
+        if (position != other.position) return false
+
+        return true
+    }
+}
