@@ -12,7 +12,6 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowIsTranslucent">false</item>
 <!--        <item name="android:windowIsFloating">false</item>-->
-
         <item name="android:windowSplashScreenAnimatedIcon" tools:ignore="NewApi">@android:color/transparent</item>
         <item name="android:windowSplashScreenAnimationDuration" tools:ignore="NewApi">0</item>
     </style>

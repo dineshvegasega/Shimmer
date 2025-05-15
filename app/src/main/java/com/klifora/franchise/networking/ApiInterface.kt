@@ -213,6 +213,14 @@ interface ApiInterface {
     ): Response<JsonElement>
 
 
+//    @GET(ORDER_HISTORY_LIST_DETAIL)
+//    suspend fun getOrderDetail(
+//        @Path("id") id: String,
+//    ): Response<JsonElement>
+//
+//    https://klifora.com/rest/V1/orders/85
+
+
     @POST("{id}"+UPDATE_SHIPPING)
     suspend fun updateShipping(
         @Header("Authorization") authHeader : String,

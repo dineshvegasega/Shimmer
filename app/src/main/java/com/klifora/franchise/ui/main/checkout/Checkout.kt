@@ -14,6 +14,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.CheckoutBinding
+import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
 import com.klifora.franchise.datastore.DataStoreKeys.MOBILE_NUMBER
@@ -327,37 +328,120 @@ class Checkout : Fragment() {
 
 
 
-                                            readData(MOBILE_NUMBER) { number ->
-                                                val co = Checkout()
-                                                co.setKeyID(RAZORPAY_KEY)
-                                                try {
-                                                    Log.e("TAG", "totalXXXCC: "+gstTotalPrice)
-                                                    val total : Double = gstTotalPrice * 100
-                                                    Log.e("TAG", "totalXXXDD: "+total)
+//                                            readData(MOBILE_NUMBER) { number ->
+//                                                val co = Checkout()
+//                                                co.setKeyID(RAZORPAY_KEY)
+//                                                try {
+//                                                    Log.e("TAG", "totalXXXCC: "+gstTotalPrice)
+//                                                    val total : Double = gstTotalPrice * 100
+//                                                    Log.e("TAG", "totalXXXDD: "+total)
+//
+////                                                            val sss = 130361.0 * 100
+////                                                            Log.e("TAG", "totalXXXEE: "+sss)
+//                                                    val totalX = total.toInt()
+//
+//                                                    val options = JSONObject()
+//                                                    options.put("name",editTextN.text.toString())
+////                                                            options.put("name","Razorpay Corp")
+//                                                    options.put("description", name)
+//                                                    options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
+//                                                    options.put("currency","INR")
+//                                                    options.put("amount", ""+totalX)
+//                                                    options.put("send_sms_hash",true)
+//                                                    val prefill = JSONObject()
+//                                                    prefill.put("email", "test@razorpay.com")
+//                                                    prefill.put("contact", "9988397522")
+////                                                            prefill.put("email", editEmail.text.toString())
+////                                                            prefill.put("contact", editMobileNo.text.toString())
+//                                                    options.put("prefill", prefill)
+//                                                    co.open(requireActivity(), options)
+//                                                }catch (e: Exception){
+////                                                        onPaymentError 0 ::: undefined ::: com.razorpay.PaymentData@dc1cb00
+//                                                    Toast.makeText(requireContext(),"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
+//                                                    e.printStackTrace()
+//                                                }
+//                                            }
 
-//                                                            val sss = 130361.0 * 100
-//                                                            Log.e("TAG", "totalXXXEE: "+sss)
-                                                    val totalX = total.toInt()
 
-                                                    val options = JSONObject()
-                                                    options.put("name",editTextN.text.toString())
-//                                                            options.put("name","Razorpay Corp")
-                                                    options.put("description", name)
-                                                    options.put("image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png")
-                                                    options.put("currency","INR")
-                                                    options.put("amount", ""+totalX)
-                                                    options.put("send_sms_hash",true)
-                                                    val prefill = JSONObject()
-                                                    prefill.put("email", "test@razorpay.com")
-                                                    prefill.put("contact", "9988397522")
-//                                                            prefill.put("email", editEmail.text.toString())
-//                                                            prefill.put("contact", editMobileNo.text.toString())
-                                                    options.put("prefill", prefill)
-                                                    co.open(requireActivity(), options)
-                                                }catch (e: Exception){
-//                                                        onPaymentError 0 ::: undefined ::: com.razorpay.PaymentData@dc1cb00
-                                                    Toast.makeText(requireContext(),"Error in payment: "+ e.message, Toast.LENGTH_LONG).show()
-                                                    e.printStackTrace()
+
+
+                                            readData(LOGIN_DATA) { loginUser ->
+                                                if (loginUser != null) {
+                                                    val data = Gson().fromJson(
+                                                        loginUser,
+                                                        ItemUserItem::class.java
+                                                    )
+
+                                                    val billing_address = JSONObject().apply {
+                                                        put("region", data.register_state)
+                                                        put("region_id", data.register_resignid)
+                                                        put("region_code", data.register_resigncode)
+                                                        put("country_id", "IN")
+                                                        put("street", JSONArray().put(data.register_address))
+                                                        put("postcode", data.register_pincode)
+                                                        put("city", data.register_city)
+                                                        put("firstname", data.contact_person)
+                                                        put("lastname", data.contact_person)
+                                                        put("email", "")
+                                                        put("telephone", data.mobile_number)
+                                                    }
+
+                                                    val addressInformation = JSONObject().apply {
+                                                        put("billing_address", billing_address)
+                                                        put("paymentMethod", JSONObject().apply {
+                                                            put("method", "checkmo")
+                                                        })
+                                                    }
+
+                                                    Log.e("TAG", "jsonObjectMethod " + addressInformation)
+
+//                                                    val payJSON = JSONObject(p1?.data.toString())
+//                                                    val payName = payJSON.getString("razorpay_payment_id")
+//                                                    Log.e("TAG", "payName " + payName)
+
+
+                                                    readData(CUSTOMER_TOKEN) { token ->
+                                                        viewModel.createOrder(token!!, addressInformation) {
+                                                            Log.e("TAG", "createOrderonCallBack: ${this.toString()}")
+                                                            val orderID = this.toString().replace("\"", "")
+                                                            try {
+                                                                cartItemCount = 0
+                                                                cartItemLiveData.value = false
+
+                                                                val customerData = JSONObject().apply {
+                                                                    put("cartId", ""+orderID)
+                                                                    put("checkout_buyer_name", ""+binding.editTextN.text.toString())
+                                                                    put("checkout_buyer_email", ""+binding.editEmail.text.toString())
+                                                                    put("checkout_purchase_order_no", ""+binding.editMobileNo.text.toString())
+                                                                    put("checkout_goods_mark", "")
+                                                                }
+
+                                                                viewModel.postCustomDetails(token, customerData) {
+                                                                    Log.e("TAG", "postCustomDetailsonCallBack22: ${this.toString()}")
+//                                                    findNavController().navigate(R.id.action_checkout_to_payment)
+
+                                                                    readData(ADMIN_TOKEN) { tokenAdmin ->
+                                                                        viewModel.orderHistoryListDetail(tokenAdmin!!, orderID) {
+                                                                            var orderID = this.increment_id
+                                                                            findNavController().navigate(R.id.action_checkout_to_thankyou,
+                                                                                Bundle().apply {
+                                                                                    putString("orderID", ""+orderID)
+                                                                                })
+                                                                        }
+                                                                    }
+
+
+
+
+                                                                }
+//                                }
+//                                .setCancelable(false)
+//                                .show()
+                                                            }catch (_: Exception){
+
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }

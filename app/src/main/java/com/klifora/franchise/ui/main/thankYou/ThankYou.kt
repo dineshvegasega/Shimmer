@@ -41,13 +41,13 @@ class ThankYou : Fragment() {
 
 
         binding.apply {
-
             if(arguments?.getString("from") == "customDesign"){
                 textTitle2.text = "Your request has been submitted regarding Custom Design. Someone from our team will get in touch with you within 24 hours"
             } else {
                 when(loginType){
                     LoginType.VENDOR ->  {
-                        val text1 = "<font color=#000000>Your order has been successfully placed.<br>Your Order No is - </font> <font color=#003E4D>123456</font>"
+                        var orderID = "" + arguments?.getString("orderID")
+                        val text1 = "<font color=#000000>Your order has been successfully placed.<br>Your Order No is - </font> <font color=#003E4D>"+orderID+"</font>"
                         textTitle2.text = HtmlCompat.fromHtml(text1, HtmlCompat.FROM_HTML_MODE_COMPACT)
                     }
                     LoginType.CUSTOMER ->  {
@@ -56,7 +56,6 @@ class ThankYou : Fragment() {
                     }
                 }
             }
-
             btHome.singleClick {
                 findNavController().navigate(R.id.action_thankyou_to_home)
             }

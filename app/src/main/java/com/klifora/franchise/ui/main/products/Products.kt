@@ -117,62 +117,7 @@ class Products : Fragment() {
 
 
             viewModel.itemProducts?.observe(viewLifecycleOwner) {
-//                it.items.forEach { itemApi ->
-//                    Log.e("TAG", "it.itemsAAA " + itemApi.id)
-//                    val bool = getArrayValue(itemsProduct, itemApi)
-//                    if (!bool) {
-//                        itemsProduct.add(itemApi)
-//                    }
-//                }
 
-//                itemsProduct.forEach { itemsProduct ->
-//                    Log.e("TAG", "it.itemsBBB " + itemsProduct.id)
-//                }
-
-//                mainThread {
-//                    if (it.items.size != 0) {
-////                        it.items.forEach { itemApi ->
-////                            val bool = getArrayValue(viewModel.itemsProduct, itemApi)
-////                            if (!bool) {
-////                                viewModel.itemsProduct.add(itemApi)
-////                            }
-////                        }
-//
-////                        if (viewModel.itemsProduct.size == 0) {
-//                        it.items.forEach {
-//                            viewModel.itemsProduct.add(it)
-//                        }
-//
-////                        viewModel.itemsProduct.addAll(it.items)
-////                        } else {
-////                            it.items.forEach { itemApi ->
-////                                viewModel.itemsProduct.forEach { itemArray ->
-////                                    if (itemApi.id != itemArray.id) {
-////                                        viewModel.itemsProduct.add(itemApi)
-////                                    }
-////                                }
-////                            }
-////                        }
-//                        Log.e("TAG", "it.itemsAAA " + it.items.size)
-//                    } else {
-//                        idPBLoading.visibility = View.GONE
-//                        Log.e("TAG", "it.itemsBBB " + it.items.size)
-//                    }
-//
-//                    viewModel.productAdapter.submitList(viewModel.itemsProduct)
-//                    viewModel.productAdapter.notifyDataSetChanged()
-//
-//
-//                    Log.e("TAG", "it.itemsCCC " + it.items.size)
-//
-//                    if (viewModel.itemsProduct.size == 0) {
-//                        binding.idDataNotFound.root.visibility = View.VISIBLE
-//                    } else {
-//                        binding.idDataNotFound.root.visibility = View.GONE
-//                    }
-//                }
-
-//                itemsProduct.addAll(it.items)
                 if (it.items.size != 0) {
 //                    idPBLoading.visibility = View.VISIBLE
                 } else {

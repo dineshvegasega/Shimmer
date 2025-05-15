@@ -19,6 +19,7 @@ import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.cart.ItemCart
 import com.klifora.franchise.models.cart.ItemCartModel
 import com.klifora.franchise.models.images.ItemImages
+import com.klifora.franchise.models.myOrdersDetail.ItemOrderDetail
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
@@ -497,6 +498,46 @@ class CheckoutVM @Inject constructor(private val repository: Repository) : ViewM
             )
         }
 
+
+
+    fun orderHistoryListDetail(
+        adminToken: String,
+        id: String,
+        callBack: ItemOrderDetail.() -> Unit
+    ) =
+        viewModelScope.launch {
+            repository.callApi(
+                callHandler = object : CallHandler<Response<ItemOrderDetail>> {
+                    override suspend fun sendRequest(apiInterface: ApiInterface) =
+                        apiInterface.orderHistoryListDetail("Bearer " + adminToken, id)
+
+                    @SuppressLint("SuspiciousIndentation")
+                    override fun success(response: Response<ItemOrderDetail>) {
+                        if (response.isSuccessful) {
+                            try {
+                                Log.e("TAG", "successAA11: ${response.body().toString()}")
+//                                val jsonObject = response.body().toString().substring(1, response.body().toString().length - 1).toString().replace("\\", "")
+//                                Log.e("TAG", "successAAB: ${jsonObject}")
+                                callBack(response.body()!!)
+                            } catch (e: Exception) {
+                                Log.e("TAG", "successFF: ${e.message}")
+                                callBack(response.body()!!)
+                            }
+                        }
+                    }
+
+                    override fun error(message: String) {
+                        Log.e("TAG", "successEE: ${message}")
+//                        super.error(message)
+//                        showSnackBar(message)
+                    }
+
+                    override fun loading() {
+                        super.loading()
+                    }
+                }
+            )
+        }
 
 
 

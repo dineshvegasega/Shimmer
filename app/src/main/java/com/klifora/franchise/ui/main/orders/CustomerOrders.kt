@@ -72,25 +72,8 @@ class CustomerOrders(
 //        adapter2 = CategoryChildTabAdapter()
 
         binding.apply {
-//            adapter2.submitData(viewModel.item1)
-//            adapter2.notifyDataSetChanged()
-//            binding.rvList2.adapter = adapter2
 
-//            readData(ADMIN_TOKEN) { token ->
-//                val emptyMap = mutableMapOf<String, String>()
-//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][field]"] = "store_id"
-//                emptyMap["searchCriteria[filter_groups][0][filters][" + 0 + "][value]"] = "4"
-//
-//            }
-
-
-//            loadData()
-
-//            orderDetailLiveA.value = true
-//            orderDetailLiveA.observe(viewLifecycleOwner) {
-//                Log.e("TAG", "orderDetailLiveAA: $it")
                 loadData("" , "")
-//            }
 
 
             editTextSearch.setOnEditorActionListener { _, actionId, _ ->
@@ -135,25 +118,6 @@ class CustomerOrders(
 
 
 
-//
-//            editTextSearch.addTextChangedListener(object : TextWatcher {
-//                    override fun afterTextChanged(s: Editable?) {
-//                    }
-//
-//                    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                    }
-//
-//                    @SuppressLint("SuspiciousIndentation")
-//                    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                        val isNumeric = isNumeric(editTextSearch.text.toString())
-//                        if(isNumeric == true){
-//                            loadData(""+editTextSearch.text.toString() , "")
-//                        } else {
-//                            loadData("" , ""+editTextSearch.text.toString())
-//                        }
-//                    }
-//                })
-
             rvListCategory1.setHasFixedSize(true)
             rvListCategory1.adapter = viewModel.customerOrders
 
@@ -174,7 +138,6 @@ class CustomerOrders(
                 viewModel.customerOrders.submitList(viewModel.itemsCustomerOrders)
                 viewModel.customerOrders.notifyDataSetChanged()
 
-//                viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount())
                 if (viewModel.itemsCustomerOrders.size == 0) {
                     binding.idDataNotFound.root.visibility = View.VISIBLE
                 } else {
@@ -218,20 +181,6 @@ class CustomerOrders(
                     )
 
                     viewModel.guestOrderList(data.name, mobile, name, page)
-//                    viewModel.guestOrderList(data.name, mobile, name ) {
-//                        Log.e("TAG", "this.items " + this.toString())
-////                        val element: ItemGuestOrderListItem = Gson().fromJson(this.toString(), ItemGuestOrderListItem::class.java)
-////                        val typeToken = object : TypeToken<List<ItemGuestOrderListItem>>() {}.type
-////                        val changeValue =
-////                            Gson().fromJson<List<ItemGuestOrderListItem>>(Gson().toJson(this.toString()), typeToken)
-//
-//
-//
-//                        viewModel.customerOrders.notifyDataSetChanged()
-//                        viewModel.customerOrders.submitList(this)
-//
-//                        viewModel.customerOrders.notifyItemRangeChanged(0, viewModel.customerOrders.getItemCount());
-//                    }
                 }
             }
         }
