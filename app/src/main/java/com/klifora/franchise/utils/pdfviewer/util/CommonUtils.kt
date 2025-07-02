@@ -3,7 +3,6 @@ package com.klifora.franchise.utils.pdfviewer.util
 import android.app.ActivityManager
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.pdf.PdfRenderer
 import java.util.*
 

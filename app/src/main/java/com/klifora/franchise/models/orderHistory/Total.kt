@@ -1,7 +1,6 @@
 package com.klifora.franchise.models.orderHistory
 
 import android.os.Parcelable
-import kotlinx.parcelize.RawValue
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

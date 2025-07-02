@@ -24,10 +24,7 @@ import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_ID
 import com.klifora.franchise.datastore.DataStoreUtil.clearDataStore
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.DataStoreUtil.removeKey
-import com.klifora.franchise.datastore.db.CartModel
-import com.klifora.franchise.ui.main.faq.FaqVM
 import com.klifora.franchise.ui.mainActivity.MainActivity
-import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.klifora.franchise.utils.isValidPassword

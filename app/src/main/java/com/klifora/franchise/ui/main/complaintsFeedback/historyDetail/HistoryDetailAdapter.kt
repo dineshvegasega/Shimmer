@@ -1,13 +1,10 @@
 package com.klifora.franchise.ui.main.complaintsFeedback.historyDetail
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemChatLeftBinding
 import com.klifora.franchise.databinding.ItemChatRightBinding
 import com.klifora.franchise.databinding.ItemLoadingBinding

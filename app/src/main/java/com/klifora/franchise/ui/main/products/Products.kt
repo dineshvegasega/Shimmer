@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.common.base.Joiner
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.DialogSortBinding
 import com.klifora.franchise.databinding.ProductsBinding
@@ -32,7 +31,6 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLi
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainCategory
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainPrice
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainShopFor
-import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 

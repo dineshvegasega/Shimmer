@@ -13,7 +13,6 @@ import com.klifora.franchise.databinding.ItemFaqBinding
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.ItemFaq
-import com.klifora.franchise.models.Items
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.utils.singleClick

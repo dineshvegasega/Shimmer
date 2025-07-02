@@ -17,12 +17,8 @@ import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemCartBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
-import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
 import com.klifora.franchise.datastore.DataStoreKeys.QUOTE_ID
-import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_ID
-import com.klifora.franchise.datastore.DataStoreUtil.clearDataStore
 import com.klifora.franchise.datastore.DataStoreUtil.readData
-import com.klifora.franchise.datastore.DataStoreUtil.removeKey
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.cart.ItemCart
@@ -31,14 +27,12 @@ import com.klifora.franchise.models.images.ItemImages
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
-import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.getJsonRequestBody
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.glideImage
-import com.klifora.franchise.utils.glideImageChache
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.sessionExpired
 import com.klifora.franchise.utils.showSnackBar

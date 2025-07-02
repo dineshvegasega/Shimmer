@@ -27,19 +27,16 @@ import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.DataStoreUtil.saveData
 import com.klifora.franchise.datastore.DataStoreUtil.saveObject
 import com.klifora.franchise.models.user.ItemUserItem
-import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.password
 import com.klifora.franchise.networking.username
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.klifora.franchise.utils.isValidPassword
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class Login : Fragment() {

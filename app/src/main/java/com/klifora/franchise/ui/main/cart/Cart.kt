@@ -6,19 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.CartBinding
-import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
-import com.klifora.franchise.datastore.DataStoreKeys.STORE_DETAIL
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.networking.GST_PERCENT
-import com.klifora.franchise.networking.login
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
@@ -28,7 +24,6 @@ import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONObject
 
 @AndroidEntryPoint
 class Cart : Fragment() {

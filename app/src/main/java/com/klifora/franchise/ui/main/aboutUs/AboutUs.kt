@@ -6,17 +6,12 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.core.text.HtmlCompat.FROM_HTML_MODE_LEGACY
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.AboutUsBinding
-import com.klifora.franchise.databinding.FaqBinding
-import com.klifora.franchise.ui.main.faq.FaqVM
 import com.klifora.franchise.ui.mainActivity.MainActivity
-import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.hideValueOff
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData

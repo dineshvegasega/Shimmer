@@ -1,20 +1,16 @@
 package com.klifora.franchise.ui.main.complaintsFeedback.history
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.klifora.franchise.databinding.ItemHistoryBinding
 import com.klifora.franchise.models.ItemHistory
 import com.klifora.franchise.BR
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemLoadingBinding
-import com.klifora.franchise.utils.changeDateFormat
-import com.klifora.franchise.utils.singleClick
 
 
 class HistoryAdapter(liveSchemesVM: HistoryVM) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

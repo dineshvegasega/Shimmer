@@ -10,7 +10,6 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.ArraySet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +26,6 @@ import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.DialogPdfBinding
-import com.klifora.franchise.databinding.ItemHomeCategoryBinding
 import com.klifora.franchise.databinding.ItemProductBinding
 import com.klifora.franchise.databinding.ItemProductDiamondsBinding
 import com.klifora.franchise.databinding.ItemProductZoomBinding
@@ -36,15 +34,11 @@ import com.klifora.franchise.databinding.LoaderBinding
 import com.klifora.franchise.databinding.ProductDetailBinding
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
-import com.klifora.franchise.models.ItemFranchiseArray
-import com.klifora.franchise.models.ItemProductOptions
 import com.klifora.franchise.models.ItemRelatedProducts
 import com.klifora.franchise.models.ItemRelatedProductsItem
-import com.klifora.franchise.models.Items
 import com.klifora.franchise.models.cart.ItemCartModel
 import com.klifora.franchise.models.options.ItemOptions
 import com.klifora.franchise.models.products.ItemProduct
-import com.klifora.franchise.models.products.ItemProductRoot
 import com.klifora.franchise.models.products.MediaGalleryEntry
 import com.klifora.franchise.models.products.Value
 import com.klifora.franchise.networking.ApiInterface
@@ -55,10 +49,6 @@ import com.klifora.franchise.networking.getJsonRequestBody
 //import com.klifora.franchise.ui.main.productDetail.ProductDetail.Companion.dialogBinding1
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainMaterial
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainPrice
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.mainShopFor
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.getSize

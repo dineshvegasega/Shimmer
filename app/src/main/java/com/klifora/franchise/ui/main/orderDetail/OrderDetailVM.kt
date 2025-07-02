@@ -15,8 +15,6 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemSkusBinding
-import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
-import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.genericAdapter.GenericAdapter
 import com.klifora.franchise.models.images.ItemImages
@@ -25,14 +23,12 @@ import com.klifora.franchise.models.myOrdersDetail.ItemX
 import com.klifora.franchise.models.products.ItemProduct
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
-import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.getJsonRequestBody
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.db
 import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.glideImage
 import com.klifora.franchise.utils.mainThread
-import com.klifora.franchise.utils.sessionExpired
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.lifecycle.HiltViewModel

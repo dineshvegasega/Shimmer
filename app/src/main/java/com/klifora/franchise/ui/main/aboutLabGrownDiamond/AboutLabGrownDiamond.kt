@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.AboutLabGrownDiamondBinding
-import com.klifora.franchise.databinding.AboutUsBinding
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion.isBackStack
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount

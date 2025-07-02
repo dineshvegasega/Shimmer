@@ -16,11 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ForgotPasswordBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
-import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_ID
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.DataStoreUtil.saveData
-import com.klifora.franchise.datastore.DataStoreUtil.saveObject
 import com.klifora.franchise.networking.password
 import com.klifora.franchise.networking.username
 import com.klifora.franchise.ui.mainActivity.MainActivity

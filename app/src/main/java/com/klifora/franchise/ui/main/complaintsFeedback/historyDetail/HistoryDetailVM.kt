@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.JsonElement
 import com.klifora.franchise.models.ItemComplaint
-import com.klifora.franchise.models.ItemComplaintItem
 import com.klifora.franchise.models.ItemMessageHistory
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
@@ -17,7 +16,6 @@ import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUr
 import com.klifora.franchise.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Response
 import javax.inject.Inject

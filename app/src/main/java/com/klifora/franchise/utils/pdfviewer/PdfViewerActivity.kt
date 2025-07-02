@@ -1,6 +1,5 @@
 package com.klifora.franchise.utils.pdfviewer
 
-import android.Manifest
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,9 +14,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.text.TextUtils
 import android.util.Log
-import android.util.TypedValue
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.View.GONE
@@ -26,10 +22,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.lifecycle.lifecycleScope
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ActivityPdfViewerBinding

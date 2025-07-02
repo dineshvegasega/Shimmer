@@ -24,17 +24,12 @@ import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.models.ItemWebsite
-import com.klifora.franchise.models.myOrdersList.ItemOrders
 import com.klifora.franchise.models.myOrdersList.ItemOrdersItem
 import com.klifora.franchise.ui.main.complaintsFeedback.createNew.CreateNewVM.Companion.type
 import com.klifora.franchise.ui.mainActivity.MainActivity
-import com.klifora.franchise.ui.mainActivity.MainActivityVM
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
-import com.klifora.franchise.utils.changeDateFormat
 import com.klifora.franchise.utils.encodeImage
 import com.klifora.franchise.utils.getCameraPath
 import com.klifora.franchise.utils.getMediaFilePathFor
-import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.showDropDownDialog
 import com.klifora.franchise.utils.showOptions
 import com.klifora.franchise.utils.showSnackBar
@@ -44,7 +39,6 @@ import id.zelory.compressor.Compressor
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.File
-import java.util.Base64
 
 @AndroidEntryPoint
 class CreateNew : Fragment() {

@@ -1,7 +1,6 @@
 package com.klifora.franchise.models.guestOrderList
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class ItemGuestOrderListItem(

@@ -11,14 +11,12 @@ import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.klifora.franchise.databinding.LoaderBinding
-import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_ID
 import com.klifora.franchise.datastore.DataStoreUtil.saveData
 import com.klifora.franchise.datastore.DataStoreUtil.saveObject
 import com.klifora.franchise.models.ItemWebsite
 import com.klifora.franchise.models.user.ItemUser
-import com.klifora.franchise.models.user.ItemUserItem
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
 import com.klifora.franchise.networking.Repository

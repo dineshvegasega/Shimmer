@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemHome3Binding
 import com.klifora.franchise.databinding.ItemHomeCategoryBinding

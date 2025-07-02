@@ -34,7 +34,6 @@ import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.onRightDrawableClicked
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import org.jsoup.internal.StringUtil.isNumeric
 
 
 @AndroidEntryPoint

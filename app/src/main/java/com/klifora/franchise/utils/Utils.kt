@@ -55,8 +55,6 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import coil.load
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -70,9 +68,7 @@ import com.klifora.franchise.datastore.DataStoreKeys.STORE_DETAIL
 import com.klifora.franchise.datastore.DataStoreUtil.clearDataStore
 import com.klifora.franchise.datastore.DataStoreUtil.removeKey
 import com.klifora.franchise.models.ItemReturn
-import com.klifora.franchise.networking.IMAGE_URL
 import com.klifora.franchise.ui.mainActivity.MainActivity
-import com.squareup.picasso.MemoryPolicy
 import com.squareup.picasso.Picasso
 import com.stfalcon.imageviewer.StfalconImageViewer
 import org.json.JSONArray

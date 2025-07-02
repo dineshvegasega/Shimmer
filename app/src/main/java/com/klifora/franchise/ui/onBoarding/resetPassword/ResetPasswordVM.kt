@@ -21,7 +21,6 @@ import com.klifora.franchise.networking.Repository
 import com.klifora.franchise.networking.getJsonRequestBody
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-import com.klifora.franchise.ui.onBoarding.login.LoginVM.Companion.storeToken
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.showSnackBar
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,7 +1,6 @@
 package com.klifora.franchise.utils
 
 import android.text.TextUtils
-import android.util.Log
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.util.Collections

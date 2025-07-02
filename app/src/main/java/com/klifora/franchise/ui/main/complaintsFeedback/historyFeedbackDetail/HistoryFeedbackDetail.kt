@@ -10,11 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
-import com.klifora.franchise.databinding.HistoryDetailBinding
 import com.klifora.franchise.databinding.HistoryFeedbackDetailBinding
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
 import com.klifora.franchise.datastore.DataStoreUtil.readData
-import com.klifora.franchise.models.ItemComplaintItem
 import com.klifora.franchise.models.ItemFeedbackItem
 import com.klifora.franchise.models.ItemWebsite
 import com.klifora.franchise.ui.mainActivity.MainActivity

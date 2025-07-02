@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -17,13 +16,10 @@ import com.klifora.franchise.databinding.CheckoutBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.CUSTOMER_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.LOGIN_DATA
-import com.klifora.franchise.datastore.DataStoreKeys.MOBILE_NUMBER
-import com.klifora.franchise.datastore.DataStoreKeys.QUOTE_ID
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.datastore.db.CartModel
 import com.klifora.franchise.models.user.ItemUserItem
 import com.klifora.franchise.networking.GST_PERCENT
-import com.klifora.franchise.networking.RAZORPAY_KEY
 import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivity.Companion
@@ -38,7 +34,6 @@ import com.klifora.franchise.utils.getPatternFormat
 import com.klifora.franchise.utils.mainThread
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
-import com.razorpay.Checkout
 import com.razorpay.PaymentData
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONArray

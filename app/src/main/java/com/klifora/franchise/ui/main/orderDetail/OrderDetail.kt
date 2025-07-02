@@ -1,13 +1,11 @@
 package com.klifora.franchise.ui.main.orderDetail
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -20,15 +18,11 @@ import com.klifora.franchise.R
 import com.klifora.franchise.databinding.OrderDetailBinding
 import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreUtil.readData
-import com.klifora.franchise.di.AppModule_GsonFactory.gson
 import com.klifora.franchise.models.guestOrderList.ItemGuestOrderListItem
-import com.klifora.franchise.models.orderHistory.Item
 import com.klifora.franchise.networking.GST_PERCENT
-import com.klifora.franchise.ui.enums.LoginType
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.loginType
 import com.klifora.franchise.utils.changeDateFormat
 import com.klifora.franchise.utils.getDate
 import com.klifora.franchise.utils.getPatternFormat
@@ -36,9 +30,7 @@ import com.klifora.franchise.utils.parcelable
 import com.klifora.franchise.utils.showSnackBar
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
-import org.json.JSONArray
 import org.json.JSONObject
-import org.jsoup.internal.StringUtil.isNumeric
 
 
 @AndroidEntryPoint

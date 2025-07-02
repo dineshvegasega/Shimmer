@@ -1,7 +1,5 @@
 package com.klifora.franchise.networking
 
-import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.storeWebUrl
-
 //https://shop.vegasega.com/media/catalog/product/u/r/ur01473-yg0000_4_lar.jpg
 
 

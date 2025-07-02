@@ -11,8 +11,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
-import com.google.gson.Gson
-import com.google.gson.JsonElement
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.ItemHistoryBinding
 import com.klifora.franchise.databinding.ItemHistoryFeedbackBinding
@@ -22,7 +20,6 @@ import com.klifora.franchise.models.ItemComplaintItem
 import com.klifora.franchise.models.ItemFeedback
 import com.klifora.franchise.models.ItemFeedbackItem
 import com.klifora.franchise.models.ItemHistory
-import com.klifora.franchise.models.products.ItemProductRoot
 import com.klifora.franchise.networking.ApiInterface
 import com.klifora.franchise.networking.CallHandler
 import com.klifora.franchise.networking.Repository

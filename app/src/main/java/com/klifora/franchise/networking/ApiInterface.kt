@@ -3,7 +3,6 @@ package com.klifora.franchise.networking
 import com.google.gson.JsonElement
 import com.klifora.franchise.models.ItemBanner
 import com.klifora.franchise.models.ItemComplaint
-import com.klifora.franchise.models.ItemComplaintItem
 import com.klifora.franchise.models.ItemFeedback
 import com.klifora.franchise.models.ItemFranchiseArray
 import com.klifora.franchise.models.ItemMessageHistory
@@ -16,7 +15,6 @@ import com.klifora.franchise.models.images.ItemImages
 import com.klifora.franchise.models.myOrdersDetail.ItemOrderDetail
 import com.klifora.franchise.models.myOrdersList.ItemOrders
 import com.klifora.franchise.models.options.ItemOptions
-import com.klifora.franchise.models.orderHistory.ItemOrderHistoryModel
 import com.klifora.franchise.models.user.ItemUser
 import okhttp3.RequestBody
 import retrofit2.Response

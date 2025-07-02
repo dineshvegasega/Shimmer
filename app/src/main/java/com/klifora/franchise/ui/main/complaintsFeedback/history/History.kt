@@ -3,8 +3,6 @@ package com.klifora.franchise.ui.main.complaintsFeedback.history
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,18 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.klifora.franchise.R
 import com.klifora.franchise.databinding.HistoryBinding
-import com.klifora.franchise.datastore.DataStoreKeys.ADMIN_TOKEN
 import com.klifora.franchise.datastore.DataStoreKeys.WEBSITE_DATA
 import com.klifora.franchise.datastore.DataStoreUtil.readData
 import com.klifora.franchise.models.ItemWebsite
 import com.klifora.franchise.ui.mainActivity.MainActivity
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemCount
 import com.klifora.franchise.ui.mainActivity.MainActivityVM.Companion.cartItemLiveData
-import com.klifora.franchise.utils.PaginationScrollListener
 import com.klifora.franchise.utils.singleClick
 import dagger.hilt.android.AndroidEntryPoint
 
